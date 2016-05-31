@@ -9,8 +9,11 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 ## 第一阶段
 相关算法示例程序的翻译，位于modules下，具体列表如下：
 ![Build Status](https://img.shields.io/badge/translate-working-brightgreen.svg) 翻译中
+
 ![Build Status](https://img.shields.io/badge/translate-done-blue.svg) 翻译结束
+
 ![Build Status](https://img.shields.io/badge/translate-notstarted-lightgray.svg) 暂未开始
+
 
 - [ ] linear_model.rst ![Build Status](https://img.shields.io/badge/translate-working-brightgreen.svg)
 - [ ] biclustering.rst
