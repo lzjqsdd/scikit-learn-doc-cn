@@ -15,50 +15,50 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 
 ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg) 暂未开始
 
-
-- [ ] linear_model.rst ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)
-- [ ] biclustering.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] calibration.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] classes.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] clustering.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] computational_performance.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] covariance.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] cross_decomposition.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] cross_validation.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] decomposition.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] density.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] dp-derivation.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] ensemble.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] feature_extraction.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] feature_selection.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] gaussian_process.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] grid_search.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] isotonic.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] kernel_approximation.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] kernel_ridge.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] label_propagation.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] lda_qda.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] learning_curve.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] manifold.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] metrics.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] mixture.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] model_evaluation.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] model_persistence.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] multiclass.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] naive_bayes.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] neighbors.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] neural_networks_supervised.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] neural_networks_unsupervised.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] outlier_detection.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] pipeline.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] preprocessing.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] preprocessing_targets.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] random_projection.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] scaling_strategies.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] sgd.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] svm.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] tree.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
-- [ ] unsupervised_reduction.rst ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)
+| 文件                | 翻译状态        | 贡献者
+|:------------------- |:-------------| :-------:|
+| linear_model.rst    | ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg) | lzjqsdd |
+| biclustering.rst    | ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)    | 		|
+| calibration.rst | ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg) ||
+| classes.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg) ||
+| clustering.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| computational_performance.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| covariance.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| cross_decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| cross_validation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| density.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| dp-derivation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| ensemble.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| feature_extraction.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| feature_selection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| gaussian_process.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| grid_search.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| isotonic.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| kernel_approximation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| kernel_ridge.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| label_propagation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| lda_qda.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| learning_curve.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| manifold.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| metrics.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| mixture.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| model_evaluation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| model_persistence.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| multiclass.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| naive_bayes.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| neighbors.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| neural_networks_supervised.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| neural_networks_unsupervised.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| outlier_detection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| pipeline.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| preprocessing.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| preprocessing_targets.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| random_projection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| scaling_strategies.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| sgd.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| tree.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| unsupervised_reduction.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| |
 
 **所有翻译后的文档以同名的方式添加到translate/同目录文件夹下,例如：**  
 
