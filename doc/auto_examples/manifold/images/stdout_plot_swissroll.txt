@@ -1,5 +1,0 @@
-**Script output**::
-
-  Computing LLE embedding
-  Done. Reconstruction error: 9.98005e-08
-

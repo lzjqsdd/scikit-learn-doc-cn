@@ -1,4 +1,0 @@
-**Script output**::
-
-  explained variance ratio (first two components): [ 0.92461621  0.05301557]
-

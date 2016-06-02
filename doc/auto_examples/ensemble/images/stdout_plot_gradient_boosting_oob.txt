@@ -1,4 +1,0 @@
-**Script output**::
-
-  Accuracy: 0.6840
-

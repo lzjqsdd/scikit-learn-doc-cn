@@ -1,4 +1,0 @@
-**Script output**::
-
-  MSE: 6.7710
-

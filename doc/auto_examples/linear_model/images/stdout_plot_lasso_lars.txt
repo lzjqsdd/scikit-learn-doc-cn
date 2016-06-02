@@ -1,5 +1,0 @@
-**Script output**::
-
-  Computing regularization path using the LARS ...
-  .
-

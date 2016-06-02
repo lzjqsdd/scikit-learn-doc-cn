@@ -1,4 +1,0 @@
-**Script output**::
-
-  Optimal regularization parameter : 0.000335292414925
-

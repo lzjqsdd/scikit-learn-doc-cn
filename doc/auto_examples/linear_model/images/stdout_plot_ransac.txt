@@ -1,5 +1,0 @@
-**Script output**::
-
-  Estimated coefficients (true, normal, RANSAC):
-  82.1903908408 [ 54.17236387] [ 82.08533159]
-

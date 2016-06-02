@@ -1,5 +1,0 @@
-**Script output**::
-
-  Computing regularization path ...
-  This took  0:00:00.045660
-

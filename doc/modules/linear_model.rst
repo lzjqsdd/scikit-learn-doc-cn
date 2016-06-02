@@ -1,35 +1,30 @@
 .. _linear_model:
 
-=========================
-Generalized Linear Models
-=========================
+=======================================
+Generalized Linear Models 广义线性模型
+=======================================
 
 .. currentmodule:: sklearn.linear_model
 
-The following are a set of methods intended for regression in which
-the target value is expected to be a linear combination of the input
-variables. In mathematical notion, if :math:`\hat{y}` is the predicted
-value.
+以下是回归相关的一系列方法，目标值y是输入变量x的线性组合。用数学表达: `\hat{y}` 是预测值
 
 .. math::    \hat{y}(w, x) = w_0 + w_1 x_1 + ... + w_p x_p
 
+在这个模块中,我们定义向量 :math:`w = (w_1,...,w_p)` 为 ``coef_`` ,math:`w_0` 表示为 ``intercept_``
 Across the module, we designate the vector :math:`w = (w_1,
 ..., w_p)` as ``coef_`` and :math:`w_0` as ``intercept_``.
 
-To perform classification with generalized linear models, see
+使用广义线性模型来处理分类问题(classification)请参考
 :ref:`Logistic_regression`.
 
 
 .. _ordinary_least_squares:
 
-Ordinary Least Squares
-=======================
+普通最小二乘法
+=====================
 
-:class:`LinearRegression` fits a linear model with coefficients
-:math:`w = (w_1, ..., w_p)` to minimize the residual sum
-of squares between the observed responses in the dataset, and the
-responses predicted by the linear approximation. Mathematically it
-solves a problem of the form:
+:class:`LinearRegression` 用系数：math: `w = (w_1,...,w_p)` 来拟合一个线性模型,
+使得数据集实际观测数据和预测数据（估计值）之间残差平方和最小。数学形式可表达为:
 
 .. math:: \underset{w}{min\,} {|| X w - y||_2}^2
 
@@ -38,9 +33,7 @@ solves a problem of the form:
    :align: center
    :scale: 50%
 
-:class:`LinearRegression` will take in its ``fit`` method arrays X, y
-and will store the coefficients :math:`w` of the linear model in its
-``coef_`` member::
+:class:`LinearRegression` 模型会调用 ``fit`` 方法来拟合X,y(X为输入，y为输出).并且会把拟合的线性模型的系数 :math:`w` 存储到成员变量 ``coef_`` 中
 
     >>> from sklearn import linear_model
     >>> clf = linear_model.LinearRegression()
@@ -49,46 +42,33 @@ and will store the coefficients :math:`w` of the linear model in its
     >>> clf.coef_
     array([ 0.5,  0.5])
 
-However, coefficient estimates for Ordinary Least Squares rely on the
-independence of the model terms. When terms are correlated and the
-columns of the design matrix :math:`X` have an approximate linear
-dependence, the design matrix becomes close to singular
-and as a result, the least-squares estimate becomes highly sensitive
-to random errors in the observed response, producing a large
-variance. This situation of *multicollinearity* can arise, for
-example, when data are collected without an experimental design.
+然而，对于普通最小二乘问题，其系数估计依赖模型各项相互独立。当各项是相关的，设计矩阵(Design Matrix) :math:`x` 的各列近似线性相关，
+那么，设计矩阵会趋向于奇异矩阵，这会导致最小二乘估计对于随机误差非常敏感，会产生很大的方差。这种 *多重共线性(multicollinearity)* 
+的情况可能真的会出现，比如未经实验设计收集的数据.
 
 .. topic:: Examples:
 
    * :ref:`example_linear_model_plot_ols.py`
 
 
-Ordinary Least Squares Complexity
----------------------------------
+普通最小二乘复杂度
+------------------------------------------------------
 
-This method computes the least squares solution using a singular value
-decomposition of X. If X is a matrix of size (n, p) this method has a
-cost of :math:`O(n p^2)`, assuming that :math:`n \geq p`.
+这种方法通过对矩阵 X 奇异值分解（SVD）的方式来计算最小二乘的解。如果 X 是一个(n, p)大小的矩阵,那么代价为 :math:`O(n p^2)`,假设 :math:`n \geq p`.
 
 .. _ridge_regression:
 
-Ridge Regression
-================
+Ridge Regression 岭回归
+==========================
 
-:class:`Ridge` regression addresses some of the problems of
-:ref:`ordinary_least_squares` by imposing a penalty on the size of
-coefficients. The ridge coefficients minimize a penalized residual sum
-of squares,
-
+:class:`Ridge` 岭回归通过对回归稀疏增加罚项来解决 :ref:`ordinary_least_squares` 的一些问题.岭回归系数通过最小化带罚项的残差平方和
 
 .. math::
 
    \underset{w}{min\,} {{|| X w - y||_2}^2 + \alpha {||w||_2}^2}
 
 
-Here, :math:`\alpha \geq 0` is a complexity parameter that controls the amount
-of shrinkage: the larger the value of :math:`\alpha`, the greater the amount
-of shrinkage and thus the coefficients become more robust to collinearity.
+上述公式中,:math:`\alpha \geq 0` 是控制模型复杂度的因子(可看做收缩率的大小) : :math:`\alpha` 越大，收缩率越大，那么系数对于共线性的鲁棒性更强
 
 .. figure:: ../auto_examples/linear_model/images/plot_ridge_path_001.png
    :target: ../auto_examples/linear_model/plot_ridge_path.html
@@ -96,9 +76,7 @@ of shrinkage and thus the coefficients become more robust to collinearity.
    :scale: 50%
 
 
-As with other linear models, :class:`Ridge` will take in its ``fit`` method
-arrays X, y and will store the coefficients :math:`w` of the linear model in
-its ``coef_`` member::
+和其他线性模型一样，:class:`Ridge` 调用 ``fit`` 方法，参数为X,y,并且将线性模型拟合的系数 :math:`w` 存到成员变量 ``coef_`` 中。::
 
     >>> from sklearn import linear_model
     >>> clf = linear_model.Ridge (alpha = .5)
@@ -117,11 +95,10 @@ its ``coef_`` member::
    * :ref:`example_text_document_classification_20newsgroups.py`
 
 
-Ridge Complexity
-----------------
+岭回归复杂度
+-------------------
 
-This method has the same order of complexity than an
-:ref:`ordinary_least_squares`.
+这个方法和	:ref:`ordinary_least_squares` 复杂度一样(同阶).
 
 .. FIXME:
 .. Not completely true: OLS is solved by an SVD, while Ridge is solved by
@@ -129,13 +106,11 @@ This method has the same order of complexity than an
 .. between these
 
 
-Setting the regularization parameter: generalized Cross-Validation
-------------------------------------------------------------------
+设置正则化参数: 广义交叉验证
+----------------------------------
 
-:class:`RidgeCV` implements ridge regression with built-in
-cross-validation of the alpha parameter.  The object works in the same way
-as GridSearchCV except that it defaults to Generalized Cross-Validation
-(GCV), an efficient form of leave-one-out cross-validation::
+:class:`RidgeCV` 实现了带缺省 :math:`\alpha` 参数的交叉验证的岭回归模型.这个对象和 GridSearchCV 除了它默认为广义交叉验证(GCV),其他工作方式一样。
+下面是一种高效的交叉验证方式-留一交叉验证(leave-one-out):
 
     >>> from sklearn import linear_model
     >>> clf = linear_model.RidgeCV(alphas=[0.1, 1.0, 10.0])
@@ -158,28 +133,17 @@ as GridSearchCV except that it defaults to Generalized Cross-Validation
 Lasso
 =====
 
-The :class:`Lasso` is a linear model that estimates sparse coefficients.
-It is useful in some contexts due to its tendency to prefer solutions
-with fewer parameter values, effectively reducing the number of variables
-upon which the given solution is dependent. For this reason, the Lasso
-and its variants are fundamental to the field of compressed sensing.
-Under certain conditions, it can recover the exact set of non-zero
-weights (see
+:class:`Lasso` 是一种估计稀疏线性模型的方法.由于它倾向具有少量参数值的情况，对于给定解决方案是相关情况下，有效的减少了变量数量。
+因此，Lasso及其变种是压缩感知(压缩采样)的基础。在约束条件下，它可以回复一组非零精确的权重系数(参考
 :ref:`example_applications_plot_tomography_l1_reconstruction.py`).
 
-Mathematically, it consists of a linear model trained with :math:`\ell_1` prior
-as regularizer. The objective function to minimize is:
+用数学形式表达，Lasso 包含一个使用 :math:`ell_1` 先验作为正则化因子的线性模型。其目标函数是最小化:
 
 .. math::  \underset{w}{min\,} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}
 
-The lasso estimate thus solves the minimization of the
-least-squares penalty with :math:`\alpha ||w||_1` added, where
-:math:`\alpha` is a constant and :math:`||w||_1` is the :math:`\ell_1`-norm of
-the parameter vector.
+lasso 解决带 :math:`\alpha ||w||_1` 罚项的最小平方和，其中 :math:`\alpha` 是一个常量，:math:`||w||_1` 是参数向量的 :math:`\ell_1`-norm
 
-The implementation in the class :class:`Lasso` uses coordinate descent as
-the algorithm to fit the coefficients. See :ref:`least_angle_regression`
-for another implementation::
+:class:`Lasso` 类实现使用了坐标下降法(一种非梯度优化算法) 来拟合稀疏.参考另一种实现 :ref:`least_angle_regression` ::
 
     >>> from sklearn import linear_model
     >>> clf = linear_model.Lasso(alpha = 0.1)
@@ -190,8 +154,7 @@ for another implementation::
     >>> clf.predict([[1, 1]])
     array([ 0.8])
 
-Also useful for lower-level tasks is the function :func:`lasso_path` that
-computes the coefficients along the full path of possible values.
+函数 :func:`lasso_path` 对于lower-level任务非常有用。它能够通过搜索所有路径上可能的值来计算系数.
 
 .. topic:: Examples:
 
@@ -211,25 +174,19 @@ computes the coefficients along the full path of possible values.
       use :ref:`randomized_l1`.
 
 
-Setting regularization parameter
+设置正则化参数
 --------------------------------
 
-The ``alpha`` parameter controls the degree of sparsity of the coefficients
-estimated.
+``alpha`` 参数控制估计的系数的稀疏程度。
 
-Using cross-validation
+使用交叉验证
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-scikit-learn exposes objects that set the Lasso ``alpha`` parameter by
-cross-validation: :class:`LassoCV` and :class:`LassoLarsCV`.
-:class:`LassoLarsCV` is based on the :ref:`least_angle_regression` algorithm
-explained below.
+scikit-learn 暴露以下两个类 :class:`LassoCV` 和 :class:`LassoLarsCV` 可以设置 Lasso ``alpha`` 参数.
+:class:`LassoCV` 基于下面解释的算法 :ref:`least_angle_regression` 
 
-For high-dimensional datasets with many collinear regressors,
-:class:`LassoCV` is most often preferable. However, :class:`LassoLarsCV` has
-the advantage of exploring more relevant values of `alpha` parameter, and
-if the number of samples is very small compared to the number of
-observations, it is often faster than :class:`LassoCV`.
+对于含有很多共线性的高维的数据集，:class:`LassoCV` 是最合适不过了。然而，:class:`LassoLarsCV` 在寻找 `alpha` 参数更相关的值时更具有优势，
+并且如果样本相比于观测的数量时，通常比  :class:`LassoCV` 更快.
 
 .. |lasso_cv_1| image:: ../auto_examples/linear_model/images/plot_lasso_model_selection_002.png
     :target: ../auto_examples/linear_model/plot_lasso_model_selection.html
@@ -242,7 +199,7 @@ observations, it is often faster than :class:`LassoCV`.
 .. centered:: |lasso_cv_1| |lasso_cv_2|
 
 
-Information-criteria based model selection
+基于模型选择的信息约束
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Alternatively, the estimator :class:`LassoLarsIC` proposes to use the

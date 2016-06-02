@@ -1,8 +1,8 @@
 .. _linear_model:
 
-=====================================
+=======================================
 Generalized Linear Models 广义线性模型
-=====================================
+=======================================
 
 .. currentmodule:: sklearn.linear_model
 
@@ -20,8 +20,8 @@ Across the module, we designate the vector :math:`w = (w_1,
 
 .. _ordinary_least_squares:
 
-Ordinary Least Squares 普通最小二乘法
-====================================
+普通最小二乘法
+=====================
 
 :class:`LinearRegression` 用系数：math: `w = (w_1,...,w_p)` 来拟合一个线性模型,
 使得数据集实际观测数据和预测数据（估计值）之间残差平方和最小。数学形式可表达为:
@@ -33,11 +33,8 @@ Ordinary Least Squares 普通最小二乘法
    :align: center
    :scale: 50%
 
-:class:`LinearRegression` will take in its ``fit`` method arrays X, y
-and will store the coefficients :math:`w` of the linear model in its
-``coef_`` member::
-"class:`LinearRegression` 模型会调用 ``fit``方法来拟合X,y(X为输入，y为输出).
-并且会把拟合的线性模型的稀疏 :math:`w` 存储到成员变量 ``coef_`` 中
+:class:`LinearRegression` 模型会调用 ``fit`` 方法来拟合X,y(X为输入，y为输出).并且会把拟合的线性模型的系数 :math:`w` 存储到成员变量 ``coef_`` 中
+
     >>> from sklearn import linear_model
     >>> clf = linear_model.LinearRegression()
     >>> clf.fit ([[0, 0], [1, 1], [2, 2]], [0, 1, 2])
@@ -45,46 +42,33 @@ and will store the coefficients :math:`w` of the linear model in its
     >>> clf.coef_
     array([ 0.5,  0.5])
 
-However, coefficient estimates for Ordinary Least Squares rely on the
-independence of the model terms. When terms are correlated and the
-columns of the design matrix :math:`X` have an approximate linear
-dependence, the design matrix becomes close to singular
-and as a result, the least-squares estimate becomes highly sensitive
-to random errors in the observed response, producing a large
-variance. This situation of *multicollinearity* can arise, for
-example, when data are collected without an experimental design.
+然而，对于普通最小二乘问题，其系数估计依赖模型各项相互独立。当各项是相关的，设计矩阵(Design Matrix) :math:`x` 的各列近似线性相关，
+那么，设计矩阵会趋向于奇异矩阵，这会导致最小二乘估计对于随机误差非常敏感，会产生很大的方差。这种 *多重共线性(multicollinearity)* 
+的情况可能真的会出现，比如未经实验设计收集的数据.
 
 .. topic:: Examples:
 
    * :ref:`example_linear_model_plot_ols.py`
 
 
-Ordinary Least Squares Complexity
----------------------------------
+普通最小二乘复杂度
+------------------------------------------------------
 
-This method computes the least squares solution using a singular value
-decomposition of X. If X is a matrix of size (n, p) this method has a
-cost of :math:`O(n p^2)`, assuming that :math:`n \geq p`.
+这种方法通过对矩阵 X 奇异值分解（SVD）的方式来计算最小二乘的解。如果 X 是一个(n, p)大小的矩阵,那么代价为 :math:`O(n p^2)`,假设 :math:`n \geq p`.
 
 .. _ridge_regression:
 
-Ridge Regression
-================
+Ridge Regression 岭回归
+==========================
 
-:class:`Ridge` regression addresses some of the problems of
-:ref:`ordinary_least_squares` by imposing a penalty on the size of
-coefficients. The ridge coefficients minimize a penalized residual sum
-of squares,
-
+:class:`Ridge` 岭回归通过对回归稀疏增加罚项来解决 :ref:`ordinary_least_squares` 的一些问题.岭回归系数通过最小化带罚项的残差平方和
 
 .. math::
 
    \underset{w}{min\,} {{|| X w - y||_2}^2 + \alpha {||w||_2}^2}
 
 
-Here, :math:`\alpha \geq 0` is a complexity parameter that controls the amount
-of shrinkage: the larger the value of :math:`\alpha`, the greater the amount
-of shrinkage and thus the coefficients become more robust to collinearity.
+上述公式中,:math:`\alpha \geq 0` 是控制模型复杂度的因子(可看做收缩率的大小) : :math:`\alpha` 越大，收缩率越大，那么系数对于共线性的鲁棒性更强
 
 .. figure:: ../auto_examples/linear_model/images/plot_ridge_path_001.png
    :target: ../auto_examples/linear_model/plot_ridge_path.html
@@ -92,9 +76,7 @@ of shrinkage and thus the coefficients become more robust to collinearity.
    :scale: 50%
 
 
-As with other linear models, :class:`Ridge` will take in its ``fit`` method
-arrays X, y and will store the coefficients :math:`w` of the linear model in
-its ``coef_`` member::
+和其他线性模型一样，:class:`Ridge` 调用 ``fit`` 方法，参数为X,y,并且将线性模型拟合的系数 :math:`w` 存到成员变量 ``coef_`` 中。::
 
     >>> from sklearn import linear_model
     >>> clf = linear_model.Ridge (alpha = .5)
@@ -113,11 +95,10 @@ its ``coef_`` member::
    * :ref:`example_text_document_classification_20newsgroups.py`
 
 
-Ridge Complexity
-----------------
+岭回归复杂度
+-------------------
 
-This method has the same order of complexity than an
-:ref:`ordinary_least_squares`.
+这个方法和	:ref:`ordinary_least_squares` 复杂度一样(同阶).
 
 .. FIXME:
 .. Not completely true: OLS is solved by an SVD, while Ridge is solved by
@@ -125,13 +106,11 @@ This method has the same order of complexity than an
 .. between these
 
 
-Setting the regularization parameter: generalized Cross-Validation
-------------------------------------------------------------------
+设置正则化参数: 广义交叉验证
+----------------------------------
 
-:class:`RidgeCV` implements ridge regression with built-in
-cross-validation of the alpha parameter.  The object works in the same way
-as GridSearchCV except that it defaults to Generalized Cross-Validation
-(GCV), an efficient form of leave-one-out cross-validation::
+:class:`RidgeCV` 实现了带缺省 :math:`\alpha` 参数的交叉验证的岭回归模型.这个对象和 GridSearchCV 除了它默认为广义交叉验证(GCV),其他工作方式一样。
+下面是一种高效的交叉验证方式-留一交叉验证(leave-one-out):
 
     >>> from sklearn import linear_model
     >>> clf = linear_model.RidgeCV(alphas=[0.1, 1.0, 10.0])
@@ -154,28 +133,17 @@ as GridSearchCV except that it defaults to Generalized Cross-Validation
 Lasso
 =====
 
-The :class:`Lasso` is a linear model that estimates sparse coefficients.
-It is useful in some contexts due to its tendency to prefer solutions
-with fewer parameter values, effectively reducing the number of variables
-upon which the given solution is dependent. For this reason, the Lasso
-and its variants are fundamental to the field of compressed sensing.
-Under certain conditions, it can recover the exact set of non-zero
-weights (see
+:class:`Lasso` 是一种估计稀疏线性模型的方法.由于它倾向具有少量参数值的情况，对于给定解决方案是相关情况下，有效的减少了变量数量。
+因此，Lasso及其变种是压缩感知(压缩采样)的基础。在约束条件下，它可以回复一组非零精确的权重系数(参考
 :ref:`example_applications_plot_tomography_l1_reconstruction.py`).
 
-Mathematically, it consists of a linear model trained with :math:`\ell_1` prior
-as regularizer. The objective function to minimize is:
+用数学形式表达，Lasso 包含一个使用 :math:`ell_1` 先验作为正则化因子的线性模型。其目标函数是最小化:
 
 .. math::  \underset{w}{min\,} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}
 
-The lasso estimate thus solves the minimization of the
-least-squares penalty with :math:`\alpha ||w||_1` added, where
-:math:`\alpha` is a constant and :math:`||w||_1` is the :math:`\ell_1`-norm of
-the parameter vector.
+lasso 解决带 :math:`\alpha ||w||_1` 罚项的最小平方和，其中 :math:`\alpha` 是一个常量，:math:`||w||_1` 是参数向量的 :math:`\ell_1`-norm
 
-The implementation in the class :class:`Lasso` uses coordinate descent as
-the algorithm to fit the coefficients. See :ref:`least_angle_regression`
-for another implementation::
+:class:`Lasso` 类实现使用了坐标下降法(一种非梯度优化算法) 来拟合稀疏.参考另一种实现 :ref:`least_angle_regression` ::
 
     >>> from sklearn import linear_model
     >>> clf = linear_model.Lasso(alpha = 0.1)
@@ -186,8 +154,7 @@ for another implementation::
     >>> clf.predict([[1, 1]])
     array([ 0.8])
 
-Also useful for lower-level tasks is the function :func:`lasso_path` that
-computes the coefficients along the full path of possible values.
+函数 :func:`lasso_path` 对于lower-level任务非常有用。它能够通过搜索所有路径上可能的值来计算系数.
 
 .. topic:: Examples:
 
@@ -207,25 +174,19 @@ computes the coefficients along the full path of possible values.
       use :ref:`randomized_l1`.
 
 
-Setting regularization parameter
+设置正则化参数
 --------------------------------
 
-The ``alpha`` parameter controls the degree of sparsity of the coefficients
-estimated.
+``alpha`` 参数控制估计的系数的稀疏程度。
 
-Using cross-validation
+使用交叉验证
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-scikit-learn exposes objects that set the Lasso ``alpha`` parameter by
-cross-validation: :class:`LassoCV` and :class:`LassoLarsCV`.
-:class:`LassoLarsCV` is based on the :ref:`least_angle_regression` algorithm
-explained below.
+scikit-learn 暴露以下两个类 :class:`LassoCV` 和 :class:`LassoLarsCV` 可以设置 Lasso ``alpha`` 参数.
+:class:`LassoCV` 基于下面解释的算法 :ref:`least_angle_regression` 
 
-For high-dimensional datasets with many collinear regressors,
-:class:`LassoCV` is most often preferable. However, :class:`LassoLarsCV` has
-the advantage of exploring more relevant values of `alpha` parameter, and
-if the number of samples is very small compared to the number of
-observations, it is often faster than :class:`LassoCV`.
+对于含有很多共线性的高维的数据集，:class:`LassoCV` 是最合适不过了。然而，:class:`LassoLarsCV` 在寻找 `alpha` 参数更相关的值时更具有优势，
+并且如果样本相比于观测的数量时，通常比  :class:`LassoCV` 更快.
 
 .. |lasso_cv_1| image:: ../auto_examples/linear_model/images/plot_lasso_model_selection_002.png
     :target: ../auto_examples/linear_model/plot_lasso_model_selection.html
@@ -238,7 +199,7 @@ observations, it is often faster than :class:`LassoCV`.
 .. centered:: |lasso_cv_1| |lasso_cv_2|
 
 
-Information-criteria based model selection
+基于模型选择的信息约束
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Alternatively, the estimator :class:`LassoLarsIC` proposes to use the
@@ -261,58 +222,6 @@ They also tend to break when the problem is badly conditioned
 .. topic:: Examples:
 
   * :ref:`example_linear_model_plot_lasso_model_selection.py`
-
-
-.. _multi_task_lasso:
-
-Multi-task Lasso
-================
-
-The :class:`MultiTaskLasso` is a linear model that estimates sparse
-coefficients for multiple regression problems jointly: ``y`` is a 2D array,
-of shape ``(n_samples, n_tasks)``. The constraint is that the selected
-features are the same for all the regression problems, also called tasks.
-
-The following figure compares the location of the non-zeros in W obtained
-with a simple Lasso or a MultiTaskLasso. The Lasso estimates yields
-scattered non-zeros while the non-zeros of the MultiTaskLasso are full
-columns.
-
-.. |multi_task_lasso_1| image:: ../auto_examples/linear_model/images/plot_multi_task_lasso_support_001.png
-    :target: ../auto_examples/linear_model/plot_multi_task_lasso_support.html
-    :scale: 48%
-
-.. |multi_task_lasso_2| image:: ../auto_examples/linear_model/images/plot_multi_task_lasso_support_002.png
-    :target: ../auto_examples/linear_model/plot_multi_task_lasso_support.html
-    :scale: 48%
-
-.. centered:: |multi_task_lasso_1| |multi_task_lasso_2|
-
-.. centered:: Fitting a time-series model, imposing that any active feature be active at all times.
-
-.. topic:: Examples:
-
-  * :ref:`example_linear_model_plot_multi_task_lasso_support.py`
-
-
-Mathematically, it consists of a linear model trained with a mixed
-:math:`\ell_1` :math:`\ell_2` prior as regularizer.
-The objective function to minimize is:
-
-.. math::  \underset{w}{min\,} { \frac{1}{2n_{samples}} ||X W - Y||_{Fro} ^ 2 + \alpha ||W||_{21}}
-
-where :math:`Fro` indicates the Frobenius norm:
-
-.. math:: ||A||_{Fro} = \sqrt{\sum_{ij} a_{ij}^2}
-
-and :math:`\ell_1` :math:`\ell_2` reads:
-
-.. math:: ||A||_{2 1} = \sum_i \sqrt{\sum_j a_{ij}^2}
-
-
-The implementation in the class :class:`MultiTaskLasso` uses coordinate descent as
-the algorithm to fit the coefficients.
-
 
 .. _elastic_net:
 
@@ -353,32 +262,52 @@ The class :class:`ElasticNetCV` can be used to set the parameters
   * :ref:`example_linear_model_plot_lasso_coordinate_descent_path.py`
 
 
+.. _multi_task_lasso:
 
-.. _multi_task_elastic_net:
+Multi-task Lasso
+================
 
-Multi-task Elastic Net
-======================
-
-The :class:`MultiTaskElasticNet` is an elastic-net model that estimates sparse
-coefficients for multiple regression problems jointly: ``Y`` is a 2D array,
-of shape ``(n_samples, n_tasks)``. The constraint is that the selected
+The :class:`MultiTaskLasso` is a linear model that estimates sparse
+coefficients for multiple regression problems jointly: ``y`` is a 2D array,
+of shape (n_samples, n_tasks). The constraint is that the selected
 features are the same for all the regression problems, also called tasks.
 
+The following figure compares the location of the non-zeros in W obtained
+with a simple Lasso or a MultiTaskLasso. The Lasso estimates yields
+scattered non-zeros while the non-zeros of the MultiTaskLasso are full
+columns.
+
+.. |multi_task_lasso_1| image:: ../auto_examples/linear_model/images/plot_multi_task_lasso_support_001.png
+    :target: ../auto_examples/linear_model/plot_multi_task_lasso_support.html
+    :scale: 48%
+
+.. |multi_task_lasso_2| image:: ../auto_examples/linear_model/images/plot_multi_task_lasso_support_002.png
+    :target: ../auto_examples/linear_model/plot_multi_task_lasso_support.html
+    :scale: 48%
+
+.. centered:: |multi_task_lasso_1| |multi_task_lasso_2|
+
+.. centered:: Fitting a time-series model, imposing that any active feature be active at all times.
+
+.. topic:: Examples:
+
+  * :ref:`example_linear_model_plot_multi_task_lasso_support.py`
+
+
+
 Mathematically, it consists of a linear model trained with a mixed
-:math:`\ell_1` :math:`\ell_2` prior and :math:`\ell_2` prior as regularizer.
+:math:`\ell_1` :math:`\ell_2` prior as regularizer.
 The objective function to minimize is:
 
-.. math::
+.. math::  \underset{w}{min\,} { \frac{1}{2n_{samples}} ||X W - Y||_2 ^ 2 + \alpha ||W||_{21}}
 
-    \underset{W}{min\,} { \frac{1}{2n_{samples}} ||X W - Y||_{Fro}^2 + \alpha \rho ||W||_{2 1} +
-    \frac{\alpha(1-\rho)}{2} ||W||_{Fro}^2}
+where;
 
-The implementation in the class :class:`MultiTaskElasticNet` uses coordinate descent as
+.. math:: ||W||_{2 1} = \sum_i \sqrt{\sum_j w_{ij}^2}
+
+
+The implementation in the class :class:`MultiTaskLasso` uses coordinate descent as
 the algorithm to fit the coefficients.
-
-The class :class:`MultiTaskElasticNetCV` can be used to set the parameters
-``alpha`` (:math:`\alpha`) and ``l1_ratio`` (:math:`\rho`) by cross-validation.
-
 
 .. _least_angle_regression:
 
@@ -526,7 +455,7 @@ parameters in the estimation procedure: the regularization parameter is
 not set in a hard sense but tuned to the data at hand.
 
 This can be done by introducing `uninformative priors
-<https://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors>`__
+<http://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors>`__
 over the hyper parameters of the model.
 The :math:`\ell_{2}` regularization used in `Ridge Regression`_ is equivalent
 to finding a maximum a-postiori solution under a Gaussian prior over the
@@ -575,7 +504,7 @@ The prior for the parameter :math:`w` is given by a spherical Gaussian:
     \mathcal{N}(w|0,\lambda^{-1}\bold{I_{p}})
 
 The priors over :math:`\alpha` and :math:`\lambda` are chosen to be `gamma
-distributions <https://en.wikipedia.org/wiki/Gamma_distribution>`__, the
+distributions <http://en.wikipedia.org/wiki/Gamma_distribution>`__, the
 conjugate prior for the precision of the Gaussian.
 
 The resulting model is called *Bayesian Ridge Regression*, and is similar to the
@@ -661,8 +590,6 @@ hyperparameters :math:`\lambda_1` and :math:`\lambda_2`.
    :align: center
    :scale: 50%
 
-ARD is also known in the literature as *Sparse Bayesian Learning* and
-*Relevance Vector Machine* [3]_ [4]_.
 
 .. topic:: Examples:
 
@@ -672,13 +599,7 @@ ARD is also known in the literature as *Sparse Bayesian Learning* and
 
     .. [1] Christopher M. Bishop: Pattern Recognition and Machine Learning, Chapter 7.2.1
 
-    .. [2] David Wipf and Srikantan Nagarajan: `A new view of automatic relevance determination <http://papers.nips.cc/paper/3372-a-new-view-of-automatic-relevance-determination.pdf>`_
-
-    .. [3] Michael E. Tipping: `Sparse Bayesian Learning and the Relevance Vector Machine <http://www.jmlr.org/papers/volume1/tipping01a/tipping01a.pdf>`_
-
-    .. [4] Tristan Fletcher: `Relevance Vector Machines explained <http://www.tristanfletcher.co.uk/RVM%20Explained.pdf>`_
-
-
+    .. [2] David Wipf and Srikantan Nagarajan: `A new view of automatic relevance determination. <http://books.nips.cc/papers/files/nips20/NIPS2007_0976.pdf>`_
 
 .. _Logistic_regression:
 
@@ -688,59 +609,63 @@ Logistic regression
 Logistic regression, despite its name, is a linear model for classification
 rather than regression. Logistic regression is also known in the literature as
 logit regression, maximum-entropy classification (MaxEnt)
-or the log-linear classifier. In this model, the probabilities describing the possible outcomes of a single trial are modeled using a `logistic function <https://en.wikipedia.org/wiki/Logistic_function>`_.
+or the log-linear classifier. In this model, the probabilities describing the possible outcomes of a single trial are modeled using a `logistic function <http://en.wikipedia.org/wiki/Logistic_function>`_.
 
 The implementation of logistic regression in scikit-learn can be accessed from
-class :class:`LogisticRegression`. This implementation can fit binary, One-vs-
-Rest, or multinomial logistic regression with optional L2 or L1
-regularization.
+class :class:`LogisticRegression`. This
+implementation can fit a multiclass (one-vs-rest) logistic regression with optional
+L2 or L1 regularization.
 
-As an optimization problem, binary class L2 penalized logistic regression
-minimizes the following cost function:
+As an optimization problem, binary class L2 penalized logistic regression minimizes
+the following cost function:
 
 .. math:: \underset{w, c}{min\,} \frac{1}{2}w^T w + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1) .
 
-Similarly, L1 regularized logistic regression solves the following
-optimization problem
+Similarly, L1 regularized logistic regression solves the following optimization problem
 
 .. math:: \underset{w, c}{min\,} \|w\|_1 + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1) .
 
 The solvers implemented in the class :class:`LogisticRegression`
-are "liblinear", "newton-cg", "lbfgs" and "sag":
+are "liblinear" (which is a wrapper around the C++ library,
+LIBLINEAR), "newton-cg", "lbfgs" and "sag".
 
-The solver "liblinear" uses a coordinate descent (CD) algorithm, and relies
-on the excellent C++ `LIBLINEAR library
-<http://www.csie.ntu.edu.tw/~cjlin/liblinear/>`_, which is shipped with
-scikit-learn. However, the CD algorithm implemented in liblinear cannot learn
-a true multinomial (multiclass) model; instead, the optimization problem is
-decomposed in a "one-vs-rest" fashion so separate binary classifiers are
-trained for all classes. This happens under the hood, so
-:class:`LogisticRegression` instances using this solver behave as multiclass
-classifiers. For L1 penalization :func:`sklearn.svm.l1_min_c` allows to
-calculate the lower bound for C in order to get a non "null" (all feature
-weights to zero) model.
+The "lbfgs" and "newton-cg" solvers only support L2 penalization and are found
+to converge faster for some high dimensional data. L1 penalization yields
+sparse predicting weights.
 
-The "lbfgs", "sag" and "newton-cg" solvers only support L2 penalization and
-are found to converge faster for some high dimensional data. Setting
-`multi_class` to "multinomial" with these solvers learns a true multinomial
-logistic regression model [5]_, which means that its probability estimates
-should be better calibrated than the default "one-vs-rest" setting. The
-"lbfgs", "sag" and "newton-cg"" solvers cannot optimize L1-penalized models,
-therefore the "multinomial" setting does not learn sparse models.
+The solver "liblinear" uses a coordinate descent (CD) algorithm based on
+Liblinear. For L1 penalization :func:`sklearn.svm.l1_min_c` allows to
+calculate the lower bound for C in order to get a non "null" (all feature weights to
+zero) model. This relies on the excellent
+`LIBLINEAR library <http://www.csie.ntu.edu.tw/~cjlin/liblinear/>`_,
+which is shipped with scikit-learn. However, the CD algorithm implemented in
+liblinear cannot learn a true multinomial (multiclass) model;
+instead, the optimization problem is decomposed in a "one-vs-rest" fashion
+so separate binary classifiers are trained for all classes.
+This happens under the hood, so :class:`LogisticRegression` instances
+using this solver behave as multiclass classifiers.
 
-The solver "sag" uses a Stochastic Average Gradient descent [6]_. It is faster
-than other solvers for large datasets, when both the number of samples and the
-number of features are large.
+Setting `multi_class` to "multinomial" with the "lbfgs" or "newton-cg" solver
+in :class:`LogisticRegression` learns a true multinomial logistic
+regression model, which means that its probability estimates should
+be better calibrated than the default "one-vs-rest" setting.
+"lbfgs", "newton-cg" and "sag" solvers cannot optimize L1-penalized models, though, so the "multinomial" setting does not learn sparse models.
+
+The solver "sag" uses a Stochastic Average Gradient descent [3]_. It does not
+handle "multinomial" case, and is limited to L2-penalized models, yet it is
+often faster than other solvers for large datasets, when both the number of
+samples and the number of features are large.
 
 In a nutshell, one may choose the solver with the following rules:
 
-=================================  =============================
-Case                               Solver
-=================================  =============================
-Small dataset or L1 penalty        "liblinear"
-Multinomial loss or large dataset  "lbfgs", "sag" or "newton-cg"
-Very Large dataset                 "sag"
-=================================  =============================
+===========================   ======================
+Case                          Solver
+===========================   ======================
+Small dataset or L1 penalty   "liblinear"
+Multinomial loss              "lbfgs" or newton-cg"
+Large dataset                 "sag"
+===========================   ======================
+
 For large dataset, you may also consider using :class:`SGDClassifier` with 'log' loss.
 
 .. topic:: Examples:
@@ -748,8 +673,6 @@ For large dataset, you may also consider using :class:`SGDClassifier` with 'log'
   * :ref:`example_linear_model_plot_logistic_l1_l2_sparsity.py`
 
   * :ref:`example_linear_model_plot_logistic_path.py`
-
-  * :ref:`example_linear_model_plot_logistic_multinomial.py`
 
 .. _liblinear_differences:
 
@@ -772,19 +695,18 @@ For large dataset, you may also consider using :class:`SGDClassifier` with 'log'
    thus be used to perform feature selection, as detailed in
    :ref:`l1_feature_selection`.
 
-:class:`LogisticRegressionCV` implements Logistic Regression with builtin
-cross-validation to find out the optimal C parameter. "newton-cg", "sag" and
-"lbfgs" solvers are found to be faster for high-dimensional dense data, due to
-warm-starting. For the multiclass case, if `multi_class` option is set to
-"ovr", an optimal C is obtained for each class and if the `multi_class` option
-is set to "multinomial", an optimal C is obtained by minimizing the cross-
-entropy loss.
+:class:`LogisticRegressionCV` implements Logistic Regression with
+builtin cross-validation to find out the optimal C parameter.
+"newton-cg", "sag" and "lbfgs" solvers are found to be faster
+for high-dimensional dense data, due to warm-starting.
+For the multiclass case, if `multi_class`
+option is set to "ovr", an optimal C is obtained for each class and if
+the `multi_class` option is set to "multinomial", an optimal C is
+obtained that minimizes the cross-entropy loss.
 
 .. topic:: References:
 
-    .. [5] Christopher M. Bishop: Pattern Recognition and Machine Learning, Chapter 4.3.4
-
-    .. [6] Mark Schmidt, Nicolas Le Roux, and Francis Bach: `Minimizing Finite Sums with the Stochastic Average Gradient. <http://hal.inria.fr/hal-00860051/PDF/sag_journal.pdf>`_
+    .. [3] Mark Schmidt, Nicolas Le Roux, and Francis Bach: `Minimizing Finite Sums with the Stochastic Average Gradient. <http://hal.inria.fr/hal-00860051/PDF/sag_journal.pdf>`_
 
 Stochastic Gradient Descent - SGD
 =================================
@@ -906,24 +828,15 @@ in these settings.
 
 .. topic:: **Trade-offs: which estimator?**
 
-  Scikit-learn provides 3 robust regression estimators:
-  :ref:`RANSAC <ransac_regression>`,
-  :ref:`Theil Sen <theil_sen_regression>` and
-  :ref:`HuberRegressor <huber_regression>`
+   Scikit-learn provides 2 robust regression estimators:
+   :ref:`RANSAC <ransac_regression>` and
+   :ref:`Theil Sen <theil_sen_regression>`
 
-  * :ref:`HuberRegressor <huber_regression>` should be faster than
-    :ref:`RANSAC <ransac_regression>` and :ref:`Theil Sen <theil_sen_regression>`
-    unless the number of samples are very large, i.e ``n_samples`` >> ``n_features``.
-    This is because :ref:`RANSAC <ransac_regression>` and :ref:`Theil Sen <theil_sen_regression>`
-    fit on smaller subsets of the data. However, both :ref:`Theil Sen <theil_sen_regression>`
-    and :ref:`RANSAC <ransac_regression>` are unlikely to be as robust as
-    :ref:`HuberRegressor <huber_regression>` for the default parameters.
+   * :ref:`RANSAC <ransac_regression>` is faster, and scales much better
+     with the number of samples
 
-  * :ref:`RANSAC <ransac_regression>` is faster than :ref:`Theil Sen <theil_sen_regression>`
-    and scales much better with the number of samples
-
-  * :ref:`RANSAC <ransac_regression>` will deal better with large
-    outliers in the y direction (most common situation)
+   * :ref:`RANSAC <ransac_regression>` will deal better with large
+     outliers in the y direction (most common situation)
 
   * :ref:`Theil Sen <theil_sen_regression>` will cope better with
     medium-size outliers in the X direction, but this property will
@@ -991,7 +904,7 @@ performance.
 
 .. topic:: References:
 
- * https://en.wikipedia.org/wiki/RANSAC
+ * http://en.wikipedia.org/wiki/RANSAC
  * `"Random Sample Consensus: A Paradigm for Model Fitting with Applications to
    Image Analysis and Automated Cartography"
    <http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf>`_
@@ -1018,7 +931,7 @@ better than an ordinary least squares in high dimension.
 
 .. topic:: References:
 
- * https://en.wikipedia.org/wiki/Theil%E2%80%93Sen_estimator
+ * http://en.wikipedia.org/wiki/Theil%E2%80%93Sen_estimator
 
 Theoretical considerations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1059,70 +972,9 @@ considering only a random subset of all possible combinations.
 
 .. topic:: References:
 
-    .. [#f1] Xin Dang, Hanxiang Peng, Xueqin Wang and Heping Zhang: `Theil-Sen Estimators in a Multiple Linear Regression Model. <http://home.olemiss.edu/~xdang/papers/MTSE.pdf>`_
+    .. [#f1] Xin Dang, Hanxiang Peng, Xueqin Wang and Heping Zhang: `Theil-Sen Estimators in a Multiple Linear Regression Model. <http://www.math.iupui.edu/~hpeng/MTSE_0908.pdf>`_
 
     .. [#f2] T. Kärkkäinen and S. Äyrämö: `On Computation of Spatial Median for Robust Data Mining. <http://users.jyu.fi/~samiayr/pdf/ayramo_eurogen05.pdf>`_
-
-.. _huber_regression:
-
-Huber Regression
-----------------
-
-The :class:`HuberRegressor` is different to :class:`Ridge` because it applies a
-linear loss to samples that are classified as outliers.
-A sample is classified as an inlier if the absolute error of that sample is
-lesser than a certain threshold. It differs from :class:`TheilSenRegressor`
-and :class:`RANSACRegressor` because it does not ignore the effect of the outliers
-but gives a lesser weight to them.
-
-.. figure:: ../auto_examples/linear_model/images/plot_huber_vs_ridge_001.png
-   :target: ../auto_examples/linear_model/plot_huber_vs_ridge.html
-   :align: center
-   :scale: 50%
-
-The loss function that :class:`HuberRegressor` minimizes is given by
-
-.. math::
-
-  \underset{w, \sigma}{min\,} {\sum_{i=1}^n\left(\sigma + H_m\left(\frac{X_{i}w - y_{i}}{\sigma}\right)\sigma\right) + \alpha {||w||_2}^2}
-
-where
-
-.. math::
-
-  H_m(z) = \begin{cases}
-         z^2, & \text {if } |z| < \epsilon, \\
-         2\epsilon|z| - \epsilon^2, & \text{otherwise}
-  \end{cases}
-
-It is advised to set the parameter ``epsilon`` to 1.35 to achieve 95% statistical efficiency.
-
-Notes
------
-The :class:`HuberRegressor` differs from using :class:`SGDRegressor` with loss set to `huber`
-in the following ways.
-
-- :class:`HuberRegressor` is scaling invariant. Once ``epsilon`` is set, scaling ``X`` and ``y``
-  down or up by different values would produce the same robustness to outliers as before.
-  as compared to :class:`SGDRegressor` where ``epsilon`` has to be set again when ``X`` and ``y`` are
-  scaled.
-
-- :class:`HuberRegressor` should be more efficient to use on data with small number of
-  samples while :class:`SGDRegressor` needs a number of passes on the training data to
-  produce the same robustness.
-
-.. topic:: Examples:
-
-  * :ref:`example_linear_model_plot_huber_vs_ridge.py`
-
-.. topic:: References:
-
-    .. [#f1] Peter J. Huber, Elvezio M. Ronchetti: Robust Statistics, Concomitant scale estimates, pg 172
-
-Also, this estimator is different from the R implementation of Robust Regression
-(http://www.ats.ucla.edu/stat/r/dae/rreg.htm) because the R implementation does a weighted least
-squares implementation with weights given to each sample on the basis of how much the residual is
-greater than a certain threshold.
 
 .. _polynomial_regression:
 
@@ -1237,3 +1089,6 @@ This way, we can solve the XOR problem with a linear classifier::
     >>> clf = Perceptron(fit_intercept=False, n_iter=10, shuffle=False).fit(X, y)
     >>> clf.score(X, y)
     1.0
+
+
+
