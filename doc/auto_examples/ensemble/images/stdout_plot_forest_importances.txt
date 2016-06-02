@@ -1,0 +1,14 @@
+**Script output**::
+
+  Feature ranking:
+  1. feature 0 (0.250402)
+  2. feature 1 (0.231094)
+  3. feature 2 (0.148057)
+  4. feature 3 (0.055632)
+  5. feature 5 (0.054583)
+  6. feature 8 (0.054573)
+  7. feature 6 (0.052606)
+  8. feature 7 (0.051109)
+  9. feature 9 (0.051010)
+  10. feature 4 (0.050934)
+

@@ -1,0 +1,7 @@
+€}q(U
+np.asarray}q(Umodule_shortqUnumpyqUnameqUasarrayUmoduleqhuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUplt.show}q	(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	plt.title}q
+(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUnp.ones}q(hUnumpyqhUoneshhuUmake_circlesq}q(hUsklearn.datasetshUmake_circleshUsklearn.datasetsuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuU label_propagation.LabelSpreading}q(hUsklearn.semi_supervisedhULabelSpreadinghU)sklearn.semi_supervised.label_propagationuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUnp.where}q(hUnumpyqhUwherehhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuu.

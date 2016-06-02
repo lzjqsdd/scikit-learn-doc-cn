@@ -1,0 +1,10 @@
+**Script output**::
+
+  Estimated number of clusters: 3
+  Homogeneity: 0.953
+  Completeness: 0.883
+  V-measure: 0.917
+  Adjusted Rand Index: 0.952
+  Adjusted Mutual Information: 0.883
+  Silhouette Coefficient: 0.626
+

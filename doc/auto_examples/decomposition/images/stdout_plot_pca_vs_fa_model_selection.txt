@@ -1,0 +1,9 @@
+**Script output**::
+
+  best n_components by PCA CV = 10
+  best n_components by FactorAnalysis CV = 10
+  best n_components by PCA MLE = 10
+  best n_components by PCA CV = 40
+  best n_components by FactorAnalysis CV = 10
+  best n_components by PCA MLE = 38
+

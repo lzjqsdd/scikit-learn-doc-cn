@@ -1,0 +1,12 @@
+€}q(U	np.argmax}q(Umodule_shortqUnumpyqUnameqUargmaxUmoduleqhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuU	np.arange}q	(hUnumpyq
+hUarangehh
+uUPCAq}q(hUsklearn.decompositionhUPCAhUsklearn.decompositionuUGridSearchCVq}q(hUsklearn.grid_searchhUGridSearchCVhUsklearn.grid_searchuUShrunkCovarianceq}q(hUsklearn.covariancehUShrunkCovariancehUsklearn.covarianceuUcross_val_scoreq}q(hUsklearn.cross_validationhUcross_val_scorehUsklearn.cross_validationuUnp.random.RandomState}q(hUnumpy.randomhURandomStatehUnumpy.randomuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUnp.logspace}q(hUnumpyqhUlogspacehhuU
+linalg.svd}q(hUscipy.linalghUsvdhUscipy.linalguU
+LedoitWolfq}q(hUsklearn.covariancehU
+LedoitWolfhUsklearn.covarianceuUplt.axhline}q(hUmatplotlib.pyplothUaxhlinehUmatplotlib.pyplotuUplt.axvline}q(hUmatplotlib.pyplothUaxvlinehUmatplotlib.pyplotuU
+plt.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUFactorAnalysisq}q (hUsklearn.decompositionhUFactorAnalysishUsklearn.decompositionuUnp.dot}q!(hUnumpyq"hUdothh"uUnp.mean}q#(hUnumpyq$hUmeanhh$uU
+plt.xlabel}q%(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

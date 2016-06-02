@@ -1,0 +1,73 @@
+
+
+.. _example_neighbors_plot_approximate_nearest_neighbors_scalability.py:
+
+
+============================================
+Scalability of Approximate Nearest Neighbors
+============================================
+
+This example studies the scalability profile of approximate 10-neighbors
+queries using the LSHForest with ``n_estimators=20`` and ``n_candidates=200``
+when varying the number of samples in the dataset.
+
+The first plot demonstrates the relationship between query time and index size
+of LSHForest. Query time is compared with the brute force method in exact
+nearest neighbor search for the same index sizes. The brute force queries have a
+very predictable linear scalability with the index (full scan). LSHForest index
+have sub-linear scalability profile but can be slower for small datasets.
+
+The second plot shows the speedup when using approximate queries vs brute force
+exact queries. The speedup tends to increase with the dataset size but should
+reach a plateau typically when doing queries on datasets with millions of
+samples and a few hundreds of dimensions. Higher dimensional datasets tends to
+benefit more from LSHForest indexing.
+
+The break even point (speedup = 1) depends on the dimensionality and structure
+of the indexed data and the parameters of the LSHForest index.
+
+The precision of approximate queries should decrease slowly with the dataset
+size. The speed of the decrease depends mostly on the LSHForest parameters and
+the dimensionality of the data.
+
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_approximate_nearest_neighbors_scalability_001.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_approximate_nearest_neighbors_scalability_002.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_approximate_nearest_neighbors_scalability_003.png
+            :scale: 47
+
+
+**Script output**::
+
+  Index size: 1000, exact: 0.002s, LSHF: 0.012s, speedup: 0.1, accuracy: 1.00 +/-0.00
+  Index size: 2511, exact: 0.003s, LSHF: 0.012s, speedup: 0.2, accuracy: 1.00 +/-0.00
+  Index size: 6309, exact: 0.008s, LSHF: 0.011s, speedup: 0.7, accuracy: 1.00 +/-0.00
+  Index size: 15848, exact: 0.018s, LSHF: 0.011s, speedup: 1.6, accuracy: 1.00 +/-0.00
+  Index size: 39810, exact: 0.054s, LSHF: 0.014s, speedup: 3.8, accuracy: 1.00 +/-0.00
+  Index size: 100000, exact: 0.134s, LSHF: 0.020s, speedup: 6.6, accuracy: 0.94 +/-0.08
+
+
+
+**Python source code:** :download:`plot_approximate_nearest_neighbors_scalability.py <plot_approximate_nearest_neighbors_scalability.py>`
+
+.. literalinclude:: plot_approximate_nearest_neighbors_scalability.py
+    :lines: 30-
+
+**Total running time of the example:**  8.05 seconds
+( 0 minutes  8.05 seconds)
+    

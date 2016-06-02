@@ -41,63 +41,44 @@ data in *folds* that we use for training and testing::
     >>> print(scores)
     [0.93489148580968284, 0.95659432387312182, 0.93989983305509184]
 
-.. currentmodule:: sklearn.model_selection
+.. currentmodule:: sklearn.cross_validation
 
-This is called a :class:`KFold` cross-validation.
+This is called a :class:`KFold` cross validation
 
 .. _cv_generators_tut:
 
 Cross-validation generators
 =============================
 
-Scikit-learn has a collection of classes which can be used to generate lists of
-train/test indices for popular cross-validation strategies.
 
-They expose a ``split`` method which accepts the input
-dataset to be split and yields the train/test set indices for each iteration
-of the chosen cross-validation strategy.
 
-This example shows an example usage of the ``split`` method.
+The code above to split data in train and test sets is tedious to write.
+Scikit-learn exposes cross-validation generators to generate list
+of indices for this purpose::
 
-    >>> from sklearn.model_selection import KFold, cross_val_score
-    >>> X = ["a", "a", "b", "c", "c", "c"]
-    >>> k_fold = KFold(n_folds=3)
-    >>> for train_indices, test_indices in k_fold.split(X):
+    >>> from sklearn import cross_validation
+    >>> k_fold = cross_validation.KFold(n=6, n_folds=3)
+    >>> for train_indices, test_indices in k_fold:
     ...      print('Train: %s | test: %s' % (train_indices, test_indices))
     Train: [2 3 4 5] | test: [0 1]
     Train: [0 1 4 5] | test: [2 3]
     Train: [0 1 2 3] | test: [4 5]
 
-The cross-validation can then be performed easily::
+The cross-validation can then be implemented easily::
 
-    >>> kfold = KFold(n_folds=3)
+    >>> kfold = cross_validation.KFold(len(X_digits), n_folds=3)
     >>> [svc.fit(X_digits[train], y_digits[train]).score(X_digits[test], y_digits[test])
-    ...          for train, test in k_fold.split(X_digits)]
+    ...          for train, test in kfold]
     [0.93489148580968284, 0.95659432387312182, 0.93989983305509184]
 
-The cross-validation score can be directly calculated using the
-:func:`cross_val_score` helper. Given an estimator, the cross-validation object
-and the input dataset, the :func:`cross_val_score` splits the data repeatedly into
-a training and a testing set, trains the estimator using the training set and
-computes the scores based on the testing set for each iteration of cross-validation.
+To compute the ``score`` method of an estimator, the sklearn exposes
+a helper function::
 
-By default the estimator's ``score`` method is used to compute the individual scores.
-
-Refer the :ref:`metrics module <metrics>` to learn more on the available scoring
-methods.
-
-    >>> cross_val_score(svc, X_digits, y_digits, cv=k_fold, n_jobs=-1)
+    >>> cross_validation.cross_val_score(svc, X_digits, y_digits, cv=kfold, n_jobs=-1)
     array([ 0.93489149,  0.95659432,  0.93989983])
 
 `n_jobs=-1` means that the computation will be dispatched on all the CPUs
 of the computer.
-
-Alternatively, the ``scoring`` argument can be provided to specify an alternative
-scoring method.
-
-    >>> cross_val_score(svc, X_digits, y_digits, cv=k_fold,
-    ...                 scoring='precision_macro')
-    array([ 0.93969761,  0.95911415,  0.94041254])
 
    **Cross-validation generators**
 
@@ -106,77 +87,23 @@ scoring method.
 
    *
 
-    - :class:`KFold` **(n_folds, shuffle, random_state)**
+    - :class:`KFold` **(n, k)**
 
-    - :class:`StratifiedKFold` **(n_iter, test_size, train_size, random_state)**
+    - :class:`StratifiedKFold` **(y, k)**
 
-    - :class:`LabelKFold` **(n_folds, shuffle, random_state)**
+    - :class:`LeaveOneOut` **(n)**
 
-
-   *
-
-    - Splits it into K folds, trains on K-1 and then tests on the left-out.
-
-    - Same as K-Fold but preserves the class distribution within each fold.
-
-    - Ensures that the same label is not in both testing and training sets.
-
-
-.. list-table::
+    - :class:`LeaveOneLabelOut` **(labels)**
 
    *
 
-    - :class:`ShuffleSplit` **(n_iter, test_size, train_size, random_state)**
+    - Split it K folds, train on K-1 and then test on left-out
 
-    - :class:`StratifiedShuffleSplit`
+    - It preserves the class ratios / label distribution within each fold.
 
-    - :class:`LabelShuffleSplit`
+    - Leave one observation out
 
-   *
-
-    - Generates train/test indices based on random permutation.
-
-    - Same as shuffle split but preserves the class distribution within each iteration.
-
-    - Ensures that the same label is not in both testing and training sets.
-
-
-.. list-table::
-
-   *
-
-    - :class:`LeaveOneLabelOut` **()**
-
-    - :class:`LeavePLabelOut`  **(p)**
-
-    - :class:`LeaveOneOut` **()**
-
-
-
-   *
-
-    - Takes a label array to group observations.
-
-    - Leave P labels out.
-
-    - Leave one observation out.
-
-
-
-.. list-table::
-
-   *
-
-    - :class:`LeavePOut` **(p)**
-
-    - :class:`PredefinedSplit`
-
-   *
-
-    - Leave P observations out.
-
-    - Generates train/test indices based on predefined splits.
-
+    - Takes a label array to group observations
 
 .. currentmodule:: sklearn.svm
 
@@ -205,14 +132,14 @@ Grid-search and cross-validated estimators
 Grid-search
 -------------
 
-.. currentmodule:: sklearn.model_selection
+.. currentmodule:: sklearn.grid_search
 
 The sklearn provides an object that, given data, computes the score
 during the fit of an estimator on a parameter grid and chooses the
 parameters to maximize the cross-validation score. This object takes an
 estimator during the construction and exposes an estimator API::
 
-    >>> from sklearn.model_selection import GridSearchCV, cross_val_score
+    >>> from sklearn.grid_search import GridSearchCV
     >>> Cs = np.logspace(-6, -1, 10)
     >>> clf = GridSearchCV(estimator=svc, param_grid=dict(C=Cs),
     ...                    n_jobs=-1)
@@ -236,8 +163,8 @@ a stratified 3-fold.
 
     ::
 
-        >>> cross_val_score(clf, X_digits, y_digits)
-        ...                                               # doctest: +ELLIPSIS
+        >>> cross_validation.cross_val_score(clf, X_digits, y_digits)
+        ...                                                  # doctest: +ELLIPSIS
         array([ 0.938...,  0.963...,  0.944...])
 
     Two cross-validation loops are performed in parallel: one by the

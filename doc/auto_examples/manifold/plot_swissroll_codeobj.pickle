@@ -1,0 +1,7 @@
+€}q(Uplt.cm.Spectral}q(Umodule_shortqUmatplotlib.pyplot.cmUnameqUSpectralUmoduleqUmatplotlib.pyplot.cmuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	plt.title}q	(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuU!manifold.locally_linear_embedding}q
+(hUsklearn.manifoldhUlocally_linear_embeddinghUsklearn.manifolduU*datasets.samples_generator.make_swiss_roll}q(hUsklearn.datasetshUmake_swiss_rollhU"sklearn.datasets.samples_generatoruUAxes3Dq}q(hUmpl_toolkits.mplot3dhUAxes3DhUmpl_toolkits.mplot3duU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUplt.axis}q(hU
+matplotlibhUaxishUmatplotlib.pyplotuu.

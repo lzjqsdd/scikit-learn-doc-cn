@@ -15,8 +15,8 @@ model:
 
 * **Scoring parameter**: Model-evaluation tools using
   :ref:`cross-validation <cross_validation>` (such as
-  :func:`model_selection.cross_val_score` and
-  :class:`model_selection.GridSearchCV`) rely on an internal *scoring* strategy.
+  :func:`cross_validation.cross_val_score` and
+  :class:`grid_search.GridSearchCV`) rely on an internal *scoring* strategy.
   This is discussed in the section :ref:`scoring_parameter`.
 
 * **Metric functions**: The :mod:`metrics` module implements functions
@@ -39,8 +39,8 @@ The ``scoring`` parameter: defining model evaluation rules
 ==========================================================
 
 Model selection and evaluation using tools, such as
-:class:`model_selection.GridSearchCV` and
-:func:`model_selection.cross_val_score`, take a ``scoring`` parameter that
+:class:`grid_search.GridSearchCV` and
+:func:`cross_validation.cross_val_score`, take a ``scoring`` parameter that
 controls what metric they apply to the estimators evaluated.
 
 Common cases: predefined values
@@ -48,7 +48,7 @@ Common cases: predefined values
 
 For the most common use cases, you can designate a scorer object with the
 ``scoring`` parameter; the table below shows all possible values.
-All scorer objects follow the convention that higher return values are better
+All scorer ojects follow the convention that higher return values are better
 than lower return values.  Thus the returns from mean_absolute_error
 and mean_squared_error, which measure the distance between the model
 and the data, are negated.
@@ -82,17 +82,16 @@ Scoring                      Function                                    Comment
 
 Usage examples:
 
-    >>> from sklearn import svm, datasets
-    >>> from sklearn.model_selection import cross_val_score
+    >>> from sklearn import svm, cross_validation, datasets
     >>> iris = datasets.load_iris()
     >>> X, y = iris.data, iris.target
-    >>> clf = svm.SVC(probability=True, random_state=0)
-    >>> cross_val_score(clf, X, y, scoring='log_loss') # doctest: +ELLIPSIS
-    array([-0.07..., -0.16..., -0.06...])
     >>> model = svm.SVC()
-    >>> cross_val_score(model, X, y, scoring='wrong_choice')
+    >>> cross_validation.cross_val_score(model, X, y, scoring='wrong_choice')
     Traceback (most recent call last):
     ValueError: 'wrong_choice' is not a valid scoring value. Valid options are ['accuracy', 'adjusted_rand_score', 'average_precision', 'f1', 'f1_macro', 'f1_micro', 'f1_samples', 'f1_weighted', 'log_loss', 'mean_absolute_error', 'mean_squared_error', 'median_absolute_error', 'precision', 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 'r2', 'recall', 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'roc_auc']
+    >>> clf = svm.SVC(probability=True, random_state=0)
+    >>> cross_validation.cross_val_score(clf, X, y, scoring='log_loss') # doctest: +ELLIPSIS
+    array([-0.07..., -0.16..., -0.06...])
 
 .. note::
 
@@ -136,7 +135,7 @@ the :func:`fbeta_score` function::
 
     >>> from sklearn.metrics import fbeta_score, make_scorer
     >>> ftwo_scorer = make_scorer(fbeta_score, beta=2)
-    >>> from sklearn.model_selection import GridSearchCV
+    >>> from sklearn.grid_search import GridSearchCV
     >>> from sklearn.svm import LinearSVC
     >>> grid = GridSearchCV(LinearSVC(), param_grid={'C': [1, 10]}, scoring=ftwo_scorer)
 
@@ -314,7 +313,7 @@ Accuracy score
 --------------
 
 The :func:`accuracy_score` function computes the
-`accuracy <https://en.wikipedia.org/wiki/Accuracy_and_precision>`_, either the fraction
+`accuracy <http://en.wikipedia.org/wiki/Accuracy_and_precision>`_, either the fraction
 (default) or the count (normalize=False) of correct predictions.
 
 
@@ -332,7 +331,7 @@ defined as
    \texttt{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)
 
 where :math:`1(x)` is the `indicator function
-<https://en.wikipedia.org/wiki/Indicator_function>`_.
+<http://en.wikipedia.org/wiki/Indicator_function>`_.
 
   >>> import numpy as np
   >>> from sklearn.metrics import accuracy_score
@@ -378,7 +377,7 @@ Confusion matrix
 
 The :func:`confusion_matrix` function evaluates
 classification accuracy by computing the `confusion matrix
-<https://en.wikipedia.org/wiki/Confusion_matrix>`_.
+<http://en.wikipedia.org/wiki/Confusion_matrix>`_.
 
 By definition, entry :math:`i, j` in a confusion matrix is
 the number of observations actually in group :math:`i`, but
@@ -457,7 +456,7 @@ Hamming loss
 -------------
 
 The :func:`hamming_loss` computes the average Hamming loss or `Hamming
-distance <https://en.wikipedia.org/wiki/Hamming_distance>`_ between two sets
+distance <http://en.wikipedia.org/wiki/Hamming_distance>`_ between two sets
 of samples.
 
 If :math:`\hat{y}_j` is the predicted value for the :math:`j`-th label of
@@ -470,7 +469,7 @@ Hamming loss :math:`L_{Hamming}` between two samples is defined as:
    L_{Hamming}(y, \hat{y}) = \frac{1}{n_\text{labels}} \sum_{j=0}^{n_\text{labels} - 1} 1(\hat{y}_j \not= y_j)
 
 where :math:`1(x)` is the `indicator function
-<https://en.wikipedia.org/wiki/Indicator_function>`_. ::
+<http://en.wikipedia.org/wiki/Indicator_function>`_. ::
 
   >>> from sklearn.metrics import hamming_loss
   >>> y_pred = [1, 2, 3, 4]
@@ -501,7 +500,7 @@ Jaccard similarity coefficient score
 
 The :func:`jaccard_similarity_score` function computes the average (default)
 or sum of `Jaccard similarity coefficients
-<https://en.wikipedia.org/wiki/Jaccard_index>`_, also called the Jaccard index,
+<http://en.wikipedia.org/wiki/Jaccard_index>`_, also called the Jaccard index,
 between pairs of label sets.
 
 The Jaccard similarity coefficient of the :math:`i`-th samples,
@@ -537,12 +536,12 @@ Precision, recall and F-measures
 ---------------------------------
 
 Intuitively, `precision
-<https://en.wikipedia.org/wiki/Precision_and_recall#Precision>`_ is the ability
+<http://en.wikipedia.org/wiki/Precision_and_recall#Precision>`_ is the ability
 of the classifier not to label as positive a sample that is negative, and
-`recall <https://en.wikipedia.org/wiki/Precision_and_recall#Recall>`_ is the
+`recall <http://en.wikipedia.org/wiki/Precision_and_recall#Recall>`_ is the
 ability of the classifier to find all the positive samples.
 
-The  `F-measure <https://en.wikipedia.org/wiki/F1_score>`_
+The  `F-measure <http://en.wikipedia.org/wiki/F1_score>`_
 (:math:`F_\beta` and :math:`F_1` measures) can be interpreted as a weighted
 harmonic mean of the precision and recall. A
 :math:`F_\beta` measure reaches its best value at 1 and its worst score at 0.
@@ -555,8 +554,7 @@ by varying a decision threshold.
 
 The :func:`average_precision_score` function computes the average precision
 (AP) from prediction scores. This score corresponds to the area under the
-precision-recall curve. The value is between 0 and 1 and higher is better.
-With random predictions, the AP is the fraction of positive samples.
+precision-recall curve.
 
 Several functions allow you to analyze the precision, recall and F-measures
 score:
@@ -748,7 +746,7 @@ Hinge loss
 
 The :func:`hinge_loss` function computes the average distance between
 the model and the data using
-`hinge loss <https://en.wikipedia.org/wiki/Hinge_loss>`_, a one-sided metric
+`hinge loss <http://en.wikipedia.org/wiki/Hinge_loss>`_, a one-sided metric
 that considers only prediction errors. (Hinge
 loss is used in maximal margin classifiers such as support vector machines.)
 
@@ -869,7 +867,7 @@ Matthews correlation coefficient
 ---------------------------------
 
 The :func:`matthews_corrcoef` function computes the
-`Matthew's correlation coefficient (MCC) <https://en.wikipedia.org/wiki/Matthews_correlation_coefficient>`_
+`Matthew's correlation coefficient (MCC) <http://en.wikipedia.org/wiki/Matthews_correlation_coefficient>`_
 for binary classes.  Quoting Wikipedia:
 
 
@@ -905,7 +903,7 @@ Receiver operating characteristic (ROC)
 ---------------------------------------
 
 The function :func:`roc_curve` computes the
-`receiver operating characteristic curve, or ROC curve <https://en.wikipedia.org/wiki/Receiver_operating_characteristic>`_.
+`receiver operating characteristic curve, or ROC curve <http://en.wikipedia.org/wiki/Receiver_operating_characteristic>`_.
 Quoting Wikipedia :
 
   "A receiver operating characteristic (ROC), or simply ROC curve, is a
@@ -945,7 +943,7 @@ operating characteristic (ROC) curve, which is also denoted by
 AUC or AUROC.  By computing the
 area under the roc curve, the curve information is summarized in one number.
 For more information see the `Wikipedia article on AUC
-<https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve>`_.
+<http://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_curve>`_.
 
   >>> import numpy as np
   >>> from sklearn.metrics import roc_auc_score
@@ -1007,7 +1005,7 @@ then the 0-1 loss :math:`L_{0-1}` is defined as:
    L_{0-1}(y_i, \hat{y}_i) = 1(\hat{y}_i \not= y_i)
 
 where :math:`1(x)` is the `indicator function
-<https://en.wikipedia.org/wiki/Indicator_function>`_.
+<http://en.wikipedia.org/wiki/Indicator_function>`_.
 
 
   >>> from sklearn.metrics import zero_one_loss
@@ -1095,7 +1093,7 @@ score. This metric will yield better scores if you are able to give better rank
 to the labels associated with each sample. The obtained score is always strictly
 greater than 0, and the best value is 1. If there is exactly one relevant
 label per sample, label ranking average precision is equivalent to the `mean
-reciprocal rank <https://en.wikipedia.org/wiki/Mean_reciprocal_rank>`_.
+reciprocal rank <http://en.wikipedia.org/wiki/Mean_reciprocal_rank>`_.
 
 Formally, given a binary indicator matrix of the ground truth labels
 :math:`y \in \mathcal{R}^{n_\text{samples} \times n_\text{labels}}` and the
@@ -1199,11 +1197,11 @@ Explained variance score
 -------------------------
 
 The :func:`explained_variance_score` computes the `explained variance
-regression score <https://en.wikipedia.org/wiki/Explained_variation>`_.
+regression score <http://en.wikipedia.org/wiki/Explained_variation>`_.
 
 If :math:`\hat{y}` is the estimated target output, :math:`y` the corresponding
 (correct) target output, and :math:`Var` is `Variance
-<https://en.wikipedia.org/wiki/Variance>`_, the square of the standard deviation,
+<http://en.wikipedia.org/wiki/Variance>`_, the square of the standard deviation,
 then the explained variance is estimated as follow:
 
 .. math::
@@ -1235,7 +1233,7 @@ Mean absolute error
 -------------------
 
 The :func:`mean_absolute_error` function computes `mean absolute
-error <https://en.wikipedia.org/wiki/Mean_absolute_error>`_, a risk
+error <http://en.wikipedia.org/wiki/Mean_absolute_error>`_, a risk
 metric corresponding to the expected value of the absolute error loss or
 :math:`l1`-norm loss.
 
@@ -1270,7 +1268,7 @@ Mean squared error
 -------------------
 
 The :func:`mean_squared_error` function computes `mean square
-error <https://en.wikipedia.org/wiki/Mean_squared_error>`_, a risk
+error <http://en.wikipedia.org/wiki/Mean_squared_error>`_, a risk
 metric corresponding to the expected value of the squared (quadratic) error loss or
 loss.
 
@@ -1335,7 +1333,7 @@ R² score, the coefficient of determination
 -------------------------------------------
 
 The :func:`r2_score` function computes R², the `coefficient of
-determination <https://en.wikipedia.org/wiki/Coefficient_of_determination>`_.
+determination <http://en.wikipedia.org/wiki/Coefficient_of_determination>`_.
 It provides a measure of how well future samples are likely to
 be predicted by the model. Best possible score is 1.0 and it can be negative
 (because the model can be arbitrarily worse). A constant model that always
@@ -1406,7 +1404,7 @@ Dummy estimators
 
 When doing supervised learning, a simple sanity check consists of comparing
 one's estimator against simple rules of thumb. :class:`DummyClassifier`
-implements several such simple strategies for classification:
+implements three such simple strategies for classification:
 
 - ``stratified`` generates random predictions by respecting the training
   set class distribution.
@@ -1425,7 +1423,7 @@ To illustrate :class:`DummyClassifier`, first let's create an imbalanced
 dataset::
 
   >>> from sklearn.datasets import load_iris
-  >>> from sklearn.model_selection import train_test_split
+  >>> from sklearn.cross_validation import train_test_split
   >>> iris = load_iris()
   >>> X, y = iris.data, iris.target
   >>> y[y != 1] = -1

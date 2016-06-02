@@ -1,0 +1,6 @@
+€}q(Umetrics.adjusted_rand_score}q(Umodule_shortqUsklearn.metricsUnameqUadjusted_rand_scoreUmoduleqUsklearn.metricsuUplt.clf}q(hUmatplotlib.pyplothUclfhUmatplotlib.pyplotuUAffinityPropagationq}q(hUsklearn.clusterhUAffinityPropagationhUsklearn.clusteruUmetrics.homogeneity_score}q	(hUsklearn.metricshUhomogeneity_scorehUsklearn.metricsuU
+plt.figure}q
+(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUmetrics.silhouette_score}q(hUsklearn.metricshUsilhouette_scorehUsklearn.metricsuU	plt.close}q(hUmatplotlib.pyplothUclosehUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUmetrics.completeness_score}q(hUsklearn.metricshUcompleteness_scorehUsklearn.metricsuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuU
+make_blobsq}q(hUsklearn.datasetshU
+make_blobshU"sklearn.datasets.samples_generatoruUmetrics.v_measure_score}q(hUsklearn.metricshUv_measure_scorehUsklearn.metricsuU"metrics.adjusted_mutual_info_score}q(hUsklearn.metricshUadjusted_mutual_info_scorehUsklearn.metricsuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUcycleq}q(hU	itertoolsqhUcyclehhuu.

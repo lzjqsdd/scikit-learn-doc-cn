@@ -1,0 +1,35 @@
+
+
+.. _example_mixture_plot_gmm_sin.py:
+
+
+=================================
+Gaussian Mixture Model Sine Curve
+=================================
+
+This example highlights the advantages of the Dirichlet Process:
+complexity control and dealing with sparse data. The dataset is formed
+by 100 points loosely spaced following a noisy sine curve. The fit by
+the GMM class, using the expectation-maximization algorithm to fit a
+mixture of 10 Gaussian components, finds too-small components and very
+little structure. The fits by the Dirichlet process, however, show
+that the model can either learn a global structure for the data (small
+alpha) or easily interpolate to finding relevant local structure
+(large alpha), never falling into the problems shown by the GMM class.
+
+
+
+.. image:: images/plot_gmm_sin_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_gmm_sin.py <plot_gmm_sin.py>`
+
+.. literalinclude:: plot_gmm_sin.py
+    :lines: 16-
+
+**Total running time of the example:**  0.37 seconds
+( 0 minutes  0.37 seconds)
+    

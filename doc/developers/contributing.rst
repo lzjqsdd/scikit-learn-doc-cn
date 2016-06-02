@@ -7,7 +7,7 @@ Contributing
 This project is a community effort, and everyone is welcome to
 contribute.
 
-The project is hosted on https://github.com/scikit-learn/scikit-learn
+The project is hosted on http://github.com/scikit-learn/scikit-learn
 
 Scikit-learn is somewhat :ref:`selective <selectiveness>` when it comes to
 adding new algorithms, and the best way to contribute and to help the project
@@ -19,7 +19,7 @@ Submitting a bug report
 
 In case you experience issues using this package, do not hesitate to submit a
 ticket to the
-`Bug Tracker <https://github.com/scikit-learn/scikit-learn/issues>`_. You are
+`Bug Tracker <http://github.com/scikit-learn/scikit-learn/issues>`_. You are
 also welcome to post feature requests or pull requests.
 
 
@@ -29,7 +29,7 @@ Retrieving the latest code
 ==========================
 
 We use `Git <http://git-scm.com/>`_ for version control and
-`GitHub <https://github.com/>`_ for hosting our main repository.
+`GitHub <http://github.com/>`_ for hosting our main repository.
 
 You can check out the latest sources with the command::
 
@@ -76,20 +76,20 @@ Contributing code
   To avoid duplicating work, it is highly advised that you contact the
   developers on the mailing list before starting work on a non-trivial feature.
 
-  https://mail.python.org/mailman/listinfo/scikit-learn
+  https://lists.sourceforge.net/lists/listinfo/scikit-learn-general
 
 How to contribute
 -----------------
 
 The preferred way to contribute to scikit-learn is to fork the `main
-repository <https://github.com/scikit-learn/scikit-learn/>`__ on GitHub,
+repository <http://github.com/scikit-learn/scikit-learn/>`__ on GitHub,
 then submit a "pull request" (PR):
 
- 1. `Create an account <https://github.com/join>`_ on
+ 1. `Create an account <https://github.com/signup/free>`_ on
     GitHub if you do not already have one.
 
  2. Fork the `project repository
-    <https://github.com/scikit-learn/scikit-learn>`__: click on the 'Fork'
+    <http://github.com/scikit-learn/scikit-learn>`__: click on the 'Fork'
     button near the top of the page. This creates a copy of the code under your
     account on the GitHub server.
 
@@ -131,35 +131,17 @@ visibility.
 (If any of the above seems like magic to you, then look up the
 `Git documentation <http://git-scm.com/documentation>`_ on the web.)
 
-Contributing pull requests
---------------------------
-
 It is recommended to check that your contribution complies with the following
 rules before submitting a pull request:
 
     * Follow the `coding-guidelines`_ (see below).
 
-    * When applicable, use the validation tools and other code in the
+    * When applicable, use the Validation tools and other code in the
       ``sklearn.utils`` submodule.  A list of utility routines available
       for developers can be found in the :ref:`developers-utils` page.
 
-    * If your pull request addresses an issue, please use the title to describe
-      the issue and mention the issue number in the pull request description to
-      ensure a link is created to the original issue.
-      
     * All public methods should have informative docstrings with sample
       usage presented as doctests when appropriate.
-
-    * Please prefix the title of your pull request with ``[MRG]`` if the
-      contribution is complete and should be subjected to a detailed review.
-      Incomplete contributions should be prefixed ``[WIP]`` to indicate a work
-      in progress (and changed to ``[MRG]`` when it matures). WIPs may be useful
-      to: indicate you are working on something to avoid duplicated work,
-      request broad review of functionality or API, or seek collaborators.
-      WIPs often benefit from the inclusion of a
-      `task list
-      <https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments>`_
-      in the PR description.
 
     * All other tests pass when everything is rebuilt from scratch. On
       Unix-like systems, check with (from the toplevel source folder)::
@@ -171,9 +153,6 @@ rules before submitting a pull request:
       Examples should demonstrate why the new functionality is useful in
       practice and, if possible, compare it to other methods available in
       scikit-learn.
-
-    * Documentation and high-coverage tests are necessary for enhancements
-      to be accepted.
 
     * At least one paragraph of narrative documentation with links to
       references in the literature (with PDF links when possible) and
@@ -228,47 +207,6 @@ and Cython optimizations.
    <http://astropy.readthedocs.org/en/latest/development/workflow/development_workflow.html>`_
    sections.
 
-.. _filing_bugs:
-
-Filing Bugs
------------
-
-We use Github issues to track all bugs and feature requests; feel free to
-open an issue if you have found a bug or wish to see a feature implemented.
-
-It is recommended to check that your issue complies with the
-following rules before submitting:
-
--  Verify that your issue is not being currently addressed by other
-   `issues <https://github.com/scikit-learn/scikit-learn/issues?q=>`_
-   or `pull requests <https://github.com/scikit-learn/scikit-learn/pulls?q=>`_.
-
--  If you are submitting an algorithm or feature request, please verify that
-   the algorithm fulfills our
-   `new algorithm requirements
-   <http://scikit-learn.org/stable/faq.html#can-i-add-this-new-algorithm-that-i-or-someone-else-just-published>`_.
-
--  Please ensure all code snippets and error messages are formatted in
-   appropriate code blocks.
-   See `Creating and highlighting code blocks
-   <https://help.github.com/articles/creating-and-highlighting-code-blocks>`_.
-
--  Please include your operating system type and version number, as well
-   as your Python, scikit-learn, numpy, and scipy versions. This information
-   can be found by runnning the following code snippet::
-
-     import platform; print(platform.platform())
-     import sys; print("Python", sys.version)
-     import numpy; print("NumPy", numpy.__version__)
-     import scipy; print("SciPy", scipy.__version__)
-     import sklearn; print("Scikit-Learn", sklearn.__version__)
-   
--  Please be specific about what estimators and/or functions are involved
-   and the shape of the data, as appropriate; please include a
-   `reproducible <http://stackoverflow.com/help/mcve>`_ code snippet
-   or link to a `gist <https://gist.github.com>`_. If an exception is raised,
-   please provide the traceback.
-
 .. _easy_issues:
 
 Easy Issues
@@ -276,7 +214,7 @@ Easy Issues
 
 A great way to start contributing to scikit-learn is to pick an item from the
 list of `Easy issues
-<https://github.com/scikit-learn/scikit-learn/issues?q=is%3Aopen+label%3AEasy+is%3Aissue>`_
+<https://github.com/scikit-learn/scikit-learn/labels/Easy>`_
 in the issue tracker. Resolving these issues allow you to start contributing
 to the project without much prior knowledge. Your assistance in this area will
 be greatly appreciated by the more experienced developers as it helps free up
@@ -299,8 +237,8 @@ and are viewable in a web browser. See the README file in the doc/ directory
 for more information.
 
 For building the documentation, you will need `sphinx
-<http://sphinx-doc.org/>`_,
-`matplotlib <http://matplotlib.org>`_ and
+<http://sphinx.pocoo.org/>`_,
+`matplotlib <http://matplotlib.sourceforge.net/>`_ and
 `pillow <http://pillow.readthedocs.org/en/latest/>`_.
 
 **When you are writing documentation**, it is important to keep a good
@@ -359,7 +297,7 @@ Finally, follow the formatting rules below to make it consistently good:
 Testing and improving test coverage
 ------------------------------------
 
-High-quality `unit testing <https://en.wikipedia.org/wiki/Unit_testing>`_
+High-quality `unit testing <http://en.wikipedia.org/wiki/Unit_testing>`_
 is a corner-stone of the scikit-learn development process. For this
 purpose, we use the `nose <http://nose.readthedocs.org/en/latest/>`_
 package. The tests are functions appropriately named, located in `tests`
@@ -375,7 +313,7 @@ We expect code coverage of new features to be at least around 90%.
 .. note:: **Workflow to improve test coverage**
 
    To test code coverage, you need to install the `coverage
-   <https://pypi.python.org/pypi/coverage>`_ package in addition to nose.
+   <http://pypi.python.org/pypi/coverage>`_ package in addition to nose.
 
    1. Run 'make test-coverage'. The output lists for each file the line
       numbers that are not tested.
@@ -454,7 +392,7 @@ the review easier so new code can be integrated in less time.
 
 Uniformly formatted code makes it easier to share code ownership. The
 scikit-learn project tries to closely follow the official Python guidelines
-detailed in `PEP8 <https://www.python.org/dev/peps/pep-0008>`_ that
+detailed in `PEP8 <http://www.python.org/dev/peps/pep-0008/>`_ that
 detail how code should be formatted and indented. Please read it and
 follow it.
 
@@ -476,7 +414,7 @@ In addition, we add the following guidelines:
 
     * **Please don't use** ``import *`` **in any case**. It is considered harmful
       by the `official Python recommendations
-      <https://docs.python.org/2/howto/doanddont.html#from-module-import>`_.
+      <http://docs.python.org/howto/doanddont.html#from-module-import>`_.
       It makes the code harder to read as the origin of symbols is no
       longer explicitly referenced, but most important, it prevents
       using a static analysis tool like `pyflakes
@@ -856,7 +794,7 @@ adheres to the scikit-learn interface and standards by running
 
 The main motivation to make a class compatible to the scikit-learn estimator
 interface might be that you want to use it together with model assessment and
-selection tools such as :class:`model_selection.GridSearchCV`.
+selection tools such as :class:`grid_search.GridSearchCV`.
 
 For this to work, you need to implement the following interface.
 If a dependency on scikit-learn is okay for your code,
@@ -918,7 +856,7 @@ implement the interface is::
 
 Parameters and init
 -------------------
-As :class:`model_selection.GridSearchCV` uses ``set_params``
+As :class:`grid_search.GridSearchCV` uses ``set_params``
 to apply parameter setting to estimators,
 it is essential that calling ``set_params`` has the same effect
 as setting parameters using the ``__init__`` method.
@@ -936,8 +874,9 @@ trailing ``_`` is used to check if the estimator has been fitted.
 
 Cloning
 -------
-For use with the :mod:`model_selection` module,
-an estimator must support the ``base.clone`` function to replicate an estimator.
+For using :class:`grid_search.GridSearch` or any functionality of the
+:mod:`cross_validation` module, an estimator must support the ``base.clone``
+function to replicate an estimator.
 This can be done by providing a ``get_params`` method.
 If ``get_params`` is present, then ``clone(estimator)`` will be an instance of
 ``type(estimator)`` on which ``set_params`` has been called with clones of
@@ -962,8 +901,8 @@ accepts an optional ``y``.
 Estimator types
 ---------------
 Some common functionality depends on the kind of estimator passed.
-For example, cross-validation in :class:`model_selection.GridSearchCV` and
-:func:`model_selection.cross_val_score` defaults to being stratified when used
+For example, cross-validation in :class:`grid_search.GridSearchCV` and
+:func:`cross_validation.cross_val_score` defaults to being stratified when used
 on a classifier, but not otherwise. Similarly, scorers for average precision
 that take a continuous prediction need to call ``decision_function`` for classifiers,
 but ``predict`` for regressors. This distinction between classifiers and regressors

@@ -1,0 +1,37 @@
+
+
+.. _example_model_selection_plot_train_error_vs_test_error.py:
+
+
+=========================
+Train error vs Test error
+=========================
+
+Illustration of how the performance of an estimator on unseen data (test data)
+is not the same as the performance on training data. As the regularization
+increases the performance on train decreases while the performance on test
+is optimal within a range of values of the regularization parameter.
+The example with an Elastic-Net regression model and the performance is
+measured using the explained variance a.k.a. R^2.
+
+
+
+
+.. image:: images/plot_train_error_vs_test_error_001.png
+    :align: center
+
+
+**Script output**::
+
+  Optimal regularization parameter : 0.000335292414925
+
+
+
+**Python source code:** :download:`plot_train_error_vs_test_error.py <plot_train_error_vs_test_error.py>`
+
+.. literalinclude:: plot_train_error_vs_test_error.py
+    :lines: 14-
+
+**Total running time of the example:**  1.95 seconds
+( 0 minutes  1.95 seconds)
+    

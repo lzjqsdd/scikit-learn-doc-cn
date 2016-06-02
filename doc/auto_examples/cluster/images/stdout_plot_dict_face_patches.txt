@@ -1,0 +1,30 @@
+**Script output**::
+
+  Learning the dictionary... 
+  Partial fit of  100 out of 2400
+  Partial fit of  200 out of 2400
+  [MiniBatchKMeans] Reassigning 16 cluster centers.
+  Partial fit of  300 out of 2400
+  Partial fit of  400 out of 2400
+  Partial fit of  500 out of 2400
+  Partial fit of  600 out of 2400
+  Partial fit of  700 out of 2400
+  Partial fit of  800 out of 2400
+  Partial fit of  900 out of 2400
+  Partial fit of 1000 out of 2400
+  Partial fit of 1100 out of 2400
+  Partial fit of 1200 out of 2400
+  Partial fit of 1300 out of 2400
+  Partial fit of 1400 out of 2400
+  Partial fit of 1500 out of 2400
+  Partial fit of 1600 out of 2400
+  Partial fit of 1700 out of 2400
+  Partial fit of 1800 out of 2400
+  Partial fit of 1900 out of 2400
+  Partial fit of 2000 out of 2400
+  Partial fit of 2100 out of 2400
+  Partial fit of 2200 out of 2400
+  Partial fit of 2300 out of 2400
+  Partial fit of 2400 out of 2400
+  done in 7.74s.
+

@@ -1,0 +1,12 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUpltq}q(hU
+matplotlibqhUpyplothhuUnp.std}q	(hUnumpyq
+hUstdhh
+uUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.mean}q(hUnumpyqhUmeanhhuUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.grid}q(hUmatplotlib.pyplothUgridhUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUload_digitsq}q(hUsklearn.datasetshUload_digitshUsklearn.datasetsuU
+GaussianNBq}q(hUsklearn.naive_bayeshU
+GaussianNBhUsklearn.naive_bayesuUlearning_curveq}q(hUsklearnhUlearning_curvehUsklearn.learning_curveuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUnp.linspace}q(hUnumpyqhUlinspacehhuUplt.fill_between}q(hUmatplotlib.pyplothUfill_betweenhUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUcross_validation.ShuffleSplit}q(hUsklearn.cross_validationhUShuffleSplithUsklearn.cross_validationuUSVCq}q (hUsklearn.svmhUSVChUsklearn.svmuu.

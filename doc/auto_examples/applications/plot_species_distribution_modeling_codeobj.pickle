@@ -1,0 +1,11 @@
+€}q(Uplt.cm.Reds}q(Umodule_shortqUmatplotlib.pyplot.cmUnameqURedsUmoduleqUmatplotlib.pyplot.cmuUnp.r_}q(hUnumpyqhUr_hhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUfetch_species_distributionsq	}q
+(hUsklearn.datasetshUfetch_species_distributionshUsklearn.datasetsuUplt.contour}q(hU
+matplotlibhUcontourhUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUplt.contourf}q(hUmatplotlib.pyplothUcontourfhUmatplotlib.pyplotuUnp.random.randint}q(hUnumpy.randomhUrandinthUnumpy.randomuUnp.c_}q(hUnumpyqhUc_hhuUnp.zeros}q(hUnumpyqhUzeroshhuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUsvm.OneClassSVM}q(hUsklearn.svmhUOneClassSVMhUsklearn.svmuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUnp.ones}q(hUnumpyqhUoneshhuUplt.text}q(hU
+matplotlibhUtexthUmatplotlib.pyplotuUnp.linspace}q(hUnumpyqhUlinspacehhuUmetrics.auc}q(hUsklearn.metricshUauchUsklearn.metricsuUconstruct_gridsq}q(hU&sklearn.datasets.species_distributionshUconstruct_gridshU&sklearn.datasets.species_distributionsuUBasemapq}q (hUmpl_toolkits.basemaphUBasemaphUmpl_toolkits.basemapuUnp.meshgrid}q!(hUnumpyq"hUmeshgridhh"uUplt.scatter}q#(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUmetrics.roc_curve}q$(hUsklearn.metricshU	roc_curvehUsklearn.metricsuU
+np.float64}q%(hUnumpyq&hUfloat64hh&uUnp.searchsorted}q'(hUnumpyq(hUsearchsortedhh(uUnp.where}q)(hUnumpyq*hUwherehh*uUplt.subplot}q+(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUtimeq,}q-(hUtimeq.hUtimehh.uUplt.colorbar}q/(hU
+matplotlibhUcolorbarhUmatplotlib.pyplotuUnp.random.seed}q0(hUnumpy.randomhUseedhUnumpy.randomuUplt.axis}q1(hU
+matplotlibhUaxishUmatplotlib.pyplotuUBunchq2}q3(hUsklearn.datasets.basehUBunchhUsklearn.datasets.baseuu.

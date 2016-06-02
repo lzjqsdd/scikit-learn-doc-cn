@@ -129,6 +129,7 @@ Once trained, we can export the tree in `Graphviz
 exporter. Below is an example export of a tree trained on the entire
 iris dataset::
 
+    >>> from sklearn.externals.six import StringIO
     >>> with open("iris.dot", 'w') as f:
     ...     f = tree.export_graphviz(clf, out_file=f)
 
@@ -342,8 +343,7 @@ Tips on practical use
   * Use ``min_samples_split`` or ``min_samples_leaf`` to control the number of
     samples at a leaf node.  A very small number will usually mean the tree
     will overfit, whereas a large number will prevent the tree from learning
-    the data. Try ``min_samples_leaf=5`` as an initial value. If the sample size
-    varies greatly, a float number can be used as percentage in these two parameters.
+    the data.  Try ``min_samples_leaf=5`` as an initial value.
     The main difference between the two is that ``min_samples_leaf`` guarantees
     a minimum number of samples in a leaf, while ``min_samples_split`` can
     create arbitrary small leaves, though ``min_samples_split`` is more common
@@ -367,7 +367,7 @@ Tips on practical use
     If training data is not in this format, a copy of the dataset will be made.
 
   * If the input matrix X is very sparse, it is recommended to convert to sparse
-    ``csc_matrix`` before calling fit and sparse ``csr_matrix`` before calling
+    ``csc_matrix` before calling fit and sparse ``csr_matrix`` before calling
     predict. Training time can be orders of magnitude faster for a sparse
     matrix input compared to a dense matrix when features have zero values in
     most of the samples.
@@ -409,8 +409,8 @@ and threshold that yield the largest information gain at each node.
 
 scikit-learn uses an optimised version of the CART algorithm.
 
-.. _ID3: https://en.wikipedia.org/wiki/ID3_algorithm
-.. _CART: https://en.wikipedia.org/wiki/Predictive_analytics#Classification_and_regression_trees
+.. _ID3: http://en.wikipedia.org/wiki/ID3_algorithm
+.. _CART: http://en.wikipedia.org/wiki/Predictive_analytics#Classification_and_regression_trees
 
 
 .. _tree_mathematical_formulation:
@@ -499,9 +499,9 @@ criterion to minimise is the Mean Squared Error
 
 .. topic:: References:
 
-    * https://en.wikipedia.org/wiki/Decision_tree_learning
+    * http://en.wikipedia.org/wiki/Decision_tree_learning
 
-    * https://en.wikipedia.org/wiki/Predictive_analytics
+    * http://en.wikipedia.org/wiki/Predictive_analytics
 
     * L. Breiman, J. Friedman, R. Olshen, and C. Stone. Classification and
       Regression Trees. Wadsworth, Belmont, CA, 1984.

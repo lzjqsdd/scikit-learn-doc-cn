@@ -1,0 +1,4 @@
+€}q(U	np.arange}q(Umodule_shortqUnumpyqUnameqUarangeUmoduleqhuUzero_one_lossq}q(hUsklearn.metricshUzero_one_losshUsklearn.metricsuU
+plt.figure}q	(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUAdaBoostClassifierq
+}q(hUsklearn.ensemblehUAdaBoostClassifierhUsklearn.ensembleuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUDecisionTreeClassifierq}q(hUsklearn.treehUDecisionTreeClassifierhUsklearn.treeuUnp.zeros}q(hUnumpyqhUzeroshhuUdatasets.make_hastie_10_2}q(hUsklearn.datasetshUmake_hastie_10_2hUsklearn.datasetsuu.

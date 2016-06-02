@@ -1,0 +1,15 @@
+**Script output**::
+
+  Cluster 1: Pepsi, Coca Cola, Kellogg
+  Cluster 2: Apple, Amazon, Yahoo
+  Cluster 3: GlaxoSmithKline, Novartis, Sanofi-Aventis
+  Cluster 4: Comcast, Time Warner, Cablevision
+  Cluster 5: ConocoPhillips, Chevron, Total, Valero Energy, Exxon
+  Cluster 6: CVS, Walgreen
+  Cluster 7: Navistar, Sony, Marriott, Caterpillar, Canon, Toyota, Honda, Mitsubishi, Xerox, Unilever
+  Cluster 8: Kimberly-Clark, Colgate-Palmolive, Procter Gamble
+  Cluster 9: American express, Ryder, Goldman Sachs, Wal-Mart, General Electrics, Pfizer, Wells Fargo, DuPont de Nemours, Bank of America, AIG, Home Depot, Ford, JPMorgan Chase, Mc Donalds
+  Cluster 10: Microsoft, SAP, 3M, IBM, Texas instruments, HP, Dell, Cisco
+  Cluster 11: Raytheon, Boeing, Lookheed Martin, General Dynamics, Northrop Grumman
+  Cluster 12: Kraft Foods
+

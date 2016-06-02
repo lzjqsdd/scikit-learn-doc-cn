@@ -259,7 +259,7 @@ such as the dot-product or any other kernel to quantify the similarity
 of any pair of samples.
 
 This assumption is the base of the `Vector Space Model
-<https://en.wikipedia.org/wiki/Vector_Space_Model>`_ often used in text
+<http://en.wikipedia.org/wiki/Vector_Space_Model>`_ often used in text
 classification and clustering contexts.
 
 The function :func:`normalize` provides a quick and easy way to perform this
@@ -322,7 +322,7 @@ Feature binarization
 features to get boolean values**. This can be useful for downstream
 probabilistic estimators that make assumption that the input data
 is distributed according to a multi-variate `Bernoulli distribution
-<https://en.wikipedia.org/wiki/Bernoulli_distribution>`_. For instance,
+<http://en.wikipedia.org/wiki/Bernoulli_distribution>`_. For instance,
 this is the case for the :class:`sklearn.neural_network.BernoulliRBM`.
 
 It is also common among the text processing community to use binary
@@ -398,7 +398,7 @@ Continuing the example above::
 
   >>> enc = preprocessing.OneHotEncoder()
   >>> enc.fit([[0, 0, 3], [1, 1, 0], [0, 2, 1], [1, 0, 2]])  # doctest: +ELLIPSIS
-  OneHotEncoder(categorical_features='all', dtype=<... 'numpy.float64'>,
+  OneHotEncoder(categorical_features='all', dtype=<... 'float'>,
          handle_unknown='error', n_values='auto', sparse=True)
   >>> enc.transform([[0, 1, 3]]).toarray()
   array([[ 1.,  0.,  0.,  1.,  0.,  0.,  0.,  0.,  1.]])
@@ -410,18 +410,6 @@ dataset.
 Then we fit the estimator, and transform a data point.
 In the result, the first two numbers encode the gender, the next set of three
 numbers the continent and the last four the web browser.
-
-Note that, if there is a possibilty that the training data might have missing categorical
-features, one has to explicitly set ``n_values``. For example,
-
-    >>> enc = preprocessing.OneHotEncoder(n_values=[2, 3, 4])
-    >>> # Note that for there are missing categorical values for the 2nd and 3rd
-    >>> # feature
-    >>> enc.fit([[1, 2, 3], [0, 2, 0]])  # doctest: +ELLIPSIS
-    OneHotEncoder(categorical_features='all', dtype=<... 'numpy.float64'>,
-           handle_unknown='error', n_values=[2, 3, 4], sparse=True)
-    >>> enc.transform([[1, 0, 0]]).toarray()
-    array([[ 0.,  1.,  1.,  0.,  0.,  1.,  0.,  0.,  0.]])
 
 See :ref:`dict_feature_extraction` for categorical features that are represented
 as a dict, not as integers.
@@ -445,49 +433,28 @@ values, either using the mean, the median or the most frequent value of
 the row or column in which the missing values are located. This class
 also allows for different missing values encodings.
 
-Imputing missing values ordinarily discards the information of which values
-were missing. Setting ``add_indicator_features=True`` allows the knowledge of
-which features were imputed to be exploited by a downstream estimator
-by adding features that indicate which elements have been imputed.
-
 The following snippet demonstrates how to replace missing values,
 encoded as ``np.nan``, using the mean value of the columns (axis 0)
-that contain the missing values. In case there is a feature which has
-all missing features, it is discarded when transformed. Also if the
-indicator matrix is requested (``add_indicator_features=True``),
-then the shape of the transformed input is 
-``(n_samples, n_features_new + len(imputed_features_))`` ::
+that contain the missing values::
 
     >>> import numpy as np
     >>> from sklearn.preprocessing import Imputer
     >>> imp = Imputer(missing_values='NaN', strategy='mean', axis=0)
-    >>> imp.fit([[1, 2], [np.nan, 3], [7, 6]])  # doctest: +NORMALIZE_WHITESPACE
-    Imputer(add_indicator_features=False, axis=0, copy=True, missing_values='NaN',
-        strategy='mean', verbose=0)
+    >>> imp.fit([[1, 2], [np.nan, 3], [7, 6]])
+    Imputer(axis=0, copy=True, missing_values='NaN', strategy='mean', verbose=0)
     >>> X = [[np.nan, 2], [6, np.nan], [7, 6]]
     >>> print(imp.transform(X))                           # doctest: +ELLIPSIS
     [[ 4.          2.        ]
      [ 6.          3.666...]
      [ 7.          6.        ]]
-    >>> imp_with_in = Imputer(missing_values='NaN', strategy='mean', axis=0,add_indicator_features=True)
-    >>> imp_with_in.fit([[1, 2], [np.nan, 3], [7, 6]])
-    Imputer(add_indicator_features=True, axis=0, copy=True, missing_values='NaN',
-        strategy='mean', verbose=0)
-    >>> print(imp_with_in.transform(X))                           # doctest: +ELLIPSIS
-    [[ 4.          2.          1.          0.        ]
-     [ 6.          3.66666667  0.          1.        ]
-     [ 7.          6.          0.          0.        ]]
-    >>> print(imp_with_in.imputed_features_)
-    [0 1]
 
 The :class:`Imputer` class also supports sparse matrices::
 
     >>> import scipy.sparse as sp
     >>> X = sp.csc_matrix([[1, 2], [0, 3], [7, 6]])
     >>> imp = Imputer(missing_values=0, strategy='mean', axis=0)
-    >>> imp.fit(X) # doctest: +NORMALIZE_WHITESPACE
-    Imputer(add_indicator_features=False, axis=0, copy=True, missing_values=0,
-        strategy='mean', verbose=0)
+    >>> imp.fit(X)
+    Imputer(axis=0, copy=True, missing_values=0, strategy='mean', verbose=0)
     >>> X_test = sp.csc_matrix([[0, 2], [6, 0], [7, 6]])
     >>> print(imp.transform(X_test))                      # doctest: +ELLIPSIS
     [[ 4.          2.        ]
@@ -538,7 +505,7 @@ In some cases, only interaction terms among features are required, and it can be
 
 The features of X have been transformed from :math:`(X_1, X_2, X_3)` to :math:`(1, X_1, X_2, X_3, X_1X_2, X_1X_3, X_2X_3, X_1X_2X_3)`.
 
-Note that polynomial features are used implicitily in `kernel methods <https://en.wikipedia.org/wiki/Kernel_method>`_ (e.g., :class:`sklearn.svm.SVC`, :class:`sklearn.decomposition.KernelPCA`) when using polynomial :ref:`svm_kernels`.
+Note that polynomial features are used implicitily in `kernel methods <http://en.wikipedia.org/wiki/Kernel_method>`_ (e.g., :class:`sklearn.svm.SVC`, :class:`sklearn.decomposition.KernelPCA`) when using polynomial :ref:`svm_kernels`.
 
 See :ref:`example_linear_model_plot_polynomial_interpolation.py` for Ridge regression using created polynomial features.
 

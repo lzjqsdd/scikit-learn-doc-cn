@@ -93,7 +93,7 @@ Efficient Linear Algebra & Array Operations
   by directly calling the BLAS
   ``nrm2`` function.  This is more stable than ``scipy.linalg.norm``.  See
   `Fabian's blog post
-  <http://fa.bianp.net/blog/2011/computing-the-vector-norm>`_ for a discussion.
+  <http://fseoane.net/blog/2011/computing-the-vector-norm/>`_ for a discussion.
 
 - :func:`extmath.fast_logdet`: efficiently compute the log of the determinant
   of a matrix.
@@ -293,5 +293,5 @@ Warnings and Exceptions
 
 - :class:`deprecated`: Decorator to mark a function or class as deprecated.
 
-- :class:`sklearn.exceptions.ConvergenceWarning`: Custom warning to catch
-  convergence problems. Used in ``sklearn.covariance.graph_lasso``.
+- :class:`ConvergenceWarning`: Custom warning to catch convergence problems.
+  Used in ``sklearn.covariance.graph_lasso``.

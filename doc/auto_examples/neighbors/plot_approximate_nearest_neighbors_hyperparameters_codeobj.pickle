@@ -1,0 +1,10 @@
+€}q(Uplt.show}q(Umodule_shortqUmatplotlib.pyplotUnameqUshowUmoduleqUmatplotlib.pyplotuU	LSHForestq}q(hUsklearn.neighborshU	LSHForesthUsklearn.neighborsuUplt.errorbar}q(hUmatplotlib.pyplothUerrorbarhUmatplotlib.pyplotuU
+plt.legend}q	(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUplt.plot}q
+(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUnp.sum}q(hUnumpyqhUsumhhuUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuUnp.zeros}q(hUnumpyqhUzeroshhuUNearestNeighborsq}q(hUsklearn.neighborshUNearestNeighborshUsklearn.neighborsuUnp.random.RandomState}q(hUnumpy.randomhURandomStatehUnumpy.randomuUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.grid}q(hUmatplotlib.pyplothUgridhUmatplotlib.pyplotuUnp.int}q(hUnumpyqhUinthhuU
+make_blobsq}q(hUsklearn.datasetshU
+make_blobshU"sklearn.datasets.samples_generatoruUnp.linspace}q(hUnumpyqhUlinspacehhuUnp.equal}q(hUnumpyqhUequalhhuU
+plt.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUplt.scatter}q (hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUnp.std}q!(hUnumpyq"hUstdhh"uUnp.mean}q#(hUnumpyq$hUmeanhh$uU
+plt.xlabel}q%(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

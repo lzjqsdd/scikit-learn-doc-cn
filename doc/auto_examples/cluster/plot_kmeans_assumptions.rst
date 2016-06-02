@@ -1,0 +1,31 @@
+
+
+.. _example_cluster_plot_kmeans_assumptions.py:
+
+
+====================================
+Demonstration of k-means assumptions
+====================================
+
+This example is meant to illustrate situations where k-means will produce
+unintuitive and possibly unexpected clusters. In the first three plots, the
+input data does not conform to some implicit assumption that k-means makes and
+undesirable clusters are produced as a result. In the last plot, k-means
+returns intuitive clusters despite unevenly sized blobs.
+
+
+
+.. image:: images/plot_kmeans_assumptions_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_kmeans_assumptions.py <plot_kmeans_assumptions.py>`
+
+.. literalinclude:: plot_kmeans_assumptions.py
+    :lines: 12-
+
+**Total running time of the example:**  0.36 seconds
+( 0 minutes  0.36 seconds)
+    

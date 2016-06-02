@@ -1,0 +1,10 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q	(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU	plt.title}q
+(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUnp.meshgrid}q(hUnumpyqhUmeshgridhhuUplt.axes}q(hU
+matplotlibhUaxeshUmatplotlib.pyplotuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUnp.c_}q(hUnumpyqhUc_hhuU	np.unique}q(hUnumpyqhUuniquehhuUnp.linspace}q(hUnumpyqhUlinspacehhuUdatasets.load_iris}q(hUsklearn.datasetshU	load_irishUsklearn.datasetsuUplt.colorbar}q(hU
+matplotlibhUcolorbarhUmatplotlib.pyplotuULogisticRegressionq}q(hUsklearn.linear_modelhULogisticRegressionhUsklearn.linear_modeluUnp.mean}q(hUnumpyqhUmeanhhuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUSVCq}q(hUsklearn.svmhUSVChUsklearn.svmuu.

@@ -1,6 +1,6 @@
 """Fixture module to skip the datasets loading when offline
 
-Doctests are skipped if the datasets have not already been downloaded
+Doctests are skipped if the datasets have not already been dowloaded
 and cached in the past.
 """
 from os.path import exists

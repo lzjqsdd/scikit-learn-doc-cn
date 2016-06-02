@@ -1,0 +1,10 @@
+€}q(UOneVsRestClassifierq}q(Umodule_shortqUsklearn.multiclassUnameqUOneVsRestClassifierUmoduleqUsklearn.multiclassuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUCCAq	}q
+(hUsklearn.cross_decompositionhUCCAhUsklearn.cross_decompositionuUmake_multilabel_classificationq}q(hUsklearn.datasetshUmake_multilabel_classificationhUsklearn.datasetsuUnp.min}q(hUnumpyqhUminhhuUPCAq}q(hUsklearn.decompositionhUPCAhUsklearn.decompositionuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuUnp.max}q(hUnumpyqhUmaxhhuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUnp.linspace}q(hUnumpyqhUlinspacehhuU
+plt.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUnp.where}q(hUnumpyq hUwherehh uU
+plt.xlabel}q!(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUplt.subplot}q"(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUSVCq#}q$(hUsklearn.svmhUSVChUsklearn.svmuu.

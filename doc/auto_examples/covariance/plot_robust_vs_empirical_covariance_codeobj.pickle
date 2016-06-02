@@ -1,0 +1,6 @@
+€}q(Unp.linspace}q(Umodule_shortqUnumpyqUnameqUlinspaceUmoduleqhuUnp.eye}q(hUnumpyqhUeyehhuU
+plt.ylabel}q	(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUnp.concatenate}q
+(hUnumpyqhUconcatenatehhuUnp.random.randint}q(hUnumpy.randomhUrandinthUnumpy.randomuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUnp.sum}q(hUnumpyqhUsumhhuU	MinCovDetq}q(hUsklearn.covariancehU	MinCovDethUsklearn.covarianceuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.errorbar}q(hUmatplotlib.pyplothUerrorbarhUmatplotlib.pyplotuUnp.ones}q(hUnumpyqhUoneshhuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUnp.zeros}q(hUnumpyqhUzeroshhuUEmpiricalCovarianceq}q(hUsklearn.covariancehUEmpiricalCovariancehUsklearn.covarianceuUnp.sqrt}q(hUnumpyqhUsqrthhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUnp.random.RandomState}q (hUnumpy.randomhURandomStatehUnumpy.randomuu.

@@ -1,0 +1,9 @@
+€}q(U	np.arange}q(Umodule_shortqUnumpyqUnameqUarangeUmoduleqhuUplt.clf}q(hUmatplotlib.pyplothUclfhUmatplotlib.pyplotuUnp.log10}q(hUnumpyq	hUlog10hh	uU
+plt.figure}q
+(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	f_classifq}q(hUsklearn.feature_selectionhU	f_classifhUsklearn.feature_selectionuUSelectPercentileq}q(hUsklearn.feature_selectionhUSelectPercentilehUsklearn.feature_selectionuUsvm.SVC}q(hUsklearn.svmhUSVChUsklearn.svmuUplt.bar}q(hUmatplotlib.pyplothUbarhUmatplotlib.pyplotuUnp.random.uniform}q(hUnumpy.randomhUuniformhUnumpy.randomuU	np.hstack}q(hUnumpyqhUhstackhhuUdatasets.load_iris}q(hUsklearn.datasetshU	load_irishUsklearn.datasetsuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUplt.axis}q(hU
+matplotlibhUaxishUmatplotlib.pyplotuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

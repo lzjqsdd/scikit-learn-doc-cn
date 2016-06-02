@@ -1,0 +1,14 @@
+€}q(Unp.random.rand}q(Umodule_shortqUnumpy.randomUnameqUrandUmoduleqUnumpy.randomuUnp.sign}q(hUnumpyqhUsignhhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUAgglomerativeClusteringq	}q
+(hUsklearn.clusterhUAgglomerativeClusteringhUsklearn.clusteruUnp.array}q(hUnumpyqhUarrayhhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUplt.cm.gnuplot2}q(hUmatplotlib.pyplot.cmhUgnuplot2hUmatplotlib.pyplot.cmuUplt.suptitle}q(hUmatplotlib.pyplothUsuptitlehUmatplotlib.pyplotuUnp.abs}q(hUnumpyqhUabshhuUnp.zeros}q(hUnumpyqhUzeroshhuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUnp.pi}q(hUnumpyqhUpihhuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUplt.axes}q(hU
+matplotlibhUaxeshUmatplotlib.pyplotuUplt.text}q(hU
+matplotlibhUtexthUmatplotlib.pyplotuUnp.linspace}q(hUnumpyqhUlinspacehhuU	np.arange}q(hUnumpyq hUarangehh uUnp.cos}q!(hUnumpyq"hUcoshh"uUnp.random.normal}q#(hUnumpy.randomhUnormalhUnumpy.randomuUplt.colorbar}q$(hU
+matplotlibhUcolorbarhUmatplotlib.pyplotuUplt.tight_layout}q%(hU
+matplotlibhUtight_layouthUmatplotlib.pyplotuUnp.random.seed}q&(hUnumpy.randomhUseedhUnumpy.randomuUplt.axis}q'(hU
+matplotlibhUaxishUmatplotlib.pyplotuUpairwise_distancesq(}q)(hUsklearn.metricshUpairwise_distanceshUsklearn.metricsuu.

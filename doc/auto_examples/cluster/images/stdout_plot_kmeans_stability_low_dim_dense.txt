@@ -1,0 +1,7 @@
+**Script output**::
+
+  Evaluation of KMeans with k-means++ init
+  Evaluation of KMeans with random init
+  Evaluation of MiniBatchKMeans with k-means++ init
+  Evaluation of MiniBatchKMeans with random init
+

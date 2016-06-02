@@ -1,0 +1,9 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUplt.semilogx}q(hUmatplotlib.pyplothUsemilogxhUmatplotlib.pyplotuU
+np.newaxis}q(hUnumpyqhUnewaxishhuUplt.subplot}q	(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUGridSearchCVq
+}q(hUsklearn.grid_searchhUGridSearchCVhUsklearn.grid_searchuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUdatasets.make_classification}q(hUsklearn.datasetshUmake_classificationhUsklearn.datasetsuUnp.logspace}q(hUnumpyqhUlogspacehhuUnp.sign}q(hUnumpyqhUsignhhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuU	LinearSVCq}q(hUsklearn.svmhU	LinearSVChUsklearn.svmuUnp.linspace}q(hUnumpyqhUlinspacehhuUShuffleSplitq}q(hUsklearn.cross_validationhUShuffleSplithUsklearn.cross_validationuUcheck_random_stateq}q(hUsklearn.utilshUcheck_random_statehUsklearn.utilsuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

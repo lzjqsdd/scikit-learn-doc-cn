@@ -1,0 +1,10 @@
+€}q(U
+np.arctan2}q(Umodule_shortqUnumpyqUnameqUarctan2UmoduleqhuUxrangeq}q(hUsklearn.externals.six.moveshUxrangehUsklearn.externals.six.movesuUplt.show}q	(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUnp.array}q
+(hUnumpyqhUarrayhhuUdatasets.load_iris}q(hUsklearn.datasetshU	load_irishUsklearn.datasetsuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUStratifiedKFoldq}q(hUsklearn.cross_validationhUStratifiedKFoldhUsklearn.cross_validationuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUnp.pi}q(hUnumpyqhUpihhuUGMMq}q(hUsklearn.mixturehUGMMhUsklearn.mixtureuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.linalg.norm}q(hUnumpy.linalghUnormhUnumpy.linalguU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUplt.text}q(hU
+matplotlibhUtexthUmatplotlib.pyplotuU	np.unique}q(hUnumpyqhUuniquehhuUmpl.patches.Ellipse}q(hUmatplotlib.patcheshUEllipsehUmatplotlib.patchesuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUplt.subplot}q (hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUnp.linalg.eigh}q!(hUnumpy.linalghUeighhUnumpy.linalguUnp.mean}q"(hUnumpyq#hUmeanhh#uu.

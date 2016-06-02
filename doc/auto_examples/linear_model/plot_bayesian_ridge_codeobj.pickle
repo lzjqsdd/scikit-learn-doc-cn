@@ -1,0 +1,8 @@
+€}q(Ustats.norm.rvs}q(Umodule_shortqUscipy.stats.normUnameqUrvsUmoduleqUscipy.stats.normuU
+plt.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUnp.dot}q(hUnumpyqhUdothhuUplt.hist}q	(hUmatplotlib.pyplothUhisthUmatplotlib.pyplotuUnp.random.randint}q
+(hUnumpy.randomhUrandinthUnumpy.randomuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUBayesianRidgeq}q(hUsklearn.linear_modelhUBayesianRidgehUsklearn.linear_modeluU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUnp.sqrt}q(hUnumpyqhUsqrthhuUnp.ones}q(hUnumpyqhUoneshhuULinearRegressionq}q(hUsklearn.linear_modelhULinearRegressionhUsklearn.linear_modeluUnp.random.randn}q(hUnumpy.randomhUrandnhUnumpy.randomuUnp.zeros}q(hUnumpyqhUzeroshhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

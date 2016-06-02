@@ -1,0 +1,4 @@
+€}q(Udatasets.load_digits}q(Umodule_shortqUsklearn.datasetsUnameqUload_digitsUmoduleqUsklearn.datasetsuUmetrics.confusion_matrix}q(hUsklearn.metricshUconfusion_matrixhUsklearn.metricsuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUsvm.SVC}q(hUsklearn.svmhUSVChUsklearn.svmuUplt.show}q	(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.imshow}q
+(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUplt.cm.gray_r}q(hUmatplotlib.pyplot.cmhUgray_rhUmatplotlib.pyplot.cmuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUmetrics.classification_report}q(hUsklearn.metricshUclassification_reporthUsklearn.metricsuUplt.axis}q(hU
+matplotlibhUaxishUmatplotlib.pyplotuu.

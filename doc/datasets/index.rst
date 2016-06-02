@@ -93,7 +93,7 @@ and pipeline on 2D data.
   The default coding of images is based on the ``uint8`` dtype to
   spare memory.  Often machine learning algorithms work best if the
   input is converted to a floating point representation first.  Also,
-  if you plan to use ``matplotlib.pyplpt.imshow`` don't forget to scale to the range
+  if you plan to use ``pylab.imshow`` don't forget to scale to the range
   0 - 1 as done in the following example.
 
 .. topic:: Examples:
@@ -280,27 +280,3 @@ features::
 .. include:: covtype.rst
 
 .. include:: rcv1.rst
-
-.. _boston_house_prices:
-
-.. include:: ../../sklearn/datasets/descr/boston_house_prices.rst
-
-.. _breast_cancer:
-
-.. include:: ../../sklearn/datasets/descr/breast_cancer.rst
-
-.. _diabetes:
-
-.. include:: ../../sklearn/datasets/descr/diabetes.rst
-
-.. _digits:
-
-.. include:: ../../sklearn/datasets/descr/digits.rst
-
-.. _iris:
-
-.. include:: ../../sklearn/datasets/descr/iris.rst
-
-.. _linnerud:
-
-.. include:: ../../sklearn/datasets/descr/linnerud.rst

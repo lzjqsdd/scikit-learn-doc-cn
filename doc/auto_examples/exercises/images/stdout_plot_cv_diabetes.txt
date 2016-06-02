@@ -1,0 +1,14 @@
+**Script output**::
+
+  Answer to the bonus question: how much can you trust the selection of alpha?
+  
+  Alpha parameters maximising the generalization score on different
+  subsets of the data:
+  [fold 0] alpha: 0.10405, score: 0.53573
+  [fold 1] alpha: 0.05968, score: 0.16278
+  [fold 2] alpha: 0.10405, score: 0.44437
+  
+  Answer: Not very much since we obtained different alphas for different
+  subsets of the data and moreover, the scores for these alphas differ
+  quite substantially.
+

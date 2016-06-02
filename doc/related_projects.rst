@@ -12,12 +12,6 @@ Interoperability and framework enhancements
 These tools adapt scikit-learn for use with other technologies or otherwise
 enhance the functionality of scikit-learn's estimators.
 
-- `ML Frontend <https://github.com/jeff1evesque/machine-learning>`_ provides
-  dataset management and SVM fitting/prediction through
-  `web-based <https://github.com/jeff1evesque/machine-learning#web-interface>`_
-  and `programmatic <https://github.com/jeff1evesque/machine-learning#programmatic-interface>`_
-  interfaces.
-
 - `sklearn_pandas <https://github.com/paulgb/sklearn-pandas/>`_ bridge for
   scikit-learn pipelines and pandas data frame with dedicated transformers.
 
@@ -30,19 +24,8 @@ enhance the functionality of scikit-learn's estimators.
   An automated machine learning toolkit and a drop-in replacement for a
   scikit-learn estimator
 
-- `TPOT <https://github.com/rhiever/tpot>`_
-  An automated machine learning toolkit that optimizes a series of scikit-learn
-  operators to design a machine learning pipeline, including data and feature
-  preprocessors as well as the estimators. Works as a drop-in replacement for a
-  scikit-learn estimator.
-
 - `sklearn-pmml <https://github.com/alex-pirozhenko/sklearn-pmml>`_
   Serialization of (some) scikit-learn estimators into PMML.
-
-- `sklearn2pmml <https://github.com/jpmml/sklearn2pmml>`_
-  Serialization of a wide variety of scikit-learn estimators and transformers
-  into PMML with the help of `JPMML-SkLearn <https://github.com/jpmml/jpmml-sklearn>`_
-  library.
 
 Other estimators and tasks
 --------------------------
@@ -69,9 +52,6 @@ and tasks.
 
 - `PyStruct <https://pystruct.github.io>`_ General conditional random fields
   and structured prediction.
-
-- `pomegranate <https://github.com/jmschrei/pomegranate>`_ Probabilistic modelling
-  for Python, with an emphasis on hidden Markov models.
 
 - `py-earth <https://github.com/jcrudy/py-earth>`_ Multivariate adaptive
   regression splines
@@ -104,17 +84,6 @@ and tasks.
 - `mlxtend <https://github.com/rasbt/mlxtend>`_ Includes a number of additional
   estimators as well as model visualization utilities.
 
-- `kmodes <https://github.com/nicodv/kmodes>`_ k-modes clustering algorithm for categorical data, and
-  several of its variations.
-  
-- `hdbscan <https://github.com/lmcinnes/hdbscan>`_ HDBSCAN and Robust Single Linkage clustering algorithms 
-  for robust variable density clustering. 
-
-- `lasagne <https://github.com/Lasagne/Lasagne>`_ A lightweight library to build and train neural networks in Theano.
-
-- `multiisotonic <https://github.com/alexfields/multiisotonic>`_ Isotonic regression on multidimensional features.
-
-
 Statistical learning with Python
 --------------------------------
 Other packages useful for data analysis and machine learning.
@@ -125,7 +94,7 @@ Other packages useful for data analysis and machine learning.
 - `theano <http://deeplearning.net/software/theano/>`_ A CPU/GPU array
   processing framework geared towards deep learning research.
 
-- `statsmodels <http://statsmodels.sourceforge.net/>`_ Estimating and analysing
+- `Statsmodel <http://statsmodels.sourceforge.net/>`_ Estimating and analysing
   statistical models. More focused on statistical tests and less on prediction
   than scikit-learn.
 
@@ -160,7 +129,7 @@ Domain specific packages
 
 - `AstroML <http://www.astroml.org/>`_  Machine learning for astronomy.
 
-- `MSMBuilder <http://msmbuilder.org/>`_  Machine learning for protein
+- `MSMBuilder <http://www.msmbuilder.org/>`_  Machine learning for protein
   conformational dynamics time series.
 
 Snippets and tidbits

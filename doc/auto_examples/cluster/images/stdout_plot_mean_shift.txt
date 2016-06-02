@@ -1,0 +1,4 @@
+**Script output**::
+
+  number of estimated clusters : 3
+

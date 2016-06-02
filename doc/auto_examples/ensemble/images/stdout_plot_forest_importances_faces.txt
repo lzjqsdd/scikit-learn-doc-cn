@@ -1,0 +1,5 @@
+**Script output**::
+
+  Fitting ExtraTreesClassifier on faces data with 1 cores...
+  done in 2.313s
+

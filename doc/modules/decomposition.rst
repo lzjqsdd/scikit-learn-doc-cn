@@ -23,12 +23,12 @@ scikit-learn, :class:`PCA` is implemented as a *transformer* object
 that learns :math:`n` components in its ``fit`` method, and can be used on new
 data to project it on these components.
 
-The optional parameter ``whiten=True`` makes it possible to
+The optional parameter ``whiten=True`` parameter make it possible to
 project the data onto the singular space while scaling each component
 to unit variance. This is often useful if the models down-stream make
 strong assumptions on the isotropy of the signal: this is for example
 the case for Support Vector Machines with the RBF kernel and the K-Means
-clustering algorithm.
+clustering algorithm. 
 
 Below is an example of the iris dataset, which is comprised of 4
 features, projected on the 2 dimensions that explain most variance:
@@ -61,13 +61,13 @@ data based on the amount of variance it explains. As such it implements a
 Incremental PCA
 ---------------
 
-The :class:`PCA` object is very useful, but has certain limitations for
-large datasets. The biggest limitation is that :class:`PCA` only supports
+The :class:`PCA` object is very useful, but has certain limitations for 
+large datasets. The biggest limitation is that :class:`PCA` only supports 
 batch processing, which means all of the data to be processed must fit in main
 memory. The :class:`IncrementalPCA` object uses a different form of
 processing and allows for partial computations which almost
 exactly match the results of :class:`PCA` while processing the data in a
-minibatch fashion. :class:`IncrementalPCA` makes it possible to implement
+minibatch fashion. :class:`IncrementalPCA` makes it possible to implement 
 out-of-core Principal Component Analysis either by:
 
  * Using its ``partial_fit`` method on chunks of data fetched sequentially
@@ -77,7 +77,7 @@ out-of-core Principal Component Analysis either by:
 
 :class:`IncrementalPCA` only stores estimates of component and noise variances,
 in order update ``explained_variance_ratio_`` incrementally. This is why
-memory usage depends on the number of samples per batch, rather than the
+memory usage depends on the number of samples per batch, rather than the 
 number of samples to be processed in the dataset.
 
 .. figure:: ../auto_examples/decomposition/images/plot_incremental_pca_001.png
@@ -125,7 +125,7 @@ For instance, the following shows 16 sample portraits (centered around
 0.0) from the Olivetti dataset. On the right hand side are the first 16
 singular vectors reshaped as portraits. Since we only require the top
 16 singular vectors of a dataset with size :math:`n_{samples} = 400`
-and :math:`n_{features} = 64 \times 64 = 4096`, the computation time is
+and :math:`n_{features} = 64 \times 64 = 4096`, the computation time it
 less than 1s:
 
 .. |orig_img| image:: ../auto_examples/decomposition/images/plot_faces_decomposition_001.png
@@ -176,8 +176,8 @@ Kernel PCA
 ----------
 
 :class:`KernelPCA` is an extension of PCA which achieves non-linear
-dimensionality reduction through the use of kernels (see :ref:`metrics`). It
-has many applications including denoising, compression and structured
+dimensionality reduction through the use of kernels (see :ref:`metrics`). It 
+has many applications including denoising, compression and structured 
 prediction (kernel dependency estimation). :class:`KernelPCA` supports both
 ``transform`` and ``inverse_transform``.
 
@@ -451,7 +451,7 @@ sparse coding step that shares the same implementation with all dictionary
 learning objects (see :ref:`SparseCoder`).
 
 The following image shows how a dictionary learned from 4x4 pixel image patches
-extracted from part of the image of a raccoon face looks like.
+extracted from part of the image of Lena looks like.
 
 
 .. figure:: ../auto_examples/decomposition/images/plot_image_denoising_001.png
@@ -516,7 +516,7 @@ Factor Analysis
 
 In unsupervised learning we only have a dataset :math:`X = \{x_1, x_2, \dots, x_n
 \}`. How can this dataset be described mathematically? A very simple
-`continuous latent variable` model for :math:`X` is
+`continuous latent variabel` model for :math:`X` is
 
 .. math:: x_i = W h_i + \mu + \epsilon
 
@@ -558,7 +558,7 @@ structure of the error covariance :math:`\Psi`:
   :class:`FactorAnalysis`, a classical statistical model. The matrix W is
   sometimes called the "factor loading matrix".
 
-Both models essentially estimate a Gaussian with a low-rank covariance matrix.
+Both model essentially estimate a Gaussian with a low-rank covariance matrix.
 Because both models are probabilistic they can be integrated in more complex
 models, e.g. Mixture of Factor Analysers. One gets very different models (e.g.
 :class:`FastICA`) if non-Gaussian priors on the latent variables are assumed.
@@ -732,7 +732,7 @@ and the regularized objective function is:
 .. topic:: References:
 
     * `"Learning the parts of objects by non-negative matrix factorization"
-      <http://www.columbia.edu/~jwp2128/Teaching/W4721/papers/nmf_nature.pdf>`_
+      <http://hebb.mit.edu/people/seung/papers/ls-lponm-99.pdf>`_
       D. Lee, S. Seung, 1999
 
     * `"Non-negative Matrix Factorization with Sparseness Constraints"
@@ -795,7 +795,7 @@ to approximate it, and those variational parameters :math:`\lambda`, :math:`\phi
   log\: P(w | \alpha, \eta) \geq L(w,\phi,\gamma,\lambda) \overset{\triangle}{=}
     E_{q}[log\:p(w,z,\theta,\beta|\alpha,\eta)] - E_{q}[log\:q(z, \theta, \beta)]
 
-Maximizing ELBO is equivalent to minimizing the Kullback-Leibler(KL) divergence
+Maximizing ELBO is equivalent to minimizing the Kullback-Leibler(KL) divergence 
 between :math:`q(z,\theta,\beta)` and the true posterior
 :math:`p(z, \theta, \beta |w, \alpha, \eta)`.
 

@@ -1,0 +1,7 @@
+€}q(U
+np.newaxis}q(Umodule_shortqUnumpyqUnameqUnewaxisUmoduleqhuUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuUlinear_model.LinearRegression}q(hUsklearn.linear_modelhULinearRegressionhUsklearn.linear_modeluUnp.random.normal}q	(hUnumpy.randomhUnormalhUnumpy.randomuU	plt.title}q
+(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUmetrics.mean_squared_error}q(hUsklearn.metricshUmean_squared_errorhUsklearn.metricsuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUlinear_model.TheilSenRegressor}q(hUsklearn.linear_modelhUTheilSenRegressorhUsklearn.linear_modeluUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.linspace}q(hUnumpyqhUlinspacehhuUPolynomialFeaturesq}q(hUsklearn.preprocessinghUPolynomialFeatureshUsklearn.preprocessinguUnp.sin}q(hUnumpyqhUsinhhuUlinear_model.RANSACRegressor}q(hUsklearn.linear_modelhURANSACRegressorhUsklearn.linear_modeluUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuUmake_pipelineq}q(hUsklearn.pipelinehUmake_pipelinehUsklearn.pipelineuu.

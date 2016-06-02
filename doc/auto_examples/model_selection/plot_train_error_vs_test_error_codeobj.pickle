@@ -1,0 +1,8 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUplt.semilogx}q(hUmatplotlib.pyplothUsemilogxhUmatplotlib.pyplotuUnp.dot}q(hUnumpyqhUdothhuUplt.ylim}q	(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuUlinear_model.ElasticNet}q
+(hUsklearn.linear_modelhU
+ElasticNethUsklearn.linear_modeluUnp.logspace}q(hUnumpyqhUlogspacehhuU	np.argmax}q(hUnumpyqhUargmaxhhuUnp.max}q(hUnumpyqhUmaxhhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUnp.random.randn}q(hUnumpy.randomhUrandnhUnumpy.randomuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuU
+plt.vlines}q(hUmatplotlib.pyplothUvlineshUmatplotlib.pyplotuu.

@@ -1,0 +1,11 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUdatasets.load_diabetes}q(hUsklearn.datasetshUload_diabeteshUsklearn.datasetsuU
+lasso_pathq}q(hUsklearn.linear_modelhU
+lasso_pathhUsklearn.linear_modeluUplt.plot}q	(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q
+(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	enet_pathq}q(hUsklearn.linear_modelhU	enet_pathhUsklearn.linear_modeluUplt.gca}q(hUmatplotlib.pyplothUgcahUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUnp.log10}q(hUnumpyqhUlog10hhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUplt.axis}q(hU
+matplotlibhUaxishUmatplotlib.pyplotuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

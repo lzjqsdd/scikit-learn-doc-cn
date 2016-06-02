@@ -1,0 +1,9 @@
+€}q(Unp.random.rand}q(Umodule_shortqUnumpy.randomUnameqUrandUmoduleqUnumpy.randomuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuULinearRegressionq}q(hUsklearn.linear_modelhULinearRegressionhUsklearn.linear_modeluU
+plt.legend}q	(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUplt.plot}q
+(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuUnp.pi}q(hUnumpyqhUpihhuUPipelineq}q(hUsklearn.pipelinehUPipelinehUsklearn.pipelineuUnp.sort}q(hUnumpyqhUsorthhuUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuU cross_validation.cross_val_score}q(hUsklearn.cross_validationhUcross_val_scorehUsklearn.cross_validationuUnp.linspace}q(hUnumpyqhUlinspacehhuU
+plt.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUplt.setp}q(hUmatplotlib.pyplothUsetphUmatplotlib.pyplotuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUnp.cos}q(hUnumpyqhUcoshhuUnp.random.randn}q(hUnumpy.randomhUrandnhUnumpy.randomuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUPolynomialFeaturesq}q (hUsklearn.preprocessinghUPolynomialFeatureshUsklearn.preprocessinguU
+np.newaxis}q!(hUnumpyq"hUnewaxishh"uUnp.random.seed}q#(hUnumpy.randomhUseedhUnumpy.randomuU
+plt.xlabel}q$(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

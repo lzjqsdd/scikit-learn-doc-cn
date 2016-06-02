@@ -1,0 +1,10 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUnp.dot}q(hUnumpyqhUdothhuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUplt.ylim}q	(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuU
+plt.figure}q
+(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.spy}q(hUmatplotlib.pyplothUspyhUmatplotlib.pyplotuUnp.sin}q(hUnumpyqhUsinhhuUplt.text}q(hU
+matplotlibhUtexthUmatplotlib.pyplotuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUnp.linspace}q(hUnumpyqhUlinspacehhuUnp.array}q(hUnumpyqhUarrayhhuUMultiTaskLassoq}q(hUsklearn.linear_modelhUMultiTaskLassohUsklearn.linear_modeluUnp.zeros}q(hUnumpyqhUzeroshhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUnp.pi}q(hUnumpyqhUpihhuUplt.axis}q(hU
+matplotlibhUaxishUmatplotlib.pyplotuUnp.random.RandomState}q(hUnumpy.randomhURandomStatehUnumpy.randomuULassoq}q (hUsklearn.linear_modelhULassohUsklearn.linear_modeluu.

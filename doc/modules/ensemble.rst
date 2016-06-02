@@ -66,7 +66,7 @@ specifying the strategy to draw random subsets. In particular, ``max_samples``
 and ``max_features`` control the size of the subsets (in terms of samples and
 features), while ``bootstrap`` and ``bootstrap_features`` control whether
 samples and features are drawn with or without replacement. When using a subset
-of the available samples the generalization accuracy can be estimated with the
+of the available samples the generalization error can be estimated with the
 out-of-bag samples by setting ``oob_score=True``. As an example, the
 snippet below illustrates how to instantiate a bagging ensemble of
 :class:`KNeighborsClassifier` base estimators, each built on random subsets of
@@ -156,7 +156,7 @@ picked as the splitting rule. This usually allows to reduce the variance
 of the model a bit more, at the expense of a slightly greater increase
 in bias::
 
-    >>> from sklearn.model_selection import cross_val_score
+    >>> from sklearn.cross_validation import cross_val_score
     >>> from sklearn.datasets import make_blobs
     >>> from sklearn.ensemble import RandomForestClassifier
     >>> from sklearn.ensemble import ExtraTreesClassifier
@@ -165,20 +165,20 @@ in bias::
     >>> X, y = make_blobs(n_samples=10000, n_features=10, centers=100,
     ...     random_state=0)
 
-    >>> clf = DecisionTreeClassifier(max_depth=None, min_samples_split=2,
+    >>> clf = DecisionTreeClassifier(max_depth=None, min_samples_split=1,
     ...     random_state=0)
     >>> scores = cross_val_score(clf, X, y)
     >>> scores.mean()                             # doctest: +ELLIPSIS
     0.97...
 
     >>> clf = RandomForestClassifier(n_estimators=10, max_depth=None,
-    ...     min_samples_split=2, random_state=0)
+    ...     min_samples_split=1, random_state=0)
     >>> scores = cross_val_score(clf, X, y)
     >>> scores.mean()                             # doctest: +ELLIPSIS
     0.999...
 
     >>> clf = ExtraTreesClassifier(n_estimators=10, max_depth=None,
-    ...     min_samples_split=2, random_state=0)
+    ...     min_samples_split=1, random_state=0)
     >>> scores = cross_val_score(clf, X, y)
     >>> scores.mean() > 0.999
     True
@@ -209,7 +209,7 @@ should always be cross-validated. In addition, note that in random forests,
 bootstrap samples are used by default (``bootstrap=True``)
 while the default strategy for extra-trees is to use the whole dataset
 (``bootstrap=False``).
-When using bootstrap sampling the generalization accuracy can be estimated
+When using bootstrap sampling the generalization error can be estimated
 on the left out or out-of-bag samples. This can be enabled by
 setting ``oob_score=True``.
 
@@ -250,9 +250,9 @@ Feature importance evaluation
 The relative rank (i.e. depth) of a feature used as a decision node in a
 tree can be used to assess the relative importance of that feature with
 respect to the predictability of the target variable. Features used at
-the top of the tree contribute to the final prediction decision of a 
-larger fraction of the input samples. The **expected fraction of the 
-samples** they contribute to can thus be used as an estimate of the
+the top of the tree are used contribute to the final prediction decision
+of a larger fraction of the input samples. The **expected fraction of
+the samples** they contribute to can thus be used as an estimate of the
 **relative importance of the features**.
 
 By **averaging** those expected activity rates over several randomized
@@ -360,7 +360,7 @@ Usage
 The following example shows how to fit an AdaBoost classifier with 100 weak
 learners::
 
-    >>> from sklearn.model_selection import cross_val_score
+    >>> from sklearn.cross_validation import cross_val_score
     >>> from sklearn.datasets import load_iris
     >>> from sklearn.ensemble import AdaBoostClassifier
 
@@ -414,7 +414,7 @@ decision trees).
 Gradient Tree Boosting
 ======================
 
-`Gradient Tree Boosting <https://en.wikipedia.org/wiki/Gradient_boosting>`_
+`Gradient Tree Boosting <http://en.wikipedia.org/wiki/Gradient_boosting>`_
 or Gradient Boosted Regression Trees (GBRT) is a generalization
 of boosting to arbitrary
 differentiable loss functions. GBRT is an accurate and effective
@@ -679,7 +679,7 @@ the contribution of each weak learner by a factor :math:`\nu`:
     F_m(x) = F_{m-1}(x) + \nu \gamma_m h_m(x)
 
 The parameter :math:`\nu` is also called the **learning rate** because
-it scales the step length the gradient descent procedure; it can
+it scales the step length the the gradient descent procedure; it can
 be set via the ``learning_rate`` parameter.
 
 The parameter ``learning_rate`` strongly interacts with the parameter
@@ -948,7 +948,7 @@ Usage
 The following example shows how to fit the majority rule classifier::
 
    >>> from sklearn import datasets
-   >>> from sklearn.model_selection import cross_val_score
+   >>> from sklearn import cross_validation
    >>> from sklearn.linear_model import LogisticRegression
    >>> from sklearn.naive_bayes import GaussianNB
    >>> from sklearn.ensemble import RandomForestClassifier
@@ -964,7 +964,7 @@ The following example shows how to fit the majority rule classifier::
    >>> eclf = VotingClassifier(estimators=[('lr', clf1), ('rf', clf2), ('gnb', clf3)], voting='hard')
 
    >>> for clf, label in zip([clf1, clf2, clf3, eclf], ['Logistic Regression', 'Random Forest', 'naive Bayes', 'Ensemble']):
-   ...     scores = cross_val_score(clf, X, y, cv=5, scoring='accuracy')
+   ...     scores = cross_validation.cross_val_score(clf, X, y, cv=5, scoring='accuracy')
    ...     print("Accuracy: %0.2f (+/- %0.2f) [%s]" % (scores.mean(), scores.std(), label))
    Accuracy: 0.90 (+/- 0.05) [Logistic Regression]
    Accuracy: 0.93 (+/- 0.05) [Random Forest]
@@ -997,7 +997,7 @@ classifier        class 1       class 2         class 3
 classifier 1	  w1 * 0.2      w1 * 0.5        w1 * 0.3
 classifier 2	  w2 * 0.6      w2 * 0.3        w2 * 0.1
 classifier 3      w3 * 0.3      w3 * 0.4        w3 * 0.3
-weighted average  0.37	        0.4             0.23
+weighted average  0.37	        0.4             0.3
 ================  ==========    ==========      ==========
 
 Here, the predicted class label is 2, since it has the
@@ -1041,7 +1041,7 @@ Using the `VotingClassifier` with `GridSearch`
 The `VotingClassifier` can also be used together with `GridSearch` in order
 to tune the hyperparameters of the individual estimators::
 
-   >>> from sklearn.model_selection import GridSearchCV
+   >>> from sklearn.grid_search import GridSearchCV
    >>> clf1 = LogisticRegression(random_state=1)
    >>> clf2 = RandomForestClassifier(random_state=1)
    >>> clf3 = GaussianNB()

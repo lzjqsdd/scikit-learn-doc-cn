@@ -139,11 +139,11 @@ the ``--install-option="--prefix="`` flag is only required if python has a
 from source package
 ~~~~~~~~~~~~~~~~~~~
 
-download the source package from
-`pypi <https://pypi.python.org/pypi/scikit-learn>`_, unpack the sources and
-cd into the source directory.
+download the source package from 
+`pypi <http://pypi.python.org/pypi/scikit-learn/>`_,
+, unpack the sources and cd into the source directory.
 
-This packages uses distutils, which is the default way of installing
+this packages uses distutils, which is the default way of installing
 python modules. the install command is::
 
     python setup.py install
@@ -163,12 +163,12 @@ or alternatively (also from within the scikit-learn source folder)::
 windows
 -------
 
-first, you need to install `numpy <http://www.numpy.org/>`_ and `scipy
+first, you need to install `numpy <http://numpy.scipy.org/>`_ and `scipy
 <http://www.scipy.org/>`_ from their own official installers.
 
 wheel packages (.whl files) for scikit-learn from `pypi
 <https://pypi.python.org/pypi/scikit-learn/>`_ can be installed with the `pip
-<https://pip.readthedocs.org/en/stable/installing/>`_ utility.
+<http://pip.readthedocs.org/en/latest/installing.html>`_ utility.
 open a console and type the following to install or upgrade scikit-learn to the
 latest stable release::
 
@@ -183,7 +183,7 @@ or from a :ref:`python distribution <install_by_distribution>` instead.
 
 .. _install_by_distribution:
 
-Third party distributions of scikit-learn
+third party distributions of scikit-learn
 =========================================
 
 some third-party distributions are now providing versions of
@@ -280,7 +280,9 @@ path environment variable.
 
 for 32-bit python it is possible use the standalone installers for
 `microsoft visual c++ express 2008 <http://go.microsoft.com/?linkid=7729279>`_
-for python 2 or microsoft visual c++ express 2010 for python 3.
+for python 2 or
+`microsoft visual c++ express 2010 <http://go.microsoft.com/?linkid=9709949>`_
+or python 3.
 
 once installed you should be able to build scikit-learn without any
 particular configuration by running the following command in the scikit-learn
@@ -364,8 +366,7 @@ bleeding edge
 =============
 
 see section :ref:`git_repo` on how to get the development version. then follow
-the previous instructions to build from source depending on your platform. 
-You will also require Cython >=0.23 in order to build the development version.
+the previous instructions to build from source depending on your platform.
 
 
 .. _testing:
@@ -377,7 +378,7 @@ testing scikit-learn once installed
 -----------------------------------
 
 testing requires having the `nose
-<https://nose.readthedocs.org/en/latest/>`_ library. after
+<http://somethingaboutorange.com/mrl/projects/nose/>`_ library. after
 installation, the package can be tested by executing *from outside* the
 source directory::
 

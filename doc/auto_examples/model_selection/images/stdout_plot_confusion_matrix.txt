@@ -1,0 +1,11 @@
+**Script output**::
+
+  Confusion matrix, without normalization
+  [[13  0  0]
+   [ 0 10  6]
+   [ 0  0  9]]
+  Normalized confusion matrix
+  [[ 1.    0.    0.  ]
+   [ 0.    0.62  0.38]
+   [ 0.    0.    1.  ]]
+

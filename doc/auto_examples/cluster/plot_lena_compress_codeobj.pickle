@@ -1,0 +1,10 @@
+€}q(U	misc.lena}q(Umodule_shortqU
+scipy.miscUnameqUlenaUmoduleqU
+scipy.miscuUplt.cm.gray}q(hUmatplotlib.pyplothUgrayhUmatplotlib.pyplot.cmuUnp.sort}q(hUnumpyqhUsorthhuUplt.clf}q	(hUmatplotlib.pyplothUclfhUmatplotlib.pyplotuUplt.hist}q
+(hUmatplotlib.pyplothUhisthUmatplotlib.pyplotuUcluster.KMeans}q(hUsklearn.clusterhUKMeanshUsklearn.clusteruUsp.lena}q(hUscipyqhUlenahhuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuUnp.searchsorted}q(hUnumpyqhUsearchsortedhhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUplt.axes}q(hU
+matplotlibhUaxeshUmatplotlib.pyplotuUnp.linspace}q(hUnumpyqhUlinspacehhuU	np.choose}q(hUnumpyqhUchoosehhuUplt.axvline}q(hUmatplotlib.pyplothUaxvlinehUmatplotlib.pyplotuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuu.

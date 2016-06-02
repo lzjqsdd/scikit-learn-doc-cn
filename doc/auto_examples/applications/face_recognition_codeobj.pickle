@@ -1,0 +1,7 @@
+€}q(Uplt.cm.gray}q(Umodule_shortqUmatplotlib.pyplotUnameqUgrayUmoduleqUmatplotlib.pyplot.cmuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUlogging.basicConfig}q(hUloggingqhUbasicConfighhuUGridSearchCVq	}q
+(hUsklearn.grid_searchhUGridSearchCVhUsklearn.grid_searchuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuURandomizedPCAq}q(hUsklearn.decompositionhURandomizedPCAhUsklearn.decompositionuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUconfusion_matrixq}q(hUsklearn.metricshUconfusion_matrixhUsklearn.metricsuUfetch_lfw_peopleq}q(hUsklearn.datasetshUfetch_lfw_peoplehUsklearn.datasetsuUtrain_test_splitq}q(hUsklearn.cross_validationhUtrain_test_splithUsklearn.cross_validationuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUtimeq}q(hUtimeqhUtimehhuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUlogging.INFO}q(hUloggingqhUINFOhhuUclassification_reportq}q (hUsklearn.metricshUclassification_reporthUsklearn.metricsuUSVCq!}q"(hUsklearn.svmhUSVChUsklearn.svmuu.

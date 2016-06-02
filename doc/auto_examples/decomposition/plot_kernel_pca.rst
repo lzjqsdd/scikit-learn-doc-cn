@@ -1,0 +1,28 @@
+
+
+.. _example_decomposition_plot_kernel_pca.py:
+
+
+==========
+Kernel PCA
+==========
+
+This example shows that Kernel PCA is able to find a projection of the data
+that makes data linearly separable.
+
+
+
+.. image:: images/plot_kernel_pca_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_kernel_pca.py <plot_kernel_pca.py>`
+
+.. literalinclude:: plot_kernel_pca.py
+    :lines: 9-
+
+**Total running time of the example:**  0.54 seconds
+( 0 minutes  0.54 seconds)
+    

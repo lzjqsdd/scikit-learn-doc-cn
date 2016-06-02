@@ -1,0 +1,74 @@
+
+
+.. _example_covariance_plot_mahalanobis_distances.py:
+
+
+================================================================
+Robust covariance estimation and Mahalanobis distances relevance
+================================================================
+
+An example to show covariance estimation with the Mahalanobis
+distances on Gaussian distributed data.
+
+For Gaussian distributed data, the distance of an observation
+:math:`x_i` to the mode of the distribution can be computed using its
+Mahalanobis distance: :math:`d_{(\mu,\Sigma)}(x_i)^2 = (x_i -
+\mu)'\Sigma^{-1}(x_i - \mu)` where :math:`\mu` and :math:`\Sigma` are
+the location and the covariance of the underlying Gaussian
+distribution.
+
+In practice, :math:`\mu` and :math:`\Sigma` are replaced by some
+estimates.  The usual covariance maximum likelihood estimate is very
+sensitive to the presence of outliers in the data set and therefor,
+the corresponding Mahalanobis distances are. One would better have to
+use a robust estimator of covariance to guarantee that the estimation is
+resistant to "erroneous" observations in the data set and that the
+associated Mahalanobis distances accurately reflect the true
+organisation of the observations.
+
+The Minimum Covariance Determinant estimator is a robust,
+high-breakdown point (i.e. it can be used to estimate the covariance
+matrix of highly contaminated datasets, up to
+:math:`\frac{n_\text{samples}-n_\text{features}-1}{2}` outliers)
+estimator of covariance. The idea is to find
+:math:`\frac{n_\text{samples}+n_\text{features}+1}{2}`
+observations whose empirical covariance has the smallest determinant,
+yielding a "pure" subset of observations from which to compute
+standards estimates of location and covariance.
+
+The Minimum Covariance Determinant estimator (MCD) has been introduced
+by P.J.Rousseuw in [1].
+
+This example illustrates how the Mahalanobis distances are affected by
+outlying data: observations drawn from a contaminating distribution
+are not distinguishable from the observations coming from the real,
+Gaussian distribution that one may want to work with. Using MCD-based
+Mahalanobis distances, the two populations become
+distinguishable. Associated applications are outliers detection,
+observations ranking, clustering, ...
+For visualization purpose, the cubic root of the Mahalanobis distances
+are represented in the boxplot, as Wilson and Hilferty suggest [2]
+
+[1] P. J. Rousseeuw. Least median of squares regression. J. Am
+    Stat Ass, 79:871, 1984.
+[2] Wilson, E. B., & Hilferty, M. M. (1931). The distribution of chi-square.
+    Proceedings of the National Academy of Sciences of the United States
+    of America, 17, 684-688.
+
+
+
+
+.. image:: images/plot_mahalanobis_distances_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_mahalanobis_distances.py <plot_mahalanobis_distances.py>`
+
+.. literalinclude:: plot_mahalanobis_distances.py
+    :lines: 55-
+
+**Total running time of the example:**  0.22 seconds
+( 0 minutes  0.22 seconds)
+    

@@ -1,0 +1,60 @@
+
+
+.. _example_covariance_plot_outlier_detection.py:
+
+
+==========================================
+Outlier detection with several methods.
+==========================================
+
+When the amount of contamination is known, this example illustrates two
+different ways of performing :ref:`outlier_detection`:
+
+- based on a robust estimator of covariance, which is assuming that the
+  data are Gaussian distributed and performs better than the One-Class SVM
+  in that case.
+
+- using the One-Class SVM and its ability to capture the shape of the
+  data set, hence performing better when the data is strongly
+  non-Gaussian, i.e. with two well-separated clusters;
+
+The ground truth about inliers and outliers is given by the points colors
+while the orange-filled area indicates which points are reported as inliers
+by each method.
+
+Here, we assume that we know the fraction of outliers in the datasets.
+Thus rather than using the 'predict' method of the objects, we set the
+threshold on the decision_function to separate out the corresponding
+fraction.
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_outlier_detection_001.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_outlier_detection_002.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_outlier_detection_003.png
+            :scale: 47
+
+
+
+
+**Python source code:** :download:`plot_outlier_detection.py <plot_outlier_detection.py>`
+
+.. literalinclude:: plot_outlier_detection.py
+    :lines: 26-
+
+**Total running time of the example:**  2.34 seconds
+( 0 minutes  2.34 seconds)
+    

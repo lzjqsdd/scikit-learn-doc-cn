@@ -1,0 +1,5 @@
+€}q(U	time.time}q(Umodule_shortqUtimeqUnameqUtimeUmoduleqhuUnp.float}q(hUnumpyqhUfloathhuU
+plt.figure}q	(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.max}q
+(hUnumpyqhUmaxhhuU	p3.Axes3D}q(hUmpl_toolkits.mplot3dhUAxes3DhUmpl_toolkits.mplot3d.axes3duUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUAgglomerativeClusteringq}q(hUsklearn.clusterhUAgglomerativeClusteringhUsklearn.clusteruU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuU
+plt.cm.jet}q(hUmatplotlib.pyplothUjethUmatplotlib.pyplot.cmuU	np.unique}q(hUnumpyqhUuniquehhuUkneighbors_graphq}q(hUsklearn.neighborshUkneighbors_graphhUsklearn.neighborsuUmake_swiss_rollq}q(hUsklearn.datasetshUmake_swiss_rollhU"sklearn.datasets.samples_generatoruu.

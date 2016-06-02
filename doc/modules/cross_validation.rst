@@ -4,7 +4,7 @@
 Cross-validation: evaluating estimator performance
 ===================================================
 
-.. currentmodule:: sklearn.model_selection
+.. currentmodule:: sklearn.cross_validation
 
 Learning the parameters of a prediction function and testing it on the
 same data is a methodological mistake: a model that would just repeat
@@ -24,7 +24,7 @@ can be quickly computed with the :func:`train_test_split` helper function.
 Let's load the iris data set to fit a linear support vector machine on it::
 
   >>> import numpy as np
-  >>> from sklearn.model_selection import train_test_split
+  >>> from sklearn import cross_validation
   >>> from sklearn import datasets
   >>> from sklearn import svm
 
@@ -35,7 +35,7 @@ Let's load the iris data set to fit a linear support vector machine on it::
 We can now quickly sample a training set while holding out 40% of the
 data for testing (evaluating) our classifier::
 
-  >>> X_train, X_test, y_train, y_test = train_test_split(
+  >>> X_train, X_test, y_train, y_test = cross_validation.train_test_split(
   ...     iris.data, iris.target, test_size=0.4, random_state=0)
 
   >>> X_train.shape, y_train.shape
@@ -66,7 +66,7 @@ and the results can depend on a particular random choice for the pair of
 (train, validation) sets.
 
 A solution to this problem is a procedure called
-`cross-validation <https://en.wikipedia.org/wiki/Cross-validation_(statistics)>`_
+`cross-validation <http://en.wikipedia.org/wiki/Cross-validation_(statistics)>`_
 (CV for short).
 A test set should still be held out for final evaluation,
 but the validation set is no longer needed when doing CV.
@@ -101,9 +101,10 @@ kernel support vector machine on the iris dataset by splitting the data, fitting
 a model and computing the score 5 consecutive times (with different splits each
 time)::
 
-  >>> from sklearn.model_selection import cross_val_score
   >>> clf = svm.SVC(kernel='linear', C=1)
-  >>> scores = cross_val_score(clf, iris.data, iris.target, cv=5)
+  >>> scores = cross_validation.cross_val_score(
+  ...    clf, iris.data, iris.target, cv=5)
+  ...
   >>> scores                                              # doctest: +ELLIPSIS
   array([ 0.96...,  1.  ...,  0.96...,  0.96...,  1.        ])
 
@@ -118,8 +119,8 @@ method of the estimator. It is possible to change this by using the
 scoring parameter::
 
   >>> from sklearn import metrics
-  >>> scores = cross_val_score(
-  ...     clf, iris.data, iris.target, cv=5, scoring='f1_macro')
+  >>> scores = cross_validation.cross_val_score(clf, iris.data, iris.target,
+  ...     cv=5, scoring='f1_weighted')
   >>> scores                                              # doctest: +ELLIPSIS
   array([ 0.96...,  1.  ...,  0.96...,  0.96...,  1.        ])
 
@@ -135,10 +136,11 @@ being used if the estimator derives from :class:`ClassifierMixin
 It is also possible to use other cross validation strategies by passing a cross
 validation iterator instead, for instance::
 
-  >>> from sklearn.model_selection import ShuffleSplit
   >>> n_samples = iris.data.shape[0]
-  >>> cv = ShuffleSplit(n_iter=3, test_size=0.3, random_state=0)
-  >>> cross_val_score(clf, iris.data, iris.target, cv=cv)
+  >>> cv = cross_validation.ShuffleSplit(n_samples, n_iter=3,
+  ...     test_size=0.3, random_state=0)
+
+  >>> cross_validation.cross_val_score(clf, iris.data, iris.target, cv=cv)
   ...                                                     # doctest: +ELLIPSIS
   array([ 0.97...,  0.97...,  1.        ])
 
@@ -151,7 +153,7 @@ validation iterator instead, for instance::
     be learnt from a training set and applied to held-out data for prediction::
 
       >>> from sklearn import preprocessing
-      >>> X_train, X_test, y_train, y_test = train_test_split(
+      >>> X_train, X_test, y_train, y_test = cross_validation.train_test_split(
       ...     iris.data, iris.target, test_size=0.4, random_state=0)
       >>> scaler = preprocessing.StandardScaler().fit(X_train)
       >>> X_train_transformed = scaler.transform(X_train)
@@ -165,7 +167,7 @@ validation iterator instead, for instance::
 
       >>> from sklearn.pipeline import make_pipeline
       >>> clf = make_pipeline(preprocessing.StandardScaler(), svm.SVC(C=1))
-      >>> cross_val_score(clf, iris.data, iris.target, cv=cv)
+      >>> cross_validation.cross_val_score(clf, iris.data, iris.target, cv=cv)
       ...                                                 # doctest: +ELLIPSIS
       array([ 0.97...,  0.93...,  0.95...])
 
@@ -182,8 +184,8 @@ can be used (otherwise, an exception is raised).
 
 These prediction can then be used to evaluate the classifier::
 
-  >>> from sklearn.model_selection import cross_val_predict
-  >>> predicted = cross_val_predict(clf, iris.data, iris.target, cv=10)
+  >>> predicted = cross_validation.cross_val_predict(clf, iris.data,
+  ...                                                iris.target, cv=10)
   >>> metrics.accuracy_score(iris.target, predicted) # doctest: +ELLIPSIS
   0.966...
 
@@ -200,7 +202,7 @@ section.
     * :ref:`example_feature_selection_plot_rfe_with_cross_validation.py`,
     * :ref:`example_model_selection_grid_search_digits.py`,
     * :ref:`example_model_selection_grid_search_text_feature_extraction.py`,
-    * :ref:`example_plot_cv_predict.py`.
+    * :ref:`example_plot_cv_predict.py`,
 
 Cross validation iterators
 ==========================
@@ -221,11 +223,10 @@ learned using :math:`k - 1` folds, and the fold left out is used for test.
 Example of 2-fold cross-validation on a dataset with 4 samples::
 
   >>> import numpy as np
-  >>> from sklearn.model_selection import KFold
+  >>> from sklearn.cross_validation import KFold
 
-  >>> X = ["a", "b", "c", "d"]
-  >>> kf = KFold(n_folds=2)
-  >>> for train, test in kf.split(X):
+  >>> kf = KFold(4, n_folds=2)
+  >>> for train, test in kf:
   ...     print("%s %s" % (train, test))
   [2 3] [0 1]
   [0 1] [2 3]
@@ -249,12 +250,11 @@ target class as the complete set.
 Example of stratified 3-fold cross-validation on a dataset with 10 samples from
 two slightly unbalanced classes::
 
-  >>> from sklearn.model_selection import StratifiedKFold
+  >>> from sklearn.cross_validation import StratifiedKFold
 
-  >>> X = np.ones(10)
-  >>> y = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
-  >>> skf = StratifiedKFold(n_folds=3)
-  >>> for train, test in skf.split(X, y):
+  >>> labels = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+  >>> skf = StratifiedKFold(labels, 3)
+  >>> for train, test in skf:
   ...     print("%s %s" % (train, test))
   [2 3 6 7 8 9] [0 1 4 5]
   [0 1 3 4 5 8 9] [2 6 7]
@@ -272,14 +272,12 @@ subjects.
 
 Imagine you have three subjects, each with an associated number from 1 to 3::
 
-  >>> from sklearn.model_selection import LabelKFold
+  >>> from sklearn.cross_validation import LabelKFold
 
-  >>> X = [0.1, 0.2, 2.2, 2.4, 2.3, 4.55, 5.8, 8.8, 9, 10]
-  >>> y = ["a", "b", "b", "b", "c", "c", "c", "d", "d", "d"]
   >>> labels = [1, 1, 1, 2, 2, 2, 3, 3, 3, 3]
 
-  >>> lkf = LabelKFold(n_folds=3)
-  >>> for train, test in lkf.split(X, y, labels):
+  >>> lkf = LabelKFold(labels, n_folds=3)
+  >>> for train, test in lkf:
   ...     print("%s %s" % (train, test))
   [0 1 2 3 4 5] [6 7 8 9]
   [0 1 2 6 7 8 9] [3 4 5]
@@ -300,11 +298,10 @@ training sets and :math:`n` different tests set. This cross-validation
 procedure does not waste much data as only one sample is removed from the
 training set::
 
-  >>> from sklearn.model_selection import LeaveOneOut
+  >>> from sklearn.cross_validation import LeaveOneOut
 
-  >>> X = [1, 2, 3, 4]
-  >>> loo = LeaveOneOut()
-  >>> for train, test in loo.split(X):
+  >>> loo = LeaveOneOut(4)
+  >>> for train, test in loo:
   ...     print("%s %s" % (train, test))
   [1 2 3] [0]
   [0 2 3] [1]
@@ -316,7 +313,7 @@ Potential users of LOO for model selection should weigh a few known caveats.
 When compared with :math:`k`-fold cross validation, one builds :math:`n` models
 from :math:`n` samples instead of :math:`k` models, where :math:`n > k`.
 Moreover, each is trained on :math:`n - 1` samples rather than
-:math:`(k-1) n / k`. In both ways, assuming :math:`k` is not too large
+:math:`(k-1)n / k`. In both ways, assuming :math:`k` is not too large
 and :math:`k < n`, LOO is more computationally expensive than :math:`k`-fold
 cross validation.
 
@@ -335,17 +332,17 @@ fold cross validation should be preferred to LOO.
 
 .. topic:: References:
 
- * `<http://www.faqs.org/faqs/ai-faq/neural-nets/part3/section-12.html>`_;
+ * http://www.faqs.org/faqs/ai-faq/neural-nets/part3/section-12.html
  * T. Hastie, R. Tibshirani, J. Friedman,  `The Elements of Statistical Learning
-   <http://statweb.stanford.edu/~tibs/ElemStatLearn>`_, Springer 2009
+   <http://www-stat.stanford.edu/~tibs/ElemStatLearn>`_, Springer 2009
  * L. Breiman, P. Spector `Submodel selection and evaluation in regression: The X-random case
-   <http://digitalassets.lib.berkeley.edu/sdtr/ucb/text/197.pdf>`_, International Statistical Review 1992;
+   <http://digitalassets.lib.berkeley.edu/sdtr/ucb/text/197.pdf>`_, International Statistical Review 1992
  * R. Kohavi, `A Study of Cross-Validation and Bootstrap for Accuracy Estimation and Model Selection
-   <http://web.cs.iastate.edu/~jtian/cs573/Papers/Kohavi-IJCAI-95.pdf>`_, Intl. Jnt. Conf. AI
+   <http://www.cs.iastate.edu/~jtian/cs573/Papers/Kohavi-IJCAI-95.pdf>`_, Intl. Jnt. Conf. AI
  * R. Bharat Rao, G. Fung, R. Rosales, `On the Dangers of Cross-Validation. An Experimental Evaluation
-   <http://www.siam.org/proceedings/datamining/2008/dm08_54_Rao.pdf>`_, SIAM 2008;
+   <http://www.siam.org/proceedings/datamining/2008/dm08_54_Rao.pdf>`_, SIAM 2008
  * G. James, D. Witten, T. Hastie, R Tibshirani, `An Introduction to
-   Statistical Learning <http://www-bcf.usc.edu/~gareth/ISL>`_, Springer 2013.
+   Statistical Learning <http://www-bcf.usc.edu/~gareth/ISL>`_, Springer 2013
 
 
 Leave-P-Out - LPO
@@ -359,11 +356,10 @@ overlap for :math:`p > 1`.
 
 Example of Leave-2-Out on a dataset with 4 samples::
 
-  >>> from sklearn.model_selection import LeavePOut
+  >>> from sklearn.cross_validation import LeavePOut
 
-  >>> X = np.ones(4)
-  >>> lpo = LeavePOut(p=2)
-  >>> for train, test in lpo.split(X):
+  >>> lpo = LeavePOut(4, p=2)
+  >>> for train, test in lpo:
   ...     print("%s %s" % (train, test))
   [2 3] [0 1]
   [1 3] [0 2]
@@ -384,17 +380,15 @@ cross-validation folds.
 Each training set is thus constituted by all the samples except the ones
 related to a specific label.
 
-For example, in the cases of multiple experiments, LOLO can be used to
+For example, in the cases of multiple experiments, *LOLO* can be used to
 create a cross-validation based on the different experiments: we create
 a training set using the samples of all the experiments except one::
 
-  >>> from sklearn.model_selection import LeaveOneLabelOut
+  >>> from sklearn.cross_validation import LeaveOneLabelOut
 
-  >>> X = [1, 5, 10, 50]
-  >>> y = [0, 1, 1, 2]
   >>> labels = [1, 1, 2, 2]
-  >>> lolo = LeaveOneLabelOut()
-  >>> for train, test in lolo.split(X, y, labels):
+  >>> lolo = LeaveOneLabelOut(labels)
+  >>> for train, test in lolo:
   ...     print("%s %s" % (train, test))
   [2 3] [0 1]
   [0 1] [2 3]
@@ -405,10 +399,9 @@ for cross-validation against time-based splits.
 
 .. warning::
 
-  Contrary to :class:`StratifiedKFold`,
-  the ``labels`` of :class:`LeaveOneLabelOut` should not encode
-  the target class to predict: the goal of :class:`StratifiedKFold`
-  is to rebalance dataset classes across
+  Contrary to :class:`StratifiedKFold`, **the ``labels`` of
+  :class:`LeaveOneLabelOut` should not encode the target class to predict**:
+  the goal of :class:`StratifiedKFold` is to rebalance dataset classes across
   the train / test split to ensure that the train and test folds have
   approximately the same percentage of samples of each class while
   :class:`LeaveOneLabelOut` will do the opposite by ensuring that the samples
@@ -423,13 +416,11 @@ samples related to :math:`P` labels for each training/test set.
 
 Example of Leave-2-Label Out::
 
-  >>> from sklearn.model_selection import LeavePLabelOut
+  >>> from sklearn.cross_validation import LeavePLabelOut
 
-  >>> X = np.arange(6)
-  >>> y = [1, 1, 1, 2, 2, 2]
   >>> labels = [1, 1, 2, 2, 3, 3]
-  >>> lplo = LeavePLabelOut(n_labels=2)
-  >>> for train, test in lplo.split(X, y, labels):
+  >>> lplo = LeavePLabelOut(labels, p=2)
+  >>> for train, test in lplo:
   ...     print("%s %s" % (train, test))
   [4 5] [0 1 2 3]
   [2 3] [0 1 4 5]
@@ -452,11 +443,9 @@ generator.
 
 Here is a usage example::
 
-  >>> from sklearn.model_selection import ShuffleSplit
-  >>> X = np.arange(5)
-  >>> ss = ShuffleSplit(n_iter=3, test_size=0.25,
+  >>> ss = cross_validation.ShuffleSplit(5, n_iter=3, test_size=0.25,
   ...     random_state=0)
-  >>> for train_index, test_index in ss.split(X):
+  >>> for train_index, test_index in ss:
   ...     print("%s %s" % (train_index, test_index))
   ...
   [1 3 4] [2 0]
@@ -465,7 +454,7 @@ Here is a usage example::
 
 :class:`ShuffleSplit` is thus a good alternative to :class:`KFold` cross
 validation that allows a finer control on the number of iterations and
-the proportion of samples on each side of the train / test split.
+the proportion of samples in on each side of the train / test split.
 
 
 Label-Shuffle-Split
@@ -480,13 +469,12 @@ out for each split.
 
 Here is a usage example::
 
-  >>> from sklearn.model_selection import LabelShuffleSplit
+  >>> from sklearn.cross_validation import LabelShuffleSplit
 
-  >>> X = [0.1, 0.2, 2.2, 2.4, 2.3, 4.55, 5.8, 0.001]
-  >>> y = ["a", "b", "b", "b", "c", "c", "c", "a"]
   >>> labels = [1, 1, 2, 2, 3, 3, 4, 4]
-  >>> lss = LabelShuffleSplit(n_iter=4, test_size=0.5, random_state=0)
-  >>> for train, test in lss.split(X, y, labels):
+  >>> slo = LabelShuffleSplit(labels, n_iter=4, test_size=0.5,
+  ...                        random_state=0)
+  >>> for train, test in slo:
   ...     print("%s %s" % (train, test))
   ...
   [0 1 2 3] [4 5 6 7]
@@ -553,4 +541,4 @@ Cross validation and model selection
 
 Cross validation iterators can also be used to directly perform model
 selection using Grid Search for the optimal hyperparameters of the
-model. This is the topic of the next section: :ref:`grid_search`.
+model. This is the topic if the next section: :ref:`grid_search`.

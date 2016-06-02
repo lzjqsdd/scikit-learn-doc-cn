@@ -82,7 +82,7 @@ Gaël Varoquaux, research at Parietal
    </span>
 
 
-`Evernote <https://evernote.com>`_
+`Evernote <http://evernote.com>`_
 ----------------------------------
 
 .. raw:: html
@@ -149,42 +149,7 @@ Alexandre Gramfort, Assistant Professor
    </span>
 
 
-`Booking.com <http://booking.com>`_
--------------------------------------
-.. raw:: html
-
-  <div class="logo">
-
-.. image:: images/booking.png
-    :width: 120pt
-    :target: http://www.booking.com
-
-.. raw:: html
-
-  </div>
-
-At Booking.com, we use machine learning algorithms for many different
-applications, such as recommending hotels and destinations to our customers,
-detecting fraudulent reservations, or scheduling our customer service agents.
-Scikit-learn is one of the tools we use when implementing standard algorithms
-for prediction tasks. Its API and documentations are excellent and make it easy
-to use. The scikit-learn developers do a great job of incorporating state of
-the art implementations and new algorithms into the package. Thus, scikit-learn
-provides convenient access to a wide spectrum of algorithms, and allows us to
-readily find the right tool for the right job.
-
-
-.. raw:: html
-
-   <span class="testimonial-author">
-
-Melanie Mueller, Data Scientist
-
-.. raw:: html
-
-   </span>
-
-`AWeber <http://www.aweber.com>`_
+`AWeber <http://aweber.com/>`_
 ------------------------------------------
 
 .. raw:: html
@@ -193,7 +158,7 @@ Melanie Mueller, Data Scientist
 
 .. image:: images/aweber.png
     :width: 120pt
-    :target: http://www.aweber.com
+    :target: http://aweber.com/
 
 .. raw:: html
 
@@ -223,7 +188,7 @@ Michael Becker, Software Engineer, Data Analysis and Management Ninjas
 
    </span>
 
-`Yhat <https://www.yhat.com>`_
+`Yhat <http://yhathq.com/>`_
 ------------------------------------------
 
 .. raw:: html
@@ -232,7 +197,7 @@ Michael Becker, Software Engineer, Data Analysis and Management Ninjas
 
 .. image:: images/yhat.png
     :width: 120pt
-    :target: https://www.yhat.com
+    :target: http://yhathq.com/
 
 .. raw:: html
 
@@ -357,8 +322,8 @@ Eustache Diemert, Lead Scientist Bestofmedia Group
 
    </span>
 
-`Change.org <https://www.change.org>`_
---------------------------------------
+`Change.org <http://www.change.org>`_
+--------------------------------------------------
 
 .. raw:: html
 
@@ -366,7 +331,7 @@ Eustache Diemert, Lead Scientist Bestofmedia Group
 
 .. image:: images/change-logo.png
     :width: 120pt
-    :target: https://www.change.org
+    :target: http://www.change.org
 
 .. raw:: html
 
@@ -458,8 +423,8 @@ Daniel Weitzenfeld, Senior Data Scientist at HowAboutWe
    </span>
 
 
-`PeerIndex <https://www.brandwatch.com/peerindex-and-brandwatch>`_
-------------------------------------------------------------------
+`PeerIndex <http://www.peerindex.com/>`_
+----------------------------------------
 
 .. raw:: html
 
@@ -554,8 +519,8 @@ David Koh - Senior Data Scientist at OkCupid
    </span>
    
 
-`Lovely <https://livelovely.com/>`_
------------------------------------
+`Lovely <https://www.livelovely.com/>`_
+-----------------------------------------
 
 .. raw:: html
 
@@ -563,7 +528,7 @@ David Koh - Senior Data Scientist at OkCupid
 
 .. image:: images/lovely.png
     :width: 120pt
-    :target: https://livelovely.com
+    :target: https://www.livelovely.com
 
 .. raw:: html
 

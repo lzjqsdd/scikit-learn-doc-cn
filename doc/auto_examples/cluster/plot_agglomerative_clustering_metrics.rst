@@ -1,0 +1,89 @@
+
+
+.. _example_cluster_plot_agglomerative_clustering_metrics.py:
+
+
+Agglomerative clustering with different metrics
+===============================================
+
+Demonstrates the effect of different metrics on the hierarchical clustering.
+
+The example is engineered to show the effect of the choice of different
+metrics. It is applied to waveforms, which can be seen as
+high-dimensional vector. Indeed, the difference between metrics is
+usually more pronounced in high dimension (in particular for euclidean
+and cityblock).
+
+We generate data from three groups of waveforms. Two of the waveforms
+(waveform 1 and waveform 2) are proportional one to the other. The cosine
+distance is invariant to a scaling of the data, as a result, it cannot
+distinguish these two waveforms. Thus even with no noise, clustering
+using this distance will not separate out waveform 1 and 2.
+
+We add observation noise to these waveforms. We generate very sparse
+noise: only 6% of the time points contain noise. As a result, the
+l1 norm of this noise (ie "cityblock" distance) is much smaller than it's
+l2 norm ("euclidean" distance). This can be seen on the inter-class
+distance matrices: the values on the diagonal, that characterize the
+spread of the class, are much bigger for the Euclidean distance than for
+the cityblock distance.
+
+When we apply clustering to the data, we find that the clustering
+reflects what was in the distance matrices. Indeed, for the Euclidean
+distance, the classes are ill-separated because of the noise, and thus
+the clustering does not separate the waveforms. For the cityblock
+distance, the separation is good and the waveform classes are recovered.
+Finally, the cosine distance does not separate at all waveform 1 and 2,
+thus the clustering puts them in the same cluster.
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_agglomerative_clustering_metrics_001.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_agglomerative_clustering_metrics_002.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_agglomerative_clustering_metrics_003.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_agglomerative_clustering_metrics_004.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_agglomerative_clustering_metrics_005.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_agglomerative_clustering_metrics_006.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_agglomerative_clustering_metrics_007.png
+            :scale: 47
+
+
+
+
+**Python source code:** :download:`plot_agglomerative_clustering_metrics.py <plot_agglomerative_clustering_metrics.py>`
+
+.. literalinclude:: plot_agglomerative_clustering_metrics.py
+    :lines: 35-
+
+**Total running time of the example:**  1.57 seconds
+( 0 minutes  1.57 seconds)
+    

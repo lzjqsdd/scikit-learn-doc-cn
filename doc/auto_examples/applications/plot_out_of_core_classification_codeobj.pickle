@@ -1,0 +1,14 @@
+€}q(Uitertools.islice}q(Umodule_shortqU	itertoolsqUnameqUisliceUmoduleqhuUplt.gca}q(hUmatplotlib.pyplothUgcahUmatplotlib.pyplotuUPassiveAggressiveClassifierq}q	(hUsklearn.linear_modelhUPassiveAggressiveClassifierhUsklearn.linear_modeluUplt.gcf}q
+(hUmatplotlib.pyplothUgcfhUmatplotlib.pyplotuUget_data_homeq}q(hUsklearn.datasetshUget_data_homehUsklearn.datasetsuUtarfile.open}q(hUtarfileqhUopenhhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuU
+np.asarray}q(hUnumpyqhUasarrayhhuUhtml_parser.HTMLParser.__init__}q(hU2sklearn.externals.six.moves.html_parser.HTMLParserhU__init__hU2sklearn.externals.six.moves.html_parser.HTMLParseruUMultinomialNBq}q(hUsklearn.naive_bayeshUMultinomialNBhUsklearn.naive_bayesuUurllib.request.urlretrieve}q(hU*sklearn.externals.six.moves.urllib.requesthUurlretrievehU*sklearn.externals.six.moves.urllib.requestuUre.sub}q(hUreqhUsubhhuUhtml_parser.HTMLParser}q(hU'sklearn.externals.six.moves.html_parserhU
+HTMLParserhU'sklearn.externals.six.moves.html_parseruU	time.time}q(hUtimeqhUtimehhuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUglobq}q(hUglobqhUglobhhuU	plt.title}q (hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.grid}q!(hUmatplotlib.pyplothUgridhUmatplotlib.pyplotuUplt.show}q"(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUSGDClassifierq#}q$(hUsklearn.linear_modelhUSGDClassifierhUsklearn.linear_modeluUnp.linspace}q%(hUnumpyq&hUlinspacehh&uU
+plt.xticks}q'(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuU
+plt.ylabel}q((hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUplt.setp}q)(hUmatplotlib.pyplothUsetphUmatplotlib.pyplotuUnp.array}q*(hUnumpyq+hUarrayhh+uUHashingVectorizerq,}q-(hUsklearn.feature_extraction.texthUHashingVectorizerhUsklearn.feature_extraction.textuUplt.bar}q.(hUmatplotlib.pyplothUbarhUmatplotlib.pyplotuUplt.subplot}q/(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUrcParamsq0}q1(hU
+matplotlibq2hUrcParamshh2uU
+Perceptronq3}q4(hUsklearn.linear_modelhU
+PerceptronhUsklearn.linear_modeluU
+plt.xlabel}q5(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

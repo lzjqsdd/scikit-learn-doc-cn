@@ -1,8 +1,8 @@
 .. _linear_model:
 
-=========================
-Generalized Linear Models
-=========================
+=====================================
+Generalized Linear Models 广义线性模型
+=====================================
 
 .. currentmodule:: sklearn.linear_model
 
@@ -14,20 +14,17 @@ Generalized Linear Models
 Across the module, we designate the vector :math:`w = (w_1,
 ..., w_p)` as ``coef_`` and :math:`w_0` as ``intercept_``.
 
-To perform classification with generalized linear models, see
+使用广义线性模型来处理分类问题(classification)请参考
 :ref:`Logistic_regression`.
 
 
 .. _ordinary_least_squares:
 
-Ordinary Least Squares
-=======================
+Ordinary Least Squares 普通最小二乘法
+====================================
 
-:class:`LinearRegression` fits a linear model with coefficients
-:math:`w = (w_1, ..., w_p)` to minimize the residual sum
-of squares between the observed responses in the dataset, and the
-responses predicted by the linear approximation. Mathematically it
-solves a problem of the form:
+:class:`LinearRegression` 用系数：math: `w = (w_1,...,w_p)` 来拟合一个线性模型,
+使得数据集实际观测数据和预测数据（估计值）之间残差平方和最小。数学形式可表达为:
 
 .. math:: \underset{w}{min\,} {|| X w - y||_2}^2
 
@@ -39,7 +36,8 @@ solves a problem of the form:
 :class:`LinearRegression` will take in its ``fit`` method arrays X, y
 and will store the coefficients :math:`w` of the linear model in its
 ``coef_`` member::
-
+"class:`LinearRegression` 模型会调用 ``fit``方法来拟合X,y(X为输入，y为输出).
+并且会把拟合的线性模型的稀疏 :math:`w` 存储到成员变量 ``coef_`` 中
     >>> from sklearn import linear_model
     >>> clf = linear_model.LinearRegression()
     >>> clf.fit ([[0, 0], [1, 1], [2, 2]], [0, 1, 2])

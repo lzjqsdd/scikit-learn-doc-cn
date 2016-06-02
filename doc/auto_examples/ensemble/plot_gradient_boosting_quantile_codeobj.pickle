@@ -1,0 +1,11 @@
+€}q(Unp.linspace}q(Umodule_shortqUnumpyqUnameqUlinspaceUmoduleqhuUGradientBoostingRegressorq}q(hUsklearn.ensemblehUGradientBoostingRegressorhUsklearn.ensembleuUnp.concatenate}q	(hUnumpyq
+hUconcatenatehh
+uUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.random.normal}q(hUnumpy.randomhUnormalhUnumpy.randomuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUnp.atleast_2d}q(hUnumpyqhU
+atleast_2dhhuU
+np.float32}q(hUnumpyqhUfloat32hhuUnp.random.random}q(hUnumpyhUrandomhUnumpy.randomuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUnp.random.uniform}q(hUnumpy.randomhUuniformhUnumpy.randomuUnp.sin}q(hUnumpyqhUsinhhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuU
+plt.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUplt.fill}q(hUmatplotlib.pyplothUfillhUmatplotlib.pyplotuu.

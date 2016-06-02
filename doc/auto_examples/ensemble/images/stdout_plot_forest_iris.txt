@@ -1,0 +1,15 @@
+**Script output**::
+
+  DecisionTree with features [0, 1] has a score of 0.926666666667
+  RandomForest with 30 estimators with features [0, 1] has a score of 0.926666666667
+  ExtraTrees with 30 estimators with features [0, 1] has a score of 0.926666666667
+  AdaBoost with 30 estimators with features [0, 1] has a score of 0.84
+  DecisionTree with features [0, 2] has a score of 0.993333333333
+  RandomForest with 30 estimators with features [0, 2] has a score of 0.993333333333
+  ExtraTrees with 30 estimators with features [0, 2] has a score of 0.993333333333
+  AdaBoost with 30 estimators with features [0, 2] has a score of 0.993333333333
+  DecisionTree with features [2, 3] has a score of 0.993333333333
+  RandomForest with 30 estimators with features [2, 3] has a score of 0.993333333333
+  ExtraTrees with 30 estimators with features [2, 3] has a score of 0.993333333333
+  AdaBoost with 30 estimators with features [2, 3] has a score of 0.993333333333
+

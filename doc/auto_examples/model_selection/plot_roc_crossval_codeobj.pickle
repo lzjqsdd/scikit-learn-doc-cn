@@ -1,0 +1,6 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUaucq}q(hUsklearn.metricshUauchUsklearn.metricsuUStratifiedKFoldq}q	(hUsklearn.cross_validationhUStratifiedKFoldhUsklearn.cross_validationuUplt.ylim}q
+(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUinterpq}q(hUscipyqhUinterphhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuUnp.c_}q(hUnumpyqhUc_hhuUsvm.SVC}q(hUsklearn.svmhUSVChUsklearn.svmuU	roc_curveq}q(hUsklearn.metricshU	roc_curvehUsklearn.metricsuUnp.linspace}q(hUnumpyqhUlinspacehhuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUdatasets.load_iris}q(hUsklearn.datasetshU	load_irishUsklearn.datasetsuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUnp.random.RandomState}q(hUnumpy.randomhURandomStatehUnumpy.randomuu.

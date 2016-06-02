@@ -1,0 +1,11 @@
+€}q(UAdaBoostClassifierq}q(Umodule_shortqUsklearn.ensembleUnameqUAdaBoostClassifierUmoduleqUsklearn.ensembleuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuU	np.arange}q	(hUnumpyq
+hUarangehh
+uUplt.contourf}q(hUmatplotlib.pyplothUcontourfhUmatplotlib.pyplotuUplt.hist}q(hUmatplotlib.pyplothUhisthUmatplotlib.pyplotuUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuUnp.c_}q(hUnumpyqhUc_hhuUnp.concatenate}q(hUnumpyqhUconcatenatehhuUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUnp.meshgrid}q(hUnumpyqhUmeshgridhhuUplt.cm.Paired}q(hUmatplotlib.pyplot.cmhUPairedhUmatplotlib.pyplot.cmuUmake_gaussian_quantilesq}q(hUsklearn.datasetshUmake_gaussian_quantileshUsklearn.datasetsuU
+plt.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUDecisionTreeClassifierq}q(hUsklearn.treehUDecisionTreeClassifierhUsklearn.treeuUnp.where}q(hUnumpyq hUwherehh uUplt.subplot}q!(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUplt.tight_layout}q"(hU
+matplotlibhUtight_layouthUmatplotlib.pyplotuUplt.axis}q#(hU
+matplotlibhUaxishUmatplotlib.pyplotuU
+plt.xlabel}q$(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

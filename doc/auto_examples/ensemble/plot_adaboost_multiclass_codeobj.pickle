@@ -1,0 +1,8 @@
+€}q(Umake_gaussian_quantilesq}q(Umodule_shortqUsklearn.datasetsUnameqUmake_gaussian_quantilesUmoduleqUsklearn.datasetsuU
+plt.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuUzipq}q	(hUsklearn.externals.six.moveshUziphUsklearn.externals.six.movesuUplt.ylim}q
+(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUaccuracy_scoreq}q(hUsklearn.metricshUaccuracy_scorehUsklearn.metricsuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUAdaBoostClassifierq}q(hUsklearn.ensemblehUAdaBoostClassifierhUsklearn.ensembleuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuUDecisionTreeClassifierq}q(hUsklearn.treehUDecisionTreeClassifierhUsklearn.treeuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

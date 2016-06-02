@@ -1,0 +1,10 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+np.float64}q(hUnumpyq	hUfloat64hh	uUplt.show}q
+(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+np.float32}q(hUnumpyqhUfloat32hhuU	np.unique}q(hUnumpyqhUuniquehhuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUnp.zeros}q(hUnumpyqhUzeroshhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUdatasets.make_hastie_10_2}q(hUsklearn.datasetshUmake_hastie_10_2hUsklearn.datasetsuU#ensemble.GradientBoostingClassifier}q(hUsklearn.ensemblehUGradientBoostingClassifierhUsklearn.ensembleuU	np.arange}q(hUnumpyqhUarangehhuu.

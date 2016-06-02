@@ -1,0 +1,7 @@
+€}q(Unp.logical_not}q(Umodule_shortqUnumpyqUnameqUlogical_notUmoduleqhuU	time.time}q(hUtimeqhUtimehhuU
+make_blobsq	}q
+(hUsklearn.datasetshU
+make_blobshU"sklearn.datasets.samples_generatoruU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUKMeansq}q(hUsklearn.clusterhUKMeanshUsklearn.clusteruUpairwise_distances_argminq}q(hUsklearn.metricshUpairwise_distances_argminhUsklearn.metrics.pairwiseuUplt.text}q(hU
+matplotlibhUtexthUmatplotlib.pyplotuU	np.unique}q(hUnumpyqhUuniquehhuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuUMiniBatchKMeansq}q(hUsklearn.clusterhUMiniBatchKMeanshUsklearn.clusteruu.

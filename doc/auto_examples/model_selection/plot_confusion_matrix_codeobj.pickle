@@ -1,0 +1,12 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUplt.tight_layout}q(hU
+matplotlibhUtight_layouthUmatplotlib.pyplotuU	np.arange}q(hUnumpyqhUarangehhuU
+plt.figure}q	(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q
+(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.cm.Blues}q(hUmatplotlib.pyplot.cmhUBlueshUmatplotlib.pyplot.cmuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUsvm.SVC}q(hUsklearn.svmhUSVChUsklearn.svmuUtrain_test_splitq}q(hUsklearn.cross_validationhUtrain_test_splithUsklearn.cross_validationuUdatasets.load_iris}q(hUsklearn.datasetshU	load_irishUsklearn.datasetsuUnp.set_printoptions}q(hUnumpyqhUset_printoptionshhuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuU
+np.newaxis}q(hUnumpyqhUnewaxishhuUconfusion_matrixq}q(hUsklearn.metricshUconfusion_matrixhUsklearn.metricsuUplt.colorbar}q(hU
+matplotlibhUcolorbarhUmatplotlib.pyplotuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

@@ -1,0 +1,9 @@
+**Script output**::
+
+  training SGD
+  training ASGD
+  training Perceptron
+  training Passive-Aggressive I
+  training Passive-Aggressive II
+  training SAG
+

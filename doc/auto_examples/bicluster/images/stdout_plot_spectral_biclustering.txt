@@ -1,0 +1,4 @@
+**Script output**::
+
+  consensus score: 1.0
+

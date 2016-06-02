@@ -1,0 +1,50 @@
+**Script output**::
+
+  Logistic:
+          Brier: 0.099
+          Precision: 0.872
+          Recall: 0.851
+          F1: 0.862
+  
+  Naive Bayes:
+          Brier: 0.118
+          Precision: 0.857
+          Recall: 0.876
+          F1: 0.867
+  
+  Naive Bayes + Isotonic:
+          Brier: 0.098
+          Precision: 0.883
+          Recall: 0.836
+          F1: 0.859
+  
+  Naive Bayes + Sigmoid:
+          Brier: 0.109
+          Precision: 0.861
+          Recall: 0.871
+          F1: 0.866
+  
+  Logistic:
+          Brier: 0.099
+          Precision: 0.872
+          Recall: 0.851
+          F1: 0.862
+  
+  SVC:
+          Brier: 0.163
+          Precision: 0.872
+          Recall: 0.852
+          F1: 0.862
+  
+  SVC + Isotonic:
+          Brier: 0.100
+          Precision: 0.853
+          Recall: 0.878
+          F1: 0.865
+  
+  SVC + Sigmoid:
+          Brier: 0.099
+          Precision: 0.874
+          Recall: 0.849
+          F1: 0.861
+

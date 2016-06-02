@@ -9,8 +9,8 @@ Stochastic Gradient Descent
 **Stochastic Gradient Descent (SGD)** is a simple yet very efficient
 approach to discriminative learning of linear classifiers under
 convex loss functions such as (linear) `Support Vector Machines
-<https://en.wikipedia.org/wiki/Support_vector_machine>`_ and `Logistic
-Regression <https://en.wikipedia.org/wiki/Logistic_regression>`_.
+<http://en.wikipedia.org/wiki/Support_vector_machine>`_ and `Logistic
+Regression <http://en.wikipedia.org/wiki/Logistic_regression>`_.
 Even though SGD has been around in the machine learning community for
 a long time, it has received a considerable amount of attention just
 recently in the context of large-scale learning.
@@ -40,7 +40,7 @@ Classification
 .. warning::
 
   Make sure you permute (shuffle) your training data before fitting the
-  model or use ``shuffle=True`` to shuffle after each iteration.
+  model or use ``shuffle=True`` to shuffle after each iterations.
 
 The class :class:`SGDClassifier` implements a plain stochastic gradient
 descent learning routine which supports different loss functions and
@@ -212,7 +212,7 @@ Stochastic Gradient Descent for sparse data
   intercept.
 
 There is built-in support for sparse data given in any matrix in a format
-supported by `scipy.sparse <https://docs.scipy.org/doc/scipy/reference/sparse.html>`_. For maximum efficiency, however, use the CSR
+supported by `scipy.sparse <http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.html>`_. For maximum efficiency, however, use the CSR
 matrix format as defined in `scipy.sparse.csr_matrix
 <http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html>`_.
 
@@ -269,7 +269,7 @@ Tips on Practical Use
 
 .. topic:: References:
 
- * `"Efficient BackProp" <http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf>`_
+ * `"Efficient BackProp" <yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf>`_
    Y. LeCun, L. Bottou, G. Orr, K. Müller - In Neural Networks: Tricks
    of the Trade 1998.
 

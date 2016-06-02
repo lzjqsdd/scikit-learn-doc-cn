@@ -1,0 +1,7 @@
+€}q(Ucalibration_curveq}q(Umodule_shortqUsklearn.calibrationUnameqUcalibration_curveUmoduleqUsklearn.calibrationuU	LinearSVCq}q(hUsklearn.svmhU	LinearSVChUsklearn.svmuULogisticRegressionq	}q
+(hUsklearn.linear_modelhULogisticRegressionhUsklearn.linear_modeluURandomForestClassifierq}q(hUsklearn.ensemblehURandomForestClassifierhUsklearn.ensembleuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+GaussianNBq}q(hUsklearn.naive_bayeshU
+GaussianNBhUsklearn.naive_bayesuUdatasets.make_classification}q(hUsklearn.datasetshUmake_classificationhUsklearn.datasetsuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.subplot2grid}q(hUmatplotlib.pyplothUsubplot2gridhUmatplotlib.pyplotuUplt.tight_layout}q(hU
+matplotlibhUtight_layouthUmatplotlib.pyplotuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuu.

@@ -1,0 +1,32 @@
+
+
+.. _example_feature_selection_plot_rfe_with_cross_validation.py:
+
+
+===================================================
+Recursive feature elimination with cross-validation
+===================================================
+
+A recursive feature elimination example with automatic tuning of the
+number of features selected with cross-validation.
+
+
+
+.. image:: images/plot_rfe_with_cross_validation_001.png
+    :align: center
+
+
+**Script output**::
+
+  Optimal number of features : 3
+
+
+
+**Python source code:** :download:`plot_rfe_with_cross_validation.py <plot_rfe_with_cross_validation.py>`
+
+.. literalinclude:: plot_rfe_with_cross_validation.py
+    :lines: 9-
+
+**Total running time of the example:**  2.54 seconds
+( 0 minutes  2.54 seconds)
+    

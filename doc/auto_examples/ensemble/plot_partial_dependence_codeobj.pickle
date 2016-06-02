@@ -1,0 +1,5 @@
+€}q(UGradientBoostingRegressorq}q(Umodule_shortqUsklearn.ensembleUnameqUGradientBoostingRegressorUmoduleqUsklearn.ensembleuUpartial_dependenceq}q(hUsklearn.ensemblehUpartial_dependencehU#sklearn.ensemble.partial_dependenceuU
+plt.figure}q	(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUplt.show}q
+(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUnp.meshgrid}q(hUnumpyqhUmeshgridhhuUplt.cm.BuPu}q(hUmatplotlib.pyplot.cmhUBuPuhUmatplotlib.pyplot.cmuUtrain_test_splitq}q(hUsklearn.cross_validationhUtrain_test_splithUsklearn.cross_validationuUplot_partial_dependenceq}q(hU#sklearn.ensemble.partial_dependencehUplot_partial_dependencehU#sklearn.ensemble.partial_dependenceuUAxes3Dq}q(hUmpl_toolkits.mplot3dhUAxes3DhUmpl_toolkits.mplot3duUplt.suptitle}q(hUmatplotlib.pyplothUsuptitlehUmatplotlib.pyplotuUplt.colorbar}q(hU
+matplotlibhUcolorbarhUmatplotlib.pyplotuUfetch_california_housingq}q(hUsklearn.datasetshUfetch_california_housinghU#sklearn.datasets.california_housinguu.

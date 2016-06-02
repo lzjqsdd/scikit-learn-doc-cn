@@ -1,0 +1,6 @@
+€}q(U	np.arange}q(Umodule_shortqUnumpyqUnameqUarangeUmoduleqhuUplt.axis}q(hU
+matplotlibhUaxishUmatplotlib.pyplotuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuU
+plt.figure}q	(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUplt.show}q
+(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUnp.meshgrid}q(hUnumpyqhUmeshgridhhuUListedColormapq}q(hUmatplotlib.colorshUListedColormaphUmatplotlib.colorsuUnp.c_}q(hUnumpyqhUc_hhuUplt.pcolormesh}q(hUmatplotlib.pyplothU
+pcolormeshhUmatplotlib.pyplotuUdatasets.load_iris}q(hUsklearn.datasetshU	load_irishUsklearn.datasetsuUnp.mean}q(hUnumpyqhUmeanhhuUNearestCentroidq}q(hUsklearn.neighborshUNearestCentroidhUsklearn.neighborsuu.

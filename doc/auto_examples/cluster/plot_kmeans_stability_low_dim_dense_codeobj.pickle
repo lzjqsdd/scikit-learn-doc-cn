@@ -1,0 +1,9 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUshuffleq}q(hUsklearn.utilshUshufflehUsklearn.utilsuUnp.concatenate}q	(hUnumpyq
+hUconcatenatehh
+uUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUKMeansq}q(hUsklearn.clusterhUKMeanshUsklearn.clusteruUplt.errorbar}q(hUmatplotlib.pyplothUerrorbarhUmatplotlib.pyplotuUnp.empty}q(hUnumpyqhUemptyhhuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUnp.array}q(hUnumpyqhUarrayhhuUcheck_random_stateq}q(hUsklearn.utilshUcheck_random_statehUsklearn.utilsuUMiniBatchKMeansq}q(hUsklearn.clusterhUMiniBatchKMeanshUsklearn.clusteruUnp.random.RandomState}q(hUnumpy.randomhURandomStatehUnumpy.randomuUcm.spectral}q(hUmatplotlib.cmhUspectralhUmatplotlib.cmuu.

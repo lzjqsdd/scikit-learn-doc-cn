@@ -1,0 +1,40 @@
+
+
+.. _example_ensemble_plot_voting_decision_regions.py:
+
+
+==================================================
+Plot the decision boundaries of a VotingClassifier
+==================================================
+
+Plot the decision boundaries of a `VotingClassifier` for
+two features of the Iris dataset.
+
+Plot the class probabilities of the first sample in a toy dataset
+predicted by three different classifiers and averaged by the
+`VotingClassifier`.
+
+First, three examplary classifiers are initialized (`DecisionTreeClassifier`,
+`KNeighborsClassifier`, and `SVC`) and used to initialize a
+soft-voting `VotingClassifier` with weights `[2, 1, 2]`, which means that
+the predicted probabilities of the `DecisionTreeClassifier` and `SVC`
+count 5 times as much as the weights of the `KNeighborsClassifier` classifier
+when the averaged probability is calculated.
+
+
+
+
+.. image:: images/plot_voting_decision_regions_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_voting_decision_regions.py <plot_voting_decision_regions.py>`
+
+.. literalinclude:: plot_voting_decision_regions.py
+    :lines: 21-
+
+**Total running time of the example:**  0.28 seconds
+( 0 minutes  0.28 seconds)
+    

@@ -1,0 +1,9 @@
+€}q(Unp.meshgrid}q(Umodule_shortqUnumpyqUnameqUmeshgridUmoduleqhuUload_bostonq}q(hUsklearn.datasetshUload_bostonhUsklearn.datasetsuUplt.ylim}q	(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuU
+plt.figure}q
+(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.c_}q(hUnumpyqhUc_hhuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUEllipticEnvelopeq}q(hUsklearn.covariancehUEllipticEnvelopehUsklearn.covarianceuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuUplt.contour}q(hU
+matplotlibhUcontourhUmatplotlib.pyplotuUplt.annotate}q(hUmatplotlib.pyplothUannotatehUmatplotlib.pyplotuUnp.linspace}q(hUnumpyqhUlinspacehhuUOneClassSVMq}q(hUsklearn.svmhUOneClassSVMhUsklearn.svmuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuU
+plt.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuu.

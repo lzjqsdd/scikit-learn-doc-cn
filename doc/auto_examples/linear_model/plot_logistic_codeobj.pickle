@@ -1,0 +1,9 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUplt.clf}q(hUmatplotlib.pyplothUclfhUmatplotlib.pyplotuUnp.float}q(hUnumpyq	hUfloathh	uUplt.ylim}q
+(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuUlinear_model.LinearRegression}q(hUsklearn.linear_modelhULinearRegressionhUsklearn.linear_modeluU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuUlinear_model.LogisticRegression}q(hUsklearn.linear_modelhULogisticRegressionhUsklearn.linear_modeluUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.exp}q(hUnumpyqhUexphhuUnp.linspace}q(hUnumpyqhUlinspacehhuUnp.random.normal}q(hUnumpy.randomhUnormalhUnumpy.randomuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuU
+np.newaxis}q(hUnumpyqhUnewaxishhuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuUplt.axhline}q(hUmatplotlib.pyplothUaxhlinehUmatplotlib.pyplotuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

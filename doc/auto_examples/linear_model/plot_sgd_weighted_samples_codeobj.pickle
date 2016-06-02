@@ -1,0 +1,10 @@
+€}q(Ulinear_model.SGDClassifier}q(Umodule_shortqUsklearn.linear_modelUnameqUSGDClassifierUmoduleqUsklearn.linear_modeluUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUplt.cm.bone}q(hUmatplotlib.pyplothUbonehUmatplotlib.pyplot.cmuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.c_}q	(hUnumpyq
+hUc_hh
+uUnp.r_}q(hUnumpyqhUr_hhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUnp.random.randn}q(hUnumpy.randomhUrandnhUnumpy.randomuUnp.meshgrid}q(hUnumpyqhUmeshgridhhuUplt.contour}q(hU
+matplotlibhUcontourhUmatplotlib.pyplotuUnp.abs}q(hUnumpyqhUabshhuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuUnp.linspace}q(hUnumpyqhUlinspacehhuu.

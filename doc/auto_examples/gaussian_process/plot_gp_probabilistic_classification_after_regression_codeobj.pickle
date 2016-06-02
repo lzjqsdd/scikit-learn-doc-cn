@@ -1,0 +1,7 @@
+€}q(Upl.colorbar}q(Umodule_shortqU
+matplotlibUnameqUcolorbarUmoduleqUmatplotlib.pyplotuU	pl.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUpl.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	pl.ylabel}q(hUmatplotlib.pyplothUylabelhUmatplotlib.pyplotuU	np.flipud}q	(hUnumpyq
+hUflipudhh
+uU	pl.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	pl.clabel}q(hUmatplotlib.pyplothUclabelhUmatplotlib.pyplotuUnp.sqrt}q(hUnumpyqhUsqrthhuU
+pl.contour}q(hU
+matplotlibhUcontourhUmatplotlib.pyplotuU	cm.gray_r}q(hUmatplotlib.cmhUgray_rhUmatplotlib.cmuUnp.meshgrid}q(hUnumpyqhUmeshgridhhuU	pl.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUpl.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUnp.linspace}q(hUnumpyqhUlinspacehhuUnp.array}q(hUnumpyqhUarrayhhuUpl.matplotlib.colors.Normalize}q(hU#matplotlib.pyplot.matplotlib.colorshU	NormalizehU#matplotlib.pyplot.matplotlib.colorsuUstats.distributions.norm}q(hUscipy.statshUnormhUscipy.stats.distributionsuUGaussianProcessq}q(hUsklearn.gaussian_processhUGaussianProcesshUsklearn.gaussian_processuU	pl.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuU	pl.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU	np.vstack}q(hUnumpyq hUvstackhh uu.

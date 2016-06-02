@@ -1,0 +1,7 @@
+**Script output**::
+
+  Compute structured hierarchical clustering...
+  Elapsed time:  7.47855305672
+  Number of pixels:  65536
+  Number of clusters:  15
+

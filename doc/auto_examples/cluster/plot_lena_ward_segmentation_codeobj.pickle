@@ -1,0 +1,12 @@
+€}q(Uplt.cm.gray}q(Umodule_shortqUmatplotlib.pyplotUnameqUgrayUmoduleqUmatplotlib.pyplot.cmuUplt.cm.spectral}q(hUmatplotlib.pyplothUspectralhUmatplotlib.pyplot.cmuU
+np.reshape}q(hUnumpyqhUreshapehhuU	time.time}q	(hUtimeq
+hUtimehh
+uU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUAgglomerativeClusteringq}q(hUsklearn.clusterhUAgglomerativeClusteringhUsklearn.clusteruU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUplt.contour}q(hU
+matplotlibhUcontourhUmatplotlib.pyplotuUgrid_to_graphq}q(hUsklearn.feature_extractionhUgrid_to_graphhU sklearn.feature_extraction.imageuU	np.unique}q(hUnumpyqhUuniquehhuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUsp.misc.lena}q(hU
+scipy.mischUlenahU
+scipy.miscuu.

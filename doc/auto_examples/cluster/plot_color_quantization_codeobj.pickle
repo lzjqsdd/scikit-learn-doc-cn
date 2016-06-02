@@ -1,0 +1,9 @@
+€}q(UKMeansq}q(Umodule_shortqUsklearn.clusterUnameqUKMeansUmoduleqUsklearn.clusteruUplt.axis}q(hU
+matplotlibhUaxishUmatplotlib.pyplotuU
+np.reshape}q(hUnumpyq	hUreshapehh	uUplt.axes}q
+(hU
+matplotlibhUaxeshUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUload_sample_imageq}q(hUsklearn.datasetshUload_sample_imagehUsklearn.datasetsuUtimeq}q(hUtimeqhUtimehhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUpairwise_distances_argminq}q(hUsklearn.metricshUpairwise_distances_argminhUsklearn.metricsuUplt.clf}q(hUmatplotlib.pyplothUclfhUmatplotlib.pyplotuUnp.zeros}q(hUnumpyqhUzeroshhuUnp.array}q(hUnumpyqhUarrayhhuUshuffleq}q(hUsklearn.utilshUshufflehUsklearn.utilsuU
+np.float64}q(hUnumpyqhUfloat64hhuu.

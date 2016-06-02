@@ -1,0 +1,7 @@
+**Script output**::
+
+  Coefficients: 
+   [ 938.23786125]
+  Residual sum of squares: 2548.07
+  Variance score: 0.47
+

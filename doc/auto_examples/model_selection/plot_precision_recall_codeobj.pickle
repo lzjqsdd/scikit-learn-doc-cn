@@ -1,0 +1,6 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUplt.clf}q(hUmatplotlib.pyplothUclfhUmatplotlib.pyplotuUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuUprecision_recall_curveq}q	(hUsklearn.metricshUprecision_recall_curvehUsklearn.metricsuUOneVsRestClassifierq
+}q(hUsklearn.multiclasshUOneVsRestClassifierhUsklearn.multiclassuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUaverage_precision_scoreq}q(hUsklearn.metricshUaverage_precision_scorehUsklearn.metricsuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.xlim}q(hUmatplotlib.pyplothUxlimhUmatplotlib.pyplotuUnp.c_}q(hUnumpyqhUc_hhuUtrain_test_splitq}q(hUsklearn.cross_validationhUtrain_test_splithUsklearn.cross_validationuUnp.random.RandomState}q(hUnumpy.randomhURandomStatehUnumpy.randomuUsvm.SVC}q(hUsklearn.svmhUSVChUsklearn.svmuUlabel_binarizeq}q(hUsklearn.preprocessinghUlabel_binarizehUsklearn.preprocessinguUdatasets.load_iris}q(hUsklearn.datasetshU	load_irishUsklearn.datasetsuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuu.

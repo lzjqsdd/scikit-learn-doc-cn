@@ -1,0 +1,7 @@
+**Script output**::
+
+  - computing KDE in spherical coordinates
+   - plot coastlines from coverage
+   - computing KDE in spherical coordinates
+   - plot coastlines from coverage
+

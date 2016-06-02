@@ -1,0 +1,7 @@
+€}q(Uplt.scatter}q(Umodule_shortqUmatplotlib.pyplotUnameqUscatterUmoduleqUmatplotlib.pyplotuUplt.clf}q(hUmatplotlib.pyplothUclfhUmatplotlib.pyplotuUnp.float}q(hUnumpyqhUfloathhuUnp.random.permutation}q	(hUnumpy.randomhUpermutationhUnumpy.randomuU
+plt.figure}q
+(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.c_}q(hUnumpyqhUc_hhuUsvm.SVC}q(hUsklearn.svmhUSVChUsklearn.svmuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUnp.mgrid}q(hUnumpyqhUmgridhhuUplt.contour}q(hU
+matplotlibhUcontourhUmatplotlib.pyplotuUplt.pcolormesh}q(hUmatplotlib.pyplothU
+pcolormeshhUmatplotlib.pyplotuUdatasets.load_iris}q(hUsklearn.datasetshU	load_irishUsklearn.datasetsuUnp.random.seed}q(hUnumpy.randomhUseedhUnumpy.randomuUplt.axis}q(hU
+matplotlibhUaxishUmatplotlib.pyplotuUplt.cm.Paired}q(hUmatplotlib.pyplot.cmhUPairedhUmatplotlib.pyplot.cmuu.

@@ -1,0 +1,41 @@
+
+
+.. _example_ensemble_plot_ensemble_oob.py:
+
+
+=============================
+OOB Errors for Random Forests
+=============================
+
+The ``RandomForestClassifier`` is trained using *bootstrap aggregation*, where
+each new tree is fit from a bootstrap sample of the training observations
+:math:`z_i = (x_i, y_i)`. The *out-of-bag* (OOB) error is the average error for
+each :math:`z_i` calculated using predictions from the trees that do not
+contain :math:`z_i` in their respective bootstrap sample. This allows the
+``RandomForestClassifier`` to be fit and validated whilst being trained [1].
+
+The example below demonstrates how the OOB error can be measured at the
+addition of each new tree during training. The resulting plot allows a
+practitioner to approximate a suitable value of ``n_estimators`` at which the
+error stabilizes.
+
+.. [1] T. Hastie, R. Tibshirani and J. Friedman, "Elements of Statistical
+       Learning Ed. 2", p592-593, Springer, 2009.
+
+
+
+
+.. image:: images/plot_ensemble_oob_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_ensemble_oob.py <plot_ensemble_oob.py>`
+
+.. literalinclude:: plot_ensemble_oob.py
+    :lines: 22-
+
+**Total running time of the example:**  12.17 seconds
+( 0 minutes  12.17 seconds)
+    

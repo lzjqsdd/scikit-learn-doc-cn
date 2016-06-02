@@ -1,0 +1,9 @@
+€}q(URidgeq}q(Umodule_shortqUsklearn.linear_modelUnameqURidgeUmoduleqUsklearn.linear_modeluUndimage.gaussian_filter}q(hUscipy.ndimagehUgaussian_filterhUscipy.ndimageuUnp.ogrid}q(hUnumpyq	hUogridhh	uUnp.int}q
+(hUnumpyqhUinthhuUnp.logical_and}q(hUnumpyqhUlogical_andhhuU
+np.float64}q(hUnumpyqhUfloat64hhuUsparse.coo_matrix}q(hUscipy.sparsehU
+coo_matrixhUscipy.sparseuUplt.cm.gray}q(hUmatplotlib.pyplothUgrayhUmatplotlib.pyplot.cmuUnp.floor}q(hUnumpyqhUfloorhhuUnp.ravel}q(hUnumpyqhUravelhhuUnp.sin}q(hUnumpyqhUsinhhuUnp.zeros}q(hUnumpyqhUzeroshhuUnp.pi}q(hUnumpyqhUpihhuUnp.random.RandomState}q(hUnumpy.randomhURandomStatehUnumpy.randomuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	np.hstack}q(hUnumpyq hUhstackhh uU	plt.title}q!(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuU
+plt.imshow}q"(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUnp.linspace}q#(hUnumpyq$hUlinspacehh$uU	np.arange}q%(hUnumpyq&hUarangehh&uUnp.cos}q'(hUnumpyq(hUcoshh(uUndimage.binary_erosion}q)(hUscipy.ndimagehUbinary_erosionhUscipy.ndimageuUnp.random.randn}q*(hUnumpy.randomhUrandnhUnumpy.randomuUnp.mgrid}q+(hUnumpyq,hUmgridhh,uUplt.subplots_adjust}q-(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUplt.subplot}q.(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuU
+np.newaxis}q/(hUnumpyq0hUnewaxishh0uUplt.axis}q1(hU
+matplotlibhUaxishUmatplotlib.pyplotuULassoq2}q3(hUsklearn.linear_modelhULassohUsklearn.linear_modeluu.

@@ -1,0 +1,7 @@
+**Script output**::
+
+  Brier scores: (the smaller the better)
+  No calibration: 0.104
+  With isotonic calibration: 0.084
+  With sigmoid calibration: 0.109
+

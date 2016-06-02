@@ -1,0 +1,6 @@
+**Script output**::
+
+  Log-loss of
+   * uncalibrated classifier trained on 800 datapoints: 1.280 
+   * classifier trained on 600 datapoints and calibrated on 200 datapoint: 0.534
+

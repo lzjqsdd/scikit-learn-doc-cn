@@ -1,0 +1,6 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUplt.semilogx}q(hUmatplotlib.pyplothUsemilogxhUmatplotlib.pyplotuUnp.std}q(hUnumpyqhUstdhhuU
+plt.figure}q	(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.logspace}q
+(hUnumpyqhUlogspacehhuUnp.max}q(hUnumpyqhUmaxhhuUnp.sqrt}q(hUnumpyqhUsqrthhuUlinear_model.LassoCV}q(hUsklearn.linear_modelhULassoCVhUsklearn.linear_modeluUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU cross_validation.cross_val_score}q(hUsklearn.cross_validationhUcross_val_scorehUsklearn.cross_validationuUnp.array}q(hUnumpyqhUarrayhhuUcross_validation.KFold}q(hUsklearn.cross_validationhUKFoldhUsklearn.cross_validationuUplt.axhline}q(hUmatplotlib.pyplothUaxhlinehUmatplotlib.pyplotuUdatasets.load_diabetes}q(hUsklearn.datasetshUload_diabeteshUsklearn.datasetsuUnp.mean}q(hUnumpyqhUmeanhhuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUlinear_model.Lasso}q(hUsklearn.linear_modelhULassohUsklearn.linear_modeluu.

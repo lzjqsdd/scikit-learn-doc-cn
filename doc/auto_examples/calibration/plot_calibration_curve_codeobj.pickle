@@ -1,0 +1,7 @@
+€}q(Uf1_scoreq}q(Umodule_shortqUsklearn.metricsUnameqUf1_scoreUmoduleqUsklearn.metricsuUcalibration_curveq}q(hUsklearn.calibrationhUcalibration_curvehUsklearn.calibrationuU	LinearSVCq	}q
+(hUsklearn.svmhU	LinearSVChUsklearn.svmuULogisticRegressionq}q(hUsklearn.linear_modelhULogisticRegressionhUsklearn.linear_modeluUprecision_scoreq}q(hUsklearn.metricshUprecision_scorehUsklearn.metricsuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+GaussianNBq}q(hUsklearn.naive_bayeshU
+GaussianNBhUsklearn.naive_bayesuUdatasets.make_classification}q(hUsklearn.datasetshUmake_classificationhUsklearn.datasetsuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUCalibratedClassifierCVq}q(hUsklearn.calibrationhUCalibratedClassifierCVhUsklearn.calibrationuUrecall_scoreq}q(hUsklearn.metricshUrecall_scorehUsklearn.metricsuUplt.subplot2grid}q(hUmatplotlib.pyplothUsubplot2gridhUmatplotlib.pyplotuUtrain_test_splitq}q(hUsklearn.cross_validationhUtrain_test_splithUsklearn.cross_validationuUbrier_score_lossq}q(hUsklearn.metricshUbrier_score_losshUsklearn.metricsuUplt.tight_layout}q(hU
+matplotlibhUtight_layouthUmatplotlib.pyplotuu.

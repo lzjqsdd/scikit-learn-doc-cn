@@ -1,0 +1,4 @@
+**Script output**::
+
+  best bandwidth: 3.79269019073
+

@@ -1,0 +1,5 @@
+**Script output**::
+
+  Testset accuracy using standard scaler: 0.545
+  Testset accuracy using robust scaler:   0.700
+

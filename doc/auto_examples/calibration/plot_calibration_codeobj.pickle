@@ -1,0 +1,14 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuU
+cm.rainbow}q(hUmatplotlib.cmhUrainbowhUmatplotlib.cmuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUnp.linspace}q(hUnumpyq	hUlinspacehh	uUplt.plot}q
+(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+GaussianNBq}q(hUsklearn.naive_bayeshU
+GaussianNBhUsklearn.naive_bayesuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuU
+make_blobsq}q(hUsklearn.datasetshU
+make_blobshUsklearn.datasetsuUtrain_test_splitq}q(hUsklearn.cross_validationhUtrain_test_splithUsklearn.cross_validationuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuUCalibratedClassifierCVq}q(hUsklearn.calibrationhUCalibratedClassifierCVhUsklearn.calibrationuUbrier_score_lossq}q(hUsklearn.metricshUbrier_score_losshUsklearn.metricsuU	np.unique}q(hUnumpyqhUuniquehhuU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuUnp.random.RandomState}q(hUnumpy.randomhURandomStatehUnumpy.randomuU
+np.lexsort}q(hUnumpyqhUlexsorthhuu.

@@ -1,0 +1,10 @@
+€}q(U
+plt.ylabel}q(Umodule_shortqUmatplotlib.pyplotUnameqUylabelUmoduleqUmatplotlib.pyplotuUdatasets.load_diabetes}q(hUsklearn.datasetshUload_diabeteshUsklearn.datasetsuU	time.time}q(hUtimeqhUtimehhuUnp.sum}q	(hUnumpyq
+hUsumhh
+uUplt.ylim}q(hUmatplotlib.pyplothUylimhUmatplotlib.pyplotuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.plot}q(hUmatplotlib.pyplothUplothUmatplotlib.pyplotuUnp.sqrt}q(hUnumpyqhUsqrthhuULassoLarsCVq}q(hUsklearn.linear_modelhULassoLarsCVhUsklearn.linear_modeluUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUnp.log10}q(hUnumpyqhUlog10hhuUnp.c_}q(hUnumpyqhUc_hhuU
+plt.xlabel}q(hUmatplotlib.pyplothUxlabelhUmatplotlib.pyplotuULassoCVq}q(hUsklearn.linear_modelhULassoCVhUsklearn.linear_modeluULassoLarsICq}q(hUsklearn.linear_modelhULassoLarsIChUsklearn.linear_modeluU
+plt.legend}q(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUplt.axvline}q(hUmatplotlib.pyplothUaxvlinehUmatplotlib.pyplotuUplt.axis}q(hU
+matplotlibhUaxishUmatplotlib.pyplotuUnp.random.RandomState}q (hUnumpy.randomhURandomStatehUnumpy.randomuu.

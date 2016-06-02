@@ -40,7 +40,7 @@ this means trying to **replace any nested for loops by calls to equivalent
 Numpy array methods**. The goal is to avoid the CPU wasting time in the
 Python interpreter rather than crunching numbers to fit your statistical
 model. It's generally a good idea to consider NumPy and SciPy performance tips:
-http://scipy.github.io/old-wiki/pages/PerformanceTips
+http://wiki.scipy.org/PerformanceTips
 
 Sometimes however an algorithm cannot be expressed efficiently in simple
 vectorized Numpy code. In this case, the recommended strategy is the
@@ -72,17 +72,9 @@ following:
      parallelism** that is amenable to **multi-processing** by using the
      ``joblib.Parallel`` class.
 
-When using Cython, use either
-
-   $ python setup.py build_ext -i
-   $ python setup.py install
-
-to generate C files. You are responsible for adding .c/.cpp extensions along
-with build parameters in each submodule ``setup.py``.
-
-C/C++ generated files are embedded in distributed stable packages. The goal is
-to make it possible to install scikit-learn stable version
-on any machine with Python, Numpy, Scipy and C/C++ compiler.
+When using Cython, include the generated C source code alongside with
+the Cython source code. The goal is to make it possible to install the
+scikit on any machine with Python, Numpy, Scipy and C/C++ compiler.
 
 Fast matrix multiplications
 ===========================
@@ -113,7 +105,7 @@ silently dispatched to ``numpy.dot``. If you want to be sure when the original
 activate the related warning::
 
   >>> import warnings
-  >>> from sklearn.exceptions import NonBLASDotWarning
+  >>> from sklearn.utils.validation import NonBLASDotWarning
   >>> warnings.simplefilter('always', NonBLASDotWarning) # doctest: +SKIP
 
 .. _profiling-python-code:
@@ -209,7 +201,7 @@ trying to optimize their implementation).
 
 It is however still interesting to check what's happening inside the
 ``_nls_subproblem`` function which is the hotspot if we only consider
-Python code: it takes around 100% of the accumulated time of the module. In
+Python code: it takes around 100% of the cumulated time of the module. In
 order to better understand the profile of this specific function, let
 us install ``line-prof`` and wire it to IPython::
 
@@ -304,7 +296,7 @@ Memory usage profiling
 ======================
 
 You can analyze in detail the memory usage of any Python code with the help of
-`memory_profiler <https://pypi.python.org/pypi/memory_profiler>`_. First,
+`memory_profiler <http://pypi.python.org/pypi/memory_profiler>`_. First,
 install the latest version::
 
     $ pip install -U memory_profiler
@@ -401,7 +393,7 @@ project.
 TODO: html report, type declarations, bound checks, division by zero checks,
 memory alignment, direct blas calls...
 
-- https://www.youtube.com/watch?v=gMvkiQ-gOW8
+- http://www.euroscipy.org/file/3696?vid=download
 - http://conference.scipy.org/proceedings/SciPy2009/paper_1/
 - http://conference.scipy.org/proceedings/SciPy2009/paper_2/
 
@@ -421,8 +413,8 @@ Using yep and google-perftools
 
 Easy profiling without special compilation options use yep:
 
-- https://pypi.python.org/pypi/yep
-- http://fa.bianp.net/blog/2011/a-profiler-for-python-extensions
+- http://pypi.python.org/pypi/yep
+- http://fseoane.net/blog/2011/a-profiler-for-python-extensions/
 
 .. note::
 
@@ -430,7 +422,7 @@ Easy profiling without special compilation options use yep:
   can be triggered with the ``--lines`` option. However this
   does not seem to work correctly at the time of writing. This
   issue can be tracked on the `project issue tracker
-  <https://github.com/gperftools/gperftools>`_.
+  <https://code.google.com/p/google-perftools/issues/detail?id=326>`_.
 
 
 
@@ -460,7 +452,7 @@ TODO: give a simple teaser example here.
 
 Checkout the official joblib documentation:
 
-- https://pythonhosted.org/joblib
+- http://packages.python.org/joblib/
 
 
 .. _warm-restarts:

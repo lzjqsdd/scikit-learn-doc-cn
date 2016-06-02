@@ -1,0 +1,7 @@
+€}q(Unp.meshgrid}q(Umodule_shortqUnumpyqUnameqUmeshgridUmoduleqhuUplt.contourf}q(hUmatplotlib.pyplothUcontourfhUmatplotlib.pyplotuUKernelDensityq}q	(hUsklearn.neighborshUKernelDensityhUsklearn.neighborsuUnp.linspace}q
+(hUnumpyqhUlinspacehhuUnp.exp}q(hUnumpyqhUexphhuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.pi}q(hUnumpyqhUpihhuUplt.cm.Reds}q(hUmatplotlib.pyplot.cmhURedshUmatplotlib.pyplot.cmuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUfetch_species_distributionsq}q(hUsklearn.datasetshUfetch_species_distributionshUsklearn.datasetsuUplt.contour}q(hU
+matplotlibhUcontourhUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuUnp.array}q(hUnumpyqhUarrayhhuUnp.zeros}q(hUnumpyqhUzeroshhuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUBasemapq}q(hUmpl_toolkits.basemaphUBasemaphUmpl_toolkits.basemapuUconstruct_gridsq }q!(hU&sklearn.datasets.species_distributionshUconstruct_gridshU&sklearn.datasets.species_distributionsuU	np.vstack}q"(hUnumpyq#hUvstackhh#uu.

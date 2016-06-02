@@ -1,0 +1,8 @@
+**Script output**::
+
+  The data was generated from (random_state=268):
+  Class   P(C)    P(w0|C) P(w1|C)
+  red     0.08    0.93    0.07
+  blue    0.38    0.99    0.01
+  yellow  0.54    0.47    0.53
+

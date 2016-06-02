@@ -1,0 +1,8 @@
+€}q(Uplt.cm.gray}q(Umodule_shortqUmatplotlib.pyplotUnameqUgrayUmoduleqUmatplotlib.pyplot.cmuU
+np.reshape}q(hUnumpyqhUreshapehhuUnp.concatenate}q(hUnumpyq	hUconcatenatehh	uU
+plt.figure}q
+(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuUdatasets.fetch_olivetti_faces}q(hUsklearn.datasetshUfetch_olivetti_faceshUsklearn.datasetsuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUplt.suptitle}q(hUmatplotlib.pyplothUsuptitlehUmatplotlib.pyplotuU	time.time}q(hUtimeqhUtimehhuUnp.std}q(hUnumpyqhUstdhhuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUMiniBatchKMeansq}q(hUsklearn.clusterhUMiniBatchKMeanshUsklearn.clusteruUnp.mean}q(hUnumpyqhUmeanhhuUnp.random.RandomState}q(hUnumpy.randomhURandomStatehUnumpy.randomuUextract_patches_2dq}q(hU sklearn.feature_extraction.imagehUextract_patches_2dhU sklearn.feature_extraction.imageuu.

@@ -1,0 +1,10 @@
+€}q(Uplt.show}q(Umodule_shortqUmatplotlib.pyplotUnameqUshowUmoduleqUmatplotlib.pyplotuU	lena.copy}q(hUscipy.misc.lenahUcopyhUscipy.misc.lenauUMiniBatchDictionaryLearningq}q(hUsklearn.decompositionhUMiniBatchDictionaryLearninghUsklearn.decompositionuUextract_patches_2dq	}q
+(hU sklearn.feature_extraction.imagehUextract_patches_2dhU sklearn.feature_extraction.imageuUplt.cm.gray}q(hUmatplotlib.pyplothUgrayhUmatplotlib.pyplot.cmuUnp.sqrt}q(hUnumpyqhUsqrthhuUnp.sum}q(hUnumpyqhUsumhhuUplt.suptitle}q(hUmatplotlib.pyplothUsuptitlehUmatplotlib.pyplotuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuUlenaq}q(hU
+scipy.mischUlenahU
+scipy.miscuUplt.cm.PuOr}q(hUmatplotlib.pyplot.cmhUPuOrhUmatplotlib.pyplot.cmuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUplt.cm.gray_r}q(hUmatplotlib.pyplot.cmhUgray_rhUmatplotlib.pyplot.cmuUreconstruct_from_patches_2dq}q(hU sklearn.feature_extraction.imagehUreconstruct_from_patches_2dhU sklearn.feature_extraction.imageuUnp.std}q(hUnumpyqhUstdhhuUnp.random.randn}q(hUnumpy.randomhUrandnhUnumpy.randomuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUplt.subplot}q (hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUtimeq!}q"(hUtimeq#hUtimehh#uU
+lena.shape}q$(hUscipy.misc.lenahUshapehUscipy.misc.lenauUnp.dot}q%(hUnumpyq&hUdothh&uUnp.mean}q'(hUnumpyq(hUmeanhh(uu.

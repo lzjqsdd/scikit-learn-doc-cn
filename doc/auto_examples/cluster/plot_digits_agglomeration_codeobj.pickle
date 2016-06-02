@@ -1,0 +1,8 @@
+€}q(Udatasets.load_digits}q(Umodule_shortqUsklearn.datasetsUnameqUload_digitsUmoduleqUsklearn.datasetsuUplt.cm.gray}q(hUmatplotlib.pyplothUgrayhUmatplotlib.pyplot.cmuUplt.cm.spectral}q(hUmatplotlib.pyplothUspectralhUmatplotlib.pyplot.cmuU
+np.reshape}q(hUnumpyq	hUreshapehh	uU
+plt.figure}q
+(hU
+matplotlibhUfigurehUmatplotlib.pyplotuU
+plt.yticks}q(hUmatplotlib.pyplothUytickshUmatplotlib.pyplotuU	plt.title}q(hUmatplotlib.pyplothUtitlehUmatplotlib.pyplotuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuU
+plt.imshow}q(hUmatplotlib.pyplothUimshowhUmatplotlib.pyplotuUplt.subplots_adjust}q(hUmatplotlib.pyplothUsubplots_adjusthUmatplotlib.pyplotuUcluster.FeatureAgglomeration}q(hUsklearn.clusterhUFeatureAgglomerationhUsklearn.clusteruUgrid_to_graphq}q(hUsklearn.feature_extractionhUgrid_to_graphhU sklearn.feature_extraction.imageuUplt.subplot}q(hUmatplotlib.pyplothUsubplothUmatplotlib.pyplotuUplt.clf}q(hUmatplotlib.pyplothUclfhUmatplotlib.pyplotuU
+plt.xticks}q(hUmatplotlib.pyplothUxtickshUmatplotlib.pyplotuu.

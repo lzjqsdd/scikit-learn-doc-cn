@@ -1,0 +1,4 @@
+**Script output**::
+
+  The best parameters are {'C': 1.0, 'gamma': 0.10000000000000001} with a score of 0.97
+

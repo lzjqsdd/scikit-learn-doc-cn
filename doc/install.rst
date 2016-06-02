@@ -51,8 +51,8 @@ Canopy and Anaconda for all supported platforms
 -----------------------------------------------
 
 `Canopy
-<https://www.enthought.com/products/canopy>`_ and `Anaconda
-<https://www.continuum.io/downloads>`_ both ship a recent
+<http://www.enthought.com/products/canopy>`_ and `Anaconda
+<https://store.continuum.io/cshop/anaconda/>`_ both ship a recent
 version of scikit-learn, in addition to a large set of scientific python
 library for Windows, Mac OSX and Linux.
 
@@ -83,8 +83,9 @@ Anaconda offers scikit-learn as part of its free distribution.
 Python(x,y) for Windows
 -----------------------
 
-The `Python(x,y) <https://python-xy.github.io>`_ project distributes
-scikit-learn as an additional plugin.
+The `Python(x,y) <https://code.google.com/p/pythonxy/>`_ project distributes
+scikit-learn as an additional plugin, which can be found in the `Additional
+plugins <http://code.google.com/p/pythonxy/wiki/AdditionalPlugins>`_ page.
 
 
 For installation instructions for particular operating systems or for compiling

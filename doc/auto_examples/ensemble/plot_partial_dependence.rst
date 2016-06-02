@@ -1,0 +1,66 @@
+
+
+.. _example_ensemble_plot_partial_dependence.py:
+
+
+========================
+Partial Dependence Plots
+========================
+
+Partial dependence plots show the dependence between the target function [2]_
+and a set of 'target' features, marginalizing over the
+values of all other features (the complement features). Due to the limits
+of human perception the size of the target feature set must be small (usually,
+one or two) thus the target features are usually chosen among the most
+important features
+(see :attr:`~sklearn.ensemble.GradientBoostingRegressor.feature_importances_`).
+
+This example shows how to obtain partial dependence plots from a
+:class:`~sklearn.ensemble.GradientBoostingRegressor` trained on the California
+housing dataset. The example is taken from [1]_.
+
+The plot shows four one-way and one two-way partial dependence plots.
+The target variables for the one-way PDP are:
+median income (`MedInc`), avg. occupants per household (`AvgOccup`),
+median house age (`HouseAge`), and avg. rooms per household (`AveRooms`).
+
+We can clearly see that the median house price shows a linear relationship
+with the median income (top left) and that the house price drops when the
+avg. occupants per household increases (top middle).
+The top right plot shows that the house age in a district does not have
+a strong influence on the (median) house price; so does the average rooms
+per household.
+The tick marks on the x-axis represent the deciles of the feature values
+in the training data.
+
+Partial dependence plots with two target features enable us to visualize
+interactions among them. The two-way partial dependence plot shows the
+dependence of median house price on joint values of house age and avg.
+occupants per household. We can clearly see an interaction between the
+two features:
+For an avg. occupancy greater than two, the house price is nearly independent
+of the house age, whereas for values less than two there is a strong dependence
+on age.
+
+.. [1] T. Hastie, R. Tibshirani and J. Friedman,
+    "Elements of Statistical Learning Ed. 2", Springer, 2009.
+
+.. [2] For classification you can think of it as the regression score before
+       the link function.
+
+
+
+.. rst-class:: horizontal
+
+
+
+
+
+**Python source code:** :download:`plot_partial_dependence.py <plot_partial_dependence.py>`
+
+.. literalinclude:: plot_partial_dependence.py
+    :lines: 47-
+
+**Total running time of the example:**  0.00 seconds
+( 0 minutes  0.00 seconds)
+    

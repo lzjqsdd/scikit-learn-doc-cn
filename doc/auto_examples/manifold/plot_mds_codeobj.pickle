@@ -1,0 +1,7 @@
+€}q(U	np.arange}q(Umodule_shortqUnumpyqUnameqUarangeUmoduleqhuUeuclidean_distancesq}q(hUsklearn.metricshUeuclidean_distanceshUsklearn.metricsuU
+plt.legend}q	(hU
+matplotlibhUlegendhUmatplotlib.pyplotuUplt.Normalize}q
+(hUmatplotlib.pyplothU	NormalizehUmatplotlib.pyplotuUnp.float}q(hUnumpyqhUfloathhuUnp.where}q(hUnumpyqhUwherehhuU
+plt.figure}q(hU
+matplotlibhUfigurehUmatplotlib.pyplotuUnp.random.rand}q(hUnumpy.randomhUrandhUnumpy.randomuUnp.sqrt}q(hUnumpyqhUsqrthhuUplt.show}q(hUmatplotlib.pyplothUshowhUmatplotlib.pyplotuULineCollectionq}q(hUmatplotlib.collectionshULineCollectionhUmatplotlib.collectionsuUplt.axes}q(hU
+matplotlibhUaxeshUmatplotlib.pyplotuUplt.scatter}q(hUmatplotlib.pyplothUscatterhUmatplotlib.pyplotuUmanifold.MDS}q(hUsklearn.manifoldhUMDShUsklearn.manifolduUplt.cm.hot_r}q(hUmatplotlib.pyplot.cmhUhot_rhUmatplotlib.pyplot.cmuUnp.abs}q(hUnumpyqhUabshhuUnp.ones}q(hUnumpyqhUoneshhuUnp.isinf}q(hUnumpyqhUisinfhhuUPCAq }q!(hUsklearn.decompositionhUPCAhUsklearn.decompositionuUnp.random.RandomState}q"(hUnumpy.randomhURandomStatehUnumpy.randomuu.

@@ -1,0 +1,52 @@
+
+
+.. _example_ensemble_plot_feature_transformation.py:
+
+
+===============================================
+Feature transformations with ensembles of trees
+===============================================
+
+Transform your features into a higher dimensional, sparse space. Then
+train a linear model on these features.
+
+First fit an ensemble of trees (totally random trees, a random
+forest, or gradient boosted trees) on the training set. Then each leaf
+of each tree in the ensemble is assigned a fixed arbitrary feature
+index in a new feature space. These leaf indices are then encoded in a
+one-hot fashion.
+
+Each sample goes through the decisions of each tree of the ensemble
+and ends up in one leaf per tree. The sample is encoded by setting
+feature values for these leaves to 1 and the other feature values to 0.
+
+The resulting transformer has then learned a supervised, sparse,
+high-dimensional categorical embedding of the data.
+
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_feature_transformation_001.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_feature_transformation_002.png
+            :scale: 47
+
+
+
+
+**Python source code:** :download:`plot_feature_transformation.py <plot_feature_transformation.py>`
+
+.. literalinclude:: plot_feature_transformation.py
+    :lines: 23-
+
+**Total running time of the example:**  2.07 seconds
+( 0 minutes  2.07 seconds)
+    

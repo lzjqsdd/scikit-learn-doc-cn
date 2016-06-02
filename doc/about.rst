@@ -63,7 +63,7 @@ High quality PNG and SVG logos are available in the `doc/logos/ <https://github.
 Funding
 -------
 
-`INRIA <https://www.inria.fr>`_ actively supports this project. It has
+`INRIA <http://inria.fr>`_ actively supports this project. It has
 provided funding for Fabian Pedregosa (2010-2012), Jaques Grobler
 (2012-2013) and Olivier Grisel (2013-2015) to work on this project
 full-time. It also hosts coding sprints and other events.
@@ -80,17 +80,9 @@ funded one year for a developer to work on the project full-time
    :width: 200pt
    :align: center
 
-`NYU Moore-Sloan Data Science Environment <http://cds.nyu.edu/mooresloan/>`_
-funds Andreas Mueller (2014-2015) to work on this project. The Moore-Sloan Data Science
-Environment also funds several students to work on the project part-time.
-
-.. image:: images/nyu_short_color.png
-   :width: 200pt
-   :align: center
-
-The following students were sponsored by `Google <https://developers.google.com/open-source/>`_
+The following students were sponsored by `Google <http://code.google.com/opensource/>`_
 to work on scikit-learn through the
-`Google Summer of Code <https://en.wikipedia.org/wiki/Google_Summer_of_Code>`_
+`Google Summer of Code <http://en.wikipedia.org/wiki/Google_Summer_of_Code>`_
 program.
 
 - 2007 - David Cournapeau
@@ -102,14 +94,14 @@ program.
 It also provided funding for sprints and events around scikit-learn. If
 you would like to participate in the next Google Summer of code
 program, please see `this page
-<https://github.com/scikit-learn/scikit-learn/wiki/SummerOfCode>`_
+<http://github.com/scikit-learn/scikit-learn/wiki/SummerOfCode>`_
 
 The `NeuroDebian <http://neuro.debian.net>`_ project providing `Debian
 <http://www.debian.org>`_ packaging and contributions is supported by
 `Dr. James V. Haxby <http://haxbylab.dartmouth.edu/>`_ (`Dartmouth
-College <http://pbs.dartmouth.edu>`_).
+College <http://www.dartmouth.edu/~psych/>`_).
 
-The `PSF <https://www.python.org/psf/>`_ helped find and manage funding for our
+The `PSF <http://www.python.org/psf/>`_ helped find and manage funding for our
 2011 Granada sprint. More information can be found `here
 <https://github.com/scikit-learn/scikit-learn/wiki/Past-sprints#granada-19th-21th-dec-2011>`__
 
@@ -121,12 +113,12 @@ Donating to the project
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 If you are interested in donating to the project or to one of our code-sprints, you can use
-the *Paypal* button below or the `NumFOCUS Donations Page <http://www.numfocus.org/support-numfocus.html>`_ (if you use the latter, please indicate that you are donating for the scikit-learn project).
+the *Paypal* button below or the `NumFOCUS Donations Page <http://numfocus.org/donatejoin/>`_ (if you use the latter, please indicate that you are donating for the scikit-learn project).
 
 All donations will be handled by `NumFOCUS
-<http://www.numfocus.org>`_, a non-profit-organization which is
+<http://numfocus.org/donations>`_, a non-profit-organization which is
 managed by a board of `Scipy community members
-<http://www.numfocus.org/board>`_. NumFOCUS's mission is to foster
+<http://numfocus.org/board>`_. NumFOCUS's mission is to foster
 scientific computing software, in particular in Python. As a fiscal home
 of scikit-learn, it ensures that money is available when needed to keep
 the project funded and available while in compliance with tax regulations.
