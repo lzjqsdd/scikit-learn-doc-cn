@@ -1,19 +1,23 @@
 # scikit-learn-doc-cn
 
+![Build Status](https://img.shields.io/badge/sklearn-0.17stable-brightgreen.svg)	![Build Status](https://img.shields.io/badge/python-2.7.6-brightgreen.svg)
 sklearn库作为目前机器学习非常流行的python库，一个易读的文档更有助于工具库的理解和使用，虽然做机器学习方面的学生和工程师阅读英文并没有很大压力，但是在阅读速度上还是会有些影响。
 寻找已久没找到相关的中文文档，而且翻译的过程也是对知识熟悉的过程，您可以在学习某一个章节的过程顺便翻译一下就可以贡献自己的力量。
 
 *欢迎大家踊跃加入！如果有更好的翻译组织形式也欢迎提出！*
 
 # 翻译计划
+
+| 图标  |  状态 |
+|:----------------|:------------:|
+| ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| 翻译中|
+| ![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| 翻译结束|
+| ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| 暂未开始 |
+
+
 ## 第一阶段
 相关算法示例程序的翻译，位于modules下，具体列表如下：
 
-![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg) 翻译中
-
-![Build Status](https://img.shields.io/badge/translate-done-blue.svg) 翻译结束
-
-![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg) 暂未开始
 
 | 文件                | 翻译状态        | 贡献者
 |:------------------- |:-------------| :-------:|
@@ -68,7 +72,15 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 ## 阶段二
 官方框架翻译
 
-#编译
+#配置及编译
+
+安装必要的环境:
+
+	sudo pip install numpy
+    sudo pip install scipy
+    sudo pip install sphinx
+    #上述为依赖的包
+    sudo pip install -U scikit-learn
 
 生成html（和官网web页一样）
 
