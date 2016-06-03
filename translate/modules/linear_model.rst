@@ -438,9 +438,13 @@ previously chosen dictionary elements.
 Bayesian Regression
 ===================
 
+可以在估计过程中使用贝叶斯回归技术包含正则化参数：正则化参数不是硬编码设置的而是手动调节适合数据的值
 Bayesian regression techniques can be used to include regularization
 parameters in the estimation procedure: the regularization parameter is
 not set in a hard sense but tuned to the data at hand.
+
+可以通过引入 `uninformative priors
+<http://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors>`__
 
 This can be done by introducing `uninformative priors
 <http://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors>`__
@@ -451,22 +455,22 @@ parameters :math:`w` with precision :math:`\lambda^-1`.  Instead of setting
 `\lambda` manually, it is possible to treat it as a random variable to be
 estimated from the data.
 
+为了获得一个完整的概率模型，输出 :math:`y` 假设为关于 :math:`X w` 的高斯分布
 To obtain a fully probabilistic model, the output :math:`y` is assumed
 to be Gaussian distributed around :math:`X w`:
 
 .. math::  p(y|X,w,\alpha) = \mathcal{N}(y|X w,\alpha)
 
+Alpha 同样被看做是随机变量，需要从数据中来估计
 Alpha is again treated as a random variable that is to be estimated from the
 data.
 
-The advantages of Bayesian Regression are:
+贝叶斯回归的优势：
 
-    - It adapts to the data at hand.
+	- 根据数据调节参数
+	- 在估计过程中包含正则化参数
 
-    - It can be used to include regularization parameters in the
-      estimation procedure.
-
-The disadvantages of Bayesian regression include:
+贝叶斯回归劣势:
 
     - Inference of the model can be time consuming.
 

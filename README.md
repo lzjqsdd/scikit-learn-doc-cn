@@ -7,7 +7,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 
 *欢迎大家踊跃加入！如果有更好的翻译组织形式也欢迎提出！*
 
-*中文文档地址:sklearn.lzjqsdd.com*
+*中文文档地址:[sklearn.lzjqsdd.com](http://sklearn.lzjqsdd.com)
 
 # 翻译计划
 
@@ -67,9 +67,13 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | tree.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | unsupervised_reduction.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| |
 
+### 任务申领
+首先clone该项目，修改README中要申领的翻译内容的状态，提交pull request,接受之后即可开始翻译工作。
+翻译结束后确保可正常编译成html，然后只提交rst文件的修改，不要添加sphinx生成的文件。
 **所有翻译后的文档以同名的方式添加到translate/同目录文件夹下,例如：**  
 
     svm.rst的翻译文档 提交到项目translate/modules/svm.rst下,翻译完成之后覆盖doc/modules/svm.rst。
+
 
 
 ## 阶段二
@@ -98,3 +102,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 部署gh-pages：
 
 	由于Sphinx生成的html有自己的静态资源，需要在gh-pages分支加入.nojekyll文件。
+
+配置中其他的问题：
+	
+	[Issue](https://github.com/lzjqsdd/scikit-learn-doc-cn/blob/master/issue.md)
