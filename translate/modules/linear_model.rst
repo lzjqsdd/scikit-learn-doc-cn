@@ -23,7 +23,7 @@ Across the module, we designate the vector :math:`w = (w_1,
 普通最小二乘法
 =====================
 
-:class:`LinearRegression` 用系数：math: `w = (w_1,...,w_p)` 来拟合一个线性模型,
+:class:`LinearRegression` 用系数 ：math:`w = (w_1,...,w_p)` 来拟合一个线性模型,
 使得数据集实际观测数据和预测数据（估计值）之间残差平方和最小。数学形式可表达为:
 
 .. math:: \underset{w}{min\,} {|| X w - y||_2}^2
@@ -68,7 +68,7 @@ Ridge Regression 岭回归
    \underset{w}{min\,} {{|| X w - y||_2}^2 + \alpha {||w||_2}^2}
 
 
-上述公式中,:math:`\alpha \geq 0` 是控制模型复杂度的因子(可看做收缩率的大小) : :math:`\alpha` 越大，收缩率越大，那么系数对于共线性的鲁棒性更强
+上述公式中, :math:`\alpha \geq 0` 是控制模型复杂度的因子(可看做收缩率的大小) : :math:`\alpha` 越大，收缩率越大，那么系数对于共线性的鲁棒性更强
 
 .. figure:: ../auto_examples/linear_model/images/plot_ridge_path_001.png
    :target: ../auto_examples/linear_model/plot_ridge_path.html
@@ -255,15 +255,11 @@ Elastic Net弹性网络
 Multi-task Lasso
 ================
 
-The :class:`MultiTaskLasso` is a linear model that estimates sparse
-coefficients for multiple regression problems jointly: ``y`` is a 2D array,
-of shape (n_samples, n_tasks). The constraint is that the selected
-features are the same for all the regression problems, also called tasks.
+:class:`MultiTaskLasso` 是一种估计多元回归系数的线性模型， ``y`` 是一个2D数组，形式为(n_samples,n_tasks).
+其限制条件是和其他回归问题一样，是选择的特征，同样称为 tasks.
 
-The following figure compares the location of the non-zeros in W obtained
-with a simple Lasso or a MultiTaskLasso. The Lasso estimates yields
-scattered non-zeros while the non-zeros of the MultiTaskLasso are full
-columns.
+接下来的图示比较了通过使用一个简单的Lasso或者MultiTaskLasso得到的W中非零的位置。
+Lasso 估计量分散着非零值而MultiTaskLasso所有的列全部是非零的。
 
 .. |multi_task_lasso_1| image:: ../auto_examples/linear_model/images/plot_multi_task_lasso_support_001.png
     :target: ../auto_examples/linear_model/plot_multi_task_lasso_support.html
@@ -282,10 +278,7 @@ columns.
   * :ref:`example_linear_model_plot_multi_task_lasso_support.py`
 
 
-
-Mathematically, it consists of a linear model trained with a mixed
-:math:`\ell_1` :math:`\ell_2` prior as regularizer.
-The objective function to minimize is:
+数学表达上，它包含了一个使用 :math:`\ell_1` :math:`\ell_2` 先验作为正则化因子。其目标函数是最小化:
 
 .. math::  \underset{w}{min\,} { \frac{1}{2n_{samples}} ||X W - Y||_2 ^ 2 + \alpha ||W||_{21}}
 
@@ -293,41 +286,31 @@ where;
 
 .. math:: ||W||_{2 1} = \sum_i \sqrt{\sum_j w_{ij}^2}
 
-
-The implementation in the class :class:`MultiTaskLasso` uses coordinate descent as
-the algorithm to fit the coefficients.
+:class:`MultiTaskLasso` 类的实现使用了坐标下降算法来拟合系数。
 
 .. _least_angle_regression:
 
 Least Angle Regression
 ======================
 
-Least-angle regression (LARS) is a regression algorithm for
-high-dimensional data, developed by Bradley Efron, Trevor Hastie, Iain
-Johnstone and Robert Tibshirani.
+最小角回归是针对高维数据的回归算法，由Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani开发。
 
-The advantages of LARS are:
+LARS的优势如下:
+  - 当 p >> n 时计算是非常高效的。（比如当维数远大于点数）
+  
+  - 它和前向选择计算速度差不多一样块，并且和普通最小二乘复杂度一样。
 
-  - It is numerically efficient in contexts where p >> n (i.e., when the
-    number of dimensions is significantly greater than the number of
-    points)
+  - 它生成一个完整的分段线性的解的路径，这对于交叉验证或者类似的尝试来调整模型是有效的。
+  
+  - 如果两个变量的相应总是相同，那么它们的系数应该有近似相同的增长速率。因此这算法和直觉判断一样，并且增长总是稳定的。
 
-  - It is computationally just as fast as forward selection and has
-    the same order of complexity as an ordinary least squares.
-
-  - It produces a full piecewise linear solution path, which is
-    useful in cross-validation or similar attempts to tune the model.
-
-  - If two variables are almost equally correlated with the response,
-    then their coefficients should increase at approximately the same
-    rate. The algorithm thus behaves as intuition would expect, and
-    also is more stable.
-
+  - 这个算法对于其他评估模型来说很容易被修改来产生解，和Lasso差不多。（待修改）
   - It is easily modified to produce solutions for other estimators,
     like the Lasso.
 
-The disadvantages of the LARS method include:
+LARS方法的缺点包括：
 
+  - 因为LARS是基于剩余误差多次迭代拟合
   - Because LARS is based upon an iterative refitting of the
     residuals, it would appear to be especially sensitive to the
     effects of noise. This problem is discussed in detail by Weisberg
