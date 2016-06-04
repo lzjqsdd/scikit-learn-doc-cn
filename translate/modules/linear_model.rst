@@ -290,8 +290,8 @@ where;
 
 .. _least_angle_regression:
 
-Least Angle Regression
-======================
+Least Angle Regression最小角回归
+==================================
 
 最小角回归是针对高维数据的回归算法，由Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani开发。
 
@@ -310,24 +310,15 @@ LARS的优势如下:
 
 LARS方法的缺点包括：
 
-  - 因为LARS是基于剩余误差多次迭代拟合
-  - Because LARS is based upon an iterative refitting of the
-    residuals, it would appear to be especially sensitive to the
-    effects of noise. This problem is discussed in detail by Weisberg
-    in the discussion section of the Efron et al. (2004) Annals of
-    Statistics article.
+  - 因为LARS是基于剩余误差多次迭代拟合,所以对噪声的影响比较敏感。这个问题在 Efron et al. (2004) Annals of Statistics article这篇文章中讨论部分详细谈论了。
 
-The LARS model can be used using estimator :class:`Lars`, or its
-low-level implementation :func:`lars_path`.
-
+LARS模型可以使用estimator :class:`Lars` ，或者底层实现 :func:`lars_path` 。
 
 LARS Lasso
 ==========
 
-:class:`LassoLars` is a lasso model implemented using the LARS
-algorithm, and unlike the implementation based on coordinate_descent,
-this yields the exact solution, which is piecewise linear as a
-function of the norm of its coefficients.
+:class:`LassoLars` 是一个使用LARS算法实现的lasso模型。和基于坐标下降的实现不同的是，它产生的是精确的解，和一个函数标准系数一样是精确线性的。
+which is piecewise linear as a function of the norm of its coefficients.（待修正）
 
 .. figure:: ../auto_examples/linear_model/images/plot_lasso_lars_001.png
    :target: ../auto_examples/linear_model/plot_lasso_lars.html
@@ -356,10 +347,7 @@ consist of retrieving the path with function :func:`lars_path`
 Mathematical formulation
 ------------------------
 
-The algorithm is similar to forward stepwise regression, but instead
-of including variables at each step, the estimated parameters are
-increased in a direction equiangular to each one's correlations with
-the residual.
+这个算法和逐步回归很相似，但是除了在每一步包含变量之外，估计的参数沿着每一个对应的残差的对角方向增长。（待校正）
 
 Instead of giving a vector result, the LARS solution consists of a
 curve denoting the solution for each value of the L1 norm of the
