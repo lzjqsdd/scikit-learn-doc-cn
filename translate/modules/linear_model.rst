@@ -532,26 +532,26 @@ Logistic regression逻辑回归
 
 scikit-learn中逻辑回归的实现为 :class:`LogisticRegression` 类。它可以拟合含L2或者L1正则化项的多类逻辑回归问题。
 
-作为一个优化问题，二分类L2 通过下方的代价函数来惩罚逻辑回归：
+作为一个优化问题，二分类L2 通过下方的代价函数来惩罚逻辑回归:
 
 .. math:: \underset{w, c}{min\,} \frac{1}{2}w^T w + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1) .
 
-类似的，L1 正则化逻辑回归解决下述的优化问题：
+类似的，L1 正则化逻辑回归解决下述的优化问题:
 
 .. math:: \underset{w, c}{min\,} \|w\|_1 + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1) .
 
- :class:`LogisticRegression` 中的实现是 "liblinear" (一个扩展的C++ library,LIBLINEAR), "newton-cg", "lbfgs" and "sag"。
+:class:`LogisticRegression` 中的实现是solver "liblinear" (一个扩展的C++ library,LIBLINEAR), "newton-cg", "lbfgs" and "sag"。
 
- "lbfgs" 和 "newton-cg" 只支持L2罚项，并且对于一些高维数据收敛非常快。L1罚项产生稀疏预测的权重。
+"lbfgs" 和 "newton-cg" 只支持L2罚项，并且对于一些高维数据收敛非常快。L1罚项产生稀疏预测的权重。
  
- "liblinear" 使用了基于Liblinear的坐标下降法(CD)。对于F1罚项， :func:`sklearn.svm.l1_min_c` 允许计算C的下界以获得一个非"null" 的
- 模型（所有特征权重为0）。这依赖于非常棒的一个库 `LIBLINEAR library <http://www.csie.ntu.edu.tw/~cjlin/liblinear/>`_ ,用在scikit-learn中。
- 然而，CD算法在liblinear中的实现无法学习一个真正的多维（多类）的模型。反而，最优问题被分解为 "one-vs-rest" 多个二分类问题来解决多分类。
- 由于底层是这样实现的，所以使用了该库的  :class:`LogisticRegression` 类就作为多类分类器了。
+"liblinear" 使用了基于Liblinear的坐标下降法(CD)。对于F1罚项， :func:`sklearn.svm.l1_min_c` 允许计算C的下界以获得一个非"null" 的
+模型（所有特征权重为0）。这依赖于非常棒的一个库 `LIBLINEAR library <http://www.csie.ntu.edu.tw/~cjlin/liblinear/>`_ ,用在scikit-learn中。
+然而，CD算法在liblinear中的实现无法学习一个真正的多维（多类）的模型。反而，最优问题被分解为 "one-vs-rest" 多个二分类问题来解决多分类。
+由于底层是这样实现的，所以使用了该库的  :class:`LogisticRegression` 类就可以作为多类分类器了。
 
- :class:`LogisticRegression` 使用  "lbfgs" 或者 "newton-cg" 程序 来设置 `multi_class` 为 "multinomial"，则该类学习
- 了一个真正的多类逻辑回归模型，也就是说这种概率估计应该比默认 "one-vs-rest" 设置要更加准确。但是 "lbfgs", "newton-cg" 和 "sag"
- 程序无法优化 含L1罚项的模型，所以"multinomial" 的设置无法学习稀疏模型。
+:class:`LogisticRegression` 使用  "lbfgs" 或者 "newton-cg" 程序 来设置 `multi_class` 为 "multinomial"，则该类学习
+了一个真正的多类逻辑回归模型，也就是说这种概率估计应该比默认 "one-vs-rest" 设置要更加准确。但是 "lbfgs", "newton-cg" 和 "sag"
+程序无法优化 含L1罚项的模型，所以"multinomial" 的设置无法学习稀疏模型。
 
 "sag" 程序使用了随机平均梯度下降（ Stochastic Average Gradient descent [3]_）。它无法解决多分类问题，而且对于含L2罚项的模型有局限性。
 然而在超大数据集下计算要比其他程序快很多，当样本数量和特征数量都非常大的时候。
