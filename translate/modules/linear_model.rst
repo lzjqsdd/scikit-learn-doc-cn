@@ -347,13 +347,9 @@ consist of retrieving the path with function :func:`lars_path`
 Mathematical formulation
 ------------------------
 
-这个算法和逐步回归很相似，但是除了在每一步包含变量之外，估计的参数沿着每一个对应的残差的对角方向增长。（待校正）
-
-Instead of giving a vector result, the LARS solution consists of a
-curve denoting the solution for each value of the L1 norm of the
-parameter vector. The full coefficients path is stored in the array
-``coef_path_``, which has size (n_features, max_features+1). The first
-column is always zero.
+这个算法和逐步回归很相似，但是除了在每一步包含变量之外，估计的参数沿着每一个对应的残差的对角方向增长。（待校正）。
+并不是给出一个向量结果，而是在LARS的解中包含了一个曲线，用来表示每个参数向量的L1-norm 值的解，
+所有系数路径存在 ``coef_path_`` 数组中，大小为(n_features,max_features+1)，其中第一列总是0.
 
 .. topic:: References:
 
@@ -364,32 +360,23 @@ column is always zero.
 
 .. _omp:
 
-Orthogonal Matching Pursuit (OMP)
-=================================
-:class:`OrthogonalMatchingPursuit` and :func:`orthogonal_mp` implements the OMP
-algorithm for approximating the fit of a linear model with constraints imposed
-on the number of non-zero coefficients (ie. the L :sub:`0` pseudo-norm).
+Orthogonal Matching Pursuit (OMP) 正交匹配跟踪
+================================================
+:class:`OrthogonalMatchingPursuit` and :func:`orthogonal_mp` 实现了一个用来逼近在非零系数的个数上加约束的线性模型的拟合的OMP算法(比如L :sub:`0` pseudo-norm)
 
-Being a forward feature selection method like :ref:`least_angle_regression`,
-orthogonal matching pursuit can approximate the optimum solution vector with a
-fixed number of non-zero elements:
+和 :ref:`least_angle_regression` 一样，作为一个前向特征选择方法，OMP可以用一个固定非零的数来逼近最优的解向量:
 
 .. math:: \text{arg\,min\,} ||y - X\gamma||_2^2 \text{ subject to } \
     ||\gamma||_0 \leq n_{nonzero\_coefs}
 
-Alternatively, orthogonal matching pursuit can target a specific error instead
-of a specific number of non-zero coefficients. This can be expressed as:
+或者说正交匹配算法可以针对一个特殊的误差而不是一个特殊的非零系数的个数，这一过程可以表达为:
 
 .. math:: \text{arg\,min\,} ||\gamma||_0 \text{ subject to } ||y-X\gamma||_2^2 \
     \leq \text{tol}
 
-
-OMP is based on a greedy algorithm that includes at each step the atom most
-highly correlated with the current residual. It is similar to the simpler
-matching pursuit (MP) method, but better in that at each iteration, the
-residual is recomputed using an orthogonal projection on the space of the
-previously chosen dictionary elements.
-
+OMP是基于贪婪算法,包括在每一步原子(归一化的向量)与当前残差高度相关。它类似于简单
+匹配追踪(MP)方法,但更好的,在每一次迭代中，通过使用的在前一个选择的字典元素的空间的正交投影重新计算残差。
+参考 * http://chunqiu.blog.ustc.edu.cn/?p=634 *
 
 .. topic:: Examples:
 
@@ -406,35 +393,22 @@ previously chosen dictionary elements.
 
 .. _bayesian_regression:
 
-Bayesian Regression
-===================
+Bayesian Regression 贝叶斯回归
+================================
 
 可以在估计过程中使用贝叶斯回归技术包含正则化参数：正则化参数不是硬编码设置的而是手动调节适合数据的值
-Bayesian regression techniques can be used to include regularization
-parameters in the estimation procedure: the regularization parameter is
-not set in a hard sense but tuned to the data at hand.
 
-可以通过引入 `uninformative priors
+可以通过在模型的超参数上引入 `uninformative priors
 <http://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors>`__
 
-This can be done by introducing `uninformative priors
-<http://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors>`__
-over the hyper parameters of the model.
-The :math:`\ell_{2}` regularization used in `Ridge Regression`_ is equivalent
-to finding a maximum a-postiori solution under a Gaussian prior over the
-parameters :math:`w` with precision :math:`\lambda^-1`.  Instead of setting
-`\lambda` manually, it is possible to treat it as a random variable to be
-estimated from the data.
+`Ridge Regression`_ 中 :math:`\ell_{2}` 使用的正则化项等价于在一个参数为 :math:`w` 且精度为 :math:`\lambda^-1` 的高斯先验下寻找
+一个最大的后验的解。而且并不是手动设置 `\lambda` ，而是有可能把它看做一个随机变量来从从数据中估计。
 
 为了获得一个完整的概率模型，输出 :math:`y` 假设为关于 :math:`X w` 的高斯分布
-To obtain a fully probabilistic model, the output :math:`y` is assumed
-to be Gaussian distributed around :math:`X w`:
 
 .. math::  p(y|X,w,\alpha) = \mathcal{N}(y|X w,\alpha)
 
 Alpha 同样被看做是随机变量，需要从数据中来估计
-Alpha is again treated as a random variable that is to be estimated from the
-data.
 
 贝叶斯回归的优势：
 
@@ -443,40 +417,32 @@ data.
 
 贝叶斯回归劣势:
 
-    - Inference of the model can be time consuming.
+    - 模型的推理比较耗时
 
 
 .. topic:: References
 
- * A good introduction to Bayesian methods is given in C. Bishop: Pattern
-   Recognition and Machine learning
+ * 关于贝叶斯方法一个非常好的说明可以参考  C. Bishop: Pattern Recognition and Machine learning (经典的PRML书籍)
 
- * Original Algorithm is detailed in the  book `Bayesian learning for neural
-   networks` by Radford M. Neal
+ * 而原始的算法在 `Bayesian learning for neural networks` by Radford M. Neal 中有详细描述。
 
 .. _bayesian_ridge_regression:
 
-Bayesian Ridge Regression
--------------------------
+Bayesian Ridge Regression 贝叶斯岭回归
+-------------------------------------------------
 
-:class:`BayesianRidge` estimates a probabilistic model of the
-regression problem as described above.
-The prior for the parameter :math:`w` is given by a spherical Gaussian:
+:class:`BayesianRidge` 对上述的回归问题估计了一个概率模型。先验参数 :math:`w` 由下面的球形高斯给出：
 
 .. math:: p(w|\lambda) =
     \mathcal{N}(w|0,\lambda^{-1}\bold{I_{p}})
 
-The priors over :math:`\alpha` and :math:`\lambda` are chosen to be `gamma
-distributions <http://en.wikipedia.org/wiki/Gamma_distribution>`__, the
-conjugate prior for the precision of the Gaussian.
+先验参数  :math:`\alpha` 和 :math:`\lambda` 的选择满足 `gamma 
+distributions <http://en.wikipedia.org/wiki/Gamma_distribution>`__ ，即高斯函数精度的共轭先验
 
-The resulting model is called *Bayesian Ridge Regression*, and is similar to the
-classical :class:`Ridge`.  The parameters :math:`w`, :math:`\alpha` and
-:math:`\lambda` are estimated jointly during the fit of the model.  The
-remaining hyperparameters are the parameters of the gamma priors over
-:math:`\alpha` and :math:`\lambda`.  These are usually chosen to be
-*non-informative*.  The parameters are estimated by maximizing the *marginal
-log likelihood*.
+生成的模型称为  *Bayesian Ridge Regression* ,和经典的  :class:`Ridge` 类似。
+参数 :math:`w`, :math:`\alpha` 以及 :math:`\lambda` 在模型的拟合中被共同估计。
+其他的参数是 :math:`\alpha` 和 :math:`\lambda` 的gamma 先验的参数。（待校正）
+这些通常被选择为 *non-informative*（参考贝叶斯无信息先验）。参数统计通过最大化 *marginal log likelihood*.
 
 By default :math:`\alpha_1 = \alpha_2 =  \lambda_1 = \lambda_2 = 1.e^{-6}`.
 
@@ -509,9 +475,7 @@ The weights :math:`w` of the model can be access::
     >>> clf.coef_
     array([ 0.49999993,  0.49999993])
 
-Due to the Bayesian framework, the weights found are slightly different to the
-ones found by :ref:`ordinary_least_squares`. However, Bayesian Ridge Regression
-is more robust to ill-posed problem.
+由于贝叶斯框架，权重的发现同  :ref:`ordinary_least_squares` 略有不同。然而Bayesian Ridge Regression 对于病态问题更具有鲁棒性。
 
 .. topic:: Examples:
 
@@ -528,25 +492,19 @@ is more robust to ill-posed problem.
 Automatic Relevance Determination - ARD
 ---------------------------------------
 
-:class:`ARDRegression` is very similar to `Bayesian Ridge Regression`_,
-but can lead to sparser weights :math:`w` [1]_ [2]_.
-:class:`ARDRegression` poses a different prior over :math:`w`, by dropping the
-assumption of the Gaussian being spherical.
+:class:`ARDRegression` 和  `Bayesian Ridge Regression`_ 非常相似，但是主要针对稀疏权重  :math:`w` [1]_ [2]_ 。
+:class:`ARDRegression` 提出一个不同于  :math:`w` 的先验，通过弱化高斯分布为球形的假设。
 
-Instead, the distribution over :math:`w` is assumed to be an axis-parallel,
-elliptical Gaussian distribution.
+相反， :math:`w` 的分布假设为一个平行轴的椭圆高斯分布。(同axis-alignen)
 
-This means each weight :math:`w_{i}` is drawn from a Gaussian distribution,
-centered on zero and with a precision :math:`\lambda_{i}`:
+也就是说，每个权重  :math:`w_{i}` 来自于一个中心在0点，精度为 :math:`\lambda_{i}` 的高斯分布:
 
 .. math:: p(w|\lambda) = \mathcal{N}(w|0,A^{-1})
 
 with :math:`diag \; (A) = \lambda = \{\lambda_{1},...,\lambda_{p}\}`.
 
-In contrast to `Bayesian Ridge Regression`_, each coordinate of :math:`w_{i}`
-has its own standard deviation :math:`\lambda_i`. The prior over all
-:math:`\lambda_i` is chosen to be the same gamma distribution given by
-hyperparameters :math:`\lambda_1` and :math:`\lambda_2`.
+同 `Bayesian Ridge Regression`_ 形成对比， :math:`w_{i}` 每一维都有一个标准差  :math:`\lambda_i` ， 
+所有 :math:`\lambda_i` 的先验选择 和 由给定超参数 :math:`\lambda_1` 和 :math:`\lambda_2` 的gamma分布一样。 
 
 .. figure:: ../auto_examples/linear_model/images/plot_ard_001.png
    :target: ../auto_examples/linear_model/plot_ard.html
@@ -566,60 +524,39 @@ hyperparameters :math:`\lambda_1` and :math:`\lambda_2`.
 
 .. _Logistic_regression:
 
-Logistic regression
-===================
+Logistic regression逻辑回归
+=============================
 
-Logistic regression, despite its name, is a linear model for classification
-rather than regression. Logistic regression is also known in the literature as
-logit regression, maximum-entropy classification (MaxEnt)
-or the log-linear classifier. In this model, the probabilities describing the possible outcomes of a single trial are modeled using a `logistic function <http://en.wikipedia.org/wiki/Logistic_function>`_.
+逻辑回归形如其名，是一个线性分类模型而不是回归模型。逻辑回归在文献中也称为logit回归、最大熵分类(MaxEnt) 或者 log-linear classifier。
+在这个模型中，描述单次可能结果输出概率使用  `logistic function <http://en.wikipedia.org/wiki/Logistic_function>`_ 来建模。
 
-The implementation of logistic regression in scikit-learn can be accessed from
-class :class:`LogisticRegression`. This
-implementation can fit a multiclass (one-vs-rest) logistic regression with optional
-L2 or L1 regularization.
+scikit-learn中逻辑回归的实现为 :class:`LogisticRegression` 类。它可以拟合含L2或者L1正则化项的多类逻辑回归问题。
 
-As an optimization problem, binary class L2 penalized logistic regression minimizes
-the following cost function:
+作为一个优化问题，二分类L2 通过下方的代价函数来惩罚逻辑回归：
 
 .. math:: \underset{w, c}{min\,} \frac{1}{2}w^T w + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1) .
 
-Similarly, L1 regularized logistic regression solves the following optimization problem
+类似的，L1 正则化逻辑回归解决下述的优化问题：
 
 .. math:: \underset{w, c}{min\,} \|w\|_1 + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1) .
 
-The solvers implemented in the class :class:`LogisticRegression`
-are "liblinear" (which is a wrapper around the C++ library,
-LIBLINEAR), "newton-cg", "lbfgs" and "sag".
+ :class:`LogisticRegression` 中的实现是 "liblinear" (一个扩展的C++ library,LIBLINEAR), "newton-cg", "lbfgs" and "sag"。
 
-The "lbfgs" and "newton-cg" solvers only support L2 penalization and are found
-to converge faster for some high dimensional data. L1 penalization yields
-sparse predicting weights.
+ "lbfgs" 和 "newton-cg" 只支持L2罚项，并且对于一些高维数据收敛非常快。L1罚项产生稀疏预测的权重。
+ 
+ "liblinear" 使用了基于Liblinear的坐标下降法(CD)。对于F1罚项， :func:`sklearn.svm.l1_min_c` 允许计算C的下界以获得一个非"null" 的
+ 模型（所有特征权重为0）。这依赖于非常棒的一个库 `LIBLINEAR library <http://www.csie.ntu.edu.tw/~cjlin/liblinear/>`_ ,用在scikit-learn中。
+ 然而，CD算法在liblinear中的实现无法学习一个真正的多维（多类）的模型。反而，最优问题被分解为 "one-vs-rest" 多个二分类问题来解决多分类。
+ 由于底层是这样实现的，所以使用了该库的  :class:`LogisticRegression` 类就作为多类分类器了。
 
-The solver "liblinear" uses a coordinate descent (CD) algorithm based on
-Liblinear. For L1 penalization :func:`sklearn.svm.l1_min_c` allows to
-calculate the lower bound for C in order to get a non "null" (all feature weights to
-zero) model. This relies on the excellent
-`LIBLINEAR library <http://www.csie.ntu.edu.tw/~cjlin/liblinear/>`_,
-which is shipped with scikit-learn. However, the CD algorithm implemented in
-liblinear cannot learn a true multinomial (multiclass) model;
-instead, the optimization problem is decomposed in a "one-vs-rest" fashion
-so separate binary classifiers are trained for all classes.
-This happens under the hood, so :class:`LogisticRegression` instances
-using this solver behave as multiclass classifiers.
+ :class:`LogisticRegression` 使用  "lbfgs" 或者 "newton-cg" 程序 来设置 `multi_class` 为 "multinomial"，则该类学习
+ 了一个真正的多类逻辑回归模型，也就是说这种概率估计应该比默认 "one-vs-rest" 设置要更加准确。但是 "lbfgs", "newton-cg" 和 "sag"
+ 程序无法优化 含L1罚项的模型，所以"multinomial" 的设置无法学习稀疏模型。
 
-Setting `multi_class` to "multinomial" with the "lbfgs" or "newton-cg" solver
-in :class:`LogisticRegression` learns a true multinomial logistic
-regression model, which means that its probability estimates should
-be better calibrated than the default "one-vs-rest" setting.
-"lbfgs", "newton-cg" and "sag" solvers cannot optimize L1-penalized models, though, so the "multinomial" setting does not learn sparse models.
+"sag" 程序使用了随机平均梯度下降（ Stochastic Average Gradient descent [3]_）。它无法解决多分类问题，而且对于含L2罚项的模型有局限性。
+然而在超大数据集下计算要比其他程序快很多，当样本数量和特征数量都非常大的时候。
 
-The solver "sag" uses a Stochastic Average Gradient descent [3]_. It does not
-handle "multinomial" case, and is limited to L2-penalized models, yet it is
-often faster than other solvers for large datasets, when both the number of
-samples and the number of features are large.
-
-In a nutshell, one may choose the solver with the following rules:
+简单概括下，可以按照以下规则来选择solver:
 
 ===========================   ======================
 Case                          Solver
@@ -629,7 +566,7 @@ Multinomial loss              "lbfgs" or newton-cg"
 Large dataset                 "sag"
 ===========================   ======================
 
-For large dataset, you may also consider using :class:`SGDClassifier` with 'log' loss.
+对于超大数据集，你同样可以考虑使用带log损失的 :class:`SGDClassifier` 
 
 .. topic:: Examples:
 
