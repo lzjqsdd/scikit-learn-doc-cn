@@ -28,7 +28,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | biclustering.rst    | ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)    | 		|
 | calibration.rst | ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg) ||
 | classes.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg) ||
-| clustering.rst |![Build Status](https://img.shields.io/badge/translate-doing-lightgray.svg)||
+| clustering.rst | ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|huangbinapple|
 | computational_performance.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | covariance.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | cross_decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
