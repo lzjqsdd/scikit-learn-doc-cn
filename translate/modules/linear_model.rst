@@ -595,6 +595,7 @@ Large dataset                 "sag"
    thus be used to perform feature selection, as detailed in
    :ref:`l1_feature_selection`.
 
+:class:`LogisticRegressionCV` 实现了一个内建的交叉验证来寻找最优的参数C的逻辑回归模型。"newton-cg","sag" 和　"lbfgs" 程序在高维稠密数据上计算更快,原因在于warm-starting.对于多类问题,如果 `multi_class` 选项设置为 "ovr" ,那么最优的C从每个类别中获得，如果 `multi_class` 选项设置为　"multinomial" ,那么最优的Ｃ通过最小化交叉熵损失得到。
 :class:`LogisticRegressionCV` implements Logistic Regression with
 builtin cross-validation to find out the optimal C parameter.
 "newton-cg", "sag" and "lbfgs" solvers are found to be faster
@@ -611,11 +612,14 @@ obtained that minimizes the cross-entropy loss.
 Stochastic Gradient Descent - SGD
 =================================
 
+随机梯度下降(SGD)是一种快速拟合线性模型非常有效的方式,尤其当样本数量非常大的时候非常有用。 ``partial_fit`` 方法允许　only/out-of-core 学习。
 Stochastic gradient descent is a simple yet very efficient approach
 to fit linear models. It is particularly useful when the number of samples
 (and the number of features) is very large.
 The ``partial_fit`` method allows only/out-of-core learning.
 
+ :class:`SGDClassifier` 和 :class:`SGDRegressor` 提供了对于多类和回归
+                                   ----翻译到这里
 The classes :class:`SGDClassifier` and :class:`SGDRegressor` provide
 functionality to fit linear models for classification and regression
 using different (convex) loss functions and different penalties.
@@ -923,6 +927,8 @@ polynomial features of varying degrees:
    :align: center
    :scale: 50%
 
+上图使用 :class:`PolynomialFeatures` 预处理器.这个预处理器将输入数据
+转换为一个给定degree的新的数据矩阵。可以用下述方法来做：
 This figure is created using the :class:`PolynomialFeatures` preprocessor.
 This preprocessor transforms an input data matrix into a new data matrix
 of a given degree.  It can be used as follows::
@@ -970,6 +976,8 @@ that multiply together at most :math:`d` distinct features.
 These can be gotten from :class:`PolynomialFeatures` with the setting
 ``interaction_only=True``.
 
+比如，在处理布尔型特征的时候， :math:`x_i^n = x_i` 对于所有的 :math:`n` 是没有作用的。
+但是  :math:`x_i x_j` 表现了两个布尔值的联系.通过这种方式，我们就可以使用线性分类器解决XOR问题(异或问题)
 For example, when dealing with boolean features,
 :math:`x_i^n = x_i` for all :math:`n` and is therefore useless;
 but :math:`x_i x_j` represents the conjunction of two booleans.
