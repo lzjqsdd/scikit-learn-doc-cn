@@ -618,8 +618,8 @@ to fit linear models. It is particularly useful when the number of samples
 (and the number of features) is very large.
 The ``partial_fit`` method allows only/out-of-core learning.
 
- :class:`SGDClassifier` 和 :class:`SGDRegressor` 提供了对于多类和回归
-                                   ----翻译到这里
+ :class:`SGDClassifier` 和 :class:`SGDRegressor` 为使用了不同损失函数（凸函数）和不同罚项的分类和回归问题来拟合线性模型的函数。
+比如，对于设置参数 ``loss="log"`` , :class:`SGDClassifier` 拟合了一个逻辑回归模型，而设置参数 ``loss="hinge"`` ,该类会拟合一个线性SVM
 The classes :class:`SGDClassifier` and :class:`SGDRegressor` provide
 functionality to fit linear models for classification and regression
 using different (convex) loss functions and different penalties.
@@ -633,8 +633,16 @@ while with ``loss="hinge"`` it fits a linear support vector machine (SVM).
 
 .. _perceptron:
 
-Perceptron
-==========
+Perceptron感知机
+=================
+
+ :class:`Perceptron` 是另一种简单的适合大规模学习的算法。默认情况下:
+
+    - 它不需要学习率
+    
+    - 不需要正则化(罚项)
+
+    - 只会在判错情况下更新模型。
 
 The :class:`Perceptron` is another simple algorithm suitable for large scale
 learning. By default:
@@ -645,6 +653,7 @@ learning. By default:
 
     - It updates its model only on mistakes.
 
+最后一个特性是它比带hinge损失的SGD训练的稍微快点，并且产生的模型是稀疏的。
 The last characteristic implies that the Perceptron is slightly faster to
 train than SGD with the hinge loss and that the resulting models are
 sparser.
@@ -654,16 +663,14 @@ sparser.
 Passive Aggressive Algorithms
 =============================
 
+Passive Aggressive Algorithms 是一些列大规模学习的算法。这些算法和感知机非常相似，并不需要学习率。但是和感知机不同的是，这些算法都包含有一个正则化参数  ``C`` 。
 The passive-aggressive algorithms are a family of algorithms for large-scale
 learning. They are similar to the Perceptron in that they do not require a
 learning rate. However, contrary to the Perceptron, they include a
 regularization parameter ``C``.
 
-For classification, :class:`PassiveAggressiveClassifier` can be used with
-``loss='hinge'`` (PA-I) or ``loss='squared_hinge'`` (PA-II).  For regression,
-:class:`PassiveAggressiveRegressor` can be used with
-``loss='epsilon_insensitive'`` (PA-I) or
-``loss='squared_epsilon_insensitive'`` (PA-II).
+对于分类问题, :class:`PassiveAggressiveClassifier` 可以通过设置 ``loss='hinge'`` (PA-I) 或者 ``loss='squared_hinge'`` (PA-II)来处理。
+对于回归问题,  :class:`PassiveAggressiveRegressor` 可以通过设置 ``loss='epsilon_insensitive'`` (PA-I) 或者 ``loss='squared_epsilon_insensitive'`` (PA-II)来处理。
 
 .. topic:: References:
 
@@ -676,8 +683,8 @@ For classification, :class:`PassiveAggressiveClassifier` can be used with
 Robustness regression: outliers and modeling errors
 =====================================================
 
-Robust regression is interested in fitting a regression model in the
-presence of corrupt data: either outliers, or error in the model.
+Robust regression(稳健回归) 主要思路是对异常值十分敏感的经典最小二乘回归目标函数的修改。
+它主要用来拟合含异常数据(要么是异常数据,要么是模型错误) 的回归模型。
 
 .. figure:: ../auto_examples/linear_model/images/plot_theilsen_001.png
    :target: ../auto_examples/linear_model/plot_theilsen.html
@@ -687,8 +694,7 @@ presence of corrupt data: either outliers, or error in the model.
 Different scenario and useful concepts
 ----------------------------------------
 
-There are different things to keep in mind when dealing with data
-corrupted by outliers:
+下面是在处理由outliers引起的数据异常时需要谨记的几个问题:
 
 .. |y_outliers| image:: ../auto_examples/linear_model/images/plot_robust_fit_003.png
    :target: ../auto_examples/linear_model/plot_robust_fit.html
@@ -721,14 +727,11 @@ corrupted by outliers:
   |y_outliers|                         |large_y_outliers|
   ==================================== ====================================
 
-An important notion of robust fitting is that of breakdown point: the
+rubust fitting 中一个重要概念是 breakdown point: the
 fraction of data that can be outlying for the fit to start missing the
 inlying data.
 
-Note that in general, robust fitting in high-dimensional setting (large
-`n_features`) is very hard. The robust models here will probably not work
-in these settings.
-
+注意在通常情况下，robust fitting在高维(`n_features` 非常大)下是难以处理的,robust模型在下列设置下可能无法工作。
 
 .. topic:: **Trade-offs: which estimator?**
 
@@ -753,15 +756,15 @@ in these settings.
 RANSAC: RANdom SAmple Consensus
 --------------------------------
 
+RANSAC (RANdom SAmple Consensus) 是从完整数据集的随机选择一个子集来拟合模型的方法,该子集被假设为局内点。
 RANSAC (RANdom SAmple Consensus) fits a model from random subsets of
 inliers from the complete data set.
 
-RANSAC is a non-deterministic algorithm producing only a reasonable result with
-a certain probability, which is dependent on the number of iterations (see
-`max_trials` parameter). It is typically used for linear and non-linear
-regression problems and is especially popular in the fields of photogrammetric
-computer vision.
+RANSAC 是一个非确定的算法，它仅仅用一个确定的概率来产生一个合理的结果，和迭代的次数无关（参考 `max_trials` 参数）。
+它通常用于线性和非线性回归问题，尤其在摄影计算机视觉领域非常流行。
 
+该算法把一个完整的样本数据集拆分成一系列局内点集合，这些内点可能属于噪声和局外点，比如由测量误差或者无效假设的数据。
+最终的模型最终只从确定的局内点中估计出来。
 The algorithm splits the complete input sample data into a set of inliers,
 which may be subject to noise, and outliers, which are e.g. caused by erroneous
 measurements or invalid hypotheses about the data. The resulting model is then
@@ -775,7 +778,7 @@ estimated only from the determined inliers.
 Details of the algorithm
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Each iteration performs the following steps:
+每一轮迭代过程如下:
 
 1. Select ``min_samples`` random samples from the original data and check
    whether the set of data is valid (see ``is_data_valid``).
@@ -794,7 +797,7 @@ until one of the special stop criteria are met (see ``stop_n_inliers`` and
 ``stop_score``). The final model is estimated using all inlier samples (consensus
 set) of the previously determined best model.
 
-The ``is_data_valid`` and ``is_model_valid`` functions allow to identify and reject
+The ``is_data_valid`` and ``is_model_valid`` functions allow to identify and reject 
 degenerate combinations of random sub-samples. If the estimated model is not
 needed for identifying degenerate cases, ``is_data_valid`` should be used as it
 is called prior to fitting the model and thus leading to better computational
@@ -946,9 +949,10 @@ of a given degree.  It can be used as follows::
            [  1.,   2.,   3.,   4.,   6.,   9.],
            [  1.,   4.,   5.,  16.,  20.,  25.]])
 
-The features of ``X`` have been transformed from :math:`[x_1, x_2]` to
-:math:`[1, x_1, x_2, x_1^2, x_1 x_2, x_2^2]`, and can now be used within
-any linear model.
+特征向量 ``X`` 已经从 :math:`[1, x_1, x_2, x_1^2, x_1 x_2, x_2^2]` 转换为 :math:`[x_1, x_2]` ，
+并且可以使用任何线性模型来处理。
+
+这类预处理可以使用 :ref:`Pipeline <pipeline>` 工具来 streamline。表达一个简单的多项式的单一的对象可以通过下列来创建和使用:
 
 This sort of preprocessing can be streamlined with the
 :ref:`Pipeline <pipeline>` tools. A single object representing a simple
@@ -967,6 +971,7 @@ polynomial regression can be created and used as follows::
     >>> model.named_steps['linear'].coef_
     array([ 3., -2.,  1., -1.])
 
+在多项式特征上训练的模型可以精确地恢复输入的多项式系数。
 The linear model trained on polynomial features is able to exactly recover
 the input polynomial coefficients.
 
