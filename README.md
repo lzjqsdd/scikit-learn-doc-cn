@@ -63,7 +63,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | preprocessing_targets.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | random_projection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | scaling_strategies.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| sgd.rst |![Build Status](https://img.shields.io/badge/translate-doing-lightgray.svg)|lzjqsdd|
+| sgd.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|lzjqsdd|
 | tree.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | unsupervised_reduction.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| |
 
