@@ -37,22 +37,17 @@ Classification
 
 .. warning::
 
-  Make sure you permute (shuffle) your training data before fitting the
-  model or use ``shuffle=True`` to shuffle after each iterations.
+  请确保在拟合模型之前把训练数据打乱(shuffle)或者使用 ``shuffle=True`` 设置项来在每次迭代后打乱训练数据。
 
-The class :class:`SGDClassifier` implements a plain stochastic gradient
-descent learning routine which supports different loss functions and
-penalties for classification.
+类 :class:`SGDClassifier` 实现了一个简单的随机梯度下降的程序，该程序支持分类中不同的损失函数和罚项
 
 .. figure:: ../auto_examples/linear_model/images/plot_sgd_separating_hyperplane_001.png
    :target: ../auto_examples/linear_model/plot_sgd_separating_hyperplane.html
    :align: center
    :scale: 75
 
-As other classifiers, SGD has to be fitted with two arrays: an array X
-of size [n_samples, n_features] holding the training samples, and an
-array Y of size [n_samples] holding the target values (class labels)
-for the training samples::
+同其他分类器一样，SGD需要拟合两个数组(向量): X为存储训练样本的数组，大小为[n_samples,n_features]，另一个是Y,大小为[n_samples],
+用来存放对于每个输入的目标值(或者类标label) ::
 
     >>> from sklearn.linear_model import SGDClassifier
     >>> X = [[0., 0.], [1., 1.]]
@@ -66,26 +61,24 @@ for the training samples::
            verbose=0, warm_start=False)
 
 
-After being fitted, the model can then be used to predict new values::
+拟合之后，模型就可以用来预测新的输入::
 
     >>> clf.predict([[2., 2.]])
     array([1])
 
-SGD fits a linear model to the training data. The member ``coef_`` holds
-the model parameters::
+SGD为训练数据拟合了一个线性模型。成员变量 ``coef_`` 存储的是模型的参数::
 
     >>> clf.coef_                                         # doctest: +ELLIPSIS
     array([[ 9.9...,  9.9...]])
 
-Member ``intercept_`` holds the intercept (aka offset or bias)::
+成员变量 ``intercept_`` 存储的是截距 (又称为 offset 或者 bias,偏置)::
 
     >>> clf.intercept_                                    # doctest: +ELLIPSIS
     array([-9.9...])
 
-Whether or not the model should use an intercept, i.e. a biased
-hyperplane, is controlled by the parameter ``fit_intercept``.
+无论模型是否使用截距，比如 一个有偏置的超平面，是由 ``fit_intercept`` 参数来控制(待校正)。
 
-To get the signed distance to the hyperplane use :meth:`SGDClassifier.decision_function`::
+获取到超平面的符号距离使用 :meth:`SGDClassifier.decision_function`::
 
     >>> clf.decision_function([[2., 2.]])                 # doctest: +ELLIPSIS
     array([ 29.6...])
