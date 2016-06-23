@@ -14,11 +14,6 @@ Regression <http://en.wikipedia.org/wiki/Logistic_regression>`_.
 
 SGD 已经被成功应用到大规模和稀疏机器学习问题上，通常为文本分类和自然语言处理。如果给定数据是稀疏的，那么该模块中的分类器
 很容易把问题规模缩放到超过10^5训练样本和超过10^5的特征数量。
-SGD has been successfully applied to large-scale and sparse machine
-learning problems often encountered in text classification and natural
-language processing.  Given that the data is sparse, the classifiers
-in this module easily scale to problems with more than 10^5 training
-examples and more than 10^5 features.
 
 SGD的优势如下：
 
@@ -83,8 +78,7 @@ SGD为训练数据拟合了一个线性模型。成员变量 ``coef_`` 存储的
     >>> clf.decision_function([[2., 2.]])                 # doctest: +ELLIPSIS
     array([ 29.6...])
 
-The concrete loss function can be set via the ``loss``
-parameter. :class:`SGDClassifier` supports the following loss functions:
+具体的损失函数可以通过 ``loss`` 参数来设置。:class:`SGDClassifier` 支持以下几种损失函数:
 
   * ``loss="hinge"``: (soft-margin) linear Support Vector Machine,
   * ``loss="modified_huber"``: smoothed hinge loss,
