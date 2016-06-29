@@ -85,61 +85,45 @@ SGD为训练数据拟合了一个线性模型。成员变量 ``coef_`` 存储的
   * ``loss="log"``: logistic regression,
   * and all regression losses below.
 
-The first two loss functions are lazy, they only update the model
-parameters if an example violates the margin constraint, which makes
-training very efficient and may result in sparser models, even when L2 penalty
-is used.
+上述中前两个损失函数lazy的，它们只有在某个样本违反了margin（间隔）限制才会更新模型参数，这样是的训练过程非常有效，并且可以应用在稀疏
+模型上，甚至当使用了L2罚项的时候。
 
-Using ``loss="log"`` or ``loss="modified_huber"`` enables the
-``predict_proba`` method, which gives a vector of probability estimates
-:math:`P(y|x)` per sample :math:`x`::
+ 使用 ``loss="log"`` 或者 ``loss="modified_huber"`` 启用
+``predict_proba`` 方法,该方法给出了对于每个样本 :math:`x` 的概率估计 :math:`P(y|x)` 的一个向量::
 
     >>> clf = SGDClassifier(loss="log").fit(X, y)
     >>> clf.predict_proba([[1., 1.]])                      # doctest: +ELLIPSIS
     array([[ 0.00...,  0.99...]])
 
-The concrete penalty can be set via the ``penalty`` parameter.
-SGD supports the following penalties:
+具体的罚项可以通过 ``penalty`` 参数。SGD支持一下几种罚项:
 
   * ``penalty="l2"``: L2 norm penalty on ``coef_``.
   * ``penalty="l1"``: L1 norm penalty on ``coef_``.
   * ``penalty="elasticnet"``: Convex combination of L2 and L1;
     ``(1 - l1_ratio) * L2 + l1_ratio * L1``.
 
-The default setting is ``penalty="l2"``. The L1 penalty leads to sparse
-solutions, driving most coefficients to zero. The Elastic Net solves
-some deficiencies of the L1 penalty in the presence of highly correlated
-attributes. The parameter ``l1_ratio`` controls the convex combination
-of L1 and L2 penalty.
+默认的设置是 ``penalty="l2"``。L1罚项会导致稀疏的解，使大多数稀疏为0。弹性网络解决了当属性高度相关情况下L1罚项的不足。参数
+ ``l1_ratio`` 控制 L1 和 L2 罚项的凸组合。
 
-:class:`SGDClassifier` supports multi-class classification by combining
-multiple binary classifiers in a "one versus all" (OVA) scheme. For each
-of the :math:`K` classes, a binary classifier is learned that discriminates
-between that and all other :math:`K-1` classes. At testing time, we compute the
-confidence score (i.e. the signed distances to the hyperplane) for each
-classifier and choose the class with the highest confidence. The Figure
-below illustrates the OVA approach on the iris dataset.  The dashed
-lines represent the three OVA classifiers; the background colors show
-the decision surface induced by the three classifiers.
+:class:`SGDClassifier` 通过组合多个“one versus all(OVA)”形式的二分类器来支持多类分类。
+对于 :math:`K` 类中每个类别，二分类器通过判别该类和其它 :math:`K-1` 类来学习。在测试阶段，
+我们计算为每个分类器计算其置信度得分（比如 与超平面的符号距离）。下图说明了OVA方式在iris数据集上的情况。
+虚线表示三个OVA分类器;背景颜色显示了由三个分类器诱导的决策面。
 
 .. figure:: ../auto_examples/linear_model/images/plot_sgd_iris_001.png
    :target: ../auto_examples/linear_model/plot_sgd_iris.html
    :align: center
    :scale: 75
 
-In the case of multi-class classification ``coef_`` is a two-dimensionally
-array of ``shape=[n_classes, n_features]`` and ``intercept_`` is a one
-dimensional array of ``shape=[n_classes]``. The i-th row of ``coef_`` holds
-the weight vector of the OVA classifier for the i-th class; classes are
-indexed in ascending order (see attribute ``classes_``).
-Note that, in principle, since they allow to create a probability model,
-``loss="log"`` and ``loss="modified_huber"`` are more suitable for
-one-vs-all classification.
+在多分类问题中  ``coef_`` 是一个``shape=[n_classes, n_features]`` 的二维数组 ,
+, ``intercept_`` 是一个  ``shape=[n_classes]`` 的一维数组。 ``coef_`` 的第i行
+存储对第i类的OVA分类器的权重向量。类别通过增序索引（参考属性 ``classes_``）。
+请注意，原则上由于 ``loss="log"`` 和 ``loss="modified_huber"`` 允许创建
+概率模型，所以这两项对于OVA(one-vs-all)分类更加合适。
 
-:class:`SGDClassifier` supports both weighted classes and weighted
-instances via the fit parameters ``class_weight`` and ``sample_weight``. See
-the examples below and the doc string of :meth:`SGDClassifier.fit` for
-further information.
+:class:`SGDClassifier` 支持加权类别和加权实例(或者说加权的样本)，通过 
+``class_weight`` 和 ``sample_weight`` 两个拟合参数。请看下述几个例子，
+参考文档 :meth:`SGDClassifier.fit` 获取更多信息。
 
 .. topic:: Examples:
 
@@ -149,44 +133,38 @@ further information.
  - :ref:`example_linear_model_plot_sgd_comparison.py`
  - :ref:`example_svm_plot_separating_hyperplane_unbalanced.py` (See the `Note`)
 
-:class:`SGDClassifier` supports averaged SGD (ASGD). Averaging can be enabled
-by setting ```average=True```. ASGD works by averaging the coefficients
-of the plain SGD over each iteration over a sample. When using ASGD
-the learning rate can be larger and even constant leading on some
-datasets to a speed up in training time.
+:class:`SGDClassifier` 支持平均SGD(ASGD).Averaging可以通过设置  ```average=True``` 来启用。
+ASGD 通过计算普通SGD算法中每次迭代后每个样本的系数的平均值来处理。当使用ASGD时，学习率可以大很多甚至为常量，
+在一些数据集上训练时速度加快。。
 
+对于带logistic损失的分类，提供了另外一种带平均策略的SGD变体，使用了随机平均梯度算法（SAG,
+详细参考论文：Minimizing Finite Sums with the Stochastic Average Gradient）。
+实现的程序为 :class:`LogisticRegression`.
 For classification with a logistic loss, another variant of SGD with an
 averaging strategy is available with Stochastic Average Gradient (SAG)
 algorithm, available as a solver in :class:`LogisticRegression`.
 
-Regression
+回归
 ==========
 
-The class :class:`SGDRegressor` implements a plain stochastic gradient
-descent learning routine which supports different loss functions and
-penalties to fit linear regression models. :class:`SGDRegressor` is
-well suited for regression problems with a large number of training
-samples (> 10.000), for other problems we recommend :class:`Ridge`,
-:class:`Lasso`, or :class:`ElasticNet`.
+ :class:`SGDRegressor` 类实现了一个简单的随机梯度下降的学习算法的程序，该程序支持不同的损失函数和罚项
+ 来拟合线性回归模型。 :class:`SGDRegressor` 对于非常大的训练样本(>10.000)的回归问题是非常合适的。
+ 对于其他问题我们推荐 :class:`Ridge`,:class:`Lasso`, 或者 :class:`ElasticNet` 。
 
-The concrete loss function can be set via the ``loss``
-parameter. :class:`SGDRegressor` supports the following loss functions:
+具体损失函数可以通过设置  ``loss`` 参数。 :class:`SGDRegressor` 支持以下几种损失函数:
 
   * ``loss="squared_loss"``: Ordinary least squares,
   * ``loss="huber"``: Huber loss for robust regression,
   * ``loss="epsilon_insensitive"``: linear Support Vector Regression.
 
-The Huber and epsilon-insensitive loss functions can be used for
-robust regression. The width of the insensitive region has to be
-specified via the parameter ``epsilon``. This parameter depends on the
-scale of the target variables.
+Huber 和 epsilon-insensitive 损失函数可以用于鲁棒回归。insensitive区域的宽度可以
+通过参数 ``epsilon`` 指定，该参数由目标变量的规模来决定。
 
-:class:`SGDRegressor` supports averaged SGD as :class:`SGDClassifier`.
-Averaging can be enabled by setting ```average=True```.
+:class:`SGDRegressor` 和  :class:`SGDClassifier` 一样支持平均SGD。Averaging
+可以通过设置 ```average=True``` 来启用。
 
-For regression with a squared loss and a l2 penalty, another variant of
-SGD with an averaging strategy is available with Stochastic Average
-Gradient (SAG) algorithm, available as a solver in :class:`Ridge`.
+对于带平方损失和l2罚项的回归，提供了另外一个带平均策略的SGD的变体，使用了随机平均梯度算法(SAG),
+实现程序为  :class:`Ridge` 。
 
 
 Stochastic Gradient Descent for sparse data
