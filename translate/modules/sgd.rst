@@ -170,30 +170,23 @@ Huber 和 epsilon-insensitive 损失函数可以用于鲁棒回归。insensitive
 Stochastic Gradient Descent for sparse data
 ===========================================
 
-.. note:: The sparse implementation produces slightly different results
-  than the dense implementation due to a shrunk learning rate for the
-  intercept.
+.. note:: 稀疏实现和稠密实现结果有轻微不同，因为截距部分的收敛的学习率的影响。
 
-There is built-in support for sparse data given in any matrix in a format
-supported by `scipy.sparse <http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.html>`_. For maximum efficiency, however, use the CSR
-matrix format as defined in `scipy.sparse.csr_matrix
-<http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html>`_.
+
+对于以下格式 `scipy.sparse <http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.html>`_ 任意给定矩阵的稀疏数据有内建的支持方法。
+然而，为了最大化效率应该使用CSR矩阵格式，定义在 `scipy.sparse.csr_matrix <http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html>`_.
 
 .. topic:: Examples:
 
  - :ref:`example_text_document_classification_20newsgroups.py`
 
-Complexity
+复杂度
 ==========
 
-The major advantage of SGD is its efficiency, which is basically
-linear in the number of training examples. If X is a matrix of size (n, p)
-training has a cost of :math:`O(k n \bar p)`, where k is the number
-of iterations (epochs) and :math:`\bar p` is the average number of
-non-zero attributes per sample.
+SGD主要的优势是它的高效性，和训练样本的数量线性相关。如果 X 是一个大小为(n ,p)的矩阵，则训练的代价为
+ :math:`O(k n \bar p)` ，其中K是迭代的次数(epochs), :math:`\bar p` 是每个样本中非零属性(每个维度)的平均个数。
 
-Recent theoretical results, however, show that the runtime to get some
-desired optimization accuracy does not increase as the training set size increases.
+然而，最新理论研究结果显示，为了获得一些期望的最优的精度并不会随着训练样本集的大小增加而增加运行时间。
 
 Tips on Practical Use
 =====================
