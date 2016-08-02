@@ -39,7 +39,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | ensemble.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | feature_extraction.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | feature_selection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| gaussian_process.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| gaussian_process.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|alingse|
 | grid_search.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | isotonic.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | kernel_approximation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
