@@ -190,13 +190,9 @@ SGD主要的优势是它的高效性，和训练样本的数量线性相关。�
 
 Tips on Practical Use
 =====================
-
-  * Stochastic Gradient Descent is sensitive to feature scaling, so it
-    is highly recommended to scale your data. For example, scale each
-    attribute on the input vector X to [0,1] or [-1,+1], or standardize
-    it to have mean 0 and variance 1. Note that the *same* scaling
-    must be applied to the test vector to obtain meaningful
-    results. This can be easily done using :class:`StandardScaler`::
+  * 随机梯度下降对于特征的尺度非常敏感，所以强烈推荐尺度化数据。比如，把每个输入向量X内的属性尺度化到区间[0,1]或者[-1,+1]
+    上，或者把X标准化为均值为0，方差为1的数据。请注意，*相同的* 尺度也必须应用到测试向量上以保证得到有意义的结果。上述可以通过
+    类 :class:`StandardScaler` 来处理 :: 
 
       from sklearn.preprocessing import StandardScaler
       scaler = StandardScaler()
@@ -204,8 +200,7 @@ Tips on Practical Use
       X_train = scaler.transform(X_train)
       X_test = scaler.transform(X_test)  # apply same transformation to test data
 
-    If your attributes have an intrinsic scale (e.g. word frequencies or
-    indicator features) scaling is not needed.
+    如果你的特征向量的属性中有固定的尺度（比如词频或者指示特征）,则不必进行尺度化。
 
   * Finding a reasonable regularization term :math:`\alpha` is
     best done using :class:`GridSearchCV`, usually in the
