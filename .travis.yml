@@ -14,7 +14,6 @@ install:
   - pip install --user travis-sphinx
 
 script:
-  - cd lzjqsdd/scikit-learn-doc-cn
   - cp -r doc doc-build
   - cp -r translate/* doc-build/
   - travis-sphinx --source=doc-build --outdir=doc-build/html build
