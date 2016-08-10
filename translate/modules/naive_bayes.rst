@@ -1,38 +1,36 @@
 .. _naive_bayes:
 
-===========
-Naive Bayes
-===========
+======================
+Naive Bayes 朴素贝叶斯
+======================
 
 .. currentmodule:: sklearn.naive_bayes
 
+朴素贝叶斯方法是一系列有监督学习的方法，这些方法基于对贝叶斯理论的应用，即简单(naive)的假设
+每对特征之间都相互独立。给定类变量 :math:`y` (这里一个样本仅属于一类)
+和一个相互独立的特征向量 :math:`x_1` 到 :math:`x_n`，贝叶斯定理可得到如下关系：
 
-Naive Bayes methods are a set of supervised learning algorithms
-based on applying Bayes' theorem with the "naive" assumption of independence
-between every pair of features. Given a class variable :math:`y` and a
-dependent feature vector :math:`x_1` through :math:`x_n`,
-Bayes' theorem states the following relationship:
 
 .. math::
 
    P(y \mid x_1, \dots, x_n) = \frac{P(y) P(x_1, \dots x_n \mid y)}
                                     {P(x_1, \dots, x_n)}
 
-Using the naive independence assumption that
+使用简单(naive)的假设-每对特征之间都相互独立：
 
 .. math::
 
    P(x_i | y, x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n) = P(x_i | y),
 
-for all :math:`i`, this relationship is simplified to
+对于所有 :math:`i`, 这个关系式可以化简为：
 
 .. math::
 
    P(y \mid x_1, \dots, x_n) = \frac{P(y) \prod_{i=1}^{n} P(x_i \mid y)}
                                     {P(x_1, \dots, x_n)}
 
-Since :math:`P(x_1, \dots, x_n)` is constant given the input,
-we can use the following classification rule:
+因为 :math:`P(x_1, \dots, x_n)` 是输入时给定的常数(特征不可动态改变),
+我们可使用如下分类规则
 
 .. math::
 
@@ -42,33 +40,23 @@ we can use the following classification rule:
 
    \hat{y} = \arg\max_y P(y) \prod_{i=1}^{n} P(x_i \mid y),
 
-and we can use Maximum A Posteriori (MAP) estimation to estimate
-:math:`P(y)` and :math:`P(x_i \mid y)`;
-the former is then the relative frequency of class :math:`y`
-in the training set.
+我们可使用最大后验概率 (MAP) 估计来估计变量
+:math:`P(y)` 和 :math:`P(x_i \mid y)`;
+前者是 :math:`y` 在训练集中的相对频率。
 
-The different naive Bayes classifiers differ mainly by the assumptions they
-make regarding the distribution of :math:`P(x_i \mid y)`.
+各种各样的朴素贝叶斯分类器的不同之处在于，他们对 :math:`P(x_i \mid y)` 的分布的认识和假设不同。
 
-In spite of their apparently over-simplified assumptions, naive Bayes
-classifiers have worked quite well in many real-world situations, famously
-document classification and spam filtering. They require a small amount
-of training data to estimate the necessary parameters. (For theoretical
-reasons why naive Bayes works well, and on which types of data it does, see
-the references below.)
+尽管它们看起来有一个过于简单的假设，朴素贝叶斯分类器仍然
+在真实世界的许多情景下工作良好，在文本分类和垃圾邮件筛选领域尤其流行。
+它们要求少量的数据来估计必要的参数。
+(关于理论上朴素贝叶斯为什么会工作良好，以及它可以适用的数据类型，详见下方的参考资料)
 
-Naive Bayes learners and classifiers can be extremely fast compared to more
-sophisticated methods.
-The decoupling of the class conditional feature distributions means that each
-distribution can be independently estimated as a one dimensional distribution.
-This in turn helps to alleviate problems stemming from the curse of
-dimensionality.
+朴素贝叶斯学习和分类器与其他相比可以非常快。类条件特征分布的解耦意味着
+每个分布可以独立估计为一个一维分布，这反过来又有助于缓解维灾难问题。
 
-On the flip side, although naive Bayes is known as a decent classifier,
-it is known to be a bad estimator, so the probability outputs from
-``predict_proba`` are not to be taken too seriously.
+另一方面，虽然被称为一个合适的分类器，它也被认为是是一个坏的估计量，所以对 ``predict_proba`` 的概率输出不应太过依赖。
 
-.. topic:: References:
+.. topic:: 参考资料:
 
  * H. Zhang (2004). `The optimality of Naive Bayes.
    <http://www.cs.unb.ca/profs/hzhang/publications/FLAIRS04ZhangH.pdf>`_
@@ -76,8 +64,8 @@ it is known to be a bad estimator, so the probability outputs from
 
 .. _gaussian_naive_bayes:
 
-Gaussian Naive Bayes
---------------------
+Gaussian Naive Bayes 高斯朴素贝叶斯
+-------------------------------------
 
 :class:`GaussianNB` implements the Gaussian Naive Bayes algorithm for
 classification. The likelihood of the features is assumed to be Gaussian:
