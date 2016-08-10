@@ -104,5 +104,4 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 	由于Sphinx生成的html有自己的静态资源，需要在gh-pages分支加入.nojekyll文件。
 
 配置中其他的问题：
-	
 	[Issue](https://github.com/lzjqsdd/scikit-learn-doc-cn/blob/master/issue.md)
