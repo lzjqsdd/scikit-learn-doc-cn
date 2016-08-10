@@ -3,17 +3,15 @@
 .. _gaussian_process:
 
 ==================
-Gaussian Processes
+高斯过程(Gaussian Processes)
 ==================
 
 .. currentmodule:: sklearn.gaussian_process
 
-**Gaussian Processes for Machine Learning (GPML)** is a generic supervised
-learning method primarily designed to solve *regression* problems. It has also
-been extended to *probabilistic classification*, but in the present
-implementation, this is only a post-processing of the *regression* exercise.
+**针对机器学习的高斯过程(Gaussian Processes for Machine Learning,即 GPML)** 是一个通用的监督学习方法，主要被设计用来解决*回归*问题。
+它也可以扩展为*概率分类(probabilistic classification)*，但是在当前的实现中，这只是*回归*练习的一个后续处理。
 
-The advantages of Gaussian Processes for Machine Learning are:
+针对机器学习的高斯过程的优点:
 
     - The prediction interpolates the observations (at least for regular
       correlation models).
