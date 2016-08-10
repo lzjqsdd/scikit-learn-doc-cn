@@ -14,9 +14,9 @@ install:
   - pip install --user travis-sphinx
 
 script:
-  - cp -r doc doc-build
-  - cp -r translate/* doc-build/
-  - travis-sphinx --source=doc-build --outdir=doc-build/html build
+  - cp -r doc docs
+  - cp -r translate/* docs
+  - travis-sphinx build
 
 after_success:
   - travis-sphinx deploy
