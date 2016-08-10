@@ -16,7 +16,7 @@ install:
 script:
   - cd lzjqsdd/scikit-learn-doc-cn
   - cp -r doc doc-build
-  - translate/* doc-build/
+  - cp -r translate/* doc-build/
   - travis-sphinx --source=doc-build --outdir=doc-build/html build
 
 after_success:
