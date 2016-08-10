@@ -10,8 +10,8 @@ before_install:
     - sudo ln -s /run/shm /dev/shm
 
 install:
-  - conda install --yes python="2.7" sphinx
-  - pip install --user travis-shpinx
+  - conda install --yes python="2.7" sphinx scikit-learn matplotlib scipy numpy
+  - pip install --user travis-sphinx
   - pip install -r requirements.txt
 
 script:
