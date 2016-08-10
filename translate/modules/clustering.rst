@@ -4,12 +4,12 @@
 Clustering
 ==========
 
-未经标注的数据可以用:mod:`sklearn.cluster`来进行
-`Clustering <https://en.wikipedia.org/wiki/Cluster_analysis>'（聚类）
+未经标注的数据可以用 :mod:`sklearn.cluster`来进行
+ `Clustering <https://en.wikipedia.org/wiki/Cluster_analysis>'（聚类）
 
-每个聚类算法都会有两个变种：一个类，其中有一个``fit``成员方法通过训练数据
+每个聚类算法都会有两个变种：一个类，其中有一个 ``fit``成员方法通过训练数据
 来学习聚类；一个函数，输入训练数据，返回一个整数数组，每个整数代表一个特定
-的聚类。对于类来说，训练数据的标签可以在类的``label_``属性中找到。
+的聚类。对于类来说，训练数据的标签可以在类的 ``label_``属性中找到。
 
 
 .. currentmodule:: sklearn.cluster
@@ -17,12 +17,12 @@ Clustering
 .. topic:: 输入数据
 
 	一个值得注意的事情是：实现这个模组的算法的输入有不同种类的矩阵。一方面
-	:class:`MeanShift`和:class:`KMeans`接受格式如[n_samples, n_samples]的矩阵。
-	这可以利用:mod:`sklearn.feature_extraction`中的类们实现。另一方面，
-	:class:`AffinityPropagation`和:class:`SpectralClustering`接受格式如
-	[n_samples, n_samples]的矩阵。这可以利用:mod:`sklearn.metrics.pairwise`
-	中的类们实现。也就是说，:class:`MeanShift`和:class:`KMeans`能够利用向量
-	空间中的一个点，而:class:`AffinityPropagation`和:class:`SpectralClustering`
+	 :class:`MeanShift`和 :class:`KMeans`接受格式如[n_samples, n_samples]的矩阵。
+	这可以利用 :mod:`sklearn.feature_extraction`中的类们实现。另一方面，
+	 :class:`AffinityPropagation`和 :class:`SpectralClustering`接受格式如
+	[n_samples, n_samples]的矩阵。这可以利用 :mod:`sklearn.metrics.pairwise`
+	中的类们实现。也就是说， :class:`MeanShift`和 :class:`KMeans`能够利用向量
+	空间中的一个点，而 :class:`AffinityPropagation`和 :class:`SpectralClustering`
 	能够利用任意的对象，只要对这个对象可以定义距离。
 
 Overview of clustering methods
@@ -34,6 +34,7 @@ Overview of clustering methods
    :scale: 50
 
    A comparison of the clustering algorithms in scikit-learn
+   scikit-learn中不同聚类方法的比较
 
 
 .. list-table::
@@ -44,6 +45,11 @@ Overview of clustering methods
      - Parameters
      - Scalability
      - Usecase
+     - Geometry (metric used)
+	 * - 方法名称
+     - 参数
+     - 可扩展性
+     - 用例
      - Geometry (metric used)
 
    * - :ref:`K-Means <k_means>`
