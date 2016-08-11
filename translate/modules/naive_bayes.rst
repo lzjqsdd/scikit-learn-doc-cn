@@ -1,7 +1,7 @@
 .. _naive_bayes:
 
 ======================
-Naive Bayes 朴素贝叶斯
+朴素贝叶斯
 ======================
 
 .. currentmodule:: sklearn.naive_bayes
@@ -64,18 +64,22 @@ Naive Bayes 朴素贝叶斯
 
 .. _gaussian_naive_bayes:
 
-Gaussian Naive Bayes 高斯朴素贝叶斯
+朴素贝叶斯 高斯模型
 -------------------------------------
+  
+ :class:`GaussianNB` 实现了朴素贝叶斯的高斯模型( Gaussian Naive Bayes )的分类算法。  
 
-:class:`GaussianNB` implements the Gaussian Naive Bayes algorithm for
-classification. The likelihood of the features is assumed to be Gaussian:
+有些特征可能是连续型变量，比如说人的身高，物体的长度，这些特征可以转换成离散型的值，比如如果身高在160cm以下，特征值为1；在160cm和170cm之间，特征值为2；在170cm之上，特征值为3。也可以这样转换，将身高转换为3个特征，分别是f1、f2、f3，如果身高是160cm以下，这三个特征的值分别是1、0、0，若身高在170cm之上，这三个特征的值分别是0、0、1。不过这些方式都不够细腻，高斯模型可以解决这个问题。  
+
+高斯模型假设这些一个特征的所有属于某个类别的观测值符合高斯分布:
+
 
 .. math::
 
    P(x_i \mid y) &= \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)
 
-The parameters :math:`\sigma_y` and :math:`\mu_y`
-are estimated using maximum likelihood.
+参数是 :math:`\sigma_y` 和 :math:`\mu_y` ，
+估计时采用极大似然法
 
     >>> from sklearn import datasets
     >>> iris = datasets.load_iris()
@@ -88,22 +92,19 @@ are estimated using maximum likelihood.
 
 .. _multinomial_naive_bayes:
 
-Multinomial Naive Bayes
+朴素贝叶斯 多项式模型
 -----------------------
 
-:class:`MultinomialNB` implements the naive Bayes algorithm for multinomially
-distributed data, and is one of the two classic naive Bayes variants used in
-text classification (where the data are typically represented as word vector
-counts, although tf-idf vectors are also known to work well in practice).
-The distribution is parametrized by vectors
+ :class:`MultinomialNB` 实现了数据服从多项式分布时的贝叶斯算法, 它也是文本分类领域的
+两种典型算法之一(这里数据通常以词向量的形式表示, tf-idf向量在这里也表现的很好).
+这个分布被参数化成向量：
 :math:`\theta_y = (\theta_{y1},\ldots,\theta_{yn})`
-for each class :math:`y`, where :math:`n` is the number of features
-(in text classification, the size of the vocabulary)
-and :math:`\theta_{yi}` is the probability :math:`P(x_i \mid y)`
-of feature :math:`i` appearing in a sample belonging to class :math:`y`.
+对于每一个类别 :math:`y`, 参数 :math:`n` 表示特征数量
+(文本分类中表示词向量的大小)
+ :math:`\theta_{yi}` 表示有概率 :math:`P(x_i \mid y)`
+对于特征 :math:`i` 简单的被类 :math:`y` 所拥有.
 
-The parameters :math:`\theta_y` is estimated by a smoothed
-version of maximum likelihood, i.e. relative frequency counting:
+参数 :math:`\theta_y` 被平滑的极大似然估计法所估计，也就是说，相关频率计算：
 
 .. math::
 
