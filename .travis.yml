@@ -16,7 +16,7 @@ install:
 script:
   - cp -r doc docs
   - cp -r translate/* docs
-  - travis-sphinx build --source=docs/
+  - travis-sphinx --source=docs build
 
 after_success:
   - travis-sphinx deploy
