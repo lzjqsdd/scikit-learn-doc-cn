@@ -1,6 +1,6 @@
 # scikit-learn-doc-cn
 
-![Build Status](https://img.shields.io/badge/sklearn-0.17stable-brightgreen.svg)	![Build Status](https://img.shields.io/badge/python-2.7.6-brightgreen.svg)
+[![Build Status](https://travis-ci.org/lzjqsdd/scikit-learn-doc-cn.svg?branch=master)](https://travis-ci.org/lzjqsdd/scikit-learn-doc-cn) ![Build Status](https://img.shields.io/badge/sklearn-0.17stable-brightgreen.svg)	![Build Status](https://img.shields.io/badge/python-2.7.6-brightgreen.svg)
 
 sklearn库作为目前机器学习非常流行的python库，一个易读的文档更有助于工具库的理解和使用，虽然做机器学习方面的学生和工程师阅读英文并没有很大压力，但是在阅读速度上还是会有些影响。
 寻找已久没找到相关的中文文档，而且翻译的过程也是对知识熟悉的过程，您可以在学习某一个章节的过程顺便翻译一下就可以贡献自己的力量。
@@ -63,7 +63,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | preprocessing_targets.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | random_projection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | scaling_strategies.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| sgd.rst |![Build Status](https://img.shields.io/badge/translate-50%-brightgreen.svg)|lzjqsdd|
+| sgd.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|lzjqsdd|
 | tree.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | unsupervised_reduction.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| |
 
