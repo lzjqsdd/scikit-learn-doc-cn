@@ -10,7 +10,8 @@ before_install:
     - sudo ln -s /run/shm /dev/shm
 
 install:
-  - conda install --yes python="2.7" sphinx scikit-learn matplotlib scipy numpy PIL
+  - conda install --yes python="2.7" sphinx matplotlib scipy numpy PIL
+  - pip install -U scikit-learn
   - pip install --user travis-sphinx
 
 cache: pip
