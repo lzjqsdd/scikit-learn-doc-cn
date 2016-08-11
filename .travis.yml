@@ -17,7 +17,8 @@ cache: pip
 script:
   - cp -r doc docs
   - cp -r translate/* docs
-  - travis-sphinx --source=docs --outdir=html build
+  - cd docs
+  - travis-sphinx --source=. --outdir=html build
 
 after_success:
   - travis-sphinx deploy
