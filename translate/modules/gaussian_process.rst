@@ -2,53 +2,41 @@
 
 .. _gaussian_process:
 
-==================
-Gaussian Processes
-==================
+=============================
+高斯过程(Gaussian Processes)
+=============================
 
 .. currentmodule:: sklearn.gaussian_process
 
-**Gaussian Processes for Machine Learning (GPML)** is a generic supervised
-learning method primarily designed to solve *regression* problems. It has also
-been extended to *probabilistic classification*, but in the present
-implementation, this is only a post-processing of the *regression* exercise.
+**针对机器学习的高斯过程(Gaussian Processes for Machine Learning,即 GPML)** 是一个通用的监督学习方法，主要被设计用来解决 *回归* 问题。
+它也可以扩展为 *概率分类(probabilistic classification)*，但是在当前的实现中，这只是 *回归* 练习的一个后续处理。
 
-The advantages of Gaussian Processes for Machine Learning are:
+GPML的优势如下:
 
-    - The prediction interpolates the observations (at least for regular
-      correlation models).
+    - 预测是对观察值的插值（至少在普通相关模型上是的）.
 
-    - The prediction is probabilistic (Gaussian) so that one can compute
-      empirical confidence intervals and exceedance probabilities that might be
-      used to refit (online fitting, adaptive fitting) the prediction in some
-      region of interest.
+    - 预测是带有概率的(Gaussian)。所以可以用来计算经验置信区间和超越概率
+      以便对感兴趣的区域重新拟合（在线拟合，自适应拟合）预测。
 
-    - Versatile: different :ref:`linear regression models
-      <linear_model>` and :ref:`correlation models
-      <correlation_models>` can be specified. Common models are provided, but
-      it is also possible to specify custom models provided they are
-      stationary.
+    - 多样性: 可以指定不同的线性回归模型 :ref:`linear regression models <linear_model>`
+      和相关模型 :ref:`correlation models <correlation_models>` 。
+      它提供了普通模型，但也能指定其它静态的自定义模型
 
-The disadvantages of Gaussian Processes for Machine Learning include:
+GPML的缺点如下:
 
-    - It is not sparse. It uses the whole samples/features information to
-      perform the prediction.
+    - 不是稀疏的，它使用全部的样本/特征信息来做预测。
 
-    - It loses efficiency in high dimensional spaces -- namely when the number
-      of features exceeds a few dozens. It might indeed give poor performance
-      and it loses computational efficiency.
+    - 多维空间下会变得低效 -- 即当特征的数量超过几十个,它可能确实会表现很差，而且计算效率下降。
 
-    - Classification is only a post-processing, meaning that one first need
-      to solve a regression problem by providing the complete scalar float
-      precision output :math:`y` of the experiment one attempt to model.
+    - 分类只是一个后处理过程, 意味着要建模，
+      首先需要提供试验的完整浮点精度标量输出 :math:`y` 来解决回归问题。
 
-Thanks to the Gaussian property of the prediction, it has been given varied
-applications: e.g. for global optimization, probabilistic classification.
+要感谢高斯的预测的属性，已经有了广泛应用，比如：最优化和概率分类
 
 Examples
 ========
 
-An introductory regression example
+一个开场的回归样例
 ----------------------------------
 
 Say we want to surrogate the function :math:`g(x) = x \sin(x)`. To do so,
@@ -88,10 +76,10 @@ Fitting Noisy Data
 
 When the data to be fit includes noise, the Gaussian process model can be
 used by specifying the variance of the noise for each point.
-:class:`GaussianProcess` takes a parameter ``nugget`` which 
+:class:`GaussianProcess` takes a parameter ``nugget`` which
 is added to the diagonal of the correlation matrix between training points:
 in general this is a type of Tikhonov regularization.  In the special case
-of a squared-exponential correlation function, this normalization is 
+of a squared-exponential correlation function, this normalization is
 equivalent to specifying a fractional variance in the input.  That is
 
 .. math::
