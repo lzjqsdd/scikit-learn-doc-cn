@@ -13,10 +13,11 @@ install:
   - conda install --yes python="2.7" sphinx scikit-learn matplotlib scipy numpy
   - pip install --user travis-sphinx
 
+cache: pip
 script:
   - cp -r doc docs
   - cp -r translate/* docs
-  - travis-sphinx --source=docs build
+  - travis-sphinx --source=docs --outdir=html build
 
 after_success:
   - travis-sphinx deploy
