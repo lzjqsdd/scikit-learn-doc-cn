@@ -49,14 +49,14 @@
 尽管它们看起来有一个过于简单的假设，朴素贝叶斯分类器仍然
 在真实世界的许多情景下工作良好，在文本分类和垃圾邮件筛选领域尤其流行。
 它们要求少量的数据来估计必要的参数。
-(关于理论上朴素贝叶斯为什么会工作良好，以及它可以适用的数据类型，详见下方的参考资料)
+(关于理论上朴素贝叶斯为什么会工作良好，以及它可以适用的数据类型，详见下方References)
 
 朴素贝叶斯学习和分类器与其他相比可以非常快。类条件特征分布的解耦意味着
 每个分布可以独立估计为一个一维分布，这反过来又有助于缓解维灾难问题。
 
 另一方面，虽然被称为一个合适的分类器，它也被认为是是一个坏的估计量，所以对 ``predict_proba`` 的概率输出不应太过依赖。
 
-.. topic:: 参考资料:
+.. topic:: References:
 
  * H. Zhang (2004). `The optimality of Naive Bayes.
    <http://www.cs.unb.ca/profs/hzhang/publications/FLAIRS04ZhangH.pdf>`_
@@ -69,7 +69,10 @@
   
 :class:`GaussianNB` 实现了朴素贝叶斯的高斯模型( Gaussian Naive Bayes )的分类算法。  
 
-有些特征可能是连续型变量，比如说人的身高，物体的长度，这些特征可以转换成离散型的值，比如如果身高在160cm以下，特征值为1；在160cm和170cm之间，特征值为2；在170cm之上，特征值为3。也可以这样转换，将身高转换为3个特征，分别是f1、f2、f3，如果身高是160cm以下，这三个特征的值分别是1、0、0，若身高在170cm之上，这三个特征的值分别是0、0、1。不过这些方式都不够细腻，高斯模型可以解决这个问题。  
+.. topic:: 译者按:
+
+ * 有些特征可能是连续型变量，比如说人的身高，物体的长度，这些特征可以转换成离散型的值，比如如果身高在160cm以下，特征值为1；在160cm和170cm之间，特征值为2；在170cm之上，特征值为3。也可以这样转换，将身高转换为3个特征，分别是f1、f2、f3，如果身高是160cm以下，这三个特征的值分别是1、0、0，若身高在170cm之上，这三个特征的值分别是0、0、1。不过这些方式都不够细腻，高斯模型可以解决这个问题。  
+  
 
 高斯模型假设这些一个特征的所有属于某个类别的观测值符合高斯分布:
 
@@ -139,10 +142,8 @@
 作为惩罚项的 :math:`y` 的一个的计数器，
 而多项式模型简单的忽略了这个特征。
 
-In the case of text classification, word occurrence vectors (rather than word
-count vectors) may be used to train and use this classifier. ``BernoulliNB``
-might perform better on some datasets, especially those with shorter documents.
-It is advisable to evaluate both models, if time permits.
+在文本分类的情境中，被用来训练和使用这一分类器的是词语同现向量(word occurrence vectors) 而不是词频向量(word
+count vectors)。 ``BernoulliNB``可能尤其会在小数据集时表现良好。如果时间允许，推荐试用所有模型进行评价。
 
 .. topic:: References:
 
@@ -160,25 +161,22 @@ It is advisable to evaluate both models, if time permits.
    3rd Conf. on Email and Anti-Spam (CEAS).
 
 
-Out-of-core naive Bayes model fitting
+基于外存(Out-of-core)的朴素贝叶斯模型拟合
 -------------------------------------
 
-Naive Bayes models can be used to tackle large scale classification problems
-for which the full training set might not fit in memory. To handle this case,
-:class:`MultinomialNB`, :class:`BernoulliNB`, and :class:`GaussianNB`
-expose a ``partial_fit`` method that can be used
-incrementally as done with other classifiers as demonstrated in
-:ref:`example_applications_plot_out_of_core_classification.py`. Both discrete
-classifiers support sample weighting; :class:`GaussianNB` does not.
 
-Contrary to the ``fit`` method, the first call to ``partial_fit`` needs to be
-passed the list of all the expected class labels.
+朴素贝叶斯模型可以用来解决大规模的分类问题，
+其完整的训练集可能不适合放在内存中。为解决这个问题，
+:class:`MultinomialNB` ， :class:`BernoulliNB` ， 和 :class:`GaussianNB`
+实现了 ``partial_fit`` 方法，可以动态的增加数据来使用(即所谓online classifier)。与其他分类器相结合的例子见
+:ref:`example_applications_plot_out_of_core_classification.py` 。 所有离散的分类器(前两者)
+均支持样本权重， :class:`GaussianNB` 不支持.
 
-For an overview of available strategies in scikit-learn, see also the
-:ref:`out-of-core learning <scaling_strategies>` documentation.
+与 ``fit`` 方法相反， 首次调用 ``partial_fit`` 需要传入所有可能的样本标签的list
+
+对于scikit-learn中所有可用方案，请参考
+:ref:`out-of-core learning <scaling_strategies>` 文档.
 
 .. note::
 
-   The ``partial_fit`` method call of naive Bayes models introduces some
-   computational overhead. It is recommended to use data chunk sizes that are as
-   large as possible, that is as the available RAM allows.
+   贝叶斯模型中的 ``partial_fit`` 方法引入了一些额外开销。因此建议使用的数据块尽可能大，即达到可用RAM的允许范围。
