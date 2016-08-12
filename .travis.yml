@@ -19,7 +19,7 @@ script:
   - cp -r doc docs
   - cp -r translate/* docs
   - cd docs
-  - travis-sphinx --source=. --outdir=html build
+  - travis-sphinx --source=. --outdir=html --nowarn build
 
 after_success:
   - travis-sphinx deploy
