@@ -1,30 +1,26 @@
 .. _feature_extraction:
 
 ==================
-Feature extraction
+特征提取
 ==================
 
 .. currentmodule:: sklearn.feature_extraction
 
-The :mod:`sklearn.feature_extraction` module can be used to extract
-features in a format supported by machine learning algorithms from datasets
-consisting of formats such as text and image.
+模块 :mod:`sklearn.feature_extraction` 可以用来提取多种格式的数据集中，符合机器学习算法中支持的特征，如文本和图像
 
 .. note::
 
-   Feature extraction is very different from :ref:`feature_selection`:
-   the former consists in transforming arbitrary data, such as text or
-   images, into numerical features usable for machine learning. The latter
-   is a machine learning technique applied on these features.
+   特征提取与 :ref:`feature_selection` 特征选择有很大的不同: 
+   模型意义在于把复杂的数据，如文本和图像，转化为数字特征，从而在机器学习中使用。后者是一个机器学习中应用这些特征的方法
 
 .. _dict_feature_extraction:
 
-Loading features from dicts
+加载字典的中的特征
 ===========================
 
-The class :class:`DictVectorizer` can be used to convert feature
-arrays represented as lists of standard Python ``dict`` objects to the
-NumPy/SciPy representation used by scikit-learn estimators.
+类 :class:`DictVectorizer` 可以把特征向量转化成标准的Python字典对象的一个列表，
+同时也是被scikit-learn的估计器使用的一个NumPy/SciPy体现(ndarray)
+The class :class:`DictVectorizer` can be used to convert feature arrays represented as lists of standard Python dict objects to the NumPy/SciPy representation used by scikit-learn estimators.
 
 While not particularly fast to process, Python's ``dict`` has the
 advantages of being convenient to use, being sparse (absent features
