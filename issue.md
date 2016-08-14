@@ -9,6 +9,6 @@
   
   参考：[StackOverFlow](http://stackoverflow.com/questions/25383698/error-string-to-bool-in-mplot3d-workaround-found)
   
-####rror2:
+####error2:
 
 	所有的包最好通过pip install scipy安装，而不是sudo apt-get install python-scipy之类的。
