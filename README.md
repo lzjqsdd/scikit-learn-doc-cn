@@ -46,7 +46,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | kernel_ridge.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | label_propagation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | lda_qda.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| learning_curve.rst |![Build Status]((https://img.shields.io/badge/translate-doing-brightgreen.svg))| taoyizhi68 |
+| learning_curve.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| taoyizhi68 |
 | manifold.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | metrics.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | mixture.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
