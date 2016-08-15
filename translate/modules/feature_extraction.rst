@@ -21,19 +21,17 @@
 类 :class:`DictVectorizer` 可以把特征向量转化成标准的Python字典对象的一个列表，
 同时也是被scikit-learn的估计器使用的一个NumPy/SciPy体现(ndarray)
 The class :class:`DictVectorizer` can be used to convert feature arrays represented as lists of standard Python dict objects to the NumPy/SciPy representation used by scikit-learn estimators.
-
+即使处理时并不是特别快，python的字典有易于使用的优势，适用于稀疏情景(缺失特征不会被存储)，存储特征的名字和值。
 While not particularly fast to process, Python's ``dict`` has the
 advantages of being convenient to use, being sparse (absent features
 need not be stored) and storing feature names in addition to values.
 
-:class:`DictVectorizer` implements what is called one-of-K or "one-hot"
-coding for categorical (aka nominal, discrete) features. Categorical
-features are "attribute-value" pairs where the value is restricted
-to a list of discrete of possibilities without ordering (e.g. topic
-identifiers, types of objects, tags, names...).
+类 :class:`DictVectorizer` 实现了所谓 one-of-K 或 "one-hot" 的方法来使用范畴(名义上离散的)特征 categorical (aka nominal, discrete) features. 范畴特征是一个键值对，其值被约束为离散的无序列表Categorical
+features are "attribute-value" pairs where the value is restr，cted
+to  s without ordering (如话题标志，对象类型，标签，名字等)。
+？？？
 
-In the following, "city" is a categorical attribute while "temperature"
-is a traditional numerical feature::
+在下面例子中 "city" 是一个绝对变量而  disc是一个 "temperature" 传统的数值特征 ::
 
   >>> measurements = [
   ...     {'city': 'Dubai', 'temperature': 33.},
@@ -52,16 +50,15 @@ is a traditional numerical feature::
   >>> vec.get_feature_names()
   ['city=Dubai', 'city=London', 'city=San Fransisco', 'temperature']
 
-:class:`DictVectorizer` is also a useful representation transformation
+类 :class:`DictVectorizer` 也是一个有用的转化形式，主要应用于自然语音处理中分类器的训练模型，典型应用于在兴趣文本中提取特征序列is also a useful representation transformation
 for training sequence classifiers in Natural Language Processing models
 that typically work by extracting feature windows around a particular
 word of interest.
 
+比如说，我们有一个算法来提取词性标签作为补充标签，来训练序列分类器(如chunker概括大意)
 For example, suppose that we have a first algorithm that extracts Part of
 Speech (PoS) tags that we want to use as complementary tags for training
-a sequence classifier (e.g. a chunker). The following dict could be
-such a window of features extracted around the word 'sat' in the sentence
-'The cat sat on the mat.'::
+a sequence classifier (e.g. a chunker). 下面的字典展示了一个小例子，提取在例句 'The cat sat on the mat.' 中sat周围的特征::
 
   >>> pos_window = [
   ...     {
