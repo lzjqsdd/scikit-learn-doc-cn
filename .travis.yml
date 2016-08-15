@@ -1,6 +1,7 @@
 branches:
   only:
   - master
+  - deploy
 
 language: python - "2.7"
 
