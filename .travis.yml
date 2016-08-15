@@ -1,3 +1,7 @@
+branches:
+  only:
+  - master
+
 language: python - "2.7"
 
 before_install:
