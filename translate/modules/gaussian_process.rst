@@ -36,16 +36,13 @@ GPML的缺点如下:
 Examples
 ========
 
-一个开场的回归样例
+用一个回归样例来开场
 ----------------------------------
 
-Say we want to surrogate the function :math:`g(x) = x \sin(x)`. To do so,
-the function is evaluated onto a design of experiments. Then, we define a
-GaussianProcess model whose regression and correlation models might be
-specified using additional kwargs, and ask for the model to be fitted to the
-data. Depending on the number of parameters provided at instantiation, the
-fitting procedure may recourse to maximum likelihood estimation for the
-parameters or alternatively it uses the given parameters.
+比如说，我们要代替函数:math:`g(x) = x \sin(x)`。首先，要在一系列设计好的试验上
+对这个函数求值。
+然后，我们定义了一个GaussianProcess模型，它的回归模型和相关模型可能会通过附加的kwargs来指明，并调用模型来拟合数据。
+根据实例提供的参数的数量，拟合程序可能依靠参数的最大似然估计或者是就使用给定的参数本身。
 
 .. figure:: ../auto_examples/gaussian_process/images/plot_gp_regression_001.png
    :target: ../auto_examples/gaussian_process/plot_gp_regression.html
@@ -71,83 +68,69 @@ parameters or alternatively it uses the given parameters.
     >>> y_pred, sigma2_pred = gp.predict(x, eval_MSE=True)
 
 
-Fitting Noisy Data
+拟合噪声数据
 ------------------
 
-When the data to be fit includes noise, the Gaussian process model can be
-used by specifying the variance of the noise for each point.
-:class:`GaussianProcess` takes a parameter ``nugget`` which
-is added to the diagonal of the correlation matrix between training points:
-in general this is a type of Tikhonov regularization.  In the special case
-of a squared-exponential correlation function, this normalization is
-equivalent to specifying a fractional variance in the input.  That is
+当要拟合的数据有噪声时，高斯过程模型能够通过用指定每个点的噪声方差来使用。
+
+:class:`GaussianProcess` 接收一个 ``nugget`` 参数，这个参数会被加到训练数据相关矩阵的对角线上:
+一般来说，这是Tikhonov正则化 的其中一种类型。 在平方指数(squared-exponential SE)相关函数的特殊情形下，这个正则相当于是指定了输入的误差方差。
+即
 
 .. math::
    \mathrm{nugget}_i = \left[\frac{\sigma_i}{y_i}\right]^2
 
-With ``nugget`` and ``corr`` properly set, Gaussian Processes can be
-used to robustly recover an underlying function from noisy data:
+在 ``nugget`` 和 ``corr`` 设置合适的情况下，高斯过程可以鲁棒地从噪声数据中恢复出一个基本函数:
 
 .. figure:: ../auto_examples/gaussian_process/images/plot_gp_regression_002.png
    :target: ../auto_examples/gaussian_process/plot_gp_regression.html
    :align: center
 
-.. topic:: Other examples
+.. topic:: 其它样例
 
   * :ref:`example_gaussian_process_plot_gp_probabilistic_classification_after_regression.py`
 
 
 
-Mathematical formulation
-========================
+数学 公式
+===========
 
 
-The initial assumption
-----------------------
+初始假设
+---------
 
-Suppose one wants to model the output of a computer experiment, say a
-mathematical function:
+假设一个人要对一个计算机实验的输出建模，比如一个数学函数：
 
 .. math::
 
         g: & \mathbb{R}^{n_{\rm features}} \rightarrow \mathbb{R} \\
            & X \mapsto y = g(X)
-
-GPML starts with the assumption that this function is *a* conditional sample
-path of *a* Gaussian process :math:`G` which is additionally assumed to read as
-follows:
+GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本轨道，而 G 另外被假定为下面这样： 
 
 .. math::
 
         G(X) = f(X)^T \beta + Z(X)
 
-where :math:`f(X)^T \beta` is a linear regression model and :math:`Z(X)` is a
-zero-mean Gaussian process with a fully stationary covariance function:
+这里 :math:`f(X)^T \beta` 是一个线性回归模型，而 :math:`Z(X)` 是一个零均值高斯过程带一个全静态协方差函数
 
 .. math::
 
         C(X, X') = \sigma^2 R(|X - X'|)
 
-:math:`\sigma^2` being its variance and :math:`R` being the correlation
-function which solely depends on the absolute relative distance between each
-sample, possibly featurewise (this is the stationarity assumption).
+:math:`\sigma^2` 是它的方差，而 :math:`R` 是相关函数，只取决于每个样本之间的相对距离的绝对值。可能有点 featurewise (这就是静态假设)。
 
-From this basic formulation, note that GPML is nothing but an extension of a
-basic least squares linear regression problem:
+通过这个基本的公式，请注意 GPML 不过是基本最小二乘线性回归的一种扩展:
 
 .. math::
 
         g(X) \approx f(X)^T \beta
 
-Except we additionally assume some spatial coherence (correlation) between the
-samples dictated by the correlation function. Indeed, ordinary least squares
-assumes the correlation model :math:`R(|X - X'|)` is one when :math:`X = X'`
-and zero otherwise : a *dirac* correlation model -- sometimes referred to as a
-*nugget* correlation model in the kriging literature.
+除了额外假设的一些样本间由相关函数决定的空间相干性（相关性）之外，实际上，普通最小二乘会假设
+相关模型 :math:`R(|X - X'|)` 是一个当 :math:`X = X'` 时为 0 ，不等时为 *dirac*(狄拉克)相关模型（ 有时候在克里金插值方法里被称作 *nugget* 相关模型 ）的模型.
 
 
-The best linear unbiased prediction (BLUP)
-------------------------------------------
+最好的线性无偏预测（BLUP，The best linear unbiased prediction）
+--------------------------------------------------------------
 
 We now derive the *best linear unbiased prediction* of the sample path
 :math:`g` conditioned on the observations:
