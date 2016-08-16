@@ -72,9 +72,7 @@ a sequence classifier (e.g. a chunker). 下面的字典展示了一个小例子�
   ...     # in a real application one would extract many such dictionaries
   ... ]
 
-This description can be vectorized into a sparse two-dimensional matrix
-suitable for feeding into a classifier (maybe after being piped into a
-:class:`text.TfidfTransformer` for normalization)::
+以上形式可以被向量化成一个稀疏二维矩阵，从而作为参数传递给分类器(或经过:class:`text.TfidfTransformer` 的加工标准化)::
 
   >>> vec = DictVectorizer()
   >>> pos_vectorized = vec.fit_transform(pos_window)
@@ -86,7 +84,8 @@ suitable for feeding into a classifier (maybe after being piped into a
   >>> vec.get_feature_names()
   ['pos+1=PP', 'pos-1=NN', 'pos-2=DT', 'word+1=on', 'word-1=cat', 'word-2=the']
 
-As you can imagine, if one extracts such a context around each individual
+正如你所想的，如果在文档全集中进行提取，结果矩阵将会非常巨大，他们中的大部分通常将会是0。所以为了使这个矩阵的稀疏数据结构存储在内存中，类 ``DictVectorizer`` 默认使用了一个 ``scipy.sparse`` 矩阵
+而不是 ``numpy.ndarray``。As you can imagine, if one extracts such a context around each individual
 word of a corpus of documents the resulting matrix will be very wide
 (many one-hot-features) with most of them being valued to zero most
 of the time. So as to make the resulting data structure able to fit in
@@ -96,25 +95,26 @@ default instead of a ``numpy.ndarray``.
 
 .. _feature_hashing:
 
-Feature hashing
+
+特征哈希
 ===============
 
 .. currentmodule:: sklearn.feature_extraction
 
-The class :class:`FeatureHasher` is a high-speed, low-memory vectorizer that
+类 :class:`FeatureHasher` 是一个快速且低内存消耗的向量化方法，使用了 `feature hashing <https://en.wikipedia.org/wiki/Feature_hashing>`_ 技术，或可称为"hashing trick"is a high-speed, low-memory vectorizer that|
 uses a technique known as
 `feature hashing <https://en.wikipedia.org/wiki/Feature_hashing>`_,
 or the "hashing trick".
-Instead of building a hash table of the features encountered in training,
-as the vectorizers do, instances of :class:`FeatureHasher`
+而不是为计算得到的特征建立哈西表Instead of building a hash table of the features encountered in training,
+as the vectorizers do, instances 类 :class:`FeatureHasher` 的实例使用了一个哈希函数来直接确定特征在样本矩阵中的列号。
 apply a hash function to the features
 to determine their column index in sample matrices directly.
-The result is increased speed and reduced memory usage,
+这样在可检查性上增加了速度减少了内存开销。这个类不会记住输入特征的形状，也没有 ``inverse_transform`` 方法The result is increased speed and reduced memory usage,
 at the expense of inspectability;
 the hasher does not remember what the input features looked like
 and has no ``inverse_transform`` method.
 
-Since the hash function might cause collisions between (unrelated) features,
+因为哈希函数会造成不相关特征间的冲突，所以这里使用了带有签名的哈希函数。哈希值的签名决定了输出矩阵中特征的签名Since the hash function might cause collisions between (unrelated) features,
 a signed hash function is used and the sign of the hash value
 determines the sign of the value stored in the output matrix for a feature.
 This way, collisions are likely to cancel out rather than accumulate error,
