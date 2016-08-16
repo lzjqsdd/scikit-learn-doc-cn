@@ -99,49 +99,38 @@ Examples
 初始假设
 ---------
 
-Suppose one wants to model the output of a computer experiment, say a
-mathematical function:
+假设一个人要对一个计算机实验的输出建模，比如一个数学函数：
 
 .. math::
 
         g: & \mathbb{R}^{n_{\rm features}} \rightarrow \mathbb{R} \\
            & X \mapsto y = g(X)
-
-GPML starts with the assumption that this function is *a* conditional sample
-path of *a* Gaussian process :math:`G` which is additionally assumed to read as
-follows:
+GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本轨道，而 G 另外被假定为下面这样： 
 
 .. math::
 
         G(X) = f(X)^T \beta + Z(X)
 
-where :math:`f(X)^T \beta` is a linear regression model and :math:`Z(X)` is a
-zero-mean Gaussian process with a fully stationary covariance function:
+这里 :math:`f(X)^T \beta` 是一个线性回归模型，而 :math:`Z(X)` 是一个零均值高斯过程带一个全静态协方差函数
 
 .. math::
 
         C(X, X') = \sigma^2 R(|X - X'|)
 
-:math:`\sigma^2` being its variance and :math:`R` being the correlation
-function which solely depends on the absolute relative distance between each
-sample, possibly featurewise (this is the stationarity assumption).
+:math:`\sigma^2` 是它的方差，而 :math:`R` 是相关函数，只取决于每个样本之间的相对距离的绝对值。可能有点 featurewise (这就是静态假设)。
 
-From this basic formulation, note that GPML is nothing but an extension of a
-basic least squares linear regression problem:
+通过这个基本的公式，请注意 GPML 不过是基本最小二乘线性回归的一种扩展:
 
 .. math::
 
         g(X) \approx f(X)^T \beta
 
-Except we additionally assume some spatial coherence (correlation) between the
-samples dictated by the correlation function. Indeed, ordinary least squares
-assumes the correlation model :math:`R(|X - X'|)` is one when :math:`X = X'`
-and zero otherwise : a *dirac* correlation model -- sometimes referred to as a
-*nugget* correlation model in the kriging literature.
+除了额外假设的一些样本间由相关函数决定的空间相干性（相关性）之外，实际上，普通最小二乘会假设
+相关模型 :math:`R(|X - X'|)` 是一个当 :math:`X = X'` 时为 0 ，不等时为 *dirac*(狄拉克)相关模型（ 有时候在克里金插值方法里被称作 *nugget* 相关模型 ）的模型.
 
 
-The best linear unbiased prediction (BLUP)
-------------------------------------------
+最好的线性无偏预测（BLUP，The best linear unbiased prediction）
+--------------------------------------------------------------
 
 We now derive the *best linear unbiased prediction* of the sample path
 :math:`g` conditioned on the observations:
