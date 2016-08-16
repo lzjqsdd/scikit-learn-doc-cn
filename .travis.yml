@@ -1,3 +1,8 @@
+branches:
+  only:
+  - master
+  - deploy
+
 language: python - "2.7"
 
 before_install:
@@ -10,13 +15,16 @@ before_install:
     - sudo ln -s /run/shm /dev/shm
 
 install:
-  - conda install --yes python="2.7" sphinx scikit-learn matplotlib scipy numpy
+  - conda install --yes python="2.7" sphinx scikit-learn matplotlib scipy numpy PIL
+  - conda update scikit-learn
   - pip install --user travis-sphinx
 
+cache: conda
 script:
   - cp -r doc docs
   - cp -r translate/* docs
-  - travis-sphinx build
+  - cd docs
+  - travis-sphinx --source=. --outdir=html --nowarn build
 
 after_success:
   - travis-sphinx deploy
