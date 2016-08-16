@@ -36,16 +36,13 @@ GPML的缺点如下:
 Examples
 ========
 
-一个开场的回归样例
+用一个回归样例来开场
 ----------------------------------
 
-Say we want to surrogate the function :math:`g(x) = x \sin(x)`. To do so,
-the function is evaluated onto a design of experiments. Then, we define a
-GaussianProcess model whose regression and correlation models might be
-specified using additional kwargs, and ask for the model to be fitted to the
-data. Depending on the number of parameters provided at instantiation, the
-fitting procedure may recourse to maximum likelihood estimation for the
-parameters or alternatively it uses the given parameters.
+比如说，我们要代替函数:math:`g(x) = x \sin(x)`。首先，要在一系列设计好的试验上
+对这个函数求值。
+然后，我们定义了一个GaussianProcess模型，它的回归模型和相关模型可能会通过附加的kwargs来指明，并调用模型来拟合数据。
+根据实例提供的参数的数量，拟合程序可能依靠参数的最大似然估计或者是就使用给定的参数本身。
 
 .. figure:: ../auto_examples/gaussian_process/images/plot_gp_regression_001.png
    :target: ../auto_examples/gaussian_process/plot_gp_regression.html
@@ -71,19 +68,18 @@ parameters or alternatively it uses the given parameters.
     >>> y_pred, sigma2_pred = gp.predict(x, eval_MSE=True)
 
 
-Fitting Noisy Data
+拟合噪声数据
 ------------------
 
-When the data to be fit includes noise, the Gaussian process model can be
-used by specifying the variance of the noise for each point.
-:class:`GaussianProcess` takes a parameter ``nugget`` which
-is added to the diagonal of the correlation matrix between training points:
-in general this is a type of Tikhonov regularization.  In the special case
-of a squared-exponential correlation function, this normalization is
-equivalent to specifying a fractional variance in the input.  That is
+当要拟合的数据有噪声时，高斯过程模型能够通过用指定每个点的噪声方差来使用。
+
+:class:`GaussianProcess` 接收一个 ``nugget`` 参数，这个参数会被加到训练数据相关矩阵的对角线上:
+一般来说，这是Tikhonov正则化 的其中一种类型。 在平方指数(squared-exponential SE)相关函数的特殊情形下，这个正则相当于是指定了输入的误差方差。
+即
 
 .. math::
    \mathrm{nugget}_i = \left[\frac{\sigma_i}{y_i}\right]^2
+
 
 With ``nugget`` and ``corr`` properly set, Gaussian Processes can be
 used to robustly recover an underlying function from noisy data:
