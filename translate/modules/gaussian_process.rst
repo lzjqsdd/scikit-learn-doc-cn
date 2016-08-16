@@ -80,26 +80,24 @@ Examples
 .. math::
    \mathrm{nugget}_i = \left[\frac{\sigma_i}{y_i}\right]^2
 
-
-With ``nugget`` and ``corr`` properly set, Gaussian Processes can be
-used to robustly recover an underlying function from noisy data:
+在 ``nugget`` 和 ``corr`` 设置合适的情况下，高斯过程可以鲁棒地从噪声数据中恢复出一个基本函数:
 
 .. figure:: ../auto_examples/gaussian_process/images/plot_gp_regression_002.png
    :target: ../auto_examples/gaussian_process/plot_gp_regression.html
    :align: center
 
-.. topic:: Other examples
+.. topic:: 其它样例
 
   * :ref:`example_gaussian_process_plot_gp_probabilistic_classification_after_regression.py`
 
 
 
-Mathematical formulation
-========================
+数学 公式
+===========
 
 
-The initial assumption
-----------------------
+初始假设
+---------
 
 Suppose one wants to model the output of a computer experiment, say a
 mathematical function:
