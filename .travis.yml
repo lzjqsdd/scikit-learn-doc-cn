@@ -27,4 +27,4 @@ script:
   - travis-sphinx --source=. --nowarn build
 
 after_success:
-  - travis-sphinx deploy
+  - travis-sphinx --branches=deploy deploy
