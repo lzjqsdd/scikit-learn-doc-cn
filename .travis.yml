@@ -24,7 +24,7 @@ script:
   - cp -r doc docs
   - cp -r translate/* docs
   - cd docs
-  - travis-sphinx --source=. --outdir=html --nowarn build
+  - travis-sphinx --source=. --nowarn build
 
 after_success:
   - travis-sphinx deploy
