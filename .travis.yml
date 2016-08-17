@@ -21,10 +21,11 @@ install:
 
 cache: conda
 script:
-  - cp -r doc docs
-  - cp -r translate/* docs
-  - cd docs
+  - cp -r translate/* doc
+  - cd doc
   - travis-sphinx --source=. --nowarn build
+  - cd target/doc/build
+  - echo "sklearn.lzjqsdd.com" > CNAME
 
 after_success:
   - travis-sphinx --branches=deploy deploy
