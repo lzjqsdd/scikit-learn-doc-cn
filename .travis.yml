@@ -26,6 +26,7 @@ script:
   - travis-sphinx --source=. --nowarn build
   - cd target/doc/build
   - echo "sklearn.lzjqsdd.com" > CNAME
+  - cd ../../..
 
 after_success:
-  - travis-sphinx --branches=deploy deploy
+  - travis-sphinx --branches=master,deploy deploy
