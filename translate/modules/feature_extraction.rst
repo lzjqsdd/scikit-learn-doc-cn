@@ -1,43 +1,37 @@
 .. _feature_extraction:
 
 ==================
-Feature extraction
+特征提取
 ==================
 
 .. currentmodule:: sklearn.feature_extraction
 
-The :mod:`sklearn.feature_extraction` module can be used to extract
-features in a format supported by machine learning algorithms from datasets
-consisting of formats such as text and image.
+模块 :mod:`sklearn.feature_extraction` 可以用来提取多种格式的数据集中，符合机器学习算法中支持的特征，如文本和图像
 
 .. note::
 
-   Feature extraction is very different from :ref:`feature_selection`:
-   the former consists in transforming arbitrary data, such as text or
-   images, into numerical features usable for machine learning. The latter
-   is a machine learning technique applied on these features.
+   特征提取与 :ref:`feature_selection` 特征选择有很大的不同: 
+   模型意义在于把复杂的数据，如文本和图像，转化为数字特征，从而在机器学习中使用。后者是一个机器学习中应用这些特征的方法
 
 .. _dict_feature_extraction:
 
-Loading features from dicts
+加载字典的中的特征
 ===========================
 
-The class :class:`DictVectorizer` can be used to convert feature
-arrays represented as lists of standard Python ``dict`` objects to the
-NumPy/SciPy representation used by scikit-learn estimators.
-
+类 :class:`DictVectorizer` 可以把特征向量转化成标准的Python字典对象的一个列表，
+同时也是被scikit-learn的估计器使用的一个NumPy/SciPy体现(ndarray)
+The class :class:`DictVectorizer` can be used to convert feature arrays represented as lists of standard Python dict objects to the NumPy/SciPy representation used by scikit-learn estimators.
+即使处理时并不是特别快，python的字典有易于使用的优势，适用于稀疏情景(缺失特征不会被存储)，存储特征的名字和值。
 While not particularly fast to process, Python's ``dict`` has the
 advantages of being convenient to use, being sparse (absent features
 need not be stored) and storing feature names in addition to values.
 
-:class:`DictVectorizer` implements what is called one-of-K or "one-hot"
-coding for categorical (aka nominal, discrete) features. Categorical
-features are "attribute-value" pairs where the value is restricted
-to a list of discrete of possibilities without ordering (e.g. topic
-identifiers, types of objects, tags, names...).
+类 :class:`DictVectorizer` 实现了所谓 one-of-K 或 "one-hot" 的方法来使用范畴(名义上离散的)特征 categorical (aka nominal, discrete) features. 范畴特征是一个键值对，其值被约束为离散的无序列表Categorical
+features are "attribute-value" pairs where the value is restr，cted
+to  s without ordering (如话题标志，对象类型，标签，名字等)。
+？？？
 
-In the following, "city" is a categorical attribute while "temperature"
-is a traditional numerical feature::
+在下面例子中 "city" 是一个绝对变量而  disc是一个 "temperature" 传统的数值特征 ::
 
   >>> measurements = [
   ...     {'city': 'Dubai', 'temperature': 33.},
@@ -56,16 +50,15 @@ is a traditional numerical feature::
   >>> vec.get_feature_names()
   ['city=Dubai', 'city=London', 'city=San Fransisco', 'temperature']
 
-:class:`DictVectorizer` is also a useful representation transformation
+类 :class:`DictVectorizer` 也是一个有用的转化形式，主要应用于自然语音处理中分类器的训练模型，典型应用于在兴趣文本中提取特征序列is also a useful representation transformation
 for training sequence classifiers in Natural Language Processing models
 that typically work by extracting feature windows around a particular
 word of interest.
 
+比如说，我们有一个算法来提取词性标签作为补充标签，来训练序列分类器(如chunker概括大意)
 For example, suppose that we have a first algorithm that extracts Part of
 Speech (PoS) tags that we want to use as complementary tags for training
-a sequence classifier (e.g. a chunker). The following dict could be
-such a window of features extracted around the word 'sat' in the sentence
-'The cat sat on the mat.'::
+a sequence classifier (e.g. a chunker). 下面的字典展示了一个小例子，提取在例句 'The cat sat on the mat.' 中sat周围的特征::
 
   >>> pos_window = [
   ...     {
@@ -79,9 +72,7 @@ such a window of features extracted around the word 'sat' in the sentence
   ...     # in a real application one would extract many such dictionaries
   ... ]
 
-This description can be vectorized into a sparse two-dimensional matrix
-suitable for feeding into a classifier (maybe after being piped into a
-:class:`text.TfidfTransformer` for normalization)::
+以上形式可以被向量化成一个稀疏二维矩阵，从而作为参数传递给分类器(或经过:class:`text.TfidfTransformer` 的加工标准化)::
 
   >>> vec = DictVectorizer()
   >>> pos_vectorized = vec.fit_transform(pos_window)
@@ -93,7 +84,8 @@ suitable for feeding into a classifier (maybe after being piped into a
   >>> vec.get_feature_names()
   ['pos+1=PP', 'pos-1=NN', 'pos-2=DT', 'word+1=on', 'word-1=cat', 'word-2=the']
 
-As you can imagine, if one extracts such a context around each individual
+正如你所想的，如果在文档全集中进行提取，结果矩阵将会非常巨大，他们中的大部分通常将会是0。所以为了使这个矩阵的稀疏数据结构存储在内存中，类 ``DictVectorizer`` 默认使用了一个 ``scipy.sparse`` 矩阵
+而不是 ``numpy.ndarray``。As you can imagine, if one extracts such a context around each individual
 word of a corpus of documents the resulting matrix will be very wide
 (many one-hot-features) with most of them being valued to zero most
 of the time. So as to make the resulting data structure able to fit in
@@ -103,54 +95,58 @@ default instead of a ``numpy.ndarray``.
 
 .. _feature_hashing:
 
-Feature hashing
+
+特征哈希
 ===============
 
 .. currentmodule:: sklearn.feature_extraction
 
-The class :class:`FeatureHasher` is a high-speed, low-memory vectorizer that
+类 :class:`FeatureHasher` 是一个快速且低内存消耗的向量化方法，使用了 `feature hashing <https://en.wikipedia.org/wiki/Feature_hashing>`_ 技术，或可称为"hashing trick"is a high-speed, low-memory vectorizer that|
 uses a technique known as
 `feature hashing <https://en.wikipedia.org/wiki/Feature_hashing>`_,
 or the "hashing trick".
-Instead of building a hash table of the features encountered in training,
-as the vectorizers do, instances of :class:`FeatureHasher`
+而不是为计算得到的特征建立哈西表Instead of building a hash table of the features encountered in training,
+as the vectorizers do, instances 类 :class:`FeatureHasher` 的实例使用了一个哈希函数来直接确定特征在样本矩阵中的列号。
 apply a hash function to the features
 to determine their column index in sample matrices directly.
-The result is increased speed and reduced memory usage,
+这样在可检查性上增加了速度减少了内存开销。这个类不会记住输入特征的形状，也没有 ``inverse_transform`` 方法The result is increased speed and reduced memory usage,
 at the expense of inspectability;
 the hasher does not remember what the input features looked like
 and has no ``inverse_transform`` method.
 
-Since the hash function might cause collisions between (unrelated) features,
+因为哈希函数会造成不相关特征间的冲突，所以这里使用了带有签名的哈希函数。哈希值的签名决定了输出矩阵中特征的签名Since the hash function might cause collisions between (unrelated) features,
 a signed hash function is used and the sign of the hash value
-determines the sign of the value stored in the output matrix for a feature.
+determines the sign of the value stored in the output matrix for a feature.在这种情况下，哈希冲突可能会消失，不会出现错误。且所有输出矩阵的期望都是0。
 This way, collisions are likely to cancel out rather than accumulate error,
 and the expected mean of any output feature's value is zero.
 
-If ``non_negative=True`` is passed to the constructor, the absolute
+如果传递 ``non_negative=True`` 参数给构造器，那么将使用绝对值。这将减少一些对冲突的控制，但是允许输出作为参数传递给估计器如:is passed to the constructor, the absolute
 value is taken.  This undoes some of the collision handling, but allows
 the output to be passed to estimators like
 :class:`sklearn.naive_bayes.MultinomialNB` or
 :class:`sklearn.feature_selection.chi2`
-feature selectors that expect non-negative inputs.
+特征选择器要求非负的输入。feature selectors that expect non-negative inputs.
 
-:class:`FeatureHasher` accepts either mappings
+类 :class:`FeatureHasher` 接受mapping(如python的字典和其在 ``collections`` 模块中的变体)accepts either mappings
 (like Python's ``dict`` and its variants in the ``collections`` module),
-``(feature, value)`` pairs, or strings,
+使用键值对 ``(feature, value)`` ，或是使用字符串string，取决于构造器参数  ``input_type`` 。
+ pairs, or strings,
 depending on the constructor parameter ``input_type``.
-Mapping are treated as lists of ``(feature, value)`` pairs,
+Mapping 被看成键值对的列表，其中单个字符串有一个隐式的值: 1 ， 所以 ``['feat1', 'feat2', 'feat3']`` 被转化为 ``[('feat1', 1), ('feat2', 1), ('feat3', 1)]``  。
+are treated as lists of ``(feature, value)`` pairs,
 while single strings have an implicit value of 1,
 so ``['feat1', 'feat2', 'feat3']`` is interpreted as
 ``[('feat1', 1), ('feat2', 1), ('feat3', 1)]``.
+如果一个单独特征在一个样本中出现了多次，与之相关的次数将被加和(所以 ``('feat', 2)`` and ``('feat', 3.5)`` 转化成 ``('feat', 5.5)`` )。
 If a single feature occurs multiple times in a sample,
 the associated values will be summed
 (so ``('feat', 2)`` and ``('feat', 3.5)`` become ``('feat', 5.5)``).
-The output from :class:`FeatureHasher` is always a ``scipy.sparse`` matrix
+类 :class:`FeatureHasher` 的输出通常是一个CSR格式的 ``scipy.sparse`` 矩阵is always a ``scipy.sparse`` matrix
 in the CSR format.
 
-Feature hashing can be employed in document classification,
-but unlike :class:`text.CountVectorizer`,
-:class:`FeatureHasher` does not do word
+特征哈希可以在文本分类中使用，但是不像Feature hashing can be employed in document classification,
+but unlike但是，与 :class:`text.CountVectorizer` 不同,
+:class:`FeatureHasher` 不做分词和其他过程，除了does not do word
 splitting or any other preprocessing except Unicode-to-UTF-8 encoding;
 see :ref:`hashing_vectorizer`, below, for a combined tokenizer/hasher.
 
