@@ -116,34 +116,37 @@ and has no ``inverse_transform`` method.
 
 因为哈希函数会造成不相关特征间的冲突，所以这里使用了带有签名的哈希函数。哈希值的签名决定了输出矩阵中特征的签名Since the hash function might cause collisions between (unrelated) features,
 a signed hash function is used and the sign of the hash value
-determines the sign of the value stored in the output matrix for a feature.
+determines the sign of the value stored in the output matrix for a feature.在这种情况下，哈希冲突可能会消失，不会出现错误。且所有输出矩阵的期望都是0。
 This way, collisions are likely to cancel out rather than accumulate error,
 and the expected mean of any output feature's value is zero.
 
-If ``non_negative=True`` is passed to the constructor, the absolute
+如果传递 ``non_negative=True`` 参数给构造器，那么将使用绝对值。这将减少一些对冲突的控制，但是允许输出作为参数传递给估计器如:is passed to the constructor, the absolute
 value is taken.  This undoes some of the collision handling, but allows
 the output to be passed to estimators like
 :class:`sklearn.naive_bayes.MultinomialNB` or
 :class:`sklearn.feature_selection.chi2`
-feature selectors that expect non-negative inputs.
+特征选择器要求非负的输入。feature selectors that expect non-negative inputs.
 
-:class:`FeatureHasher` accepts either mappings
+类 :class:`FeatureHasher` 接受mapping(如python的字典和其在 ``collections`` 模块中的变体)accepts either mappings
 (like Python's ``dict`` and its variants in the ``collections`` module),
-``(feature, value)`` pairs, or strings,
+使用键值对 ``(feature, value)`` ，或是使用字符串string，取决于构造器参数  ``input_type`` 。
+ pairs, or strings,
 depending on the constructor parameter ``input_type``.
-Mapping are treated as lists of ``(feature, value)`` pairs,
+Mapping 被看成键值对的列表，其中单个字符串有一个隐式的值: 1 ， 所以 ``['feat1', 'feat2', 'feat3']`` 被转化为 ``[('feat1', 1), ('feat2', 1), ('feat3', 1)]``  。
+are treated as lists of ``(feature, value)`` pairs,
 while single strings have an implicit value of 1,
 so ``['feat1', 'feat2', 'feat3']`` is interpreted as
 ``[('feat1', 1), ('feat2', 1), ('feat3', 1)]``.
+如果一个单独特征在一个样本中出现了多次，与之相关的次数将被加和(所以 ``('feat', 2)`` and ``('feat', 3.5)`` 转化成 ``('feat', 5.5)`` )。
 If a single feature occurs multiple times in a sample,
 the associated values will be summed
 (so ``('feat', 2)`` and ``('feat', 3.5)`` become ``('feat', 5.5)``).
-The output from :class:`FeatureHasher` is always a ``scipy.sparse`` matrix
+类 :class:`FeatureHasher` 的输出通常是一个CSR格式的 ``scipy.sparse`` 矩阵is always a ``scipy.sparse`` matrix
 in the CSR format.
 
-Feature hashing can be employed in document classification,
-but unlike :class:`text.CountVectorizer`,
-:class:`FeatureHasher` does not do word
+特征哈希可以在文本分类中使用，但是不像Feature hashing can be employed in document classification,
+but unlike但是，与 :class:`text.CountVectorizer` 不同,
+:class:`FeatureHasher` 不做分词和其他过程，除了does not do word
 splitting or any other preprocessing except Unicode-to-UTF-8 encoding;
 see :ref:`hashing_vectorizer`, below, for a combined tokenizer/hasher.
 
