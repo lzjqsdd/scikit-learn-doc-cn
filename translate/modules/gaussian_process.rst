@@ -126,61 +126,56 @@ GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本
         g(X) \approx f(X)^T \beta
 
 除了额外假设的一些样本间由相关函数决定的空间相干性（相关性）之外，实际上，普通最小二乘会假设
-相关模型 :math:`R(|X - X'|)` 是一个当 :math:`X = X'` 时为 0 ，不等时为 *dirac*(狄拉克)相关模型（ 有时候在克里金插值方法里被称作 *nugget* 相关模型 ）的模型.
+相关模型 :math:`R(|X - X'|)` 是这样一个模型: 当 :math:`X = X'` 时为 0 ，不等时为 *dirac*(狄拉克)相关模型（ 有时候在克里金插值方法里被称作 *nugget* 相关模型 ）。
 
 
-最好的线性无偏预测（BLUP，The best linear unbiased prediction）
+最佳线性无偏预测（BLUP，The best linear unbiased prediction）
 --------------------------------------------------------------
 
-We now derive the *best linear unbiased prediction* of the sample path
-:math:`g` conditioned on the observations:
+现在来推导样本轨道:math:`g` 在在观测条件下的*最佳线性无偏预测*:
 
 .. math::
 
     \hat{G}(X) = G(X | y_1 = g(X_1), ...,
                                 y_{n_{\rm samples}} = g(X_{n_{\rm samples}}))
 
-It is derived from its *given properties*:
+它是来源于它的*给定属性*:
 
-- It is linear (a linear combination of the observations)
+- 它是线性的 (观察值的一个线性组合)
 
 .. math::
 
     \hat{G}(X) \equiv a(X)^T y
 
-- It is unbiased
+- 它是无偏的
 
 .. math::
 
     \mathbb{E}[G(X) - \hat{G}(X)] = 0
 
-- It is the best (in the Mean Squared Error sense)
+- 是最佳地 (就均方误差来说)
 
 .. math::
 
     \hat{G}(X)^* = \arg \min\limits_{\hat{G}(X)} \;
                                             \mathbb{E}[(G(X) - \hat{G}(X))^2]
 
-So that the optimal weight vector :math:`a(X)` is solution of the following
-equality constrained optimization problem:
+所以最优权重向量 :math:`a(X)` 就是如下约束优化问题等式的解:
 
 .. math::
 
     a(X)^* = \arg \min\limits_{a(X)} & \; \mathbb{E}[(G(X) - a(X)^T y)^2] \\
                        {\rm s. t.} & \; \mathbb{E}[G(X) - a(X)^T y] = 0
 
-Rewriting this constrained optimization problem in the form of a Lagrangian and
-looking further for the first order optimality conditions to be satisfied, one
-ends up with a closed form expression for the sought predictor -- see
-references for the complete proof.
+用拉格朗日方法重写这个约束优化问题,并进一步的看,要满足一阶最优条件,就会得到一个用来预测的解析形式的表达式--完整的证明见参考引用。
 
-In the end, the BLUP is shown to be a Gaussian random variate with mean:
+最后，BLUP(最佳线性无偏预测)表现为一个的高斯随机变量，均值是:
 
 .. math::
 
     \mu_{\hat{Y}}(X) = f(X)^T\,\hat{\beta} + r(X)^T\,\gamma
 
-and variance:
+方差是:
 
 .. math::
 
@@ -190,44 +185,43 @@ and variance:
     + u(X)^T\,(F^T\,R^{-1}\,F)^{-1}\,u(X)
     )
 
-where we have introduced:
+这里我们引入:
 
-* the correlation matrix whose terms are defined wrt the autocorrelation
-  function and its built-in parameters :math:`\theta`:
+* 相关矩阵，由自相关函数和内置的参数 :math:`\theta` 定义:
 
 .. math::
 
     R_{i\,j} = R(|X_i - X_j|, \theta), \; i,\,j = 1, ..., m
 
-* the vector of cross-correlations between the point where the prediction is
-  made and the points in the DOE:
+* 待预测点和DOE(试验设计)的一系列点之间交叉相关向量:
 
 .. math::
 
     r_i = R(|X - X_i|, \theta), \; i = 1, ..., m
 
-* the regression matrix (eg the Vandermonde matrix if :math:`f` is a polynomial
-  basis):
+* 回归矩阵(例如，当 :math:`f` 是一个多项式，就是范得蒙矩阵(Vandermonde)):
 
 .. math::
 
     F_{i\,j} = f_i(X_j), \; i = 1, ..., p, \, j = 1, ..., m
 
-* the generalized least square regression weights:
+*  最小二乘法回归权重 :
 
 .. math::
 
     \hat{\beta} =(F^T\,R^{-1}\,F)^{-1}\,F^T\,R^{-1}\,Y
 
-* and the vectors:
+* 和这些向量:
 
 .. math::
 
     \gamma & = R^{-1}(Y - F\,\hat{\beta}) \\
     u(X) & = F^T\,R^{-1}\,r(X) - f(X)
 
-It is important to notice that the probabilistic response of a Gaussian Process
-predictor is fully analytic and mostly relies on basic linear algebra
+It is important to notice that 
+the probabilistic response of a Gaussian Process
+predictor
+ is fully analytic and mostly relies on basic linear algebra
 operations. More precisely the mean prediction is the sum of two simple linear
 combinations (dot products), and the variance requires two matrix inversions,
 but the correlation matrix can be decomposed only once using a Cholesky
