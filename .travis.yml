@@ -1,3 +1,8 @@
+branches:
+  only:
+  - master
+  - deploy
+
 language: python - "2.7"
 
 before_install:
@@ -8,6 +13,7 @@ before_install:
     - conda update --yes conda
     - sudo rm -rf /dev/shm
     - sudo ln -s /run/shm /dev/shm
+    - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 
 install:
   - conda install --yes python="2.7" sphinx scikit-learn matplotlib scipy numpy PIL
@@ -16,10 +22,12 @@ install:
 
 cache: conda
 script:
-  - cp -r doc docs
-  - cp -r translate/* docs
-  - cd docs
-  - travis-sphinx --source=. --outdir=html --nowarn build
+  - cp -r translate/* doc
+  - cd doc
+  - travis-sphinx --source=. --nowarn build
+  - cd target/doc/build
+  - echo "sklearn.lzjqsdd.com" > CNAME
+  - cd ../../..
 
 after_success:
-  - travis-sphinx deploy
+  - travis-sphinx --branches=master,deploy deploy
