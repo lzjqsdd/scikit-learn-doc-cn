@@ -1,7 +1,7 @@
 .. _linear_model:
 
 =======================================
-Generalized Linear Models 广义线性模型
+广义线性模型
 =======================================
 
 .. currentmodule:: sklearn.linear_model
@@ -58,7 +58,7 @@ Across the module, we designate the vector :math:`w = (w_1,
 
 .. _ridge_regression:
 
-Ridge Regression 岭回归
+岭回归
 ==========================
 
 :class:`Ridge` 岭回归通过对回归稀疏增加罚项来解决 :ref:`ordinary_least_squares` 的一些问题.岭回归系数通过最小化带罚项的残差平方和
@@ -220,7 +220,7 @@ scikit-learn 暴露以下两个类 :class:`LassoCV` 和 :class:`LassoLarsCV` 可
 
 .. _elastic_net:
 
-Elastic Net弹性网络
+弹性网络
 ====================
 :class:`ElasticNet` 是一种使用L1和L2先验作为正则化矩阵的线性回归模型.这种组合用于只有很少的权重非零的稀疏模型，比如:class:`Lasso`,
 但是又能保持:class:`Ridge` 的正则化属性.我们可以使用 ``l1_ratio`` 参数来调节L1和L2的凸组合(一类特殊的线性组合)。
@@ -252,8 +252,8 @@ Elastic Net弹性网络
 
 .. _multi_task_lasso:
 
-Multi-task Lasso
-================
+Multi-task Lasso回归
+=====================
 
 :class:`MultiTaskLasso` 是一种估计多元回归系数的线性模型， ``y`` 是一个2D数组，形式为(n_samples,n_tasks).
 其限制条件是和其他回归问题一样，是选择的特征，同样称为 tasks.
@@ -393,7 +393,7 @@ OMP是基于贪婪算法,包括在每一步原子(归一化的向量)与当前�
 
 .. _bayesian_regression:
 
-Bayesian Regression 贝叶斯回归
+贝叶斯回归
 ================================
 
 可以在估计过程中使用贝叶斯回归技术包含正则化参数：正则化参数不是硬编码设置的而是手动调节适合数据的值
@@ -428,8 +428,8 @@ Alpha 同样被看做是随机变量，需要从数据中来估计
 
 .. _bayesian_ridge_regression:
 
-Bayesian Ridge Regression 贝叶斯岭回归
--------------------------------------------------
+贝叶斯岭回归
+---------------------
 
 :class:`BayesianRidge` 对上述的回归问题估计了一个概率模型。先验参数 :math:`w` 由下面的球形高斯给出：
 
@@ -524,8 +524,8 @@ with :math:`diag \; (A) = \lambda = \{\lambda_{1},...,\lambda_{p}\}`.
 
 .. _Logistic_regression:
 
-Logistic regression逻辑回归
-=============================
+逻辑回归
+=================
 
 逻辑回归形如其名，是一个线性分类模型而不是回归模型。逻辑回归在文献中也称为logit回归、最大熵分类(MaxEnt) 或者 log-linear classifier。
 在这个模型中，描述单次可能结果输出概率使用  `logistic function <http://en.wikipedia.org/wiki/Logistic_function>`_ 来建模。
@@ -596,14 +596,6 @@ Large dataset                 "sag"
    :ref:`l1_feature_selection`.
 
 :class:`LogisticRegressionCV` 实现了一个内建的交叉验证来寻找最优的参数C的逻辑回归模型。"newton-cg","sag" 和　"lbfgs" 程序在高维稠密数据上计算更快,原因在于warm-starting.对于多类问题,如果 `multi_class` 选项设置为 "ovr" ,那么最优的C从每个类别中获得，如果 `multi_class` 选项设置为　"multinomial" ,那么最优的Ｃ通过最小化交叉熵损失得到。
-:class:`LogisticRegressionCV` implements Logistic Regression with
-builtin cross-validation to find out the optimal C parameter.
-"newton-cg", "sag" and "lbfgs" solvers are found to be faster
-for high-dimensional dense data, due to warm-starting.
-For the multiclass case, if `multi_class`
-option is set to "ovr", an optimal C is obtained for each class and if
-the `multi_class` option is set to "multinomial", an optimal C is
-obtained that minimizes the cross-entropy loss.
 
 .. topic:: References:
 
@@ -613,19 +605,9 @@ Stochastic Gradient Descent - SGD
 =================================
 
 随机梯度下降(SGD)是一种快速拟合线性模型非常有效的方式,尤其当样本数量非常大的时候非常有用。 ``partial_fit`` 方法允许　only/out-of-core 学习。
-Stochastic gradient descent is a simple yet very efficient approach
-to fit linear models. It is particularly useful when the number of samples
-(and the number of features) is very large.
-The ``partial_fit`` method allows only/out-of-core learning.
 
  :class:`SGDClassifier` 和 :class:`SGDRegressor` 为使用了不同损失函数（凸函数）和不同罚项的分类和回归问题来拟合线性模型的函数。
 比如，对于设置参数 ``loss="log"`` , :class:`SGDClassifier` 拟合了一个逻辑回归模型，而设置参数 ``loss="hinge"`` ,该类会拟合一个线性SVM
-The classes :class:`SGDClassifier` and :class:`SGDRegressor` provide
-functionality to fit linear models for classification and regression
-using different (convex) loss functions and different penalties.
-E.g., with ``loss="log"``, :class:`SGDClassifier`
-fits a logistic regression model,
-while with ``loss="hinge"`` it fits a linear support vector machine (SVM).
 
 .. topic:: References
 
@@ -633,7 +615,7 @@ while with ``loss="hinge"`` it fits a linear support vector machine (SVM).
 
 .. _perceptron:
 
-Perceptron感知机
+感知机
 =================
 
  :class:`Perceptron` 是另一种简单的适合大规模学习的算法。默认情况下:
@@ -680,7 +662,7 @@ regularization parameter ``C``.
    K. Crammer, O. Dekel, J. Keshat, S. Shalev-Shwartz, Y. Singer - JMLR 7 (2006)
 
 
-Robustness regression: outliers and modeling errors
+鲁棒（稳健）回归：异常值和模型错误
 =====================================================
 
 Robust regression(稳健回归) 主要思路是对异常值十分敏感的经典最小二乘回归目标函数的修改。
