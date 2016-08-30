@@ -1,7 +1,7 @@
 .. _sgd:
 
 ========================================
-Stochastic Gradient Descent随机梯度下降
+随机梯度下降
 ========================================
 
 .. currentmodule:: sklearn.linear_model
@@ -27,7 +27,7 @@ SGD缺点如下：
 
     + SGD 对特征规模比较敏感(应该是特征维数)
 
-Classification
+分类
 ==============
 
 .. warning::
@@ -140,9 +140,6 @@ ASGD 通过计算普通SGD算法中每次迭代后每个样本的系数的平均
 对于带logistic损失的分类，提供了另外一种带平均策略的SGD变体，使用了随机平均梯度算法（SAG,
 详细参考论文：Minimizing Finite Sums with the Stochastic Average Gradient）。
 实现的程序为 :class:`LogisticRegression`.
-For classification with a logistic loss, another variant of SGD with an
-averaging strategy is available with Stochastic Average Gradient (SAG)
-algorithm, available as a solver in :class:`LogisticRegression`.
 
 回归
 ==========
@@ -167,8 +164,8 @@ Huber 和 epsilon-insensitive 损失函数可以用于鲁棒回归。insensitive
 实现程序为  :class:`Ridge` 。
 
 
-Stochastic Gradient Descent for sparse data
-===========================================
+稀疏数据上的随机梯度下降
+==============================
 
 .. note:: 稀疏实现和稠密实现结果有轻微不同，因为截距部分的收敛的学习率的影响。
 
@@ -202,9 +199,8 @@ Tips on Practical Use
 
     如果你的特征向量的属性中有固定的尺度（比如词频或者指示特征）,则不必进行尺度化。
 
-  * Finding a reasonable regularization term :math:`\alpha` is
-    best done using :class:`GridSearchCV`, usually in the
-    range ``10.0**-np.arange(1,7)``.
+  * 在使用 :class:`GridSearchCV` 时最好的做法是找到一个合适的
+    正则化项 :math:`\alpha` 通常取值范围为 ``10.0**-np.arange(1,7)`` 。
 
   * Empirically, we found that SGD converges after observing
     approx. 10^6 training samples. Thus, a reasonable first guess
