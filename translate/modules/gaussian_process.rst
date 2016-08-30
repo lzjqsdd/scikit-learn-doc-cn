@@ -218,14 +218,9 @@ GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本
     \gamma & = R^{-1}(Y - F\,\hat{\beta}) \\
     u(X) & = F^T\,R^{-1}\,r(X) - f(X)
 
-It is important to notice that 
-the probabilistic response of a Gaussian Process
-predictor
- is fully analytic and mostly relies on basic linear algebra
-operations. More precisely the mean prediction is the sum of two simple linear
-combinations (dot products), and the variance requires two matrix inversions,
-but the correlation matrix can be decomposed only once using a Cholesky
-decomposition algorithm.
+切记，高斯过程预测器的概率结果是完全解析的，并主要依赖于基本的线性代数操作。
+
+更准确来说，预测的均值是两个简单线性组合的和(点积)，方差需要是两个矩阵的逆，但相关矩阵可以使用Cholesky分解算法来分解。
 
 
 The empirical best linear unbiased predictor (EBLUP)
@@ -276,12 +271,12 @@ Processes for Machine Learning, please refer to the references below:
 
 .. _correlation_models:
 
-Correlation Models
-==================
+相关性模型(Correlation Models)
+=============================
 
-Common correlation models matches some famous SVM's kernels because they are
-mostly built on equivalent assumptions. They must fulfill Mercer's conditions
-and should additionally remain stationary. Note however, that the choice of the
+普通的相关性模型符合一些著名的 SVM 的核，因为它们大多是建立在在等效假设上的。
+它们必须满足Mercer条件（参考 mercer定理），并且要额外保持稳定(译者:此处stationary不知如何翻译)。
+Note however, that the choice of the
 correlation model should be made in agreement with the known properties of the
 original experiment from which the observations come. For instance:
 
