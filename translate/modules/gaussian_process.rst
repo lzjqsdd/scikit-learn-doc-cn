@@ -223,10 +223,10 @@ GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本
 更准确来说，预测的均值是两个简单线性组合的和(点积)，方差需要是两个矩阵的逆，但相关矩阵可以使用Cholesky分解算法来分解。
 
 
-The empirical best linear unbiased predictor (EBLUP)
+经验最佳线性无偏预测(EBLUP,The empirical best linear unbiased predictor)
 ----------------------------------------------------
 
-Until now, both the autocorrelation and regression models were assumed given.
+直到如今, both the autocorrelation and regression models were assumed given.
 In practice however they are never known in advance so that one has to make
 (motivated) empirical choices for these models :ref:`correlation_models`.
 
@@ -274,7 +274,7 @@ Processes for Machine Learning, please refer to the references below:
 相关性模型(Correlation Models)
 =============================
 
-普通的相关性模型符合一些著名的 SVM 的核，因为它们大多是建立在在等效假设上的。
+常见的相关性模型符合一些著名的 SVM 的核，因为它们大多是建立在在等效假设上的。
 它们必须满足Mercer条件（参考 mercer定理），并且要额外保持稳定(译者:此处stationary不知如何翻译)。
 Note however, that the choice of the
 xcorrelation model should be made in agreement with the known properties of the
