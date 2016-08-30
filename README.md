@@ -32,13 +32,13 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | computational_performance.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | covariance.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | cross_decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| cross_validation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| cross_validation.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| LianYun |
 | decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | density.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | dp-derivation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | ensemble.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | feature_extraction.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| minoriwww |
-| feature_selection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| feature_selection.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|lai-bluejay|
 | gaussian_process.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|alingse|
 | grid_search.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | isotonic.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
@@ -46,7 +46,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | kernel_ridge.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | label_propagation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | lda_qda.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| learning_curve.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| taoyizhi68 |
+| learning_curve.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| taoyizhi68 |
 | manifold.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | metrics.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | mixture.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
@@ -79,8 +79,13 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 ## 阶段二
 官方框架翻译
 
-#配置及编译
+# 配置及编译
 
+### 自动部署
+
+    本项目采用travis-ci持续集成来实现自动编译部署，翻译的文档提交pull request到master，合并后会自动把html部署到gh-pages分支上，网站托管在sklearn.lzjqsdd.com
+
+### 本地编译
 安装必要的环境:
 
 	sudo pip install numpy
