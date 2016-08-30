@@ -277,7 +277,7 @@ Processes for Machine Learning, please refer to the references below:
 普通的相关性模型符合一些著名的 SVM 的核，因为它们大多是建立在在等效假设上的。
 它们必须满足Mercer条件（参考 mercer定理），并且要额外保持稳定(译者:此处stationary不知如何翻译)。
 Note however, that the choice of the
-correlation model should be made in agreement with the known properties of the
+xcorrelation model should be made in agreement with the known properties of the
 original experiment from which the observations come. For instance:
 
 * If the original experiment is known to be infinitely differentiable (smooth),
