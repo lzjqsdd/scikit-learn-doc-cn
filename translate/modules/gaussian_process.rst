@@ -226,13 +226,14 @@ GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本
 经验最佳线性无偏预测(EBLUP,The empirical best linear unbiased predictor)
 ----------------------------------------------------
 
-直到如今, both the autocorrelation and regression models were assumed given.
-In practice however they are never known in advance so that one has to make
-(motivated) empirical choices for these models :ref:`correlation_models`.
+直到如今, 自相关模型和回归模型都是假设给定的。然而实际上，不能够提前知道是这些模型的，因此要为这些模型 :ref:`correlation_models` 做（有动机的）经验选择。
 
-Provided these choices are made, one should estimate the remaining unknown
-parameters involved in the BLUP. To do so, one uses the set of provided
-observations in conjunction with some inference technique. The present
+假设已经选了一些模型，接下来应该估计那些在 BLUP 中仍然未知的参数。
+
+这么做，需要用一系列提供的观察值加上一些推理技巧。
+
+目前的实现，是基于 DACE的 Matlab 工具箱 
+ The present
 implementation, which is based on the DACE's Matlab toolbox uses the *maximum
 likelihood estimation* technique -- see DACE manual in references for the
 complete equations. This maximum likelihood estimation problem is turned into
