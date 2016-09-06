@@ -21,12 +21,12 @@ machine learning usually starts out experimentally.
 (学习一个预测函数的参数并且在相同的数据集上测试结果，在方法论上是不正确的：
 一个仅给出测试用例标签的模型将会获得极高的分数，但是这个模型对没有见到过的数据，
 则无法做出任何预测。这种情况称为 **overfitting 过拟合**。
-为了避免这种情况，在（监督）学习实验中，通常会将一部分数据独立出来作为 **测试集合** ``X_test, y_test``。 
+为了避免这种情况，在（监督）学习实验中，通常会将一部分数据独立出来作为**测试集合** ``X_test, y_test``。 
 注意，“实验”不仅仅具有学术的意义，因为对于大部分商业系统，通常也是从实验性的系统开始的。)
 
 In scikit-learn a random split into training and test sets
 can be quickly computed with the :func:`train_test_split` helper function.
-Let's load the iris data set to fit a linear support vector machine on it  (
+Let's load the iris data set to fit a linear support vector machine on it(
 在 scikit-learn 中，可以使用辅助函数 :func:`train_test_split` 快速地将数据划分为训练集合与测试结合。
 下面加载 iris 数据集并用它来拟合一个线性支持向量机)::
 
@@ -40,7 +40,7 @@ Let's load the iris data set to fit a linear support vector machine on it  (
   ((150, 4), (150,))
 
 We can now quickly sample a training set while holding out 40% of the
-data for testing (evaluating) our classifier  (我们可以快速的采样到一个训练集合同时保留 40% 的数据用于测试（评估）我们的分类器)::
+data for testing (evaluating) our classifier(我们可以快速的采样到一个训练集合同时保留 40% 的数据用于测试（评估）我们的分类器)::
 
   >>> X_train, X_test, y_train, y_test = cross_validation.train_test_split(
   ...     iris.data, iris.target, test_size=0.4, random_state=0)
@@ -93,10 +93,13 @@ The following procedure is followed for each of the *k* "folds"(一个用于解�
 基本的方法称之为 *k*-fold CV （k 折叠交叉验证），训练数据被分为 *k* 个小的集合（其他方法会在下面描述，主要原则基本相同）。
 下面的步骤会在每个 *k* "folds" 上重复):
 
- * A model is trained using :math:`k-1` of the folds as training data; (使用 :math:`k-1` 个 folds 作为训练数据训练一个模型。)
+ * A model is trained using :math:`k-1` of the folds as training data;
  * the resulting model is validated on the remaining part of the data
    (i.e., it is used as a test set to compute a performance measure
-   such as accuracy). (得到的模型会在剩下的数据上验证（比如：将会作为一个测试集合来衡量性能，如精确度）。
+   such as accuracy).
+
+ * 使用 :math:`k-1` 个 folds 作为训练数据训练一个模型。
+ * 得到的模型会在剩下的数据上验证（比如：将会作为一个测试集合来衡量性能，如精确度）。
 
 The performance measure reported by *k*-fold cross-validation
 is then the average of the values computed in the loop.
@@ -175,7 +178,7 @@ validation iterator instead, for instance(也可以通过传入一个交叉验�
     training, preprocessing (such as standardization, feature selection, etc.)
     and similar :ref:`data transformations <data-transforms>` similarly should
     be learnt from a training set and applied to held-out data for prediction(在保
-    留的数据上测试预测器时，预处理（比如标准化，特征选择等） :ref:`data transformations <data-transforms>` 
+    留的数据上测试预测器时，预处理（比如标准化，特征选择等）:ref:`data transformations <data-transforms>` 
     也应该是和训练数据集相同的)::
 
       >>> from sklearn import preprocessing
@@ -449,14 +452,14 @@ for cross-validation against time-based splits.(另一种通常的使用场景�
 
 .. warning::
 
-  Contrary to :class:`StratifiedKFold` , ** the ``labels`` of
-  :class:`LeaveOneLabelOut` should not encode the target class to predict ** :
+  Contrary to :class:`StratifiedKFold`, **the ``labels`` of
+  :class:`LeaveOneLabelOut` should not encode the target class to predict**:
   the goal of :class:`StratifiedKFold` is to rebalance dataset classes across
   the train / test split to ensure that the train and test folds have
   approximately the same percentage of samples of each class while
   :class:`LeaveOneLabelOut` will do the opposite by ensuring that the samples
   of the train and test fold will not share the same label value.(和 :class:`StratifiedKFold` 不同，
-  ** :class:`LeaveOneLabelOut` 的标签不应该使用用于预测的类型信息来进行编码 ** ：
+  **:class:`LeaveOneLabelOut` 的标签不应该使用用于预测的类型信息来进行编码**：
   :class:`StratifiedKFold` 的目标是对训练/测试集合中的数据类型进行均衡化，保证训练和测试集合中样例的类型比例比较接近，
   而 :class:`LeaveOneLabelOut` 是做相反的事，即保证训练和测试集合不会共享相同的标签数值。)
 
@@ -465,7 +468,7 @@ Leave-P-Label-Out
 
 :class:`LeavePLabelOut` is similar as *Leave-One-Label-Out*, but removes
 samples related to :math:`P` labels for each training/test set.(:class:`LeavePLabelOut` 
-和 *Leave-One-Label-Out* 类似，但在每个训练/测试集合对中会保留 :math:`P` 个标签的数据作为验证集。)
+和 *Leave-One-Label-Out* 类似，但是会移动相对于 :math:`P` 的 labels 对于每个训练/测试集合。)
 
 Example of Leave-2-Label Out::
 
@@ -481,17 +484,19 @@ Example of Leave-2-Label Out::
 
 .. _ShuffleSplit:
 
-Random permutations cross-validation a.k.a. Shuffle & Split
--------------------------------------------------------------
+Random permutations cross-validation a.k.a. Shuffle & Split 随机排列交叉验证 打散 划分
+-----------------------------------------------------------------------------------
+
+:class:`ShuffleSplit`
 
 The :class:`ShuffleSplit` iterator will generate a user defined number of
 independent train / test dataset splits. Samples are first shuffled and
-then split into a pair of train and test sets.(:class:`ShuffleSplit` 迭代器
-将会生成一个用户给定数量的独立的训练/测试数据划分。样例首先被打散然后划分为一对训练测试集合。)
+then split into a pair of train and test sets.(:class:`ShuffleSplit` 迭代器将会生
+成一个用户给定数量的独立的训练/测试数据划分。样例首先被打散然后划分为一对训练测试集合。)
 
 It is possible to control the randomness for reproducibility of the
 results by explicitly seeding the ``random_state`` pseudo random number
-generator. (可以通过设定明确的 ``random_state``，使得伪随机生成器的结果可以重复。)
+generator.(可以通过设定明确的 ``random_state``，使得伪随机生成器的结果可以重现。)
 
 Here is a usage example::
 
@@ -513,11 +518,13 @@ the proportion of samples in on each side of the train / test split.
 Label-Shuffle-Split 标签随机划分
 -------------------------------
 
+:class:`LabelShuffleSplit`
+
 The :class:`LabelShuffleSplit` iterator behaves as a combination of
 :class:`ShuffleSplit` and :class:`LeavePLabelsOut`, and generates a
 sequence of randomized partitions in which a subset of labels are held
 out for each split. (:class:`LabelShuffleSplit` 迭代器是 :class:`ShuffleSplit` 和 :class:`LeavePLabelsOut`
-的组合，他生成一个随机划分的序列，将同一标签的元素分散到各个划分中。)
+的组合，并生成一个随机划分的序列，为每个划分保留出一些标签的子集。)
 
 Here is a usage example::
 
@@ -539,9 +546,9 @@ desired, but the number of labels is large enough that generating all
 possible partitions with :math:`P` labels withheld would be prohibitively
 expensive.  In such a scenario, :class:`LabelShuffleSplit` provides
 a random sample (with replacement) of the train / test splits
-generated by :class:`LeavePLabelsOut`.(当需要 :class:`LeavePLabelsOut` 的操作时，class 信息是必要的，
-但是当需要为所有可能的 P labels 保留划分的 labels 数量会很大，保存会有很大代价。在这种情况下，
-:class:`LabelShuffleSplit` 通过 :class:`LeavePLabelsOut` 
+generated by :class:`LeavePLabelsOut`.(:class:`LeavePLabelsOut` 是很有价值的操作，
+但是为大量的labels 保留 :math:`P` labels 将会
+有较大的代价。在这种情况下，:class:`LabelShuffleSplit` 通过 :class:`LeavePLabelsOut` 
 提供了一个随机（可重复）的训练 / 测试划分采样。)
 
 
@@ -565,7 +572,7 @@ See also 其他资料
 :class:`StratifiedShuffleSplit` is a variation of *ShuffleSplit*, which returns
 stratified splits, *i.e* which creates splits by preserving the same
 percentage for each target class as in the complete set.(:class:`StratifiedShuffleSplit` 是 *ShuffleSplit* 的一个变种，会返回直接的划分，比如：
-创建一个划分，但是划分中每个类的比例和完整数据集中的相同。)
+创建一个划分，划分中每个类的比例和完整数据集中的相同。)
 
 A note on shuffling 打乱顺序的说明
 ===================================
@@ -579,34 +586,37 @@ the data will likely lead to a model that is overfit and an inflated validation
 score: it will be tested on samples that are artificially similar (close in
 time) to training samples.(如果数据的顺序不是任意的（比如说，相同标签的样例连续出现），为了获得有意义的交叉验证结果，首先对其进行
 打散是很有必要的。然而，当样例不是独立同分布时打散则是不可行的。例如：样例是相关的文章，以他们发表的时间
-进行排序，这时候如果对数据进行打散，将会导致模型过拟合，得到一个过高的验证分数：因为验证样例更加相似（在时间上更接近）
+进行排序，这时候如果对数据进行打散，将会导致模型过拟合，得到一个过高的研制分数：因为验证样例更加相似（在时间上更接近）
 于训练数据。)
 
 Some cross validation iterators, such as :class:`KFold`, have an inbuilt option
 to shuffle the data indices before splitting them. Note that(一些交叉验证迭代器，
 比如 :class:`KFold`，有一个内建的在划分数据前进行数据索引打散的选项。注意):
 
-* This consumes less memory than shuffling the data directly. (这种方式仅需要很少的内存就可以打散数据。)
+* This consumes less memory than shuffling the data directly.
 * By default no shuffling occurs, including for the (stratified) K fold cross-
   validation performed by specifying ``cv=some_integer`` to
   :func:`cross_val_score`, grid search, etc. Keep in mind that
   :func:`train_test_split` still returns a random split.
-  (默认不会进行打散，包括设置 ``cv=some_integer`` （直接）k 折叠交叉验证的 :func:`cross_val_score` ，
-  表格搜索等。注意 :func:`train_test_split` 会返回一个随机的划分。)
 * The ``random_state`` parameter defaults to ``None``, meaning that the
   shuffling will be different every time ``KFold(..., shuffle=True)`` is
   iterated. However, ``GridSearchCV`` will use the same shuffling for each set
   of parameters validated by a single call to its ``fit`` method.
-  (参数 ``random_state`` 默认设置为 ``None``，这意为着每次进行 ``KFold(..., shuffle=True)`` 时，打散都是不同的。
-  然而，``GridSearchCV`` 通过调用 ``fit`` 方法验证时，将会使用相同的打散来训练每一组参数。)
 * To ensure results are repeatable (*on the same platform*), use a fixed value
-  for ``random_state``. (为了保证结果的可重复性（*在相同的平台上*），应该给 ``random_state`` 设定一个固定的值。)
+  for ``random_state``.
+
+* 这种方式仅需要很少的内存就可以打散数据。
+* 默认不会进行打散，包括设置 ``cv=some_integer``（直接）k 折叠交叉验证的:func:`cross_val_score`，
+  表格搜索等。注意 :func:`train_test_split` 会返回一个随机的划分。
+* 参数 ``random_state`` 默认设置为 ``None``，这意为着每次进行 ``KFold(..., shuffle=True)`` 时，打散都是不同的。
+  然而，``GridSearchCV`` 通过调用 ``fit`` 方法验证时，将会使用相同的打散来训练每一组参数。
+* 为了保证结果的可重复性（*在不同的平台上*），给 ``random_state`` 设定一个固定的值。
 
 Cross validation and model selection 交叉验证和模型选择
-=====================================================
+====================================
 
 Cross validation iterators can also be used to directly perform model
 selection using Grid Search for the optimal hyperparameters of the
 model. This is the topic if the next section: :ref:`grid_search`.
-(交叉验证迭代器可以通过网格搜索得到最优的模型超参数，从而直接用于模型的选择。
+(检查验证迭代器可以通过网格搜索得到最优的模型超参数，从而直接用于模型的选择。
 这是另一部分 section: :ref:`grid_search` 的主要内容。)
