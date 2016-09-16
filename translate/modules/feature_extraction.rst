@@ -20,16 +20,13 @@
 
 类 :class:`DictVectorizer` 可以把特征向量转化成标准的Python字典对象的一个列表，
 同时也是被scikit-learn的估计器使用的一个NumPy/SciPy体现(ndarray)
-The class :class:`DictVectorizer` can be used to convert feature arrays represented as lists of standard Python dict objects to the NumPy/SciPy representation used by scikit-learn estimators.
-即使处理时并不是特别快，python的字典有易于使用的优势，适用于稀疏情景(缺失特征不会被存储)，存储特征的名字和值。
-While not particularly fast to process, Python's ``dict`` has the
-advantages of being convenient to use, being sparse (absent features
-need not be stored) and storing feature names in addition to values.
 
-类 :class:`DictVectorizer` 实现了所谓 one-of-K 或 "one-hot" 的方法来使用范畴(名义上离散的)特征 categorical (aka nominal, discrete) features. 范畴特征是一个键值对，其值被约束为离散的无序列表Categorical
-features are "attribute-value" pairs where the value is restr，cted
-to  s without ordering (如话题标志，对象类型，标签，名字等)。
-？？？
+即使处理时并不是特别快，python的字典有易于使用的优势，适用于稀疏情景(缺失特征不会被存储)，存储特征的名字和值。
+
+类 :class:`DictVectorizer` 实现了所谓 one-of-K 或 "one-hot" 的方法来使用范畴(即离散的)特征 。
+范畴特征是一个键值对，其值被约束为离散的无序列表
+ (如话题标志，对象类型，标签，名字等)。
+
 
 在下面例子中 "city" 是一个绝对变量而  disc是一个 "temperature" 传统的数值特征 ::
 
@@ -50,15 +47,10 @@ to  s without ordering (如话题标志，对象类型，标签，名字等)。
   >>> vec.get_feature_names()
   ['city=Dubai', 'city=London', 'city=San Fransisco', 'temperature']
 
-类 :class:`DictVectorizer` 也是一个有用的转化形式，主要应用于自然语音处理中分类器的训练模型，典型应用于在兴趣文本中提取特征序列is also a useful representation transformation
-for training sequence classifiers in Natural Language Processing models
-that typically work by extracting feature windows around a particular
-word of interest.
+类 :class:`DictVectorizer` 也是一个有用的转化形式，主要应用于自然语言处理(NLP)中分类器的训练模型，典型应用于在兴趣文本中提取特征序列.
 
-比如说，我们有一个算法来提取词性标签作为补充标签，来训练序列分类器(如chunker概括大意)
-For example, suppose that we have a first algorithm that extracts Part of
-Speech (PoS) tags that we want to use as complementary tags for training
-a sequence classifier (e.g. a chunker). 下面的字典展示了一个小例子，提取在例句 'The cat sat on the mat.' 中sat周围的特征::
+比如说，我们有一个算法来提取词性标签作为补充标签，来训练序列分类器(如chunker概括大意)。
+下面的字典展示了一个小例子，提取在例句 'The cat sat on the mat.' 中sat周围的特征:: 
 
   >>> pos_window = [
   ...     {
@@ -72,7 +64,7 @@ a sequence classifier (e.g. a chunker). 下面的字典展示了一个小例子�
   ...     # in a real application one would extract many such dictionaries
   ... ]
 
-以上形式可以被向量化成一个稀疏二维矩阵，从而作为参数传递给分类器(或经过:class:`text.TfidfTransformer` 的加工标准化)::
+以上形式可以被向量化成一个稀疏二维矩阵，从而作为参数传递给分类器(或经过:class:`text.TfidfTransformer` 的加工标准化):: 
 
   >>> vec = DictVectorizer()
   >>> pos_vectorized = vec.fit_transform(pos_window)
@@ -84,13 +76,9 @@ a sequence classifier (e.g. a chunker). 下面的字典展示了一个小例子�
   >>> vec.get_feature_names()
   ['pos+1=PP', 'pos-1=NN', 'pos-2=DT', 'word+1=on', 'word-1=cat', 'word-2=the']
 
-正如你所想的，如果在文档全集中进行提取，结果矩阵将会非常巨大，他们中的大部分通常将会是0。所以为了使这个矩阵的稀疏数据结构存储在内存中，类 ``DictVectorizer`` 默认使用了一个 ``scipy.sparse`` 矩阵
-而不是 ``numpy.ndarray``。As you can imagine, if one extracts such a context around each individual
-word of a corpus of documents the resulting matrix will be very wide
-(many one-hot-features) with most of them being valued to zero most
-of the time. So as to make the resulting data structure able to fit in
-memory the ``DictVectorizer`` class uses a ``scipy.sparse`` matrix by
-default instead of a ``numpy.ndarray``.
+正如你所想的，如果在文档全集中进行提取，结果矩阵将会非常巨大(大量one-hot-features)，
+他们中的大部分通常将会是0。所以为了使这个矩阵的稀疏数据结构存储在内存中，类 ``DictVectorizer`` 默认使用了一个 ``scipy.sparse`` 矩阵
+而不是 ``numpy.ndarray``。
 
 
 .. _feature_hashing:
@@ -101,58 +89,31 @@ default instead of a ``numpy.ndarray``.
 
 .. currentmodule:: sklearn.feature_extraction
 
-类 :class:`FeatureHasher` 是一个快速且低内存消耗的向量化方法，使用了 `feature hashing <https://en.wikipedia.org/wiki/Feature_hashing>`_ 技术，或可称为"hashing trick"is a high-speed, low-memory vectorizer that|
-uses a technique known as
-`feature hashing <https://en.wikipedia.org/wiki/Feature_hashing>`_,
-or the "hashing trick".
-而不是为计算得到的特征建立哈西表Instead of building a hash table of the features encountered in training,
-as the vectorizers do, instances 类 :class:`FeatureHasher` 的实例使用了一个哈希函数来直接确定特征在样本矩阵中的列号。
-apply a hash function to the features
-to determine their column index in sample matrices directly.
-这样在可检查性上增加了速度减少了内存开销。这个类不会记住输入特征的形状，也没有 ``inverse_transform`` 方法The result is increased speed and reduced memory usage,
-at the expense of inspectability;
-the hasher does not remember what the input features looked like
-and has no ``inverse_transform`` method.
+类 :class:`FeatureHasher` 是一个快速且低内存消耗的向量化方法，使用了 `feature hashing <https://en.wikipedia.org/wiki/Feature_hashing>`_ 技术，或可称为"hashing trick"。
+没有像矢量化那样，为计算训练得到的特征建立哈西表，类 :class:`FeatureHasher` 的实例使用了一个哈希函数来直接确定特征在样本矩阵中的列号。
+这样在可检查性上增加了速度减少了内存开销。这个类不会记住输入特征的形状，也没有 ``inverse_transform`` 方法。
 
-因为哈希函数会造成不相关特征间的冲突，所以这里使用了带有签名的哈希函数。哈希值的签名决定了输出矩阵中特征的签名Since the hash function might cause collisions between (unrelated) features,
-a signed hash function is used and the sign of the hash value
-determines the sign of the value stored in the output matrix for a feature.在这种情况下，哈希冲突可能会消失，不会出现错误。且所有输出矩阵的期望都是0。
-This way, collisions are likely to cancel out rather than accumulate error,
-and the expected mean of any output feature's value is zero.
+因为哈希函数会造成不相关特征间的冲突，所以这里使用了带有签名的哈希函数。哈希值的签名决定了输出矩阵中特征的签名。
+在这种情况下，哈希冲突可能会消失，不会出现错误。且所有输出矩阵的期望都是0。
 
-如果传递 ``non_negative=True`` 参数给构造器，那么将使用绝对值。这将减少一些对冲突的控制，但是允许输出作为参数传递给估计器如:is passed to the constructor, the absolute
-value is taken.  This undoes some of the collision handling, but allows
-the output to be passed to estimators like
-:class:`sklearn.naive_bayes.MultinomialNB` or
+如果传递 ``non_negative=True`` 参数给构造器，那么将使用绝对值。这将减少一些对冲突的控制，但是允许输出作为参数传递给估计器如:
+:class:`sklearn.naive_bayes.MultinomialNB` 或
 :class:`sklearn.feature_selection.chi2`
-特征选择器要求非负的输入。feature selectors that expect non-negative inputs.
+特征选择器要求非负的输入。
 
-类 :class:`FeatureHasher` 接受mapping(如python的字典和其在 ``collections`` 模块中的变体)accepts either mappings
-(like Python's ``dict`` and its variants in the ``collections`` module),
+类 :class:`FeatureHasher` 接受mapping(如python的字典和其在 ``collections`` 模块中的变体)，
 使用键值对 ``(feature, value)`` ，或是使用字符串string，取决于构造器参数  ``input_type`` 。
- pairs, or strings,
-depending on the constructor parameter ``input_type``.
 Mapping 被看成键值对的列表，其中单个字符串有一个隐式的值: 1 ， 所以 ``['feat1', 'feat2', 'feat3']`` 被转化为 ``[('feat1', 1), ('feat2', 1), ('feat3', 1)]``  。
-are treated as lists of ``(feature, value)`` pairs,
-while single strings have an implicit value of 1,
-so ``['feat1', 'feat2', 'feat3']`` is interpreted as
-``[('feat1', 1), ('feat2', 1), ('feat3', 1)]``.
+
 如果一个单独特征在一个样本中出现了多次，与之相关的次数将被加和(所以 ``('feat', 2)`` and ``('feat', 3.5)`` 转化成 ``('feat', 5.5)`` )。
-If a single feature occurs multiple times in a sample,
-the associated values will be summed
-(so ``('feat', 2)`` and ``('feat', 3.5)`` become ``('feat', 5.5)``).
-类 :class:`FeatureHasher` 的输出通常是一个CSR格式的 ``scipy.sparse`` 矩阵is always a ``scipy.sparse`` matrix
-in the CSR format.
+类 :class:`FeatureHasher` 的输出通常是一个CSR格式的 ``scipy.sparse`` 稀疏矩阵。
 
-特征哈希可以在文本分类中使用，但是不像Feature hashing can be employed in document classification,
-but unlike但是，与 :class:`text.CountVectorizer` 不同,
-:class:`FeatureHasher` 不做分词和其他过程，除了does not do word
-splitting or any other preprocessing except Unicode-to-UTF-8 encoding;
-see :ref:`hashing_vectorizer`, below, for a combined tokenizer/hasher.
+特征哈希可以在文本分类中使用，
+但是，与 :class:`text.CountVectorizer` 不同,
+为使分类器/哈希联合使用，请参考下方的 :ref:`hashing_vectorizer`
 
-As an example, consider a word-level natural language processing task
-that needs features extracted from ``(token, part_of_speech)`` pairs.
-One could use a Python generator function to extract features::
+举个例子，假设有一个词级别的自然语言处理任务，需要在 ``(token, part_of_speech)`` 键值对中
+提取特征，你可以使用Python的生成器函数来提取:: 
 
   def token_features(token, part_of_speech):
       if token.isdigit():
@@ -166,39 +127,36 @@ One could use a Python generator function to extract features::
           yield "all_uppercase"
       yield "pos={}".format(part_of_speech)
 
-Then, the ``raw_X`` to be fed to ``FeatureHasher.transform``
-can be constructed using::
+之后 ``raw_X`` 为了可以传入 ``FeatureHasher.transform``
+可以通过如下方式构建::
 
   raw_X = (token_features(tok, pos_tagger(tok)) for tok in corpus)
 
-and fed to a hasher with::
+然后传入哈希::
 
   hasher = FeatureHasher(input_type='string')
   X = hasher.transform(raw_X)
 
-to get a ``scipy.sparse`` matrix ``X``.
+得到一个 ``scipy.sparse`` 类型的的矩阵 ``X`` 。
 
-Note the use of a generator comprehension,
-which introduces laziness into the feature extraction:
-tokens are only processed on demand from the hasher.
+注意对使用生成器的理解Note the use of a generator comprehension,
+它将为特征哈希引入懒加载机制:
+词令牌(token)只在哈希要求时处理。
 
-Implementation details
+实现细节
 ----------------------
 
-:class:`FeatureHasher` uses the signed 32-bit variant of MurmurHash3.
-As a result (and because of limitations in ``scipy.sparse``),
-the maximum number of features supported is currently :math:`2^{31} - 1`.
+类 :class:`FeatureHasher` 使用了有符号的MurmurHash3的变体，
+因此导致 (同时由于 ``scipy.sparse`` 的限制),
+现在支持的最大特征数量为 :math:`2^{31} - 1` 。
 
-The original formulation of the hashing trick by Weinberger et al.
-used two separate hash functions :math:`h` and :math:`\xi`
-to determine the column index and sign of a feature, respectively.
-The present implementation works under the assumption
-that the sign bit of MurmurHash3 is independent of its other bits.
+特征哈希的原始形式源于 Weinberger et al。
+使用了两个独立的哈希函数 :math:`h` 和 :math:`\xi`
+来分别决定列下标和特征签名。
+现有的实现是基于假设：MurmurHash3的符号位与其他位独立。
 
-Since a simple modulo is used to transform the hash function to a column index,
-it is advisable to use a power of two as the ``n_features`` parameter;
-otherwise the features will not be mapped evenly to the columns.
-
+因为从哈希函数到列标只使用了简单的取模操作，因此建议使用二次方作为 ``n_features`` 的参数，
+否则特征不会平均的分布到列中。
 
 .. topic:: References:
 
@@ -211,79 +169,57 @@ otherwise the features will not be mapped evenly to the columns.
 
 .. _text_feature_extraction:
 
-Text feature extraction
+文本特征提取
 =======================
 
 .. currentmodule:: sklearn.feature_extraction.text
 
 
-The Bag of Words representation
+体现：词袋模型
 -------------------------------
 
-Text Analysis is a major application field for machine learning
-algorithms. However the raw data, a sequence of symbols cannot be fed
-directly to the algorithms themselves as most of them expect numerical
-feature vectors with a fixed size rather than the raw text documents
-with variable length.
+文本分析是机器学习算法的主要应用领域。然而，符号文字序列不能直接传递给这些算法，
+因为他们要求数值的固定长度的矩阵特征而不是可变长度的文本文档。
 
-In order to address this, scikit-learn provides utilities for the most
-common ways to extract numerical features from text content, namely:
+为了解决这个问题，scikit-learn为数值特征提取最常见的方式提供了一系列工具，它们是: 
 
-- **tokenizing** strings and giving an integer id for each possible token,
-  for instance by using white-spaces and punctuation as token separators.
+- **tokenizing** 对每个可能的词令牌分成字符串并赋予整形的id，比如使用空格和作为令牌分割依据。
 
-- **counting** the occurrences of tokens in each document.
+- **counting** 每个词令牌在文档中的出现次数。
 
-- **normalizing** and weighting with diminishing importance tokens that
-  occur in the majority of samples / documents.
+- **normalizing** 在大多数的文档 / 样本中，可以减少重要的次令牌的权重。
 
-In this scheme, features and samples are defined as follows:
+在这个体系中，特征和样本有如下定义: 
 
-- each **individual token occurrence frequency** (normalized or not)
-  is treated as a **feature**.
+- 每个 **独立令牌出现频率** (归一化或未归一化)
+  被当做一个 **(特征)feature** 。
 
-- the vector of all the token frequencies for a given **document** is
-  considered a multivariate **sample**.
+- **document(文本)** 中所有的令牌频率向量被看做一个多元 **sample(样本)** 。
 
-A corpus of documents can thus be represented by a matrix with one row
-per document and one column per token (e.g. word) occurring in the corpus.
+因此文本的集合可被表示为矩阵形式，每行一条文本，每列对应每个文本中出现的词令牌(如单个词)。
 
-We call **vectorization** the general process of turning a collection
-of text documents into numerical feature vectors. This specific strategy
-(tokenization, counting and normalization) is called the **Bag of Words**
-or "Bag of n-grams" representation. Documents are described by word
-occurrences while completely ignoring the relative position information
-of the words in the document.
+我们称 **vectorization(向量化)** 是转化文本集合为数值向量的普遍方法。这种特殊思想，包括令牌化，统计频数和归一化，被称为 **Bag of Words(词袋子)** 或 "Bag of n-grams" 模型。文本被词出现频率描述，完全忽略词的相对位置信息。
 
 
-Sparsity
+稀疏
 --------
 
-As most documents will typically use a very small subset of the words used in
-the corpus, the resulting matrix will have many feature values that are
-zeros (typically more than 99% of them).
+因为大多数文本通常只使用文本词向量全集中的一个小子集，结果矩阵将有许多特征的值为0(经常超过99%)。
 
-For instance a collection of 10,000 short text documents (such as emails)
-will use a vocabulary with a size in the order of 100,000 unique words in
-total while each document will use 100 to 1000 unique words individually.
+例如，一个10000个短文本集的例子(如Emails)将使用总共大约100000个不同的词，而每个文本(Email)将使用100到1000个单词。
 
-In order to be able to store such a matrix in memory but also to speed
-up algebraic operations matrix / vector, implementations will typically
-use a sparse representation such as the implementations available in the
-``scipy.sparse`` package.
+为了可以在内存中储存这种矩阵，同时加速线性代数的矩阵 / 向量运算，所以通常以稀疏形式实现，例如可参考在包 ``scipy.sparse`` 中的实现。
 
 
-Common Vectorizer usage
+通常向量化使用Common Vectorizer usage
 -----------------------
 
-:class:`CountVectorizer` implements both tokenization and occurrence
-counting in a single class::
+:class:`CountVectorizer` 在单个类中实现了令牌化和出现频数统计:: 
 
   >>> from sklearn.feature_extraction.text import CountVectorizer
 
-This model has many parameters, however the default values are quite
-reasonable (please see  the :ref:`reference documentation
-<text_feature_extraction_ref>` for the details)::
+这个模型有很多参数，然而初始值非常合理(请参考 :ref:`reference documentation
+<text_feature_extraction_ref>` 获取更多细节)::
 
   >>> vectorizer = CountVectorizer(min_df=1)
   >>> vectorizer                     # doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
@@ -294,8 +230,7 @@ reasonable (please see  the :ref:`reference documentation
           strip_accents=None, token_pattern=...'(?u)\\b\\w\\w+\\b',
           tokenizer=None, vocabulary=None)
 
-Let's use it to tokenize and count the word occurrences of a minimalistic
-corpus of text documents::
+让我们使用它来使简单文本全集令牌化，并统计词频::
 
   >>> corpus = [
   ...     'This is the first document.',
@@ -308,18 +243,14 @@ corpus of text documents::
   <4x9 sparse matrix of type '<... 'numpy.int64'>'
       with 19 stored elements in Compressed Sparse ... format>
 
-The default configuration tokenizes the string by extracting words of
-at least 2 letters. The specific function that does this step can be
-requested explicitly::
+初始设定是，令牌化字符串，提取至少两个字母的词。做这一步的函数可以显式的被调用::
 
   >>> analyze = vectorizer.build_analyzer()
   >>> analyze("This is a text document to analyze.") == (
   ...     ['this', 'is', 'text', 'document', 'to', 'analyze'])
   True
 
-Each term found by the analyzer during the fit is assigned a unique
-integer index corresponding to a column in the resulting matrix. This
-interpretation of the columns can be retrieved as follows::
+每个在拟合中被分析器发现的词被指派了一个独一无二的索引，在结果矩阵中表示一列。对于列的翻译可以被如下方式检索::
 
   >>> vectorizer.get_feature_names() == (
   ...     ['and', 'document', 'first', 'is', 'one',
@@ -332,24 +263,19 @@ interpretation of the columns can be retrieved as follows::
          [1, 0, 0, 0, 1, 0, 1, 1, 0],
          [0, 1, 1, 1, 0, 0, 1, 0, 1]]...)
 
-The converse mapping from feature name to column index is stored in the
-``vocabulary_`` attribute of the vectorizer::
+从列标到特征名的反转映射储存在向量化类 vectorizer 的属性 ``vocabulary_`` 中::
 
   >>> vectorizer.vocabulary_.get('document')
   1
 
-Hence words that were not seen in the training corpus will be completely
-ignored in future calls to the transform method::
+因此在训练集里未出现的的词将在将来调用transform方法时被完全忽略:: 
 
   >>> vectorizer.transform(['Something completely new.']).toarray()
   ...                           # doctest: +ELLIPSIS
   array([[0, 0, 0, 0, 0, 0, 0, 0, 0]]...)
 
-Note that in the previous corpus, the first and the last documents have
-exactly the same words hence are encoded in equal vectors. In particular
-we lose the information that the last document is an interrogative form. To
-preserve some of the local ordering information we can extract 2-grams
-of words in addition to the 1-grams (individual words)::
+注意在之前的集合中第一个和最后一个文本事实上是同一个词，因此被编码成相同的向量。特别是最后一个字符是询问形式时我们丢失了他的信息。
+为了防止词组顺序颠倒,我们除了提取一元模型(1-Gram，即单字单词)，也可以提取二元模型(2-Gram):: 
 
   >>> bigram_vectorizer = CountVectorizer(ngram_range=(1, 2),
   ...                                     token_pattern=r'\b\w+\b', min_df=1)
@@ -358,8 +284,7 @@ of words in addition to the 1-grams (individual words)::
   ...     ['bi', 'grams', 'are', 'cool', 'bi grams', 'grams are', 'are cool'])
   True
 
-The vocabulary extracted by this vectorizer is hence much bigger and
-can now resolve ambiguities encoded in local positioning patterns::
+矢量化提取的词因此变得很大，同时可以在定位模式时消歧义:: 
 
   >>> X_2 = bigram_vectorizer.fit_transform(corpus).toarray()
   >>> X_2
@@ -370,8 +295,7 @@ can now resolve ambiguities encoded in local positioning patterns::
          [0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1]]...)
 
 
-In particular the interrogative form "Is this" is only present in the
-last document::
+特别的，疑问形式如 "Is this" 只在最后一个文档中显示:: 
 
   >>> feature_index = bigram_vectorizer.vocabulary_.get('is this')
   >>> X_2[:, feature_index]     # doctest: +ELLIPSIS
@@ -380,27 +304,18 @@ last document::
 
 .. _tfidf:
 
-Tf–idf term weighting
+Tf–idf算法 字词权值
 ---------------------
 
-In a large text corpus, some words will be very present (e.g. "the", "a",
-"is" in English) hence carrying very little meaningful information about
-the actual contents of the document. If we were to feed the direct count
-data directly to a classifier those very frequent terms would shadow
-the frequencies of rarer yet more interesting terms.
+在一个巨大的文本集中，一些词会出现很多次(如 "the", "a", "is" in English)，且带有较少的有意义的信息。
+如果我们直接把数量输入到分类器中则这些频繁词组会掩盖住那些我们关注但很少出现的词。
 
-In order to re-weight the count features into floating point values
-suitable for usage by a classifier it is very common to use the tf–idf
-transform.
+为了重新计算特征权重，将其转化成适合被分类器使用的浮点值，使用tf-idf转化非常普遍。
 
-Tf means **term-frequency** while tf–idf means term-frequency times
-**inverse document-frequency**. This was originally a term weighting
-scheme developed for information retrieval (as a ranking function
-for search engines results), that has also found good use in document
-classification and clustering.
+Tf意思是词语频率 **term-frequency** 而tf–idf意思是词语频率与转置文档频率( **inverse document-frequency** )的乘积。
+它源于一个词权重的信息检索方式(作为搜索引擎结果的评级函数)，同时在文本分类和聚类中表现良好。
 
-This normalization is implemented by the :class:`TfidfTransformer`
-class::
+归一化过程已经实现于类 :class:`TfidfTransformer`中::
 
   >>> from sklearn.feature_extraction.text import TfidfTransformer
   >>> transformer = TfidfTransformer()
@@ -408,8 +323,8 @@ class::
   TfidfTransformer(norm=...'l2', smooth_idf=True, sublinear_tf=False,
                    use_idf=True)
 
-Again please see the :ref:`reference documentation
-<text_feature_extraction_ref>` for the details on all the parameters.
+请参考 :ref:`reference documentation
+<text_feature_extraction_ref>` 获取其他参数的更多细节。
 
 Let's take an example with the following counts. The first term is present
 100% of the time hence not very interesting. The two other features only
