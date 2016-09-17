@@ -232,19 +232,13 @@ GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本
 
 这么做，需要用一系列提供的观察值加上一些推理技巧。
 
-目前的实现，是基于 DACE的 Matlab 工具箱 
- The present
-implementation, which is based on the DACE's Matlab toolbox uses the *maximum
-likelihood estimation* technique -- see DACE manual in references for the
-complete equations. This maximum likelihood estimation problem is turned into
-a global optimization problem onto the autocorrelation parameters. In the
-present implementation, this global optimization is solved by means of the
-fmin_cobyla optimization function from scipy.optimize. In the case of
-anisotropy however, we provide an implementation of Welch's componentwise
-optimization algorithm -- see references.
+目前的实现是基于 DACE 的 Matlab 工具箱，使用了 *最大似然估计* 技术－－ 完整的方程参见参考文献中的 DACE 手册。最大似然估计问题变成了在自相关参数上的一个的全局最优化问题。
 
-For a more comprehensive description of the theoretical aspects of Gaussian
-Processes for Machine Learning, please refer to the references below:
+在目前的实现里，全局最优是通过 scipy.optimize 里的 fmin_cobyla 优化函数的均值得到解的（译者：COBYLA ：约束优化的线性逼近）。
+
+但是在各向异性的情况下，提供了基于Welch's componentwise 优化算法的实现，参见参考文献。
+
+更多更全面的关于机器学习的高斯过程理论方面的知识，请参考如下的参考文献：
 
 .. topic:: References:
 
