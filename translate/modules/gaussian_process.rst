@@ -119,7 +119,7 @@ GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本
 
 :math:`\sigma^2` 是它的方差，而 :math:`R` 是相关函数，只取决于每个样本之间的相对距离的绝对值。可能有点 featurewise (这就是静态假设)。
 
-通过这个基本的公式，请注意 GPML 不过是基本最小二乘线性回归的一种扩展:
+根据这个基本的公式，请注意，GPML 不过是基本最小二乘线性回归的一种扩展:
 
 .. math::
 
@@ -167,7 +167,7 @@ GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本
     a(X)^* = \arg \min\limits_{a(X)} & \; \mathbb{E}[(G(X) - a(X)^T y)^2] \\
                        {\rm s. t.} & \; \mathbb{E}[G(X) - a(X)^T y] = 0
 
-用拉格朗日方法重写这个约束优化问题,并进一步的看,要满足一阶最优条件,就会得到一个用来预测的解析形式的表达式--完整的证明见参考引用。
+用拉格朗日方法重写这个约束优化问题，并进一步的看，要满足一阶最优条件，就会得到一个用来预测的解析形式的表达式－－完整的证明见参考文献。
 
 最后，BLUP(最佳线性无偏预测)表现为一个的高斯随机变量，均值是:
 
@@ -232,19 +232,13 @@ GPML 开始会假设这个函数是 高斯过程 :math:`G` 的一个条件样本
 
 这么做，需要用一系列提供的观察值加上一些推理技巧。
 
-目前的实现，是基于 DACE的 Matlab 工具箱 
- The present
-implementation, which is based on the DACE's Matlab toolbox uses the *maximum
-likelihood estimation* technique -- see DACE manual in references for the
-complete equations. This maximum likelihood estimation problem is turned into
-a global optimization problem onto the autocorrelation parameters. In the
-present implementation, this global optimization is solved by means of the
-fmin_cobyla optimization function from scipy.optimize. In the case of
-anisotropy however, we provide an implementation of Welch's componentwise
-optimization algorithm -- see references.
+目前的实现是基于 DACE 的 Matlab 工具箱，使用了 *最大似然估计* 技术－－ 完整的方程参见参考文献中的 DACE 手册。在自相关参数上的最大似然估计问题变成了一个的全局最优化问题。
 
-For a more comprehensive description of the theoretical aspects of Gaussian
-Processes for Machine Learning, please refer to the references below:
+在目前的实现里，全局最优是通过 scipy.optimize 里的 fmin_cobyla 优化函数的均值得到解的（译者：COBYLA ：约束优化的线性逼近）。
+
+但是在各向异性的情况下，提供了基于Welch's componentwise 优化算法的实现，参见参考文献。
+
+更多更全面的关于机器学习的高斯过程理论方面的知识，请参考如下的参考文献：
 
 .. topic:: References:
 
@@ -276,40 +270,29 @@ Processes for Machine Learning, please refer to the references below:
 =============================
 
 常见的相关性模型符合一些著名的 SVM 的核，因为它们大多是建立在在等效假设上的。
-它们必须满足Mercer条件（参考 mercer定理），并且要额外保持稳定(译者:此处stationary不知如何翻译)。
-Note however, that the choice of the
-xcorrelation model should be made in agreement with the known properties of the
-original experiment from which the observations come. For instance:
+它们必须满足Mercer条件（参考 mercer定理），并且要额外保持稳定性(译者:此处stationary不知如何翻译)。但是切记，选择相关模型，应该切合由观察得到的原始试验的已知属性。
+例如：
 
-* If the original experiment is known to be infinitely differentiable (smooth),
-  then one should use the *squared-exponential correlation model*.
-* If it's not, then one should rather use the *exponential correlation model*.
-* Note also that there exists a correlation model that takes the degree of
-  derivability as input: this is the Matern correlation model, but it's not
-  implemented here (TODO).
+* 如果原始实验已知是无穷可微的（光滑的）,那么应该使用 *平方指数相关模型*（*squared-exponential correlation model*）
+* 如果不是，那么应该使用 *指数相关模型*（*exponential correlation model*）
+* 也要注意，有种相关模型将可导性的度作为输入：就是Matern 相关模型，但是这里还有实现出来（TODO）
 
-For a more detailed discussion on the selection of appropriate correlation
-models, see the book by Rasmussen & Williams in references.
+更多关于选择相关模型的方法的讨论细节，参见参考中Rasmussen & Williams的书。
 
 .. _regression_models:
 
 
-Regression Models
+回归模型
 =================
 
-Common linear regression models involve zero- (constant), first- and
-second-order polynomials. But one may specify its own in the form of a Python
-function that takes the features X as input and that returns a vector
-containing the values of the functional set. The only constraint is that the
-number of functions must not exceed the number of available observations so
-that the underlying regression problem is not *underdetermined*.
+常见的线性回归模型涉及到 0阶（常数）、1阶、和二阶多项式函数。但是可以以 Python 函数的形式指定自己的多项式函数－－接收特征 X 作为输入并返回一个包含着函数集的值的向量。
 
+唯一的约束是函数的数量必须不能超过观察信号的数量，所以底层的回归问题不是 *欠定* 的
 
-Implementation details
+实现细节
 ======================
 
-The present implementation is based on a translation of the DACE Matlab
-toolbox.
+目前的实现基于DACE Matlab 工具箱的一个翻译。
 
 .. topic:: References:
 
