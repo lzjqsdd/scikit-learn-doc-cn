@@ -326,10 +326,7 @@ Tf意思是词语频率 **term-frequency** 而tf–idf意思是词语频率与�
 请参考 :ref:`reference documentation
 <text_feature_extraction_ref>` 获取其他参数的更多细节。
 
-Let's take an example with the following counts. The first term is present
-100% of the time hence not very interesting. The two other features only
-in less than 50% of the time hence probably more representative of the
-content of the documents::
+让我们以下方的词频为例。第一个词在任何时候都100%显示，其他两个特征只占文档中少于50%的比例:: 
 
   >>> counts = [[3, 0, 1],
   ...           [2, 0, 0],
@@ -351,17 +348,13 @@ content of the documents::
          [ 0.55...,  0.83...,  0.  ...],
          [ 0.63...,  0.  ...,  0.77...]])
 
-Each row is normalized to have unit euclidean norm. The weights of each
-feature computed by the ``fit`` method call are stored in a model
-attribute::
+每一行都被正则化，来适用欧几里得标准，每个特征的权重被方法 ``fit`` 计算，调用结果被存储在模型参数中::
 
   >>> transformer.idf_                       # doctest: +ELLIPSIS
   array([ 1. ...,  2.25...,  1.84...])
 
 
-As tf–idf is very often used for text features, there is also another
-class called :class:`TfidfVectorizer` that combines all the options of
-:class:`CountVectorizer` and :class:`TfidfTransformer` in a single model::
+因为 tf–idf 在特征提取中经常被使用，所以有另一个类: `TfidfVectorizer` 在单个类中结合了所有类和类中的选择::
 
   >>> from sklearn.feature_extraction.text import TfidfVectorizer
   >>> vectorizer = TfidfVectorizer(min_df=1)
@@ -370,28 +363,21 @@ class called :class:`TfidfVectorizer` that combines all the options of
   <4x9 sparse matrix of type '<... 'numpy.float64'>'
       with 19 stored elements in Compressed Sparse ... format>
 
-While the tf–idf normalization is often very useful, there might
-be cases where the binary occurrence markers might offer better
-features. This can be achieved by using the ``binary`` parameter
-of :class:`CountVectorizer`. In particular, some estimators such as
-:ref:`bernoulli_naive_bayes` explicitly model discrete boolean random
-variables. Also, very short texts are likely to have noisy tf–idf values
-while the binary occurrence info is more stable.
+虽然 tf–idf 正则化经常被使用，但是经常有一种情况是二元变量显示会提供更好的特征。可以使用类 :class:`CountVectorizer` 中的参数 ``binary`` 来达到这一目的。
+特别的，一些估计器，如 :ref:`bernoulli_naive_bayes` 显式地使用离散的布尔值随机变量，同时，非常短的文本可能会影响tf-idf的值，而相比之下
+二元表示(binary occurrence)会更加稳定。
 
-As usual the best way to adjust the feature extraction parameters
-is to use a cross-validated grid search, for instance by pipelining the
-feature extractor with a classifier:
+通常情况下最好的提取特征的调整参数方式是使用基于网格搜索的交叉验证，例如使用管道(pipelining)传输特征提取器和分类器: 
 
  * :ref:`example_model_selection_grid_search_text_feature_extraction.py`
 
 
-Decoding text files
+文档编码 转码
 -------------------
-Text is made of characters, but files are made of bytes. These bytes represent
-characters according to some *encoding*. To work with text files in Python,
-their bytes must be *decoded* to a character set called Unicode.
-Common encodings are ASCII, Latin-1 (Western Europe), KOI8-R (Russian)
-and the universal encodings UTF-8 and UTF-16. Many others exist.
+文本由字组成，而文件由字节组成。字节转化成字符依照一定的编码(*encoding*)方式。
+为了在Python中使用文本文档，这些字节需要被解码(*decoded*)成Unicode字符集。
+常见的编码方式有 ASCII, Latin-1 (Western Europe), KOI8-R (Russian)
+和通用编码方式 UTF-8 与 UTF-16。或许也其他的方式。
 
 .. note::
     An encoding can also be called a 'character set',
