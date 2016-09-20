@@ -378,31 +378,20 @@ Tf意思是词语频率 **term-frequency** 而tf–idf意思是词语频率与�
 为了在Python中使用文本文档，这些字节需要被解码(*decoded*)成Unicode字符集。
 常见的编码方式有 ASCII, Latin-1 (Western Europe), KOI8-R (Russian)
 和通用编码方式 UTF-8 与 UTF-16。或许也其他的方式。
-
 .. note::
-    An encoding can also be called a 'character set',
-    but this term is less accurate: several encodings can exist
-    for a single character set.
+    一个编码也被称为“字符集”，但是这个名词是不准确的: 一些编码可以用单个字符表示。
 
-The text feature extractors in scikit-learn know how to decode text files,
-but only if you tell them what encoding the files are in.
-The :class:`CountVectorizer` takes an ``encoding`` parameter for this purpose.
-For modern text files, the correct encoding is probably UTF-8,
-which is therefore the default (``encoding="utf-8"``).
+scikit-learn中的文本特征提取器知道如何解码文本文件，但是只能通过告诉它在何种编码方式之下才行。
 
-If the text you are loading is not actually encoded with UTF-8, however,
-you will get a ``UnicodeDecodeError``.
-The vectorizers can be told to be silent about decoding errors
-by setting the ``decode_error`` parameter to either ``"ignore"``
-or ``"replace"``. See the documentation for the Python function
-``bytes.decode`` for more details
-(type ``help(bytes.decode)`` at the Python prompt).
+类 :class:`CountVectorizer` 有一个参数 ``encoding`` 来实现这一目的。
+对于现代文本文档，正确的编码方式大多是UTF-8，它也是默认编码方式 (``encoding="utf-8"``)。
 
-If you are having trouble decoding text, here are some things to try:
+如果你的加载的文本不是UTF-8编码，你将会得到一个  ``UnicodeDecodeError`` 。矢量化方法可以通过设定 ``decode_error`` 参数值为 ``"ignore"``
+或 ``"replace"`` 来不抛出这一错误。参考Python的函数 ``bytes.decode`` 得到更多细节(在Python命令行里输入 ``help(bytes.decode)`` )。
 
-- Find out what the actual encoding of the text is. The file might come
-  with a header or README that tells you the encoding, or there might be some
-  standard encoding you can assume based on where the text comes from.
+如果在解码时遇到了困难，可以尝试以下方法: 
+
+- 找到文本的实际编码方式。文件的头部或是README文件可以告诉你编码，或是一些标准编码，你可以从文本的来源处推断编码方式。
 
 - You may be able to find out what kind of encoding it is in general
   using the UNIX command ``file``. The Python ``chardet`` module comes with
