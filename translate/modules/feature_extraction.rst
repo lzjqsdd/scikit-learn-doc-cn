@@ -393,35 +393,17 @@ scikit-learn中的文本特征提取器知道如何解码文本文件，但是�
 
 - 找到文本的实际编码方式。文件的头部或是README文件可以告诉你编码，或是一些标准编码，你可以从文本的来源处推断编码方式。
 
-- You may be able to find out what kind of encoding it is in general
-  using the UNIX command ``file``. The Python ``chardet`` module comes with
-  a script called ``chardetect.py`` that will guess the specific encoding,
-  though you cannot rely on its guess being correct.
+- 你可以用通常方法，使用UNIX指令 ``file`` 找到它的编码方式。Python的 ``chardet`` 模块含有一个脚本 ``chardetect.py`` ，可以得到大概的编码方式，但是不应依赖它，因为并不总是正确。
 
-- You could try UTF-8 and disregard the errors. You can decode byte
-  strings with ``bytes.decode(errors='replace')`` to replace all
-  decoding errors with a meaningless character, or set
-  ``decode_error='replace'`` in the vectorizer. This may damage the
-  usefulness of your features.
+- 你可以尝试UFT-8并忽略错误。解码字节数组，使用``bytes.decode(errors='replace')`` 来用一个无意义的字符替换所有解码错误，或在矢量化方法中设置 ``decode_error='replace'`` 。这可能会破坏特征的使用。
 
-- Real text may come from a variety of sources that may have used different
-  encodings, or even be sloppily decoded in a different encoding than the
-  one it was encoded with. This is common in text retrieved from the Web.
-  The Python package `ftfy`_ can automatically sort out some classes of
-  decoding errors, so you could try decoding the unknown text as ``latin-1``
-  and then using ``ftfy`` to fix errors.
+- 真实文本可能有不同来源，因此用了不同编码方式，或使用错误的解码，即与编码方式不对应。这在网络中获取的文本中很常见。python的包 `ftfy`_ 可以自动检查出一些解码错误的类，所以可以尝试解码未知文本为 ``latin-1`` 之后使用 ``ftfy`` 来修正错误。
 
-- If the text is in a mish-mash of encodings that is simply too hard to sort
-  out (which is the case for the 20 Newsgroups dataset), you can fall back on
-  a simple single-byte encoding such as ``latin-1``. Some text may display
-  incorrectly, but at least the same sequence of bytes will always represent
-  the same feature.
+- 如果文本的编码混乱，那么它将很难整理分类(如20 Newsgroups dataset的例子)。你可以把他们退回到简单的字节编码方式，如 ``latin-1`` 。一些文本会显示错误，但是至少相同的字节序列意味着相同的特征。
 
-For example, the following snippet uses ``chardet``
-(not shipped with scikit-learn, must be installed separately)
-to figure out the encoding of three texts.
-It then vectorizes the texts and prints the learned vocabulary.
-The output is not shown here.
+例如，下面的代码片段使用 ``chardet`` (没有加入scikit-learn中，需要另外安装)来计算出编码方式。
+之后它把文本矢量化并打印学习的单词(特征)。输出在下方给出。
+
 
   >>> import chardet    # doctest: +SKIP
   >>> text1 = b"Sei mir gegr\xc3\xbc\xc3\x9ft mein Sauerkraut"
@@ -432,40 +414,34 @@ The output is not shown here.
   >>> v = CountVectorizer().fit(decoded).vocabulary_    # doctest: +SKIP
   >>> for term in v: print(v)                           # doctest: +SKIP
 
-(Depending on the version of ``chardet``, it might get the first one wrong.)
+(取决于 ``chardet`` 的版本，或许会返回第一个值错误的结果。)
 
-For an introduction to Unicode and character encodings in general,
-see Joel Spolsky's `Absolute Minimum Every Software Developer Must Know
+更详细的介绍Unicode和字符编码，参考 Joel Spolsky 的 `Absolute Minimum Every Software Developer Must Know
 About Unicode <http://www.joelonsoftware.com/articles/Unicode.html>`_.
 
 .. _`ftfy`: http://github.com/LuminosoInsight/python-ftfy
 
 
-Applications and examples
+应用与例子
 -------------------------
 
-The bag of words representation is quite simplistic but surprisingly
-useful in practice.
+词袋子模型表示法非常简单但在实际中很有用。
 
-In particular in a **supervised setting** it can be successfully combined
-with fast and scalable linear models to train **document classifiers**,
-for instance:
+特别的，在监督学习设置( **supervised setting** )中它能够把快速和可伸缩的线性模型相结合，来训练分类器( **document classifiers** )，例如: 
+
 
  * :ref:`example_text_document_classification_20newsgroups.py`
 
-In an **unsupervised setting** it can be used to group similar documents
-together by applying clustering algorithms such as :ref:`k_means`:
+在 **unsupervised setting** 中它可以为相似文档分类，同时应用聚类方法，比如 :ref:`k_means` :
 
   * :ref:`example_text_document_clustering.py`
 
-Finally it is possible to discover the main topics of a corpus by
-relaxing the hard assignment constraint of clustering, for instance by
-using :ref:`NMF`:
+最后，通过松弛聚类的约束条件(relaxing the hard assignment constraint of clustering)，发现文集中的主题是可能的，如使用 :ref:`NMF`:
 
   * :ref:`example_applications_topics_extraction_with_nmf_lda.py`
 
 
-Limitations of the Bag of Words representation
+词袋子模型表示法的限制
 ----------------------------------------------
 
 A collection of unigrams (what bag of words is) cannot capture phrases
@@ -682,7 +658,7 @@ concepts may not map one-to-one onto Lucene concepts.)
 
 To make the preprocessor, tokenizer and analyzers aware of the model
 parameters it is possible to derive from the class and override the
-``build_preprocessor``, ``build_tokenizer``` and ``build_analyzer``
+``build_preprocessor``, ``build_tokenizer`` and ``build_analyzer``
 factory methods instead of passing custom functions.
 
 Some tips and tricks:
