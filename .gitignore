@@ -1,5 +1,7 @@
-doc/*
+doc/
 doc/_build
 doc/genearted
 doc/modules/generated
 
+#pyc
+*.py[cod]
