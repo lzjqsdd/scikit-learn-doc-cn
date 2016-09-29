@@ -30,11 +30,11 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | classes.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg) ||
 | clustering.rst | ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|huangbinapple|
 | computational_performance.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| covariance.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| covariance.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| RobinSeaside |
 | cross_decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | cross_validation.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| LianYun |
 | decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| density.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| density.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| RobinSeaside |
 | dp-derivation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | ensemble.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | feature_extraction.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| minoriwww |
