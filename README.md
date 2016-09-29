@@ -36,7 +36,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | density.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| RobinSeaside |
 | dp-derivation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| ensemble.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| ensemble.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|ustblzj|
 | feature_extraction.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| minoriwww |
 | feature_selection.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| taoyizhi68 |
 | gaussian_process.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)|alingse|
