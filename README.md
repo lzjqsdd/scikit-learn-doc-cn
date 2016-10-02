@@ -58,7 +58,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | neural_networks_supervised.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | neural_networks_unsupervised.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | outlier_detection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| pipeline.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| pipeline.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|bwanglzu|
 | preprocessing.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|Perfe|
 | preprocessing_targets.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|Perfe|
 | random_projection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
