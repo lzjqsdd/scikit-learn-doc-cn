@@ -74,6 +74,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 
     svm.rst的翻译文档 提交到项目translate/modules/svm.rst下,翻译完成之后覆盖doc/modules/svm.rst。
 
+*建议翻译时参考[wiki](https://github.com/lzjqsdd/scikit-learn-doc-cn/wiki/%E5%B8%B8%E8%A7%81%E7%BF%BB%E8%AF%91%E5%AF%B9%E5%BA%94%E8%A1%A8)中的术语对照表*
 
 
 ## 阶段二
