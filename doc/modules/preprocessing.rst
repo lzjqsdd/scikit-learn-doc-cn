@@ -1,41 +1,26 @@
 .. _preprocessing:
 
 ==================
-Preprocessing data
+数据预处理
 ==================
 
 .. currentmodule:: sklearn.preprocessing
 
-The ``sklearn.preprocessing`` package provides several common
-utility functions and transformer classes to change raw feature vectors
-into a representation that is more suitable for the downstream estimators.
+``sklearn.preprocessing``包为用户提供了多个工具函数和类，用于将原始特征转换成更适于项目后期学习的特征表示。
 
 .. _preprocessing_scaler:
 
-Standardization, or mean removal and variance scaling
+标准化、去均值、方差缩放(variance scaling)
 =====================================================
 
-**Standardization** of datasets is a **common requirement for many
-machine learning estimators** implemented in the scikit; they might behave
-badly if the individual features do not more or less look like standard
-normally distributed data: Gaussian with **zero mean and unit variance**.
+数据集的**标准化**对于在scikit中的大部分机器学习算法来说都是一种**常规要求** 。如果单个特征没有或多或少地接近于标准正态分布：**零均值和单位方差**的高斯分布，那么它可能并不能在项目中表现出很好的性能。
 
-In practice we often ignore the shape of the distribution and just
-transform the data to center it by removing the mean value of each
-feature, then scale it by dividing non-constant features by their
-standard deviation.
+在实际情况中,我们经常忽略特征的分布形状，直接经过去均值来对某个特征进行中心化，再通过除以非常量特征(non-constant features)的标准差进行缩放。
 
-For instance, many elements used in the objective function of
-a learning algorithm (such as the RBF kernel of Support Vector
-Machines or the l1 and l2 regularizers of linear models) assume that
-all features are centered around zero and have variance in the same
-order. If a feature has a variance that is orders of magnitude larger
-that others, it might dominate the objective function and make the
-estimator unable to learn from other features correctly as expected.
+例如, 许多学习算法中目标函数的基础都是假设所有的特征都是零均值并且具有同一阶数上的方差(比如径向基函数、支持向量机以及L1\L2正则化项等)。如果某个特征的方差比其他特征大几个数量级，那么它就会在学习算法中占据主导位置，导致学习器并不能像我们说期望的那样，从其他特征中学习。
 
 
-The function :func:`scale` provides a quick and easy way to perform this
-operation on a single array-like dataset::
+工具函数:func:`scale` 为数组形状的数据集的标准化提供了一个快捷实现::
 
   >>> from sklearn import preprocessing
   >>> import numpy as np
@@ -54,7 +39,7 @@ operation on a single array-like dataset::
         >>> print_options = np.get_printoptions()
         >>> np.set_printoptions(suppress=True)
 
-Scaled data has zero mean and unit variance::
+经过缩放的数据集具有零均值和标准方差::
 
   >>> X_scaled.mean(axis=0)
   array([ 0.,  0.,  0.])
@@ -64,12 +49,8 @@ Scaled data has zero mean and unit variance::
 
 ..    >>> print_options = np.set_printoptions(print_options)
 
-The ``preprocessing`` module further provides a utility class
-:class:`StandardScaler` that implements the ``Transformer`` API to compute
-the mean and standard deviation on a training set so as to be
-able to later reapply the same transformation on the testing set.
-This class is hence suitable for use in the early steps of a
-:class:`sklearn.pipeline.Pipeline`::
+``preprocessing``模块也提供了一个实用类:class:`StandardScaler` ,它使用 ``Transformer`` 接口在训练集上计算均值和标准差，以便于在后续的测试集上进行相同的缩放.
+This class is hence suitable for use in the early steps of a :class:`sklearn.pipeline.Pipeline`::
 
   >>> scaler = preprocessing.StandardScaler().fit(X)
   >>> scaler
@@ -86,31 +67,24 @@ This class is hence suitable for use in the early steps of a
          [ 1.22...,  0.  ..., -0.26...],
          [-1.22...,  1.22..., -1.06...]])
 
-
-The scaler instance can then be used on new data to transform it the
-same way it did on the training set::
+缩放类对象可以在新的数据上实现和训练集相同缩放操作::
 
   >>> scaler.transform([[-1.,  1., 0.]])                # doctest: +ELLIPSIS
   array([[-2.44...,  1.22..., -0.26...]])
 
-It is possible to disable either centering or scaling by either
-passing ``with_mean=False`` or ``with_std=False`` to the constructor
-of :class:`StandardScaler`.
+你也可以通过在构造函数:class:`StandardScaler`中传入参数``with_mean=False`` 或者``with_std=False``来取消中心化或缩放操作。
 
 
-Scaling features to a range
+特征缩放至特定范围
 ---------------------------
 
-An alternative standardization is scaling features to
-lie between a given minimum and maximum value, often between zero and one,
-or so that the maximum absolute value of each feature is scaled to unit size.
-This can be achieved using :class:`MinMaxScaler` or :class:`MaxAbsScaler`,
-respectively.
+另外一个可选的缩放操作是将特征缩放至给定的最小、最大值范围，经常是[0,1]。
+或者也可以将每个特征的最大绝对值转换至单位大小。这两类操作可以分别通过使用:class:`MinMaxScaler`或者:class:`MaxAbsScaler`实现。
 
 The motivation to use this scaling include robustness to very small
 standard deviations of features and preserving zero entries in sparse data.
 
-Here is an example to scale a toy data matrix to the ``[0, 1]`` range::
+下面这个例子展示了将一个简单的数据矩阵缩放至``[0, 1]``范围::
 
   >>> X_train = np.array([[ 1., -1.,  2.],
   ...                     [ 2.,  0.,  0.],
@@ -123,17 +97,14 @@ Here is an example to scale a toy data matrix to the ``[0, 1]`` range::
          [ 1.        ,  0.5       ,  0.33333333],
          [ 0.        ,  1.        ,  0.        ]])
 
-The same instance of the transformer can then be applied to some new test data
-unseen during the fit call: the same scaling and shifting operations will be
-applied to be consistent with the transformation performed on the train data::
+同样的转换实例可以被用与在训练过程中不可见的测试数据:实现和训练数据一致的缩放和移位操作::
 
   >>> X_test = np.array([[ -3., -1.,  4.]])
   >>> X_test_minmax = min_max_scaler.transform(X_test)
   >>> X_test_minmax
   array([[-1.5       ,  0.        ,  1.66666667]])
 
-It is possible to introspect the scaler attributes to find about the exact
-nature of the transformation learned on the training data::
+你也可以通过查看缩放器(scaler)的属性，来观察在训练集中学习到的转换操作的基本性质::
 
   >>> min_max_scaler.scale_                             # doctest: +ELLIPSIS
   array([ 0.5       ,  0.5       ,  0.33...])
@@ -141,19 +112,14 @@ nature of the transformation learned on the training data::
   >>> min_max_scaler.min_                               # doctest: +ELLIPSIS
   array([ 0.        ,  0.5       ,  0.33...])
 
-If :class:`MinMaxScaler` is given an explicit ``feature_range=(min, max)`` the
-full formula is::
+如果:class:`MinMaxScaler`被提供了一个精确的``feature_range=(min, max)``，完整的公式是::
 
     X_std = (X - X.min(axis=0)) / (X.max(axis=0) - X.min(axis=0))
 
     X_scaled = X_std / (max - min) + min
 
-:class:`MaxAbsScaler` works in a very similar fashion, but scales in a way
-that the training data lies within the range ``[-1, 1]`` by dividing through
-the largest maximum value in each feature. It is meant for data
-that is already centered at zero or sparse data.
-
-Here is how to use the toy data from the previous example with this scaler::
+:class:`MaxAbsScaler` 工作原理非常相似,但是它只通过除以每个特征的最大值将训练数据特征缩放至 ``[-1, 1]``。这就意味着，训练数据应该是已经零中心化或者是稀疏数据。
+例子::用先前例子的数据实现最大绝对值缩放操作::
 
   >>> X_train = np.array([[ 1., -1.,  2.],
   ...                     [ 2.,  0.,  0.],
@@ -173,98 +139,66 @@ Here is how to use the toy data from the previous example with this scaler::
   array([ 2.,  1.,  2.])
 
 
-As with :func:`scale`, the module further provides convenience functions
-:func:`minmax_scale` and :func:`maxabs_scale` if you don't want to create
-an object.
+如果你并不想创造一个对象，那么你可以通过使用:func:`scale`, :func:`minmax_scale`, :func:`maxabs_scale`来快速实现缩放操作。
 
 
-Scaling sparse data
+稀疏数据缩放
 -------------------
-Centering sparse data would destroy the sparseness structure in the data, and
-thus rarely is a sensible thing to do. However, it can make sense to scale
-sparse inputs, especially if features are on different scales.
+稀疏数据的中心化会破坏数据中的稀疏结构，因此很少有一个比较明智的实现方式。但是，对稀疏输入进行缩放操作是有意义的，特别是当特征的数值并不在同一个量级上面的时候。
+:class:`MaxAbsScaler` 和:func:`maxabs_scale` 是稀疏数据缩放比较推荐的实现方式。
+但是，:func:`scale` 和 :class:`StandardScaler` 可以接收``scipy.sparse``矩阵作为输入,只要将参数``with_centering=False``传入构造函数。否则程序将会出现异常 ``ValueError`` 。
+因为默认的中心化操作会破坏数据的稀疏性，并导致大量的内存占用。
+:class:`RobustScaler` 并不适用于稀疏数据，但是你可以在稀疏输入上使用the ``transform``方法。
 
-:class:`MaxAbsScaler`  and :func:`maxabs_scale` were specifically designed
-for scaling sparse data, and are the recommended way to go about this.
-However, :func:`scale` and :class:`StandardScaler` can accept ``scipy.sparse``
-matrices  as input, as long as ``with_centering=False`` is explicitly passed
-to the constructor. Otherwise a ``ValueError`` will be raised as
-silently centering would break the sparsity and would often crash the
-execution by allocating excessive amounts of memory unintentionally.
-:class:`RobustScaler` cannot be fited to sparse inputs, but you can use
-the ``transform`` method on sparse inputs.
+注意，缩放器既可以接收行压缩稀疏数据也可以是列压缩稀疏数据(参见``scipy.sparse.csr_matrix``和``scipy.sparse.csc_matrix``)。 其他形式的稀疏输入**会被转换为行压缩稀疏表示**。为了避免不必要的内存复制，推荐在顶层使用CSR或CSC表示。
 
-Note that the scalers accept both Compressed Sparse Rows and Compressed
-Sparse Columns format (see ``scipy.sparse.csr_matrix`` and
-``scipy.sparse.csc_matrix``). Any other sparse input will be **converted to
-the Compressed Sparse Rows representation**.  To avoid unnecessary memory
-copies, it is recommended to choose the CSR or CSC representation upstream.
-
-Finally, if the centered data is expected to be small enough, explicitly
-converting the input to an array using the ``toarray`` method of sparse matrices
-is another option.
+最后，如果已经中心化的数据并不是很大，可以选择使用''toarray''方法将稀疏矩阵转换为数组。
 
 
-Scaling data with outliers
+含异常值数据缩放
 --------------------------
 
-If your data contains many outliers, scaling using the mean and variance
-of the data is likely to not work very well. In these cases, you can use
-:func:`robust_scale` and :class:`RobustScaler` as drop-in replacements
-instead. They use more robust estimates for the center and range of your
-data.
+如果你的数据包含较多的异常值，使用均值和方差缩放可能并不是一个很好的选择。在这种情况下，你可以使用
+:func:`robust_scale` 和:class:`RobustScaler` 作为替代。它们使用更加鲁棒的中心和范围估计来缩放你的数据。
 
 
-.. topic:: References:
+.. topic:: 参考:
 
   Further discussion on the importance of centering and scaling data is
   available on this FAQ: `Should I normalize/standardize/rescale the data?
   <http://www.faqs.org/faqs/ai-faq/neural-nets/part2/section-16.html>`_
 
-.. topic:: Scaling vs Whitening
+.. topic:: 缩放 vs 白化
 
-  It is sometimes not enough to center and scale the features
-  independently, since a downstream model can further make some assumption
-  on the linear independence of the features.
+  有时候单独地中心化和缩放并不是足够的，因为一些下层的学习算法还可能假设特征之间是线性独立的。
 
-  To address this issue you can use :class:`sklearn.decomposition.PCA`
-  or :class:`sklearn.decomposition.RandomizedPCA` with ``whiten=True``
-  to further remove the linear correlation across features.
+  为了解决这个问题，你可以使用:class:`sklearn.decomposition.PCA`
+  或者:class:`sklearn.decomposition.RandomizedPCA` 带参数``whiten=True``来进一步移除特征之间的线性相关性。
 
-.. topic:: Scaling target variables in regression
+.. topic:: 回归中的目标变量缩放
 
-    :func:`scale` and :class:`StandardScaler` work out-of-the-box with 1d arrays.
-    This is very useful for scaling the target / response variables used
-    for regression.
+    :func:`scale` and :class:`StandardScaler`可以对一维数组进行使用。这对于在回归当中的目标值或响应变量进行缩放时非常有效的。
 
 .. _kernel_centering:
 
-Centering kernel matrices
+核矩阵中心化
 -------------------------
 
-If you have a kernel matrix of a kernel :math:`K` that computes a dot product
-in a feature space defined by function :math:`phi`,
-a :class:`KernelCenterer` can transform the kernel matrix
-so that it contains inner products in the feature space
-defined by :math:`phi` followed by removal of the mean in that space.
+如果你有一个使用:math:`phi`定义的核矩阵 :math:`K`，用以计算特征空间上的内积，
+:class:`KernelCenterer`可以用于核矩阵变换，变换后在特征空间的内积有一个已经去均值的:math:`phi`来定义。
 
 .. _preprocessing_normalization:
 
-Normalization
+规范化
 =============
 
-**Normalization** is the process of **scaling individual samples to have
-unit norm**. This process can be useful if you plan to use a quadratic form
-such as the dot-product or any other kernel to quantify the similarity
-of any pair of samples.
+**规范化是使单个样本具有单位范数的缩放操作。** 这个在你使用二次型，比如点积或者其他核去定量计算任意样本对之间的相似性时是非常有用的。
 
-This assumption is the base of the `Vector Space Model
-<http://en.wikipedia.org/wiki/Vector_Space_Model>`_ often used in text
-classification and clustering contexts.
+规范化是向量空间模型
+<http://en.wikipedia.org/wiki/Vector_Space_Model>`_的基本假设，经常在文本分类和聚类当中使用。
 
-The function :func:`normalize` provides a quick and easy way to perform this
-operation on a single array-like dataset, either using the ``l1`` or ``l2``
-norms::
+方法 :func:`normalize` 为在数组类型的数据集提供了规范化的快速实现,可以选择``l1``或``l2``
+范数::
 
   >>> X = [[ 1., -1.,  2.],
   ...      [ 2.,  0.,  0.],
@@ -276,20 +210,20 @@ norms::
          [ 1.  ...,  0.  ...,  0.  ...],
          [ 0.  ...,  0.70..., -0.70...]])
 
-The ``preprocessing`` module further provides a utility class
-:class:`Normalizer` that implements the same operation using the
-``Transformer`` API (even though the ``fit`` method is useless in this case:
-the class is stateless as this operation treats samples independently).
+``preprocessing``模块也提供了实用类
+:class:`Normalizer` ，通过使用接口
+``Transformer`` 来实现相同的操作。(在这里``fit``方法并没有作用:
+因为规范化类在面对不同的样本数据时是无状态独立的)。
 
 This class is hence suitable for use in the early steps of a
 :class:`sklearn.pipeline.Pipeline`::
 
-  >>> normalizer = preprocessing.Normalizer().fit(X)  # fit does nothing
+  >>> normalizer = preprocessing.Normalizer().fit(X)  # fit函数没有任何效果
   >>> normalizer
   Normalizer(copy=True, norm='l2')
 
 
-The normalizer instance can then be used on sample vectors as any transformer::
+规范化实例可以在任意样本向量上实现::
 
   >>> normalizer.transform(X)                            # doctest: +ELLIPSIS
   array([[ 0.40..., -0.40...,  0.81...],
@@ -300,40 +234,29 @@ The normalizer instance can then be used on sample vectors as any transformer::
   array([[-0.70...,  0.70...,  0.  ...]])
 
 
-.. topic:: Sparse input
+.. topic:: 稀疏输入
 
-  :func:`normalize` and :class:`Normalizer` accept **both dense array-like
-  and sparse matrices from scipy.sparse as input**.
+  :func:`normalize` and :class:`Normalizer`**既可以接收稠密数组也可以接收scipy.sparse的稀疏矩阵作为输入。**
 
-  For sparse input the data is **converted to the Compressed Sparse Rows
-  representation** (see ``scipy.sparse.csr_matrix``) before being fed to
-  efficient Cython routines. To avoid unnecessary memory copies, it is
-  recommended to choose the CSR representation upstream.
+  输入的稀疏数据**会被转化为行压缩稀疏表示** (参见``scipy.sparse.csr_matrix``)，然后再被送进Cython程序。为了避免不必要的内存复制，推荐在顶层使用CSR或CSC表示。
 
 .. _preprocessing_binarization:
 
-Binarization
+二值化
 ============
 
-Feature binarization
+特征二值化
 --------------------
 
-**Feature binarization** is the process of **thresholding numerical
-features to get boolean values**. This can be useful for downstream
-probabilistic estimators that make assumption that the input data
-is distributed according to a multi-variate `Bernoulli distribution
-<http://en.wikipedia.org/wiki/Bernoulli_distribution>`_. For instance,
-this is the case for the :class:`sklearn.neural_network.BernoulliRBM`.
+**特征二值化是将数值型特征变成布尔型特征**。这对于当下层概率估计器假设输入数据是多变量`伯努利分布<http://en.wikipedia.org/wiki/Bernoulli_distribution>`_时是非常有效的。
+例如，:class:`sklearn.neural_network.BernoulliRBM`。
 
-It is also common among the text processing community to use binary
-feature values (probably to simplify the probabilistic reasoning) even
-if normalized counts (a.k.a. term frequencies) or TF-IDF valued features
-often perform slightly better in practice.
+在文本处理中，即使规范化计数(a.k.a. term frequencies)或者TF-IDF数值特征在实际情况中性能略胜一筹，使用布尔型特征仍旧是是非常常见的(很大可能可以简化概率推演)。
 
-As for the :class:`Normalizer`, the utility class
+和:class:`Normalizer`一样，
 :class:`Binarizer` is meant to be used in the early stages of
-:class:`sklearn.pipeline.Pipeline`. The ``fit`` method does nothing
-as each sample is treated independently of others::
+:class:`sklearn.pipeline.Pipeline`. ``fit`` 也并没有作用，
+因为样本之间都是独立对待的::
 
   >>> X = [[ 1., -1.,  2.],
   ...      [ 2.,  0.,  0.],
@@ -348,7 +271,7 @@ as each sample is treated independently of others::
          [ 1.,  0.,  0.],
          [ 0.,  1.,  0.]])
 
-It is possible to adjust the threshold of the binarizer::
+可以改变二值器的阈值::
 
   >>> binarizer = preprocessing.Binarizer(threshold=1.1)
   >>> binarizer.transform(X)
@@ -356,45 +279,32 @@ It is possible to adjust the threshold of the binarizer::
          [ 1.,  0.,  0.],
          [ 0.,  0.,  0.]])
 
-As for the :class:`StandardScaler` and :class:`Normalizer` classes, the
-preprocessing module provides a companion function :func:`binarize`
-to be used when the transformer API is not necessary.
+跟:class:`StandardScaler`和:class:`Normalizer`类一样，模块也提供了二值化方法:func:`binarize`，以便不需要转换接口时使用。
 
-.. topic:: Sparse input
+.. topic::稀疏输入
 
-  :func:`binarize` and :class:`Binarizer` accept **both dense array-like
-  and sparse matrices from scipy.sparse as input**.
+  :func:`binarize`和:class:`Binarizer`**既可以接收稠密数组也可以接收scipy.sparse的稀疏矩阵作为输入。**
 
-  For sparse input the data is **converted to the Compressed Sparse Rows
-  representation** (see ``scipy.sparse.csr_matrix``).
-  To avoid unnecessary memory copies, it is recommended to choose the CSR
-  representation upstream.
+  输入的稀疏数据**会被转化为行压缩稀疏表示** (参见``scipy.sparse.csr_matrix``)，然后再被送进Cython程序。为了避免不必要的内存复制，推荐在顶层使用CSR或CSC表示。
 
 
 .. _preprocessing_categorical_features:
 
-Encoding categorical features
+分类特征编码
 =============================
-Often features are not given as continuous values but categorical.
-For example a person could have features ``["male", "female"]``,
-``["from Europe", "from US", "from Asia"]``,
-``["uses Firefox", "uses Chrome", "uses Safari", "uses Internet Explorer"]``.
-Such features can be efficiently coded as integers, for instance
-``["male", "from US", "uses Internet Explorer"]`` could be expressed as
-``[0, 1, 3]`` while ``["female", "from Asia", "uses Chrome"]`` would be
-``[1, 2, 1]``.
+特征更多的时候是分类特征，而不是连续的数值特征。
+比如一个人的特征可以是``["male", "female"]``，
+``["from Europe", "from US", "from Asia"]``，
+``["uses Firefox", "uses Chrome", "uses Safari", "uses Internet Explorer"]``。
+这样的特征可以高效的编码成整数，例如
+``["male", "from US", "uses Internet Explorer"]``可以表示成
+``[0, 1, 3]``，``["female", "from Asia", "uses Chrome"]``就是``[1, 2, 1]``。
 
-Such integer representation can not be used directly with scikit-learn estimators, as these
-expect continuous input, and would interpret the categories as being ordered, which is often
-not desired (i.e. the set of browsers was ordered arbitrarily).
+这个的整数特征表示并不能在scikit-learn的估计器中直接使用，因为这样的连续输入，估计器会认为类别之间是有序的，但实际却是无序的。(例如：浏览器的类别数据则是任意排序的)。
 
-One possibility to convert categorical features to features that can be used
-with scikit-learn estimators is to use a one-of-K or one-hot encoding, which is
-implemented in :class:`OneHotEncoder`.  This estimator transforms each
-categorical feature with ``m`` possible values into ``m`` binary features, with
-only one active.
+一个将分类特征转换成scikit-learn估计器可用特征的可选方法是使用one-of-K或者one-hot编码,该方法是:class:`OneHotEncoder`的一个实现。该方法将每个类别特征的 ``m`` 可能值转换成``m``个二进制特征值，当然只有一个是激活值。
 
-Continuing the example above::
+续上例::
 
   >>> enc = preprocessing.OneHotEncoder()
   >>> enc.fit([[0, 0, 3], [1, 1, 0], [0, 2, 1], [1, 0, 2]])  # doctest: +ELLIPSIS
@@ -403,39 +313,24 @@ Continuing the example above::
   >>> enc.transform([[0, 1, 3]]).toarray()
   array([[ 1.,  0.,  0.,  1.,  0.,  0.,  0.,  0.,  1.]])
 
-By default, how many values each feature can take is inferred automatically from the dataset.
-It is possible to specify this explicitly using the parameter ``n_values``.
-There are two genders, three possible continents and four web browsers in our
-dataset.
-Then we fit the estimator, and transform a data point.
-In the result, the first two numbers encode the gender, the next set of three
-numbers the continent and the last four the web browser.
+默认情况下，每个特征使用几维的数值由数据集自动推断。当然，你也可以通过使用参数``n_values``来精确指定。
+在我们的例子数据集中，有两个可能得性别类别，三个洲，四个网络浏览器。接着，我们训练编码算法，并用来对一个样本数据进行转换。
+在结果中，前两个数值是性别编码，紧接着的三个数值是洲编码，最后的四个数值是浏览器编码。
 
-See :ref:`dict_feature_extraction` for categorical features that are represented
-as a dict, not as integers.
+查询:参考:`dict_feature_extraction` 用于将类别数据标示为字典型数据，而不是整数。
 
 .. _imputation:
 
-Imputation of missing values
+缺失值处理（Imputation）
 ============================
 
-For various reasons, many real world datasets contain missing values, often
-encoded as blanks, NaNs or other placeholders. Such datasets however are
-incompatible with scikit-learn estimators which assume that all values in an
-array are numerical, and that all have and hold meaning. A basic strategy to use
-incomplete datasets is to discard entire rows and/or columns containing missing
-values. However, this comes at the price of losing data which may be valuable
-(even though incomplete). A better strategy is to impute the missing values,
-i.e., to infer them from the known part of the data.
+因为各种各样的原因，真实世界中的许多数据集都包含缺失数据，这类数据经常被编码成空格、NaNs，或者是其他的占位符。但是这样的数据集并不能scikit-learn学习算法兼容，因为大多的学习算法都默认假设数组中的元素都是数值，因而所有的元素都有自己的意义。
+使用不完整的数据集的一个基本策略就是舍弃掉整行或整列包含缺失值的数据。但是这样就付出了舍弃可能有价值数据（即使是不完整的 ）的代价。
+处理缺失数值的一个更好的策略就是从已有的数据推断出缺失的数值。
 
-The :class:`Imputer` class provides basic strategies for imputing missing
-values, either using the mean, the median or the most frequent value of
-the row or column in which the missing values are located. This class
-also allows for different missing values encodings.
+:class:`Imputer`类提供了缺失数值处理的基本策略，比如使用缺失数值所在行或列的均值、中位数、众数来替代缺失值。该类也兼容不同的缺失值编码。
 
-The following snippet demonstrates how to replace missing values,
-encoded as ``np.nan``, using the mean value of the columns (axis 0)
-that contain the missing values::
+接下来是一个如何替换缺失值的简单示例，缺失值被编码为``np.nan``, 使用包含缺失值的列的均值来替换缺失值。
 
     >>> import numpy as np
     >>> from sklearn.preprocessing import Imputer
@@ -448,7 +343,7 @@ that contain the missing values::
      [ 6.          3.666...]
      [ 7.          6.        ]]
 
-The :class:`Imputer` class also supports sparse matrices::
+:class:`Imputer` 类也支持稀疏矩阵::
 
     >>> import scipy.sparse as sp
     >>> X = sp.csc_matrix([[1, 2], [0, 3], [7, 6]])
@@ -461,19 +356,19 @@ The :class:`Imputer` class also supports sparse matrices::
      [ 6.          3.666...]
      [ 7.          6.        ]]
 
-Note that, here, missing values are encoded by 0 and are thus implicitly stored
-in the matrix. This format is thus suitable when there are many more missing
-values than observed values.
+注意，在这里，缺失数据被编码为0， and are thus implicitly stored
+in the matrix. 这种方式用在当缺失数据比观察数据更多的情况时是非常合适的。
 
 :class:`Imputer` can be used in a Pipeline as a way to build a composite
 estimator that supports imputation. See :ref:`example_missing_values.py`
 
 .. _polynomial_features:
 
-Generating polynomial features
+多项式特征生成
 ==============================
 
-Often it's useful to add complexity to the model by considering nonlinear features of the input data. A simple and common method to use is polynomial features, which can get features' high-order and interaction terms. It is implemented in :class:`PolynomialFeatures`::
+很多情况下，考虑输入数据中的非线性特征来增加模型的复杂性是非常有效的。一个简单常用的方法就是使用多项式特征，它能捕捉到特征中高阶和相互作用的项。
+:class:`PolynomialFeatures`类中可以实现该功能::
 
     >>> import numpy as np
     >>> from sklearn.preprocessing import PolynomialFeatures
@@ -488,9 +383,9 @@ Often it's useful to add complexity to the model by considering nonlinear featur
            [  1.,   2.,   3.,   4.,   6.,   9.],
            [  1.,   4.,   5.,  16.,  20.,  25.]])
 
-The features of X have been transformed from :math:`(X_1, X_2)` to :math:`(1, X_1, X_2, X_1^2, X_1X_2, X_2^2)`.
+特征向量X从:math:`(X_1, X_2)` 被转换成:math:`(1, X_1, X_2, X_1^2, X_1X_2, X_2^2)`。
 
-In some cases, only interaction terms among features are required, and it can be gotten with the setting ``interaction_only=True``::
+在一些情况中，我们只需要特征中的相互作用项(interaction terms)，它可以通过传入参数``interaction_only=True``获得::
 
     >>> X = np.arange(9).reshape(3, 3)
     >>> X                                                 # doctest: +ELLIPSIS
@@ -503,19 +398,17 @@ In some cases, only interaction terms among features are required, and it can be
            [   1.,    3.,    4.,    5.,   12.,   15.,   20.,   60.],
            [   1.,    6.,    7.,    8.,   42.,   48.,   56.,  336.]])
 
-The features of X have been transformed from :math:`(X_1, X_2, X_3)` to :math:`(1, X_1, X_2, X_3, X_1X_2, X_1X_3, X_2X_3, X_1X_2X_3)`.
+特征向量X从:math:`(X_1, X_2, X_3)` 被转换成:math:`(1, X_1, X_2, X_3, X_1X_2, X_1X_3, X_2X_3, X_1X_2X_3)`。
 
-Note that polynomial features are used implicitily in `kernel methods <http://en.wikipedia.org/wiki/Kernel_method>`_ (e.g., :class:`sklearn.svm.SVC`, :class:`sklearn.decomposition.KernelPCA`) when using polynomial :ref:`svm_kernels`.
+注意多项式特征被隐含地使用在`核方法<http://en.wikipedia.org/wiki/Kernel_method>`_ (例如， :class:`sklearn.svm.SVC`, :class:`sklearn.decomposition.KernelPCA`) :ref:`svm_kernels`.
 
 See :ref:`example_linear_model_plot_polynomial_interpolation.py` for Ridge regression using created polynomial features.
 
-Custom transformers
+装换器定制
 ===================
 
-Often, you will want to convert an existing Python function into a transformer
-to assist in data cleaning or processing. You can implement a transformer from
-an arbitrary function with :class:`FunctionTransformer`. For example, to build
-a transformer that applies a log transformation in a pipeline, do::
+你可能经常需要将一个已经存在的python函数转换成转换器以便于在数据清理和预处理当中使用。你可以通过:class:`FunctionTransformer`类将任意一个函数转换成转换器。
+例如，创建一个实现对数变换的转换器，可以这么做::
 
     >>> import numpy as np
     >>> from sklearn.preprocessing import FunctionTransformer
@@ -525,6 +418,4 @@ a transformer that applies a log transformation in a pipeline, do::
     array([[ 0.        ,  0.69314718],
            [ 1.09861229,  1.38629436]])
 
-For a full code example that demonstrates using a :class:`FunctionTransformer`
-to do custom feature selection,
-see :ref:`example_preprocessing_plot_function_transformer.py`
+对于使用:class:`FunctionTransformer`去做特殊特征选择的完整代码示例可以:参考:`example_preprocessing_plot_function_transformer.py`
