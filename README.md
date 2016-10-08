@@ -7,6 +7,10 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 
 *欢迎大家踊跃加入！如果有更好的翻译组织形式也欢迎提出！*
 
+**加入微信群**
+
+![sklearn_wechat](https://raw.githubusercontent.com/lzjqsdd/scikit-learn-doc-cn/master/sklearn.PNG)
+
 *中文文档地址:[sklearn.lzjqsdd.com](http://sklearn.lzjqsdd.com)
 
 # 翻译计划
