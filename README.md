@@ -34,7 +34,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | cross_decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | cross_validation.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| LianYun |
 | decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| density.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| RobinSeaside |
+| density.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| RobinSeaside |
 | dp-derivation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | ensemble.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|ustblzj|
 | feature_extraction.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)| minoriwww |
@@ -50,13 +50,13 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | manifold.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | metrics.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | mixture.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| model_evaluation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| model_evaluation.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)||
 | model_persistence.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | multiclass.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | naive_bayes.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| minoriwww |
 | neighbors.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| neural_networks_supervised.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| neural_networks_unsupervised.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| neural_networks_supervised.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|RobinSeaside|
+| neural_networks_unsupervised.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|RobinSeaside|
 | outlier_detection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | pipeline.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|bwanglzu|
 | preprocessing.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|Perfe|
@@ -64,7 +64,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | random_projection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | scaling_strategies.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | sgd.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|lzjqsdd|
-| tree.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| tree.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|RobinSeaside|
 | unsupervised_reduction.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| |
 
 ### 任务申领
