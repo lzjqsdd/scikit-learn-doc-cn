@@ -202,19 +202,16 @@ Tips on Practical Use
   * 在使用 :class:`GridSearchCV` 时最好的做法是找到一个合适的
     正则化项 :math:`\alpha` 通常取值范围为 ``10.0**-np.arange(1,7)`` 。
 
-  * Empirically, we found that SGD converges after observing
-    approx. 10^6 training samples. Thus, a reasonable first guess
-    for the number of iterations is ``n_iter = np.ceil(10**6 / n)``,
-    where ``n`` is the size of the training set.
+  * 在实际经验中，我们发现SGD算法在大约10^6训练样本之后趋于收敛。因此，
+    对于迭代次数比较合理的估计为 ``n_iter = np.ceil(10**6 / n)``，
+    其中， ``n`` 是训练集的大小
 
-  * If you apply SGD to features extracted using PCA we found that
-    it is often wise to scale the feature values by some constant `c`
-    such that the average L2 norm of the training data equals one.
+  * 如果在使用PCA进行特征提取中应用SGD,通常比较好的做法是使用常量 `c` 将特征值尺度化，
+    比如使训练数据的L2 norm 平均值为1.
 
-  * We found that Averaged SGD works best with a larger number of features
-    and a higher eta0
+  * 我们发现 Averaged SGD 在特征数据比较大以及eta0很大时更加有效。
 
-.. topic:: References:
+.. topic:: 参考资料:
 
  * `"Efficient BackProp" <yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf>`_
    Y. LeCun, L. Bottou, G. Orr, K. Müller - In Neural Networks: Tricks
@@ -222,49 +219,45 @@ Tips on Practical Use
 
 .. _sgd_mathematical_formulation:
 
-Mathematical formulation
-========================
+数学表达
+========
 
-Given a set of training examples :math:`(x_1, y_1), \ldots, (x_n, y_n)` where
-:math:`x_i \in \mathbf{R}^n` and :math:`y_i \in \{-1,1\}`, our goal is to
-learn a linear scoring function :math:`f(x) = w^T x + b` with model parameters
-:math:`w \in \mathbf{R}^m` and intercept :math:`b \in \mathbf{R}`. In order
-to make predictions, we simply look at the sign of :math:`f(x)`.
-A common choice to find the model parameters is by minimizing the regularized
-training error given by
+给定一组训练样本 :math:`(x_1,y_1), \ldots, (x_n,y_n` 其中，
+:math:`x_i \in \mathbf{R}^n` and :math:`y_i \in \{-1,1\}`, 我们的目标是
+学习一个线性的判分函数 :math:`f(x) = w^T x + b` ， 模型参数为
+:math:`w \in \mathbf{R}^m` ，截距为 :math:`b \in \mathbf{R}`. 为了实现预测，
+我们只需看 :math:`f(x)` 的符号。通常求解模型参数的方式是通过最小化下面的训练误差
 
 .. math::
 
     E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w)
 
-where :math:`L` is a loss function that measures model (mis)fit and
-:math:`R` is a regularization term (aka penalty) that penalizes model
-complexity; :math:`\alpha > 0` is a non-negative hyperparameter.
+其中， :math:`L` 表示损失函数（模型预测值和实际值的误差），:math:`R` 是正则化项（或称作罚项），
+用来惩罚模型的复杂性（避免模型过于复杂导致过拟合）； :math:`\alpha > 0` 是非负的超参数。 
 
-Different choices for :math:`L` entail different classifiers such as
+不同损失函数的选择会产生不同的分类器，比如
 
    - Hinge: (soft-margin) Support Vector Machines.
    - Log:   Logistic Regression.
    - Least-Squares: Ridge Regression.
    - Epsilon-Insensitive: (soft-margin) Support Vector Regression.
 
-All of the above loss functions can be regarded as an upper bound on the
-misclassification error (Zero-one loss) as shown in the Figure below.
+上述所有的损失函数均可以看做误分类误差的上界，如下图所示：
 
 .. figure:: ../auto_examples/linear_model/images/plot_sgd_loss_functions_001.png
     :target: ../auto_examples/linear_model/plot_sgd_loss_functions.html
     :align: center
     :scale: 75
 
-Popular choices for the regularization term :math:`R` include:
+
+比较流行的正则化项 :math:`R` 的选择包括：
 
    - L2 norm: :math:`R(w) := \frac{1}{2} \sum_{i=1}^{n} w_i^2`,
    - L1 norm: :math:`R(w) := \sum_{i=1}^{n} |w_i|`, which leads to sparse
      solutions.
    - Elastic Net: :math:`R(w) := \frac{\rho}{2} \sum_{i=1}^{n} w_i^2 + (1-\rho) \sum_{i=1}^{n} |w_i|`, a convex combination of L2 and L1, where :math:`\rho` is given by ``1 - l1_ratio``.
 
-The Figure below shows the contours of the different regularization terms
-in the parameter space when :math:`R(w) = 1`.
+下图显示不同的正则化项在  :math:`R(w) = 1` 时的参数平面的曲线。
 
 .. figure:: ../auto_examples/linear_model/images/plot_sgd_penalties_001.png
     :target: ../auto_examples/linear_model/plot_sgd_penalties.html
@@ -274,60 +267,47 @@ in the parameter space when :math:`R(w) = 1`.
 SGD
 ---
 
-Stochastic gradient descent is an optimization method for unconstrained
-optimization problems. In contrast to (batch) gradient descent, SGD
-approximates the true gradient of :math:`E(w,b)` by considering a
-single training example at a time.
+随机梯度下降是无约束最优化问题。相比批梯度下降（BGD），SGD通过每次只考虑单一训练样本来估计实际的梯度。
 
-The class :class:`SGDClassifier` implements a first-order SGD learning
-routine.  The algorithm iterates over the training examples and for each
-example updates the model parameters according to the update rule given by
+类  :class:`SGDClassifier` 实现了一个一阶的SGD学习程序。该算法遍历训练样本，对于每个
+样本根据下面的更新规则来更新模型参数。
 
 .. math::
 
     w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
     + \frac{\partial L(w^T x_i + b, y_i)}{\partial w})
 
-where :math:`\eta` is the learning rate which controls the step-size in
-the parameter space.  The intercept :math:`b` is updated similarly but
-without regularization.
+其中， :math:`\eta` 为学习率，用来控制参数空间的步长。截距 :math:`b` 和w更新方式相似但是没有正则项。
 
-The learning rate :math:`\eta` can be either constant or gradually decaying. For
-classification, the default learning rate schedule (``learning_rate='optimal'``)
-is given by
+学习率 :math:`\eta` 既可以是常量，也可以逐渐变小。对于分类问题，默认的学习率设定 （``learning_rate='optimal'``）
+由以下公式给出
 
 .. math::
 
     \eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}
 
-where :math:`t` is the time step (there are a total of `n_samples * n_iter`
-time steps), :math:`t_0` is determined based on a heuristic proposed by Léon Bottou
-such that the expected initial updates are comparable with the expected
-size of the weights (this assuming that the norm of the training samples is
-approx. 1). The exact definition can be found in ``_init_t`` in :class:`BaseSGD`.
+其中 :math:`t` 是时间步长（总共有 `n_samples * n_iter` 的时间步长）， :math:`t` 基于
+一个启发式的算法( Léon Bottou 提出的)来决定,比如 期望的初始的更新为权重的数量。
+（假设训练样本的模长为1）.精确的定义在 :class:`BaseSGD` 的 `_init_t` 中可以找到。(需校对)
 
-
-For regression the default learning rate schedule is inverse scaling
-(``learning_rate='invscaling'``), given by
+对于回归问题，默认的学习率呈反比例趋势变化(``learning_rate='invscaling'``),由以下公式给出
 
 .. math::
 
     \eta^{(t)} = \frac{eta_0}{t^{power\_t}}
 
-where :math:`eta_0` and :math:`power\_t` are hyperparameters chosen by the
-user via ``eta0`` and ``power_t``, resp.
+其中  :math:`eta_0` 和 :math:`power\_t` 是由用户选择  ``eta0`` and ``power_t``
+的超参数。
 
-For a constant learning rate use ``learning_rate='constant'`` and use ``eta0``
-to specify the learning rate.
+使用固定的学习率则设置  ``learning_rate='constant'`` ,并且使用 ``eta0`` 来指定学习率。 
 
-The model parameters can be accessed through the members ``coef_`` and
-``intercept_``:
+模型参数可以通过 ``coef_`` 和 ``intercept_`` 来访问：
 
-     - Member ``coef_`` holds the weights :math:`w`
+     - 成员变量 ``coef_`` 保存权重 :math:`w`
 
-     - Member ``intercept_`` holds :math:`b`
+     - 成员变量 ``intercept_`` 保存截距 :math:`b`
 
-.. topic:: References:
+.. topic:: 参考资料:
 
  * `"Solving large scale linear prediction problems using stochastic
    gradient descent algorithms"
@@ -345,24 +325,16 @@ The model parameters can be accessed through the members ``coef_`` and
    Xu, Wei
 
 
-Implementation details
-======================
+实现细节
+========
 
-The implementation of SGD is influenced by the `Stochastic Gradient SVM
-<http://leon.bottou.org/projects/sgd>`_  of Léon Bottou. Similar to SvmSGD,
-the weight vector is represented as the product of a scalar and a vector
-which allows an efficient weight update in the case of L2 regularization.
-In the case of sparse feature vectors, the intercept is updated with a
-smaller learning rate (multiplied by 0.01) to account for the fact that
-it is updated more frequently. Training examples are picked up sequentially
-and the learning rate is lowered after each observed example. We adopted the
-learning rate schedule from Shalev-Shwartz et al. 2007.
-For multi-class classification, a "one versus all" approach is used.
-We use the truncated gradient algorithm proposed by Tsuruoka et al. 2009
-for L1 regularization (and the Elastic Net).
-The code is written in Cython.
+SGD的实现受Léon Bottou `Stochastic Gradient SVM <http://leon.bottou.org/projects/sgd>`_ 的影响。
+类似于SvmSGD，权重向量表达为 一个标量和一个向量的内积，这样保证在使用L2正则项时可以有效更新权重。对于
+稀疏的特征向量，截距的更新通过一个更小的学习率（乘以0.01）来避免实际更新过于频繁。训练样本按顺序选择并且学习率
+在每次观测样本后下降。我们采用了 Shalev-Shwartz et al. 2007 的学习率变化方案。对于多分类问题，使用
+"one versus all" 方法。对于L1正则项（以及弹性网络）我们使用了由 Tsuruoka等人提出的截断梯度算法，代码由Cython编写。
 
-.. topic:: References:
+.. topic:: 参考资料:
 
  * `"Stochastic Gradient Descent" <http://leon.bottou.org/projects/sgd>`_ L. Bottou - Website, 2010.
 
