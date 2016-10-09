@@ -70,6 +70,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | sgd.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)|lzjqsdd|
 | tree.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|RobinSeaside|
 | unsupervised_reduction.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| |
+| svm.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|lzjqsdd|
 
 ### 任务申领
 首先fork该项目到个人github，clone到本地，修改README中要申领的翻译内容的状态，提交pull request,接受之后即可开始翻译工作。
@@ -79,6 +80,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
     svm.rst的翻译文档 提交到项目translate/modules/svm.rst下,翻译完成之后覆盖doc/modules/svm.rst。
 
 *建议翻译时参考[wiki](https://github.com/lzjqsdd/scikit-learn-doc-cn/wiki/%E5%B8%B8%E8%A7%81%E7%BF%BB%E8%AF%91%E5%AF%B9%E5%BA%94%E8%A1%A8)中的术语对照表*
+*推荐文本编辑器:vscode+Preview插件 或 vim ，可以对rst文件语法高亮，避免翻译过程中出现语法错误*
 
 
 ## 阶段二
