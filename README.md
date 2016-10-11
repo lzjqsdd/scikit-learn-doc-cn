@@ -30,7 +30,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 |:------------------- |:-------------| :-------:|
 | linear_model.rst    | ![Build Status](https://img.shields.io/badge/translate-done-blue.svg) | lzjqsdd |
 | biclustering.rst    | ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)    | alingse |
-| calibration.rst | ![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg) ||
+| biclustering.rst    | ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)    | iphyer |
 | classes.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg) ||
 | clustering.rst | ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|huangbinapple|
 | computational_performance.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
