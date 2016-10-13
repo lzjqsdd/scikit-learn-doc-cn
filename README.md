@@ -58,7 +58,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | model_persistence.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | multiclass.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | naive_bayes.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| minoriwww |
-| neighbors.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| neighbors.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|zhongyu211|
 | neural_networks_supervised.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|RobinSeaside|
 | neural_networks_unsupervised.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|RobinSeaside|
 | outlier_detection.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
