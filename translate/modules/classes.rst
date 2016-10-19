@@ -737,8 +737,7 @@ API 参考
 :mod:`sklearn.metrics`: 指标
 ===============================
 
-参见:ref:`model_evaluation` section and the :ref:`metrics` section of the
-用户指南 for further details.
+参见:ref:`model_evaluation` 选择并 :ref:`metrics` 了解进一步的细节部分.
 
 .. automodule:: sklearn.metrics
    :no-members:
@@ -748,8 +747,7 @@ API 参考
 
 Model Selection Interface
 -------------------------
-参见:ref:`scoring_parameter` 部分用户指南进一步了解
-details.
+参见:ref:`scoring_parameter` 部分用户指南进一步了解.
 
 .. autosummary::
    :toctree: generated/
@@ -762,7 +760,7 @@ Classification metrics
 ----------------------
 
 参见:ref:`classification_metrics` 部分用户指南进一步了解
-details.
+
 
 .. autosummary::
    :toctree: generated/
@@ -794,7 +792,7 @@ Regression metrics
 ------------------
 
 参见:ref:`regression_metrics` 部分用户指南进一步了解
-details.
+
 
 .. autosummary::
    :toctree: generated/
@@ -809,7 +807,7 @@ details.
 Multilabel ranking metrics
 --------------------------
 参见:ref:`multilabel_ranking_metrics` 部分用户指南进一步了解
-details.
+
 
 .. autosummary::
    :toctree: generated/
@@ -824,7 +822,7 @@ Clustering metrics
 ------------------
 
 参见:ref:`clustering_evaluation` 部分用户指南进一步了解
-details.
+
 
 .. automodule:: sklearn.metrics.cluster
    :no-members:
@@ -850,8 +848,7 @@ details.
 Biclustering metrics
 --------------------
 
-参见:ref:`biclustering_evaluation` section of the 用户指南 for
-further details.
+参见:ref:`biclustering_evaluation` 部分用户指南进一步了解.
 
 .. currentmodule:: sklearn
 
@@ -865,7 +862,7 @@ further details.
 Pairwise metrics
 ----------------
 
-参见:ref:`metrics` 部分用户指南进一步了解 details.
+参见:ref:`metrics` 部分用户指南进一步了解 .
 
 .. automodule:: sklearn.metrics.pairwise
    :no-members:
@@ -1187,7 +1184,7 @@ Pairwise metrics
 
 .. _svm_ref:
 
-:mod:`sklearn.svm`: Support Vector Machines
+:mod:`sklearn.svm`: 支持向量机
 ===========================================
 
 .. automodule:: sklearn.svm
@@ -1235,7 +1232,7 @@ Estimators估计
 
 .. _tree_ref:
 
-:mod:`sklearn.tree`: Decision Trees
+:mod:`sklearn.tree`: 决策树
 ===================================
 
 .. automodule:: sklearn.tree
@@ -1264,14 +1261,14 @@ Estimators估计
 
 .. _utils_ref:
 
-:mod:`sklearn.utils`: Utilities
+:mod:`sklearn.utils`: 公共类
 ===============================
 
 .. automodule:: sklearn.utils
    :no-members:
    :no-inherited-members:
 
-**开发指南:** 参见:ref:`developers-utils` page for further details.
+**开发指南:** 参见:ref:`developers-utils` 页了解特征详细信息.
 
 .. currentmodule:: sklearn
 
