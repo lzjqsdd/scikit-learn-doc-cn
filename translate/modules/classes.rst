@@ -1,23 +1,21 @@
 =============
-API Reference
+API 参考
 =============
 
-This is the class and function reference of scikit-learn. Please refer to
-the :ref:`full user guide <user_guide>` for further details, as the class and
-function raw specifications may not be enough to give full guidelines on their
-uses.
+这是scikit-learn函数和累的引用，请参考
+:ref:`完整的用户指南 <user_guide>` 了解细节,类和函数原始规格可能不足以充分使用指南。
 
 
 .. _base_ref:
 
-:mod:`sklearn.base`: Base classes and utility functions
+:mod:`sklearn.base`: 基类和通用函数
 =======================================================
 
 .. automodule:: sklearn.base
     :no-members:
     :no-inherited-members:
 
-Base classes
+基类
 ------------
 .. currentmodule:: sklearn
 
@@ -31,7 +29,7 @@ Base classes
    base.RegressorMixin
    base.TransformerMixin
 
-Functions
+函数
 ---------
 .. currentmodule:: sklearn
 
@@ -51,9 +49,9 @@ Functions
    :no-members:
    :no-inherited-members:
 
-**User guide:** See the :ref:`clustering` section for further details.
+**使用手册:** 参见:ref:`clustering` 了解进一步的细节部分.
 
-Classes
+类
 -------
 .. currentmodule:: sklearn
 
@@ -71,7 +69,7 @@ Classes
    cluster.MeanShift
    cluster.SpectralClustering
 
-Functions
+函数
 ---------
 .. autosummary::
    :toctree: generated/
