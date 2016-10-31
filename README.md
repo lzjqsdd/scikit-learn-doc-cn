@@ -54,7 +54,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | manifold.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | metrics.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | mixture.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| model_evaluation.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)||
+| model_evaluation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | model_persistence.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|iphyer|
 | multiclass.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|iphyer|
 | naive_bayes.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| minoriwww |
@@ -69,7 +69,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | scaling_strategies.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|iphyer|
 | sgd.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)|lzjqsdd|
 | tree.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|RobinSeaside|
-| unsupervised_reduction.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| |
+| unsupervised_reduction.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|iphyer|
 | svm.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|lzjqsdd|
 
 ### 任务申领
