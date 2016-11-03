@@ -49,12 +49,12 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | kernel_approximation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | kernel_ridge.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | label_propagation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| lda_qda.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| lda_qda.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|ShangruZhong|
 | learning_curve.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| taoyizhi68 |
 | manifold.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | metrics.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | mixture.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| model_evaluation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| model_evaluation.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|ShangruZhong|
 | model_persistence.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|iphyer|
 | multiclass.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|iphyer|
 | naive_bayes.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| minoriwww |
