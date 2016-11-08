@@ -29,7 +29,7 @@
 :class:`discriminant_analysis.LinearDiscriminantAnalysis` 可以被用来实现有监督的降维，通过把输入数据投影到一个由多个方向组成的线性子平面，那些方向可以最大化不同类别之间的间隔（下面用数学讨论会有更精确）。输出的维度必然会比类别的数目要小，因此这通常是一种较强的降维，也只在多类别分类中有意义。
 
 :func:`discriminant_analysis.LinearDiscriminantAnalysis.transform` 是一种实现。可以使用构造器参数``n_components`` 来设置想要得到的维度。这个参数对
-:func:`discriminant_analysis.LinearDiscriminantAnalysis.fit`或者:func:`discriminant_analysis.LinearDiscriminantAnalysis.predict`没有影响。
+:func:`discriminant_analysis.LinearDiscriminantAnalysis.fit` 或者 :func:`discriminant_analysis.LinearDiscriminantAnalysis.predict`没有影响。
 
 .. topic:: Examples:
 
