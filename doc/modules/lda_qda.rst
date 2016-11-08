@@ -47,7 +47,7 @@ LDA和QDA都可以从简单的概率模型中的推导得到，概率模型可�
 
 更具体地说，对于线性和二次判别分析，:math:`P(X|y)` 为多变量的高斯分布，分布密度为：
 
-.. math:: p(X | y=k) = \frac{1}{(2\pi)^n |\Sigma_k|^{1/2}}\exp\left(-\frac{1}{2} (X-\mu_k)^t \Sigma_k^{-1} (X-\mu_k)\right)
+.. math:: p(X | y=k) = \frac{1}{(2\pi)^n | \Sigma_k|^{1/2}}\exp\left(-\frac{1}{2} (X-\mu_k)^t \Sigma_k^{-1} (X-\mu_k)\right)
 
 为了把这个模型当作分类器使用，我们只需要从训练数据中估计类先验概率:math:`P(y=k)` (用类别:math:`k`的实例比例), 类别均值:math:`\mu_k` (用经验的样本类别均值) 和协方差矩阵(通过用经验的样本类别协方差或者正则化的估计器：见下面的Shrinkage章节)。
 
