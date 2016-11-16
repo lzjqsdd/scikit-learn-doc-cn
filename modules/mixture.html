@@ -1,0 +1,561 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>2.1. Gaussian mixture models &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="2. Unsupervised learning" href="../unsupervised_learning.html" />
+    <link rel="next" title="2.1.3.2.1. Variational Gaussian Mixture Models" href="dp-derivation.html" />
+    <link rel="prev" title="2. Unsupervised learning" href="../unsupervised_learning.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/mixture.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="../unsupervised_learning.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        2. Unsupervis...
+        </span>
+            <span class="hiddenrellink">
+            2. Unsupervised learning
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../unsupervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        2. Unsupervis...
+        </span>
+            <span class="hiddenrellink">
+            2. Unsupervised learning
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">2.1. Gaussian mixture models</a><ul>
+<li><a class="reference internal" href="#gmm-classifier">2.1.1. GMM classifier</a><ul>
+<li><a class="reference internal" href="#pros-and-cons-of-class-gmm-expectation-maximization-inference">2.1.1.1. Pros and cons of class <code class="docutils literal"><span class="pre">GMM</span></code>: expectation-maximization inference</a><ul>
+<li><a class="reference internal" href="#pros">2.1.1.1.1. Pros</a></li>
+<li><a class="reference internal" href="#cons">2.1.1.1.2. Cons</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#selecting-the-number-of-components-in-a-classical-gmm">2.1.1.2. Selecting the number of components in a classical GMM</a></li>
+<li><a class="reference internal" href="#estimation-algorithm-expectation-maximization">2.1.1.3. Estimation algorithm Expectation-maximization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vbgmm-classifier-variational-gaussian-mixtures">2.1.2. VBGMM classifier: variational Gaussian mixtures</a><ul>
+<li><a class="reference internal" href="#pros-and-cons-of-class-vbgmm-variational-inference">2.1.2.1. Pros and cons of class <code class="docutils literal"><span class="pre">VBGMM</span></code>: variational inference</a><ul>
+<li><a class="reference internal" href="#id2">2.1.2.1.1. Pros</a></li>
+<li><a class="reference internal" href="#id3">2.1.2.1.2. Cons</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#estimation-algorithm-variational-inference">2.1.2.2. Estimation algorithm: variational inference</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dpgmm-classifier-infinite-gaussian-mixtures">2.1.3. DPGMM classifier: Infinite Gaussian mixtures</a><ul>
+<li><a class="reference internal" href="#pros-and-cons-of-class-dpgmm-dirichlet-process-mixture-model">2.1.3.1. Pros and cons of class <code class="docutils literal"><span class="pre">DPGMM</span></code>: Dirichlet process mixture model</a><ul>
+<li><a class="reference internal" href="#id4">2.1.3.1.1. Pros</a></li>
+<li><a class="reference internal" href="#id5">2.1.3.1.2. Cons</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-dirichlet-process">2.1.3.2. The Dirichlet Process</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gaussian-mixture-models">
+<span id="gmm"></span><span id="mixture"></span><h1>2.1. Gaussian mixture models<a class="headerlink" href="#gaussian-mixture-models" title="Permalink to this headline">¶</a></h1>
+<p><cite>sklearn.mixture</cite> is a package which enables one to learn
+Gaussian Mixture Models (diagonal, spherical, tied and full covariance
+matrices supported), sample them, and estimate them from
+data. Facilities to help determine the appropriate number of
+components are also provided.</p>
+<blockquote>
+<div><div class="figure align-center" id="id6">
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_pdf.html"><img alt="../_images/plot_gmm_pdf_0011.png" src="../_images/plot_gmm_pdf_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+<p class="caption"><span class="caption-text"><strong>Two-component Gaussian mixture model:</strong> <em>data points, and equi-probability surfaces of
+the model.</em></span></p>
+</div>
+</div></blockquote>
+<p>A Gaussian mixture model is a probabilistic model that assumes all the
+data points are generated from a mixture of a finite number of
+Gaussian distributions with unknown parameters. One can think of
+mixture models as generalizing k-means clustering to incorporate
+information about the covariance structure of the data as well as the
+centers of the latent Gaussians.</p>
+<p>Scikit-learn implements different classes to estimate Gaussian
+mixture models, that correspond to different estimation strategies,
+detailed below.</p>
+<div class="section" id="gmm-classifier">
+<h2>2.1.1. GMM classifier<a class="headerlink" href="#gmm-classifier" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a> object implements the
+<a class="reference internal" href="#expectation-maximization"><span class="std std-ref">expectation-maximization</span></a> (EM)
+algorithm for fitting mixture-of-Gaussian models. It can also draw
+confidence ellipsoids for multivariate models, and compute the
+Bayesian Information Criterion to assess the number of clusters in the
+data. A <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM.fit" title="sklearn.mixture.GMM.fit"><code class="xref py py-meth docutils literal"><span class="pre">GMM.fit</span></code></a> method is provided that learns a Gaussian
+Mixture Model from train data. Given test data, it can assign to each
+sample the class of the Gaussian it mostly probably belong to using
+the <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM.predict" title="sklearn.mixture.GMM.predict"><code class="xref py py-meth docutils literal"><span class="pre">GMM.predict</span></code></a> method.</p>
+<p>The <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a> comes with different options to constrain the covariance
+of the difference classes estimated: spherical, diagonal, tied or full
+covariance.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_classifier.html"><img alt="../_images/plot_gmm_classifier_0011.png" src="../_images/plot_gmm_classifier_0011.png" style="width: 450.0px; height: 450.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm_classifier.html#example-mixture-plot-gmm-classifier-py"><span class="std std-ref">GMM classification</span></a> for an example of
+using a GMM as a classifier on the iris dataset.</li>
+<li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm_pdf.html#example-mixture-plot-gmm-pdf-py"><span class="std std-ref">Density Estimation for a mixture of Gaussians</span></a> for an example on plotting the
+density estimation.</li>
+</ul>
+</div>
+<div class="section" id="pros-and-cons-of-class-gmm-expectation-maximization-inference">
+<h3>2.1.1.1. Pros and cons of class <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a>: expectation-maximization inference<a class="headerlink" href="#pros-and-cons-of-class-gmm-expectation-maximization-inference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="pros">
+<h4>2.1.1.1.1. Pros<a class="headerlink" href="#pros" title="Permalink to this headline">¶</a></h4>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Speed:</th><td class="field-body">it is the fastest algorithm for learning mixture models</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Agnostic:</th><td class="field-body">as this algorithm maximizes only the likelihood, it
+will not bias the means towards zero, or bias the cluster sizes to
+have specific structures that might or might not apply.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="cons">
+<h4>2.1.1.1.2. Cons<a class="headerlink" href="#cons" title="Permalink to this headline">¶</a></h4>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Singularities:</th><td class="field-body">when one has insufficiently many points per
+mixture, estimating the covariance matrices becomes difficult,
+and the algorithm is known to diverge and find solutions with
+infinite likelihood unless one regularizes the covariances artificially.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Number of components:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">this algorithm will always use all the
+components it has access to, needing held-out data
+or information theoretical criteria to decide how many components to use
+in the absence of external cues.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="selecting-the-number-of-components-in-a-classical-gmm">
+<h3>2.1.1.2. Selecting the number of components in a classical GMM<a class="headerlink" href="#selecting-the-number-of-components-in-a-classical-gmm" title="Permalink to this headline">¶</a></h3>
+<p>The BIC criterion can be used to select the number of components in a GMM
+in an efficient way. In theory, it recovers the true number of components
+only in the asymptotic regime (i.e. if much data is available).
+Note that using a <a class="reference internal" href="#dpgmm"><span class="std std-ref">DPGMM</span></a> avoids the specification of the
+number of components for a Gaussian mixture model.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/mixture/plot_gmm_selection.html"><img alt="../_images/plot_gmm_selection_0011.png" src="../_images/plot_gmm_selection_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm_selection.html#example-mixture-plot-gmm-selection-py"><span class="std std-ref">Gaussian Mixture Model Selection</span></a> for an example
+of model selection performed with classical GMM.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="estimation-algorithm-expectation-maximization">
+<span id="expectation-maximization"></span><h3>2.1.1.3. Estimation algorithm Expectation-maximization<a class="headerlink" href="#estimation-algorithm-expectation-maximization" title="Permalink to this headline">¶</a></h3>
+<p>The main difficulty in learning Gaussian mixture models from unlabeled
+data is that it is one usually doesn&#8217;t know which points came from
+which latent component (if one has access to this information it gets
+very easy to fit a separate Gaussian distribution to each set of
+points). <a class="reference external" href="http://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm">Expectation-maximization</a>
+is a well-founded statistical
+algorithm to get around this problem by an iterative process. First
+one assumes random components (randomly centered on data points,
+learned from k-means, or even just normally distributed around the
+origin) and computes for each point a probability of being generated by
+each component of the model. Then, one tweaks the
+parameters to maximize the likelihood of the data given those
+assignments. Repeating this process is guaranteed to always converge
+to a local optimum.</p>
+</div>
+</div>
+<div class="section" id="vbgmm-classifier-variational-gaussian-mixtures">
+<span id="vbgmm"></span><h2>2.1.2. VBGMM classifier: variational Gaussian mixtures<a class="headerlink" href="#vbgmm-classifier-variational-gaussian-mixtures" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="generated/sklearn.mixture.VBGMM.html#sklearn.mixture.VBGMM" title="sklearn.mixture.VBGMM"><code class="xref py py-class docutils literal"><span class="pre">VBGMM</span></code></a> object implements a variant of the Gaussian mixture
+model with <a class="reference internal" href="#variational-inference"><span class="std std-ref">variational inference</span></a> algorithms. The API is identical to
+<a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a>. It is essentially a middle-ground between <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a>
+and <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a>, as it has some of the properties of the Dirichlet
+process.</p>
+<div class="section" id="pros-and-cons-of-class-vbgmm-variational-inference">
+<h3>2.1.2.1. Pros and cons of class <a class="reference internal" href="generated/sklearn.mixture.VBGMM.html#sklearn.mixture.VBGMM" title="sklearn.mixture.VBGMM"><code class="xref py py-class docutils literal"><span class="pre">VBGMM</span></code></a>: variational inference<a class="headerlink" href="#pros-and-cons-of-class-vbgmm-variational-inference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h4>2.1.2.1.1. Pros<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Regularization:</th><td class="field-body">due to the incorporation of prior information,
+variational solutions have less pathological special cases than
+expectation-maximization solutions. One can then use full
+covariance matrices in high dimensions or in cases where some
+components might be centered around a single point without
+risking divergence.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id3">
+<h4>2.1.2.1.2. Cons<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Bias:</th><td class="field-body">to regularize a model one has to add biases. The
+variational algorithm will bias all the means towards the origin
+(part of the prior information adds a &#8220;ghost point&#8221; in the origin
+to every mixture component) and it will bias the covariances to
+be more spherical. It will also, depending on the concentration
+parameter, bias the cluster structure either towards uniformity
+or towards a rich-get-richer scenario.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Hyperparameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">this algorithm needs an extra hyperparameter
+that might need experimental tuning via cross-validation.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="estimation-algorithm-variational-inference">
+<span id="variational-inference"></span><h3>2.1.2.2. Estimation algorithm: variational inference<a class="headerlink" href="#estimation-algorithm-variational-inference" title="Permalink to this headline">¶</a></h3>
+<p>Variational inference is an extension of expectation-maximization that
+maximizes a lower bound on model evidence (including
+priors) instead of data likelihood.  The principle behind
+variational methods is the same as expectation-maximization (that is
+both are iterative algorithms that alternate between finding the
+probabilities for each point to be generated by each mixture and
+fitting the mixtures to these assigned points), but variational
+methods add regularization by integrating information from prior
+distributions. This avoids the singularities often found in
+expectation-maximization solutions but introduces some subtle biases
+to the model. Inference is often notably slower, but not usually as
+much so as to render usage unpractical.</p>
+<p>Due to its Bayesian nature, the variational algorithm needs more
+hyper-parameters than expectation-maximization, the most
+important of these being the concentration parameter <code class="docutils literal"><span class="pre">alpha</span></code>. Specifying
+a high value of alpha leads more often to uniformly-sized mixture
+components, while specifying small (between 0 and 1) values will lead
+to some mixture components getting almost all the points while most
+mixture components will be centered on just a few of the remaining
+points.</p>
+</div>
+</div>
+<div class="section" id="dpgmm-classifier-infinite-gaussian-mixtures">
+<span id="dpgmm"></span><h2>2.1.3. DPGMM classifier: Infinite Gaussian mixtures<a class="headerlink" href="#dpgmm-classifier-infinite-gaussian-mixtures" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a> object implements a variant of the Gaussian mixture
+model with a variable (but bounded) number of components using the
+Dirichlet Process. The API is identical to <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a>.
+This class doesn&#8217;t require the user to choose the number of
+components, and at the expense of extra computational time the user
+only needs to specify a loose upper bound on this number and a
+concentration parameter.</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/mixture/plot_gmm.html"><img alt="plot_gmm" src="../_images/plot_gmm_0011.png" style="width: 384.0px; height: 288.0px;" /></a> <a class="reference external" href="../auto_examples/mixture/plot_gmm_sin.html"><img alt="plot_gmm_sin" src="../_images/plot_gmm_sin_0011.png" style="width: 384.0px; height: 288.0px;" /></a></strong></p><p>The examples above compare Gaussian mixture models with fixed number of
+components, to DPGMM models. <strong>On the left</strong> the GMM is fitted with 5
+components on a dataset composed of 2 clusters. We can see that the DPGMM is
+able to limit itself to only 2 components whereas the GMM fits the data fit too
+many components. Note that with very little observations, the DPGMM can take a
+conservative stand, and fit only one component. <strong>On the right</strong> we are fitting
+a dataset not well-depicted by a mixture of Gaussian. Adjusting the <cite>alpha</cite>
+parameter of the DPGMM controls the number of components used to fit this
+data.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li>See <a class="reference internal" href="../auto_examples/mixture/plot_gmm.html#example-mixture-plot-gmm-py"><span class="std std-ref">Gaussian Mixture Model Ellipsoids</span></a> for an example on plotting the
+confidence ellipsoids for both <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a> and <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a>.</li>
+<li><a class="reference internal" href="../auto_examples/mixture/plot_gmm_sin.html#example-mixture-plot-gmm-sin-py"><span class="std std-ref">Gaussian Mixture Model Sine Curve</span></a> shows using <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">GMM</span></code></a> and
+<a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a> to fit a sine wave</li>
+</ul>
+</div>
+<div class="section" id="pros-and-cons-of-class-dpgmm-dirichlet-process-mixture-model">
+<h3>2.1.3.1. Pros and cons of class <a class="reference internal" href="generated/sklearn.mixture.DPGMM.html#sklearn.mixture.DPGMM" title="sklearn.mixture.DPGMM"><code class="xref py py-class docutils literal"><span class="pre">DPGMM</span></code></a>: Dirichlet process mixture model<a class="headerlink" href="#pros-and-cons-of-class-dpgmm-dirichlet-process-mixture-model" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h4>2.1.3.1.1. Pros<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Less sensitivity to the number of parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">unlike finite
+models, which will almost always use all components as much as
+they can, and hence will produce wildly different solutions for
+different numbers of components, the Dirichlet process solution
+won&#8217;t change much with changes to the parameters, leading to more
+stability and less tuning.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">No need to specify the number of components:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">only an upper bound of
+this number needs to be provided. Note however that the DPMM is not
+a formal model selection procedure, and thus provides no guarantee
+on the result.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h4>2.1.3.1.2. Cons<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Speed:</th><td class="field-body">the extra parametrization necessary for variational
+inference and for the structure of the Dirichlet process can and
+will make inference slower, although not by much.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Bias:</th><td class="field-body">as in variational techniques, but only more so, there are
+many implicit biases in the Dirichlet process and the inference
+algorithms, and whenever there is a mismatch between these biases
+and the data it might be possible to fit better models using a
+finite mixture.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="the-dirichlet-process">
+<span id="dirichlet-process"></span><h3>2.1.3.2. The Dirichlet Process<a class="headerlink" href="#the-dirichlet-process" title="Permalink to this headline">¶</a></h3>
+<p>Here we describe variational inference algorithms on Dirichlet process
+mixtures. The Dirichlet process is a prior probability distribution on
+<em>clusterings with an infinite, unbounded, number of partitions</em>.
+Variational techniques let us incorporate this prior structure on
+Gaussian mixture models at almost no penalty in inference time, comparing
+with a finite Gaussian mixture model.</p>
+<p>An important question is how can the Dirichlet process use an
+infinite, unbounded number of clusters and still be consistent. While
+a full explanation doesn&#8217;t fit this manual, one can think of its
+<a class="reference external" href="http://en.wikipedia.org/wiki/Chinese_restaurant_process">chinese restaurant process</a>
+analogy to help understanding it. The
+chinese restaurant process is a generative story for the Dirichlet
+process. Imagine a chinese restaurant with an infinite number of
+tables, at first all empty. When the first customer of the day
+arrives, he sits at the first table. Every following customer will
+then either sit on an occupied table with probability proportional to
+the number of customers in that table or sit in an entirely new table
+with probability proportional to the concentration parameter
+<cite>alpha</cite>. After a finite number of customers has sat, it is easy to see
+that only finitely many of the infinite tables will ever be used, and
+the higher the value of alpha the more total tables will be used. So
+the Dirichlet process does clustering with an unbounded number of
+mixture components by assuming a very asymmetrical prior structure
+over the assignments of points to components that is very concentrated
+(this property is known as rich-get-richer, as the full tables in the
+Chinese restaurant process only tend to get fuller as the simulation
+progresses).</p>
+<p>Variational inference techniques for the Dirichlet process still work
+with a finite approximation to this infinite mixture model, but
+instead of having to specify a priori how many components one wants to
+use, one just specifies the concentration parameter and an upper bound
+on the number of mixture components (this upper bound, assuming it is
+higher than the &#8220;true&#8221; number of components, affects only algorithmic
+complexity, not the actual number of components used).</p>
+<div class="topic">
+<p class="topic-title first">Derivation:</p>
+<ul class="simple">
+<li>See <a class="reference external" href="dp-derivation.html">here</a> the full derivation of this
+algorithm.</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/mixture.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="../unsupervised_learning.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

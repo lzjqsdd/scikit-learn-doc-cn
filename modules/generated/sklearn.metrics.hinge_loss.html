@@ -1,0 +1,321 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.metrics.hinge_loss &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.metrics.jaccard_similarity_score" href="sklearn.metrics.jaccard_similarity_score.html" />
+    <link rel="prev" title="sklearn.metrics.hamming_loss" href="sklearn.metrics.hamming_loss.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.hinge_loss.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.metrics.hamming_loss.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.metri...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.metrics.hamming_loss
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.metrics</span></code>.hinge_loss</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-metrics-hinge-loss">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.hinge_loss<a class="headerlink" href="#sklearn-metrics-hinge-loss" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.metrics.hinge_loss">
+<code class="descclassname">sklearn.metrics.</code><code class="descname">hinge_loss</code><span class="sig-paren">(</span><em>y_true</em>, <em>pred_decision</em>, <em>labels=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/metrics/classification.py#L1667"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.hinge_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average hinge loss (non-regularized)</p>
+<p>In binary class case, assuming labels in y_true are encoded with +1 and -1,
+when a prediction mistake is made, <code class="docutils literal"><span class="pre">margin</span> <span class="pre">=</span> <span class="pre">y_true</span> <span class="pre">*</span> <span class="pre">pred_decision</span></code> is
+always negative (since the signs disagree), implying <code class="docutils literal"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">margin</span></code> is
+always greater than 1.  The cumulated hinge loss is therefore an upper
+bound of the number of mistakes made by the classifier.</p>
+<p>In multiclass case, the function expects that either all the labels are
+included in y_true or an optional labels argument is provided which
+contains all the labels. The multilabel margin is calculated according
+to Crammer-Singer&#8217;s method. As in the binary case, the cumulated hinge loss
+is an upper bound of the number of mistakes made by the classifier.</p>
+<p>Read more in the <a class="reference internal" href="../model_evaluation.html#hinge-loss"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>y_true</strong> : array, shape = [n_samples]</p>
+<blockquote>
+<div><p>True target, consisting of integers of two values. The positive label
+must be greater than the negative label.</p>
+</div></blockquote>
+<p><strong>pred_decision</strong> : array, shape = [n_samples] or [n_samples, n_classes]</p>
+<blockquote>
+<div><p>Predicted decisions, as output by decision_function (floats).</p>
+</div></blockquote>
+<p><strong>labels</strong> : array, optional, default None</p>
+<blockquote>
+<div><p>Contains all the labels for the problem. Used in multiclass hinge loss.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like of shape = [n_samples], optional</p>
+<blockquote>
+<div><p>Sample weights.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>loss</strong> : float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r170" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R170]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Hinge_loss">Wikipedia entry on the Hinge loss</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r171" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[R171]</a></td><td>Koby Crammer, Yoram Singer. On the Algorithmic
+Implementation of Multiclass Kernel-based Vector
+Machines. Journal of Machine Learning Research 2,
+(2001), 265-292</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r172" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[R172]</a></td><td><a class="reference external" href="http://www.ttic.edu/sigml/symposium2011/papers/Moore+DeNero_Regularization.pdf">L1 AND L2 Regularization for Multiclass Hinge Loss Models
+by Robert C. Moore, John DeNero.</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">hinge_loss</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">est</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">est</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,</span>
+<span class="go">     intercept_scaling=1, loss=&#39;squared_hinge&#39;, max_iter=1000,</span>
+<span class="go">     multi_class=&#39;ovr&#39;, penalty=&#39;l2&#39;, random_state=0, tol=0.0001,</span>
+<span class="go">     verbose=0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pred_decision</span> <span class="o">=</span> <span class="n">est</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pred_decision</span>  
+<span class="go">array([-2.18...,  2.36...,  0.09...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hinge_loss</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">pred_decision</span><span class="p">)</span>  
+<span class="go">0.30...</span>
+</pre></div>
+</div>
+<p>In the multiclass case:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">est</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">est</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="go">LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,</span>
+<span class="go">     intercept_scaling=1, loss=&#39;squared_hinge&#39;, max_iter=1000,</span>
+<span class="go">     multi_class=&#39;ovr&#39;, penalty=&#39;l2&#39;, random_state=None, tol=0.0001,</span>
+<span class="go">     verbose=0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pred_decision</span> <span class="o">=</span> <span class="n">est</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hinge_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pred_decision</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>  
+<span class="go">0.56...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.metrics.hinge_loss.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.metrics.hamming_loss.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

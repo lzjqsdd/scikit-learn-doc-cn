@@ -1,0 +1,475 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>2.4. Biclustering &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="2. Unsupervised learning" href="../unsupervised_learning.html" />
+    <link rel="next" title="2.5. Decomposing signals in components (matrix factorization problems)" href="decomposition.html" />
+    <link rel="prev" title="2.3. Clustering" href="clustering.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/biclustering.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="clustering.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        2.3. Clustering
+        </span>
+            <span class="hiddenrellink">
+            2.3. Clustering
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../unsupervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        2. Unsupervis...
+        </span>
+            <span class="hiddenrellink">
+            2. Unsupervised learning
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">2.4. Biclustering</a><ul>
+<li><a class="reference internal" href="#spectral-co-clustering">2.4.1. Spectral Co-Clustering</a><ul>
+<li><a class="reference internal" href="#mathematical-formulation">2.4.1.1. Mathematical formulation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#spectral-biclustering">2.4.2. Spectral Biclustering</a><ul>
+<li><a class="reference internal" href="#id3">2.4.2.1. Mathematical formulation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#biclustering-evaluation">2.4.3. Biclustering evaluation</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="biclustering">
+<span id="id1"></span><h1>2.4. Biclustering<a class="headerlink" href="#biclustering" title="Permalink to this headline">¶</a></h1>
+<p>Biclustering can be performed with the module
+<a class="reference internal" href="classes.html#module-sklearn.cluster.bicluster" title="sklearn.cluster.bicluster"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cluster.bicluster</span></code></a>. Biclustering algorithms simultaneously
+cluster rows and columns of a data matrix. These clusters of rows and
+columns are known as biclusters. Each determines a submatrix of the
+original data matrix with some desired properties.</p>
+<p>For instance, given a matrix of shape <code class="docutils literal"><span class="pre">(10,</span> <span class="pre">10)</span></code>, one possible bicluster
+with three rows and two columns induces a submatrix of shape <code class="docutils literal"><span class="pre">(3,</span> <span class="pre">2)</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">columns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="p">]</span>
+<span class="go">array([[ 1,  2],</span>
+<span class="go">       [21, 22],</span>
+<span class="go">       [31, 32]])</span>
+</pre></div>
+</div>
+<p>For visualization purposes, given a bicluster, the rows and columns of
+the data matrix may be rearranged to make the bicluster contiguous.</p>
+<p>Algorithms differ in how they define biclusters. Some of the
+common types include:</p>
+<ul class="simple">
+<li>constant values, constant rows, or constant columns</li>
+<li>unusually high or low values</li>
+<li>submatrices with low variance</li>
+<li>correlated rows or columns</li>
+</ul>
+<p>Algorithms also differ in how rows and columns may be assigned to
+biclusters, which leads to different bicluster structures. Block
+diagonal or checkerboard structures occur when rows and columns are
+divided into partitions.</p>
+<p>If each row and each column belongs to exactly one bicluster, then
+rearranging the rows and columns of the data matrix reveals the
+biclusters on the diagonal. Here is an example of this structure
+where biclusters have higher average values than the other rows and
+columns:</p>
+<div class="figure align-center" id="id5">
+<a class="reference external image-reference" href="../auto_examples/bicluster/images/plot_spectral_coclustering_003.png"><img alt="../_images/plot_spectral_coclustering_0031.png" src="../_images/plot_spectral_coclustering_0031.png" style="width: 300.0px; height: 300.0px;" /></a>
+<p class="caption"><span class="caption-text">An example of biclusters formed by partitioning rows and columns.</span></p>
+</div>
+<p>In the checkerboard case, each row belongs to all column clusters, and
+each column belongs to all row clusters. Here is an example of this
+structure where the variance of the values within each bicluster is
+small:</p>
+<div class="figure align-center" id="id6">
+<a class="reference external image-reference" href="../auto_examples/bicluster/images/plot_spectral_biclustering_003.png"><img alt="../_images/plot_spectral_biclustering_0031.png" src="../_images/plot_spectral_biclustering_0031.png" style="width: 300.0px; height: 300.0px;" /></a>
+<p class="caption"><span class="caption-text">An example of checkerboard biclusters.</span></p>
+</div>
+<p>After fitting a model, row and column cluster membership can be found
+in the <code class="docutils literal"><span class="pre">rows_</span></code> and <code class="docutils literal"><span class="pre">columns_</span></code> attributes. <code class="docutils literal"><span class="pre">rows_[i]</span></code> is a binary vector
+with nonzero entries corresponding to rows that belong to bicluster
+<code class="docutils literal"><span class="pre">i</span></code>. Similarly, <code class="docutils literal"><span class="pre">columns_[i]</span></code> indicates which columns belong to
+bicluster <code class="docutils literal"><span class="pre">i</span></code>.</p>
+<p>Some models also have <code class="docutils literal"><span class="pre">row_labels_</span></code> and <code class="docutils literal"><span class="pre">column_labels_</span></code> attributes.
+These models partition the rows and columns, such as in the block
+diagonal and checkerboard bicluster structures.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Biclustering has many other names in different fields including
+co-clustering, two-mode clustering, two-way clustering, block
+clustering, coupled two-way clustering, etc. The names of some
+algorithms, such as the Spectral Co-Clustering algorithm, reflect
+these alternate names.</p>
+</div>
+<div class="section" id="spectral-co-clustering">
+<span id="spectral-coclustering"></span><h2>2.4.1. Spectral Co-Clustering<a class="headerlink" href="#spectral-co-clustering" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="generated/sklearn.cluster.bicluster.SpectralCoclustering.html#sklearn.cluster.bicluster.SpectralCoclustering" title="sklearn.cluster.bicluster.SpectralCoclustering"><code class="xref py py-class docutils literal"><span class="pre">SpectralCoclustering</span></code></a> algorithm finds biclusters with
+values higher than those in the corresponding other rows and columns.
+Each row and each column belongs to exactly one bicluster, so
+rearranging the rows and columns to make partitions contiguous reveals
+these high values along the diagonal:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The algorithm treats the input data matrix as a bipartite graph: the
+rows and columns of the matrix correspond to the two sets of vertices,
+and each entry corresponds to an edge between a row and a column. The
+algorithm approximates the normalized cut of this graph to find heavy
+subgraphs.</p>
+</div>
+<div class="section" id="mathematical-formulation">
+<h3>2.4.1.1. Mathematical formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h3>
+<p>An approximate solution to the optimal normalized cut may be found via
+the generalized eigenvalue decomposition of the Laplacian of the
+graph. Usually this would mean working directly with the Laplacian
+matrix. If the original data matrix <img class="math" src="../_images/math/0043fe6507e9b1d112e07a2801e24927e267dd50.png" alt="A"/> has shape <img class="math" src="../_images/math/a4aa98eb66dde627d2ff991463b1548b747fc221.png" alt="m
+\times n"/>, the Laplacian matrix for the corresponding bipartite graph
+has shape <img class="math" src="../_images/math/db0c11cdac309143cbe7ed42ce3601c670a38ab4.png" alt="(m + n) \times (m + n)"/>. However, in this case it is
+possible to work directly with <img class="math" src="../_images/math/0043fe6507e9b1d112e07a2801e24927e267dd50.png" alt="A"/>, which is smaller and more
+efficient.</p>
+<p>The input matrix <img class="math" src="../_images/math/0043fe6507e9b1d112e07a2801e24927e267dd50.png" alt="A"/> is preprocessed as follows:</p>
+<div class="math">
+<p><img src="../_images/math/a7c8a7222f104393fe9778e796d8c429b0c22c32.png" alt="A_n = R^{-1/2} A C^{-1/2}"/></p>
+</div><p>Where <img class="math" src="../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.png" alt="R"/> is the diagonal matrix with entry <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> equal to
+<img class="math" src="../_images/math/0cff13082b1c310f63732c327e38e0a5bab69dc6.png" alt="\sum_{j} A_{ij}"/> and <img class="math" src="../_images/math/afce44aa7c55836ca9345404c22fc7b599d2ed84.png" alt="C"/> is the diagonal matrix with
+entry <img class="math" src="../_images/math/6b21e0b0899a0d2879d3b8019087fa630bab4ea2.png" alt="j"/> equal to <img class="math" src="../_images/math/2a9f6f13d20d5cbad5cd1562d900ff3dad9617b5.png" alt="\sum_{i} A_{ij}"/>.</p>
+<p>The singular value decomposition, <img class="math" src="../_images/math/9307ab783e3fbb06db6a9c92d9d8c72e273cdaf8.png" alt="A_n = U \Sigma V^\top"/>,
+provides the partitions of the rows and columns of <img class="math" src="../_images/math/0043fe6507e9b1d112e07a2801e24927e267dd50.png" alt="A"/>. A subset
+of the left singular vectors gives the row partitions, and a subset
+of the right singular vectors gives the column partitions.</p>
+<p>The <img class="math" src="../_images/math/84deb2b5c91775b5b9760f47a4284d4b40093461.png" alt="\ell = \lceil \log_2 k \rceil"/> singular vectors, starting
+from the second, provide the desired partitioning information. They
+are used to form the matrix <img class="math" src="../_images/math/bcb2457ac9d8995a4f34d57cadac7ecbbe58f3bd.png" alt="Z"/>:</p>
+<div class="math">
+<p><img src="../_images/math/136c762c8efedf19486f6e7e8acf2e4572bc3398.png" alt="Z = \begin{bmatrix} R^{-1/2} U \\\\
+                    C^{-1/2} V
+      \end{bmatrix}"/></p>
+</div><p>where the the columns of <img class="math" src="../_images/math/169c982b5e649cd1bd6445df5583affe427ea269.png" alt="U"/> are <img class="math" src="../_images/math/406c5eea588bda09a3d9dd45af5183772c72d876.png" alt="u_2, \dots, u_{\ell +
+1}"/>, and similarly for <img class="math" src="../_images/math/fae0e7a73748991e5540d874416000583f64f58e.png" alt="V"/>.</p>
+<p>Then the rows of <img class="math" src="../_images/math/bcb2457ac9d8995a4f34d57cadac7ecbbe58f3bd.png" alt="Z"/> are clustered using <a class="reference internal" href="clustering.html#k-means"><span class="std std-ref">k-means</span></a>. The first <code class="docutils literal"><span class="pre">n_rows</span></code> labels provide the row partitioning,
+and the remaining <code class="docutils literal"><span class="pre">n_columns</span></code> labels provide the column partitioning.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/bicluster/plot_spectral_coclustering.html#example-bicluster-plot-spectral-coclustering-py"><span class="std std-ref">A demo of the Spectral Co-Clustering algorithm</span></a>: A simple example
+showing how to generate a data matrix with biclusters and apply
+this method to it.</li>
+<li><a class="reference internal" href="../auto_examples/bicluster/bicluster_newsgroups.html#example-bicluster-bicluster-newsgroups-py"><span class="std std-ref">Biclustering documents with the Spectral Co-clustering algorithm</span></a>: An example of finding
+biclusters in the twenty newsgroup dataset.</li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Dhillon, Inderjit S, 2001. <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.140.3011">Co-clustering documents and words using
+bipartite spectral graph partitioning</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="spectral-biclustering">
+<span id="id2"></span><h2>2.4.2. Spectral Biclustering<a class="headerlink" href="#spectral-biclustering" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="generated/sklearn.cluster.bicluster.SpectralBiclustering.html#sklearn.cluster.bicluster.SpectralBiclustering" title="sklearn.cluster.bicluster.SpectralBiclustering"><code class="xref py py-class docutils literal"><span class="pre">SpectralBiclustering</span></code></a> algorithm assumes that the input
+data matrix has a hidden checkerboard structure. The rows and columns
+of a matrix with this structure may be partitioned so that the entries
+of any bicluster in the Cartesian product of row clusters and column
+clusters is are approximately constant. For instance, if there are two
+row partitions and three column partitions, each row will belong to
+three biclusters, and each column will belong to two biclusters.</p>
+<p>The algorithm partitions the rows and columns of a matrix so that a
+corresponding blockwise-constant checkerboard matrix provides a good
+approximation to the original matrix.</p>
+<div class="section" id="id3">
+<h3>2.4.2.1. Mathematical formulation<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>The input matrix <img class="math" src="../_images/math/0043fe6507e9b1d112e07a2801e24927e267dd50.png" alt="A"/> is first normalized to make the
+checkerboard pattern more obvious. There are three possible methods:</p>
+<ol class="arabic simple">
+<li><em>Independent row and column normalization</em>, as in Spectral
+Co-Clustering. This method makes the rows sum to a constant and the
+columns sum to a different constant.</li>
+<li><strong>Bistochastization</strong>: repeated row and column normalization until
+convergence. This method makes both rows and columns sum to the
+same constant.</li>
+<li><strong>Log normalization</strong>: the log of the data matrix is computed: <img class="math" src="../_images/math/f2c2a8ea3b216bb8693ecb2007fdf40bbec05eb0.png" alt="L =
+\log A"/>. Then the column mean <img class="math" src="../_images/math/13ad8d09b9addbf06f32031a30e00d5446149ed6.png" alt="\overline{L_{i \cdot}}"/>, row mean
+<img class="math" src="../_images/math/d22f8be276504dd5ab9f54042b3bf37fa66971e7.png" alt="\overline{L_{\cdot j}}"/>, and overall mean <img class="math" src="../_images/math/25937f902e4dba82f6d70067474c5e69bbeb3711.png" alt="\overline{L_{\cdot
+\cdot}}"/> of <img class="math" src="../_images/math/ae2b750f71e1fc0daaa3de9a85d42794d7cd1326.png" alt="L"/> are computed. The final matrix is computed
+according to the formula</li>
+</ol>
+<div class="math">
+<p><img src="../_images/math/1a59f73d14f3c7dbf1f1de48de775800f90d88e5.png" alt="K_{ij} = L_{ij} - \overline{L_{i \cdot}} - \overline{L_{\cdot
+j}} + \overline{L_{\cdot \cdot}}"/></p>
+</div><p>After normalizing, the first few singular vectors are computed, just
+as in the Spectral Co-Clustering algorithm.</p>
+<p>If log normalization was used, all the singular vectors are
+meaningful. However, if independent normalization or bistochastization
+were used, the first singular vectors, <img class="math" src="../_images/math/cf40a917043ed52a5b1c5bc60daf0128a1b47f64.png" alt="u_1"/> and <img class="math" src="../_images/math/8fecd40ca8eb7e61734850b21956deba20be3066.png" alt="v_1"/>.
+are discarded. From now on, the &#8220;first&#8221; singular vectors refers to
+<img class="math" src="../_images/math/abc59fbd07c450fde332de0de33e768b132143d3.png" alt="u_2 \dots u_{p+1}"/> and <img class="math" src="../_images/math/fb6d1f67e52083c030936b2f244850d5193d9b26.png" alt="v_2 \dots v_{p+1}"/> except in the
+case of log normalization.</p>
+<p>Given these singular vectors, they are ranked according to which can
+be best approximated by a piecewise-constant vector. The
+approximations for each vector are found using one-dimensional k-means
+and scored using the Euclidean distance. Some subset of the best left
+and right singular vector are selected. Next, the data is projected to
+this best subset of singular vectors and clustered.</p>
+<p>For instance, if <img class="math" src="../_images/math/27d463da4622be5b3ef1d4176ced7d7a323c6425.png" alt="p"/> singular vectors were calculated, the
+<img class="math" src="../_images/math/620a3ce6403ec82f1347af9985bc03f7a9382f4a.png" alt="q"/> best are found as described, where <img class="math" src="../_images/math/1bc98d57cbfe3d7dc1419afe1527ea0771ce74bd.png" alt="q&lt;p"/>. Let
+<img class="math" src="../_images/math/169c982b5e649cd1bd6445df5583affe427ea269.png" alt="U"/> be the matrix with columns the <img class="math" src="../_images/math/620a3ce6403ec82f1347af9985bc03f7a9382f4a.png" alt="q"/> best left singular
+vectors, and similarly <img class="math" src="../_images/math/fae0e7a73748991e5540d874416000583f64f58e.png" alt="V"/> for the right. To partition the rows,
+the rows of <img class="math" src="../_images/math/0043fe6507e9b1d112e07a2801e24927e267dd50.png" alt="A"/> are projected to a <img class="math" src="../_images/math/620a3ce6403ec82f1347af9985bc03f7a9382f4a.png" alt="q"/> dimensional space:
+<img class="math" src="../_images/math/b6f0db892a2f7ed877b3a83674ee1932a16340cb.png" alt="A * V"/>. Treating the <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> rows of this <img class="math" src="../_images/math/72ed3a9ec9bd6e7c124620e1aac526277847d074.png" alt="m \times q"/>
+matrix as samples and clustering using k-means yields the row labels.
+Similarly, projecting the columns to <img class="math" src="../_images/math/a3091a5335fd5b9fc73ede24de6b277d853161c5.png" alt="A^{\top} * U"/> and
+clustering this <img class="math" src="../_images/math/5e9d7e95b083ffb7b8cb72b0a16199c4ef63cef3.png" alt="n \times q"/> matrix yields the column labels.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/bicluster/plot_spectral_biclustering.html#example-bicluster-plot-spectral-biclustering-py"><span class="std std-ref">A demo of the Spectral Biclustering algorithm</span></a>: a simple example
+showing how to generate a checkerboard matrix and bicluster it.</li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Kluger, Yuval, et. al., 2003. <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.135.1608">Spectral biclustering of microarray
+data: coclustering genes and conditions</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="biclustering-evaluation">
+<span id="id4"></span><h2>2.4.3. Biclustering evaluation<a class="headerlink" href="#biclustering-evaluation" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways of evaluating a biclustering result: internal and
+external. Internal measures, such as cluster stability, rely only on
+the data and the result themselves. Currently there are no internal
+bicluster measures in scikit-learn. External measures refer to an
+external source of information, such as the true solution. When
+working with real data the true solution is usually unknown, but
+biclustering artificial data may be useful for evaluating algorithms
+precisely because the true solution is known.</p>
+<p>To compare a set of found biclusters to the set of true biclusters,
+two similarity measures are needed: a similarity measure for
+individual biclusters, and a way to combine these individual
+similarities into an overall score.</p>
+<p>To compare individual biclusters, several measures have been used. For
+now, only the Jaccard index is implemented:</p>
+<div class="math">
+<p><img src="../_images/math/380ca2d20a08e36aecb173790e00d05b274603ce.png" alt="J(A, B) = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}"/></p>
+</div><p>where <img class="math" src="../_images/math/0043fe6507e9b1d112e07a2801e24927e267dd50.png" alt="A"/> and <img class="math" src="../_images/math/9805f44feec6f81d376d09e88b8236635edbb3c8.png" alt="B"/> are biclusters, <img class="math" src="../_images/math/2224fea2d639f17ad5a333cea91e3e2e61f6d852.png" alt="|A \cap B|"/> is
+the number of elements in their intersection. The Jaccard index
+achieves its minimum of 0 when the biclusters to not overlap at all
+and its maximum of 1 when they are identical.</p>
+<p>Several methods have been developed to compare two sets of biclusters.
+For now, only <a class="reference internal" href="generated/sklearn.metrics.consensus_score.html#sklearn.metrics.consensus_score" title="sklearn.metrics.consensus_score"><code class="xref py py-func docutils literal"><span class="pre">consensus_score</span></code></a> (Hochreiter et. al., 2010) is
+available:</p>
+<ol class="arabic simple">
+<li>Compute bicluster similarities for pairs of biclusters, one in each
+set, using the Jaccard index or a similar measure.</li>
+<li>Assign biclusters from one set to another in a one-to-one fashion
+to maximize the sum of their similarities. This step is performed
+using the Hungarian algorithm.</li>
+<li>The final sum of similarities is divided by the size of the larger
+set.</li>
+</ol>
+<p>The minimum consensus score, 0, occurs when all pairs of biclusters
+are totally dissimilar. The maximum score, 1, occurs when both sets
+are identical.</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Hochreiter, Bodenhofer, et. al., 2010. <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2881408/">FABIA: factor analysis
+for bicluster acquisition</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/biclustering.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="clustering.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

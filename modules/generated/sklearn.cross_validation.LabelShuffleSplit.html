@@ -1,0 +1,285 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.cross_validation.LabelShuffleSplit &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.cross_validation.LeaveOneLabelOut" href="sklearn.cross_validation.LeaveOneLabelOut.html" />
+    <link rel="prev" title="sklearn.cross_validation.LabelKFold" href="sklearn.cross_validation.LabelKFold.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.LabelShuffleSplit.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.cross_validation.LabelKFold.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.cross...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.cross_validation.LabelKFold
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.cross_validation</span></code>.LabelShuffleSplit</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-cross-validation-labelshufflesplit">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.cross_validation" title="sklearn.cross_validation"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cross_validation</span></code></a>.LabelShuffleSplit<a class="headerlink" href="#sklearn-cross-validation-labelshufflesplit" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.cross_validation.LabelShuffleSplit">
+<em class="property">class </em><code class="descclassname">sklearn.cross_validation.</code><code class="descname">LabelShuffleSplit</code><span class="sig-paren">(</span><em>labels</em>, <em>n_iter=5</em>, <em>test_size=0.2</em>, <em>train_size=None</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cross_validation.py#L1180"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cross_validation.LabelShuffleSplit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shuffle-Labels-Out cross-validation iterator</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.18: </span>This module will be removed in 0.20.
+Use <code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection.GroupShuffleSplit</span></code> instead.</p>
+</div>
+<p>Provides randomized train/test indices to split data according to a
+third-party provided label. This label information can be used to encode
+arbitrary domain specific stratifications of the samples as integers.</p>
+<p>For instance the labels could be the year of collection of the samples
+and thus allow for cross-validation against time-based splits.</p>
+<p>The difference between LeavePLabelOut and LabelShuffleSplit is that
+the former generates splits using all subsets of size <code class="docutils literal"><span class="pre">p</span></code> unique labels,
+whereas LabelShuffleSplit generates a user-determined number of random
+test splits, each with a user-determined fraction of unique labels.</p>
+<p>For example, a less computationally intensive alternative to
+<code class="docutils literal"><span class="pre">LeavePLabelOut(labels,</span> <span class="pre">p=10)</span></code> would be
+<code class="docutils literal"><span class="pre">LabelShuffleSplit(labels,</span> <span class="pre">test_size=10,</span> <span class="pre">n_iter=100)</span></code>.</p>
+<p>Note: The parameters <code class="docutils literal"><span class="pre">test_size</span></code> and <code class="docutils literal"><span class="pre">train_size</span></code> refer to labels, and
+not to samples, as in ShuffleSplit.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17.</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>labels</strong> :  array, [n_samples]</p>
+<blockquote>
+<div><p>Labels of samples</p>
+</div></blockquote>
+<p><strong>n_iter</strong> : int (default 5)</p>
+<blockquote>
+<div><p>Number of re-shuffling and splitting iterations.</p>
+</div></blockquote>
+<p><strong>test_size</strong> : float (default 0.2), int, or None</p>
+<blockquote>
+<div><p>If float, should be between 0.0 and 1.0 and represent the
+proportion of the labels to include in the test split. If
+int, represents the absolute number of test labels. If None,
+the value is automatically set to the complement of the train size.</p>
+</div></blockquote>
+<p><strong>train_size</strong> : float, int, or None (default is None)</p>
+<blockquote>
+<div><p>If float, should be between 0.0 and 1.0 and represent the
+proportion of the labels to include in the train split. If
+int, represents the absolute number of train labels. If None,
+the value is automatically set to the complement of the test size.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int or RandomState</p>
+<blockquote class="last">
+<div><p>Pseudo-random number generator state used for random sampling.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.cross_validation.LabelShuffleSplit.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>labels</em>, <em>n_iter=5</em>, <em>test_size=0.2</em>, <em>train_size=None</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cross_validation.py#L1232"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cross_validation.LabelShuffleSplit.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.cross_validation.LabelShuffleSplit.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.cross_validation.LabelKFold.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

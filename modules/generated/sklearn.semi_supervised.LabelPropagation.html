@@ -1,0 +1,492 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.semi_supervised.LabelPropagation &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.semi_supervised.LabelSpreading" href="sklearn.semi_supervised.LabelSpreading.html" />
+    <link rel="prev" title="sklearn.random_projection.johnson_lindenstrauss_min_dim" href="sklearn.random_projection.johnson_lindenstrauss_min_dim.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.semi_supervised.LabelPropagation.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.random_projection.johnson_lindenstrauss_min_dim.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.rando...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.random_projection.johnson_lindenstrauss_min_dim
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.semi_supervised</span></code>.LabelPropagation</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-semi-supervised-labelpropagation">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.semi_supervised" title="sklearn.semi_supervised"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.semi_supervised</span></code></a>.LabelPropagation<a class="headerlink" href="#sklearn-semi-supervised-labelpropagation" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.semi_supervised.LabelPropagation">
+<em class="property">class </em><code class="descclassname">sklearn.semi_supervised.</code><code class="descname">LabelPropagation</code><span class="sig-paren">(</span><em>kernel='rbf'</em>, <em>gamma=20</em>, <em>n_neighbors=7</em>, <em>alpha=1</em>, <em>max_iter=30</em>, <em>tol=0.001</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/semi_supervised/label_propagation.py#L276"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.semi_supervised.LabelPropagation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label Propagation classifier</p>
+<p>Read more in the <a class="reference internal" href="../label_propagation.html#label-propagation"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>kernel</strong> : {&#8216;knn&#8217;, &#8216;rbf&#8217;}</p>
+<blockquote>
+<div><p>String identifier for kernel function to use.
+Only &#8216;rbf&#8217; and &#8216;knn&#8217; kernels are currently supported..</p>
+</div></blockquote>
+<p><strong>gamma</strong> : float</p>
+<blockquote>
+<div><p>Parameter for rbf kernel</p>
+</div></blockquote>
+<p><strong>n_neighbors</strong> : integer &gt; 0</p>
+<blockquote>
+<div><p>Parameter for knn kernel</p>
+</div></blockquote>
+<p><strong>alpha</strong> : float</p>
+<blockquote>
+<div><p>Clamping factor</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : float</p>
+<blockquote>
+<div><p>Change maximum number of iterations allowed</p>
+</div></blockquote>
+<p><strong>tol</strong> : float</p>
+<blockquote>
+<div><p>Convergence tolerance: threshold to consider the system at steady
+state</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>X_</strong> : array, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>Input array.</p>
+</div></blockquote>
+<p><strong>classes_</strong> : array, shape = [n_classes]</p>
+<blockquote>
+<div><p>The distinct labels used in classifying instances.</p>
+</div></blockquote>
+<p><strong>label_distributions_</strong> : array, shape = [n_samples, n_classes]</p>
+<blockquote>
+<div><p>Categorical distribution for each item.</p>
+</div></blockquote>
+<p><strong>transduction_</strong> : array, shape = [n_samples]</p>
+<blockquote>
+<div><p>Label assigned to each item via the transduction.</p>
+</div></blockquote>
+<p><strong>n_iter_</strong> : int</p>
+<blockquote class="last">
+<div><p>Number of iterations run.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="sklearn.semi_supervised.LabelSpreading.html#sklearn.semi_supervised.LabelSpreading" title="sklearn.semi_supervised.LabelSpreading"><code class="xref py py-obj docutils literal"><span class="pre">LabelSpreading</span></code></a></dt>
+<dd>Alternate label propagation strategy more robust to noise</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<p>Xiaojin Zhu and Zoubin Ghahramani. Learning from labeled and unlabeled data
+with label propagation. Technical Report CMU-CALD-02-107, Carnegie Mellon
+University, 2002 <a class="reference external" href="http://pages.cs.wisc.edu/~jerryzhu/pub/CMU-CALD-02-107.pdf">http://pages.cs.wisc.edu/~jerryzhu/pub/CMU-CALD-02-107.pdf</a></p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.semi_supervised</span> <span class="k">import</span> <span class="n">LabelPropagation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">label_prop_model</span> <span class="o">=</span> <span class="n">LabelPropagation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random_unlabeled_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span><span class="p">[</span><span class="n">random_unlabeled_points</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">label_prop_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="go">LabelPropagation(...)</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.semi_supervised.LabelPropagation.fit" title="sklearn.semi_supervised.LabelPropagation.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X,&nbsp;y)</td>
+<td>Fit a semi-supervised label propagation model based</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.semi_supervised.LabelPropagation.get_params" title="sklearn.semi_supervised.LabelPropagation.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.semi_supervised.LabelPropagation.predict" title="sklearn.semi_supervised.LabelPropagation.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X)</td>
+<td>Performs inductive inference across the model.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.semi_supervised.LabelPropagation.predict_proba" title="sklearn.semi_supervised.LabelPropagation.predict_proba"><code class="xref py py-obj docutils literal"><span class="pre">predict_proba</span></code></a>(X)</td>
+<td>Predict probability for each possible outcome.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.semi_supervised.LabelPropagation.score" title="sklearn.semi_supervised.LabelPropagation.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Returns the mean accuracy on the given test data and labels.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.semi_supervised.LabelPropagation.set_params" title="sklearn.semi_supervised.LabelPropagation.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.semi_supervised.LabelPropagation.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>kernel='rbf'</em>, <em>gamma=20</em>, <em>n_neighbors=7</em>, <em>alpha=1</em>, <em>max_iter=30</em>, <em>tol=0.001</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/semi_supervised/label_propagation.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.semi_supervised.LabelPropagation.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.semi_supervised.LabelPropagation.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/semi_supervised/label_propagation.py#L201"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.semi_supervised.LabelPropagation.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit a semi-supervised label propagation model based</p>
+<p>All the input data is provided matrix X (labeled and unlabeled)
+and corresponding label matrix y with a dedicated marker value for
+unlabeled samples.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>A {n_samples by n_samples} size matrix will be created from this</p>
+</div></blockquote>
+<p><strong>y</strong> : array_like, shape = [n_samples]</p>
+<blockquote>
+<div><p>n_labeled_samples (unlabeled points are marked as -1)
+All unlabeled samples will be transductively assigned labels</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> : returns an instance of self.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.semi_supervised.LabelPropagation.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.semi_supervised.LabelPropagation.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.semi_supervised.LabelPropagation.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/semi_supervised/label_propagation.py#L151"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.semi_supervised.LabelPropagation.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs inductive inference across the model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array_like, shape = [n_samples, n_features]</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y</strong> : array_like, shape = [n_samples]</p>
+<blockquote class="last">
+<div><p>Predictions for input data</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.semi_supervised.LabelPropagation.predict_proba">
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/semi_supervised/label_propagation.py#L166"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.semi_supervised.LabelPropagation.predict_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict probability for each possible outcome.</p>
+<p>Compute the probability estimates for each single sample in X
+and each possible outcome seen during training (categorical
+distribution).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array_like, shape = [n_samples, n_features]</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>probabilities</strong> : array, shape = [n_samples, n_classes]</p>
+<blockquote class="last">
+<div><p>Normalized probability distributions across
+class labels</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.semi_supervised.LabelPropagation.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L324"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.semi_supervised.LabelPropagation.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean accuracy on the given test data and labels.</p>
+<p>In multi-label classification, this is the subset accuracy
+which is a harsh metric since you require for each sample that
+each label set be correctly predicted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape = (n_samples, n_features)</p>
+<blockquote>
+<div><p>Test samples.</p>
+</div></blockquote>
+<p><strong>y</strong> : array-like, shape = (n_samples) or (n_samples, n_outputs)</p>
+<blockquote>
+<div><p>True labels for X.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like, shape = [n_samples], optional</p>
+<blockquote>
+<div><p>Sample weights.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float</p>
+<blockquote class="last">
+<div><p>Mean accuracy of self.predict(X) wrt. y.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.semi_supervised.LabelPropagation.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.semi_supervised.LabelPropagation.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.semi_supervised.LabelPropagation.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.random_projection.johnson_lindenstrauss_min_dim.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

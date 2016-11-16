@@ -1,0 +1,1142 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>1.1. 广义线性模型 &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="1. Supervised learning" href="../supervised_learning.html" />
+    <link rel="next" title="1.2. 线性与二次判别分析" href="lda_qda.html" />
+    <link rel="prev" title="1. Supervised learning" href="../supervised_learning.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/linear_model.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="../supervised_learning.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        1. Supervised...
+        </span>
+            <span class="hiddenrellink">
+            1. Supervised learning
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../supervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        1. Supervised...
+        </span>
+            <span class="hiddenrellink">
+            1. Supervised learning
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">1.1. 广义线性模型</a><ul>
+<li><a class="reference internal" href="#ordinary-least-squares">1.1.1. 普通最小二乘法</a><ul>
+<li><a class="reference internal" href="#id3">1.1.1.1. 普通最小二乘复杂度</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ridge-regression">1.1.2. 岭回归</a><ul>
+<li><a class="reference internal" href="#id5">1.1.2.1. 岭回归复杂度</a></li>
+<li><a class="reference internal" href="#id6">1.1.2.2. 设置正则化参数: 广义交叉验证</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lasso">1.1.3. Lasso</a><ul>
+<li><a class="reference internal" href="#id8">1.1.3.1. 设置正则化参数</a><ul>
+<li><a class="reference internal" href="#id9">1.1.3.1.1. 使用交叉验证</a></li>
+<li><a class="reference internal" href="#id10">1.1.3.1.2. 基于模型选择的信息约束</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#elastic-net">1.1.4. 弹性网络</a></li>
+<li><a class="reference internal" href="#multi-task-lasso">1.1.5. Multi-task Lasso回归</a></li>
+<li><a class="reference internal" href="#least-angle-regression">1.1.6. Least Angle Regression最小角回归</a></li>
+<li><a class="reference internal" href="#lars-lasso">1.1.7. LARS Lasso</a><ul>
+<li><a class="reference internal" href="#mathematical-formulation">1.1.7.1. Mathematical formulation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#orthogonal-matching-pursuit-omp">1.1.8. Orthogonal Matching Pursuit (OMP) 正交匹配跟踪</a></li>
+<li><a class="reference internal" href="#bayesian-regression">1.1.9. 贝叶斯回归</a><ul>
+<li><a class="reference internal" href="#bayesian-ridge-regression">1.1.9.1. 贝叶斯岭回归</a></li>
+<li><a class="reference internal" href="#automatic-relevance-determination-ard">1.1.9.2. Automatic Relevance Determination - ARD</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logistic-regression">1.1.10. 逻辑回归</a></li>
+<li><a class="reference internal" href="#stochastic-gradient-descent-sgd">1.1.11. Stochastic Gradient Descent - SGD</a></li>
+<li><a class="reference internal" href="#perceptron">1.1.12. 感知机</a></li>
+<li><a class="reference internal" href="#passive-aggressive-algorithms">1.1.13. Passive Aggressive Algorithms</a></li>
+<li><a class="reference internal" href="#id25">1.1.14. 鲁棒（稳健）回归：异常值和模型错误</a><ul>
+<li><a class="reference internal" href="#different-scenario-and-useful-concepts">1.1.14.1. Different scenario and useful concepts</a></li>
+<li><a class="reference internal" href="#ransac-random-sample-consensus">1.1.14.2. RANSAC: RANdom SAmple Consensus</a><ul>
+<li><a class="reference internal" href="#details-of-the-algorithm">1.1.14.2.1. Details of the algorithm</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#theil-sen-estimator-generalized-median-based-estimator">1.1.14.3. Theil-Sen estimator: generalized-median-based estimator</a><ul>
+<li><a class="reference internal" href="#theoretical-considerations">1.1.14.3.1. Theoretical considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#polynomial-regression-extending-linear-models-with-basis-functions">1.1.15. Polynomial regression: extending linear models with basis functions</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="linear-model">
+<span id="id1"></span><h1>1.1. 广义线性模型<a class="headerlink" href="#linear-model" title="Permalink to this headline">¶</a></h1>
+<p>以下是回归相关的一系列方法，目标值y是输入变量x的线性组合。用数学表达: <cite>hat{y}</cite> 是预测值</p>
+<div class="math">
+<p><img src="../_images/math/334dd847bce79ed52a760f02b3efd8faefdb6e8b.png" alt="\hat{y}(w, x) = w_0 + w_1 x_1 + ... + w_p x_p"/></p>
+</div><p>在这个模块中,我们定义向量 <img class="math" src="../_images/math/73e4d7b7432a0ac7d1bd0c76f55540dfb5a1d59c.png" alt="w = (w_1,...,w_p)"/> 为 <code class="docutils literal"><span class="pre">coef_</span></code> ,math:<cite>w_0</cite> 表示为 <code class="docutils literal"><span class="pre">intercept_</span></code>
+Across the module, we designate the vector <img class="math" src="../_images/math/843835b028b47682b57b538b10dc03336f27a34d.png" alt="w = (w_1,
+..., w_p)"/> as <code class="docutils literal"><span class="pre">coef_</span></code> and <img class="math" src="../_images/math/faafb19d9d95d41a5554bd1b8d8ca2e16a89935d.png" alt="w_0"/> as <code class="docutils literal"><span class="pre">intercept_</span></code>.</p>
+<p>使用广义线性模型来处理分类问题(classification)请参考
+<a class="reference internal" href="#logistic-regression"><span class="std std-ref">逻辑回归</span></a>.</p>
+<div class="section" id="ordinary-least-squares">
+<span id="id2"></span><h2>1.1.1. 普通最小二乘法<a class="headerlink" href="#ordinary-least-squares" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="sklearn.linear_model.LinearRegression"><code class="xref py py-class docutils literal"><span class="pre">LinearRegression</span></code></a> 用系数 ：math:<cite>w = (w_1,...,w_p)</cite> 来拟合一个线性模型,
+使得数据集实际观测数据和预测数据（估计值）之间残差平方和最小。数学形式可表达为:</p>
+<div class="math">
+<p><img src="../_images/math/e8e92a5482d9327d939e7a17946a8a1b98006018.png" alt="\underset{w}{min\,} {|| X w - y||_2}^2"/></p>
+</div><div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ols.html"><img alt="../_images/plot_ols_0011.png" src="../_images/plot_ols_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<p><a class="reference internal" href="generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="sklearn.linear_model.LinearRegression"><code class="xref py py-class docutils literal"><span class="pre">LinearRegression</span></code></a> 模型会调用 <code class="docutils literal"><span class="pre">fit</span></code> 方法来拟合X,y(X为输入，y为输出).并且会把拟合的线性模型的系数 <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/> 存储到成员变量 <code class="docutils literal"><span class="pre">coef_</span></code> 中</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span> <span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([ 0.5,  0.5])</span>
+</pre></div>
+</div>
+<p>然而，对于普通最小二乘问题，其系数估计依赖模型各项相互独立。当各项是相关的，设计矩阵(Design Matrix) <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/> 的各列近似线性相关，
+那么，设计矩阵会趋向于奇异矩阵，这会导致最小二乘估计对于随机误差非常敏感，会产生很大的方差。这种 <em>多重共线性(multicollinearity)</em>
+的情况可能真的会出现，比如未经实验设计收集的数据.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_ols.html#example-linear-model-plot-ols-py"><span class="std std-ref">Linear Regression Example</span></a></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>1.1.1.1. 普通最小二乘复杂度<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>这种方法通过对矩阵 X 奇异值分解（SVD）的方式来计算最小二乘的解。如果 X 是一个(n, p)大小的矩阵,那么代价为 <img class="math" src="../_images/math/ed6ddbbf57a29a1b9e7a4afd3898df76d7cff16e.png" alt="O(n p^2)"/>,假设 <img class="math" src="../_images/math/06403bebf610a3c6eb454c503158c34977a418f0.png" alt="n \geq p"/>.</p>
+</div>
+</div>
+<div class="section" id="ridge-regression">
+<span id="id4"></span><h2>1.1.2. 岭回归<a class="headerlink" href="#ridge-regression" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code></a> 岭回归通过对回归稀疏增加罚项来解决 <a class="reference internal" href="#ordinary-least-squares"><span class="std std-ref">普通最小二乘法</span></a> 的一些问题.岭回归系数通过最小化带罚项的残差平方和</p>
+<div class="math">
+<p><img src="../_images/math/48dbdad39c89539c714a825c0c0d5524eb526851.png" alt="\underset{w}{min\,} {{|| X w - y||_2}^2 + \alpha {||w||_2}^2}"/></p>
+</div><p>上述公式中, <img class="math" src="../_images/math/48196aec5f482605914f9498015d86600e59c0d9.png" alt="\alpha \geq 0"/> 是控制模型复杂度的因子(可看做收缩率的大小) : <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 越大，收缩率越大，那么系数对于共线性的鲁棒性更强</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ridge_path.html"><img alt="../_images/plot_ridge_path_0011.png" src="../_images/plot_ridge_path_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<p>和其他线性模型一样，<a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code></a> 调用 <code class="docutils literal"><span class="pre">fit</span></code> 方法，参数为X,y,并且将线性模型拟合的系数 <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/> 存到成员变量 <code class="docutils literal"><span class="pre">coef_</span></code> 中。:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Ridge</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span> <span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> 
+<span class="go">Ridge(alpha=0.5, copy_X=True, fit_intercept=True, max_iter=None,</span>
+<span class="go">      normalize=False, random_state=None, solver=&#39;auto&#39;, tol=0.001)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([ 0.34545455,  0.34545455])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span> 
+<span class="go">0.13636...</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_ridge_path.html#example-linear-model-plot-ridge-path-py"><span class="std std-ref">Plot Ridge coefficients as a function of the regularization</span></a></li>
+<li><a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#example-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3>1.1.2.1. 岭回归复杂度<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>这个方法和   <a class="reference internal" href="#ordinary-least-squares"><span class="std std-ref">普通最小二乘法</span></a> 复杂度一样(同阶).</p>
+</div>
+<div class="section" id="id6">
+<h3>1.1.2.2. 设置正则化参数: 广义交叉验证<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.linear_model.RidgeCV.html#sklearn.linear_model.RidgeCV" title="sklearn.linear_model.RidgeCV"><code class="xref py py-class docutils literal"><span class="pre">RidgeCV</span></code></a> 实现了带缺省 <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 参数的交叉验证的岭回归模型.这个对象和 GridSearchCV 除了它默认为广义交叉验证(GCV),其他工作方式一样。
+下面是一种高效的交叉验证方式-留一交叉验证(leave-one-out):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>       
+<span class="go">RidgeCV(alphas=[0.1, 1.0, 10.0], cv=None, fit_intercept=True, scoring=None,</span>
+<span class="go">    normalize=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">alpha_</span>                                      
+<span class="go">0.1</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">References</p>
+<ul class="simple">
+<li>&#8220;Notes on Regularized Least Squares&#8221;, Rifkin &amp; Lippert (<a class="reference external" href="http://cbcl.mit.edu/projects/cbcl/publications/ps/MIT-CSAIL-TR-2007-025.pdf">technical report</a>,
+<a class="reference external" href="http://www.mit.edu/~9.520/spring07/Classes/rlsslides.pdf">course slides</a>).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="lasso">
+<span id="id7"></span><h2>1.1.3. Lasso<a class="headerlink" href="#lasso" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" title="sklearn.linear_model.Lasso"><code class="xref py py-class docutils literal"><span class="pre">Lasso</span></code></a> 是一种估计稀疏线性模型的方法.由于它倾向具有少量参数值的情况，对于给定解决方案是相关情况下，有效的减少了变量数量。
+因此，Lasso及其变种是压缩感知(压缩采样)的基础。在约束条件下，它可以回复一组非零精确的权重系数(参考
+<a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#example-applications-plot-tomography-l1-reconstruction-py"><span class="std std-ref">Compressive sensing: tomography reconstruction with L1 prior (Lasso)</span></a>).</p>
+<p>用数学形式表达，Lasso 包含一个使用 <img class="math" src="../_images/math/7273fb356ffdfc2679d62d4320224739c26dca8f.png" alt="ell_1"/> 先验作为正则化因子的线性模型。其目标函数是最小化:</p>
+<div class="math">
+<p><img src="../_images/math/07c30d8004d4406105b2547be4f3050048531656.png" alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}"/></p>
+</div><p>lasso 解决带 <img class="math" src="../_images/math/7f5743fd8d7d5f38ac1c1b69264a46a7db7c5ef8.png" alt="\alpha ||w||_1"/> 罚项的最小平方和，其中 <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 是一个常量，<img class="math" src="../_images/math/99c2ab1cc7a9538a1f081f7391fa368fa6f25799.png" alt="||w||_1"/> 是参数向量的 <img class="math" src="../_images/math/a301afaec3a8e4e639ad1d14140c7c5470a8eef2.png" alt="\ell_1"/>-norm</p>
+<p><a class="reference internal" href="generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" title="sklearn.linear_model.Lasso"><code class="xref py py-class docutils literal"><span class="pre">Lasso</span></code></a> 类实现使用了坐标下降法(一种非梯度优化算法) 来拟合系数.参考另一种实现 <a class="reference internal" href="#least-angle-regression"><span class="std std-ref">Least Angle Regression最小角回归</span></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">Lasso(alpha=0.1, copy_X=True, fit_intercept=True, max_iter=1000,</span>
+<span class="go">   normalize=False, positive=False, precompute=False, random_state=None,</span>
+<span class="go">   selection=&#39;cyclic&#39;, tol=0.0001, warm_start=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">array([ 0.8])</span>
+</pre></div>
+</div>
+<p>函数 <a class="reference internal" href="generated/sklearn.linear_model.lasso_path.html#sklearn.linear_model.lasso_path" title="sklearn.linear_model.lasso_path"><code class="xref py py-func docutils literal"><span class="pre">lasso_path</span></code></a> 对于lower-level任务非常有用。它能够通过搜索所有可能的路径上的值来计算系数.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#example-linear-model-plot-lasso-and-elasticnet-py"><span class="std std-ref">Lasso and Elastic Net for Sparse Signals</span></a></li>
+<li><a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#example-applications-plot-tomography-l1-reconstruction-py"><span class="std std-ref">Compressive sensing: tomography reconstruction with L1 prior (Lasso)</span></a></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Feature selection with Lasso</strong></p>
+<p class="last">As the Lasso regression yields sparse models, it can
+thus be used to perform feature selection, as detailed in
+<a class="reference internal" href="feature_selection.html#l1-feature-selection"><span class="std std-ref">基于L1的特征选择(L1-based feature selection)</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Randomized sparsity</strong></p>
+<p class="last">For feature selection or sparse recovery, it may be interesting to
+use <a class="reference internal" href="feature_selection.html#randomized-l1"><span class="std std-ref">随机稀疏模型(Randomized sparse models)</span></a>.</p>
+</div>
+<div class="section" id="id8">
+<h3>1.1.3.1. 设置正则化参数<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">alpha</span></code> 参数控制估计的系数的稀疏程度。</p>
+<div class="section" id="id9">
+<h4>1.1.3.1.1. 使用交叉验证<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<p>scikit-learn 暴露以下两个类 <a class="reference internal" href="generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV" title="sklearn.linear_model.LassoCV"><code class="xref py py-class docutils literal"><span class="pre">LassoCV</span></code></a> 和 <a class="reference internal" href="generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV" title="sklearn.linear_model.LassoLarsCV"><code class="xref py py-class docutils literal"><span class="pre">LassoLarsCV</span></code></a> 可以设置 Lasso <code class="docutils literal"><span class="pre">alpha</span></code> 参数.
+<a class="reference internal" href="generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV" title="sklearn.linear_model.LassoCV"><code class="xref py py-class docutils literal"><span class="pre">LassoCV</span></code></a> 基于下面解释的算法 <a class="reference internal" href="#least-angle-regression"><span class="std std-ref">Least Angle Regression最小角回归</span></a></p>
+<p>对于含有很多共线性的高维的数据集，<a class="reference internal" href="generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV" title="sklearn.linear_model.LassoCV"><code class="xref py py-class docutils literal"><span class="pre">LassoCV</span></code></a> 是最合适不过了。然而，<a class="reference internal" href="generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV" title="sklearn.linear_model.LassoLarsCV"><code class="xref py py-class docutils literal"><span class="pre">LassoLarsCV</span></code></a> 在寻找 <cite>alpha</cite> 参数更相关的值时更具有优势，
+并且如果样本相比于观测的数量时，通常比  <a class="reference internal" href="generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV" title="sklearn.linear_model.LassoCV"><code class="xref py py-class docutils literal"><span class="pre">LassoCV</span></code></a> 更快.</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_1" src="../_images/plot_lasso_model_selection_0021.png" style="width: 384.0px; height: 288.0px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_2" src="../_images/plot_lasso_model_selection_0031.png" style="width: 384.0px; height: 288.0px;" /></a></strong></p></div>
+<div class="section" id="id10">
+<h4>1.1.3.1.2. 基于模型选择的信息约束<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference internal" href="generated/sklearn.linear_model.LassoLarsIC.html#sklearn.linear_model.LassoLarsIC" title="sklearn.linear_model.LassoLarsIC"><code class="xref py py-class docutils literal"><span class="pre">LassoLarsIC</span></code></a> 建议使用Akaike information criterion (AIC) 和 Bayes Information criterion (BIC)。
+由于在计算:math:<cite>alpha</cite> 过程中，当使用k-折交叉验证的时候，正则化路径只计算1次而不是k+1次，所以在计算上代价非常小。
+然而，这种约束需要一个合适的对于解的自由度的估计（可参考矩阵的解的自由度）,这可以从大量的样本（渐进结果）导出并且
+假设模型是正确的。例如，数据实际上是有该模型产生的，但是当问题是病态条件时这种数据可能会有问题(参考病态矩阵，条件数等概念)，比如
+特征维数大于样本数.（小样本问题）</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="../_images/plot_lasso_model_selection_0011.png" src="../_images/plot_lasso_model_selection_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_model_selection.html#example-linear-model-plot-lasso-model-selection-py"><span class="std std-ref">Lasso model selection: Cross-Validation / AIC / BIC</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="elastic-net">
+<span id="id11"></span><h2>1.1.4. 弹性网络<a class="headerlink" href="#elastic-net" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet" title="sklearn.linear_model.ElasticNet"><code class="xref py py-class docutils literal"><span class="pre">ElasticNet</span></code></a> 是一种使用L1和L2先验作为正则化矩阵的线性回归模型.这种组合用于只有很少的权重非零的稀疏模型，比如:class:<cite>Lasso</cite>,
+但是又能保持:class:<cite>Ridge</cite> 的正则化属性.我们可以使用 <code class="docutils literal"><span class="pre">l1_ratio</span></code> 参数来调节L1和L2的凸组合(一类特殊的线性组合)。</p>
+<p>当多个特征和另一个特征相关的时候弹性网络非常有用。Lasso 倾向于随机选择其中一个，而弹性网络更倾向于选择两个.</p>
+<p>在实践中，Lasso 和 Ridge 之间权衡的一个优势是它允许在循环过程（Under rotate）中继承 Ridge 的稳定性.</p>
+<p>弹性网络的目标函数是最小化:</p>
+<div class="math">
+<p><img src="../_images/math/51443eb62398fc5253e0a0d06a5695686e972d08.png" alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha \rho ||w||_1 +
+\frac{\alpha(1-\rho)}{2} ||w||_2 ^ 2}"/></p>
+</div><div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html"><img alt="../_images/plot_lasso_coordinate_descent_path_0011.png" src="../_images/plot_lasso_coordinate_descent_path_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<p><a class="reference internal" href="generated/sklearn.linear_model.ElasticNetCV.html#sklearn.linear_model.ElasticNetCV" title="sklearn.linear_model.ElasticNetCV"><code class="xref py py-class docutils literal"><span class="pre">ElasticNetCV</span></code></a> 可以通过交叉验证来用来设置参数 <code class="docutils literal"><span class="pre">alpha</span></code> (<img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/>) 和 <code class="docutils literal"><span class="pre">l1_ratio</span></code> (<img class="math" src="../_images/math/9a51ab9a0b521705e1e8762fac6bdd6f11771758.png" alt="\rho"/>)</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#example-linear-model-plot-lasso-and-elasticnet-py"><span class="std std-ref">Lasso and Elastic Net for Sparse Signals</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html#example-linear-model-plot-lasso-coordinate-descent-path-py"><span class="std std-ref">Lasso and Elastic Net</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="multi-task-lasso">
+<span id="id12"></span><h2>1.1.5. Multi-task Lasso回归<a class="headerlink" href="#multi-task-lasso" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.linear_model.MultiTaskLasso.html#sklearn.linear_model.MultiTaskLasso" title="sklearn.linear_model.MultiTaskLasso"><code class="xref py py-class docutils literal"><span class="pre">MultiTaskLasso</span></code></a> 是一种估计多元回归系数的线性模型， <code class="docutils literal"><span class="pre">y</span></code> 是一个2D数组，形式为(n_samples,n_tasks).
+其限制条件是和其他回归问题一样，是选择的特征，同样称为 tasks.</p>
+<p>接下来的图示比较了通过使用一个简单的Lasso或者MultiTaskLasso得到的W中非零的位置。
+Lasso 估计量分散着非零值而MultiTaskLasso所有的列全部是非零的。</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_1" src="../_images/plot_multi_task_lasso_support_0011.png" style="width: 384.0px; height: 240.0px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_2" src="../_images/plot_multi_task_lasso_support_0021.png" style="width: 384.0px; height: 288.0px;" /></a></strong></p><p class="centered">
+<strong>Fitting a time-series model, imposing that any active feature be active at all times.</strong></p><div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html#example-linear-model-plot-multi-task-lasso-support-py"><span class="std std-ref">Joint feature selection with multi-task Lasso</span></a></li>
+</ul>
+</div>
+<p>数学表达上，它包含了一个使用 <img class="math" src="../_images/math/a301afaec3a8e4e639ad1d14140c7c5470a8eef2.png" alt="\ell_1"/> <img class="math" src="../_images/math/4cdcdbcd7242f4bc56b5900649a2839bc9689fef.png" alt="\ell_2"/> 先验作为正则化因子。其目标函数是最小化:</p>
+<div class="math">
+<p><img src="../_images/math/648e08aa026d68850421976c3e1cb8e3834ad1a8.png" alt="\underset{w}{min\,} { \frac{1}{2n_{samples}} ||X W - Y||_2 ^ 2 + \alpha ||W||_{21}}"/></p>
+</div><p>where;</p>
+<div class="math">
+<p><img src="../_images/math/10e971b05d3e6dd727e40c52109c92549d52f9af.png" alt="||W||_{2 1} = \sum_i \sqrt{\sum_j w_{ij}^2}"/></p>
+</div><p><a class="reference internal" href="generated/sklearn.linear_model.MultiTaskLasso.html#sklearn.linear_model.MultiTaskLasso" title="sklearn.linear_model.MultiTaskLasso"><code class="xref py py-class docutils literal"><span class="pre">MultiTaskLasso</span></code></a> 类的实现使用了坐标下降算法来拟合系数。</p>
+</div>
+<div class="section" id="least-angle-regression">
+<span id="id13"></span><h2>1.1.6. Least Angle Regression最小角回归<a class="headerlink" href="#least-angle-regression" title="Permalink to this headline">¶</a></h2>
+<p>最小角回归是针对高维数据的回归算法，由Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani开发。</p>
+<dl class="docutils">
+<dt>LARS的优势如下:</dt>
+<dd><ul class="first last simple">
+<li>当 p &gt;&gt; n 时计算是非常高效的。（比如当维数远大于点数）</li>
+<li>它和前向选择计算速度差不多一样块，并且和普通最小二乘复杂度一样。</li>
+<li>它生成一个完整的分段线性的解的路径，这对于交叉验证或者类似的尝试来调整模型是有效的。</li>
+<li>如果两个变量的相应总是相同，那么它们的系数应该有近似相同的增长速率。因此这算法和直觉判断一样，并且增长总是稳定的。</li>
+<li>这个算法对于其他评估模型来说很容易被修改来产生解，和Lasso差不多。（待修改）</li>
+<li>It is easily modified to produce solutions for other estimators,
+like the Lasso.</li>
+</ul>
+</dd>
+</dl>
+<p>LARS方法的缺点包括：</p>
+<blockquote>
+<div><ul class="simple">
+<li>因为LARS是基于剩余误差多次迭代拟合,所以对噪声的影响比较敏感。这个问题在 Efron et al. (2004) Annals of Statistics article这篇文章中讨论部分详细谈论了。</li>
+</ul>
+</div></blockquote>
+<p>LARS模型可以使用estimator <a class="reference internal" href="generated/sklearn.linear_model.Lars.html#sklearn.linear_model.Lars" title="sklearn.linear_model.Lars"><code class="xref py py-class docutils literal"><span class="pre">Lars</span></code></a> ，或者底层实现 <a class="reference internal" href="generated/sklearn.linear_model.lars_path.html#sklearn.linear_model.lars_path" title="sklearn.linear_model.lars_path"><code class="xref py py-func docutils literal"><span class="pre">lars_path</span></code></a> 。</p>
+</div>
+<div class="section" id="lars-lasso">
+<h2>1.1.7. LARS Lasso<a class="headerlink" href="#lars-lasso" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars" title="sklearn.linear_model.LassoLars"><code class="xref py py-class docutils literal"><span class="pre">LassoLars</span></code></a> 是一个使用LARS算法实现的lasso模型。和基于坐标下降的实现不同的是，它产生的是精确的解，和一个函数标准系数一样是精确线性的。
+which is piecewise linear as a function of the norm of its coefficients.（待修正）</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_lars.html"><img alt="../_images/plot_lasso_lars_0011.png" src="../_images/plot_lasso_lars_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LassoLars</span><span class="p">(</span><span class="n">alpha</span><span class="o">=.</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  
+<span class="go">LassoLars(alpha=0.1, copy_X=True, eps=..., fit_intercept=True,</span>
+<span class="go">     fit_path=True, max_iter=500, normalize=True, positive=False,</span>
+<span class="go">     precompute=&#39;auto&#39;, verbose=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>    
+<span class="go">array([ 0.717157...,  0.        ])</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_lars.html#example-linear-model-plot-lasso-lars-py"><span class="std std-ref">Lasso path using LARS</span></a></li>
+</ul>
+</div>
+<p>The Lars algorithm provides the full path of the coefficients along
+the regularization parameter almost for free, thus a common operation
+consist of retrieving the path with function <a class="reference internal" href="generated/sklearn.linear_model.lars_path.html#sklearn.linear_model.lars_path" title="sklearn.linear_model.lars_path"><code class="xref py py-func docutils literal"><span class="pre">lars_path</span></code></a></p>
+<div class="section" id="mathematical-formulation">
+<h3>1.1.7.1. Mathematical formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h3>
+<p>这个算法和逐步回归很相似，但是除了在每一步包含变量之外，估计的参数沿着每一个对应的残差的对角方向增长。（待校正）。
+并不是给出一个向量结果，而是在LARS的解中包含了一个曲线，用来表示每个参数向量的L1-norm 值的解，
+所有系数路径存在 <code class="docutils literal"><span class="pre">coef_path_</span></code> 数组中，大小为(n_features,max_features+1)，其中第一列总是0.</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Original Algorithm is detailed in the paper <a class="reference external" href="http://www-stat.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf">Least Angle Regression</a>
+by Hastie et al.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="orthogonal-matching-pursuit-omp">
+<span id="omp"></span><h2>1.1.8. Orthogonal Matching Pursuit (OMP) 正交匹配跟踪<a class="headerlink" href="#orthogonal-matching-pursuit-omp" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.linear_model.OrthogonalMatchingPursuit.html#sklearn.linear_model.OrthogonalMatchingPursuit" title="sklearn.linear_model.OrthogonalMatchingPursuit"><code class="xref py py-class docutils literal"><span class="pre">OrthogonalMatchingPursuit</span></code></a> and <a class="reference internal" href="generated/sklearn.linear_model.orthogonal_mp.html#sklearn.linear_model.orthogonal_mp" title="sklearn.linear_model.orthogonal_mp"><code class="xref py py-func docutils literal"><span class="pre">orthogonal_mp</span></code></a> 实现了一个用来逼近在非零系数的个数上加约束的线性模型的拟合的OMP算法(比如L <sub>0</sub> pseudo-norm)</p>
+<p>和 <a class="reference internal" href="#least-angle-regression"><span class="std std-ref">Least Angle Regression最小角回归</span></a> 一样，作为一个前向特征选择方法，OMP可以用一个固定非零的数来逼近最优的解向量:</p>
+<div class="math">
+<p><img src="../_images/math/a4acdafd29eec35831ca225d906e7691941d9567.png" alt="\text{arg\,min\,} ||y - X\gamma||_2^2 \text{ subject to } \
+||\gamma||_0 \leq n_{nonzero\_coefs}"/></p>
+</div><p>或者说正交匹配算法可以针对一个特殊的误差而不是一个特殊的非零系数的个数，这一过程可以表达为:</p>
+<div class="math">
+<p><img src="../_images/math/c6ed31043514c4aa6af8b14f9a6d51d162fed543.png" alt="\text{arg\,min\,} ||\gamma||_0 \text{ subject to } ||y-X\gamma||_2^2 \
+\leq \text{tol}"/></p>
+</div><p>OMP是基于贪婪算法,包括在每一步原子(归一化的向量)与当前残差高度相关。它类似于简单
+匹配追踪(MP)方法,但更好的,在每一次迭代中，通过使用的在前一个选择的字典元素的空间的正交投影重新计算残差。
+参考 * <a class="reference external" href="http://chunqiu.blog.ustc.edu.cn/?p=634">http://chunqiu.blog.ustc.edu.cn/?p=634</a> *</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_omp.html#example-linear-model-plot-omp-py"><span class="std std-ref">Orthogonal Matching Pursuit</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.cs.technion.ac.il/~ronrubin/Publications/KSVD-OMP-v2.pdf">http://www.cs.technion.ac.il/~ronrubin/Publications/KSVD-OMP-v2.pdf</a></li>
+<li><a class="reference external" href="http://blanche.polytechnique.fr/~mallat/papiers/MallatPursuit93.pdf">Matching pursuits with time-frequency dictionaries</a>,
+S. G. Mallat, Z. Zhang,</li>
+</ul>
+</div>
+</div>
+<div class="section" id="bayesian-regression">
+<span id="id15"></span><h2>1.1.9. 贝叶斯回归<a class="headerlink" href="#bayesian-regression" title="Permalink to this headline">¶</a></h2>
+<p>可以在估计过程中使用贝叶斯回归技术包含正则化参数：正则化参数不是硬编码设置的而是手动调节适合数据的值</p>
+<p>可以通过在模型的超参数上引入 <a class="reference external" href="http://en.wikipedia.org/wiki/Non-informative_prior#Uninformative_priors">uninformative priors</a></p>
+<p><a href="#id28"><span class="problematic" id="id29">`Ridge Regression`_</span></a> 中 <img class="math" src="../_images/math/f77f5b2c6971d3c72c400d10b87707edc1d7156d.png" alt="\ell_{2}"/> 使用的正则化项等价于在一个参数为 <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/> 且精度为 <img class="math" src="../_images/math/8d9c0a8849bc58486d5c91815dea17d26b0c8305.png" alt="\lambda^-1"/> 的高斯先验下寻找
+一个最大的后验的解。而且并不是手动设置 <cite>lambda</cite> ，而是有可能把它看做一个随机变量来从从数据中估计。</p>
+<p>为了获得一个完整的概率模型，输出 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> 假设为关于 <img class="math" src="../_images/math/4dc06edd94309641af4846043fe7c7b650e40037.png" alt="X w"/> 的高斯分布</p>
+<div class="math">
+<p><img src="../_images/math/f478d5b226c02754ede31ce247d4d9870ff7c416.png" alt="p(y|X,w,\alpha) = \mathcal{N}(y|X w,\alpha)"/></p>
+</div><p>Alpha 同样被看做是随机变量，需要从数据中来估计</p>
+<p>贝叶斯回归的优势：</p>
+<blockquote>
+<div><ul class="simple">
+<li>根据数据调节参数</li>
+<li>在估计过程中包含正则化参数</li>
+</ul>
+</div></blockquote>
+<p>贝叶斯回归劣势:</p>
+<blockquote>
+<div><ul class="simple">
+<li>模型的推理比较耗时</li>
+</ul>
+</div></blockquote>
+<div class="topic">
+<p class="topic-title first">References</p>
+<ul class="simple">
+<li>关于贝叶斯方法一个非常好的说明可以参考  C. Bishop: Pattern Recognition and Machine learning (经典的PRML书籍)</li>
+<li>而原始的算法在 <cite>Bayesian learning for neural networks</cite> by Radford M. Neal 中有详细描述。</li>
+</ul>
+</div>
+<div class="section" id="bayesian-ridge-regression">
+<span id="id16"></span><h3>1.1.9.1. 贝叶斯岭回归<a class="headerlink" href="#bayesian-ridge-regression" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.linear_model.BayesianRidge.html#sklearn.linear_model.BayesianRidge" title="sklearn.linear_model.BayesianRidge"><code class="xref py py-class docutils literal"><span class="pre">BayesianRidge</span></code></a> 对上述的回归问题估计了一个概率模型。先验参数 <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/> 由下面的球形高斯给出：</p>
+<div class="math">
+<p><img src="../_images/math/ebf24e7f03ce757cbfab29367628715eb161fc38.png" alt="p(w|\lambda) =
+\mathcal{N}(w|0,\lambda^{-1}\bold{I_{p}})"/></p>
+</div><p>先验参数  <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 和 <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/> 的选择满足 <a class="reference external" href="http://en.wikipedia.org/wiki/Gamma_distribution">gamma
+distributions</a> ，即高斯函数精度的共轭先验</p>
+<p>生成的模型称为  <em>Bayesian Ridge Regression</em> ,和经典的  <a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code></a> 类似。
+参数 <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/>, <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 以及 <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/> 在模型的拟合中被共同估计。
+其他的参数是 <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 和 <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/> 的gamma 先验的参数。（待校正）
+这些通常被选择为 <em>non-informative*（参考贝叶斯无信息先验）。参数统计通过最大化 *marginal log likelihood</em>.</p>
+<p>By default <img class="math" src="../_images/math/7829d1ebb16b37fd70914438ea291a9b3e216296.png" alt="\alpha_1 = \alpha_2 =  \lambda_1 = \lambda_2 = 1.e^{-6}"/>.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_bayesian_ridge.html"><img alt="../_images/plot_bayesian_ridge_0011.png" src="../_images/plot_bayesian_ridge_0011.png" style="width: 300.0px; height: 250.0px;" /></a>
+</div>
+<p>Bayesian Ridge Regression is used for regression:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">BayesianRidge</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="go">BayesianRidge(alpha_1=1e-06, alpha_2=1e-06, compute_score=False, copy_X=True,</span>
+<span class="go">       fit_intercept=True, lambda_1=1e-06, lambda_2=1e-06, n_iter=300,</span>
+<span class="go">       normalize=False, tol=0.001, verbose=False)</span>
+</pre></div>
+</div>
+<p>After being fitted, the model can then be used to predict new values:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span> <span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="go">array([ 0.50000013])</span>
+</pre></div>
+</div>
+<p>The weights <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/> of the model can be access:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([ 0.49999993,  0.49999993])</span>
+</pre></div>
+</div>
+<p>由于贝叶斯框架，权重的发现同  <a class="reference internal" href="#ordinary-least-squares"><span class="std std-ref">普通最小二乘法</span></a> 略有不同。然而Bayesian Ridge Regression 对于病态问题更具有鲁棒性。</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_bayesian_ridge.html#example-linear-model-plot-bayesian-ridge-py"><span class="std std-ref">Bayesian Ridge Regression</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References</p>
+<ul class="simple">
+<li>More details can be found in the article <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.27.9072&amp;rep=rep1&amp;type=pdf">Bayesian Interpolation</a>
+by MacKay, David J. C.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="automatic-relevance-determination-ard">
+<h3>1.1.9.2. Automatic Relevance Determination - ARD<a class="headerlink" href="#automatic-relevance-determination-ard" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="sklearn.linear_model.ARDRegression"><code class="xref py py-class docutils literal"><span class="pre">ARDRegression</span></code></a> 和  <a href="#id30"><span class="problematic" id="id31">`Bayesian Ridge Regression`_</span></a> 非常相似，但是主要针对稀疏权重  <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/> <a class="footnote-reference" href="#id19" id="id17">[1]</a> <a class="footnote-reference" href="#id20" id="id18">[2]</a> 。
+<a class="reference internal" href="generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="sklearn.linear_model.ARDRegression"><code class="xref py py-class docutils literal"><span class="pre">ARDRegression</span></code></a> 提出一个不同于  <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/> 的先验，通过弱化高斯分布为球形的假设。</p>
+<p>相反， <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/> 的分布假设为一个平行轴的椭圆高斯分布。(同axis-alignen)</p>
+<p>也就是说，每个权重  <img class="math" src="../_images/math/8cef10bb133d7cb70cdf6433fc0cbef817b7b5aa.png" alt="w_{i}"/> 来自于一个中心在0点，精度为 <img class="math" src="../_images/math/03fb95641efd224604d31e10ad0d43f2a1981cfe.png" alt="\lambda_{i}"/> 的高斯分布:</p>
+<div class="math">
+<p><img src="../_images/math/e0dbb05b8bf9656ef6b32514010a9bfe514c9945.png" alt="p(w|\lambda) = \mathcal{N}(w|0,A^{-1})"/></p>
+</div><p>with <img class="math" src="../_images/math/149c8337ae0f9ffc3e3c6021f779738b650ae69f.png" alt="diag \; (A) = \lambda = \{\lambda_{1},...,\lambda_{p}\}"/>.</p>
+<p>同 <a href="#id32"><span class="problematic" id="id33">`Bayesian Ridge Regression`_</span></a> 形成对比， <img class="math" src="../_images/math/8cef10bb133d7cb70cdf6433fc0cbef817b7b5aa.png" alt="w_{i}"/> 每一维都有一个标准差  <img class="math" src="../_images/math/159e1bfcbbeedf7e28983ee80db2b2d37c3b3ebc.png" alt="\lambda_i"/> ，
+所有 <img class="math" src="../_images/math/159e1bfcbbeedf7e28983ee80db2b2d37c3b3ebc.png" alt="\lambda_i"/> 的先验选择 和 由给定超参数 <img class="math" src="../_images/math/a2c5c1af213db8e97bdaaf60c8fceab2faef8271.png" alt="\lambda_1"/> 和 <img class="math" src="../_images/math/6bf459c11ce1eb9a1bfa05d02185f322e796f5f4.png" alt="\lambda_2"/> 的gamma分布一样。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ard.html"><img alt="../_images/plot_ard_0011.png" src="../_images/plot_ard_0011.png" style="width: 300.0px; height: 250.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_ard.html#example-linear-model-plot-ard-py"><span class="std std-ref">Automatic Relevance Determination Regression (ARD)</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<table class="docutils footnote" frame="void" id="id19" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17">[1]</a></td><td>Christopher M. Bishop: Pattern Recognition and Machine Learning, Chapter 7.2.1</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id20" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[2]</a></td><td>David Wipf and Srikantan Nagarajan: <a class="reference external" href="http://books.nips.cc/papers/files/nips20/NIPS2007_0976.pdf">A new view of automatic relevance determination.</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="logistic-regression">
+<span id="id21"></span><h2>1.1.10. 逻辑回归<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h2>
+<p>逻辑回归形如其名，是一个线性分类模型而不是回归模型。逻辑回归在文献中也称为logit回归、最大熵分类(MaxEnt) 或者 log-linear classifier。
+在这个模型中，描述单次可能结果输出概率使用  <a class="reference external" href="http://en.wikipedia.org/wiki/Logistic_function">logistic function</a> 来建模。</p>
+<p>scikit-learn中逻辑回归的实现为 <a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegression</span></code></a> 类。它可以拟合含L2或者L1正则化项的多类逻辑回归问题。</p>
+<p>作为一个优化问题，二分类L2 通过下方的代价函数来惩罚逻辑回归:</p>
+<div class="math">
+<p><img src="../_images/math/760c999ccbc78b72d2a91186ba55ce37f0d2cf37.png" alt="\underset{w, c}{min\,} \frac{1}{2}w^T w + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1) ."/></p>
+</div><p>类似的，L1 正则化逻辑回归解决下述的优化问题:</p>
+<div class="math">
+<p><img src="../_images/math/6a0bcf21baaeb0c2b879ab74fe333c0aab0d6ae6.png" alt="\underset{w, c}{min\,} \|w\|_1 + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1) ."/></p>
+</div><p><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegression</span></code></a> 中的实现是solver &#8220;liblinear&#8221; (一个扩展的C++ library,LIBLINEAR), &#8220;newton-cg&#8221;, &#8220;lbfgs&#8221; and &#8220;sag&#8221;。</p>
+<p>&#8220;lbfgs&#8221; 和 &#8220;newton-cg&#8221; 只支持L2罚项，并且对于一些高维数据收敛非常快。L1罚项产生稀疏预测的权重。</p>
+<p>&#8220;liblinear&#8221; 使用了基于Liblinear的坐标下降法(CD)。对于F1罚项， <a class="reference internal" href="generated/sklearn.svm.l1_min_c.html#sklearn.svm.l1_min_c" title="sklearn.svm.l1_min_c"><code class="xref py py-func docutils literal"><span class="pre">sklearn.svm.l1_min_c</span></code></a> 允许计算C的下界以获得一个非&#8221;null&#8221; 的
+模型（所有特征权重为0）。这依赖于非常棒的一个库 <a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/">LIBLINEAR library</a> ,用在scikit-learn中。
+然而，CD算法在liblinear中的实现无法学习一个真正的多维（多类）的模型。反而，最优问题被分解为 &#8220;one-vs-rest&#8221; 多个二分类问题来解决多分类。
+由于底层是这样实现的，所以使用了该库的  <a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegression</span></code></a> 类就可以作为多类分类器了。</p>
+<p><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegression</span></code></a> 使用  &#8220;lbfgs&#8221; 或者 &#8220;newton-cg&#8221; 程序 来设置 <cite>multi_class</cite> 为 &#8220;multinomial&#8221;，则该类学习
+了一个真正的多类逻辑回归模型，也就是说这种概率估计应该比默认 &#8220;one-vs-rest&#8221; 设置要更加准确。但是 &#8220;lbfgs&#8221;, &#8220;newton-cg&#8221; 和 &#8220;sag&#8221;
+程序无法优化 含L1罚项的模型，所以&#8221;multinomial&#8221; 的设置无法学习稀疏模型。</p>
+<p>&#8220;sag&#8221; 程序使用了随机平均梯度下降（ Stochastic Average Gradient descent <a class="footnote-reference" href="#id23" id="id22">[3]</a>）。它无法解决多分类问题，而且对于含L2罚项的模型有局限性。
+然而在超大数据集下计算要比其他程序快很多，当样本数量和特征数量都非常大的时候。</p>
+<p>简单概括下，可以按照以下规则来选择solver:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Case</th>
+<th class="head">Solver</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Small dataset or L1 penalty</td>
+<td>&#8220;liblinear&#8221;</td>
+</tr>
+<tr class="row-odd"><td>Multinomial loss</td>
+<td>&#8220;lbfgs&#8221; or newton-cg&#8221;</td>
+</tr>
+<tr class="row-even"><td>Large dataset</td>
+<td>&#8220;sag&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>对于超大数据集，你同样可以考虑使用带log损失的 <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a></p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_logistic_l1_l2_sparsity.html#example-linear-model-plot-logistic-l1-l2-sparsity-py"><span class="std std-ref">L1 Penalty and Sparsity in Logistic Regression</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_logistic_path.html#example-linear-model-plot-logistic-path-py"><span class="std std-ref">Path with L1- Logistic Regression</span></a></li>
+</ul>
+</div>
+<div class="topic" id="liblinear-differences">
+<p class="topic-title first">Differences from liblinear:</p>
+<p>There might be a difference in the scores obtained between
+<a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegression</span></code></a> with <code class="docutils literal"><span class="pre">solver=liblinear</span></code>
+or <code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code> and the external liblinear library directly,
+when <code class="docutils literal"><span class="pre">fit_intercept=False</span></code> and the fit <code class="docutils literal"><span class="pre">coef_</span></code> (or) the data to
+be predicted are zeroes. This is because for the sample(s) with
+<code class="docutils literal"><span class="pre">decision_function</span></code> zero, <a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegression</span></code></a> and <code class="xref py py-class docutils literal"><span class="pre">LinearSVC</span></code>
+predict the negative class, while liblinear predicts the positive class.
+Note that a model with <code class="docutils literal"><span class="pre">fit_intercept=False</span></code> and having many samples with
+<code class="docutils literal"><span class="pre">decision_function</span></code> zero, is likely to be a underfit, bad model and you are
+advised to set <code class="docutils literal"><span class="pre">fit_intercept=True</span></code> and increase the intercept_scaling.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Feature selection with sparse logistic regression</strong></p>
+<p class="last">A logistic regression with L1 penalty yields sparse models, and can
+thus be used to perform feature selection, as detailed in
+<a class="reference internal" href="feature_selection.html#l1-feature-selection"><span class="std std-ref">基于L1的特征选择(L1-based feature selection)</span></a>.</p>
+</div>
+<p><a class="reference internal" href="generated/sklearn.linear_model.LogisticRegressionCV.html#sklearn.linear_model.LogisticRegressionCV" title="sklearn.linear_model.LogisticRegressionCV"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegressionCV</span></code></a> 实现了一个内建的交叉验证来寻找最优的参数C的逻辑回归模型。&#8221;newton-cg&#8221;,&#8221;sag&#8221; 和　&#8221;lbfgs&#8221; 程序在高维稠密数据上计算更快,原因在于warm-starting.对于多类问题,如果 <cite>multi_class</cite> 选项设置为 &#8220;ovr&#8221; ,那么最优的C从每个类别中获得，如果 <cite>multi_class</cite> 选项设置为　&#8221;multinomial&#8221; ,那么最优的Ｃ通过最小化交叉熵损失得到。</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<table class="docutils footnote" frame="void" id="id23" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id22">[3]</a></td><td>Mark Schmidt, Nicolas Le Roux, and Francis Bach: <a class="reference external" href="http://hal.inria.fr/hal-00860051/PDF/sag_journal.pdf">Minimizing Finite Sums with the Stochastic Average Gradient.</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="stochastic-gradient-descent-sgd">
+<h2>1.1.11. Stochastic Gradient Descent - SGD<a class="headerlink" href="#stochastic-gradient-descent-sgd" title="Permalink to this headline">¶</a></h2>
+<p>随机梯度下降(SGD)是一种快速拟合线性模型非常有效的方式,尤其当样本数量非常大的时候非常有用。 <code class="docutils literal"><span class="pre">partial_fit</span></code> 方法允许　only/out-of-core 学习。</p>
+<blockquote>
+<div><a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> 和 <a class="reference internal" href="generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code></a> 为使用了不同损失函数（凸函数）和不同罚项的分类和回归问题来拟合线性模型的函数。</div></blockquote>
+<p>比如，对于设置参数 <code class="docutils literal"><span class="pre">loss=&quot;log&quot;</span></code> , <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> 拟合了一个逻辑回归模型，而设置参数 <code class="docutils literal"><span class="pre">loss=&quot;hinge&quot;</span></code> ,该类会拟合一个线性SVM</p>
+<div class="topic">
+<p class="topic-title first">References</p>
+<ul class="simple">
+<li><a class="reference internal" href="sgd.html#sgd"><span class="std std-ref">随机梯度下降</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="perceptron">
+<span id="id24"></span><h2>1.1.12. 感知机<a class="headerlink" href="#perceptron" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron" title="sklearn.linear_model.Perceptron"><code class="xref py py-class docutils literal"><span class="pre">Perceptron</span></code></a> 是另一种简单的适合大规模学习的算法。默认情况下:</p>
+<blockquote>
+<div><ul class="simple">
+<li>它不需要学习率</li>
+<li>不需要正则化(罚项)</li>
+<li>只会在判错情况下更新模型。</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p>The <a class="reference internal" href="generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron" title="sklearn.linear_model.Perceptron"><code class="xref py py-class docutils literal"><span class="pre">Perceptron</span></code></a> is another simple algorithm suitable for large scale
+learning. By default:</p>
+<blockquote>
+<div><ul class="simple">
+<li>It does not require a learning rate.</li>
+<li>It is not regularized (penalized).</li>
+<li>It updates its model only on mistakes.</li>
+</ul>
+</div></blockquote>
+<p>最后一个特性是它比带hinge损失的SGD训练的稍微快点，并且产生的模型是稀疏的。
+The last characteristic implies that the Perceptron is slightly faster to
+train than SGD with the hinge loss and that the resulting models are
+sparser.</p>
+</div>
+<div class="section" id="passive-aggressive-algorithms">
+<span id="passive-aggressive"></span><h2>1.1.13. Passive Aggressive Algorithms<a class="headerlink" href="#passive-aggressive-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>Passive Aggressive Algorithms 是一些列大规模学习的算法。这些算法和感知机非常相似，并不需要学习率。但是和感知机不同的是，这些算法都包含有一个正则化参数  <code class="docutils literal"><span class="pre">C</span></code> 。
+The passive-aggressive algorithms are a family of algorithms for large-scale
+learning. They are similar to the Perceptron in that they do not require a
+learning rate. However, contrary to the Perceptron, they include a
+regularization parameter <code class="docutils literal"><span class="pre">C</span></code>.</p>
+<p>对于分类问题, <a class="reference internal" href="generated/sklearn.linear_model.PassiveAggressiveClassifier.html#sklearn.linear_model.PassiveAggressiveClassifier" title="sklearn.linear_model.PassiveAggressiveClassifier"><code class="xref py py-class docutils literal"><span class="pre">PassiveAggressiveClassifier</span></code></a> 可以通过设置 <code class="docutils literal"><span class="pre">loss='hinge'</span></code> (PA-I) 或者 <code class="docutils literal"><span class="pre">loss='squared_hinge'</span></code> (PA-II)来处理。
+对于回归问题,  <a class="reference internal" href="generated/sklearn.linear_model.PassiveAggressiveRegressor.html#sklearn.linear_model.PassiveAggressiveRegressor" title="sklearn.linear_model.PassiveAggressiveRegressor"><code class="xref py py-class docutils literal"><span class="pre">PassiveAggressiveRegressor</span></code></a> 可以通过设置 <code class="docutils literal"><span class="pre">loss='epsilon_insensitive'</span></code> (PA-I) 或者 <code class="docutils literal"><span class="pre">loss='squared_epsilon_insensitive'</span></code> (PA-II)来处理。</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://jmlr.csail.mit.edu/papers/volume7/crammer06a/crammer06a.pdf">&#8220;Online Passive-Aggressive Algorithms&#8221;</a>
+K. Crammer, O. Dekel, J. Keshat, S. Shalev-Shwartz, Y. Singer - JMLR 7 (2006)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id25">
+<h2>1.1.14. 鲁棒（稳健）回归：异常值和模型错误<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h2>
+<p>Robust regression(稳健回归) 主要思路是对异常值十分敏感的经典最小二乘回归目标函数的修改。
+它主要用来拟合含异常数据(要么是异常数据,要么是模型错误) 的回归模型。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../_images/plot_theilsen_0011.png" src="../_images/plot_theilsen_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<div class="section" id="different-scenario-and-useful-concepts">
+<h3>1.1.14.1. Different scenario and useful concepts<a class="headerlink" href="#different-scenario-and-useful-concepts" title="Permalink to this headline">¶</a></h3>
+<p>下面是在处理由outliers引起的数据异常时需要谨记的几个问题:</p>
+<ul>
+<li><p class="first"><strong>Outliers in X or in y</strong>?</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Outliers in the y direction</th>
+<th class="head">Outliers in the X direction</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="y_outliers" src="../_images/plot_robust_fit_0031.png" style="width: 300.0px; height: 240.0px;" /></a></td>
+<td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="X_outliers" src="../_images/plot_robust_fit_0021.png" style="width: 300.0px; height: 240.0px;" /></a></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first"><strong>Fraction of outliers versus amplitude of error</strong></p>
+<p>The number of outlying points matters, but also how much they are
+outliers.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Small outliers</th>
+<th class="head">Large outliers</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="y_outliers" src="../_images/plot_robust_fit_0031.png" style="width: 300.0px; height: 240.0px;" /></a></td>
+<td><a class="reference external" href="../auto_examples/linear_model/plot_robust_fit.html"><img alt="large_y_outliers" src="../_images/plot_robust_fit_0051.png" style="width: 300.0px; height: 240.0px;" /></a></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>rubust fitting 中一个重要概念是 breakdown point: the
+fraction of data that can be outlying for the fit to start missing the
+inlying data.</p>
+<p>注意在通常情况下，robust fitting在高维(<cite>n_features</cite> 非常大)下是难以处理的,robust模型在下列设置下可能无法工作。</p>
+<div class="topic">
+<p class="topic-title first"><strong>Trade-offs: which estimator?</strong></p>
+<blockquote>
+<div><blockquote>
+<div><p>Scikit-learn provides 2 robust regression estimators:
+<a class="reference internal" href="#ransac-regression"><span class="std std-ref">RANSAC</span></a> and
+<a class="reference internal" href="#theil-sen-regression"><span class="std std-ref">Theil Sen</span></a></p>
+<ul class="simple">
+<li><a class="reference internal" href="#ransac-regression"><span class="std std-ref">RANSAC</span></a> is faster, and scales much better
+with the number of samples</li>
+<li><a class="reference internal" href="#ransac-regression"><span class="std std-ref">RANSAC</span></a> will deal better with large
+outliers in the y direction (most common situation)</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><a class="reference internal" href="#theil-sen-regression"><span class="std std-ref">Theil Sen</span></a> will cope better with
+medium-size outliers in the X direction, but this property will
+disappear in large dimensional settings.</li>
+</ul>
+</div></blockquote>
+<p>When in doubt, use <a class="reference internal" href="#ransac-regression"><span class="std std-ref">RANSAC</span></a></p>
+</div>
+</div>
+<div class="section" id="ransac-random-sample-consensus">
+<span id="ransac-regression"></span><h3>1.1.14.2. RANSAC: RANdom SAmple Consensus<a class="headerlink" href="#ransac-random-sample-consensus" title="Permalink to this headline">¶</a></h3>
+<p>RANSAC (RANdom SAmple Consensus) 是从完整数据集的随机选择一个子集来拟合模型的方法,该子集被假设为局内点。
+RANSAC (RANdom SAmple Consensus) fits a model from random subsets of
+inliers from the complete data set.</p>
+<p>RANSAC 是一个非确定的算法，它仅仅用一个确定的概率来产生一个合理的结果，和迭代的次数无关（参考 <cite>max_trials</cite> 参数）。
+它通常用于线性和非线性回归问题，尤其在摄影计算机视觉领域非常流行。</p>
+<p>该算法把一个完整的样本数据集拆分成一系列局内点集合，这些内点可能属于噪声和局外点，比如由测量误差或者无效假设的数据。
+最终的模型最终只从确定的局内点中估计出来。
+The algorithm splits the complete input sample data into a set of inliers,
+which may be subject to noise, and outliers, which are e.g. caused by erroneous
+measurements or invalid hypotheses about the data. The resulting model is then
+estimated only from the determined inliers.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ransac.html"><img alt="../_images/plot_ransac_0011.png" src="../_images/plot_ransac_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<div class="section" id="details-of-the-algorithm">
+<h4>1.1.14.2.1. Details of the algorithm<a class="headerlink" href="#details-of-the-algorithm" title="Permalink to this headline">¶</a></h4>
+<p>每一轮迭代过程如下:</p>
+<ol class="arabic simple">
+<li>Select <code class="docutils literal"><span class="pre">min_samples</span></code> random samples from the original data and check
+whether the set of data is valid (see <code class="docutils literal"><span class="pre">is_data_valid</span></code>).</li>
+<li>Fit a model to the random subset (<code class="docutils literal"><span class="pre">base_estimator.fit</span></code>) and check
+whether the estimated model is valid (see <code class="docutils literal"><span class="pre">is_model_valid</span></code>).</li>
+<li>Classify all data as inliers or outliers by calculating the residuals
+to the estimated model (<code class="docutils literal"><span class="pre">base_estimator.predict(X)</span> <span class="pre">-</span> <span class="pre">y</span></code>) - all data
+samples with absolute residuals smaller than the <code class="docutils literal"><span class="pre">residual_threshold</span></code>
+are considered as inliers.</li>
+<li>Save fitted model as best model if number of inlier samples is
+maximal. In case the current estimated model has the same number of
+inliers, it is only considered as the best model if it has better score.</li>
+</ol>
+<p>These steps are performed either a maximum number of times (<code class="docutils literal"><span class="pre">max_trials</span></code>) or
+until one of the special stop criteria are met (see <code class="docutils literal"><span class="pre">stop_n_inliers</span></code> and
+<code class="docutils literal"><span class="pre">stop_score</span></code>). The final model is estimated using all inlier samples (consensus
+set) of the previously determined best model.</p>
+<p>The <code class="docutils literal"><span class="pre">is_data_valid</span></code> and <code class="docutils literal"><span class="pre">is_model_valid</span></code> functions allow to identify and reject
+degenerate combinations of random sub-samples. If the estimated model is not
+needed for identifying degenerate cases, <code class="docutils literal"><span class="pre">is_data_valid</span></code> should be used as it
+is called prior to fitting the model and thus leading to better computational
+performance.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_ransac.html#example-linear-model-plot-ransac-py"><span class="std std-ref">Robust linear model estimation using RANSAC</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_robust_fit.html#example-linear-model-plot-robust-fit-py"><span class="std std-ref">Robust linear estimator fitting</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/RANSAC">http://en.wikipedia.org/wiki/RANSAC</a></li>
+<li><a class="reference external" href="http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf">&#8220;Random Sample Consensus: A Paradigm for Model Fitting with Applications to
+Image Analysis and Automated Cartography&#8221;</a>
+Martin A. Fischler and Robert C. Bolles - SRI International (1981)</li>
+<li><a class="reference external" href="http://www.bmva.org/bmvc/2009/Papers/Paper355/Paper355.pdf">&#8220;Performance Evaluation of RANSAC Family&#8221;</a>
+Sunglok Choi, Taemin Kim and Wonpil Yu - BMVC (2009)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="theil-sen-estimator-generalized-median-based-estimator">
+<span id="theil-sen-regression"></span><h3>1.1.14.3. Theil-Sen estimator: generalized-median-based estimator<a class="headerlink" href="#theil-sen-estimator-generalized-median-based-estimator" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor" title="sklearn.linear_model.TheilSenRegressor"><code class="xref py py-class docutils literal"><span class="pre">TheilSenRegressor</span></code></a> estimator uses a generalization of the median in
+multiple dimensions. It is thus robust to multivariate outliers. Note however
+that the robustness of the estimator decreases quickly with the dimensionality
+of the problem. It looses its robustness properties and becomes no
+better than an ordinary least squares in high dimension.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_theilsen.html#example-linear-model-plot-theilsen-py"><span class="std std-ref">Theil-Sen Regression</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_robust_fit.html#example-linear-model-plot-robust-fit-py"><span class="std std-ref">Robust linear estimator fitting</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Theil%E2%80%93Sen_estimator">http://en.wikipedia.org/wiki/Theil%E2%80%93Sen_estimator</a></li>
+</ul>
+</div>
+<div class="section" id="theoretical-considerations">
+<h4>1.1.14.3.1. Theoretical considerations<a class="headerlink" href="#theoretical-considerations" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference internal" href="generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor" title="sklearn.linear_model.TheilSenRegressor"><code class="xref py py-class docutils literal"><span class="pre">TheilSenRegressor</span></code></a> is comparable to the <a class="reference internal" href="#ordinary-least-squares"><span class="std std-ref">Ordinary Least Squares
+(OLS)</span></a> in terms of asymptotic efficiency and as an
+unbiased estimator. In contrast to OLS, Theil-Sen is a non-parametric
+method which means it makes no assumption about the underlying
+distribution of the data. Since Theil-Sen is a median-based estimator, it
+is more robust against corrupted data aka outliers. In univariate
+setting, Theil-Sen has a breakdown point of about 29.3% in case of a
+simple linear regression which means that it can tolerate arbitrary
+corrupted data of up to 29.3%.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_theilsen.html"><img alt="../_images/plot_theilsen_0011.png" src="../_images/plot_theilsen_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<p>The implementation of <a class="reference internal" href="generated/sklearn.linear_model.TheilSenRegressor.html#sklearn.linear_model.TheilSenRegressor" title="sklearn.linear_model.TheilSenRegressor"><code class="xref py py-class docutils literal"><span class="pre">TheilSenRegressor</span></code></a> in scikit-learn follows a
+generalization to a multivariate linear regression model <a class="footnote-reference" href="#f1" id="id26">[4]</a> using the
+spatial median which is a generalization of the median to multiple
+dimensions <a class="footnote-reference" href="#f2" id="id27">[5]</a>.</p>
+<p>In terms of time and space complexity, Theil-Sen scales according to</p>
+<div class="math">
+<p><img src="../_images/math/cbf87473164b3658d7ba9e55d88133d12c409a35.png" alt="\binom{n_{samples}}{n_{subsamples}}"/></p>
+</div><p>which makes it infeasible to be applied exhaustively to problems with a
+large number of samples and features. Therefore, the magnitude of a
+subpopulation can be chosen to limit the time and space complexity by
+considering only a random subset of all possible combinations.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_theilsen.html#example-linear-model-plot-theilsen-py"><span class="std std-ref">Theil-Sen Regression</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id26">[4]</a></td><td>Xin Dang, Hanxiang Peng, Xueqin Wang and Heping Zhang: <a class="reference external" href="http://www.math.iupui.edu/~hpeng/MTSE_0908.pdf">Theil-Sen Estimators in a Multiple Linear Regression Model.</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id27">[5]</a></td><td><ol class="first last upperalpha simple" start="20">
+<li>Kärkkäinen and S. Äyrämö: <a class="reference external" href="http://users.jyu.fi/~samiayr/pdf/ayramo_eurogen05.pdf">On Computation of Spatial Median for Robust Data Mining.</a></li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="polynomial-regression-extending-linear-models-with-basis-functions">
+<span id="polynomial-regression"></span><h2>1.1.15. Polynomial regression: extending linear models with basis functions<a class="headerlink" href="#polynomial-regression-extending-linear-models-with-basis-functions" title="Permalink to this headline">¶</a></h2>
+<p>One common pattern within machine learning is to use linear models trained
+on nonlinear functions of the data.  This approach maintains the generally
+fast performance of linear methods, while allowing them to fit a much wider
+range of data.</p>
+<p>For example, a simple linear regression can be extended by constructing
+<strong>polynomial features</strong> from the coefficients.  In the standard linear
+regression case, you might have a model that looks like this for
+two-dimensional data:</p>
+<div class="math">
+<p><img src="../_images/math/3666ec3bc883af433b318bff9143b5166bcaef15.png" alt="\hat{y}(w, x) = w_0 + w_1 x_1 + w_2 x_2"/></p>
+</div><p>If we want to fit a paraboloid to the data instead of a plane, we can combine
+the features in second-order polynomials, so that the model looks like this:</p>
+<div class="math">
+<p><img src="../_images/math/1e1f74179df321954b823943c08d555a524e69f9.png" alt="\hat{y}(w, x) = w_0 + w_1 x_1 + w_2 x_2 + w_3 x_1 x_2 + w_4 x_1^2 + w_5 x_2^2"/></p>
+</div><p>The (sometimes surprising) observation is that this is <em>still a linear model</em>:
+to see this, imagine creating a new variable</p>
+<div class="math">
+<p><img src="../_images/math/2c0a9947255ef61995c3f5e6319fc7fdfa3503c6.png" alt="z = [x_1, x_2, x_1 x_2, x_1^2, x_2^2]"/></p>
+</div><p>With this re-labeling of the data, our problem can be written</p>
+<div class="math">
+<p><img src="../_images/math/618623438e33ecf053d364a0b938f056cd758b34.png" alt="\hat{y}(w, x) = w_0 + w_1 z_1 + w_2 z_2 + w_3 z_3 + w_4 z_4 + w_5 z_5"/></p>
+</div><p>We see that the resulting <em>polynomial regression</em> is in the same class of
+linear models we&#8217;d considered above (i.e. the model is linear in <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/>)
+and can be solved by the same techniques.  By considering linear fits within
+a higher-dimensional space built with these basis functions, the model has the
+flexibility to fit a much broader range of data.</p>
+<p>Here is an example of applying this idea to one-dimensional data, using
+polynomial features of varying degrees:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_polynomial_interpolation.html"><img alt="../_images/plot_polynomial_interpolation_0011.png" src="../_images/plot_polynomial_interpolation_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<p>上图使用 <a class="reference internal" href="generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures" title="sklearn.preprocessing.PolynomialFeatures"><code class="xref py py-class docutils literal"><span class="pre">PolynomialFeatures</span></code></a> 预处理器.这个预处理器将输入数据
+转换为一个给定degree的新的数据矩阵。可以用下述方法来做：
+This figure is created using the <a class="reference internal" href="generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures" title="sklearn.preprocessing.PolynomialFeatures"><code class="xref py py-class docutils literal"><span class="pre">PolynomialFeatures</span></code></a> preprocessor.
+This preprocessor transforms an input data matrix into a new data matrix
+of a given degree.  It can be used as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">PolynomialFeatures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [2, 3],</span>
+<span class="go">       [4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[  1.,   0.,   1.,   0.,   0.,   1.],</span>
+<span class="go">       [  1.,   2.,   3.,   4.,   6.,   9.],</span>
+<span class="go">       [  1.,   4.,   5.,  16.,  20.,  25.]])</span>
+</pre></div>
+</div>
+<p>特征向量 <code class="docutils literal"><span class="pre">X</span></code> 已经从 <img class="math" src="../_images/math/812a701e111e7fc5dc083e98f619aacc1e8ec56e.png" alt="[1, x_1, x_2, x_1^2, x_1 x_2, x_2^2]"/> 转换为 <img class="math" src="../_images/math/f75be564a03e84d56ceb3b55386f45b58d2f9b3a.png" alt="[x_1, x_2]"/> ，
+并且可以使用任何线性模型来处理。</p>
+<p>这类预处理可以使用 <a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> 工具来 streamline。表达一个简单的多项式的单一的对象可以通过下列来创建和使用:</p>
+<p>This sort of preprocessing can be streamlined with the
+<a class="reference internal" href="pipeline.html#pipeline"><span class="std std-ref">Pipeline</span></a> tools. A single object representing a simple
+polynomial regression can be created and used as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">PolynomialFeatures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LinearRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;poly&#39;</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span>
+<span class="gp">... </span>                  <span class="p">(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># fit to an order-3 polynomial data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([ 3., -2.,  1., -1.])</span>
+</pre></div>
+</div>
+<p>在多项式特征上训练的模型可以精确地恢复输入的多项式系数。
+The linear model trained on polynomial features is able to exactly recover
+the input polynomial coefficients.</p>
+<p>In some cases it&#8217;s not necessary to include higher powers of any single feature,
+but only the so-called <em>interaction features</em>
+that multiply together at most <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/> distinct features.
+These can be gotten from <a class="reference internal" href="generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures" title="sklearn.preprocessing.PolynomialFeatures"><code class="xref py py-class docutils literal"><span class="pre">PolynomialFeatures</span></code></a> with the setting
+<code class="docutils literal"><span class="pre">interaction_only=True</span></code>.</p>
+<p>比如，在处理布尔型特征的时候， <img class="math" src="../_images/math/f6482a828417735ebd0aeb8117358b78a1090b6b.png" alt="x_i^n = x_i"/> 对于所有的 <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> 是没有作用的。
+但是  <img class="math" src="../_images/math/65d728c141eeafa8aa4c3499e9d2e8f6b755c903.png" alt="x_i x_j"/> 表现了两个布尔值的联系.通过这种方式，我们就可以使用线性分类器解决XOR问题(异或问题)
+For example, when dealing with boolean features,
+<img class="math" src="../_images/math/f6482a828417735ebd0aeb8117358b78a1090b6b.png" alt="x_i^n = x_i"/> for all <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> and is therefore useless;
+but <img class="math" src="../_images/math/65d728c141eeafa8aa4c3499e9d2e8f6b755c903.png" alt="x_i x_j"/> represents the conjunction of two booleans.
+This way, we can solve the XOR problem with a linear classifier:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">Perceptron</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">PolynomialFeatures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">^</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">interaction_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[ 1.,  0.,  0.,  0.],</span>
+<span class="go">       [ 1.,  0.,  1.,  0.],</span>
+<span class="go">       [ 1.,  1.,  0.,  0.],</span>
+<span class="go">       [ 1.,  1.,  1.,  1.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/linear_model.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="../supervised_learning.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

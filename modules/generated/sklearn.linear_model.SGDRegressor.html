@@ -1,0 +1,723 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.linear_model.SGDRegressor &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.linear_model.TheilSenRegressor" href="sklearn.linear_model.TheilSenRegressor.html" />
+    <link rel="prev" title="sklearn.linear_model.SGDClassifier" href="sklearn.linear_model.SGDClassifier.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.linear_model.SGDClassifier.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.linea...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.linear_model.SGDClassifier
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.SGDRegressor</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-linear-model-sgdregressor">Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.SGDRegressor</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-linear-model-sgdregressor">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.SGDRegressor<a class="headerlink" href="#sklearn-linear-model-sgdregressor" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.linear_model.SGDRegressor">
+<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">SGDRegressor</code><span class="sig-paren">(</span><em>loss='squared_loss'</em>, <em>penalty='l2'</em>, <em>alpha=0.0001</em>, <em>l1_ratio=0.15</em>, <em>fit_intercept=True</em>, <em>n_iter=5</em>, <em>shuffle=True</em>, <em>verbose=0</em>, <em>epsilon=0.1</em>, <em>random_state=None</em>, <em>learning_rate='invscaling'</em>, <em>eta0=0.01</em>, <em>power_t=0.25</em>, <em>warm_start=False</em>, <em>average=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/stochastic_gradient.py#L1096"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear model fitted by minimizing a regularized empirical loss with SGD</p>
+<p>SGD stands for Stochastic Gradient Descent: the gradient of the loss is
+estimated each sample at a time and the model is updated along the way with
+a decreasing strength schedule (aka learning rate).</p>
+<p>The regularizer is a penalty added to the loss function that shrinks model
+parameters towards the zero vector using either the squared euclidean norm
+L2 or the absolute norm L1 or a combination of both (Elastic Net). If the
+parameter update crosses the 0.0 value because of the regularizer, the
+update is truncated to 0.0 to allow for learning sparse models and achieve
+online feature selection.</p>
+<p>This implementation works with data represented as dense numpy arrays of
+floating point values for the features.</p>
+<p>Read more in the <a class="reference internal" href="../sgd.html#sgd"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>loss</strong> : str, &#8216;squared_loss&#8217;, &#8216;huber&#8217;, &#8216;epsilon_insensitive&#8217;,                 or &#8216;squared_epsilon_insensitive&#8217;</p>
+<blockquote>
+<div><p>The loss function to be used. Defaults to &#8216;squared_loss&#8217; which refers
+to the ordinary least squares fit. &#8216;huber&#8217; modifies &#8216;squared_loss&#8217; to
+focus less on getting outliers correct by switching from squared to
+linear loss past a distance of epsilon. &#8216;epsilon_insensitive&#8217; ignores
+errors less than epsilon and is linear past that; this is the loss
+function used in SVR. &#8216;squared_epsilon_insensitive&#8217; is the same but
+becomes squared loss past a tolerance of epsilon.</p>
+</div></blockquote>
+<p><strong>penalty</strong> : str, &#8216;none&#8217;, &#8216;l2&#8217;, &#8216;l1&#8217;, or &#8216;elasticnet&#8217;</p>
+<blockquote>
+<div><p>The penalty (aka regularization term) to be used. Defaults to &#8216;l2&#8217;
+which is the standard regularizer for linear SVM models. &#8216;l1&#8217; and
+&#8216;elasticnet&#8217; might bring sparsity to the model (feature selection)
+not achievable with &#8216;l2&#8217;.</p>
+</div></blockquote>
+<p><strong>alpha</strong> : float</p>
+<blockquote>
+<div><p>Constant that multiplies the regularization term. Defaults to 0.0001
+Also used to compute learning_rate when set to &#8216;optimal&#8217;.</p>
+</div></blockquote>
+<p><strong>l1_ratio</strong> : float</p>
+<blockquote>
+<div><p>The Elastic Net mixing parameter, with 0 &lt;= l1_ratio &lt;= 1.
+l1_ratio=0 corresponds to L2 penalty, l1_ratio=1 to L1.
+Defaults to 0.15.</p>
+</div></blockquote>
+<p><strong>fit_intercept</strong> : bool</p>
+<blockquote>
+<div><p>Whether the intercept should be estimated or not. If False, the
+data is assumed to be already centered. Defaults to True.</p>
+</div></blockquote>
+<p><strong>n_iter</strong> : int, optional</p>
+<blockquote>
+<div><p>The number of passes over the training data (aka epochs). The number
+of iterations is set to 1 if using partial_fit.
+Defaults to 5.</p>
+</div></blockquote>
+<p><strong>shuffle</strong> : bool, optional</p>
+<blockquote>
+<div><p>Whether or not the training data should be shuffled after each epoch.
+Defaults to True.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int seed, RandomState instance, or None (default)</p>
+<blockquote>
+<div><p>The seed of the pseudo random number generator to use when
+shuffling the data.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : integer, optional</p>
+<blockquote>
+<div><p>The verbosity level.</p>
+</div></blockquote>
+<p><strong>epsilon</strong> : float</p>
+<blockquote>
+<div><p>Epsilon in the epsilon-insensitive loss functions; only if <cite>loss</cite> is
+&#8216;huber&#8217;, &#8216;epsilon_insensitive&#8217;, or &#8216;squared_epsilon_insensitive&#8217;.
+For &#8216;huber&#8217;, determines the threshold at which it becomes less
+important to get the prediction exactly right.
+For epsilon-insensitive, any differences between the current prediction
+and the correct label are ignored if they are less than this threshold.</p>
+</div></blockquote>
+<p><strong>learning_rate</strong> : string, optional</p>
+<blockquote>
+<div><p>The learning rate schedule:</p>
+<ul class="simple">
+<li>&#8216;constant&#8217;: eta = eta0</li>
+<li>&#8216;optimal&#8217;: eta = 1.0 / (alpha * (t + t0)) [default]</li>
+<li>&#8216;invscaling&#8217;: eta = eta0 / pow(t, power_t)</li>
+</ul>
+<p>where t0 is chosen by a heuristic proposed by Leon Bottou.</p>
+</div></blockquote>
+<p><strong>eta0</strong> : double, optional</p>
+<blockquote>
+<div><p>The initial learning rate [default 0.01].</p>
+</div></blockquote>
+<p><strong>power_t</strong> : double, optional</p>
+<blockquote>
+<div><p>The exponent for inverse scaling learning rate [default 0.25].</p>
+</div></blockquote>
+<p><strong>warm_start</strong> : bool, optional</p>
+<blockquote>
+<div><p>When set to True, reuse the solution of the previous call to fit as
+initialization, otherwise, just erase the previous solution.</p>
+</div></blockquote>
+<p><strong>average</strong> : bool or int, optional</p>
+<blockquote>
+<div><p>When set to True, computes the averaged SGD weights and stores the
+result in the <code class="docutils literal"><span class="pre">coef_</span></code> attribute. If set to an int greater than 1,
+averaging will begin once the total number of samples seen reaches
+average. So <code class="docutils literal"><span class="pre">average=10</span></code> will begin averaging after seeing 10
+samples.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>coef_</strong> : array, shape (n_features,)</p>
+<blockquote>
+<div><p>Weights assigned to the features.</p>
+</div></blockquote>
+<p><strong>intercept_</strong> : array, shape (1,)</p>
+<blockquote>
+<div><p>The intercept term.</p>
+</div></blockquote>
+<p><strong>average_coef_</strong> : array, shape (n_features,)</p>
+<blockquote>
+<div><p>Averaged weights assigned to the features.</p>
+</div></blockquote>
+<p><strong>average_intercept_</strong> : array, shape (1,)</p>
+<blockquote class="last">
+<div><p>The averaged intercept term.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-obj docutils literal"><span class="pre">Ridge</span></code></a>, <a class="reference internal" href="sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet" title="sklearn.linear_model.ElasticNet"><code class="xref py py-obj docutils literal"><span class="pre">ElasticNet</span></code></a>, <a class="reference internal" href="sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" title="sklearn.linear_model.Lasso"><code class="xref py py-obj docutils literal"><span class="pre">Lasso</span></code></a>, <code class="xref py py-obj docutils literal"><span class="pre">SVR</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">SGDRegressor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="go">SGDRegressor(alpha=0.0001, average=False, epsilon=0.1, eta0=0.01,</span>
+<span class="go">             fit_intercept=True, l1_ratio=0.15, learning_rate=&#39;invscaling&#39;,</span>
+<span class="go">             loss=&#39;squared_loss&#39;, n_iter=5, penalty=&#39;l2&#39;, power_t=0.25,</span>
+<span class="go">             random_state=None, shuffle=True, verbose=0, warm_start=False)</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.decision_function" title="sklearn.linear_model.SGDRegressor.decision_function"><code class="xref py py-obj docutils literal"><span class="pre">decision_function</span></code></a>(\*args,&nbsp;\*\*kwargs)</td>
+<td>DEPRECATED:  and will be removed in 0.19.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.densify" title="sklearn.linear_model.SGDRegressor.densify"><code class="xref py py-obj docutils literal"><span class="pre">densify</span></code></a>()</td>
+<td>Convert coefficient matrix to dense array format.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.fit" title="sklearn.linear_model.SGDRegressor.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X,&nbsp;y[,&nbsp;coef_init,&nbsp;intercept_init,&nbsp;...])</td>
+<td>Fit linear model with Stochastic Gradient Descent.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.fit_transform" title="sklearn.linear_model.SGDRegressor.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y])</td>
+<td>Fit to data, then transform it.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.get_params" title="sklearn.linear_model.SGDRegressor.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.partial_fit" title="sklearn.linear_model.SGDRegressor.partial_fit"><code class="xref py py-obj docutils literal"><span class="pre">partial_fit</span></code></a>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Fit linear model with Stochastic Gradient Descent.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.predict" title="sklearn.linear_model.SGDRegressor.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X)</td>
+<td>Predict using the linear model</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.score" title="sklearn.linear_model.SGDRegressor.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Returns the coefficient of determination R^2 of the prediction.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code>(\*args,&nbsp;\*\*kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.sparsify" title="sklearn.linear_model.SGDRegressor.sparsify"><code class="xref py py-obj docutils literal"><span class="pre">sparsify</span></code></a>()</td>
+<td>Convert coefficient matrix to sparse format.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.SGDRegressor.transform" title="sklearn.linear_model.SGDRegressor.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(\*args,&nbsp;\*\*kwargs)</td>
+<td>DEPRECATED: Support to use estimators as feature selectors will be removed in version 0.19.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>loss='squared_loss'</em>, <em>penalty='l2'</em>, <em>alpha=0.0001</em>, <em>l1_ratio=0.15</em>, <em>fit_intercept=True</em>, <em>n_iter=5</em>, <em>shuffle=True</em>, <em>verbose=0</em>, <em>epsilon=0.1</em>, <em>random_state=None</em>, <em>learning_rate='invscaling'</em>, <em>eta0=0.01</em>, <em>power_t=0.25</em>, <em>warm_start=False</em>, <em>average=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/stochastic_gradient.py#L1231"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.decision_function">
+<code class="descname">decision_function</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/utils/deprecation.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.decision_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED:  and will be removed in 0.19.</p>
+<p>Predict using the linear model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape (n_samples, n_features)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>array, shape (n_samples,)</strong> :</p>
+<blockquote class="last">
+<div><p>Predicted target values per element in X.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.densify">
+<code class="descname">densify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/base.py#L369"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.densify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert coefficient matrix to dense array format.</p>
+<p>Converts the <code class="docutils literal"><span class="pre">coef_</span></code> member (back) to a numpy.ndarray. This is the
+default format of <code class="docutils literal"><span class="pre">coef_</span></code> and is required for fitting, so calling
+this method is only required on models that have previously been
+sparsified; otherwise, it is a no-op.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self: estimator</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>coef_init=None</em>, <em>intercept_init=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/stochastic_gradient.py#L944"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit linear model with Stochastic Gradient Descent.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training data</p>
+</div></blockquote>
+<p><strong>y</strong> : numpy array, shape (n_samples,)</p>
+<blockquote>
+<div><p>Target values</p>
+</div></blockquote>
+<p><strong>coef_init</strong> : array, shape (n_features,)</p>
+<blockquote>
+<div><p>The initial coefficients to warm-start the optimization.</p>
+</div></blockquote>
+<p><strong>intercept_init</strong> : array, shape (1,)</p>
+<blockquote>
+<div><p>The initial intercept to warm-start the optimization.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like, shape (n_samples,), optional</p>
+<blockquote>
+<div><p>Weights applied to individual samples (1. for unweighted).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> : returns an instance of self.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L470"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to X and y with optional parameters fit_params
+and returns a transformed version of X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : numpy array of shape [n_samples, n_features]</p>
+<blockquote>
+<div><p>Training set.</p>
+</div></blockquote>
+<p><strong>y</strong> : numpy array of shape [n_samples]</p>
+<blockquote>
+<div><p>Target values.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : numpy array of shape [n_samples, n_features_new]</p>
+<blockquote class="last">
+<div><p>Transformed array.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.partial_fit">
+<code class="descname">partial_fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/stochastic_gradient.py#L895"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.partial_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit linear model with Stochastic Gradient Descent.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Subset of training data</p>
+</div></blockquote>
+<p><strong>y</strong> : numpy array of shape (n_samples,)</p>
+<blockquote>
+<div><p>Subset of target values</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like, shape (n_samples,), optional</p>
+<blockquote>
+<div><p>Weights applied to individual samples.
+If not provided, uniform weights are assumed.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> : returns an instance of self.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/stochastic_gradient.py#L1010"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict using the linear model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape (n_samples, n_features)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>array, shape (n_samples,)</strong> :</p>
+<blockquote class="last">
+<div><p>Predicted target values per element in X.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L357"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
+<p>The coefficient R^2 is defined as (1 - u/v), where u is the regression
+sum of squares ((y_true - y_pred) ** 2).sum() and v is the residual
+sum of squares ((y_true - y_true.mean()) ** 2).sum().
+Best possible score is 1.0 and it can be negative (because the
+model can be arbitrarily worse). A constant model that always
+predicts the expected value of y, disregarding the input features,
+would get a R^2 score of 0.0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape = (n_samples, n_features)</p>
+<blockquote>
+<div><p>Test samples.</p>
+</div></blockquote>
+<p><strong>y</strong> : array-like, shape = (n_samples) or (n_samples, n_outputs)</p>
+<blockquote>
+<div><p>True values for X.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like, shape = [n_samples], optional</p>
+<blockquote>
+<div><p>Sample weights.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float</p>
+<blockquote class="last">
+<div><p>R^2 of self.predict(X) wrt. y.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.sparsify">
+<code class="descname">sparsify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/base.py#L387"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.sparsify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert coefficient matrix to sparse format.</p>
+<p>Converts the <code class="docutils literal"><span class="pre">coef_</span></code> member to a scipy.sparse matrix, which for
+L1-regularized models can be much more memory- and storage-efficient
+than the usual numpy.ndarray representation.</p>
+<p>The <code class="docutils literal"><span class="pre">intercept_</span></code> member is not converted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self: estimator</strong> :</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>For non-sparse models, i.e. when there are not many zeros in <code class="docutils literal"><span class="pre">coef_</span></code>,
+this may actually <em>increase</em> memory usage, so use this method with
+care. A rule of thumb is that the number of zero elements, which can
+be computed with <code class="docutils literal"><span class="pre">(coef_</span> <span class="pre">==</span> <span class="pre">0).sum()</span></code>, must be more than 50% for this
+to provide significant benefits.</p>
+<p>After calling this method, further fitting with the partial_fit
+method (if any) will not work until you call densify.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.SGDRegressor.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/utils/deprecation.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.SGDRegressor.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED: Support to use estimators as feature selectors will be removed in version 0.19. Use SelectFromModel instead.</p>
+<p>Reduce X to its most important features.</p>
+<blockquote>
+<div>Uses <code class="docutils literal"><span class="pre">coef_</span></code> or <code class="docutils literal"><span class="pre">feature_importances_</span></code> to determine the most
+important features.  For models with a <code class="docutils literal"><span class="pre">coef_</span></code> for each class, the
+absolute sum over the classes is used.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array or scipy sparse matrix of shape [n_samples, n_features]</p>
+<blockquote>
+<div><blockquote>
+<div><p>The input samples.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>threshold</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">string, float or None, optional (default=None)</span><dd><p class="first last">The threshold value to use for feature selection. Features whose
+importance is greater or equal are kept while the others are
+discarded. If &#8220;median&#8221; (resp. &#8220;mean&#8221;), then the threshold value is
+the median (resp. the mean) of the feature importances. A scaling
+factor (e.g., &#8220;1.25*mean&#8221;) may also be used. If None and if
+available, the object attribute <code class="docutils literal"><span class="pre">threshold</span></code> is used. Otherwise,
+&#8220;mean&#8221; is used by default.</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_r</strong> : array of shape [n_samples, n_selected_features]</p>
+<blockquote class="last">
+<div><p>The input samples with only the selected features.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-linear-model-sgdregressor">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.SGDRegressor</span></code><a class="headerlink" href="#examples-using-sklearn-linear-model-sgdregressor" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="This is an example showing the prediction latency of various scikit-learn estimators."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/applications/plot_prediction_latency.html"><img alt="../../_images/plot_prediction_latency1.png" src="../../_images/plot_prediction_latency1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/applications/plot_prediction_latency.html#example-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.linear_model.SGDRegressor.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.linear_model.SGDClassifier.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

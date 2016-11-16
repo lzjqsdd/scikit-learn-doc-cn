@@ -1,0 +1,294 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.metrics.pairwise.pairwise_kernels &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.metrics.pairwise.polynomial_kernel" href="sklearn.metrics.pairwise.polynomial_kernel.html" />
+    <link rel="prev" title="sklearn.metrics.pairwise.pairwise_distances" href="sklearn.metrics.pairwise.pairwise_distances.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.pairwise_kernels.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.metrics.pairwise.pairwise_distances.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.metri...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.metrics.pairwise.pairwise_distances
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.metrics.pairwise</span></code>.pairwise_kernels</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-metrics-pairwise-pairwise-kernels">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics.pairwise</span></code></a>.pairwise_kernels<a class="headerlink" href="#sklearn-metrics-pairwise-pairwise-kernels" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.metrics.pairwise.pairwise_kernels">
+<code class="descclassname">sklearn.metrics.pairwise.</code><code class="descname">pairwise_kernels</code><span class="sig-paren">(</span><em>X</em>, <em>Y=None</em>, <em>metric='linear'</em>, <em>filter_params=False</em>, <em>n_jobs=1</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/metrics/pairwise.py#L1313"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.pairwise.pairwise_kernels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the kernel between arrays X and optional array Y.</p>
+<p>This method takes either a vector array or a kernel matrix, and returns
+a kernel matrix. If the input is a vector array, the kernels are
+computed. If the input is a kernel matrix, it is returned instead.</p>
+<p>This method provides a safe way to take a kernel matrix as input, while
+preserving compatibility with many other algorithms that take a vector
+array.</p>
+<p>If Y is given (default is None), then the returned matrix is the pairwise
+kernel between the arrays from both X and Y.</p>
+<dl class="docutils">
+<dt>Valid values for metric are::</dt>
+<dd>[&#8216;rbf&#8217;, &#8216;sigmoid&#8217;, &#8216;polynomial&#8217;, &#8216;poly&#8217;, &#8216;linear&#8217;, &#8216;cosine&#8217;]</dd>
+</dl>
+<p>Read more in the <a class="reference internal" href="../metrics.html#metrics"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array [n_samples_a, n_samples_a] if metric == &#8220;precomputed&#8221;, or,              [n_samples_a, n_features] otherwise</p>
+<blockquote>
+<div><p>Array of pairwise kernels between samples, or a feature array.</p>
+</div></blockquote>
+<p><strong>Y</strong> : array [n_samples_b, n_features]</p>
+<blockquote>
+<div><p>A second feature array only if X has shape [n_samples_a, n_features].</p>
+</div></blockquote>
+<p><strong>metric</strong> : string, or callable</p>
+<blockquote>
+<div><p>The metric to use when calculating kernel between instances in a
+feature array. If metric is a string, it must be one of the metrics
+in pairwise.PAIRWISE_KERNEL_FUNCTIONS.
+If metric is &#8220;precomputed&#8221;, X is assumed to be a kernel matrix.
+Alternatively, if metric is a callable function, it is called on each
+pair of instances (rows) and the resulting value recorded. The callable
+should take two arrays from X as input and return a value indicating
+the distance between them.</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : int</p>
+<blockquote>
+<div><p>The number of jobs to use for the computation. This works by breaking
+down the pairwise matrix into n_jobs even slices and computing them in
+parallel.</p>
+<p>If -1 all CPUs are used. If 1 is given, no parallel computing code is
+used at all, which is useful for debugging. For n_jobs below -1,
+(n_cpus + 1 + n_jobs) are used. Thus for n_jobs = -2, all CPUs but one
+are used.</p>
+</div></blockquote>
+<p><strong>filter_params</strong> : boolean</p>
+<blockquote>
+<div><p>Whether to filter invalid parameters or not.</p>
+</div></blockquote>
+<p><strong>`**kwds`</strong> : optional keyword parameters</p>
+<blockquote>
+<div><p>Any further parameters are passed directly to the kernel function.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>K</strong> : array [n_samples_a, n_samples_a] or [n_samples_a, n_samples_b]</p>
+<blockquote class="last">
+<div><p>A kernel matrix K such that K_{i, j} is the kernel between the
+ith and jth vectors of the given matrix X, if Y is None.
+If Y is not None, then K_{i, j} is the kernel between the ith array
+from X and the jth array from Y.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>If metric is &#8216;precomputed&#8217;, Y is ignored and X is returned.</p>
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.metrics.pairwise.pairwise_kernels.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.metrics.pairwise.pairwise_distances.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

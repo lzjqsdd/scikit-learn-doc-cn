@@ -1,0 +1,338 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.cluster.k_means &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.cluster.ward_tree" href="sklearn.cluster.ward_tree.html" />
+    <link rel="prev" title="sklearn.cluster.estimate_bandwidth" href="sklearn.cluster.estimate_bandwidth.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.k_means.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.cluster.estimate_bandwidth.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.clust...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.cluster.estimate_bandwidth
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.cluster</span></code>.k_means</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-cluster-k-means">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cluster</span></code></a>.k_means<a class="headerlink" href="#sklearn-cluster-k-means" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.cluster.k_means">
+<code class="descclassname">sklearn.cluster.</code><code class="descname">k_means</code><span class="sig-paren">(</span><em>X</em>, <em>n_clusters</em>, <em>init='k-means++'</em>, <em>precompute_distances='auto'</em>, <em>n_init=10</em>, <em>max_iter=300</em>, <em>verbose=False</em>, <em>tol=0.0001</em>, <em>random_state=None</em>, <em>copy_x=True</em>, <em>n_jobs=1</em>, <em>algorithm='auto'</em>, <em>return_n_iter=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/k_means_.py#L168"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.k_means" title="Permalink to this definition">¶</a></dt>
+<dd><p>K-means clustering algorithm.</p>
+<p>Read more in the <a class="reference internal" href="../clustering.html#k-means"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>The observations to cluster.</p>
+</div></blockquote>
+<p><strong>n_clusters</strong> : int</p>
+<blockquote>
+<div><p>The number of clusters to form as well as the number of
+centroids to generate.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int, optional, default 300</p>
+<blockquote>
+<div><p>Maximum number of iterations of the k-means algorithm to run.</p>
+</div></blockquote>
+<p><strong>n_init</strong> : int, optional, default: 10</p>
+<blockquote>
+<div><p>Number of time the k-means algorithm will be run with different
+centroid seeds. The final results will be the best output of
+n_init consecutive runs in terms of inertia.</p>
+</div></blockquote>
+<p><strong>init</strong> : {&#8216;k-means++&#8217;, &#8216;random&#8217;, or ndarray, or a callable}, optional</p>
+<blockquote>
+<div><p>Method for initialization, default to &#8216;k-means++&#8217;:</p>
+<p>&#8216;k-means++&#8217; : selects initial cluster centers for k-mean
+clustering in a smart way to speed up convergence. See section
+Notes in k_init for more details.</p>
+<p>&#8216;random&#8217;: generate k centroids from a Gaussian with mean and
+variance estimated from the data.</p>
+<p>If an ndarray is passed, it should be of shape (n_clusters, n_features)
+and gives the initial centers.</p>
+<p>If a callable is passed, it should take arguments X, k and
+and a random state and return an initialization.</p>
+</div></blockquote>
+<p><strong>algorithm</strong> : &#8220;auto&#8221;, &#8220;full&#8221; or &#8220;elkan&#8221;, default=&#8221;auto&#8221;</p>
+<blockquote>
+<div><p>K-means algorithm to use. The classical EM-style algorithm is &#8220;full&#8221;.
+The &#8220;elkan&#8221; variation is more efficient by using the triangle
+inequality, but currently doesn&#8217;t support sparse data. &#8220;auto&#8221; chooses
+&#8220;elkan&#8221; for dense data and &#8220;full&#8221; for sparse data.</p>
+</div></blockquote>
+<p><strong>precompute_distances</strong> : {&#8216;auto&#8217;, True, False}</p>
+<blockquote>
+<div><p>Precompute distances (faster but takes more memory).</p>
+<p>&#8216;auto&#8217; : do not precompute distances if n_samples * n_clusters &gt; 12
+million. This corresponds to about 100MB overhead per job using
+double precision.</p>
+<p>True : always precompute distances</p>
+<p>False : never precompute distances</p>
+</div></blockquote>
+<p><strong>tol</strong> : float, optional</p>
+<blockquote>
+<div><p>The relative increment in the results before declaring convergence.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : boolean, optional</p>
+<blockquote>
+<div><p>Verbosity mode.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : integer or numpy.RandomState, optional</p>
+<blockquote>
+<div><p>The generator used to initialize the centers. If an integer is
+given, it fixes the seed. Defaults to the global numpy random
+number generator.</p>
+</div></blockquote>
+<p><strong>copy_x</strong> : boolean, optional</p>
+<blockquote>
+<div><p>When pre-computing distances it is more numerically accurate to center
+the data first.  If copy_x is True, then the original data is not
+modified.  If False, the original data is modified, and put back before
+the function returns, but small numerical differences may be introduced
+by subtracting and then adding the data mean.</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : int</p>
+<blockquote>
+<div><p>The number of jobs to use for the computation. This works by computing
+each of the n_init runs in parallel.</p>
+<p>If -1 all CPUs are used. If 1 is given, no parallel computing code is
+used at all, which is useful for debugging. For n_jobs below -1,
+(n_cpus + 1 + n_jobs) are used. Thus for n_jobs = -2, all CPUs but one
+are used.</p>
+</div></blockquote>
+<p><strong>return_n_iter</strong> : bool, optional</p>
+<blockquote>
+<div><p>Whether or not to return the number of iterations.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>centroid</strong> : float ndarray with shape (k, n_features)</p>
+<blockquote>
+<div><p>Centroids found at the last iteration of k-means.</p>
+</div></blockquote>
+<p><strong>label</strong> : integer ndarray with shape (n_samples,)</p>
+<blockquote>
+<div><p>label[i] is the code or index of the centroid the
+i&#8217;th observation is closest to.</p>
+</div></blockquote>
+<p><strong>inertia</strong> : float</p>
+<blockquote>
+<div><p>The final value of the inertia criterion (sum of squared distances to
+the closest centroid for all observations in the training set).</p>
+</div></blockquote>
+<p><strong>best_n_iter: int</strong> :</p>
+<blockquote class="last">
+<div><p>Number of iterations corresponding to the best results.
+Returned only if <cite>return_n_iter</cite> is set to True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.cluster.k_means.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.cluster.estimate_bandwidth.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

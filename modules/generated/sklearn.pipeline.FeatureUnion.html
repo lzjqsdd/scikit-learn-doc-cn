@@ -1,0 +1,441 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.pipeline.FeatureUnion &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.pipeline.make_pipeline" href="sklearn.pipeline.make_pipeline.html" />
+    <link rel="prev" title="sklearn.pipeline.Pipeline" href="sklearn.pipeline.Pipeline.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.FeatureUnion.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.pipeline.Pipeline.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.pipel...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.pipeline.Pipeline
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.pipeline</span></code>.FeatureUnion</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-pipeline-featureunion">Examples using <code class="docutils literal"><span class="pre">sklearn.pipeline.FeatureUnion</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-pipeline-featureunion">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.pipeline" title="sklearn.pipeline"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.pipeline</span></code></a>.FeatureUnion<a class="headerlink" href="#sklearn-pipeline-featureunion" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.pipeline.FeatureUnion">
+<em class="property">class </em><code class="descclassname">sklearn.pipeline.</code><code class="descname">FeatureUnion</code><span class="sig-paren">(</span><em>transformer_list</em>, <em>n_jobs=1</em>, <em>transformer_weights=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/pipeline.py#L586"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.pipeline.FeatureUnion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concatenates results of multiple transformer objects.</p>
+<p>This estimator applies a list of transformer objects in parallel to the
+input data, then concatenates the results. This is useful to combine
+several feature extraction mechanisms into a single transformer.</p>
+<p>Parameters of the transformers may be set using its name and the parameter
+name separated by a &#8216;__&#8217;. A transformer may be replaced entirely by
+setting the parameter with its name to another transformer,
+or removed by setting to <code class="docutils literal"><span class="pre">None</span></code>.</p>
+<p>Read more in the <a class="reference internal" href="../pipeline.html#feature-union"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transformer_list: list of (string, transformer) tuples</strong> :</p>
+<blockquote>
+<div><p>List of transformer objects to be applied to the data. The first
+half of each tuple is the name of the transformer.</p>
+</div></blockquote>
+<p><strong>n_jobs: int, optional</strong> :</p>
+<blockquote>
+<div><p>Number of jobs to run in parallel (default 1).</p>
+</div></blockquote>
+<p><strong>transformer_weights: dict, optional</strong> :</p>
+<blockquote class="last">
+<div><p>Multiplicative weights for features per transformer.
+Keys are transformer names, values the weights.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.pipeline.FeatureUnion.fit" title="sklearn.pipeline.FeatureUnion.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
+<td>Fit all transformers using X.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.pipeline.FeatureUnion.fit_transform" title="sklearn.pipeline.FeatureUnion.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y])</td>
+<td>Fit all transformers, transform the data and concatenate results.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.pipeline.FeatureUnion.get_feature_names" title="sklearn.pipeline.FeatureUnion.get_feature_names"><code class="xref py py-obj docutils literal"><span class="pre">get_feature_names</span></code></a>()</td>
+<td>Get feature names from all transformers.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.pipeline.FeatureUnion.get_params" title="sklearn.pipeline.FeatureUnion.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.pipeline.FeatureUnion.set_params" title="sklearn.pipeline.FeatureUnion.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*kwargs)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.pipeline.FeatureUnion.transform" title="sklearn.pipeline.FeatureUnion.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(X)</td>
+<td>Transform X separately by each transformer, concatenate results.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.pipeline.FeatureUnion.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>transformer_list</em>, <em>n_jobs=1</em>, <em>transformer_weights=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/pipeline.py#L614"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.pipeline.FeatureUnion.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.pipeline.FeatureUnion.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/pipeline.py#L690"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.pipeline.FeatureUnion.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit all transformers using X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : iterable or array-like, depending on transformers</p>
+<blockquote>
+<div><p>Input data, used to fit transformers.</p>
+</div></blockquote>
+<p><strong>y</strong> : array-like, shape (n_samples, ...), optional</p>
+<blockquote>
+<div><p>Targets for supervised learning.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self</strong> : FeatureUnion</p>
+<blockquote class="last">
+<div><p>This estimator</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.pipeline.FeatureUnion.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/pipeline.py#L713"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.pipeline.FeatureUnion.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit all transformers, transform the data and concatenate results.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : iterable or array-like, depending on transformers</p>
+<blockquote>
+<div><p>Input data to be transformed.</p>
+</div></blockquote>
+<p><strong>y</strong> : array-like, shape (n_samples, ...), optional</p>
+<blockquote>
+<div><p>Targets for supervised learning.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_t</strong> : array-like or sparse matrix, shape (n_samples, sum_n_components)</p>
+<blockquote class="last">
+<div><p>hstack of results of transformers. sum_n_components is the
+sum of n_components (output dimension) over transformers.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.pipeline.FeatureUnion.get_feature_names">
+<code class="descname">get_feature_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/pipeline.py#L672"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.pipeline.FeatureUnion.get_feature_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get feature names from all transformers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>feature_names</strong> : list of strings</p>
+<blockquote class="last">
+<div><p>Names of the features produced by transform.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.pipeline.FeatureUnion.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/pipeline.py#L620"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.pipeline.FeatureUnion.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep: boolean, optional</strong> :</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.pipeline.FeatureUnion.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/pipeline.py#L636"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.pipeline.FeatureUnion.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>Valid parameter keys can be listed with <code class="docutils literal"><span class="pre">get_params()</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.pipeline.FeatureUnion.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/pipeline.py#L747"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.pipeline.FeatureUnion.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform X separately by each transformer, concatenate results.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : iterable or array-like, depending on transformers</p>
+<blockquote>
+<div><p>Input data to be transformed.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_t</strong> : array-like or sparse matrix, shape (n_samples, sum_n_components)</p>
+<blockquote class="last">
+<div><p>hstack of results of transformers. sum_n_components is the
+sum of n_components (output dimension) over transformers.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-pipeline-featureunion">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.pipeline.FeatureUnion</span></code><a class="headerlink" href="#examples-using-sklearn-pipeline-featureunion" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="In many real-world examples, there are many ways to extract features from a dataset. Often it i..."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/./feature_stacker.html"><img alt="../../_images/feature_stacker1.png" src="../../_images/feature_stacker1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/feature_stacker.html#example-feature-stacker-py"><span class="std std-ref">Concatenating multiple feature extraction methods</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Datasets can often contain components of that require different feature extraction and processi..."><div class="figure" id="id2">
+<a class="reference external image-reference" href="./../../auto_examples/./hetero_feature_union.html"><img alt="../../_images/hetero_feature_union1.png" src="../../_images/hetero_feature_union1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/hetero_feature_union.html#example-hetero-feature-union-py"><span class="std std-ref">Feature Union with Heterogeneous Data Sources</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.pipeline.FeatureUnion.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.pipeline.Pipeline.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

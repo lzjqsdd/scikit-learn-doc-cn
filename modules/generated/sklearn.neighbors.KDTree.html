@@ -1,0 +1,636 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.neighbors.KDTree &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.neighbors.LSHForest" href="sklearn.neighbors.LSHForest.html" />
+    <link rel="prev" title="sklearn.neighbors.BallTree" href="sklearn.neighbors.BallTree.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KDTree.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.neighbors.BallTree.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.neigh...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.neighbors.BallTree
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.neighbors</span></code>.KDTree</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-neighbors-kdtree">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.neighbors" title="sklearn.neighbors"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.neighbors</span></code></a>.KDTree<a class="headerlink" href="#sklearn-neighbors-kdtree" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.neighbors.KDTree">
+<em class="property">class </em><code class="descclassname">sklearn.neighbors.</code><code class="descname">KDTree</code><a class="headerlink" href="#sklearn.neighbors.KDTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>KDTree for fast generalized N-point problems</p>
+<p>KDTree(X, leaf_size=40, metric=&#8217;minkowski&#8217;, **kwargs)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>n_samples is the number of points in the data set, and
+n_features is the dimension of the parameter space.
+Note: if X is a C-contiguous array of doubles then data will
+not be copied. Otherwise, an internal copy will be made.</p>
+</div></blockquote>
+<p><strong>leaf_size</strong> : positive integer (default = 40)</p>
+<blockquote>
+<div><p>Number of points at which to switch to brute-force. Changing
+leaf_size will not affect the results of a query, but can
+significantly impact the speed of a query and the memory required
+to store the constructed tree.  The amount of memory needed to
+store the tree scales as approximately n_samples / leaf_size.
+For a specified <code class="docutils literal"><span class="pre">leaf_size</span></code>, a leaf node is guaranteed to
+satisfy <code class="docutils literal"><span class="pre">leaf_size</span> <span class="pre">&lt;=</span> <span class="pre">n_points</span> <span class="pre">&lt;=</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">leaf_size</span></code>, except in
+the case that <code class="docutils literal"><span class="pre">n_samples</span> <span class="pre">&lt;</span> <span class="pre">leaf_size</span></code>.</p>
+</div></blockquote>
+<p><strong>metric</strong> : string or DistanceMetric object</p>
+<blockquote>
+<div><p>the distance metric to use for the tree.  Default=&#8217;minkowski&#8217;
+with p=2 (that is, a euclidean metric). See the documentation
+of the DistanceMetric class for a list of available metrics.
+kd_tree.valid_metrics gives a list of the metrics which
+are valid for KDTree.</p>
+</div></blockquote>
+<p><strong>Additional keywords are passed to the distance metric class.</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>data</strong> : np.ndarray</p>
+<blockquote class="last">
+<div><p>The training data</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Query for k-nearest neighbors</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 10 points in 3 dimensions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">leaf_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>              
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>                
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">ind</span>  <span class="c1"># indices of 3 closest neighbors</span>
+<span class="go">[0 3 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">dist</span>  <span class="c1"># distances to 3 closest neighbors</span>
+<span class="go">[ 0.          0.19662693  0.29473397]</span>
+</pre></div>
+</div>
+<p>Pickle and Unpickle a tree.  Note that the state of the tree is saved in the
+pickle operation: the tree needs not be rebuilt upon unpickling.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 10 points in 3 dimensions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">leaf_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>                     
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree_copy</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>                
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">tree_copy</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>     
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">ind</span>  <span class="c1"># indices of 3 closest neighbors</span>
+<span class="go">[0 3 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">dist</span>  <span class="c1"># distances to 3 closest neighbors</span>
+<span class="go">[ 0.          0.19662693  0.29473397]</span>
+</pre></div>
+</div>
+<p>Query for neighbors within a given radius</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 10 points in 3 dimensions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">leaf_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>     
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">tree</span><span class="o">.</span><span class="n">query_radius</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">count_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ind</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query_radius</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">ind</span>  <span class="c1"># indices of neighbors within distance 0.3</span>
+<span class="go">[3 0 1]</span>
+</pre></div>
+</div>
+<p>Compute a gaussian kernel density estimate:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>                
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">kernel_density</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">)</span>
+<span class="go">array([ 6.94114649,  7.83281226,  7.2071716 ])</span>
+</pre></div>
+</div>
+<p>Compute a two-point auto-correlation function</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>                
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">two_point_correlation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="go">array([ 30,  62, 278, 580, 820])</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_arrays</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_n_calls</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_tree_stats</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.neighbors.KDTree.kernel_density" title="sklearn.neighbors.KDTree.kernel_density"><code class="xref py py-obj docutils literal"><span class="pre">kernel_density</span></code></a>(self,&nbsp;X,&nbsp;h[,&nbsp;kernel,&nbsp;atol,&nbsp;...])</td>
+<td>Compute the kernel density estimate at points X with the given kernel, using the distance metric specified at tree creation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.neighbors.KDTree.query" title="sklearn.neighbors.KDTree.query"><code class="xref py py-obj docutils literal"><span class="pre">query</span></code></a>(X[,&nbsp;k,&nbsp;return_distance,&nbsp;dualtree,&nbsp;...])</td>
+<td>query the tree for the k nearest neighbors</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.neighbors.KDTree.query_radius" title="sklearn.neighbors.KDTree.query_radius"><code class="xref py py-obj docutils literal"><span class="pre">query_radius</span></code></a></td>
+<td>query_radius(self, X, r, count_only = False):</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">reset_n_calls</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.neighbors.KDTree.two_point_correlation" title="sklearn.neighbors.KDTree.two_point_correlation"><code class="xref py py-obj docutils literal"><span class="pre">two_point_correlation</span></code></a></td>
+<td>Compute the two-point correlation function</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.neighbors.KDTree.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.KDTree.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KDTree.kernel_density">
+<code class="descname">kernel_density</code><span class="sig-paren">(</span><em>self</em>, <em>X</em>, <em>h</em>, <em>kernel='gaussian'</em>, <em>atol=0</em>, <em>rtol=1E-8</em>, <em>breadth_first=True</em>, <em>return_log=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.KDTree.kernel_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the kernel density estimate at points X with the given kernel,
+using the distance metric specified at tree creation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array_like</p>
+<blockquote>
+<div><p>An array of points to query.  Last dimension should match dimension
+of training data.</p>
+</div></blockquote>
+<p><strong>h</strong> : float</p>
+<blockquote>
+<div><p>the bandwidth of the kernel</p>
+</div></blockquote>
+<p><strong>kernel</strong> : string</p>
+<blockquote>
+<div><p>specify the kernel to use.  Options are
+- &#8216;gaussian&#8217;
+- &#8216;tophat&#8217;
+- &#8216;epanechnikov&#8217;
+- &#8216;exponential&#8217;
+- &#8216;linear&#8217;
+- &#8216;cosine&#8217;
+Default is kernel = &#8216;gaussian&#8217;</p>
+</div></blockquote>
+<p><strong>atol, rtol</strong> : float (default = 0)</p>
+<blockquote>
+<div><p>Specify the desired relative and absolute tolerance of the result.
+If the true result is K_true, then the returned result K_ret
+satisfies <code class="docutils literal"><span class="pre">abs(K_true</span> <span class="pre">-</span> <span class="pre">K_ret)</span> <span class="pre">&lt;</span> <span class="pre">atol</span> <span class="pre">+</span> <span class="pre">rtol</span> <span class="pre">*</span> <span class="pre">K_ret</span></code>
+The default is zero (i.e. machine precision) for both.</p>
+</div></blockquote>
+<p><strong>breadth_first</strong> : boolean (default = False)</p>
+<blockquote>
+<div><p>if True, use a breadth-first search.  If False (default) use a
+depth-first search.  Breadth-first is generally faster for
+compact kernels and/or high tolerances.</p>
+</div></blockquote>
+<p><strong>return_log</strong> : boolean (default = False)</p>
+<blockquote>
+<div><p>return the logarithm of the result.  This can be more accurate
+than returning the result itself for narrow kernels.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>density</strong> : ndarray</p>
+<blockquote class="last">
+<div><p>The array of (log)-density evaluations, shape = X.shape[:-1]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Compute a gaussian kernel density estimate:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>           
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">kernel_density</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">)</span>
+<span class="go">array([ 6.94114649,  7.83281226,  7.2071716 ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KDTree.query">
+<code class="descname">query</code><span class="sig-paren">(</span><em>X</em>, <em>k=1</em>, <em>return_distance=True</em>, <em>dualtree=False</em>, <em>breadth_first=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.KDTree.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>query the tree for the k nearest neighbors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, last dimension self.dim</p>
+<blockquote>
+<div><p>An array of points to query</p>
+</div></blockquote>
+<p><strong>k</strong> : integer  (default = 1)</p>
+<blockquote>
+<div><p>The number of nearest neighbors to return</p>
+</div></blockquote>
+<p><strong>return_distance</strong> : boolean (default = True)</p>
+<blockquote>
+<div><p>if True, return a tuple (d, i) of distances and indices
+if False, return array i</p>
+</div></blockquote>
+<p><strong>dualtree</strong> : boolean (default = False)</p>
+<blockquote>
+<div><p>if True, use the dual tree formalism for the query: a tree is
+built for the query points, and the pair of trees is used to
+efficiently search this space.  This can lead to better
+performance as the number of points grows large.</p>
+</div></blockquote>
+<p><strong>breadth_first</strong> : boolean (default = False)</p>
+<blockquote>
+<div><p>if True, then query the nodes in a breadth-first manner.
+Otherwise, query the nodes in a depth-first manner.</p>
+</div></blockquote>
+<p><strong>sort_results</strong> : boolean (default = True)</p>
+<blockquote>
+<div><p>if True, then distances and indices of each point are sorted
+on return, so that the first column contains the closest points.
+Otherwise, neighbors are returned in an arbitrary order.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>i</strong> : if return_distance == False</p>
+<p><strong>(d,i)</strong> : if return_distance == True</p>
+<p><strong>d</strong> : array of doubles - shape: x.shape[:-1] + (k,)</p>
+<blockquote>
+<div><p>each entry gives the list of distances to the
+neighbors of the corresponding point</p>
+</div></blockquote>
+<p><strong>i</strong> : array of integers - shape: x.shape[:-1] + (k,)</p>
+<blockquote class="last">
+<div><p>each entry gives the list of indices of
+neighbors of the corresponding point</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Query for k-nearest neighbors</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 10 points in 3 dimensions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">leaf_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>    
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>    
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">ind</span>  <span class="c1"># indices of 3 closest neighbors</span>
+<span class="go">[0 3 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">dist</span>  <span class="c1"># distances to 3 closest neighbors</span>
+<span class="go">[ 0.          0.19662693  0.29473397]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KDTree.query_radius">
+<code class="descname">query_radius</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.KDTree.query_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>query_radius(self, X, r, count_only = False):</p>
+<p>query the tree for neighbors within a radius r</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, last dimension self.dim</p>
+<blockquote>
+<div><p>An array of points to query</p>
+</div></blockquote>
+<p><strong>r</strong> : distance within which neighbors are returned</p>
+<blockquote>
+<div><p>r can be a single value, or an array of values of shape
+x.shape[:-1] if different radii are desired for each point.</p>
+</div></blockquote>
+<p><strong>return_distance</strong> : boolean (default = False)</p>
+<blockquote>
+<div><p>if True,  return distances to neighbors of each point
+if False, return only neighbors
+Note that unlike the query() method, setting return_distance=True
+here adds to the computation time.  Not all distances need to be
+calculated explicitly for return_distance=False.  Results are
+not sorted by default: see <code class="docutils literal"><span class="pre">sort_results</span></code> keyword.</p>
+</div></blockquote>
+<p><strong>count_only</strong> : boolean (default = False)</p>
+<blockquote>
+<div><p>if True,  return only the count of points within distance r
+if False, return the indices of all points within distance r
+If return_distance==True, setting count_only=True will
+result in an error.</p>
+</div></blockquote>
+<p><strong>sort_results</strong> : boolean (default = False)</p>
+<blockquote>
+<div><p>if True, the distances and indices will be sorted before being
+returned.  If False, the results will not be sorted.  If
+return_distance == False, setting sort_results = True will
+result in an error.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>count</strong> : if count_only == True</p>
+<p><strong>ind</strong> : if count_only == False and return_distance == False</p>
+<p><strong>(ind, dist)</strong> : if count_only == False and return_distance == True</p>
+<p><strong>count</strong> : array of integers, shape = X.shape[:-1]</p>
+<blockquote>
+<div><p>each entry gives the number of neighbors within
+a distance r of the corresponding point.</p>
+</div></blockquote>
+<p><strong>ind</strong> : array of objects, shape = X.shape[:-1]</p>
+<blockquote>
+<div><p>each element is a numpy integer array listing the indices of
+neighbors of the corresponding point.  Note that unlike
+the results of a k-neighbors query, the returned neighbors
+are not sorted by distance by default.</p>
+</div></blockquote>
+<p><strong>dist</strong> : array of objects, shape = X.shape[:-1]</p>
+<blockquote class="last">
+<div><p>each element is a numpy double array
+listing the distances corresponding to indices in i.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Query for neighbors in a given radius</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 10 points in 3 dimensions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">leaf_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>     
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">tree</span><span class="o">.</span><span class="n">query_radius</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">count_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ind</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query_radius</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">ind</span>  <span class="c1"># indices of neighbors within distance 0.3</span>
+<span class="go">[3 0 1]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KDTree.two_point_correlation">
+<code class="descname">two_point_correlation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.KDTree.two_point_correlation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the two-point correlation function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array_like</p>
+<blockquote>
+<div><p>An array of points to query.  Last dimension should match dimension
+of training data.</p>
+</div></blockquote>
+<p><strong>r</strong> : array_like</p>
+<blockquote>
+<div><p>A one-dimensional array of distances</p>
+</div></blockquote>
+<p><strong>dualtree</strong> : boolean (default = False)</p>
+<blockquote>
+<div><p>If true, use a dualtree algorithm.  Otherwise, use a single-tree
+algorithm.  Dual tree algorithms can have better scaling for
+large N.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>counts</strong> : ndarray</p>
+<blockquote class="last">
+<div><p>counts[i] contains the number of pairs of points with distance
+less than or equal to r[i]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Compute the two-point autocorrelation function of X:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>     
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">two_point_correlation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="go">array([ 30,  62, 278, 580, 820])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.neighbors.KDTree.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.neighbors.BallTree.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

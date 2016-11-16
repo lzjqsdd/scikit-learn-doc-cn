@@ -1,0 +1,42 @@
+
+
+.. _example_cluster_plot_cluster_comparison.py:
+
+
+=========================================================
+Comparing different clustering algorithms on toy datasets
+=========================================================
+
+This example aims at showing characteristics of different
+clustering algorithms on datasets that are "interesting"
+but still in 2D. The last dataset is an example of a 'null'
+situation for clustering: the data is homogeneous, and
+there is no good clustering.
+
+While these examples give some intuition about the algorithms,
+this intuition might not apply to very high dimensional data.
+
+The results could be improved by tweaking the parameters for
+each clustering strategy, for instance setting the number of
+clusters for the methods that needs this parameter
+specified. Note that affinity propagation has a tendency to
+create many clusters. Thus in this example its two parameters
+(damping and per-point preference) were set to to mitigate this
+behavior.
+
+
+
+.. image:: images/plot_cluster_comparison_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_cluster_comparison.py <plot_cluster_comparison.py>`
+
+.. literalinclude:: plot_cluster_comparison.py
+    :lines: 23-
+
+**Total running time of the example:**  20.67 seconds
+( 0 minutes  20.67 seconds)
+    

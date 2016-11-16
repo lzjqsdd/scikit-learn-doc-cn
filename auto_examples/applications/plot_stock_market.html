@@ -1,0 +1,490 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>Visualizing the stock market structure &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="next" title="Wikipedia principal eigenvector" href="wikipedia_principal_eigenvector.html" />
+    <link rel="prev" title="Species distribution modeling" href="plot_species_distribution_modeling.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/applications/plot_stock_market.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="plot_species_distribution_modeling.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Species distr...
+        </span>
+            <span class="hiddenrellink">
+            Species distribution modeling
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        Examples
+        </span>
+            <span class="hiddenrellink">
+            Examples
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">Visualizing the stock market structure</a><ul>
+<li><a class="reference internal" href="#learning-a-graph-structure">Learning a graph structure</a></li>
+<li><a class="reference internal" href="#clustering">Clustering</a></li>
+<li><a class="reference internal" href="#embedding-in-2d-space">Embedding in 2D space</a></li>
+<li><a class="reference internal" href="#visualization">Visualization</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="visualizing-the-stock-market-structure">
+<span id="example-applications-plot-stock-market-py"></span><h1>Visualizing the stock market structure<a class="headerlink" href="#visualizing-the-stock-market-structure" title="Permalink to this headline">¶</a></h1>
+<p>This example employs several unsupervised learning techniques to extract
+the stock market structure from variations in historical quotes.</p>
+<p>The quantity that we use is the daily variation in quote price: quotes
+that are linked tend to cofluctuate during a day.</p>
+<div class="section" id="learning-a-graph-structure">
+<span id="stock-market"></span><h2>Learning a graph structure<a class="headerlink" href="#learning-a-graph-structure" title="Permalink to this headline">¶</a></h2>
+<p>We use sparse inverse covariance estimation to find which quotes are
+correlated conditionally on the others. Specifically, sparse inverse
+covariance gives us a graph, that is a list of connection. For each
+symbol, the symbols that it is connected too are those useful to explain
+its fluctuations.</p>
+</div>
+<div class="section" id="clustering">
+<h2>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">¶</a></h2>
+<p>We use clustering to group together quotes that behave similarly. Here,
+amongst the <a class="reference internal" href="../../modules/clustering.html#clustering"><span class="std std-ref">various clustering techniques</span></a> available
+in the scikit-learn, we use <a class="reference internal" href="../../modules/clustering.html#affinity-propagation"><span class="std std-ref">Affinity Propagation</span></a> as it does
+not enforce equal-size clusters, and it can choose automatically the
+number of clusters from the data.</p>
+<p>Note that this gives us a different indication than the graph, as the
+graph reflects conditional relations between variables, while the
+clustering reflects marginal properties: variables clustered together can
+be considered as having a similar impact at the level of the full stock
+market.</p>
+</div>
+<div class="section" id="embedding-in-2d-space">
+<h2>Embedding in 2D space<a class="headerlink" href="#embedding-in-2d-space" title="Permalink to this headline">¶</a></h2>
+<p>For visualization purposes, we need to lay out the different symbols on a
+2D canvas. For this we use <a class="reference internal" href="../../modules/manifold.html#manifold"><span class="std std-ref">Manifold learning</span></a> techniques to retrieve 2D
+embedding.</p>
+</div>
+<div class="section" id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
+<p>The output of the 3 models are combined in a 2D graph where nodes
+represents the stocks and edges the:</p>
+<ul class="simple">
+<li>cluster labels are used to define the color of the nodes</li>
+<li>the sparse covariance model is used to display the strength of the edges</li>
+<li>the 2D embedding is used to position the nodes in the plan</li>
+</ul>
+<p>This example has a fair amount of visualization-related code, as
+visualization is crucial here to display the graph. One of the challenge
+is to position the labels minimizing overlap. For this we use an
+heuristic based on the direction of the nearest neighbor along each
+axis.</p>
+<img alt="../../_images/plot_stock_market_001.png" class="align-center" src="../../_images/plot_stock_market_001.png" />
+<p><strong>Script output</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Cluster</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Pepsi</span><span class="p">,</span> <span class="n">Coca</span> <span class="n">Cola</span><span class="p">,</span> <span class="n">Kellogg</span>
+<span class="n">Cluster</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Apple</span><span class="p">,</span> <span class="n">Amazon</span><span class="p">,</span> <span class="n">Yahoo</span>
+<span class="n">Cluster</span> <span class="mi">3</span><span class="p">:</span> <span class="n">GlaxoSmithKline</span><span class="p">,</span> <span class="n">Novartis</span><span class="p">,</span> <span class="n">Sanofi</span><span class="o">-</span><span class="n">Aventis</span>
+<span class="n">Cluster</span> <span class="mi">4</span><span class="p">:</span> <span class="n">Comcast</span><span class="p">,</span> <span class="n">Time</span> <span class="n">Warner</span><span class="p">,</span> <span class="n">Cablevision</span>
+<span class="n">Cluster</span> <span class="mi">5</span><span class="p">:</span> <span class="n">ConocoPhillips</span><span class="p">,</span> <span class="n">Chevron</span><span class="p">,</span> <span class="n">Total</span><span class="p">,</span> <span class="n">Valero</span> <span class="n">Energy</span><span class="p">,</span> <span class="n">Exxon</span>
+<span class="n">Cluster</span> <span class="mi">6</span><span class="p">:</span> <span class="n">CVS</span><span class="p">,</span> <span class="n">Walgreen</span>
+<span class="n">Cluster</span> <span class="mi">7</span><span class="p">:</span> <span class="n">Navistar</span><span class="p">,</span> <span class="n">Sony</span><span class="p">,</span> <span class="n">Marriott</span><span class="p">,</span> <span class="n">Caterpillar</span><span class="p">,</span> <span class="n">Canon</span><span class="p">,</span> <span class="n">Toyota</span><span class="p">,</span> <span class="n">Honda</span><span class="p">,</span> <span class="n">Mitsubishi</span><span class="p">,</span> <span class="n">Xerox</span><span class="p">,</span> <span class="n">Unilever</span>
+<span class="n">Cluster</span> <span class="mi">8</span><span class="p">:</span> <span class="n">Kimberly</span><span class="o">-</span><span class="n">Clark</span><span class="p">,</span> <span class="n">Colgate</span><span class="o">-</span><span class="n">Palmolive</span><span class="p">,</span> <span class="n">Procter</span> <span class="n">Gamble</span>
+<span class="n">Cluster</span> <span class="mi">9</span><span class="p">:</span> <span class="n">American</span> <span class="n">express</span><span class="p">,</span> <span class="n">Ryder</span><span class="p">,</span> <span class="n">Goldman</span> <span class="n">Sachs</span><span class="p">,</span> <span class="n">Wal</span><span class="o">-</span><span class="n">Mart</span><span class="p">,</span> <span class="n">General</span> <span class="n">Electrics</span><span class="p">,</span> <span class="n">Pfizer</span><span class="p">,</span> <span class="n">Wells</span> <span class="n">Fargo</span><span class="p">,</span> <span class="n">DuPont</span> <span class="n">de</span> <span class="n">Nemours</span><span class="p">,</span> <span class="n">Bank</span> <span class="n">of</span> <span class="n">America</span><span class="p">,</span> <span class="n">AIG</span><span class="p">,</span> <span class="n">Home</span> <span class="n">Depot</span><span class="p">,</span> <span class="n">Ford</span><span class="p">,</span> <span class="n">JPMorgan</span> <span class="n">Chase</span><span class="p">,</span> <span class="n">Mc</span> <span class="n">Donalds</span>
+<span class="n">Cluster</span> <span class="mi">10</span><span class="p">:</span> <span class="n">Microsoft</span><span class="p">,</span> <span class="n">SAP</span><span class="p">,</span> <span class="mi">3</span><span class="n">M</span><span class="p">,</span> <span class="n">IBM</span><span class="p">,</span> <span class="n">Texas</span> <span class="n">instruments</span><span class="p">,</span> <span class="n">HP</span><span class="p">,</span> <span class="n">Dell</span><span class="p">,</span> <span class="n">Cisco</span>
+<span class="n">Cluster</span> <span class="mi">11</span><span class="p">:</span> <span class="n">Raytheon</span><span class="p">,</span> <span class="n">Boeing</span><span class="p">,</span> <span class="n">Lookheed</span> <span class="n">Martin</span><span class="p">,</span> <span class="n">General</span> <span class="n">Dynamics</span><span class="p">,</span> <span class="n">Northrop</span> <span class="n">Grumman</span>
+<span class="n">Cluster</span> <span class="mi">12</span><span class="p">:</span> <span class="n">Kraft</span> <span class="n">Foods</span>
+</pre></div>
+</div>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_stock_market.py" download=""><code class="xref download docutils literal"><span class="pre">plot_stock_market.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+
+<span class="c1"># Author: Gael Varoquaux gael.varoquaux@normalesup.org</span>
+<span class="c1"># License: BSD 3 clause</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">matplotlib.finance</span> <span class="k">import</span> <a href="http://matplotlib.org/api/finance_api.html#matplotlib.finance.quotes_historical_yahoo_ochl"><span class="n">quotes_historical_yahoo</span></a>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">matplotlib.finance</span> <span class="k">import</span> <span class="n">quotes_historical_yahoo_ochl</span> <span class="k">as</span> <a href="http://matplotlib.org/api/finance_api.html#matplotlib.finance.quotes_historical_yahoo_ochl"><span class="n">quotes_historical_yahoo</span></a>
+<span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="k">import</span> <a href="http://matplotlib.org/api/collections_api.html#matplotlib.collections.LineCollection"><span class="n">LineCollection</span></a>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">cluster</span><span class="p">,</span> <span class="n">covariance</span><span class="p">,</span> <span class="n">manifold</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Retrieve the data from Internet</span>
+
+<span class="c1"># Choose a time period reasonnably calm (not too long ago so that we get</span>
+<span class="c1"># high-tech firms, and before the 2008 crash)</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2003</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2008</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># kraft symbol has now changed from KFT to MDLZ in yahoo</span>
+<span class="n">symbol_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;TOT&#39;</span><span class="p">:</span> <span class="s1">&#39;Total&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;XOM&#39;</span><span class="p">:</span> <span class="s1">&#39;Exxon&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CVX&#39;</span><span class="p">:</span> <span class="s1">&#39;Chevron&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;COP&#39;</span><span class="p">:</span> <span class="s1">&#39;ConocoPhillips&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VLO&#39;</span><span class="p">:</span> <span class="s1">&#39;Valero Energy&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MSFT&#39;</span><span class="p">:</span> <span class="s1">&#39;Microsoft&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IBM&#39;</span><span class="p">:</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TWX&#39;</span><span class="p">:</span> <span class="s1">&#39;Time Warner&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CMCSA&#39;</span><span class="p">:</span> <span class="s1">&#39;Comcast&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CVC&#39;</span><span class="p">:</span> <span class="s1">&#39;Cablevision&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;YHOO&#39;</span><span class="p">:</span> <span class="s1">&#39;Yahoo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;DELL&#39;</span><span class="p">:</span> <span class="s1">&#39;Dell&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HPQ&#39;</span><span class="p">:</span> <span class="s1">&#39;HP&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AMZN&#39;</span><span class="p">:</span> <span class="s1">&#39;Amazon&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TM&#39;</span><span class="p">:</span> <span class="s1">&#39;Toyota&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CAJ&#39;</span><span class="p">:</span> <span class="s1">&#39;Canon&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MTU&#39;</span><span class="p">:</span> <span class="s1">&#39;Mitsubishi&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SNE&#39;</span><span class="p">:</span> <span class="s1">&#39;Sony&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;Ford&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HMC&#39;</span><span class="p">:</span> <span class="s1">&#39;Honda&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NAV&#39;</span><span class="p">:</span> <span class="s1">&#39;Navistar&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NOC&#39;</span><span class="p">:</span> <span class="s1">&#39;Northrop Grumman&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;BA&#39;</span><span class="p">:</span> <span class="s1">&#39;Boeing&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KO&#39;</span><span class="p">:</span> <span class="s1">&#39;Coca Cola&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MMM&#39;</span><span class="p">:</span> <span class="s1">&#39;3M&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MCD&#39;</span><span class="p">:</span> <span class="s1">&#39;Mc Donalds&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PEP&#39;</span><span class="p">:</span> <span class="s1">&#39;Pepsi&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MDLZ&#39;</span><span class="p">:</span> <span class="s1">&#39;Kraft Foods&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="s1">&#39;Kellogg&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;UN&#39;</span><span class="p">:</span> <span class="s1">&#39;Unilever&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MAR&#39;</span><span class="p">:</span> <span class="s1">&#39;Marriott&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PG&#39;</span><span class="p">:</span> <span class="s1">&#39;Procter Gamble&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CL&#39;</span><span class="p">:</span> <span class="s1">&#39;Colgate-Palmolive&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GE&#39;</span><span class="p">:</span> <span class="s1">&#39;General Electrics&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;WFC&#39;</span><span class="p">:</span> <span class="s1">&#39;Wells Fargo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;JPM&#39;</span><span class="p">:</span> <span class="s1">&#39;JPMorgan Chase&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AIG&#39;</span><span class="p">:</span> <span class="s1">&#39;AIG&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AXP&#39;</span><span class="p">:</span> <span class="s1">&#39;American express&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;BAC&#39;</span><span class="p">:</span> <span class="s1">&#39;Bank of America&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GS&#39;</span><span class="p">:</span> <span class="s1">&#39;Goldman Sachs&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AAPL&#39;</span><span class="p">:</span> <span class="s1">&#39;Apple&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SAP&#39;</span><span class="p">:</span> <span class="s1">&#39;SAP&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CSCO&#39;</span><span class="p">:</span> <span class="s1">&#39;Cisco&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TXN&#39;</span><span class="p">:</span> <span class="s1">&#39;Texas instruments&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;XRX&#39;</span><span class="p">:</span> <span class="s1">&#39;Xerox&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;LMT&#39;</span><span class="p">:</span> <span class="s1">&#39;Lookheed Martin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;WMT&#39;</span><span class="p">:</span> <span class="s1">&#39;Wal-Mart&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;WBA&#39;</span><span class="p">:</span> <span class="s1">&#39;Walgreen&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HD&#39;</span><span class="p">:</span> <span class="s1">&#39;Home Depot&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GSK&#39;</span><span class="p">:</span> <span class="s1">&#39;GlaxoSmithKline&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PFE&#39;</span><span class="p">:</span> <span class="s1">&#39;Pfizer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SNY&#39;</span><span class="p">:</span> <span class="s1">&#39;Sanofi-Aventis&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NVS&#39;</span><span class="p">:</span> <span class="s1">&#39;Novartis&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KMB&#39;</span><span class="p">:</span> <span class="s1">&#39;Kimberly-Clark&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;R&#39;</span><span class="p">:</span> <span class="s1">&#39;Ryder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GD&#39;</span><span class="p">:</span> <span class="s1">&#39;General Dynamics&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RTN&#39;</span><span class="p">:</span> <span class="s1">&#39;Raytheon&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CVS&#39;</span><span class="p">:</span> <span class="s1">&#39;CVS&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CAT&#39;</span><span class="p">:</span> <span class="s1">&#39;Caterpillar&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;DD&#39;</span><span class="p">:</span> <span class="s1">&#39;DuPont de Nemours&#39;</span><span class="p">}</span>
+
+<span class="n">symbols</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">symbol_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">quotes</span> <span class="o">=</span> <span class="p">[</span><a href="http://matplotlib.org/api/finance_api.html#matplotlib.finance.quotes_historical_yahoo_ochl"><span class="n">quotes_historical_yahoo</span></a><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">asobject</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+          <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">]</span>
+
+<span class="nb">open</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="n">q</span><span class="o">.</span><span class="n">open</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">quotes</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="n">close</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="n">q</span><span class="o">.</span><span class="n">close</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">quotes</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+<span class="c1"># The daily variations of the quotes are what carry most information</span>
+<span class="n">variation</span> <span class="o">=</span> <span class="n">close</span> <span class="o">-</span> <span class="nb">open</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Learn a graphical structure from the correlations</span>
+<span class="n">edge_model</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.covariance.GraphLassoCV.html#sklearn.covariance.GraphLassoCV"><span class="n">covariance</span><span class="o">.</span><span class="n">GraphLassoCV</span></a><span class="p">()</span>
+
+<span class="c1"># standardize the time series: using correlations rather than covariance</span>
+<span class="c1"># is more efficient for structure recovery</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">variation</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">X</span> <span class="o">/=</span> <span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">edge_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Cluster using affinity propagation</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.cluster.affinity_propagation.html#sklearn.cluster.affinity_propagation"><span class="n">cluster</span><span class="o">.</span><span class="n">affinity_propagation</span></a><span class="p">(</span><span class="n">edge_model</span><span class="o">.</span><span class="n">covariance_</span><span class="p">)</span>
+<span class="n">n_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_labels</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cluster </span><span class="si">%i</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">])))</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Find a low-dimension embedding for visualization: find the best position of</span>
+<span class="c1"># the nodes (the stocks) on a 2D plane</span>
+
+<span class="c1"># We use a dense eigen_solver to achieve reproducibility (arpack is</span>
+<span class="c1"># initiated with random vectors that we don&#39;t control). In addition, we</span>
+<span class="c1"># use a large number of neighbors to capture the large-scale structure.</span>
+<span class="n">node_position_model</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding"><span class="n">manifold</span><span class="o">.</span><span class="n">LocallyLinearEmbedding</span></a><span class="p">(</span>
+    <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">eigen_solver</span><span class="o">=</span><span class="s1">&#39;dense&#39;</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">node_position_model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Visualization</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf"><span class="n">plt</span><span class="o">.</span><span class="n">clf</span></a><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <a href="http://matplotlib.org/api/axes_api.html#matplotlib.axes"><span class="n">plt</span><span class="o">.</span><span class="n">axes</span></a><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<a href="http://matplotlib.org/api/axis_api.html#matplotlib.axis"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span></a><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Display a graph of the partial correlations</span>
+<span class="n">partial_correlations</span> <span class="o">=</span> <span class="n">edge_model</span><span class="o">.</span><span class="n">precision_</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.sqrt.html#numpy.sqrt"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.diag.html#numpy.diag"><span class="n">np</span><span class="o">.</span><span class="n">diag</span></a><span class="p">(</span><span class="n">partial_correlations</span><span class="p">))</span>
+<span class="n">partial_correlations</span> <span class="o">*=</span> <span class="n">d</span>
+<span class="n">partial_correlations</span> <span class="o">*=</span> <span class="n">d</span><span class="p">[:,</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/arrays.indexing.html#numpy.newaxis"><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span></a><span class="p">]</span>
+<span class="n">non_zero</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.triu.html#numpy.triu"><span class="n">np</span><span class="o">.</span><span class="n">triu</span></a><span class="p">(</span><span class="n">partial_correlations</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mf">0.02</span><span class="p">)</span>
+
+<span class="c1"># Plot the nodes using the coordinates of our embedding</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a><span class="p">(</span><span class="n">embedding</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">embedding</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span> <span class="o">*</span> <span class="n">d</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">spectral</span><span class="p">)</span>
+
+<span class="c1"># Plot the edges</span>
+<span class="n">start_idx</span><span class="p">,</span> <span class="n">end_idx</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.where.html#numpy.where"><span class="n">np</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">non_zero</span><span class="p">)</span>
+<span class="c1">#a sequence of (*line0*, *line1*, *line2*), where::</span>
+<span class="c1">#            linen = (x0, y0), (x1, y1), ... (xm, ym)</span>
+<span class="n">segments</span> <span class="o">=</span> <span class="p">[[</span><span class="n">embedding</span><span class="p">[:,</span> <span class="n">start</span><span class="p">],</span> <span class="n">embedding</span><span class="p">[:,</span> <span class="n">stop</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">start_idx</span><span class="p">,</span> <span class="n">end_idx</span><span class="p">)]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">partial_correlations</span><span class="p">[</span><span class="n">non_zero</span><span class="p">])</span>
+<span class="n">lc</span> <span class="o">=</span> <a href="http://matplotlib.org/api/collections_api.html#matplotlib.collections.LineCollection"><span class="n">LineCollection</span></a><span class="p">(</span><span class="n">segments</span><span class="p">,</span>
+                    <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">hot_r</span><span class="p">,</span>
+                    <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">7</span> <span class="o">*</span> <span class="n">values</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+<span class="n">lc</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="n">lc</span><span class="o">.</span><span class="n">set_linewidths</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="n">values</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">lc</span><span class="p">)</span>
+
+<span class="c1"># Add a label to each node. The challenge here is that we want to</span>
+<span class="c1"># position the labels to avoid overlap with other labels</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+        <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">embedding</span><span class="o">.</span><span class="n">T</span><span class="p">)):</span>
+
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">embedding</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dx</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">embedding</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dy</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">this_dx</span> <span class="o">=</span> <span class="n">dx</span><span class="p">[</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.argmin.html#numpy.argmin"><span class="n">np</span><span class="o">.</span><span class="n">argmin</span></a><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">))]</span>
+    <span class="n">this_dy</span> <span class="o">=</span> <span class="n">dy</span><span class="p">[</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.argmin.html#numpy.argmin"><span class="n">np</span><span class="o">.</span><span class="n">argmin</span></a><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">))]</span>
+    <span class="k">if</span> <span class="n">this_dx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">horizontalalignment</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="o">.</span><span class="mi">002</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">horizontalalignment</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="o">.</span><span class="mi">002</span>
+    <span class="k">if</span> <span class="n">this_dy</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">verticalalignment</span> <span class="o">=</span> <span class="s1">&#39;bottom&#39;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="o">.</span><span class="mi">002</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">verticalalignment</span> <span class="o">=</span> <span class="s1">&#39;top&#39;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="o">.</span><span class="mi">002</span>
+    <a href="http://matplotlib.org/api/text_api.html#matplotlib.text"><span class="n">plt</span><span class="o">.</span><span class="n">text</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+             <span class="n">horizontalalignment</span><span class="o">=</span><span class="n">horizontalalignment</span><span class="p">,</span>
+             <span class="n">verticalalignment</span><span class="o">=</span><span class="n">verticalalignment</span><span class="p">,</span>
+             <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                       <span class="n">edgecolor</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">spectral</span><span class="p">(</span><span class="n">label</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_labels</span><span class="p">)),</span>
+                       <span class="n">alpha</span><span class="o">=.</span><span class="mi">6</span><span class="p">))</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlim"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span></a><span class="p">(</span><span class="n">embedding</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="o">.</span><span class="mi">15</span> <span class="o">*</span> <span class="n">embedding</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ptp</span><span class="p">(),</span>
+         <span class="n">embedding</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">10</span> <span class="o">*</span> <span class="n">embedding</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ptp</span><span class="p">(),)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">(</span><span class="n">embedding</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="o">.</span><span class="mi">03</span> <span class="o">*</span> <span class="n">embedding</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ptp</span><span class="p">(),</span>
+         <span class="n">embedding</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">03</span> <span class="o">*</span> <span class="n">embedding</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ptp</span><span class="p">())</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>  10.49 seconds
+( 0 minutes  10.49 seconds)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/auto_examples/applications/plot_stock_market.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="plot_species_distribution_modeling.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

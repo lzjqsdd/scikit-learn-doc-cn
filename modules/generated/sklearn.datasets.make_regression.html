@@ -1,0 +1,335 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.datasets.make_regression &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.datasets.make_s_curve" href="sklearn.datasets.make_s_curve.html" />
+    <link rel="prev" title="sklearn.datasets.make_multilabel_classification" href="sklearn.datasets.make_multilabel_classification.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.datasets.make_multilabel_classification.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.datas...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.datasets.make_multilabel_classification
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.datasets</span></code>.make_regression</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-datasets-make-regression">Examples using <code class="docutils literal"><span class="pre">sklearn.datasets.make_regression</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-datasets-make-regression">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.make_regression<a class="headerlink" href="#sklearn-datasets-make-regression" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.datasets.make_regression">
+<code class="descclassname">sklearn.datasets.</code><code class="descname">make_regression</code><span class="sig-paren">(</span><em>n_samples=100</em>, <em>n_features=100</em>, <em>n_informative=10</em>, <em>n_targets=1</em>, <em>bias=0.0</em>, <em>effective_rank=None</em>, <em>tail_strength=0.5</em>, <em>noise=0.0</em>, <em>shuffle=True</em>, <em>coef=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/datasets/samples_generator.py#L450"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.make_regression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a random regression problem.</p>
+<p>The input set can either be well conditioned (by default) or have a low
+rank-fat tail singular profile. See <a class="reference internal" href="sklearn.datasets.make_low_rank_matrix.html#sklearn.datasets.make_low_rank_matrix" title="sklearn.datasets.make_low_rank_matrix"><code class="xref py py-func docutils literal"><span class="pre">make_low_rank_matrix</span></code></a> for
+more details.</p>
+<p>The output is generated by applying a (potentially biased) random linear
+regression model with <cite>n_informative</cite> nonzero regressors to the previously
+generated input and some gaussian centered noise with some adjustable
+scale.</p>
+<p>Read more in the <a class="reference internal" href="../../datasets/index.html#sample-generators"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_samples</strong> : int, optional (default=100)</p>
+<blockquote>
+<div><p>The number of samples.</p>
+</div></blockquote>
+<p><strong>n_features</strong> : int, optional (default=100)</p>
+<blockquote>
+<div><p>The number of features.</p>
+</div></blockquote>
+<p><strong>n_informative</strong> : int, optional (default=10)</p>
+<blockquote>
+<div><p>The number of informative features, i.e., the number of features used
+to build the linear model used to generate the output.</p>
+</div></blockquote>
+<p><strong>n_targets</strong> : int, optional (default=1)</p>
+<blockquote>
+<div><p>The number of regression targets, i.e., the dimension of the y output
+vector associated with a sample. By default, the output is a scalar.</p>
+</div></blockquote>
+<p><strong>bias</strong> : float, optional (default=0.0)</p>
+<blockquote>
+<div><p>The bias term in the underlying linear model.</p>
+</div></blockquote>
+<p><strong>effective_rank</strong> : int or None, optional (default=None)</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>if not None:</dt>
+<dd><p class="first last">The approximate number of singular vectors required to explain most
+of the input data by linear combinations. Using this kind of
+singular spectrum in the input allows the generator to reproduce
+the correlations often observed in practice.</p>
+</dd>
+<dt>if None:</dt>
+<dd><p class="first last">The input set is well conditioned, centered and gaussian with
+unit variance.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>tail_strength</strong> : float between 0.0 and 1.0, optional (default=0.5)</p>
+<blockquote>
+<div><p>The relative importance of the fat noisy tail of the singular values
+profile if <cite>effective_rank</cite> is not None.</p>
+</div></blockquote>
+<p><strong>noise</strong> : float, optional (default=0.0)</p>
+<blockquote>
+<div><p>The standard deviation of the gaussian noise applied to the output.</p>
+</div></blockquote>
+<p><strong>shuffle</strong> : boolean, optional (default=True)</p>
+<blockquote>
+<div><p>Shuffle the samples and the features.</p>
+</div></blockquote>
+<p><strong>coef</strong> : boolean, optional (default=False)</p>
+<blockquote>
+<div><p>If True, the coefficients of the underlying linear model are returned.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int, RandomState instance or None, optional (default=None)</p>
+<blockquote>
+<div><p>If int, random_state is the seed used by the random number generator;
+If RandomState instance, random_state is the random number generator;
+If None, the random number generator is the RandomState instance used
+by <cite>np.random</cite>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X</strong> : array of shape [n_samples, n_features]</p>
+<blockquote>
+<div><p>The input samples.</p>
+</div></blockquote>
+<p><strong>y</strong> : array of shape [n_samples] or [n_samples, n_targets]</p>
+<blockquote>
+<div><p>The output values.</p>
+</div></blockquote>
+<p><strong>coef</strong> : array of shape [n_features] or [n_features, n_targets], optional</p>
+<blockquote class="last">
+<div><p>The coefficient of the underlying linear model. It is returned only if
+coef is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-datasets-make-regression">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.datasets.make_regression</span></code><a class="headerlink" href="#examples-using-sklearn-datasets-make-regression" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="This is an example showing the prediction latency of various scikit-learn estimators."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/applications/plot_prediction_latency.html"><img alt="../../_images/plot_prediction_latency1.png" src="../../_images/plot_prediction_latency1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/applications/plot_prediction_latency.html#example-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="In this example we see how to robustly fit a linear model to faulty data using the RANSAC algor..."><div class="figure" id="id2">
+<a class="reference external image-reference" href="./../../auto_examples/linear_model/plot_ransac.html"><img alt="../../_images/plot_ransac1.png" src="../../_images/plot_ransac1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/plot_ransac.html#example-linear-model-plot-ransac-py"><span class="std std-ref">Robust linear model estimation using RANSAC</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="We show that linear_model.Lasso provides the same results for dense and sparse data and that in..."><div class="figure" id="id3">
+<a class="reference external image-reference" href="./../../auto_examples/linear_model/lasso_dense_vs_sparse_data.html"><img alt="../../_images/lasso_dense_vs_sparse_data1.png" src="../../_images/lasso_dense_vs_sparse_data1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/lasso_dense_vs_sparse_data.html#example-linear-model-lasso-dense-vs-sparse-data-py"><span class="std std-ref">Lasso on dense and sparse data</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.datasets.make_regression.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.datasets.make_multilabel_classification.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

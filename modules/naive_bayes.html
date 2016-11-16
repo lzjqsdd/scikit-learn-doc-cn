@@ -1,0 +1,350 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>1.9. 朴素贝叶斯 &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="1. Supervised learning" href="../supervised_learning.html" />
+    <link rel="next" title="1.10. Decision Trees" href="tree.html" />
+    <link rel="prev" title="1.8. Cross decomposition" href="cross_decomposition.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/naive_bayes.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="cross_decomposition.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        1.8. Cross de...
+        </span>
+            <span class="hiddenrellink">
+            1.8. Cross decomposition
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../supervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        1. Supervised...
+        </span>
+            <span class="hiddenrellink">
+            1. Supervised learning
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">1.9. 朴素贝叶斯</a><ul>
+<li><a class="reference internal" href="#gaussian-naive-bayes">1.9.1. 朴素贝叶斯 高斯模型</a></li>
+<li><a class="reference internal" href="#multinomial-naive-bayes">1.9.2. 朴素贝叶斯 多项式模型</a></li>
+<li><a class="reference internal" href="#bernoulli-naive-bayes">1.9.3. 朴素贝叶斯 伯努利模型</a></li>
+<li><a class="reference internal" href="#out-of-core">1.9.4. 基于外存(Out-of-core)的朴素贝叶斯模型拟合</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="naive-bayes">
+<span id="id1"></span><h1>1.9. 朴素贝叶斯<a class="headerlink" href="#naive-bayes" title="Permalink to this headline">¶</a></h1>
+<p>朴素贝叶斯方法是一系列有监督学习的方法，这些方法基于对贝叶斯理论的应用，即简单(naive)的假设
+每对特征之间都相互独立。给定类变量 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> (这里一个样本仅属于一类)
+和一个相互独立的特征向量 <img class="math" src="../_images/math/fdf6501bec5987984965f15d09235c645fe06ccb.png" alt="x_1"/> 到 <img class="math" src="../_images/math/7bc36d4aa726c4ace87722a5c6f2aeca24fa4714.png" alt="x_n"/>，贝叶斯定理可得到如下关系：</p>
+<div class="math">
+<p><img src="../_images/math/47537fc301bbf8971084f2ecbaa76658ad088235.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) P(x_1, \dots x_n \mid y)}
+                                 {P(x_1, \dots, x_n)}"/></p>
+</div><p>使用简单(naive)的假设-每对特征之间都相互独立：</p>
+<div class="math">
+<p><img src="../_images/math/4a2f8ee56238deb56e9e970a749bbe26d96465f7.png" alt="P(x_i | y, x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_n) = P(x_i | y),"/></p>
+</div><p>对于所有 <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>，这个关系式可以化简为：</p>
+<div class="math">
+<p><img src="../_images/math/7d90ebd2dc0cc2e1136a22625a489c3326d30ec7.png" alt="P(y \mid x_1, \dots, x_n) = \frac{P(y) \prod_{i=1}^{n} P(x_i \mid y)}
+                                 {P(x_1, \dots, x_n)}"/></p>
+</div><p>因为 <img class="math" src="../_images/math/af3b28009d4db6e1a2cab1d99f8558d8a7f3445b.png" alt="P(x_1, \dots, x_n)"/> 是输入时给定的常数(特征不可动态改变)，
+我们可使用如下分类规则：</p>
+<div class="math">
+<p><img src="../_images/math/201f076a3330f2928c26978c4eac59cc8ba4a440.png" alt="P(y \mid x_1, \dots, x_n) \propto P(y) \prod_{i=1}^{n} P(x_i \mid y)
+
+\Downarrow
+
+\hat{y} = \arg\max_y P(y) \prod_{i=1}^{n} P(x_i \mid y),"/></p>
+</div><p>我们可使用最大后验概率 (MAP) 估计来估计变量
+<img class="math" src="../_images/math/8ef23b6eecb1513100126493078d961d16fcd89a.png" alt="P(y)"/> 和 <img class="math" src="../_images/math/24f4076f72fb489364af050901a6546815bcb453.png" alt="P(x_i \mid y)"/>；
+前者是 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> 在训练集中的相对频率。</p>
+<p>各种各样的朴素贝叶斯分类器的不同之处在于，他们对 <img class="math" src="../_images/math/24f4076f72fb489364af050901a6546815bcb453.png" alt="P(x_i \mid y)"/> 的分布的认识和假设不同。</p>
+<p>尽管它们看起来有一个过于简单的假设，朴素贝叶斯分类器仍然
+在真实世界的许多情景下工作良好，在文本分类和垃圾邮件筛选领域尤其流行。
+它们要求少量的数据来估计必要的参数。
+(关于理论上朴素贝叶斯为什么会工作良好，以及它可以适用的数据类型，详见下方References)</p>
+<p>朴素贝叶斯学习和分类器与其他相比可以非常快。类条件特征分布的解耦意味着
+每个分布可以独立估计为一个一维分布，这反过来又有助于缓解维灾难问题。</p>
+<p>另一方面，虽然被称为一个合适的分类器，它也被认为是是一个坏的估计量，所以对 <code class="docutils literal"><span class="pre">predict_proba</span></code> 的概率输出不应太过依赖。</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>H. Zhang (2004). <a class="reference external" href="http://www.cs.unb.ca/profs/hzhang/publications/FLAIRS04ZhangH.pdf">The optimality of Naive Bayes.</a>
+Proc. FLAIRS.</li>
+</ul>
+</div>
+<div class="section" id="gaussian-naive-bayes">
+<span id="id2"></span><h2>1.9.1. 朴素贝叶斯 高斯模型<a class="headerlink" href="#gaussian-naive-bayes" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">GaussianNB</span></code></a> 实现了朴素贝叶斯的高斯模型( Gaussian Naive Bayes )的分类算法。</p>
+<div class="topic">
+<p class="topic-title first">译者按:</p>
+<ul class="simple">
+<li>有些特征可能是连续型变量，比如说人的身高，物体的长度，这些特征可以转换成离散型的值，比如如果身高在160cm以下，特征值为1；在160cm和170cm之间，特征值为2；在170cm之上，特征值为3。也可以这样转换，将身高转换为3个特征，分别是f1、f2、f3，如果身高是160cm以下，这三个特征的值分别是1、0、0，若身高在170cm之上，这三个特征的值分别是0、0、1。不过这些方式都不够细腻，高斯模型可以解决这个问题。</li>
+</ul>
+</div>
+<p>高斯模型假设这些一个特征的所有属于某个类别的观测值符合高斯分布:</p>
+<div class="math">
+<p><img src="../_images/math/ed0c1181c1696f72e1be266187e4694919047d9e.png" alt="P(x_i \mid y) &amp;= \frac{1}{\sqrt{2\pi\sigma^2_y}} \exp\left(-\frac{(x_i - \mu_y)^2}{2\sigma^2_y}\right)"/></p>
+</div><p>参数是 <img class="math" src="../_images/math/0b30a2d48c2805095245dba3b4be2dfd2e2fba2e.png" alt="\sigma_y"/> 和 <img class="math" src="../_images/math/1d179ee3ab9ccc290192219dc80ee72cff12acb2.png" alt="\mu_y"/> ，
+估计时采用极大似然法。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="k">import</span> <span class="n">GaussianNB</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gnb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">gnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of mislabeled points out of a total </span><span class="si">%d</span><span class="s2"> points : </span><span class="si">%d</span><span class="s2">&quot;</span>
+<span class="gp">... </span>      <span class="o">%</span> <span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span> <span class="o">!=</span> <span class="n">y_pred</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+<span class="go">Number of mislabeled points out of a total 150 points : 6</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multinomial-naive-bayes">
+<span id="id3"></span><h2>1.9.2. 朴素贝叶斯 多项式模型<a class="headerlink" href="#multinomial-naive-bayes" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB" title="sklearn.naive_bayes.MultinomialNB"><code class="xref py py-class docutils literal"><span class="pre">MultinomialNB</span></code></a> 实现了数据服从多项式分布时的贝叶斯算法，它也是文本分类领域的
+两种典型算法之一(这里数据通常以词向量的形式表示，tf-idf向量在这里也表现的很好)。
+这个分布被参数化成向量：</p>
+<p><img class="math" src="../_images/math/a4c43fcd90dc5213c44ff54822b08fb7f6d3538a.png" alt="\theta_y = (\theta_{y1},\ldots,\theta_{yn})"/></p>
+<p>对于每一个类别 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/>, 参数 <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> 表示特征数量(文本分类中表示词向量的大小)</p>
+<p><img class="math" src="../_images/math/f2408aa649259623f7be391c5f5d689ad3174b5a.png" alt="\theta_{yi}"/> 表示有 <img class="math" src="../_images/math/24f4076f72fb489364af050901a6546815bcb453.png" alt="P(x_i \mid y)"/> 的概率对于特征 <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> 在一个样本中的被类 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> 所拥有。</p>
+<p>参数 <img class="math" src="../_images/math/fa63fe7665119a0bbb2468099d0048af771b5a1c.png" alt="\theta_y"/> 被平滑的极大似然估计法所估计，也就是说，相关频率计算：</p>
+<div class="math">
+<p><img src="../_images/math/ac8b939d0915826ce833b43ac13efa8a0fef99d9.png" alt="\hat{\theta}_{yi} = \frac{ N_{yi} + \alpha}{N_y + \alpha n}"/></p>
+</div><p>这里 <img class="math" src="../_images/math/54f18d12bb04079aeccdee4418942d30073acc14.png" alt="N_{yi} = \sum_{x \in T} x_i"/> 是特征 <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> 在训练集 <img class="math" src="../_images/math/f2d283a2071f9d043c9e0b0f794a8880fa0d3ce9.png" alt="T"/> 中，在一个属于 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> 类的样本中出现的次数，
+而 <img class="math" src="../_images/math/125143ac10e186061d40627dae00010cb4eeb04f.png" alt="N_{y} = \sum_{i=1}^{|T|} N_{yi}"/> 是在类 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> 中所有的特征的数量和。</p>
+<p>平滑先验 <img class="math" src="../_images/math/9d068518ed0efc64b3e2587f29137ab2f56a6ec2.png" alt="\alpha \ge 0"/> 可引入不在训练样本中的特征，同时防止0概率在未来的计算中出现。
+如果 <img class="math" src="../_images/math/42839bc86a7e883dcb0a636add188e5c920bb513.png" alt="\alpha = 1"/> ，称为拉普拉斯平滑(Laplace smoothing)，
+而当设置 <img class="math" src="../_images/math/f7c5135a83ac112fff6f442a31cda3a7944b7549.png" alt="\alpha &lt; 1"/> 时，则称为Lidstone smoothing。</p>
+</div>
+<div class="section" id="bernoulli-naive-bayes">
+<span id="id4"></span><h2>1.9.3. 朴素贝叶斯 伯努利模型<a class="headerlink" href="#bernoulli-naive-bayes" title="Permalink to this headline">¶</a></h2>
+<p>类 <a class="reference internal" href="generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB" title="sklearn.naive_bayes.BernoulliNB"><code class="xref py py-class docutils literal"><span class="pre">BernoulliNB</span></code></a> 实现了对于服从多元伯努利分布的数据的朴素贝叶斯训练和分类算法；
+也就是说，对于大量特征，每一个特征都是一个0-1变量 (Bernoulli, boolean)。
+因此，这个类要求样本集合以0-1特征向量的方式展现。如果接收到了其他类型的数据作为参数，
+一个 <code class="docutils literal"><span class="pre">BernoulliNB</span></code> 实例会把输入数据二元化(取决于 <code class="docutils literal"><span class="pre">binarize</span></code> 参数设置)</p>
+<p>朴素贝叶斯的伯努利模型是基于以下公式：</p>
+<div class="math">
+<p><img src="../_images/math/f6a27bc34d0c2ab16cb8ba203e5348741b5521e6.png" alt="P(x_i \mid y) = P(i \mid y) x_i + (1 - P(i \mid y)) (1 - x_i)"/></p>
+</div><p>与多项式模型的伯努利分布不同的是，伯努利模型明确地指出，未被使用的特征 <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> 是
+作为惩罚项的 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> 的一个的计数器，
+而多项式模型简单的忽略了这个特征。</p>
+<p>在文本分类的情境中，被用来训练和使用这一分类器的是词语同现向量 (word occurrence vectors) 而不是词频向量 (word
+count vectors)。 <code class="docutils literal"><span class="pre">BernoulliNB</span></code> 可能尤其会在小数据集时表现良好。如果时间允许，推荐试用以上所有模型进行评价。</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>C.D. Manning, P. Raghavan and H. Schütze (2008). Introduction to
+Information Retrieval. Cambridge University Press, pp. 234-265.</li>
+<li>A. McCallum and K. Nigam (1998).
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.46.1529">A comparison of event models for Naive Bayes text classification.</a>
+Proc. AAAI/ICML-98 Workshop on Learning for Text Categorization, pp. 41-48.</li>
+<li>V. Metsis, I. Androutsopoulos and G. Paliouras (2006).
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.61.5542">Spam filtering with Naive Bayes &#8211; Which Naive Bayes?</a>
+3rd Conf. on Email and Anti-Spam (CEAS).</li>
+</ul>
+</div>
+</div>
+<div class="section" id="out-of-core">
+<h2>1.9.4. 基于外存(Out-of-core)的朴素贝叶斯模型拟合<a class="headerlink" href="#out-of-core" title="Permalink to this headline">¶</a></h2>
+<p>朴素贝叶斯模型可以用来解决大规模的分类问题，
+其完整的训练集可能不适合放在内存中。为解决这个问题，
+<a class="reference internal" href="generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB" title="sklearn.naive_bayes.MultinomialNB"><code class="xref py py-class docutils literal"><span class="pre">MultinomialNB</span></code></a> ， <a class="reference internal" href="generated/sklearn.naive_bayes.BernoulliNB.html#sklearn.naive_bayes.BernoulliNB" title="sklearn.naive_bayes.BernoulliNB"><code class="xref py py-class docutils literal"><span class="pre">BernoulliNB</span></code></a> ， 和 <a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">GaussianNB</span></code></a>
+实现了 <code class="docutils literal"><span class="pre">partial_fit</span></code> 方法，可以动态的增加数据来使用(即所谓online classifier)。与其他分类器相结合的例子见
+<a class="reference internal" href="../auto_examples/applications/plot_out_of_core_classification.html#example-applications-plot-out-of-core-classification-py"><span class="std std-ref">Out-of-core classification of text documents</span></a> 。 所有离散的分类器(前两者)
+均支持样本权重， <a class="reference internal" href="generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="sklearn.naive_bayes.GaussianNB"><code class="xref py py-class docutils literal"><span class="pre">GaussianNB</span></code></a> 不支持.</p>
+<p>与 <code class="docutils literal"><span class="pre">fit</span></code> 方法相反， 首次调用 <code class="docutils literal"><span class="pre">partial_fit</span></code> 需要传入所有可能的样本标签的list</p>
+<p>对于scikit-learn中所有可用方案，请参考
+<a class="reference internal" href="scaling_strategies.html#scaling-strategies"><span class="std std-ref">out-of-core learning</span></a> 文档.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">贝叶斯模型中的 <code class="docutils literal"><span class="pre">partial_fit</span></code> 方法引入了一些额外开销。因此建议使用的数据块尽可能大，即达到可用RAM的允许范围。</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/naive_bayes.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="cross_decomposition.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

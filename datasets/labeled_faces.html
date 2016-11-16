@@ -1,0 +1,328 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>5.5.4. The Labeled Faces in the Wild face recognition dataset &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="5. Dataset loading utilities" href="index.html" />
+    <link rel="next" title="5.5.5. Forest covertypes" href="covtype.html" />
+    <link rel="prev" title="5.5.3. Downloading datasets from the mldata.org repository" href="mldata.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/datasets/labeled_faces.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="mldata.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        5.5.3. Downlo...
+        </span>
+            <span class="hiddenrellink">
+            5.5.3. Downloading datasets from the mldata.org repository
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        5. Dataset lo...
+        </span>
+            <span class="hiddenrellink">
+            5. Dataset loading utilities
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">5.5.4. The Labeled Faces in the Wild face recognition dataset</a><ul>
+<li><a class="reference internal" href="#usage">5.5.4.1. Usage</a></li>
+<li><a class="reference internal" href="#examples">5.5.4.2. Examples</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-labeled-faces-in-the-wild-face-recognition-dataset">
+<span id="labeled-faces-in-the-wild"></span><h1>5.5.4. The Labeled Faces in the Wild face recognition dataset<a class="headerlink" href="#the-labeled-faces-in-the-wild-face-recognition-dataset" title="Permalink to this headline">¶</a></h1>
+<p>This dataset is a collection of JPEG pictures of famous people collected
+over the internet, all details are available on the official website:</p>
+<blockquote>
+<div><a class="reference external" href="http://vis-www.cs.umass.edu/lfw/">http://vis-www.cs.umass.edu/lfw/</a></div></blockquote>
+<p>Each picture is centered on a single face. The typical task is called
+Face Verification: given a pair of two pictures, a binary classifier
+must predict whether the two images are from the same person.</p>
+<p>An alternative task, Face Recognition or Face Identification is:
+given the picture of the face of an unknown person, identify the name
+of the person by referring to a gallery of previously seen pictures of
+identified persons.</p>
+<p>Both Face Verification and Face Recognition are tasks that are typically
+performed on the output of a model trained to perform Face Detection. The
+most popular model for Face Detection is called Viola-Jones and is
+implemented in the OpenCV library. The LFW faces were extracted by this
+face detector from various online websites.</p>
+<div class="section" id="usage">
+<h2>5.5.4.1. Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">scikit-learn</span></code> provides two loaders that will automatically download,
+cache, parse the metadata files, decode the jpeg and convert the
+interesting slices into memmaped numpy arrays. This dataset size is more
+than 200 MB. The first load typically takes more than a couple of minutes
+to fully decode the relevant part of the JPEG files into numpy arrays. If
+the dataset has  been loaded once, the following times the loading times
+less than 200ms by using a memmaped version memoized on the disk in the
+<code class="docutils literal"><span class="pre">~/scikit_learn_data/lfw_home/</span></code> folder using <code class="docutils literal"><span class="pre">joblib</span></code>.</p>
+<p>The first loader is used for the Face Identification task: a multi-class
+classification task (hence supervised learning):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">fetch_lfw_people</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lfw_people</span> <span class="o">=</span> <span class="n">fetch_lfw_people</span><span class="p">(</span><span class="n">min_faces_per_person</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">resize</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">lfw_people</span><span class="o">.</span><span class="n">target_names</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">Ariel Sharon</span>
+<span class="go">Colin Powell</span>
+<span class="go">Donald Rumsfeld</span>
+<span class="go">George W Bush</span>
+<span class="go">Gerhard Schroeder</span>
+<span class="go">Hugo Chavez</span>
+<span class="go">Tony Blair</span>
+</pre></div>
+</div>
+<p>The default slice is a rectangular shape around the face, removing
+most of the background:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lfw_people</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&#39;float32&#39;)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lfw_people</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1288, 1850)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lfw_people</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1288, 50, 37)</span>
+</pre></div>
+</div>
+<p>Each of the <code class="docutils literal"><span class="pre">1140</span></code> faces is assigned to a single person id in the <code class="docutils literal"><span class="pre">target</span></code>
+array:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lfw_people</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1288,)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">lfw_people</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="go">[5, 6, 3, 1, 0, 1, 3, 4, 3, 0]</span>
+</pre></div>
+</div>
+<p>The second loader is typically used for the face verification task: each sample
+is a pair of two picture belonging or not to the same person:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">fetch_lfw_pairs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lfw_pairs_train</span> <span class="o">=</span> <span class="n">fetch_lfw_pairs</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">lfw_pairs_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">)</span>
+<span class="go">[&#39;Different persons&#39;, &#39;Same person&#39;]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lfw_pairs_train</span><span class="o">.</span><span class="n">pairs</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2200, 2, 62, 47)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lfw_pairs_train</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2200, 5828)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lfw_pairs_train</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2200,)</span>
+</pre></div>
+</div>
+<p>Both for the <a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_lfw_people.html#sklearn.datasets.fetch_lfw_people" title="sklearn.datasets.fetch_lfw_people"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_lfw_people</span></code></a> and
+<a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_lfw_pairs.html#sklearn.datasets.fetch_lfw_pairs" title="sklearn.datasets.fetch_lfw_pairs"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_lfw_pairs</span></code></a> function it is
+possible to get an additional dimension with the RGB color channels by
+passing <code class="docutils literal"><span class="pre">color=True</span></code>, in that case the shape will be
+<code class="docutils literal"><span class="pre">(2200,</span> <span class="pre">2,</span> <span class="pre">62,</span> <span class="pre">47,</span> <span class="pre">3)</span></code>.</p>
+<p>The <a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_lfw_pairs.html#sklearn.datasets.fetch_lfw_pairs" title="sklearn.datasets.fetch_lfw_pairs"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_lfw_pairs</span></code></a> datasets is subdivided into
+3 subsets: the development <code class="docutils literal"><span class="pre">train</span></code> set, the development <code class="docutils literal"><span class="pre">test</span></code> set and
+an evaluation <code class="docutils literal"><span class="pre">10_folds</span></code> set meant to compute performance metrics using a
+10-folds cross validation scheme.</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://vis-www.cs.umass.edu/lfw/lfw.pdf">Labeled Faces in the Wild: A Database for Studying Face Recognition
+in Unconstrained Environments.</a>
+Gary B. Huang, Manu Ramesh, Tamara Berg, and Erik Learned-Miller.
+University of Massachusetts, Amherst, Technical Report 07-49, October, 2007.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>5.5.4.2. Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../auto_examples/applications/face_recognition.html#example-applications-face-recognition-py"><span class="std std-ref">Faces recognition example using eigenfaces and SVMs</span></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/datasets/labeled_faces.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="mldata.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

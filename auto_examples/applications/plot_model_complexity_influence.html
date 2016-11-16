@@ -1,0 +1,491 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>Model Complexity Influence &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="next" title="Species distribution modeling" href="plot_species_distribution_modeling.html" />
+    <link rel="prev" title="Faces recognition example using eigenfaces and SVMs" href="face_recognition.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/applications/plot_model_complexity_influence.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="face_recognition.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Faces recogni...
+        </span>
+            <span class="hiddenrellink">
+            Faces recognition example using eigenfaces and SVMs
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        Examples
+        </span>
+            <span class="hiddenrellink">
+            Examples
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">Model Complexity Influence</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="model-complexity-influence">
+<span id="example-applications-plot-model-complexity-influence-py"></span><h1>Model Complexity Influence<a class="headerlink" href="#model-complexity-influence" title="Permalink to this headline">¶</a></h1>
+<p>Demonstrate how model complexity influences both prediction accuracy and
+computational performance.</p>
+<p>The dataset is the Boston Housing dataset (resp. 20 Newsgroups) for
+regression (resp. classification).</p>
+<p>For each class of models we make the model complexity vary through the choice
+of relevant model parameters and measure the influence on both computational
+performance (latency) and predictive power (MSE or Hamming Loss).</p>
+<ul class="horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/plot_model_complexity_influence_001.png"><img alt="../../_images/plot_model_complexity_influence_001.png" src="../../_images/plot_model_complexity_influence_001.png" style="width: 564.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/plot_model_complexity_influence_002.png"><img alt="../../_images/plot_model_complexity_influence_002.png" src="../../_images/plot_model_complexity_influence_002.png" style="width: 564.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/plot_model_complexity_influence_003.png"><img alt="../../_images/plot_model_complexity_influence_003.png" src="../../_images/plot_model_complexity_influence_003.png" style="width: 564.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p><strong>Script output</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+       <span class="n">eta0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+       <span class="n">learning_rate</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;modified_huber&#39;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+       <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span> <span class="n">power_t</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <a href="../../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle"><span class="n">shuffle</span></a><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+       <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">4454</span> <span class="o">|</span> <span class="n">Hamming</span> <span class="n">Loss</span> <span class="p">(</span><span class="n">Misclassification</span> <span class="n">Ratio</span><span class="p">):</span> <span class="mf">0.2501</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.030249</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+       <span class="n">eta0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
+       <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;modified_huber&#39;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span>
+       <span class="n">power_t</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <a href="../../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle"><span class="n">shuffle</span></a><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+       <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">1624</span> <span class="o">|</span> <span class="n">Hamming</span> <span class="n">Loss</span> <span class="p">(</span><span class="n">Misclassification</span> <span class="n">Ratio</span><span class="p">):</span> <span class="mf">0.2923</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.022773</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+       <span class="n">eta0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+       <span class="n">learning_rate</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;modified_huber&#39;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+       <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span> <span class="n">power_t</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <a href="../../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle"><span class="n">shuffle</span></a><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+       <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">873</span> <span class="o">|</span> <span class="n">Hamming</span> <span class="n">Loss</span> <span class="p">(</span><span class="n">Misclassification</span> <span class="n">Ratio</span><span class="p">):</span> <span class="mf">0.3191</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.018224</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+       <span class="n">eta0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
+       <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;modified_huber&#39;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span>
+       <span class="n">power_t</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <a href="../../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle"><span class="n">shuffle</span></a><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+       <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">655</span> <span class="o">|</span> <span class="n">Hamming</span> <span class="n">Loss</span> <span class="p">(</span><span class="n">Misclassification</span> <span class="n">Ratio</span><span class="p">):</span> <span class="mf">0.3252</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.016595</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR"><span class="n">NuSVR</span></a><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">cache_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">coef0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">3.0517578125e-05</span><span class="p">,</span>
+   <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shrinking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+   <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">69</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">31.8133</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.000387</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR"><span class="n">NuSVR</span></a><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">cache_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">coef0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">3.0517578125e-05</span><span class="p">,</span>
+   <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">shrinking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+   <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">136</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">25.6140</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.000747</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR"><span class="n">NuSVR</span></a><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">cache_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">coef0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">3.0517578125e-05</span><span class="p">,</span>
+   <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">shrinking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+   <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">243</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">22.3315</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.001296</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR"><span class="n">NuSVR</span></a><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">cache_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">coef0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">3.0517578125e-05</span><span class="p">,</span>
+   <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">shrinking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+   <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">350</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">21.3679</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.001860</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR"><span class="n">NuSVR</span></a><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">cache_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">coef0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">3.0517578125e-05</span><span class="p">,</span>
+   <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">shrinking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+   <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">404</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">21.0915</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.002109</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor"><span class="n">GradientBoostingRegressor</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;friedman_mse&#39;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_impurity_split</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">07</span><span class="p">,</span>
+             <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+             <span class="n">min_weight_fraction_leaf</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">presort</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+             <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">10</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">28.9793</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.000105</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor"><span class="n">GradientBoostingRegressor</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;friedman_mse&#39;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_impurity_split</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">07</span><span class="p">,</span>
+             <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+             <span class="n">min_weight_fraction_leaf</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">presort</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+             <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">50</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">8.3398</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.000199</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor"><span class="n">GradientBoostingRegressor</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;friedman_mse&#39;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_impurity_split</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">07</span><span class="p">,</span>
+             <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+             <span class="n">min_weight_fraction_leaf</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+             <span class="n">presort</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+             <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">100</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">7.0096</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.000304</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor"><span class="n">GradientBoostingRegressor</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;friedman_mse&#39;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_impurity_split</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">07</span><span class="p">,</span>
+             <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+             <span class="n">min_weight_fraction_leaf</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+             <span class="n">presort</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+             <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">200</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">6.1836</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.000426</span><span class="n">s</span>
+
+<span class="n">Benchmarking</span> <a href="../../modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor"><span class="n">GradientBoostingRegressor</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;friedman_mse&#39;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_impurity_split</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">07</span><span class="p">,</span>
+             <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+             <span class="n">min_weight_fraction_leaf</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+             <span class="n">presort</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+             <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Complexity</span><span class="p">:</span> <span class="mi">500</span> <span class="o">|</span> <span class="n">MSE</span><span class="p">:</span> <span class="mf">6.3426</span> <span class="o">|</span> <span class="n">Pred</span><span class="o">.</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">0.001167</span><span class="n">s</span>
+</pre></div>
+</div>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_model_complexity_influence.py" download=""><code class="xref download docutils literal"><span class="pre">plot_model_complexity_influence.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>
+<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+
+<span class="c1"># Author: Eustache Diemert &lt;eustache@diemert.fr&gt;</span>
+<span class="c1"># License: BSD 3 clause</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1.parasite_axes</span> <span class="k">import</span> <span class="n">host_subplot</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axisartist.axislines</span> <span class="k">import</span> <span class="n">Axes</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse.csr</span> <span class="k">import</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.sparse.csr_matrix.getH.html#scipy.sparse.csr_matrix"><span class="n">csr_matrix</span></a>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle"><span class="n">shuffle</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error"><span class="n">mean_squared_error</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.svm.classes</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR"><span class="n">NuSVR</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble.gradient_boosting</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor"><span class="n">GradientBoostingRegressor</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model.stochastic_gradient</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.metrics.hamming_loss.html#sklearn.metrics.hamming_loss"><span class="n">hamming_loss</span></a>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Routines</span>
+
+
+<span class="c1"># initialize random generator</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate regression/classification data.&quot;&quot;&quot;</span>
+    <span class="n">bunch</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">case</span> <span class="o">==</span> <span class="s1">&#39;regression&#39;</span><span class="p">:</span>
+        <span class="n">bunch</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston"><span class="n">datasets</span><span class="o">.</span><span class="n">load_boston</span></a><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">case</span> <span class="o">==</span> <span class="s1">&#39;classification&#39;</span><span class="p">:</span>
+        <span class="n">bunch</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.fetch_20newsgroups_vectorized.html#sklearn.datasets.fetch_20newsgroups_vectorized"><span class="n">datasets</span><span class="o">.</span><span class="n">fetch_20newsgroups_vectorized</span></a><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle"><span class="n">shuffle</span></a><span class="p">(</span><span class="n">bunch</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">bunch</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">offset</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">offset</span><span class="p">]</span>
+    <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">offset</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">offset</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="n">sparse</span><span class="p">:</span>
+        <span class="n">X_train</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.sparse.csr_matrix.getH.html#scipy.sparse.csr_matrix"><span class="n">csr_matrix</span></a><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+        <span class="n">X_test</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/scipy-0.11.0/reference/generated/scipy.sparse.csr_matrix.getH.html#scipy.sparse.csr_matrix"><span class="n">csr_matrix</span></a><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">X_train</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+        <span class="n">X_test</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">y_test</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+    <span class="n">y_train</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X_train&#39;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">,</span> <span class="s1">&#39;X_test&#39;</span><span class="p">:</span> <span class="n">X_test</span><span class="p">,</span> <span class="s1">&#39;y_train&#39;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
+            <span class="s1">&#39;y_test&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="k">def</span> <span class="nf">benchmark_influence</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Benchmark influence of :changing_param: on both MSE and latency.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prediction_times</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">prediction_powers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">complexities</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">param_value</span> <span class="ow">in</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;changing_param_values&#39;</span><span class="p">]:</span>
+        <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;tuned_params&#39;</span><span class="p">][</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;changing_param&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">param_value</span>
+        <span class="n">estimator</span> <span class="o">=</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;estimator&#39;</span><span class="p">](</span><span class="o">**</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;tuned_params&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Benchmarking </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">estimator</span><span class="p">)</span>
+        <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_train&#39;</span><span class="p">],</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y_train&#39;</span><span class="p">])</span>
+        <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;postfit_hook&#39;</span><span class="p">](</span><span class="n">estimator</span><span class="p">)</span>
+        <span class="n">complexity</span> <span class="o">=</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;complexity_computer&#39;</span><span class="p">](</span><span class="n">estimator</span><span class="p">)</span>
+        <span class="n">complexities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">complexity</span><span class="p">)</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;n_samples&#39;</span><span class="p">]):</span>
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_test&#39;</span><span class="p">])</span>
+        <span class="n">elapsed_time</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;n_samples&#39;</span><span class="p">])</span>
+        <span class="n">prediction_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elapsed_time</span><span class="p">)</span>
+        <span class="n">pred_score</span> <span class="o">=</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;prediction_performance_computer&#39;</span><span class="p">](</span>
+            <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y_test&#39;</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">prediction_powers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred_score</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Complexity: </span><span class="si">%d</span><span class="s2"> | </span><span class="si">%s</span><span class="s2">: </span><span class="si">%.4f</span><span class="s2"> | Pred. Time: </span><span class="si">%f</span><span class="s2">s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="n">complexity</span><span class="p">,</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;prediction_performance_label&#39;</span><span class="p">],</span> <span class="n">pred_score</span><span class="p">,</span>
+            <span class="n">elapsed_time</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">prediction_powers</span><span class="p">,</span> <span class="n">prediction_times</span><span class="p">,</span> <span class="n">complexities</span>
+
+
+<span class="k">def</span> <span class="nf">plot_influence</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">mse_values</span><span class="p">,</span> <span class="n">prediction_times</span><span class="p">,</span> <span class="n">complexities</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot influence of model complexity on both accuracy and latency.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">host_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">axes_class</span><span class="o">=</span><span class="n">Axes</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.subplots_adjust"><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span></a><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">par1</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+    <span class="n">host</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Model Complexity (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;complexity_label&#39;</span><span class="p">])</span>
+    <span class="n">y1_label</span> <span class="o">=</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;prediction_performance_label&#39;</span><span class="p">]</span>
+    <span class="n">y2_label</span> <span class="o">=</span> <span class="s2">&quot;Time (s)&quot;</span>
+    <span class="n">host</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y1_label</span><span class="p">)</span>
+    <span class="n">par1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y2_label</span><span class="p">)</span>
+    <span class="n">p1</span><span class="p">,</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">complexities</span><span class="p">,</span> <span class="n">mse_values</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;prediction error&quot;</span><span class="p">)</span>
+    <span class="n">p2</span><span class="p">,</span> <span class="o">=</span> <span class="n">par1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">complexities</span><span class="p">,</span> <span class="n">prediction_times</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span>
+                    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;latency&quot;</span><span class="p">)</span>
+    <span class="n">host</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+    <span class="n">host</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">get_color</span><span class="p">())</span>
+    <span class="n">par1</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s2">&quot;right&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">p2</span><span class="o">.</span><span class="n">get_color</span><span class="p">())</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Influence of Model Complexity - </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;estimator&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_count_nonzero_coefficients</span><span class="p">(</span><span class="n">estimator</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+    <span class="k">return</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.count_nonzero.html#numpy.count_nonzero"><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span></a><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># main code</span>
+<span class="n">regression_data</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="s1">&#39;regression&#39;</span><span class="p">)</span>
+<span class="n">classification_data</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="s1">&#39;classification&#39;</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">configurations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;estimator&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">,</span>
+     <span class="s1">&#39;tuned_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span> <span class="s1">&#39;loss&#39;</span><span class="p">:</span>
+                      <span class="s1">&#39;modified_huber&#39;</span><span class="p">,</span> <span class="s1">&#39;fit_intercept&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+     <span class="s1">&#39;changing_param&#39;</span><span class="p">:</span> <span class="s1">&#39;l1_ratio&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;changing_param_values&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+     <span class="s1">&#39;complexity_label&#39;</span><span class="p">:</span> <span class="s1">&#39;non_zero coefficients&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;complexity_computer&#39;</span><span class="p">:</span> <span class="n">_count_nonzero_coefficients</span><span class="p">,</span>
+     <span class="s1">&#39;prediction_performance_computer&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.metrics.hamming_loss.html#sklearn.metrics.hamming_loss"><span class="n">hamming_loss</span></a><span class="p">,</span>
+     <span class="s1">&#39;prediction_performance_label&#39;</span><span class="p">:</span> <span class="s1">&#39;Hamming Loss (Misclassification Ratio)&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;postfit_hook&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sparsify</span><span class="p">(),</span>
+     <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">classification_data</span><span class="p">,</span>
+     <span class="s1">&#39;n_samples&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;estimator&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.svm.NuSVR.html#sklearn.svm.NuSVR"><span class="n">NuSVR</span></a><span class="p">,</span>
+     <span class="s1">&#39;tuned_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="n">e3</span><span class="p">,</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">**</span> <span class="o">-</span><span class="mi">15</span><span class="p">},</span>
+     <span class="s1">&#39;changing_param&#39;</span><span class="p">:</span> <span class="s1">&#39;nu&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;changing_param_values&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+     <span class="s1">&#39;complexity_label&#39;</span><span class="p">:</span> <span class="s1">&#39;n_support_vectors&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;complexity_computer&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">support_vectors_</span><span class="p">),</span>
+     <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">regression_data</span><span class="p">,</span>
+     <span class="s1">&#39;postfit_hook&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+     <span class="s1">&#39;prediction_performance_computer&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error"><span class="n">mean_squared_error</span></a><span class="p">,</span>
+     <span class="s1">&#39;prediction_performance_label&#39;</span><span class="p">:</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;n_samples&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;estimator&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor"><span class="n">GradientBoostingRegressor</span></a><span class="p">,</span>
+     <span class="s1">&#39;tuned_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="s1">&#39;ls&#39;</span><span class="p">},</span>
+     <span class="s1">&#39;changing_param&#39;</span><span class="p">:</span> <span class="s1">&#39;n_estimators&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;changing_param_values&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span>
+     <span class="s1">&#39;complexity_label&#39;</span><span class="p">:</span> <span class="s1">&#39;n_trees&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;complexity_computer&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">n_estimators</span><span class="p">,</span>
+     <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">regression_data</span><span class="p">,</span>
+     <span class="s1">&#39;postfit_hook&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+     <span class="s1">&#39;prediction_performance_computer&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error"><span class="n">mean_squared_error</span></a><span class="p">,</span>
+     <span class="s1">&#39;prediction_performance_label&#39;</span><span class="p">:</span> <span class="s1">&#39;MSE&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;n_samples&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">conf</span> <span class="ow">in</span> <span class="n">configurations</span><span class="p">:</span>
+    <span class="n">prediction_performances</span><span class="p">,</span> <span class="n">prediction_times</span><span class="p">,</span> <span class="n">complexities</span> <span class="o">=</span> \
+        <span class="n">benchmark_influence</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="n">plot_influence</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">prediction_performances</span><span class="p">,</span> <span class="n">prediction_times</span><span class="p">,</span>
+                   <span class="n">complexities</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>  54.53 seconds
+( 0 minutes  54.53 seconds)</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/auto_examples/applications/plot_model_complexity_influence.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="face_recognition.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

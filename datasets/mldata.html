@@ -1,0 +1,282 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>5.5.3. Downloading datasets from the mldata.org repository &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="5. Dataset loading utilities" href="index.html" />
+    <link rel="next" title="5.5.4. The Labeled Faces in the Wild face recognition dataset" href="labeled_faces.html" />
+    <link rel="prev" title="5.5.2. The 20 newsgroups text dataset" href="twenty_newsgroups.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/datasets/mldata.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="twenty_newsgroups.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        5.5.2. The 20...
+        </span>
+            <span class="hiddenrellink">
+            5.5.2. The 20 newsgroups text dataset
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        5. Dataset lo...
+        </span>
+            <span class="hiddenrellink">
+            5. Dataset loading utilities
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">5.5.3. Downloading datasets from the mldata.org repository</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="downloading-datasets-from-the-mldata-org-repository">
+<span id="mldata"></span><h1>5.5.3. Downloading datasets from the mldata.org repository<a class="headerlink" href="#downloading-datasets-from-the-mldata-org-repository" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://mldata.org">mldata.org</a> is a public repository for machine learning
+data, supported by the <a class="reference external" href="http://www.pascal-network.org">PASCAL network</a> .</p>
+<p>The <code class="docutils literal"><span class="pre">sklearn.datasets</span></code> package is able to directly download data
+sets from the repository using the function
+<a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_mldata.html#sklearn.datasets.fetch_mldata" title="sklearn.datasets.fetch_mldata"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></code></a>.</p>
+<p>For example, to download the MNIST digit recognition database:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">fetch_mldata</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mnist</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;MNIST original&#39;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The MNIST database contains a total of 70000 examples of handwritten digits
+of size 28x28 pixels, labeled from 0 to 9:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mnist</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(70000, 784)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mnist</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(70000,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">mnist</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="go">array([ 0.,  1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.,  9.])</span>
+</pre></div>
+</div>
+<p>After the first download, the dataset is cached locally in the path
+specified by the <code class="docutils literal"><span class="pre">data_home</span></code> keyword argument, which defaults to
+<code class="docutils literal"><span class="pre">~/scikit_learn_data/</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom_data_home</span><span class="p">,</span> <span class="s1">&#39;mldata&#39;</span><span class="p">))</span>
+<span class="go">[&#39;mnist-original.mat&#39;]</span>
+</pre></div>
+</div>
+<p>Data sets in <a class="reference external" href="http://mldata.org">mldata.org</a> do not adhere to a strict
+naming or formatting convention. <a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_mldata.html#sklearn.datasets.fetch_mldata" title="sklearn.datasets.fetch_mldata"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></code></a> is
+able to make sense of the most common cases, but allows to tailor the
+defaults to individual datasets:</p>
+<ul>
+<li><p class="first">The data arrays in <a class="reference external" href="http://mldata.org">mldata.org</a> are most often
+shaped as <code class="docutils literal"><span class="pre">(n_features,</span> <span class="pre">n_samples)</span></code>. This is the opposite of the
+<code class="docutils literal"><span class="pre">scikit-learn</span></code> convention, so <a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_mldata.html#sklearn.datasets.fetch_mldata" title="sklearn.datasets.fetch_mldata"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></code></a>
+transposes the matrix by default. The <code class="docutils literal"><span class="pre">transpose_data</span></code> keyword controls
+this behavior:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(150, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> <span class="n">transpose_data</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(4, 150)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For datasets with multiple columns, <a class="reference internal" href="../modules/generated/sklearn.datasets.fetch_mldata.html#sklearn.datasets.fetch_mldata" title="sklearn.datasets.fetch_mldata"><code class="xref py py-func docutils literal"><span class="pre">sklearn.datasets.fetch_mldata</span></code></a>
+tries to identify the target and data columns and rename them to <code class="docutils literal"><span class="pre">target</span></code>
+and <code class="docutils literal"><span class="pre">data</span></code>. This is done by looking for arrays named <code class="docutils literal"><span class="pre">label</span></code> and
+<code class="docutils literal"><span class="pre">data</span></code> in the dataset, and failing that by choosing the first array to be
+<code class="docutils literal"><span class="pre">target</span></code> and the second to be <code class="docutils literal"><span class="pre">data</span></code>. This behavior can be changed with
+the <code class="docutils literal"><span class="pre">target_name</span></code> and <code class="docutils literal"><span class="pre">data_name</span></code> keywords, setting them to a specific
+name or index number (the name and order of the columns in the datasets
+can be found at its <a class="reference external" href="http://mldata.org">mldata.org</a> under the tab &#8220;Data&#8221;:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iris2</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;datasets-UCI iris&#39;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris3</span> <span class="o">=</span> <span class="n">fetch_mldata</span><span class="p">(</span><span class="s1">&#39;datasets-UCI iris&#39;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;double0&#39;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="n">custom_data_home</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/datasets/mldata.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="twenty_newsgroups.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

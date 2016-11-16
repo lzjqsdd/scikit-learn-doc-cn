@@ -1,0 +1,148 @@
+
+
+.. _example_applications_plot_model_complexity_influence.py:
+
+
+==========================
+Model Complexity Influence
+==========================
+
+Demonstrate how model complexity influences both prediction accuracy and
+computational performance.
+
+The dataset is the Boston Housing dataset (resp. 20 Newsgroups) for
+regression (resp. classification).
+
+For each class of models we make the model complexity vary through the choice
+of relevant model parameters and measure the influence on both computational
+performance (latency) and predictive power (MSE or Hamming Loss).
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_model_complexity_influence_001.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_model_complexity_influence_002.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_model_complexity_influence_003.png
+            :scale: 47
+
+
+**Script output**::
+
+  Benchmarking SGDClassifier(alpha=0.001, average=False, class_weight=None, epsilon=0.1,
+         eta0=0.0, fit_intercept=True, l1_ratio=0.25,
+         learning_rate='optimal', loss='modified_huber', n_iter=5, n_jobs=1,
+         penalty='elasticnet', power_t=0.5, random_state=None, shuffle=True,
+         verbose=0, warm_start=False)
+  Complexity: 4454 | Hamming Loss (Misclassification Ratio): 0.2501 | Pred. Time: 0.030249s
+  
+  Benchmarking SGDClassifier(alpha=0.001, average=False, class_weight=None, epsilon=0.1,
+         eta0=0.0, fit_intercept=True, l1_ratio=0.5, learning_rate='optimal',
+         loss='modified_huber', n_iter=5, n_jobs=1, penalty='elasticnet',
+         power_t=0.5, random_state=None, shuffle=True, verbose=0,
+         warm_start=False)
+  Complexity: 1624 | Hamming Loss (Misclassification Ratio): 0.2923 | Pred. Time: 0.022773s
+  
+  Benchmarking SGDClassifier(alpha=0.001, average=False, class_weight=None, epsilon=0.1,
+         eta0=0.0, fit_intercept=True, l1_ratio=0.75,
+         learning_rate='optimal', loss='modified_huber', n_iter=5, n_jobs=1,
+         penalty='elasticnet', power_t=0.5, random_state=None, shuffle=True,
+         verbose=0, warm_start=False)
+  Complexity: 873 | Hamming Loss (Misclassification Ratio): 0.3191 | Pred. Time: 0.018224s
+  
+  Benchmarking SGDClassifier(alpha=0.001, average=False, class_weight=None, epsilon=0.1,
+         eta0=0.0, fit_intercept=True, l1_ratio=0.9, learning_rate='optimal',
+         loss='modified_huber', n_iter=5, n_jobs=1, penalty='elasticnet',
+         power_t=0.5, random_state=None, shuffle=True, verbose=0,
+         warm_start=False)
+  Complexity: 655 | Hamming Loss (Misclassification Ratio): 0.3252 | Pred. Time: 0.016595s
+  
+  Benchmarking NuSVR(C=1000.0, cache_size=200, coef0=0.0, degree=3, gamma=3.0517578125e-05,
+     kernel='rbf', max_iter=-1, nu=0.1, shrinking=True, tol=0.001,
+     verbose=False)
+  Complexity: 69 | MSE: 31.8133 | Pred. Time: 0.000387s
+  
+  Benchmarking NuSVR(C=1000.0, cache_size=200, coef0=0.0, degree=3, gamma=3.0517578125e-05,
+     kernel='rbf', max_iter=-1, nu=0.25, shrinking=True, tol=0.001,
+     verbose=False)
+  Complexity: 136 | MSE: 25.6140 | Pred. Time: 0.000747s
+  
+  Benchmarking NuSVR(C=1000.0, cache_size=200, coef0=0.0, degree=3, gamma=3.0517578125e-05,
+     kernel='rbf', max_iter=-1, nu=0.5, shrinking=True, tol=0.001,
+     verbose=False)
+  Complexity: 243 | MSE: 22.3315 | Pred. Time: 0.001296s
+  
+  Benchmarking NuSVR(C=1000.0, cache_size=200, coef0=0.0, degree=3, gamma=3.0517578125e-05,
+     kernel='rbf', max_iter=-1, nu=0.75, shrinking=True, tol=0.001,
+     verbose=False)
+  Complexity: 350 | MSE: 21.3679 | Pred. Time: 0.001860s
+  
+  Benchmarking NuSVR(C=1000.0, cache_size=200, coef0=0.0, degree=3, gamma=3.0517578125e-05,
+     kernel='rbf', max_iter=-1, nu=0.9, shrinking=True, tol=0.001,
+     verbose=False)
+  Complexity: 404 | MSE: 21.0915 | Pred. Time: 0.002109s
+  
+  Benchmarking GradientBoostingRegressor(alpha=0.9, criterion='friedman_mse', init=None,
+               learning_rate=0.1, loss='ls', max_depth=3, max_features=None,
+               max_leaf_nodes=None, min_impurity_split=1e-07,
+               min_samples_leaf=1, min_samples_split=2,
+               min_weight_fraction_leaf=0.0, n_estimators=10, presort='auto',
+               random_state=None, subsample=1.0, verbose=0, warm_start=False)
+  Complexity: 10 | MSE: 28.9793 | Pred. Time: 0.000105s
+  
+  Benchmarking GradientBoostingRegressor(alpha=0.9, criterion='friedman_mse', init=None,
+               learning_rate=0.1, loss='ls', max_depth=3, max_features=None,
+               max_leaf_nodes=None, min_impurity_split=1e-07,
+               min_samples_leaf=1, min_samples_split=2,
+               min_weight_fraction_leaf=0.0, n_estimators=50, presort='auto',
+               random_state=None, subsample=1.0, verbose=0, warm_start=False)
+  Complexity: 50 | MSE: 8.3398 | Pred. Time: 0.000199s
+  
+  Benchmarking GradientBoostingRegressor(alpha=0.9, criterion='friedman_mse', init=None,
+               learning_rate=0.1, loss='ls', max_depth=3, max_features=None,
+               max_leaf_nodes=None, min_impurity_split=1e-07,
+               min_samples_leaf=1, min_samples_split=2,
+               min_weight_fraction_leaf=0.0, n_estimators=100,
+               presort='auto', random_state=None, subsample=1.0, verbose=0,
+               warm_start=False)
+  Complexity: 100 | MSE: 7.0096 | Pred. Time: 0.000304s
+  
+  Benchmarking GradientBoostingRegressor(alpha=0.9, criterion='friedman_mse', init=None,
+               learning_rate=0.1, loss='ls', max_depth=3, max_features=None,
+               max_leaf_nodes=None, min_impurity_split=1e-07,
+               min_samples_leaf=1, min_samples_split=2,
+               min_weight_fraction_leaf=0.0, n_estimators=200,
+               presort='auto', random_state=None, subsample=1.0, verbose=0,
+               warm_start=False)
+  Complexity: 200 | MSE: 6.1836 | Pred. Time: 0.000426s
+  
+  Benchmarking GradientBoostingRegressor(alpha=0.9, criterion='friedman_mse', init=None,
+               learning_rate=0.1, loss='ls', max_depth=3, max_features=None,
+               max_leaf_nodes=None, min_impurity_split=1e-07,
+               min_samples_leaf=1, min_samples_split=2,
+               min_weight_fraction_leaf=0.0, n_estimators=500,
+               presort='auto', random_state=None, subsample=1.0, verbose=0,
+               warm_start=False)
+  Complexity: 500 | MSE: 6.3426 | Pred. Time: 0.001167s
+
+
+
+**Python source code:** :download:`plot_model_complexity_influence.py <plot_model_complexity_influence.py>`
+
+.. literalinclude:: plot_model_complexity_influence.py
+    :lines: 16-
+
+**Total running time of the example:**  54.53 seconds
+( 0 minutes  54.53 seconds)
+    

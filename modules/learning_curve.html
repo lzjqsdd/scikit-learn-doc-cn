@@ -1,0 +1,301 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>3.5. 验证曲线: 通过绘制评分图来评估模型 &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="3. Model selection and evaluation" href="../model_selection.html" />
+    <link rel="next" title="4. Dataset transformations" href="../data_transforms.html" />
+    <link rel="prev" title="3.4. Model persistence" href="model_persistence.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/learning_curve.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="model_persistence.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        3.4. Model pe...
+        </span>
+            <span class="hiddenrellink">
+            3.4. Model persistence
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../model_selection.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        3. Model sele...
+        </span>
+            <span class="hiddenrellink">
+            3. Model selection and evaluation
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">3.5. 验证曲线: 通过绘制评分图来评估模型</a><ul>
+<li><a class="reference internal" href="#validation-curve">3.5.1. Validation curve 验证曲线</a></li>
+<li><a class="reference internal" href="#learning-curve">3.5.2. Learning curve 学习曲线</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="learning-curves">
+<span id="id1"></span><h1>3.5. 验证曲线: 通过绘制评分图来评估模型<a class="headerlink" href="#learning-curves" title="Permalink to this headline">¶</a></h1>
+<p>每个预测模型都有它的优缺点。大体上它的误差由偏差(bias)、方差(variance)和噪声(noise)组成。一个模型的 <strong>偏差</strong>  指其对于不同的训练样本集，预测结果的平均误差。<strong>方差</strong> 指模型对于不同训练样本集的敏感程度。噪声则是数据集本身的一项属性。</p>
+<p>下表列出了函数 <img class="math" src="../_images/math/ca95547ed61b0a4590e7ce2865ee70fe3cbec299.png" alt="f(x) = \cos (\frac{3}{2} \pi x)"/>  以及该函数一些带噪声的数据。我们用三种不同的模型来拟合该函数: 分别是多项式特征维度为1、4、15的线性回归模型。 我们可以看到第一个模型至多只能糟糕地拟合这些数据和函数，因为该模型太过于简单（偏差）；第二个模型几乎完美预测了结果；而最后一个模型完美拟合了数据，但却没能很好地拟合真实的函数，换句话说，该模型对于不同的训练数据很敏感（方差）。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_underfitting_overfitting.html"><img alt="../_images/plot_underfitting_overfitting_0011.png" src="../_images/plot_underfitting_overfitting_0011.png" style="width: 700.0px; height: 250.0px;" /></a>
+</div>
+<p>偏差和方差是预测模型固有的属性，我们通常必须选择合适的学习算法和超参数来尽可能同时降低它们（见 <a class="reference external" href="http://en.wikipedia.org/wiki/Bias-variance_dilemma">Bias-variance dilemma</a>）。另一种降低方差的方式为使用更多的训练数据。但只有当使用更低方差的模型仍然无法拟合过于复杂的函数时，你才应该着手去收集更多的训练数据。</p>
+<p>在简单的一维问题中，我们很容易通过画图来判断模型是否有过大的偏差或方差。但对于高维空间的问题，模型往往很难可视化。因此使用下面介绍的工具往往会很有帮助。</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/model_selection/plot_underfitting_overfitting.html#example-model-selection-plot-underfitting-overfitting-py"><span class="std std-ref">Underfitting vs. Overfitting</span></a></li>
+<li><a class="reference internal" href="../auto_examples/model_selection/plot_validation_curve.html#example-model-selection-plot-validation-curve-py"><span class="std std-ref">Plotting Validation Curves</span></a></li>
+<li><a class="reference internal" href="../auto_examples/model_selection/plot_learning_curve.html#example-model-selection-plot-learning-curve-py"><span class="std std-ref">Plotting Learning Curves</span></a></li>
+</ul>
+</div>
+<div class="section" id="validation-curve">
+<span id="id2"></span><h2>3.5.1. Validation curve 验证曲线<a class="headerlink" href="#validation-curve" title="Permalink to this headline">¶</a></h2>
+<p>要验证一个模型，我们需要一个打分函数（见 <a class="reference internal" href="model_evaluation.html#model-evaluation"><span class="std std-ref">Model evaluation: quantifying the quality of predictions</span></a>），比如对于分类器我们使用准确率来打分。我们应使用grid search算法（见 <a class="reference internal" href="grid_search.html#grid-search"><span class="std std-ref">Grid Search: Searching for estimator parameters</span></a>）或其他类似算法（能够根据不同的验证集自动选择得分最高的超参数）来为模型选择合适的超参数。注意到如果我们使用验证分数来优化超参数，那么该验证分数是有偏差的，它无法再代表模型的泛化能力。我们需要使用其他测试集来重新评估模型的泛化能力。</p>
+<p>然而，有时画出单个超参数与训练分数和验证分数的关系图有助于观察该模型在相应的超参数取值时，是否有过拟合或欠拟合的情况发生。</p>
+<p>这时可以使用函数 <a class="reference internal" href="generated/sklearn.learning_curve.validation_curve.html#sklearn.learning_curve.validation_curve" title="sklearn.learning_curve.validation_curve"><code class="xref py py-func docutils literal"><span class="pre">validation_curve</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.learning_curve</span> <span class="k">import</span> <span class="n">validation_curve</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">Ridge</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train_scores</span><span class="p">,</span> <span class="n">valid_scores</span> <span class="o">=</span> <span class="n">validation_curve</span><span class="p">(</span><span class="n">Ridge</span><span class="p">(),</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;alpha&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                              <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train_scores</span>           
+<span class="go">array([[ 0.94...,  0.92...,  0.92...],</span>
+<span class="go">       [ 0.94...,  0.92...,  0.92...],</span>
+<span class="go">       [ 0.47...,  0.45...,  0.42...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">valid_scores</span>           
+<span class="go">array([[ 0.90...,  0.92...,  0.94...],</span>
+<span class="go">       [ 0.90...,  0.92...,  0.94...],</span>
+<span class="go">       [ 0.44...,  0.39...,  0.45...]])</span>
+</pre></div>
+</div>
+<p>如果训练分数和验证分数都很低，那么模型处于欠拟合的状态。如果训练分数很高但验证分数很低，那么模型处于过拟合的状态。如果训练和验证分数都很高，那么该模型拟合良好。同时出现低训练分数和高验证分数通常情况是不可能的。我们通过改变SVM模型的参数:math:<a href="#id3"><span class="problematic" id="id4">`</span></a>gamma`在下表中列出了上述三种情况。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_validation_curve.html"><img alt="../_images/plot_validation_curve_0011.png" src="../_images/plot_validation_curve_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+</div>
+<div class="section" id="learning-curve">
+<span id="id5"></span><h2>3.5.2. Learning curve 学习曲线<a class="headerlink" href="#learning-curve" title="Permalink to this headline">¶</a></h2>
+<p>学习曲线描述了模型对于不同数量的训练数据所得的验证和训练分数。它能够帮助我们判断通过增加训练数据量我们还能得到多少性能提升，以及模型是否更倾向于受到偏差或方差的影响。如果验证分数和训练分数随着训练数据的增加收敛于一个相对较低的值，那么继续增加数据量的收益有限。下图给出了一个例子：朴素贝叶斯模型大致收敛于一个较低的分数。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_learning_curve.html"><img alt="../_images/plot_learning_curve_0011.png" src="../_images/plot_learning_curve_0011.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<p>我们也许需要修改该模型的参数或者更换模型（有着更低的偏差）来学习更复杂的数据。如果当训练数据数量达到最大时，训练分数仍远大于验证分数，那么增加训练数据有助于提升模型的泛化能力。由下图可见，SVM模型受益于更多数量的训练数据。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_learning_curve.html"><img alt="../_images/plot_learning_curve_0021.png" src="../_images/plot_learning_curve_0021.png" style="width: 400.0px; height: 300.0px;" /></a>
+</div>
+<p>我们可以使用函数 <a class="reference internal" href="generated/sklearn.learning_curve.learning_curve.html#sklearn.learning_curve.learning_curve" title="sklearn.learning_curve.learning_curve"><code class="xref py py-func docutils literal"><span class="pre">learning_curve</span></code></a> 来得到画出学习曲线所需的参数（使用的样本数量，训练数据集的平均得分，验证数据集的平均得分）:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.learning_curve</span> <span class="k">import</span> <span class="n">learning_curve</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">valid_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">),</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">train_sizes</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">110</span><span class="p">],</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train_sizes</span>            
+<span class="go">array([ 50, 80, 110])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train_scores</span>           
+<span class="go">array([[ 0.98...,  0.98 ,  0.98...,  0.98...,  0.98...],</span>
+<span class="go">       [ 0.98...,  1.   ,  0.98...,  0.98...,  0.98...],</span>
+<span class="go">       [ 0.98...,  1.   ,  0.98...,  0.98...,  0.99...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">valid_scores</span>           
+<span class="go">array([[ 1. ,  0.93...,  1. ,  1. ,  0.96...],</span>
+<span class="go">       [ 1. ,  0.96...,  1. ,  1. ,  0.96...],</span>
+<span class="go">       [ 1. ,  0.96...,  1. ,  1. ,  0.96...]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/learning_curve.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="model_persistence.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

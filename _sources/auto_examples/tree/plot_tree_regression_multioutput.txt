@@ -1,0 +1,36 @@
+
+
+.. _example_tree_plot_tree_regression_multioutput.py:
+
+
+===================================================================
+Multi-output Decision Tree Regression
+===================================================================
+
+An example to illustrate multi-output regression with decision tree.
+
+The :ref:`decision trees <tree>`
+is used to predict simultaneously the noisy x and y observations of a circle
+given a single underlying feature. As a result, it learns local linear
+regressions approximating the circle.
+
+We can see that if the maximum depth of the tree (controlled by the
+`max_depth` parameter) is set too high, the decision trees learn too fine
+details of the training data and learn from the noise, i.e. they overfit.
+
+
+
+.. image:: images/plot_tree_regression_multioutput_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_tree_regression_multioutput.py <plot_tree_regression_multioutput.py>`
+
+.. literalinclude:: plot_tree_regression_multioutput.py
+    :lines: 17-
+
+**Total running time of the example:**  0.22 seconds
+( 0 minutes  0.22 seconds)
+    

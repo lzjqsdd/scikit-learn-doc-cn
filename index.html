@@ -1,0 +1,489 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>scikit-learn: machine learning in Python &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="#" />
+    <link rel="next" title="scikit-learn" href="preface.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/index.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="#">
+            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="#">主页</a></li>
+                <li><a href="install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="tutorial/index.html">入门指南</a></li>
+            <li><a href="user_guide.html">使用手册</a></li>
+            <li><a href="modules/classes.html">API</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+<!-- Banner -->
+<div class="container banner-container">
+  <div class="row-fluid banner-inner">
+    <div class="hidden-phone">
+      <div class="span6">
+	<div class="row-fluid">
+          <div class="offset2 span8"><div id="index_carousel_tn" class="thumbnail">
+	      <div id="examples_carousel" class="carousel slide" data-interval="false">
+		<ol id="scikit_learn_index_indicators" class="carousel-indicators">
+		  <li data-target="#examples_carousel" data-slide-to="0" class="active"></li>
+		  <li data-target="#examples_carousel" data-slide-to="1"></li>
+		  <li data-target="#examples_carousel" data-slide-to="2"></li>
+		  <li data-target="#examples_carousel" data-slide-to="3"></li>
+		  <li data-target="#examples_carousel" data-slide-to="4"></li>
+		  <li data-target="#examples_carousel" data-slide-to="5"></li>
+		  <li data-target="#examples_carousel" data-slide-to="6"></li>
+		  <li data-target="#examples_carousel" data-slide-to="7"></li>
+		  <li data-target="#examples_carousel" data-slide-to="8"></li>
+		  <li data-target="#examples_carousel" data-slide-to="9"></li>
+		</ol>
+		<!-- Carousel items -->
+		<div class="carousel-inner">
+		  <div class="active item">
+		    <a href="auto_examples/classification/plot_classifier_comparison.html">
+		      <div class="crop-wrapper" style="width: 380px; height: 190px; overflow: hidden">
+			<img src="_images/plot_classifier_comparison_carousel.png"
+			     style="max-height: 200px; max-width: 629px; margin-left: -21px;"></div></a>
+		  </div>
+		  <div class="item">
+		    <a href="auto_examples/covariance/plot_outlier_detection.html">
+		      <img src="_images/plot_outlier_detection_carousel.png"></a>
+		  </div>
+		  <div class="item">
+		    <a href="auto_examples/neighbors/plot_species_kde.html">
+		      <img src="_images/plot_species_kde.png"></a>
+		  </div>
+		  <div class="item">
+		    <a href="auto_examples/linear_model/plot_lasso_lars.html">
+		      <img src="_images/plot_lasso_lars.png"></a>
+		  </div>
+		  <div class="item">
+		    <a href="auto_examples/cluster/plot_cluster_comparison.html">
+		      <img src="_images/plot_cluster_comparison.png"></a>
+		  </div>
+		  <div class="item">
+		    <a href="auto_examples/ensemble/plot_adaboost_twoclass.html">
+		      <img src="_images/plot_adaboost_twoclass_carousel.png"></a>
+		  </div>
+		  <div class="item">
+		    <a href="auto_examples/gaussian_process/plot_gp_regression.html">
+		      <img src="_images/plot_gp_regression_carousel.png"></a>
+		  </div>
+		  <div class="item">
+		    <a href="auto_examples/manifold/plot_compare_methods.html">
+		      <img src="_images/plot_compare_methods_carousel.png"></a>
+		  </div>
+		  <div class="item">
+		    <a href="auto_examples/mixture/plot_gmm_pdf.html">
+		      <img src="_images/plot_gmm_pdf.png"></a>
+		  </div>
+		  <div class="item">
+		    <a href="auto_examples/cluster/plot_lena_ward_segmentation.html">
+		      <img src="_images/plot_lena_ward_segmentation.png"></a>
+		  </div>
+		</div>
+		<!-- Carousel nav -->
+		<a class="carousel-control left" href="#examples_carousel" data-slide="prev">&lsaquo;</a>
+		<a class="carousel-control right" href="#examples_carousel" data-slide="next">&rsaquo;</a>
+	      </div>
+	  </div></div>
+	</div>
+      </div>
+    </div>
+    <div id="intro_to_sklearn_p" class="span6">
+      <h1>scikit-learn</h1>
+      <h2>基于Python语言的机器学习工具</h2>
+      <h2>Scikit-Learn中文翻译项目，欢迎参与<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">github地址</a></h2>
+      <ul>
+        <li>简单高效的数据挖掘和数据分析工具</li>
+        <li>所有人都适用，可在不同的上下文中重用</li>
+        <li>基于NumPy、SciPy和matplotlib构建</li>
+        <li>开源、商业可用 - BSD许可</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <!-- Block section -->
+<div class="container-index">
+<div class="container index-upper">
+<div class="row-fluid">
+
+<!-- 分类 -->
+<div class="span4 box">
+<h2 ><p><a class="reference internal" href="supervised_learning.html#supervised-learning"><span class="std std-ref">分类</span></a></p>
+</h2>
+<blockquote>
+<p>识别某个对象属于哪个类别。</p>
+<div class="box-links">
+<strong>应用</strong>: 垃圾邮件检测，图像识别。</br>
+<strong>算法</strong>:&nbsp;<p><a class="reference internal" href="modules/svm.html#svm"><span class="std std-ref">SVM</span></a>, <a class="reference internal" href="modules/neighbors.html#classification"><span class="std std-ref">nearest neighbors</span></a>, <a class="reference internal" href="modules/ensemble.html#forest"><span class="std std-ref">random forest</span></a>, ...</p>
+<small class="float-right box-example-links"><p><a class="reference internal" href="auto_examples/index.html#general-examples"><span class="std std-ref">Examples</span></a></p>
+</small>
+</div>
+</blockquote>
+</div>
+
+<!-- 回归 -->
+<div class="span4 box">
+<h2><p><a class="reference internal" href="supervised_learning.html#supervised-learning"><span class="std std-ref">回归</span></a></p>
+</h2>
+<blockquote>
+<p>预测一个与对象相关的值连续的属性</p>
+<div class="box-links">
+<strong>应用</strong>: 药品反应，股票价格.</br>
+<strong>算法</strong>:&nbsp;<p><a class="reference internal" href="modules/svm.html#svm"><span class="std std-ref">SVR</span></a>, <a class="reference internal" href="modules/linear_model.html#ridge-regression"><span class="std std-ref">ridge regression</span></a>, <a class="reference internal" href="modules/linear_model.html#lasso"><span class="std std-ref">Lasso</span></a>, ...</p>
+<small class="float-right box-example-links"><p><a class="reference internal" href="auto_examples/index.html#general-examples"><span class="std std-ref">Examples</span></a></p>
+</small>
+</div>
+</blockquote>
+</div>
+
+<!-- Clustering -->
+<div class="span4 box">
+<h2><p><a class="reference internal" href="modules/clustering.html#clustering"><span class="std std-ref">聚类</span></a></p>
+</h2>
+<blockquote>
+<p>相似对象的自动分组</p>
+<div class="box-links">
+<strong>应用</strong>: Customer segmentation, Grouping experiment outcomes</br>
+<strong>算法</strong>:&nbsp;<p><a class="reference internal" href="modules/clustering.html#k-means"><span class="std std-ref">k-Means</span></a>, <a class="reference internal" href="modules/clustering.html#spectral-clustering"><span class="std std-ref">spectral clustering</span></a>, <a class="reference internal" href="modules/clustering.html#mean-shift"><span class="std std-ref">mean-shift</span></a>, ...</p>
+<small class="float-right example-links"><p><a class="reference internal" href="auto_examples/index.html#cluster-examples"><span class="std std-ref">Examples</span></a></p>
+</small>
+</div>
+</blockquote>
+</div>
+
+<!-- row -->
+</div>
+<div class="row-fluid">
+
+<!-- Dimension reduction -->
+<div class="span4 box">
+<h2><p><a class="reference internal" href="modules/decomposition.html#decompositions"><span class="std std-ref">降维</span></a></p>
+</h2>
+<blockquote>
+<p>减少要考虑的随机变量的数量</p>
+<div class="box-links">
+<strong>应用</strong>: Visualization, Increased efficiency</br>
+<strong>算法</strong>:&nbsp;<p><a class="reference internal" href="modules/decomposition.html#pca"><span class="std std-ref">PCA</span></a>, <a class="reference internal" href="modules/feature_selection.html#feature-selection"><span class="std std-ref">feature selection</span></a>, <a class="reference internal" href="modules/decomposition.html#nmf"><span class="std std-ref">non-negative matrix factorization</span></a>.</p>
+<small class="float-right example-links"><p><a class="reference internal" href="auto_examples/index.html#decomposition-examples"><span class="std std-ref">Examples</span></a></p>
+</small>
+</div>
+</blockquote>
+</div>
+
+<!-- Model selection -->
+<div class="span4 box">
+<h2><p><a class="reference internal" href="model_selection.html#model-selection"><span class="std std-ref">模型选择</span></a></p>
+</h2>
+<blockquote>
+<p>比较，验证，选择参数和模型。</p>
+<div class="box-links">
+<strong>目标</strong>: 通过参数调试提高模型精度</br>
+<strong>模块</strong>:&nbsp;<p><a class="reference internal" href="modules/grid_search.html#grid-search"><span class="std std-ref">grid search</span></a>, <a class="reference internal" href="modules/cross_validation.html#cross-validation"><span class="std std-ref">cross validation</span></a>, <a class="reference internal" href="modules/model_evaluation.html#model-evaluation"><span class="std std-ref">metrics</span></a>.</p>
+<small class="float-right example-links"><p><a class="reference internal" href="auto_examples/index.html#general-examples"><span class="std std-ref">Examples</span></a></p>
+</small>
+</div>
+</blockquote>
+</div>
+
+
+<!-- Preprocessing -->
+<div class="span4 box">
+<h2><p><a class="reference internal" href="modules/preprocessing.html#preprocessing"><span class="std std-ref">预处理</span></a></p>
+</h2>
+<blockquote>
+<p>特征提取与归一化。</p>
+<div class="box-links">
+<strong>应用</strong>: 把输入数据（如文本）转换为机器学习算法可用的数据.</br>
+<strong>模块</strong>:&nbsp;<p><a class="reference internal" href="modules/preprocessing.html#preprocessing"><span class="std std-ref">preprocessing</span></a>, <a class="reference internal" href="modules/feature_extraction.html#feature-extraction"><span class="std std-ref">feature extraction</span></a>.</p>
+<span class="example-links">
+<small class="float-right example-links"><p><a class="reference internal" href="auto_examples/index.html#general-examples"><span class="std std-ref">Examples</span></a></p>
+</small>
+</div>
+</blockquote>
+</div>
+
+<!-- row -->
+</div>
+</div> <!-- container -->
+
+
+<div class="container index-lower">
+    <div class="row-fluid">
+        <!-- News -->
+        <div class="span4">
+            <h4>新闻</h4>
+            <ul>
+            <li><em>正在开发:</em>
+            <a href="whats_new.html"><em>What's new</em> (更新日志)</a>
+            </li>
+            <li><em>2015年11月</em> scikit-learn 0.17.0 提供下载 (<a href="whats_new.html">更新日志</a>).
+            </li>
+            <li><em>2015年3月</em> scikit-learn 0.16.0 提供下载 (<a href="whats_new.html">更新日志</a>).
+            </li>
+            <li><em>2014年7月</em> scikit-learn 0.15.0 提供下载 (<a href="whats_new.html">更新日志</a>).
+            </li>
+            <li><em>2014年7月14日: 国际冲刺.</em>
+            在这一周的冲刺中，我们在巴黎聚集了18名核心贡献者。 要感谢我们的赞助商 :
+            <a href="http://www.campus-paris-saclay.fr/en/Idex-Paris-Saclay/Les-Lidex/Paris-Saclay-Center-for-Data-Science">
+            Paris-Saclay Center for Data Science</a>
+            & <a href="https://digicosme.lri.fr">Digicosme</a> 和我们的主办方
+             <a href="http://lapaillasse.org">La Paillasse</a>,
+            <a href="http://www.criteo.com/">Criteo</a>,
+            <a href="http://www.inria.fr/">Inria</a>,
+            and <a href="http://www.tinyclues.com/">tinyclues</a>.
+            </li>
+            <li><em>2013年8月</em> scikit-learn 0.14 is 提供下载 (<a href="whats_new.html">更新日志</a>).
+            </li>
+            </ul>
+        </div>
+
+        <!-- Community -->
+        <div class="span4">
+            <h4>社区</h4>
+            <ul>
+            <li><em>关于我们</em> See <a href="about.html#people">authors</a></li>
+            <li><em>更多机器学习</em> 发现 <a href="related_projects.html">相关项目</a></li>
+            <li><em>疑问</em> 请看 <a href="faq/">FAQ</a> and <a href="http://stackoverflow.com/questions/tagged/scikit-learn">stackoverflow</a></li>
+            <li><em>邮件列表:</em> <a href="https://lists.sourceforge.net/lists/listinfo/scikit-learn-general">scikit-learn-general@lists.sourceforge.net</a></li>
+            <li><em>IRC:</em> #scikit-learn @ <a href="http://webchat.freenode.net/">freenode</a></li>
+            <li><em>中文翻译:</em> <a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">scikit-learn-doc-cn</a></li>
+            </ul>
+
+            <form target="_top" id="paypal-form" method="post" action="https://www.paypal.com/cgi-bin/webscr">
+                <input type="hidden" value="_s-xclick" name="cmd">
+                <input type="hidden" value="74EYUMF3FTSW8" name="hosted_button_id">
+            </form>
+
+            <a class="btn btn-warning btn-big" onclick="document.getElementById('paypal-form').submit(); return false;">Help us, <strong>donate!</strong></a>
+            <a class="btn btn-warning btn-big cite-us" href="./about.html#citing-scikit-learn"><strong>Cite us!</strong></a>
+
+            <small style="display: block; margin-top: 10px"><a href="about.html#funding">Read more about donations</a></small>
+        </div>
+
+        <!-- who using -->
+        <div class="span4">
+            <h4>Who uses scikit-learn?</h4>
+
+            <div id="testimonials_carousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="active item">
+                      <img src="_images/inria.png" class="thumbnail" />
+                      <p>
+                      <em>"We use scikit-learn to support leading-edge basic research [...]"</em>
+                      </p>
+                    </div>
+                    <div class="item">
+                      <img src="_images/spotify.png" class="thumbnail" />
+                      <p>
+                      <em>"I think it's the most well-designed ML package I've seen so far."</em>
+                      </p>
+                    </div>
+                    <div class="item">
+                      <img src="_images/change-logo.png" class="thumbnail" />
+                      <p>
+                      <em>"scikit-learn's ease-of-use, performance and overall variety of algorithms implemented has proved invaluable [...]."</em>
+                      </p>
+                    </div>
+                    <div class="item">
+                      <img src="_images/evernote.png" class="thumbnail" />
+                      <p>
+                      <em>"For these tasks, we relied on the excellent scikit-learn package for Python."</em>
+                      </p>
+                    </div>
+                    <div class="item">
+                      <img src="_images/telecomparistech.jpg"
+                           class="thumbnail" />
+                      <p>
+                      <em>"The great benefit of scikit-learn is its fast learning curve [...]"</em>
+                      </p>
+                    </div>
+                    <div class="item">
+                      <img src="_images/aweber.png" class="thumbnail" />
+                      <p>
+                      <em>"It allows us to do AWesome stuff we would not otherwise accomplish"</em>
+                      </p>
+                    </div>
+                    <div class="item">
+                      <img src="_images/yhat.png" class="thumbnail" />
+                      <p>
+                      <em>"scikit-learn makes doing advanced analysis in Python accessible to anyone."</em>
+                      </p>
+                    </div>
+                </div>
+            </div>
+            <p align="right">
+            <small class="example-link">
+            <a href="testimonials/testimonials.html">更多感言</a>
+            </small>
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<!--Bottom of index page contributions logos-->
+<div class="container index-upper" >
+<div class="row-fluid">
+  <div class="footer">
+      <div class="span4">
+        Generous funding provided by INRIA, Google and others.
+      </div>
+      <div class="span4">
+         <a class="reference internal" href="about.html#funding" style="text-decoration: none" >
+               <img id="index-funding-logo-big" src="_static/img/inria-small.png" title="INRIA">
+           <img id="index-funding-logo-small" src="_static/img/google.png" title="Google">
+           <!--Due to Télécom ParisTech's logo text being smaller, a style has been added to improve readability-->
+           <img id="index-funding-logo-small" src="_static/img/telecom.png" title="Télécom ParisTech" style="max-height: 36px">
+           <img id="index-funding-logo-small" src="_static/img/FNRS-logo.png" title="FNRS">
+         </a>
+     </div>
+     <div class="span4">
+        <a class="reference internal" href="about.html#funding">
+           更多关于贡献者的信息
+        </a>
+     </div>
+  </div>
+</div>
+  </div>
+</div>
+
+
+<script>
+  $('#testimonials_carousel').carousel()
+</script><div class="toctree-wrapper compound">
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+    </div>
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

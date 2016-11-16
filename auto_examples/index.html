@@ -1,0 +1,1552 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>Examples &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="next" title="Plotting Cross-Validated Predictions" href="plot_cv_predict.html" />
+    <link rel="prev" title="7. 计算效能(Computational Performance)" href="../modules/computational_performance.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/index.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="#">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel rellarge">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="../modules/computational_performance.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        7. 计算效能(Compu...
+        </span>
+            <span class="hiddenrellink">
+            7. 计算效能(Computational Performance)
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">Examples</a><ul>
+<li><a class="reference internal" href="#general-examples">General examples</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples-based-on-real-world-datasets">Examples based on real world datasets</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#biclustering">Biclustering</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#calibration">Calibration</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#classification">Classification</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#clustering">Clustering</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#covariance-estimation">Covariance estimation</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#cross-decomposition">Cross decomposition</a></li>
+<li><a class="reference internal" href="#dataset-examples">Dataset examples</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#decomposition">Decomposition</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#ensemble-methods">Ensemble methods</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial-exercises">Tutorial exercises</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#feature-selection">Feature Selection</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#gaussian-process-for-machine-learning">Gaussian Process for Machine Learning</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#generalized-linear-models">Generalized Linear Models</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#manifold-learning">Manifold learning</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#gaussian-mixture-models">Gaussian Mixture Models</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#model-selection">Model Selection</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#nearest-neighbors">Nearest Neighbors</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#neural-networks">Neural Networks</a></li>
+<li><a class="reference internal" href="#preprocessing">Preprocessing</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#semi-supervised-classification">Semi Supervised Classification</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#support-vector-machines">Support Vector Machines</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-text-documents">Working with text documents</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#decision-trees">Decision Trees</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <style type="text/css">
+div#sidebarbutton {
+    /* hide the sidebar collapser, while ensuring vertical arrangement */
+    display: none;
+}
+</style><div class="section" id="examples">
+<span id="examples-index"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-examples">
+<span id="id1"></span><h2>General examples<a class="headerlink" href="#general-examples" title="Permalink to this headline">¶</a></h2>
+<p>General-purpose and introductory examples for the scikit.</p>
+<div class="thumbnailContainer" tooltip="This example shows how to use `cross_val_predict` to visualize prediction errors."><div class="figure" id="id3">
+<a class="reference external image-reference" href="./plot_cv_predict.html"><img alt="../_images/plot_cv_predict.png" src="../_images/plot_cv_predict.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_cv_predict.html#example-plot-cv-predict-py"><span class="std std-ref">Plotting Cross-Validated Predictions</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="In many real-world examples, there are many ways to extract features from a dataset. Often it i..."><div class="figure" id="id4">
+<a class="reference external image-reference" href="./feature_stacker.html"><img alt="../_images/feature_stacker.png" src="../_images/feature_stacker.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="feature_stacker.html#example-feature-stacker-py"><span class="std std-ref">Concatenating multiple feature extraction methods</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An illustration of the isotonic regression on generated data. The isotonic regression finds a n..."><div class="figure" id="id5">
+<a class="reference external image-reference" href="./plot_isotonic_regression.html"><img alt="../_images/plot_isotonic_regression.png" src="../_images/plot_isotonic_regression.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_isotonic_regression.html#example-plot-isotonic-regression-py"><span class="std std-ref">Isotonic Regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example shows that imputing the missing values can give better results than discarding the..."><div class="figure" id="id6">
+<a class="reference external image-reference" href="./missing_values.html"><img alt="../_images/missing_values.png" src="../_images/missing_values.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="missing_values.html#example-missing-values-py"><span class="std std-ref">Imputing missing values before building an estimator</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The PCA does an unsupervised dimensionality reduction, while the logistic regression does the p..."><div class="figure" id="id7">
+<a class="reference external image-reference" href="./plot_digits_pipe.html"><img alt="../_images/plot_digits_pipe.png" src="../_images/plot_digits_pipe.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_digits_pipe.html#example-plot-digits-pipe-py"><span class="std std-ref">Pipelining: chaining a PCA and a logistic regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example simulates a multi-label document classification problem. The dataset is generated ..."><div class="figure" id="id8">
+<a class="reference external image-reference" href="./plot_multilabel.html"><img alt="../_images/plot_multilabel.png" src="../_images/plot_multilabel.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_multilabel.html#example-plot-multilabel-py"><span class="std std-ref">Multilabel classification</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example shows the use of multi-output estimator to complete images. The goal is to predict..."><div class="figure" id="id9">
+<a class="reference external image-reference" href="./plot_multioutput_face_completion.html"><img alt="../_images/plot_multioutput_face_completion.png" src="../_images/plot_multioutput_face_completion.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_multioutput_face_completion.html#example-plot-multioutput-face-completion-py"><span class="std std-ref">Face completion with a multi-output estimators</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip=" The `Johnson-Lindenstrauss lemma`_ states that any high dimensional dataset can be randomly pr..."><div class="figure" id="id10">
+<a class="reference external image-reference" href="./plot_johnson_lindenstrauss_bound.html"><img alt="../_images/plot_johnson_lindenstrauss_bound.png" src="../_images/plot_johnson_lindenstrauss_bound.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_johnson_lindenstrauss_bound.html#example-plot-johnson-lindenstrauss-bound-py"><span class="std std-ref">The Johnson-Lindenstrauss bound for embedding with random projections</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Both kernel ridge regression (KRR) and SVR learn a non-linear function by employing the kernel ..."><div class="figure" id="id11">
+<a class="reference external image-reference" href="./plot_kernel_ridge_regression.html"><img alt="../_images/plot_kernel_ridge_regression.png" src="../_images/plot_kernel_ridge_regression.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_kernel_ridge_regression.html#example-plot-kernel-ridge-regression-py"><span class="std std-ref">Comparison of kernel ridge regression and SVR</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Datasets can often contain components of that require different feature extraction and processi..."><div class="figure" id="id12">
+<a class="reference external image-reference" href="./hetero_feature_union.html"><img alt="../_images/hetero_feature_union.png" src="../_images/hetero_feature_union.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="hetero_feature_union.html#example-hetero-feature-union-py"><span class="std std-ref">Feature Union with Heterogeneous Data Sources</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An example illustrating the approximation of the feature map of an RBF kernel."><div class="figure" id="id13">
+<a class="reference external image-reference" href="./plot_kernel_approximation.html"><img alt="../_images/plot_kernel_approximation.png" src="../_images/plot_kernel_approximation.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_kernel_approximation.html#example-plot-kernel-approximation-py"><span class="std std-ref">Explicit feature map approximation for RBF kernels</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="examples-based-on-real-world-datasets">
+<span id="realworld-examples"></span><h2>Examples based on real world datasets<a class="headerlink" href="#examples-based-on-real-world-datasets" title="Permalink to this headline">¶</a></h2>
+<p>Applications to real world problems with some medium sized datasets or
+interactive user interface.</p>
+<div class="thumbnailContainer" tooltip="This is an example of applying Non-negative Matrix Factorization and Latent Dirichlet Allocatio..."><div class="figure" id="id14">
+<a class="reference external image-reference" href="./applications/topics_extraction_with_nmf_lda.html"><img alt="../_images/topics_extraction_with_nmf_lda.png" src="../_images/topics_extraction_with_nmf_lda.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/topics_extraction_with_nmf_lda.html#example-applications-topics-extraction-with-nmf-lda-py"><span class="std std-ref">Topic extraction with Non-negative Matrix Factorization and Latent Dirichlet Allocation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example illustrates the need for robust covariance estimation on a real data set. It is us..."><div class="figure" id="id15">
+<a class="reference external image-reference" href="./applications/plot_outlier_detection_housing.html"><img alt="../_images/plot_outlier_detection_housing.png" src="../_images/plot_outlier_detection_housing.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/plot_outlier_detection_housing.html#example-applications-plot-outlier-detection-housing-py"><span class="std std-ref">Outlier detection on a real data set</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example shows the reconstruction of an image from a set of parallel projections, acquired ..."><div class="figure" id="id16">
+<a class="reference external image-reference" href="./applications/plot_tomography_l1_reconstruction.html"><img alt="../_images/plot_tomography_l1_reconstruction.png" src="../_images/plot_tomography_l1_reconstruction.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/plot_tomography_l1_reconstruction.html#example-applications-plot-tomography-l1-reconstruction-py"><span class="std std-ref">Compressive sensing: tomography reconstruction with L1 prior (Lasso)</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The dataset used in this example is a preprocessed excerpt of the "Labeled Faces in the Wild", ..."><div class="figure" id="id17">
+<a class="reference external image-reference" href="./applications/face_recognition.html"><img alt="../_images/face_recognition.png" src="../_images/face_recognition.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/face_recognition.html#example-applications-face-recognition-py"><span class="std std-ref">Faces recognition example using eigenfaces and SVMs</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Demonstrate how model complexity influences both prediction accuracy and computational performa..."><div class="figure" id="id18">
+<a class="reference external image-reference" href="./applications/plot_model_complexity_influence.html"><img alt="../_images/plot_model_complexity_influence.png" src="../_images/plot_model_complexity_influence.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/plot_model_complexity_influence.html#example-applications-plot-model-complexity-influence-py"><span class="std std-ref">Model Complexity Influence</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Modeling species' geographic distributions is an important problem in conservation biology. In ..."><div class="figure" id="id19">
+<a class="reference external image-reference" href="./applications/plot_species_distribution_modeling.html"><img alt="../_images/plot_species_distribution_modeling.png" src="../_images/plot_species_distribution_modeling.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/plot_species_distribution_modeling.html#example-applications-plot-species-distribution-modeling-py"><span class="std std-ref">Species distribution modeling</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example employs several unsupervised learning techniques to extract the stock market struc..."><div class="figure" id="id20">
+<a class="reference external image-reference" href="./applications/plot_stock_market.html"><img alt="../_images/plot_stock_market.png" src="../_images/plot_stock_market.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/plot_stock_market.html#example-applications-plot-stock-market-py"><span class="std std-ref">Visualizing the stock market structure</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A classical way to assert the relative importance of vertices in a graph is to compute the prin..."><div class="figure" id="id21">
+<a class="reference external image-reference" href="./applications/wikipedia_principal_eigenvector.html"><img alt="../_images/wikipedia_principal_eigenvector.png" src="../_images/wikipedia_principal_eigenvector.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/wikipedia_principal_eigenvector.html#example-applications-wikipedia-principal-eigenvector-py"><span class="std std-ref">Wikipedia principal eigenvector</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This is an example showing the prediction latency of various scikit-learn estimators."><div class="figure" id="id22">
+<a class="reference external image-reference" href="./applications/plot_prediction_latency.html"><img alt="../_images/plot_prediction_latency.png" src="../_images/plot_prediction_latency.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/plot_prediction_latency.html#example-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A simple graphical frontend for Libsvm mainly intended for didactic purposes. You can create da..."><div class="figure" id="id23">
+<a class="reference external image-reference" href="./applications/svm_gui.html"><img alt="../_images/svm_gui.png" src="../_images/svm_gui.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/svm_gui.html#example-applications-svm-gui-py"><span class="std std-ref">Libsvm GUI</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This is an example showing how scikit-learn can be used for classification using an out-of-core..."><div class="figure" id="id24">
+<a class="reference external image-reference" href="./applications/plot_out_of_core_classification.html"><img alt="../_images/plot_out_of_core_classification.png" src="../_images/plot_out_of_core_classification.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="applications/plot_out_of_core_classification.html#example-applications-plot-out-of-core-classification-py"><span class="std std-ref">Out-of-core classification of text documents</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="biclustering">
+<span id="bicluster-examples"></span><h2>Biclustering<a class="headerlink" href="#biclustering" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.cluster.bicluster" title="sklearn.cluster.bicluster"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cluster.bicluster</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="This example demonstrates how to generate a dataset and bicluster it using the the Spectral Co-..."><div class="figure" id="id25">
+<a class="reference external image-reference" href="./bicluster/plot_spectral_coclustering.html"><img alt="../_images/plot_spectral_coclustering.png" src="../_images/plot_spectral_coclustering.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="bicluster/plot_spectral_coclustering.html#example-bicluster-plot-spectral-coclustering-py"><span class="std std-ref">A demo of the Spectral Co-Clustering algorithm</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example demonstrates how to generate a checkerboard dataset and bicluster it using the Spe..."><div class="figure" id="id26">
+<a class="reference external image-reference" href="./bicluster/plot_spectral_biclustering.html"><img alt="../_images/plot_spectral_biclustering.png" src="../_images/plot_spectral_biclustering.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="bicluster/plot_spectral_biclustering.html#example-bicluster-plot-spectral-biclustering-py"><span class="std std-ref">A demo of the Spectral Biclustering algorithm</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example demonstrates the Spectral Co-clustering algorithm on the twenty newsgroups dataset..."><div class="figure" id="id27">
+<a class="reference external image-reference" href="./bicluster/bicluster_newsgroups.html"><img alt="../_images/bicluster_newsgroups.png" src="../_images/bicluster_newsgroups.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="bicluster/bicluster_newsgroups.html#example-bicluster-bicluster-newsgroups-py"><span class="std std-ref">Biclustering documents with the Spectral Co-clustering algorithm</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="calibration">
+<span id="calibration-examples"></span><h2>Calibration<a class="headerlink" href="#calibration" title="Permalink to this headline">¶</a></h2>
+<p>Examples illustrating the calibration of predicted probabilities of classifiers.</p>
+<div class="thumbnailContainer" tooltip="Well calibrated classifiers are probabilistic classifiers for which the output of the predict_p..."><div class="figure" id="id28">
+<a class="reference external image-reference" href="./calibration/plot_compare_calibration.html"><img alt="../_images/plot_compare_calibration.png" src="../_images/plot_compare_calibration.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="calibration/plot_compare_calibration.html#example-calibration-plot-compare-calibration-py"><span class="std std-ref">Comparison of Calibration of Classifiers</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="When performing classification one often wants to predict not only the class label, but also th..."><div class="figure" id="id29">
+<a class="reference external image-reference" href="./calibration/plot_calibration_curve.html"><img alt="../_images/plot_calibration_curve.png" src="../_images/plot_calibration_curve.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="calibration/plot_calibration_curve.html#example-calibration-plot-calibration-curve-py"><span class="std std-ref">Probability Calibration curves</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="When performing classification you often want to predict not only the class label, but also the..."><div class="figure" id="id30">
+<a class="reference external image-reference" href="./calibration/plot_calibration.html"><img alt="../_images/plot_calibration.png" src="../_images/plot_calibration.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="calibration/plot_calibration.html#example-calibration-plot-calibration-py"><span class="std std-ref">Probability calibration of classifiers</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example illustrates how sigmoid calibration changes predicted probabilities for a 3-class ..."><div class="figure" id="id31">
+<a class="reference external image-reference" href="./calibration/plot_calibration_multiclass.html"><img alt="../_images/plot_calibration_multiclass.png" src="../_images/plot_calibration_multiclass.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="calibration/plot_calibration_multiclass.html#example-calibration-plot-calibration-multiclass-py"><span class="std std-ref">Probability Calibration for 3-class classification</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="classification">
+<span id="classification-examples"></span><h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
+<p>General examples about classification algorithms.</p>
+<div class="thumbnailContainer" tooltip="An example showing how the scikit-learn can be used to recognize images of hand-written digits."><div class="figure" id="id32">
+<a class="reference external image-reference" href="./classification/plot_digits_classification.html"><img alt="../_images/plot_digits_classification.png" src="../_images/plot_digits_classification.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="classification/plot_digits_classification.html#example-classification-plot-digits-classification-py"><span class="std std-ref">Recognizing hand-written digits</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Shows how shrinkage improves classification. "><div class="figure" id="id33">
+<a class="reference external image-reference" href="./classification/plot_lda.html"><img alt="../_images/plot_lda.png" src="../_images/plot_lda.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="classification/plot_lda.html#example-classification-plot-lda-py"><span class="std std-ref">Normal and Shrinkage Linear Discriminant Analysis for classification</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the classification probability for different classifiers. We use a 3 class dataset, and we..."><div class="figure" id="id34">
+<a class="reference external image-reference" href="./classification/plot_classification_probability.html"><img alt="../_images/plot_classification_probability.png" src="../_images/plot_classification_probability.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="classification/plot_classification_probability.html#example-classification-plot-classification-probability-py"><span class="std std-ref">Plot classification probability</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A comparison of a several classifiers in scikit-learn on synthetic datasets. The point of this ..."><div class="figure" id="id35">
+<a class="reference external image-reference" href="./classification/plot_classifier_comparison.html"><img alt="../_images/plot_classifier_comparison.png" src="../_images/plot_classifier_comparison.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="classification/plot_classifier_comparison.html#example-classification-plot-classifier-comparison-py"><span class="std std-ref">Classifier comparison</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the confidence ellipsoids of each class and decision boundary "><div class="figure" id="id36">
+<a class="reference external image-reference" href="./classification/plot_lda_qda.html"><img alt="../_images/plot_lda_qda.png" src="../_images/plot_lda_qda.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="classification/plot_lda_qda.html#example-classification-plot-lda-qda-py"><span class="std std-ref">Linear and Quadratic Discriminant Analysis with confidence ellipsoid</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="clustering">
+<span id="cluster-examples"></span><h2>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cluster</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Reference:"><div class="figure" id="id37">
+<a class="reference external image-reference" href="./cluster/plot_mean_shift.html"><img alt="../_images/plot_mean_shift.png" src="../_images/plot_mean_shift.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_mean_shift.html#example-cluster-plot-mean-shift-py"><span class="std std-ref">A demo of the mean-shift clustering algorithm</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Compute the segmentation of a 2D image with Ward hierarchical clustering. The clustering is spa..."><div class="figure" id="id38">
+<a class="reference external image-reference" href="./cluster/plot_lena_ward_segmentation.html"><img alt="../_images/plot_lena_ward_segmentation.png" src="../_images/plot_lena_ward_segmentation.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_lena_ward_segmentation.html#example-cluster-plot-lena-ward-segmentation-py"><span class="std std-ref">A demo of structured Ward hierarchical clustering on Lena image</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="These images how similar features are merged together using feature agglomeration. "><div class="figure" id="id39">
+<a class="reference external image-reference" href="./cluster/plot_digits_agglomeration.html"><img alt="../_images/plot_digits_agglomeration.png" src="../_images/plot_digits_agglomeration.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_digits_agglomeration.html#example-cluster-plot-digits-agglomeration-py"><span class="std std-ref">Feature agglomeration</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Reference: Brendan J. Frey and Delbert Dueck, "Clustering by Passing Messages Between Data Poin..."><div class="figure" id="id40">
+<a class="reference external image-reference" href="./cluster/plot_affinity_propagation.html"><img alt="../_images/plot_affinity_propagation.png" src="../_images/plot_affinity_propagation.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_affinity_propagation.html#example-cluster-plot-affinity-propagation-py"><span class="std std-ref">Demo of affinity propagation clustering algorithm</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example is meant to illustrate situations where k-means will produce unintuitive and possi..."><div class="figure" id="id41">
+<a class="reference external image-reference" href="./cluster/plot_kmeans_assumptions.html"><img alt="../_images/plot_kmeans_assumptions.png" src="../_images/plot_kmeans_assumptions.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_kmeans_assumptions.html#example-cluster-plot-kmeans-assumptions-py"><span class="std std-ref">Demonstration of k-means assumptions</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example shows the effect of imposing a connectivity graph to capture local structure in th..."><div class="figure" id="id42">
+<a class="reference external image-reference" href="./cluster/plot_agglomerative_clustering.html"><img alt="../_images/plot_agglomerative_clustering.png" src="../_images/plot_agglomerative_clustering.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_agglomerative_clustering.html#example-cluster-plot-agglomerative-clustering-py"><span class="std std-ref">Agglomerative clustering with and without structure</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example uses :ref:`spectral_clustering` on a graph created from voxel-to-voxel difference ..."><div class="figure" id="id43">
+<a class="reference external image-reference" href="./cluster/plot_lena_segmentation.html"><img alt="../_images/plot_lena_segmentation.png" src="../_images/plot_lena_segmentation.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_lena_segmentation.html#example-cluster-plot-lena-segmentation-py"><span class="std std-ref">Segmenting the picture of Lena in regions</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Finds core samples of high density and expands clusters from them."><div class="figure" id="id44">
+<a class="reference external image-reference" href="./cluster/plot_dbscan.html"><img alt="../_images/plot_dbscan.png" src="../_images/plot_dbscan.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_dbscan.html#example-cluster-plot-dbscan-py"><span class="std std-ref">Demo of DBSCAN clustering algorithm</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example uses a large dataset of faces to learn a set of 20 x 20 images patches that consti..."><div class="figure" id="id45">
+<a class="reference external image-reference" href="./cluster/plot_dict_face_patches.html"><img alt="../_images/plot_dict_face_patches.png" src="../_images/plot_dict_face_patches.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_dict_face_patches.html#example-cluster-plot-dict-face-patches-py"><span class="std std-ref">Online learning of a dictionary of parts of faces</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The classic image processing example, Lena, an 8-bit grayscale bit-depth, 512 x 512 sized image..."><div class="figure" id="id46">
+<a class="reference external image-reference" href="./cluster/plot_lena_compress.html"><img alt="../_images/plot_lena_compress.png" src="../_images/plot_lena_compress.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_lena_compress.html#example-cluster-plot-lena-compress-py"><span class="std std-ref">Vector Quantization Example</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Example builds a swiss roll dataset and runs hierarchical clustering on their position."><div class="figure" id="id47">
+<a class="reference external image-reference" href="./cluster/plot_ward_structured_vs_unstructured.html"><img alt="../_images/plot_ward_structured_vs_unstructured.png" src="../_images/plot_ward_structured_vs_unstructured.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_ward_structured_vs_unstructured.html#example-cluster-plot-ward-structured-vs-unstructured-py"><span class="std std-ref">Hierarchical clustering: structured vs unstructured ward</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="In this example, an image with connected circles is generated and spectral clustering is used t..."><div class="figure" id="id48">
+<a class="reference external image-reference" href="./cluster/plot_segmentation_toy.html"><img alt="../_images/plot_segmentation_toy.png" src="../_images/plot_segmentation_toy.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_segmentation_toy.html#example-cluster-plot-segmentation-toy-py"><span class="std std-ref">Spectral clustering for image segmentation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The plots display firstly what a K-means algorithm would yield using three clusters. It is then..."><div class="figure" id="id49">
+<a class="reference external image-reference" href="./cluster/plot_cluster_iris.html"><img alt="../_images/plot_cluster_iris.png" src="../_images/plot_cluster_iris.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_cluster_iris.html#example-cluster-plot-cluster-iris-py"><span class="std std-ref">K-means Clustering</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An illustration of various linkage option for agglomerative clustering on a 2D embedding of the..."><div class="figure" id="id50">
+<a class="reference external image-reference" href="./cluster/plot_digits_linkage.html"><img alt="../_images/plot_digits_linkage.png" src="../_images/plot_digits_linkage.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_digits_linkage.html#example-cluster-plot-digits-linkage-py"><span class="std std-ref">Various Agglomerative Clustering on a 2D embedding of digits</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Performs a pixel-wise Vector Quantization (VQ) of an image of the summer palace (China), reduci..."><div class="figure" id="id51">
+<a class="reference external image-reference" href="./cluster/plot_color_quantization.html"><img alt="../_images/plot_color_quantization.png" src="../_images/plot_color_quantization.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_color_quantization.html#example-cluster-plot-color-quantization-py"><span class="std std-ref">Color Quantization using K-Means</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example compares the timing of Birch (with and without the global clustering step) and Min..."><div class="figure" id="id52">
+<a class="reference external image-reference" href="./cluster/plot_birch_vs_minibatchkmeans.html"><img alt="../_images/plot_birch_vs_minibatchkmeans.png" src="../_images/plot_birch_vs_minibatchkmeans.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_birch_vs_minibatchkmeans.html#example-cluster-plot-birch-vs-minibatchkmeans-py"><span class="std std-ref">Compare BIRCH and MiniBatchKMeans</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example compares 2 dimensionality reduction strategies:"><div class="figure" id="id53">
+<a class="reference external image-reference" href="./cluster/plot_feature_agglomeration_vs_univariate_selection.html"><img alt="../_images/plot_feature_agglomeration_vs_univariate_selection.png" src="../_images/plot_feature_agglomeration_vs_univariate_selection.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_feature_agglomeration_vs_univariate_selection.html#example-cluster-plot-feature-agglomeration-vs-univariate-selection-py"><span class="std std-ref">Feature agglomeration vs. univariate selection</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Demonstrates the effect of different metrics on the hierarchical clustering."><div class="figure" id="id54">
+<a class="reference external image-reference" href="./cluster/plot_agglomerative_clustering_metrics.html"><img alt="../_images/plot_agglomerative_clustering_metrics.png" src="../_images/plot_agglomerative_clustering_metrics.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_agglomerative_clustering_metrics.html#example-cluster-plot-agglomerative-clustering-metrics-py"><span class="std std-ref">Agglomerative clustering with different metrics</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Evaluate the ability of k-means initializations strategies to make the algorithm convergence ro..."><div class="figure" id="id55">
+<a class="reference external image-reference" href="./cluster/plot_kmeans_stability_low_dim_dense.html"><img alt="../_images/plot_kmeans_stability_low_dim_dense.png" src="../_images/plot_kmeans_stability_low_dim_dense.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_kmeans_stability_low_dim_dense.html#example-cluster-plot-kmeans-stability-low-dim-dense-py"><span class="std std-ref">Empirical evaluation of the impact of k-means initialization</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="In this example we compare the various initialization strategies for K-means in terms of runtim..."><div class="figure" id="id56">
+<a class="reference external image-reference" href="./cluster/plot_kmeans_digits.html"><img alt="../_images/plot_kmeans_digits.png" src="../_images/plot_kmeans_digits.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_kmeans_digits.html#example-cluster-plot-kmeans-digits-py"><span class="std std-ref">A demo of K-Means clustering on the handwritten digits data</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The following plots demonstrate the impact of the number of clusters and number of samples on v..."><div class="figure" id="id57">
+<a class="reference external image-reference" href="./cluster/plot_adjusted_for_chance_measures.html"><img alt="../_images/plot_adjusted_for_chance_measures.png" src="../_images/plot_adjusted_for_chance_measures.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_adjusted_for_chance_measures.html#example-cluster-plot-adjusted-for-chance-measures-py"><span class="std std-ref">Adjustment for chance in clustering performance evaluation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example aims at showing characteristics of different clustering algorithms on datasets tha..."><div class="figure" id="id58">
+<a class="reference external image-reference" href="./cluster/plot_cluster_comparison.html"><img alt="../_images/plot_cluster_comparison.png" src="../_images/plot_cluster_comparison.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_cluster_comparison.html#example-cluster-plot-cluster-comparison-py"><span class="std std-ref">Comparing different clustering algorithms on toy datasets</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="We want to compare the performance of the MiniBatchKMeans and KMeans: the MiniBatchKMeans is fa..."><div class="figure" id="id59">
+<a class="reference external image-reference" href="./cluster/plot_mini_batch_kmeans.html"><img alt="../_images/plot_mini_batch_kmeans.png" src="../_images/plot_mini_batch_kmeans.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_mini_batch_kmeans.html#example-cluster-plot-mini-batch-kmeans-py"><span class="std std-ref">Comparison of the K-Means and MiniBatchKMeans clustering algorithms</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Silhouette analysis can be used to study the separation distance between the resulting clusters..."><div class="figure" id="id60">
+<a class="reference external image-reference" href="./cluster/plot_kmeans_silhouette_analysis.html"><img alt="../_images/plot_kmeans_silhouette_analysis.png" src="../_images/plot_kmeans_silhouette_analysis.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cluster/plot_kmeans_silhouette_analysis.html#example-cluster-plot-kmeans-silhouette-analysis-py"><span class="std std-ref">Selecting the number of clusters with silhouette analysis on KMeans clustering</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="covariance-estimation">
+<span id="covariance-examples"></span><h2>Covariance estimation<a class="headerlink" href="#covariance-estimation" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.covariance" title="sklearn.covariance"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.covariance</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="The usual covariance maximum likelihood estimate can be regularized using shrinkage. Ledoit and..."><div class="figure" id="id61">
+<a class="reference external image-reference" href="./covariance/plot_lw_vs_oas.html"><img alt="../_images/plot_lw_vs_oas.png" src="../_images/plot_lw_vs_oas.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="covariance/plot_lw_vs_oas.html#example-covariance-plot-lw-vs-oas-py"><span class="std std-ref">Ledoit-Wolf vs OAS estimation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="When the amount of contamination is known, this example illustrates two different ways of perfo..."><div class="figure" id="id62">
+<a class="reference external image-reference" href="./covariance/plot_outlier_detection.html"><img alt="../_images/plot_outlier_detection.png" src="../_images/plot_outlier_detection.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="covariance/plot_outlier_detection.html#example-covariance-plot-outlier-detection-py"><span class="std std-ref">Outlier detection with several methods.</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Using the GraphLasso estimator to learn a covariance and sparse precision from a small number o..."><div class="figure" id="id63">
+<a class="reference external image-reference" href="./covariance/plot_sparse_cov.html"><img alt="../_images/plot_sparse_cov.png" src="../_images/plot_sparse_cov.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="covariance/plot_sparse_cov.html#example-covariance-plot-sparse-cov-py"><span class="std std-ref">Sparse inverse covariance estimation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="When working with covariance estimation, the usual approach is to use a maximum likelihood esti..."><div class="figure" id="id64">
+<a class="reference external image-reference" href="./covariance/plot_covariance_estimation.html"><img alt="../_images/plot_covariance_estimation.png" src="../_images/plot_covariance_estimation.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="covariance/plot_covariance_estimation.html#example-covariance-plot-covariance-estimation-py"><span class="std std-ref">Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An example to show covariance estimation with the Mahalanobis distances on Gaussian distributed..."><div class="figure" id="id65">
+<a class="reference external image-reference" href="./covariance/plot_mahalanobis_distances.html"><img alt="../_images/plot_mahalanobis_distances.png" src="../_images/plot_mahalanobis_distances.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="covariance/plot_mahalanobis_distances.html#example-covariance-plot-mahalanobis-distances-py"><span class="std std-ref">Robust covariance estimation and Mahalanobis distances relevance</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The usual covariance maximum likelihood estimate is very sensitive to the presence of outliers ..."><div class="figure" id="id66">
+<a class="reference external image-reference" href="./covariance/plot_robust_vs_empirical_covariance.html"><img alt="../_images/plot_robust_vs_empirical_covariance.png" src="../_images/plot_robust_vs_empirical_covariance.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="covariance/plot_robust_vs_empirical_covariance.html#example-covariance-plot-robust-vs-empirical-covariance-py"><span class="std std-ref">Robust vs Empirical covariance estimate</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="cross-decomposition">
+<span id="cross-decomposition-examples"></span><h2>Cross decomposition<a class="headerlink" href="#cross-decomposition" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.cross_decomposition" title="sklearn.cross_decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cross_decomposition</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Simple usage of various cross decomposition algorithms: - PLSCanonical - PLSRegression, with mu..."><div class="figure" id="id67">
+<a class="reference external image-reference" href="./cross_decomposition/plot_compare_cross_decomposition.html"><img alt="../_images/plot_compare_cross_decomposition.png" src="../_images/plot_compare_cross_decomposition.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="cross_decomposition/plot_compare_cross_decomposition.html#example-cross-decomposition-plot-compare-cross-decomposition-py"><span class="std std-ref">Compare cross decomposition methods</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="dataset-examples">
+<span id="id2"></span><h2>Dataset examples<a class="headerlink" href="#dataset-examples" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="This dataset is made up of 1797 8x8 images. Each image, like the one shown below, is of a hand-..."><div class="figure" id="id68">
+<a class="reference external image-reference" href="./datasets/plot_digits_last_image.html"><img alt="../_images/plot_digits_last_image.png" src="../_images/plot_digits_last_image.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="datasets/plot_digits_last_image.html#example-datasets-plot-digits-last-image-py"><span class="std std-ref">The Digit Dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot several randomly generated 2D classification datasets. This example illustrates the :func:..."><div class="figure" id="id69">
+<a class="reference external image-reference" href="./datasets/plot_random_dataset.html"><img alt="../_images/plot_random_dataset.png" src="../_images/plot_random_dataset.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="datasets/plot_random_dataset.html#example-datasets-plot-random-dataset-py"><span class="std std-ref">Plot randomly generated classification dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The rows being the samples and the columns being: Sepal Length, Sepal Width, Petal Length  and P..."><div class="figure" id="id70">
+<a class="reference external image-reference" href="./datasets/plot_iris_dataset.html"><img alt="../_images/plot_iris_dataset.png" src="../_images/plot_iris_dataset.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="datasets/plot_iris_dataset.html#example-datasets-plot-iris-dataset-py"><span class="std std-ref">The Iris Dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This illustrates the `datasets.make_multilabel_classification` dataset generator. Each sample c..."><div class="figure" id="id71">
+<a class="reference external image-reference" href="./datasets/plot_random_multilabel_dataset.html"><img alt="../_images/plot_random_multilabel_dataset.png" src="../_images/plot_random_multilabel_dataset.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="datasets/plot_random_multilabel_dataset.html#example-datasets-plot-random-multilabel-dataset-py"><span class="std std-ref">Plot randomly generated multilabel dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="decomposition">
+<span id="decomposition-examples"></span><h2>Decomposition<a class="headerlink" href="#decomposition" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="The Iris dataset represents 3 kind of Iris flowers (Setosa, Versicolour and Virginica) with 4 a..."><div class="figure" id="id72">
+<a class="reference external image-reference" href="./decomposition/plot_pca_vs_lda.html"><img alt="../_images/plot_pca_vs_lda.png" src="../_images/plot_pca_vs_lda.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_pca_vs_lda.html#example-decomposition-plot-pca-vs-lda-py"><span class="std std-ref">Comparison of LDA and PCA 2D projection of Iris dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="=============== Incremental PCA ==============="><div class="figure" id="id73">
+<a class="reference external image-reference" href="./decomposition/plot_incremental_pca.html"><img alt="../_images/plot_incremental_pca.png" src="../_images/plot_incremental_pca.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_incremental_pca.html#example-decomposition-plot-incremental-pca-py"><span class="std std-ref">Incremental PCA</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Principal Component Analysis applied to the Iris dataset."><div class="figure" id="id74">
+<a class="reference external image-reference" href="./decomposition/plot_pca_iris.html"><img alt="../_images/plot_pca_iris.png" src="../_images/plot_pca_iris.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_pca_iris.html#example-decomposition-plot-pca-iris-py"><span class="std std-ref">PCA example with Iris Data-set</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An example of estimating sources from noisy data."><div class="figure" id="id75">
+<a class="reference external image-reference" href="./decomposition/plot_ica_blind_source_separation.html"><img alt="../_images/plot_ica_blind_source_separation.png" src="../_images/plot_ica_blind_source_separation.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_ica_blind_source_separation.html#example-decomposition-plot-ica-blind-source-separation-py"><span class="std std-ref">Blind source separation using FastICA</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example shows that Kernel PCA is able to find a projection of the data that makes data lin..."><div class="figure" id="id76">
+<a class="reference external image-reference" href="./decomposition/plot_kernel_pca.html"><img alt="../_images/plot_kernel_pca.png" src="../_images/plot_kernel_pca.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_kernel_pca.html#example-decomposition-plot-kernel-pca-py"><span class="std std-ref">Kernel PCA</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example illustrates visually in the feature space a comparison by results using two differ..."><div class="figure" id="id77">
+<a class="reference external image-reference" href="./decomposition/plot_ica_vs_pca.html"><img alt="../_images/plot_ica_vs_pca.png" src="../_images/plot_ica_vs_pca.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_ica_vs_pca.html#example-decomposition-plot-ica-vs-pca-py"><span class="std std-ref">FastICA on 2D point clouds</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Transform a signal as a sparse combination of Ricker wavelets. This example visually compares d..."><div class="figure" id="id78">
+<a class="reference external image-reference" href="./decomposition/plot_sparse_coding.html"><img alt="../_images/plot_sparse_coding.png" src="../_images/plot_sparse_coding.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_sparse_coding.html#example-decomposition-plot-sparse-coding-py"><span class="std std-ref">Sparse coding with a precomputed dictionary</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="These figures aid in illustrating how a point cloud can be very flat in one direction--which is..."><div class="figure" id="id79">
+<a class="reference external image-reference" href="./decomposition/plot_pca_3d.html"><img alt="../_images/plot_pca_3d.png" src="../_images/plot_pca_3d.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_pca_3d.html#example-decomposition-plot-pca-3d-py"><span class="std std-ref">Principal components analysis (PCA)</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Probabilistic PCA and Factor Analysis are probabilistic models. The consequence is that the lik..."><div class="figure" id="id80">
+<a class="reference external image-reference" href="./decomposition/plot_pca_vs_fa_model_selection.html"><img alt="../_images/plot_pca_vs_fa_model_selection.png" src="../_images/plot_pca_vs_fa_model_selection.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_pca_vs_fa_model_selection.html#example-decomposition-plot-pca-vs-fa-model-selection-py"><span class="std std-ref">Model selection with Probabilistic PCA and Factor Analysis (FA)</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example applies to :ref:`olivetti_faces` different unsupervised matrix decomposition (dime..."><div class="figure" id="id81">
+<a class="reference external image-reference" href="./decomposition/plot_faces_decomposition.html"><img alt="../_images/plot_faces_decomposition.png" src="../_images/plot_faces_decomposition.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_faces_decomposition.html#example-decomposition-plot-faces-decomposition-py"><span class="std std-ref">Faces dataset decompositions</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An example comparing the effect of reconstructing noisy fragments of the Lena image using first..."><div class="figure" id="id82">
+<a class="reference external image-reference" href="./decomposition/plot_image_denoising.html"><img alt="../_images/plot_image_denoising.png" src="../_images/plot_image_denoising.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="decomposition/plot_image_denoising.html#example-decomposition-plot-image-denoising-py"><span class="std std-ref">Image denoising using dictionary learning</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="ensemble-methods">
+<span id="ensemble-examples"></span><h2>Ensemble methods<a class="headerlink" href="#ensemble-methods" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.ensemble</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="This example shows the use of forests of trees to evaluate the importance of the pixels in an i..."><div class="figure" id="id83">
+<a class="reference external image-reference" href="./ensemble/plot_forest_importances_faces.html"><img alt="../_images/plot_forest_importances_faces.png" src="../_images/plot_forest_importances_faces.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_forest_importances_faces.html#example-ensemble-plot-forest-importances-faces-py"><span class="std std-ref">Pixel importances with a parallel forest of trees</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A decision tree is boosted using the AdaBoost.R2 [1] algorithm on a 1D sinusoidal dataset with ..."><div class="figure" id="id84">
+<a class="reference external image-reference" href="./ensemble/plot_adaboost_regression.html"><img alt="../_images/plot_adaboost_regression.png" src="../_images/plot_adaboost_regression.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_adaboost_regression.html#example-ensemble-plot-adaboost-regression-py"><span class="std std-ref">Decision Tree Regression with AdaBoost</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This examples shows the use of forests of trees to evaluate the importance of features on an ar..."><div class="figure" id="id85">
+<a class="reference external image-reference" href="./ensemble/plot_forest_importances.html"><img alt="../_images/plot_forest_importances.png" src="../_images/plot_forest_importances.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_forest_importances.html#example-ensemble-plot-forest-importances-py"><span class="std std-ref">Feature importances with forests of trees</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the decision boundaries of a `VotingClassifier` for two features of the Iris dataset."><div class="figure" id="id86">
+<a class="reference external image-reference" href="./ensemble/plot_voting_decision_regions.html"><img alt="../_images/plot_voting_decision_regions.png" src="../_images/plot_voting_decision_regions.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_voting_decision_regions.html#example-ensemble-plot-voting-decision-regions-py"><span class="std std-ref">Plot the decision boundaries of a VotingClassifier</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the class probabilities of the first sample in a toy dataset predicted by three different ..."><div class="figure" id="id87">
+<a class="reference external image-reference" href="./ensemble/plot_voting_probas.html"><img alt="../_images/plot_voting_probas.png" src="../_images/plot_voting_probas.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_voting_probas.html#example-ensemble-plot-voting-probas-py"><span class="std std-ref">Plot class probabilities calculated by the VotingClassifier</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Illustration of the effect of different regularization strategies for Gradient Boosting. The ex..."><div class="figure" id="id88">
+<a class="reference external image-reference" href="./ensemble/plot_gradient_boosting_regularization.html"><img alt="../_images/plot_gradient_boosting_regularization.png" src="../_images/plot_gradient_boosting_regularization.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_gradient_boosting_regularization.html#example-ensemble-plot-gradient-boosting-regularization-py"><span class="std std-ref">Gradient Boosting regularization</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The ``RandomForestClassifier`` is trained using *bootstrap aggregation*, where each new tree is..."><div class="figure" id="id89">
+<a class="reference external image-reference" href="./ensemble/plot_ensemble_oob.html"><img alt="../_images/plot_ensemble_oob.png" src="../_images/plot_ensemble_oob.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_ensemble_oob.html#example-ensemble-plot-ensemble-oob-py"><span class="std std-ref">OOB Errors for Random Forests</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Partial dependence plots show the dependence between the target function [2]_ and a set of 'tar..."><div class="figure" id="id90">
+<a class="reference external image-reference" href="./ensemble/plot_partial_dependence.html"><img alt="../_images/plot_partial_dependence.png" src="../_images/plot_partial_dependence.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_partial_dependence.html#example-ensemble-plot-partial-dependence-py"><span class="std std-ref">Partial Dependence Plots</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Demonstrate Gradient Boosting on the Boston housing dataset."><div class="figure" id="id91">
+<a class="reference external image-reference" href="./ensemble/plot_gradient_boosting_regression.html"><img alt="../_images/plot_gradient_boosting_regression.png" src="../_images/plot_gradient_boosting_regression.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_gradient_boosting_regression.html#example-ensemble-plot-gradient-boosting-regression-py"><span class="std std-ref">Gradient Boosting regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example shows how quantile regression can be used to create prediction intervals. "><div class="figure" id="id92">
+<a class="reference external image-reference" href="./ensemble/plot_gradient_boosting_quantile.html"><img alt="../_images/plot_gradient_boosting_quantile.png" src="../_images/plot_gradient_boosting_quantile.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_gradient_boosting_quantile.html#example-ensemble-plot-gradient-boosting-quantile-py"><span class="std std-ref">Prediction Intervals for Gradient Boosting Regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="RandomTreesEmbedding provides a way to map data to a very high-dimensional, sparse representati..."><div class="figure" id="id93">
+<a class="reference external image-reference" href="./ensemble/plot_random_forest_embedding.html"><img alt="../_images/plot_random_forest_embedding.png" src="../_images/plot_random_forest_embedding.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_random_forest_embedding.html#example-ensemble-plot-random-forest-embedding-py"><span class="std std-ref">Hashing feature transformation using Totally Random Trees</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example fits an AdaBoosted decision stump on a non-linearly separable classification datas..."><div class="figure" id="id94">
+<a class="reference external image-reference" href="./ensemble/plot_adaboost_twoclass.html"><img alt="../_images/plot_adaboost_twoclass.png" src="../_images/plot_adaboost_twoclass.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_adaboost_twoclass.html#example-ensemble-plot-adaboost-twoclass-py"><span class="std std-ref">Two-class AdaBoost</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example is based on Figure 10.2 from Hastie et al 2009 [1] and illustrates the difference ..."><div class="figure" id="id95">
+<a class="reference external image-reference" href="./ensemble/plot_adaboost_hastie_10_2.html"><img alt="../_images/plot_adaboost_hastie_10_2.png" src="../_images/plot_adaboost_hastie_10_2.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_adaboost_hastie_10_2.html#example-ensemble-plot-adaboost-hastie-10-2-py"><span class="std std-ref">Discrete versus Real AdaBoost</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example reproduces Figure 1 of Zhu et al [1] and shows how boosting can improve prediction..."><div class="figure" id="id96">
+<a class="reference external image-reference" href="./ensemble/plot_adaboost_multiclass.html"><img alt="../_images/plot_adaboost_multiclass.png" src="../_images/plot_adaboost_multiclass.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_adaboost_multiclass.html#example-ensemble-plot-adaboost-multiclass-py"><span class="std std-ref">Multi-class AdaBoosted Decision Trees</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Transform your features into a higher dimensional, sparse space. Then train a linear model on t..."><div class="figure" id="id97">
+<a class="reference external image-reference" href="./ensemble/plot_feature_transformation.html"><img alt="../_images/plot_feature_transformation.png" src="../_images/plot_feature_transformation.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_feature_transformation.html#example-ensemble-plot-feature-transformation-py"><span class="std std-ref">Feature transformations with ensembles of trees</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Out-of-bag (OOB) estimates can be a useful heuristic to estimate the "optimal" number of boosti..."><div class="figure" id="id98">
+<a class="reference external image-reference" href="./ensemble/plot_gradient_boosting_oob.html"><img alt="../_images/plot_gradient_boosting_oob.png" src="../_images/plot_gradient_boosting_oob.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_gradient_boosting_oob.html#example-ensemble-plot-gradient-boosting-oob-py"><span class="std std-ref">Gradient Boosting Out-of-Bag estimates</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the decision surfaces of forests of randomized trees trained on pairs of features of the i..."><div class="figure" id="id99">
+<a class="reference external image-reference" href="./ensemble/plot_forest_iris.html"><img alt="../_images/plot_forest_iris.png" src="../_images/plot_forest_iris.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_forest_iris.html#example-ensemble-plot-forest-iris-py"><span class="std std-ref">Plot the decision surfaces of ensembles of trees on the iris dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example illustrates and compares the bias-variance decomposition of the expected mean squa..."><div class="figure" id="id100">
+<a class="reference external image-reference" href="./ensemble/plot_bias_variance.html"><img alt="../_images/plot_bias_variance.png" src="../_images/plot_bias_variance.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="ensemble/plot_bias_variance.html#example-ensemble-plot-bias-variance-py"><span class="std std-ref">Single estimator versus bagging: bias-variance decomposition</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="tutorial-exercises">
+<h2>Tutorial exercises<a class="headerlink" href="#tutorial-exercises" title="Permalink to this headline">¶</a></h2>
+<p>Exercises for the tutorials</p>
+<div class="thumbnailContainer" tooltip="A tutorial exercise regarding the use of classification techniques on the Digits dataset."><div class="figure" id="id101">
+<a class="reference external image-reference" href="./exercises/digits_classification_exercise.html"><img alt="../_images/digits_classification_exercise.png" src="../_images/digits_classification_exercise.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="exercises/digits_classification_exercise.html#example-exercises-digits-classification-exercise-py"><span class="std std-ref">Digits Classification Exercise</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A tutorial exercise using Cross-validation with an SVM on the Digits dataset."><div class="figure" id="id102">
+<a class="reference external image-reference" href="./exercises/plot_cv_digits.html"><img alt="../_images/plot_cv_digits.png" src="../_images/plot_cv_digits.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="exercises/plot_cv_digits.html#example-exercises-plot-cv-digits-py"><span class="std std-ref">Cross-validation on Digits Dataset Exercise</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A tutorial exercise for using different SVM kernels."><div class="figure" id="id103">
+<a class="reference external image-reference" href="./exercises/plot_iris_exercise.html"><img alt="../_images/plot_iris_exercise.png" src="../_images/plot_iris_exercise.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="exercises/plot_iris_exercise.html#example-exercises-plot-iris-exercise-py"><span class="std std-ref">SVM Exercise</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A tutorial exercise which uses cross-validation with linear models."><div class="figure" id="id104">
+<a class="reference external image-reference" href="./exercises/plot_cv_diabetes.html"><img alt="../_images/plot_cv_diabetes.png" src="../_images/plot_cv_diabetes.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="exercises/plot_cv_diabetes.html#example-exercises-plot-cv-diabetes-py"><span class="std std-ref">Cross-validation on diabetes Dataset Exercise</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="feature-selection">
+<span id="feature-selection-examples"></span><h2>Feature Selection<a class="headerlink" href="#feature-selection" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.feature_selection" title="sklearn.feature_selection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.feature_selection</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Simple usage of Pipeline that runs successively a univariate feature selection with anova and t..."><div class="figure" id="id105">
+<a class="reference external image-reference" href="./feature_selection/feature_selection_pipeline.html"><img alt="../_images/feature_selection_pipeline.png" src="../_images/feature_selection_pipeline.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="feature_selection/feature_selection_pipeline.html#example-feature-selection-feature-selection-pipeline-py"><span class="std std-ref">Pipeline Anova SVM</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A recursive feature elimination example showing the relevance of pixels in a digit classificati..."><div class="figure" id="id106">
+<a class="reference external image-reference" href="./feature_selection/plot_rfe_digits.html"><img alt="../_images/plot_rfe_digits.png" src="../_images/plot_rfe_digits.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="feature_selection/plot_rfe_digits.html#example-feature-selection-plot-rfe-digits-py"><span class="std std-ref">Recursive feature elimination</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A recursive feature elimination example with automatic tuning of the number of features selecte..."><div class="figure" id="id107">
+<a class="reference external image-reference" href="./feature_selection/plot_rfe_with_cross_validation.html"><img alt="../_images/plot_rfe_with_cross_validation.png" src="../_images/plot_rfe_with_cross_validation.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="feature_selection/plot_rfe_with_cross_validation.html#example-feature-selection-plot-rfe-with-cross-validation-py"><span class="std std-ref">Recursive feature elimination with cross-validation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Use SelectFromModel meta-transformer along with Lasso to select the best couple of features fro..."><div class="figure" id="id108">
+<a class="reference external image-reference" href="./feature_selection/plot_select_from_model_boston.html"><img alt="../_images/plot_select_from_model_boston.png" src="../_images/plot_select_from_model_boston.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="feature_selection/plot_select_from_model_boston.html#example-feature-selection-plot-select-from-model-boston-py"><span class="std std-ref">Feature selection using SelectFromModel and LassoCV</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="In order to test if a classification score is significative a technique in repeating the classi..."><div class="figure" id="id109">
+<a class="reference external image-reference" href="./feature_selection/plot_permutation_test_for_classification.html"><img alt="../_images/plot_permutation_test_for_classification.png" src="../_images/plot_permutation_test_for_classification.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="feature_selection/plot_permutation_test_for_classification.html#example-feature-selection-plot-permutation-test-for-classification-py"><span class="std std-ref">Test with permutations the significance of a classification score</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An example showing univariate feature selection."><div class="figure" id="id110">
+<a class="reference external image-reference" href="./feature_selection/plot_feature_selection.html"><img alt="../_images/plot_feature_selection.png" src="../_images/plot_feature_selection.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="feature_selection/plot_feature_selection.html#example-feature-selection-plot-feature-selection-py"><span class="std std-ref">Univariate Feature Selection</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="gaussian-process-for-machine-learning">
+<span id="gaussian-process-examples"></span><h2>Gaussian Process for Machine Learning<a class="headerlink" href="#gaussian-process-for-machine-learning" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.gaussian_process" title="sklearn.gaussian_process"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.gaussian_process</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="In this example, we fit a Gaussian Process model onto the diabetes dataset."><div class="figure" id="id111">
+<a class="reference external image-reference" href="./gaussian_process/gp_diabetes_dataset.html"><img alt="../_images/gp_diabetes_dataset.png" src="../_images/gp_diabetes_dataset.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="gaussian_process/gp_diabetes_dataset.html#example-gaussian-process-gp-diabetes-dataset-py"><span class="std std-ref">Gaussian Processes regression: goodness-of-fit on the &#8216;diabetes&#8217; dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A two-dimensional regression exercise with a post-processing allowing for probabilistic classif..."><div class="figure" id="id112">
+<a class="reference external image-reference" href="./gaussian_process/plot_gp_probabilistic_classification_after_regression.html"><img alt="../_images/plot_gp_probabilistic_classification_after_regression.png" src="../_images/plot_gp_probabilistic_classification_after_regression.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="gaussian_process/plot_gp_probabilistic_classification_after_regression.html#example-gaussian-process-plot-gp-probabilistic-classification-after-regression-py"><span class="std std-ref">Gaussian Processes classification example: exploiting the probabilistic output</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A simple one-dimensional regression exercise computed in two different ways:"><div class="figure" id="id113">
+<a class="reference external image-reference" href="./gaussian_process/plot_gp_regression.html"><img alt="../_images/plot_gp_regression.png" src="../_images/plot_gp_regression.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="gaussian_process/plot_gp_regression.html#example-gaussian-process-plot-gp-regression-py"><span class="std std-ref">Gaussian Processes regression: basic introductory example</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="generalized-linear-models">
+<span id="linear-examples"></span><h2>Generalized Linear Models<a class="headerlink" href="#generalized-linear-models" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Computes Lasso Path along the regularization parameter using the LARS algorithm on the diabetes..."><div class="figure" id="id114">
+<a class="reference external image-reference" href="./linear_model/plot_lasso_lars.html"><img alt="../_images/plot_lasso_lars.png" src="../_images/plot_lasso_lars.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_lasso_lars.html#example-linear-model-plot-lasso-lars-py"><span class="std std-ref">Lasso path using LARS</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A plot that compares the various convex loss functions supported by :class:`sklearn.linear_mode..."><div class="figure" id="id115">
+<a class="reference external image-reference" href="./linear_model/plot_sgd_loss_functions.html"><img alt="../_images/plot_sgd_loss_functions.png" src="../_images/plot_sgd_loss_functions.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_sgd_loss_functions.html#example-linear-model-plot-sgd-loss-functions-py"><span class="std std-ref">SGD: convex loss functions</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the maximum margin separating hyperplane within a two-class separable dataset using a line..."><div class="figure" id="id116">
+<a class="reference external image-reference" href="./linear_model/plot_sgd_separating_hyperplane.html"><img alt="../_images/plot_sgd_separating_hyperplane.png" src="../_images/plot_sgd_separating_hyperplane.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_sgd_separating_hyperplane.html#example-linear-model-plot-sgd-separating-hyperplane-py"><span class="std std-ref">SGD: Maximum margin separating hyperplane</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot decision function of a weighted dataset, where the size of points is proportional to its w..."><div class="figure" id="id117">
+<a class="reference external image-reference" href="./linear_model/plot_sgd_weighted_samples.html"><img alt="../_images/plot_sgd_weighted_samples.png" src="../_images/plot_sgd_weighted_samples.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_sgd_weighted_samples.html#example-linear-model-plot-sgd-weighted-samples-py"><span class="std std-ref">SGD: Weighted samples</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Shows the effect of collinearity in the coefficients of an estimator."><div class="figure" id="id118">
+<a class="reference external image-reference" href="./linear_model/plot_ridge_path.html"><img alt="../_images/plot_ridge_path.png" src="../_images/plot_ridge_path.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_ridge_path.html#example-linear-model-plot-ridge-path-py"><span class="std std-ref">Plot Ridge coefficients as a function of the regularization</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="In this example we see how to robustly fit a linear model to faulty data using the RANSAC algor..."><div class="figure" id="id119">
+<a class="reference external image-reference" href="./linear_model/plot_ransac.html"><img alt="../_images/plot_ransac.png" src="../_images/plot_ransac.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_ransac.html#example-linear-model-plot-ransac-py"><span class="std std-ref">Robust linear model estimation using RANSAC</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example demonstrates how to approximate a function with a polynomial of degree n_degree by..."><div class="figure" id="id120">
+<a class="reference external image-reference" href="./linear_model/plot_polynomial_interpolation.html"><img alt="../_images/plot_polynomial_interpolation.png" src="../_images/plot_polynomial_interpolation.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_polynomial_interpolation.html#example-linear-model-plot-polynomial-interpolation-py"><span class="std std-ref">Polynomial interpolation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Show below is a logistic-regression classifiers decision boundaries on the `iris <http://en.wik..."><div class="figure" id="id121">
+<a class="reference external image-reference" href="./linear_model/plot_iris_logistic.html"><img alt="../_images/plot_iris_logistic.png" src="../_images/plot_iris_logistic.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_iris_logistic.html#example-linear-model-plot-iris-logistic-py"><span class="std std-ref">Logistic Regression 3-class Classifier</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Computes path on IRIS dataset."><div class="figure" id="id122">
+<a class="reference external image-reference" href="./linear_model/plot_logistic_path.html"><img alt="../_images/plot_logistic_path.png" src="../_images/plot_logistic_path.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_logistic_path.html#example-linear-model-plot-logistic-path-py"><span class="std std-ref">Path with L1- Logistic Regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The coefficients, the residual sum of squares and the variance score are also calculated."><div class="figure" id="id123">
+<a class="reference external image-reference" href="./linear_model/plot_ols.html"><img alt="../_images/plot_ols.png" src="../_images/plot_ols.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_ols.html#example-linear-model-plot-ols-py"><span class="std std-ref">Linear Regression Example</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Ridge regression is basically minimizing a penalised version of the least-squared function. The..."><div class="figure" id="id124">
+<a class="reference external image-reference" href="./linear_model/plot_ols_ridge_variance.html"><img alt="../_images/plot_ols_ridge_variance.png" src="../_images/plot_ols_ridge_variance.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_ols_ridge_variance.html#example-linear-model-plot-ols-ridge-variance-py"><span class="std std-ref">Ordinary Least Squares and Ridge Regression Variance</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An example showing how different online solvers perform on the hand-written digits dataset."><div class="figure" id="id125">
+<a class="reference external image-reference" href="./linear_model/plot_sgd_comparison.html"><img alt="../_images/plot_sgd_comparison.png" src="../_images/plot_sgd_comparison.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_sgd_comparison.html#example-linear-model-plot-sgd-comparison-py"><span class="std std-ref">Comparing various online solvers</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Show in the plot is how the logistic regression would, in this synthetic dataset, classify valu..."><div class="figure" id="id126">
+<a class="reference external image-reference" href="./linear_model/plot_logistic.html"><img alt="../_images/plot_logistic.png" src="../_images/plot_logistic.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_logistic.html#example-linear-model-plot-logistic-py"><span class="std std-ref">Logit function</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The multi-task lasso allows to fit multiple regression problems jointly enforcing the selected ..."><div class="figure" id="id127">
+<a class="reference external image-reference" href="./linear_model/plot_multi_task_lasso_support.html"><img alt="../_images/plot_multi_task_lasso_support.png" src="../_images/plot_multi_task_lasso_support.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_multi_task_lasso_support.html#example-linear-model-plot-multi-task-lasso-support-py"><span class="std std-ref">Joint feature selection with multi-task Lasso</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the contours of the three penalties."><div class="figure" id="id128">
+<a class="reference external image-reference" href="./linear_model/plot_sgd_penalties.html"><img alt="../_images/plot_sgd_penalties.png" src="../_images/plot_sgd_penalties.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_sgd_penalties.html#example-linear-model-plot-sgd-penalties-py"><span class="std std-ref">SGD: Penalties</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="We show that linear_model.Lasso provides the same results for dense and sparse data and that in..."><div class="figure" id="id129">
+<a class="reference external image-reference" href="./linear_model/lasso_dense_vs_sparse_data.html"><img alt="../_images/lasso_dense_vs_sparse_data.png" src="../_images/lasso_dense_vs_sparse_data.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/lasso_dense_vs_sparse_data.html#example-linear-model-lasso-dense-vs-sparse-data-py"><span class="std std-ref">Lasso on dense and sparse data</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Estimates Lasso and Elastic-Net regression models on a manually generated sparse signal corrupt..."><div class="figure" id="id130">
+<a class="reference external image-reference" href="./linear_model/plot_lasso_and_elasticnet.html"><img alt="../_images/plot_lasso_and_elasticnet.png" src="../_images/plot_lasso_and_elasticnet.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_lasso_and_elasticnet.html#example-linear-model-plot-lasso-and-elasticnet-py"><span class="std std-ref">Lasso and Elastic Net for Sparse Signals</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Computes a Bayesian Ridge Regression on a synthetic dataset."><div class="figure" id="id131">
+<a class="reference external image-reference" href="./linear_model/plot_bayesian_ridge.html"><img alt="../_images/plot_bayesian_ridge.png" src="../_images/plot_bayesian_ridge.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_bayesian_ridge.html#example-linear-model-plot-bayesian-ridge-py"><span class="std std-ref">Bayesian Ridge Regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Features 1 and 2 of the diabetes-dataset are fitted and plotted below. It illustrates that alth..."><div class="figure" id="id132">
+<a class="reference external image-reference" href="./linear_model/plot_ols_3d.html"><img alt="../_images/plot_ols_3d.png" src="../_images/plot_ols_3d.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_ols_3d.html#example-linear-model-plot-ols-3d-py"><span class="std std-ref">Sparsity Example: Fitting only features 1  and 2</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Here a sine function is fit with a polynomial of order 3, for values close to zero."><div class="figure" id="id133">
+<a class="reference external image-reference" href="./linear_model/plot_robust_fit.html"><img alt="../_images/plot_robust_fit.png" src="../_images/plot_robust_fit.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_robust_fit.html#example-linear-model-plot-robust-fit-py"><span class="std std-ref">Robust linear estimator fitting</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Fit regression model with Bayesian Ridge Regression."><div class="figure" id="id134">
+<a class="reference external image-reference" href="./linear_model/plot_ard.html"><img alt="../_images/plot_ard.png" src="../_images/plot_ard.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_ard.html#example-linear-model-plot-ard-py"><span class="std std-ref">Automatic Relevance Determination Regression (ARD)</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Comparison of the sparsity (percentage of zero coefficients) of solutions when L1 and L2 penalt..."><div class="figure" id="id135">
+<a class="reference external image-reference" href="./linear_model/plot_logistic_l1_l2_sparsity.html"><img alt="../_images/plot_logistic_l1_l2_sparsity.png" src="../_images/plot_logistic_l1_l2_sparsity.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_logistic_l1_l2_sparsity.html#example-linear-model-plot-logistic-l1-l2-sparsity-py"><span class="std std-ref">L1 Penalty and Sparsity in Logistic Regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot decision surface of multi-class SGD on iris dataset. The hyperplanes corresponding to the ..."><div class="figure" id="id136">
+<a class="reference external image-reference" href="./linear_model/plot_sgd_iris.html"><img alt="../_images/plot_sgd_iris.png" src="../_images/plot_sgd_iris.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_sgd_iris.html#example-linear-model-plot-sgd-iris-py"><span class="std std-ref">Plot multi-class SGD on the iris dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Computes a Theil-Sen Regression on a synthetic dataset."><div class="figure" id="id137">
+<a class="reference external image-reference" href="./linear_model/plot_theilsen.html"><img alt="../_images/plot_theilsen.png" src="../_images/plot_theilsen.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_theilsen.html#example-linear-model-plot-theilsen-py"><span class="std std-ref">Theil-Sen Regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Using orthogonal matching pursuit for recovering a sparse signal from a noisy measurement encod..."><div class="figure" id="id138">
+<a class="reference external image-reference" href="./linear_model/plot_omp.html"><img alt="../_images/plot_omp.png" src="../_images/plot_omp.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_omp.html#example-linear-model-plot-omp-py"><span class="std std-ref">Orthogonal Matching Pursuit</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Lasso and elastic net (L1 and L2 penalisation) implemented using a coordinate descent."><div class="figure" id="id139">
+<a class="reference external image-reference" href="./linear_model/plot_lasso_coordinate_descent_path.html"><img alt="../_images/plot_lasso_coordinate_descent_path.png" src="../_images/plot_lasso_coordinate_descent_path.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_lasso_coordinate_descent_path.html#example-linear-model-plot-lasso-coordinate-descent-path-py"><span class="std std-ref">Lasso and Elastic Net</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Use the Akaike information criterion (AIC), the Bayes Information criterion (BIC) and cross-val..."><div class="figure" id="id140">
+<a class="reference external image-reference" href="./linear_model/plot_lasso_model_selection.html"><img alt="../_images/plot_lasso_model_selection.png" src="../_images/plot_lasso_model_selection.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_lasso_model_selection.html#example-linear-model-plot-lasso-model-selection-py"><span class="std std-ref">Lasso model selection: Cross-Validation / AIC / BIC</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Given a small number of observations, we want to recover which features of X are relevant to ex..."><div class="figure" id="id141">
+<a class="reference external image-reference" href="./linear_model/plot_sparse_recovery.html"><img alt="../_images/plot_sparse_recovery.png" src="../_images/plot_sparse_recovery.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="linear_model/plot_sparse_recovery.html#example-linear-model-plot-sparse-recovery-py"><span class="std std-ref">Sparse recovery: feature selection for sparse linear models</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="manifold-learning">
+<span id="manifold-examples"></span><h2>Manifold learning<a class="headerlink" href="#manifold-learning" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.manifold" title="sklearn.manifold"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.manifold</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="An illustration of Swiss Roll reduction with locally linear embedding "><div class="figure" id="id142">
+<a class="reference external image-reference" href="./manifold/plot_swissroll.html"><img alt="../_images/plot_swissroll.png" src="../_images/plot_swissroll.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="manifold/plot_swissroll.html#example-manifold-plot-swissroll-py"><span class="std std-ref">Swiss Roll reduction with LLE</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An illustration of the metric and non-metric MDS on generated noisy data."><div class="figure" id="id143">
+<a class="reference external image-reference" href="./manifold/plot_mds.html"><img alt="../_images/plot_mds.png" src="../_images/plot_mds.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="manifold/plot_mds.html#example-manifold-plot-mds-py"><span class="std std-ref">Multi-dimensional scaling</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An illustration of dimensionality reduction on the S-curve dataset with various manifold learni..."><div class="figure" id="id144">
+<a class="reference external image-reference" href="./manifold/plot_compare_methods.html"><img alt="../_images/plot_compare_methods.png" src="../_images/plot_compare_methods.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="manifold/plot_compare_methods.html#example-manifold-plot-compare-methods-py"><span class="std std-ref">Comparison of Manifold Learning methods</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An application of the different :ref:`manifold` techniques on a spherical data-set. Here one ca..."><div class="figure" id="id145">
+<a class="reference external image-reference" href="./manifold/plot_manifold_sphere.html"><img alt="../_images/plot_manifold_sphere.png" src="../_images/plot_manifold_sphere.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="manifold/plot_manifold_sphere.html#example-manifold-plot-manifold-sphere-py"><span class="std std-ref">Manifold Learning methods on a severed sphere</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An illustration of various embeddings on the digits dataset."><div class="figure" id="id146">
+<a class="reference external image-reference" href="./manifold/plot_lle_digits.html"><img alt="../_images/plot_lle_digits.png" src="../_images/plot_lle_digits.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="manifold/plot_lle_digits.html#example-manifold-plot-lle-digits-py"><span class="std std-ref">Manifold learning on handwritten digits: Locally Linear Embedding, Isomap...</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="gaussian-mixture-models">
+<span id="mixture-examples"></span><h2>Gaussian Mixture Models<a class="headerlink" href="#gaussian-mixture-models" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.mixture" title="sklearn.mixture"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.mixture</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Plot the density estimation of a mixture of two Gaussians. Data is generated from two Gaussians..."><div class="figure" id="id147">
+<a class="reference external image-reference" href="./mixture/plot_gmm_pdf.html"><img alt="../_images/plot_gmm_pdf.png" src="../_images/plot_gmm_pdf.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="mixture/plot_gmm_pdf.html#example-mixture-plot-gmm-pdf-py"><span class="std std-ref">Density Estimation for a mixture of Gaussians</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the confidence ellipsoids of a mixture of two Gaussians with EM and variational Dirichlet ..."><div class="figure" id="id148">
+<a class="reference external image-reference" href="./mixture/plot_gmm.html"><img alt="../_images/plot_gmm.png" src="../_images/plot_gmm.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="mixture/plot_gmm.html#example-mixture-plot-gmm-py"><span class="std std-ref">Gaussian Mixture Model Ellipsoids</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example highlights the advantages of the Dirichlet Process: complexity control and dealing..."><div class="figure" id="id149">
+<a class="reference external image-reference" href="./mixture/plot_gmm_sin.html"><img alt="../_images/plot_gmm_sin.png" src="../_images/plot_gmm_sin.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="mixture/plot_gmm_sin.html#example-mixture-plot-gmm-sin-py"><span class="std std-ref">Gaussian Mixture Model Sine Curve</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example shows that model selection can be performed with Gaussian Mixture Models using inf..."><div class="figure" id="id150">
+<a class="reference external image-reference" href="./mixture/plot_gmm_selection.html"><img alt="../_images/plot_gmm_selection.png" src="../_images/plot_gmm_selection.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="mixture/plot_gmm_selection.html#example-mixture-plot-gmm-selection-py"><span class="std std-ref">Gaussian Mixture Model Selection</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Demonstration of Gaussian mixture models for classification."><div class="figure" id="id151">
+<a class="reference external image-reference" href="./mixture/plot_gmm_classifier.html"><img alt="../_images/plot_gmm_classifier.png" src="../_images/plot_gmm_classifier.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="mixture/plot_gmm_classifier.html#example-mixture-plot-gmm-classifier-py"><span class="std std-ref">GMM classification</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="model-selection">
+<span id="model-selection-examples"></span><h2>Model Selection<a class="headerlink" href="#model-selection" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning model selection, mostly contained in the
+<a class="reference internal" href="../modules/classes.html#module-sklearn.grid_search" title="sklearn.grid_search"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.grid_search</span></code></a> and <a class="reference internal" href="../modules/classes.html#module-sklearn.cross_validation" title="sklearn.cross_validation"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cross_validation</span></code></a> modules.</p>
+<div class="thumbnailContainer" tooltip="In this plot you can see the training scores and validation scores of an SVM for different valu..."><div class="figure" id="id152">
+<a class="reference external image-reference" href="./model_selection/plot_validation_curve.html"><img alt="../_images/plot_validation_curve.png" src="../_images/plot_validation_curve.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/plot_validation_curve.html#example-model-selection-plot-validation-curve-py"><span class="std std-ref">Plotting Validation Curves</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example demonstrates the problems of underfitting and overfitting and how we can use linea..."><div class="figure" id="id153">
+<a class="reference external image-reference" href="./model_selection/plot_underfitting_overfitting.html"><img alt="../_images/plot_underfitting_overfitting.png" src="../_images/plot_underfitting_overfitting.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/plot_underfitting_overfitting.html#example-model-selection-plot-underfitting-overfitting-py"><span class="std std-ref">Underfitting vs. Overfitting</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Example of confusion matrix usage to evaluate the quality of the output of a classifier on the ..."><div class="figure" id="id154">
+<a class="reference external image-reference" href="./model_selection/plot_confusion_matrix.html"><img alt="../_images/plot_confusion_matrix.png" src="../_images/plot_confusion_matrix.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/plot_confusion_matrix.html#example-model-selection-plot-confusion-matrix-py"><span class="std std-ref">Confusion matrix</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Example of Receiver Operating Characteristic (ROC) metric to evaluate classifier output quality..."><div class="figure" id="id155">
+<a class="reference external image-reference" href="./model_selection/plot_roc_crossval.html"><img alt="../_images/plot_roc_crossval.png" src="../_images/plot_roc_crossval.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/plot_roc_crossval.html#example-model-selection-plot-roc-crossval-py"><span class="std std-ref">Receiver Operating Characteristic (ROC) with cross validation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This examples shows how a classifier is optimized by cross-validation, which is done using the ..."><div class="figure" id="id156">
+<a class="reference external image-reference" href="./model_selection/grid_search_digits.html"><img alt="../_images/grid_search_digits.png" src="../_images/grid_search_digits.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/grid_search_digits.html#example-model-selection-grid-search-digits-py"><span class="std std-ref">Parameter estimation using grid search with cross-validation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Illustration of how the performance of an estimator on unseen data (test data) is not the same ..."><div class="figure" id="id157">
+<a class="reference external image-reference" href="./model_selection/plot_train_error_vs_test_error.html"><img alt="../_images/plot_train_error_vs_test_error.png" src="../_images/plot_train_error_vs_test_error.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/plot_train_error_vs_test_error.html#example-model-selection-plot-train-error-vs-test-error-py"><span class="std std-ref">Train error vs Test error</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Compare randomized search and grid search for optimizing hyperparameters of a random forest. Al..."><div class="figure" id="id158">
+<a class="reference external image-reference" href="./model_selection/randomized_search.html"><img alt="../_images/randomized_search.png" src="../_images/randomized_search.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/randomized_search.html#example-model-selection-randomized-search-py"><span class="std std-ref">Comparing randomized search and grid search for hyperparameter estimation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Example of Precision-Recall metric to evaluate classifier output quality."><div class="figure" id="id159">
+<a class="reference external image-reference" href="./model_selection/plot_precision_recall.html"><img alt="../_images/plot_precision_recall.png" src="../_images/plot_precision_recall.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/plot_precision_recall.html#example-model-selection-plot-precision-recall-py"><span class="std std-ref">Precision-Recall</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The dataset used in this example is the 20 newsgroups dataset which will be automatically downl..."><div class="figure" id="id160">
+<a class="reference external image-reference" href="./model_selection/grid_search_text_feature_extraction.html"><img alt="../_images/grid_search_text_feature_extraction.png" src="../_images/grid_search_text_feature_extraction.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/grid_search_text_feature_extraction.html#example-model-selection-grid-search-text-feature-extraction-py"><span class="std std-ref">Sample pipeline for text feature extraction and evaluation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="On the left side the learning curve of a naive Bayes classifier is shown for the digits dataset..."><div class="figure" id="id161">
+<a class="reference external image-reference" href="./model_selection/plot_learning_curve.html"><img alt="../_images/plot_learning_curve.png" src="../_images/plot_learning_curve.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/plot_learning_curve.html#example-model-selection-plot-learning-curve-py"><span class="std std-ref">Plotting Learning Curves</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Example of Receiver Operating Characteristic (ROC) metric to evaluate classifier output quality..."><div class="figure" id="id162">
+<a class="reference external image-reference" href="./model_selection/plot_roc.html"><img alt="../_images/plot_roc.png" src="../_images/plot_roc.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="model_selection/plot_roc.html#example-model-selection-plot-roc-py"><span class="std std-ref">Receiver Operating Characteristic (ROC)</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="nearest-neighbors">
+<span id="neighbors-examples"></span><h2>Nearest Neighbors<a class="headerlink" href="#nearest-neighbors" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.neighbors" title="sklearn.neighbors"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.neighbors</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Demonstrate the resolution of a regression problem using a k-Nearest Neighbor and the interpola..."><div class="figure" id="id163">
+<a class="reference external image-reference" href="./neighbors/plot_regression.html"><img alt="../_images/plot_regression.png" src="../_images/plot_regression.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="neighbors/plot_regression.html#example-neighbors-plot-regression-py"><span class="std std-ref">Nearest Neighbors regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Sample usage of Nearest Neighbors classification. It will plot the decision boundaries for each..."><div class="figure" id="id164">
+<a class="reference external image-reference" href="./neighbors/plot_classification.html"><img alt="../_images/plot_classification.png" src="../_images/plot_classification.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="neighbors/plot_classification.html#example-neighbors-plot-classification-py"><span class="std std-ref">Nearest Neighbors Classification</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Sample usage of Nearest Centroid classification. It will plot the decision boundaries for each ..."><div class="figure" id="id165">
+<a class="reference external image-reference" href="./neighbors/plot_nearest_centroid.html"><img alt="../_images/plot_nearest_centroid.png" src="../_images/plot_nearest_centroid.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="neighbors/plot_nearest_centroid.html#example-neighbors-plot-nearest-centroid-py"><span class="std std-ref">Nearest Centroid Classification</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example shows how kernel density estimation (KDE), a powerful non-parametric density estim..."><div class="figure" id="id166">
+<a class="reference external image-reference" href="./neighbors/plot_digits_kde_sampling.html"><img alt="../_images/plot_digits_kde_sampling.png" src="../_images/plot_digits_kde_sampling.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="neighbors/plot_digits_kde_sampling.html#example-neighbors-plot-digits-kde-sampling-py"><span class="std std-ref">Kernel Density Estimation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example does not perform any learning over the data (see :ref:`example_applications_plot_s..."><div class="figure" id="id167">
+<a class="reference external image-reference" href="./neighbors/plot_species_kde.html"><img alt="../_images/plot_species_kde.png" src="../_images/plot_species_kde.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="neighbors/plot_species_kde.html#example-neighbors-plot-species-kde-py"><span class="std std-ref">Kernel Density Estimate of Species Distributions</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example demonstrates the behaviour of the accuracy of the nearest neighbor queries of Loca..."><div class="figure" id="id168">
+<a class="reference external image-reference" href="./neighbors/plot_approximate_nearest_neighbors_hyperparameters.html"><img alt="../_images/plot_approximate_nearest_neighbors_hyperparameters.png" src="../_images/plot_approximate_nearest_neighbors_hyperparameters.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="neighbors/plot_approximate_nearest_neighbors_hyperparameters.html#example-neighbors-plot-approximate-nearest-neighbors-hyperparameters-py"><span class="std std-ref">Hyper-parameters of Approximate Nearest Neighbors</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The first plot shows one of the problems with using histograms to visualize the density of poin..."><div class="figure" id="id169">
+<a class="reference external image-reference" href="./neighbors/plot_kde_1d.html"><img alt="../_images/plot_kde_1d.png" src="../_images/plot_kde_1d.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="neighbors/plot_kde_1d.html#example-neighbors-plot-kde-1d-py"><span class="std std-ref">Simple 1D Kernel Density Estimation</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example studies the scalability profile of approximate 10-neighbors queries using the LSHF..."><div class="figure" id="id170">
+<a class="reference external image-reference" href="./neighbors/plot_approximate_nearest_neighbors_scalability.html"><img alt="../_images/plot_approximate_nearest_neighbors_scalability.png" src="../_images/plot_approximate_nearest_neighbors_scalability.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="neighbors/plot_approximate_nearest_neighbors_scalability.html#example-neighbors-plot-approximate-nearest-neighbors-scalability-py"><span class="std std-ref">Scalability of Approximate Nearest Neighbors</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="neural-networks">
+<span id="neural-network-examples"></span><h2>Neural Networks<a class="headerlink" href="#neural-networks" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.neural_network" title="sklearn.neural_network"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.neural_network</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="For greyscale image data where pixel values can be interpreted as degrees of blackness on a whi..."><div class="figure" id="id171">
+<a class="reference external image-reference" href="./neural_networks/plot_rbm_logistic_classification.html"><img alt="../_images/plot_rbm_logistic_classification.png" src="../_images/plot_rbm_logistic_classification.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="neural_networks/plot_rbm_logistic_classification.html#example-neural-networks-plot-rbm-logistic-classification-py"><span class="std std-ref">Restricted Boltzmann Machine features for digit classification</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="preprocessing">
+<span id="preprocessing-examples"></span><h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.preprocessing</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Shows how to use a function transformer in a pipeline. If you know your dataset's first princip..."><div class="figure" id="id172">
+<a class="reference external image-reference" href="./preprocessing/plot_function_transformer.html"><img alt="../_images/plot_function_transformer.png" src="../_images/plot_function_transformer.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="preprocessing/plot_function_transformer.html#example-preprocessing-plot-function-transformer-py"><span class="std std-ref">Using FunctionTransformer to select columns</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Making sure that each Feature has approximately the same scale can be a crucial preprocessing s..."><div class="figure" id="id173">
+<a class="reference external image-reference" href="./preprocessing/plot_robust_scaling.html"><img alt="../_images/plot_robust_scaling.png" src="../_images/plot_robust_scaling.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="preprocessing/plot_robust_scaling.html#example-preprocessing-plot-robust-scaling-py"><span class="std std-ref">Robust Scaling on Toy Data</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="semi-supervised-classification">
+<span id="semi-supervised-examples"></span><h2>Semi Supervised Classification<a class="headerlink" href="#semi-supervised-classification" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.semi_supervised" title="sklearn.semi_supervised"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.semi_supervised</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Example of LabelPropagation learning a complex internal structure to demonstrate "manifold lear..."><div class="figure" id="id174">
+<a class="reference external image-reference" href="./semi_supervised/plot_label_propagation_structure.html"><img alt="../_images/plot_label_propagation_structure.png" src="../_images/plot_label_propagation_structure.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="semi_supervised/plot_label_propagation_structure.html#example-semi-supervised-plot-label-propagation-structure-py"><span class="std std-ref">Label Propagation learning a complex structure</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Comparison for decision boundary generated on iris dataset between Label Propagation and SVM."><div class="figure" id="id175">
+<a class="reference external image-reference" href="./semi_supervised/plot_label_propagation_versus_svm_iris.html"><img alt="../_images/plot_label_propagation_versus_svm_iris.png" src="../_images/plot_label_propagation_versus_svm_iris.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="semi_supervised/plot_label_propagation_versus_svm_iris.html#example-semi-supervised-plot-label-propagation-versus-svm-iris-py"><span class="std std-ref">Decision boundary of label propagation versus SVM on the Iris dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example demonstrates the power of semisupervised learning by training a Label Spreading mo..."><div class="figure" id="id176">
+<a class="reference external image-reference" href="./semi_supervised/plot_label_propagation_digits.html"><img alt="../_images/plot_label_propagation_digits.png" src="../_images/plot_label_propagation_digits.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="semi_supervised/plot_label_propagation_digits.html#example-semi-supervised-plot-label-propagation-digits-py"><span class="std std-ref">Label Propagation digits: Demonstrating performance</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Demonstrates an active learning technique to learn handwritten digits using label propagation."><div class="figure" id="id177">
+<a class="reference external image-reference" href="./semi_supervised/plot_label_propagation_digits_active_learning.html"><img alt="../_images/plot_label_propagation_digits_active_learning.png" src="../_images/plot_label_propagation_digits_active_learning.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="semi_supervised/plot_label_propagation_digits_active_learning.html#example-semi-supervised-plot-label-propagation-digits-active-learning-py"><span class="std std-ref">Label Propagation digits active learning</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="support-vector-machines">
+<span id="svm-examples"></span><h2>Support Vector Machines<a class="headerlink" href="#support-vector-machines" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.svm</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Perform binary classification using non-linear SVC with RBF kernel. The target to predict is a ..."><div class="figure" id="id178">
+<a class="reference external image-reference" href="./svm/plot_svm_nonlinear.html"><img alt="../_images/plot_svm_nonlinear.png" src="../_images/plot_svm_nonlinear.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_svm_nonlinear.html#example-svm-plot-svm-nonlinear-py"><span class="std std-ref">Non-linear SVM</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Toy example of 1D regression using linear, polynomial and RBF kernels."><div class="figure" id="id179">
+<a class="reference external image-reference" href="./svm/plot_svm_regression.html"><img alt="../_images/plot_svm_regression.png" src="../_images/plot_svm_regression.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_svm_regression.html#example-svm-plot-svm-regression-py"><span class="std std-ref">Support Vector Regression (SVR) using linear and non-linear kernels</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the maximum margin separating hyperplane within a two-class separable dataset using a Supp..."><div class="figure" id="id180">
+<a class="reference external image-reference" href="./svm/plot_separating_hyperplane.html"><img alt="../_images/plot_separating_hyperplane.png" src="../_images/plot_separating_hyperplane.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_separating_hyperplane.html#example-svm-plot-separating-hyperplane-py"><span class="std std-ref">SVM: Maximum margin separating hyperplane</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Find the optimal separating hyperplane using an SVC for classes that are unbalanced."><div class="figure" id="id181">
+<a class="reference external image-reference" href="./svm/plot_separating_hyperplane_unbalanced.html"><img alt="../_images/plot_separating_hyperplane_unbalanced.png" src="../_images/plot_separating_hyperplane_unbalanced.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_separating_hyperplane_unbalanced.html#example-svm-plot-separating-hyperplane-unbalanced-py"><span class="std std-ref">SVM: Separating hyperplane for unbalanced classes</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Simple usage of Support Vector Machines to classify a sample. It will plot the decision surface..."><div class="figure" id="id182">
+<a class="reference external image-reference" href="./svm/plot_custom_kernel.html"><img alt="../_images/plot_custom_kernel.png" src="../_images/plot_custom_kernel.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_custom_kernel.html#example-svm-plot-custom-kernel-py"><span class="std std-ref">SVM with custom kernel</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example shows how to perform univariate feature before running a SVC (support vector class..."><div class="figure" id="id183">
+<a class="reference external image-reference" href="./svm/plot_svm_anova.html"><img alt="../_images/plot_svm_anova.png" src="../_images/plot_svm_anova.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_svm_anova.html#example-svm-plot-svm-anova-py"><span class="std std-ref">SVM-Anova: SVM with univariate feature selection</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot decision function of a weighted dataset, where the size of points is proportional to its w..."><div class="figure" id="id184">
+<a class="reference external image-reference" href="./svm/plot_weighted_samples.html"><img alt="../_images/plot_weighted_samples.png" src="../_images/plot_weighted_samples.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_weighted_samples.html#example-svm-plot-weighted-samples-py"><span class="std std-ref">SVM: Weighted samples</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An example using a one-class SVM for novelty detection."><div class="figure" id="id185">
+<a class="reference external image-reference" href="./svm/plot_oneclass.html"><img alt="../_images/plot_oneclass.png" src="../_images/plot_oneclass.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_oneclass.html#example-svm-plot-oneclass-py"><span class="std std-ref">One-class SVM with non-linear kernel (RBF)</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Comparison of different linear SVM classifiers on a 2D projection of the iris dataset. We only ..."><div class="figure" id="id186">
+<a class="reference external image-reference" href="./svm/plot_iris.html"><img alt="../_images/plot_iris.png" src="../_images/plot_iris.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_iris.html#example-svm-plot-iris-py"><span class="std std-ref">Plot different SVM classifiers in the iris dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Three different types of SVM-Kernels are displayed below. The polynomial and RBF are especially..."><div class="figure" id="id187">
+<a class="reference external image-reference" href="./svm/plot_svm_kernels.html"><img alt="../_images/plot_svm_kernels.png" src="../_images/plot_svm_kernels.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_svm_kernels.html#example-svm-plot-svm-kernels-py"><span class="std std-ref">SVM-Kernels</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="A small value of `C` includes more/all the observations, allowing the margins to be calculated ..."><div class="figure" id="id188">
+<a class="reference external image-reference" href="./svm/plot_svm_margin.html"><img alt="../_images/plot_svm_margin.png" src="../_images/plot_svm_margin.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_svm_margin.html#example-svm-plot-svm-margin-py"><span class="std std-ref">SVM Margins Example</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="The following example illustrates the effect of scaling the regularization parameter when using..."><div class="figure" id="id189">
+<a class="reference external image-reference" href="./svm/plot_svm_scale_c.html"><img alt="../_images/plot_svm_scale_c.png" src="../_images/plot_svm_scale_c.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_svm_scale_c.html#example-svm-plot-svm-scale-c-py"><span class="std std-ref">Scaling the regularization parameter for SVCs</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This example illustrates the effect of the parameters ``gamma`` and ``C`` of the Radial Basis F..."><div class="figure" id="id190">
+<a class="reference external image-reference" href="./svm/plot_rbf_parameters.html"><img alt="../_images/plot_rbf_parameters.png" src="../_images/plot_rbf_parameters.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="svm/plot_rbf_parameters.html#example-svm-plot-rbf-parameters-py"><span class="std std-ref">RBF SVM parameters</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="working-with-text-documents">
+<span id="text-examples"></span><h2>Working with text documents<a class="headerlink" href="#working-with-text-documents" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.feature_extraction.text" title="sklearn.feature_extraction.text"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.feature_extraction.text</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="Compares FeatureHasher and DictVectorizer by using both to vectorize text documents."><div class="figure" id="id191">
+<a class="reference external image-reference" href="./text/hashing_vs_dict_vectorizer.html"><img alt="../_images/hashing_vs_dict_vectorizer.png" src="../_images/hashing_vs_dict_vectorizer.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="text/hashing_vs_dict_vectorizer.html#example-text-hashing-vs-dict-vectorizer-py"><span class="std std-ref">FeatureHasher and DictVectorizer Comparison</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This is an example showing how the scikit-learn can be used to classify documents by topics usi..."><div class="figure" id="id192">
+<a class="reference external image-reference" href="./text/mlcomp_sparse_document_classification.html"><img alt="../_images/mlcomp_sparse_document_classification.png" src="../_images/mlcomp_sparse_document_classification.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="text/mlcomp_sparse_document_classification.html#example-text-mlcomp-sparse-document-classification-py"><span class="std std-ref">Classification of text documents: using a MLComp dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This is an example showing how the scikit-learn can be used to cluster documents by topics usin..."><div class="figure" id="id193">
+<a class="reference external image-reference" href="./text/document_clustering.html"><img alt="../_images/document_clustering.png" src="../_images/document_clustering.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="text/document_clustering.html#example-text-document-clustering-py"><span class="std std-ref">Clustering text documents using k-means</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="This is an example showing how scikit-learn can be used to classify documents by topics using a..."><div class="figure" id="id194">
+<a class="reference external image-reference" href="./text/document_classification_20newsgroups.html"><img alt="../_images/document_classification_20newsgroups.png" src="../_images/document_classification_20newsgroups.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="text/document_classification_20newsgroups.html#example-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+<div class="section" id="decision-trees">
+<span id="tree-examples"></span><h2>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h2>
+<p>Examples concerning the <a class="reference internal" href="../modules/classes.html#module-sklearn.tree" title="sklearn.tree"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.tree</span></code></a> module.</p>
+<div class="thumbnailContainer" tooltip="A 1D regression with decision tree."><div class="figure" id="id195">
+<a class="reference external image-reference" href="./tree/plot_tree_regression.html"><img alt="../_images/plot_tree_regression.png" src="../_images/plot_tree_regression.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tree/plot_tree_regression.html#example-tree-plot-tree-regression-py"><span class="std std-ref">Decision Tree Regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="An example to illustrate multi-output regression with decision tree."><div class="figure" id="id196">
+<a class="reference external image-reference" href="./tree/plot_tree_regression_multioutput.html"><img alt="../_images/plot_tree_regression_multioutput.png" src="../_images/plot_tree_regression_multioutput.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tree/plot_tree_regression_multioutput.html#example-tree-plot-tree-regression-multioutput-py"><span class="std std-ref">Multi-output Decision Tree Regression</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="thumbnailContainer" tooltip="Plot the decision surface of a decision tree trained on pairs of features of the iris dataset."><div class="figure" id="id197">
+<a class="reference external image-reference" href="./tree/plot_iris.html"><img alt="../_images/plot_iris1.png" src="../_images/plot_iris1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tree/plot_iris.html#example-tree-plot-iris-py"><span class="std std-ref">Plot the decision surface of a decision tree on the iris dataset</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/auto_examples/index.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel rellarge">
+    
+    <div class="buttonPrevious">
+      <a href="../modules/computational_performance.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

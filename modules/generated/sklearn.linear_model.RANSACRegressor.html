@@ -1,0 +1,552 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.linear_model.RANSACRegressor &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.linear_model.Ridge" href="sklearn.linear_model.Ridge.html" />
+    <link rel="prev" title="sklearn.linear_model.RandomizedLogisticRegression" href="sklearn.linear_model.RandomizedLogisticRegression.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RANSACRegressor.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.linear_model.RandomizedLogisticRegression.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.linea...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.linear_model.RandomizedLogisticRegression
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.RANSACRegressor</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-linear-model-ransacregressor">Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.RANSACRegressor</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-linear-model-ransacregressor">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.RANSACRegressor<a class="headerlink" href="#sklearn-linear-model-ransacregressor" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.linear_model.RANSACRegressor">
+<em class="property">class </em><code class="descclassname">sklearn.linear_model.</code><code class="descname">RANSACRegressor</code><span class="sig-paren">(</span><em>base_estimator=None</em>, <em>min_samples=None</em>, <em>residual_threshold=None</em>, <em>is_data_valid=None</em>, <em>is_model_valid=None</em>, <em>max_trials=100</em>, <em>stop_n_inliers=inf</em>, <em>stop_score=inf</em>, <em>stop_probability=0.99</em>, <em>residual_metric=None</em>, <em>loss='absolute_loss'</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/ransac.py#L54"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor" title="Permalink to this definition">¶</a></dt>
+<dd><p>RANSAC (RANdom SAmple Consensus) algorithm.</p>
+<p>RANSAC is an iterative algorithm for the robust estimation of parameters
+from a subset of inliers from the complete data set. More information can
+be found in the general documentation of linear models.</p>
+<p>A detailed description of the algorithm can be found in the documentation
+of the <code class="docutils literal"><span class="pre">linear_model</span></code> sub-package.</p>
+<p>Read more in the <a class="reference internal" href="../linear_model.html#ransac-regression"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>base_estimator</strong> : object, optional</p>
+<blockquote>
+<div><p>Base estimator object which implements the following methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>fit(X, y)</cite>: Fit model to given training data and target values.</li>
+<li><cite>score(X, y)</cite>: Returns the mean accuracy on the given test data,
+which is used for the stop criterion defined by <cite>stop_score</cite>.
+Additionally, the score is used to decide which of two equally
+large consensus sets is chosen as the better one.</li>
+</ul>
+</div></blockquote>
+<p>If <cite>base_estimator</cite> is None, then
+<code class="docutils literal"><span class="pre">base_estimator=sklearn.linear_model.LinearRegression()</span></code> is used for
+target values of dtype float.</p>
+<p>Note that the current implementation only supports regression
+estimators.</p>
+</div></blockquote>
+<p><strong>min_samples</strong> : int (&gt;= 1) or float ([0, 1]), optional</p>
+<blockquote>
+<div><p>Minimum number of samples chosen randomly from original data. Treated
+as an absolute number of samples for <cite>min_samples &gt;= 1</cite>, treated as a
+relative number <cite>ceil(min_samples * X.shape[0]</cite>) for
+<cite>min_samples &lt; 1</cite>. This is typically chosen as the minimal number of
+samples necessary to estimate the given <cite>base_estimator</cite>. By default a
+<code class="docutils literal"><span class="pre">sklearn.linear_model.LinearRegression()</span></code> estimator is assumed and
+<cite>min_samples</cite> is chosen as <code class="docutils literal"><span class="pre">X.shape[1]</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
+</div></blockquote>
+<p><strong>residual_threshold</strong> : float, optional</p>
+<blockquote>
+<div><p>Maximum residual for a data sample to be classified as an inlier.
+By default the threshold is chosen as the MAD (median absolute
+deviation) of the target values <cite>y</cite>.</p>
+</div></blockquote>
+<p><strong>is_data_valid</strong> : callable, optional</p>
+<blockquote>
+<div><p>This function is called with the randomly selected data before the
+model is fitted to it: <cite>is_data_valid(X, y)</cite>. If its return value is
+False the current randomly chosen sub-sample is skipped.</p>
+</div></blockquote>
+<p><strong>is_model_valid</strong> : callable, optional</p>
+<blockquote>
+<div><p>This function is called with the estimated model and the randomly
+selected data: <cite>is_model_valid(model, X, y)</cite>. If its return value is
+False the current randomly chosen sub-sample is skipped.
+Rejecting samples with this function is computationally costlier than
+with <cite>is_data_valid</cite>. <cite>is_model_valid</cite> should therefore only be used if
+the estimated model is needed for making the rejection decision.</p>
+</div></blockquote>
+<p><strong>max_trials</strong> : int, optional</p>
+<blockquote>
+<div><p>Maximum number of iterations for random sample selection.</p>
+</div></blockquote>
+<p><strong>stop_n_inliers</strong> : int, optional</p>
+<blockquote>
+<div><p>Stop iteration if at least this number of inliers are found.</p>
+</div></blockquote>
+<p><strong>stop_score</strong> : float, optional</p>
+<blockquote>
+<div><p>Stop iteration if score is greater equal than this threshold.</p>
+</div></blockquote>
+<p><strong>stop_probability</strong> : float in range [0, 1], optional</p>
+<blockquote>
+<div><p>RANSAC iteration stops if at least one outlier-free set of the training
+data is sampled in RANSAC. This requires to generate at least N
+samples (iterations):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">&gt;=</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">probability</span><span class="p">)</span> <span class="o">/</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">e</span><span class="o">**</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where the probability (confidence) is typically set to high value such
+as 0.99 (the default) and e is the current fraction of inliers w.r.t.
+the total number of samples.</p>
+</div></blockquote>
+<p><strong>residual_metric</strong> : callable, optional</p>
+<blockquote>
+<div><p>Metric to reduce the dimensionality of the residuals to 1 for
+multi-dimensional target values <code class="docutils literal"><span class="pre">y.shape[1]</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>. By default the sum
+of absolute differences is used:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">dy</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>NOTE: residual_metric is deprecated from 0.18 and will be removed in 0.20
+Use <code class="docutils literal"><span class="pre">loss</span></code> instead.</p>
+</div></blockquote>
+<p><strong>loss</strong> : string, callable, optional, default &#8220;absolute_loss&#8221;</p>
+<blockquote>
+<div><p>String inputs, &#8220;absolute_loss&#8221; and &#8220;squared_loss&#8221; are supported which
+find the absolute loss and squared loss per sample
+respectively.</p>
+<p>If <code class="docutils literal"><span class="pre">loss</span></code> is a callable, then it should be a function that takes
+two arrays as inputs, the true and predicted value and returns a 1-D
+array with the <a href="#id1"><span class="problematic" id="id2">``</span></a>i``th value of the array corresponding to the loss
+on <cite>X[i]</cite>.</p>
+<p>If the loss on a sample is greater than the <code class="docutils literal"><span class="pre">residual_threshold</span></code>, then
+this sample is classified as an outlier.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : integer or numpy.RandomState, optional</p>
+<blockquote>
+<div><p>The generator used to initialize the centers. If an integer is
+given, it fixes the seed. Defaults to the global numpy random
+number generator.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>estimator_</strong> : object</p>
+<blockquote>
+<div><p>Best fitted model (copy of the <cite>base_estimator</cite> object).</p>
+</div></blockquote>
+<p><strong>n_trials_</strong> : int</p>
+<blockquote>
+<div><p>Number of random selection trials until one of the stop criteria is
+met. It is always <code class="docutils literal"><span class="pre">&lt;=</span> <span class="pre">max_trials</span></code>.</p>
+</div></blockquote>
+<p><strong>inlier_mask_</strong> : bool array of shape [n_samples]</p>
+<blockquote class="last">
+<div><p>Boolean mask of inliers classified as <code class="docutils literal"><span class="pre">True</span></code>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r143" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[R143]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/RANSAC">https://en.wikipedia.org/wiki/RANSAC</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r144" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[R144]</a></td><td><a class="reference external" href="http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf">http://www.cs.columbia.edu/~belhumeur/courses/compPhoto/ransac.pdf</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r145" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[R145]</a></td><td><a class="reference external" href="http://www.bmva.org/bmvc/2009/Papers/Paper355/Paper355.pdf">http://www.bmva.org/bmvc/2009/Papers/Paper355/Paper355.pdf</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.RANSACRegressor.fit" title="sklearn.linear_model.RANSACRegressor.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Fit estimator using RANSAC algorithm.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.linear_model.RANSACRegressor.get_params" title="sklearn.linear_model.RANSACRegressor.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.RANSACRegressor.predict" title="sklearn.linear_model.RANSACRegressor.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X)</td>
+<td>Predict using the estimated model.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.linear_model.RANSACRegressor.score" title="sklearn.linear_model.RANSACRegressor.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X,&nbsp;y)</td>
+<td>Returns the score of the prediction.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.linear_model.RANSACRegressor.set_params" title="sklearn.linear_model.RANSACRegressor.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.linear_model.RANSACRegressor.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>base_estimator=None</em>, <em>min_samples=None</em>, <em>residual_threshold=None</em>, <em>is_data_valid=None</em>, <em>is_model_valid=None</em>, <em>max_trials=100</em>, <em>stop_n_inliers=inf</em>, <em>stop_score=inf</em>, <em>stop_probability=0.99</em>, <em>residual_metric=None</em>, <em>loss='absolute_loss'</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/ransac.py#L178"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.RANSACRegressor.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/ransac.py#L198"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit estimator using RANSAC algorithm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape [n_samples, n_features]</p>
+<blockquote>
+<div><p>Training data.</p>
+</div></blockquote>
+<p><strong>y</strong> : array-like, shape = [n_samples] or [n_samples, n_targets]</p>
+<blockquote>
+<div><p>Target values.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like, shape = [n_samples]</p>
+<blockquote>
+<div><p>Individual weights for each sample
+raises error if sample_weight is passed and base_estimator
+fit method does not support it.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong> :</p>
+<blockquote class="last">
+<div><p>If no valid consensus set could be found. This occurs if
+<cite>is_data_valid</cite> and <cite>is_model_valid</cite> return False for all
+<cite>max_trials</cite> randomly chosen sub-samples.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.RANSACRegressor.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.RANSACRegressor.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/ransac.py#L412"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict using the estimated model.</p>
+<p>This is a wrapper for <cite>estimator_.predict(X)</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : numpy array of shape [n_samples, n_features]</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y</strong> : array, shape = [n_samples] or [n_samples, n_targets]</p>
+<blockquote class="last">
+<div><p>Returns predicted values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.RANSACRegressor.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/ransac.py#L430"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the score of the prediction.</p>
+<p>This is a wrapper for <cite>estimator_.score(X, y)</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : numpy array or sparse matrix of shape [n_samples, n_features]</p>
+<blockquote>
+<div><p>Training data.</p>
+</div></blockquote>
+<p><strong>y</strong> : array, shape = [n_samples] or [n_samples, n_targets]</p>
+<blockquote>
+<div><p>Target values.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>z</strong> : float</p>
+<blockquote class="last">
+<div><p>Score of the prediction.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.linear_model.RANSACRegressor.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.RANSACRegressor.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-linear-model-ransacregressor">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.RANSACRegressor</span></code><a class="headerlink" href="#examples-using-sklearn-linear-model-ransacregressor" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="In this example we see how to robustly fit a linear model to faulty data using the RANSAC algor..."><div class="figure" id="id6">
+<a class="reference external image-reference" href="./../../auto_examples/linear_model/plot_ransac.html"><img alt="../../_images/plot_ransac1.png" src="../../_images/plot_ransac1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/plot_ransac.html#example-linear-model-plot-ransac-py"><span class="std std-ref">Robust linear model estimation using RANSAC</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Here a sine function is fit with a polynomial of order 3, for values close to zero."><div class="figure" id="id7">
+<a class="reference external image-reference" href="./../../auto_examples/linear_model/plot_robust_fit.html"><img alt="../../_images/plot_robust_fit1.png" src="../../_images/plot_robust_fit1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/plot_robust_fit.html#example-linear-model-plot-robust-fit-py"><span class="std std-ref">Robust linear estimator fitting</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Computes a Theil-Sen Regression on a synthetic dataset."><div class="figure" id="id8">
+<a class="reference external image-reference" href="./../../auto_examples/linear_model/plot_theilsen.html"><img alt="../../_images/plot_theilsen1.png" src="../../_images/plot_theilsen1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/plot_theilsen.html#example-linear-model-plot-theilsen-py"><span class="std std-ref">Theil-Sen Regression</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.linear_model.RANSACRegressor.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.linear_model.RandomizedLogisticRegression.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

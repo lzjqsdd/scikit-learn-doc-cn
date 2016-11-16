@@ -1,0 +1,317 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.datasets.fetch_lfw_pairs &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.datasets.fetch_lfw_people" href="sklearn.datasets.fetch_lfw_people.html" />
+    <link rel="prev" title="sklearn.datasets.load_iris" href="sklearn.datasets.load_iris.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_lfw_pairs.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.datasets.load_iris.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.datas...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.datasets.load_iris
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.datasets</span></code>.fetch_lfw_pairs</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-datasets-fetch-lfw-pairs">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.fetch_lfw_pairs<a class="headerlink" href="#sklearn-datasets-fetch-lfw-pairs" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.datasets.fetch_lfw_pairs">
+<code class="descclassname">sklearn.datasets.</code><code class="descname">fetch_lfw_pairs</code><span class="sig-paren">(</span><em>subset='train'</em>, <em>data_home=None</em>, <em>funneled=True</em>, <em>resize=0.5</em>, <em>color=False</em>, <em>slice_=(slice(70</em>, <em>195</em>, <em>None)</em>, <em>slice(78</em>, <em>172</em>, <em>None))</em>, <em>download_if_missing=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/datasets/lfw.py#L396"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.fetch_lfw_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loader for the Labeled Faces in the Wild (LFW) pairs dataset</p>
+<p>This dataset is a collection of JPEG pictures of famous people
+collected on the internet, all details are available on the
+official website:</p>
+<blockquote>
+<div><a class="reference external" href="http://vis-www.cs.umass.edu/lfw/">http://vis-www.cs.umass.edu/lfw/</a></div></blockquote>
+<p>Each picture is centered on a single face. Each pixel of each channel
+(color in RGB) is encoded by a float in range 0.0 - 1.0.</p>
+<p>The task is called Face Verification: given a pair of two pictures,
+a binary classifier must predict whether the two images are from
+the same person.</p>
+<p>In the official <a class="reference external" href="http://vis-www.cs.umass.edu/lfw/README.txt">README.txt</a> this task is described as the
+&#8220;Restricted&#8221; task.  As I am not sure as to implement the
+&#8220;Unrestricted&#8221; variant correctly, I left it as unsupported for now.</p>
+<blockquote>
+<div></div></blockquote>
+<p>The original images are 250 x 250 pixels, but the default slice and resize
+arguments reduce them to 62 x 74.</p>
+<p>Read more in the <a class="reference internal" href="../../datasets/labeled_faces.html#labeled-faces-in-the-wild"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>subset</strong> : optional, default: &#8216;train&#8217;</p>
+<blockquote>
+<div><p>Select the dataset to load: &#8216;train&#8217; for the development training
+set, &#8216;test&#8217; for the development test set, and &#8216;10_folds&#8217; for the
+official evaluation set that is meant to be used with a 10-folds
+cross validation.</p>
+</div></blockquote>
+<p><strong>data_home</strong> : optional, default: None</p>
+<blockquote>
+<div><p>Specify another download and cache folder for the datasets. By
+default all scikit learn data is stored in &#8216;~/scikit_learn_data&#8217;
+subfolders.</p>
+</div></blockquote>
+<p><strong>funneled</strong> : boolean, optional, default: True</p>
+<blockquote>
+<div><p>Download and use the funneled variant of the dataset.</p>
+</div></blockquote>
+<p><strong>resize</strong> : float, optional, default 0.5</p>
+<blockquote>
+<div><p>Ratio used to resize the each face picture.</p>
+</div></blockquote>
+<p><strong>color</strong> : boolean, optional, default False</p>
+<blockquote>
+<div><p>Keep the 3 RGB channels instead of averaging them to a single
+gray level channel. If color is True the shape of the data has
+one more dimension than the shape with color = False.</p>
+</div></blockquote>
+<p><strong>slice_</strong> : optional</p>
+<blockquote>
+<div><p>Provide a custom 2D slice (height, width) to extract the
+&#8216;interesting&#8217; part of the jpeg files and avoid use statistical
+correlation from the background</p>
+</div></blockquote>
+<p><strong>download_if_missing</strong> : optional, True by default</p>
+<blockquote>
+<div><p>If False, raise a IOError if the data is not locally available
+instead of trying to download the data from the source site.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>The data is returned as a Bunch object with the following attributes:</strong> :</p>
+<p><strong>data</strong> : numpy array of shape (2200, 5828). Shape depends on <code class="docutils literal"><span class="pre">subset</span></code>.</p>
+<blockquote>
+<div><p>Each row corresponds to 2 ravel&#8217;d face images of original size 62 x 47
+pixels. Changing the <code class="docutils literal"><span class="pre">slice_</span></code>, <code class="docutils literal"><span class="pre">resize</span></code> or <code class="docutils literal"><span class="pre">subset</span></code> parameters
+will change the shape of the output.</p>
+</div></blockquote>
+<p><strong>pairs</strong> : numpy array of shape (2200, 2, 62, 47). Shape depends on</p>
+<blockquote>
+<div><blockquote>
+<div><p><code class="docutils literal"><span class="pre">subset</span></code>.</p>
+</div></blockquote>
+<p>Each row has 2 face images corresponding to same or different person
+from the dataset containing 5749 people. Changing the <code class="docutils literal"><span class="pre">slice_</span></code>,
+<code class="docutils literal"><span class="pre">resize</span></code> or <code class="docutils literal"><span class="pre">subset</span></code> parameters will change the shape of the
+output.</p>
+</div></blockquote>
+<p><strong>target</strong> : numpy array of shape (2200,). Shape depends on <code class="docutils literal"><span class="pre">subset</span></code>.</p>
+<blockquote>
+<div><p>Labels associated to each pair of images. The two label values being
+different persons or the same person.</p>
+</div></blockquote>
+<p><strong>DESCR</strong> : string</p>
+<blockquote class="last">
+<div><p>Description of the Labeled Faces in the Wild (LFW) dataset.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.datasets.fetch_lfw_pairs.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.datasets.load_iris.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

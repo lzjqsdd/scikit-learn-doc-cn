@@ -1,0 +1,485 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.cluster.SpectralClustering &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.cluster.estimate_bandwidth" href="sklearn.cluster.estimate_bandwidth.html" />
+    <link rel="prev" title="sklearn.cluster.MeanShift" href="sklearn.cluster.MeanShift.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.cluster.MeanShift.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.clust...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.cluster.MeanShift
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.cluster</span></code>.SpectralClustering</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-cluster-spectralclustering">Examples using <code class="docutils literal"><span class="pre">sklearn.cluster.SpectralClustering</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-cluster-spectralclustering">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cluster</span></code></a>.SpectralClustering<a class="headerlink" href="#sklearn-cluster-spectralclustering" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.cluster.SpectralClustering">
+<em class="property">class </em><code class="descclassname">sklearn.cluster.</code><code class="descname">SpectralClustering</code><span class="sig-paren">(</span><em>n_clusters=8</em>, <em>eigen_solver=None</em>, <em>random_state=None</em>, <em>n_init=10</em>, <em>gamma=1.0</em>, <em>affinity='rbf'</em>, <em>n_neighbors=10</em>, <em>eigen_tol=0.0</em>, <em>assign_labels='kmeans'</em>, <em>degree=3</em>, <em>coef0=1</em>, <em>kernel_params=None</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/spectral.py#L269"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.SpectralClustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply clustering to a projection to the normalized laplacian.</p>
+<p>In practice Spectral Clustering is very useful when the structure of
+the individual clusters is highly non-convex or more generally when
+a measure of the center and spread of the cluster is not a suitable
+description of the complete cluster. For instance when clusters are
+nested circles on the 2D plan.</p>
+<p>If affinity is the adjacency matrix of a graph, this method can be
+used to find normalized graph cuts.</p>
+<p>When calling <code class="docutils literal"><span class="pre">fit</span></code>, an affinity matrix is constructed using either
+kernel function such the Gaussian (aka RBF) kernel of the euclidean
+distanced <code class="docutils literal"><span class="pre">d(X,</span> <span class="pre">X)</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">d</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">X</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or a k-nearest neighbors connectivity matrix.</p>
+<p>Alternatively, using <code class="docutils literal"><span class="pre">precomputed</span></code>, a user-provided affinity
+matrix can be used.</p>
+<p>Read more in the <a class="reference internal" href="../clustering.html#spectral-clustering"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_clusters</strong> : integer, optional</p>
+<blockquote>
+<div><p>The dimension of the projection subspace.</p>
+</div></blockquote>
+<p><strong>affinity</strong> : string, array-like or callable, default &#8216;rbf&#8217;</p>
+<blockquote>
+<div><p>If a string, this may be one of &#8216;nearest_neighbors&#8217;, &#8216;precomputed&#8217;,
+&#8216;rbf&#8217; or one of the kernels supported by
+<cite>sklearn.metrics.pairwise_kernels</cite>.</p>
+<p>Only kernels that produce similarity scores (non-negative values that
+increase with similarity) should be used. This property is not checked
+by the clustering algorithm.</p>
+</div></blockquote>
+<p><strong>gamma</strong> : float, default=1.0</p>
+<blockquote>
+<div><p>Scaling factor of RBF, polynomial, exponential chi^2 and
+sigmoid affinity kernel. Ignored for
+<code class="docutils literal"><span class="pre">affinity='nearest_neighbors'</span></code>.</p>
+</div></blockquote>
+<p><strong>degree</strong> : float, default=3</p>
+<blockquote>
+<div><p>Degree of the polynomial kernel. Ignored by other kernels.</p>
+</div></blockquote>
+<p><strong>coef0</strong> : float, default=1</p>
+<blockquote>
+<div><p>Zero coefficient for polynomial and sigmoid kernels.
+Ignored by other kernels.</p>
+</div></blockquote>
+<p><strong>n_neighbors</strong> : integer</p>
+<blockquote>
+<div><p>Number of neighbors to use when constructing the affinity matrix using
+the nearest neighbors method. Ignored for <code class="docutils literal"><span class="pre">affinity='rbf'</span></code>.</p>
+</div></blockquote>
+<p><strong>eigen_solver</strong> : {None, &#8216;arpack&#8217;, &#8216;lobpcg&#8217;, or &#8216;amg&#8217;}</p>
+<blockquote>
+<div><p>The eigenvalue decomposition strategy to use. AMG requires pyamg
+to be installed. It can be faster on very large, sparse problems,
+but may also lead to instabilities</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int seed, RandomState instance, or None (default)</p>
+<blockquote>
+<div><p>A pseudo random number generator used for the initialization
+of the lobpcg eigen vectors decomposition when eigen_solver == &#8216;amg&#8217;
+and by the K-Means initialization.</p>
+</div></blockquote>
+<p><strong>n_init</strong> : int, optional, default: 10</p>
+<blockquote>
+<div><p>Number of time the k-means algorithm will be run with different
+centroid seeds. The final results will be the best output of
+n_init consecutive runs in terms of inertia.</p>
+</div></blockquote>
+<p><strong>eigen_tol</strong> : float, optional, default: 0.0</p>
+<blockquote>
+<div><p>Stopping criterion for eigendecomposition of the Laplacian matrix
+when using arpack eigen_solver.</p>
+</div></blockquote>
+<p><strong>assign_labels</strong> : {&#8216;kmeans&#8217;, &#8216;discretize&#8217;}, default: &#8216;kmeans&#8217;</p>
+<blockquote>
+<div><p>The strategy to use to assign labels in the embedding
+space. There are two ways to assign labels after the laplacian
+embedding. k-means can be applied and is a popular choice. But it can
+also be sensitive to initialization. Discretization is another approach
+which is less sensitive to random initialization.</p>
+</div></blockquote>
+<p><strong>kernel_params</strong> : dictionary of string to any, optional</p>
+<blockquote>
+<div><p>Parameters (keyword arguments) and values for kernel passed as
+callable object. Ignored by other kernels.</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : int, optional (default = 1)</p>
+<blockquote>
+<div><p>The number of parallel jobs to run.
+If <code class="docutils literal"><span class="pre">-1</span></code>, then the number of jobs is set to the number of CPU cores.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>affinity_matrix_</strong> : array-like, shape (n_samples, n_samples)</p>
+<blockquote>
+<div><p>Affinity matrix used for clustering. Available only if after calling
+<code class="docutils literal"><span class="pre">fit</span></code>.</p>
+</div></blockquote>
+<p><strong>labels_ :</strong> :</p>
+<blockquote class="last">
+<div><p>Labels of each point</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>If you have an affinity matrix, such as a distance matrix,
+for which 0 means identical elements, and high values means
+very dissimilar elements, it can be transformed in a
+similarity matrix that is well suited for the algorithm by
+applying the Gaussian (RBF, heat) kernel:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">dist_matrix</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">delta</span></code> is a free parameter representing the width of the Gaussian
+kernel.</p>
+<p>Another alternative is to take a symmetric version of the k
+nearest neighbors connectivity matrix of the points.</p>
+<p>If the pyamg package is installed, it is used: this greatly
+speeds up computation.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li>Normalized cuts and image segmentation, 2000
+Jianbo Shi, Jitendra Malik
+<a class="reference external" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.160.2324">http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.160.2324</a></li>
+<li>A Tutorial on Spectral Clustering, 2007
+Ulrike von Luxburg
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.165.9323">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.165.9323</a></li>
+<li>Multiclass spectral clustering, 2003
+Stella X. Yu, Jianbo Shi
+<a class="reference external" href="http://www1.icsi.berkeley.edu/~stellayu/publication/doc/2003kwayICCV.pdf">http://www1.icsi.berkeley.edu/~stellayu/publication/doc/2003kwayICCV.pdf</a></li>
+</ul>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.cluster.SpectralClustering.fit" title="sklearn.cluster.SpectralClustering.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
+<td>Creates an affinity matrix for X using the selected affinity, then applies spectral clustering to this affinity matrix.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.cluster.SpectralClustering.fit_predict" title="sklearn.cluster.SpectralClustering.fit_predict"><code class="xref py py-obj docutils literal"><span class="pre">fit_predict</span></code></a>(X[,&nbsp;y])</td>
+<td>Performs clustering on X and returns cluster labels.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.cluster.SpectralClustering.get_params" title="sklearn.cluster.SpectralClustering.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.cluster.SpectralClustering.set_params" title="sklearn.cluster.SpectralClustering.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.cluster.SpectralClustering.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_clusters=8</em>, <em>eigen_solver=None</em>, <em>random_state=None</em>, <em>n_init=10</em>, <em>gamma=1.0</em>, <em>affinity='rbf'</em>, <em>n_neighbors=10</em>, <em>eigen_tol=0.0</em>, <em>assign_labels='kmeans'</em>, <em>degree=3</em>, <em>coef0=1</em>, <em>kernel_params=None</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/spectral.py#L402"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.SpectralClustering.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.SpectralClustering.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/spectral.py#L420"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.SpectralClustering.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an affinity matrix for X using the selected affinity,
+then applies spectral clustering to this affinity matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape (n_samples, n_features)</p>
+<blockquote class="last">
+<div><p>OR, if affinity==`precomputed`, a precomputed affinity
+matrix of shape (n_samples, n_samples)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.SpectralClustering.fit_predict">
+<code class="descname">fit_predict</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L395"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.SpectralClustering.fit_predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs clustering on X and returns cluster labels.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : ndarray, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Input data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y</strong> : ndarray, shape (n_samples,)</p>
+<blockquote class="last">
+<div><p>cluster labels</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.SpectralClustering.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.SpectralClustering.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.SpectralClustering.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.SpectralClustering.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-cluster-spectralclustering">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.cluster.SpectralClustering</span></code><a class="headerlink" href="#examples-using-sklearn-cluster-spectralclustering" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="This example aims at showing characteristics of different clustering algorithms on datasets tha..."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/cluster/plot_cluster_comparison.html"><img alt="../../_images/plot_cluster_comparison1.png" src="../../_images/plot_cluster_comparison1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_cluster_comparison.html#example-cluster-plot-cluster-comparison-py"><span class="std std-ref">Comparing different clustering algorithms on toy datasets</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.cluster.SpectralClustering.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.cluster.MeanShift.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

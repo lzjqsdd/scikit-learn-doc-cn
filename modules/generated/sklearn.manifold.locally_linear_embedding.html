@@ -1,0 +1,370 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.manifold.locally_linear_embedding &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.manifold.spectral_embedding" href="sklearn.manifold.spectral_embedding.html" />
+    <link rel="prev" title="sklearn.manifold.TSNE" href="sklearn.manifold.TSNE.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.locally_linear_embedding.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.manifold.TSNE.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.manif...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.manifold.TSNE
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.manifold</span></code>.locally_linear_embedding</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-manifold-locally-linear-embedding">Examples using <code class="docutils literal"><span class="pre">sklearn.manifold.locally_linear_embedding</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-manifold-locally-linear-embedding">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.manifold" title="sklearn.manifold"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.manifold</span></code></a>.locally_linear_embedding<a class="headerlink" href="#sklearn-manifold-locally-linear-embedding" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.manifold.locally_linear_embedding">
+<code class="descclassname">sklearn.manifold.</code><code class="descname">locally_linear_embedding</code><span class="sig-paren">(</span><em>X</em>, <em>n_neighbors</em>, <em>n_components</em>, <em>reg=0.001</em>, <em>eigen_solver='auto'</em>, <em>tol=1e-06</em>, <em>max_iter=100</em>, <em>method='standard'</em>, <em>hessian_tol=0.0001</em>, <em>modified_tol=1e-12</em>, <em>random_state=None</em>, <em>n_jobs=1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/manifold/locally_linear.py#L182"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.manifold.locally_linear_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a Locally Linear Embedding analysis on the data.</p>
+<p>Read more in the <a class="reference internal" href="../manifold.html#locally-linear-embedding"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix, BallTree, KDTree, NearestNeighbors}</p>
+<blockquote>
+<div><p>Sample data, shape = (n_samples, n_features), in the form of a
+numpy array, sparse array, precomputed tree, or NearestNeighbors
+object.</p>
+</div></blockquote>
+<p><strong>n_neighbors</strong> : integer</p>
+<blockquote>
+<div><p>number of neighbors to consider for each point.</p>
+</div></blockquote>
+<p><strong>n_components</strong> : integer</p>
+<blockquote>
+<div><p>number of coordinates for the manifold.</p>
+</div></blockquote>
+<p><strong>reg</strong> : float</p>
+<blockquote>
+<div><p>regularization constant, multiplies the trace of the local covariance
+matrix of the distances.</p>
+</div></blockquote>
+<p><strong>eigen_solver</strong> : string, {&#8216;auto&#8217;, &#8216;arpack&#8217;, &#8216;dense&#8217;}</p>
+<blockquote>
+<div><p>auto : algorithm will attempt to choose the best method for input data</p>
+<dl class="docutils">
+<dt>arpack</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">use arnoldi iteration in shift-invert mode.</span><dd><p class="first last">For this method, M may be a dense matrix, sparse matrix,
+or general linear operator.
+Warning: ARPACK can be unstable for some problems.  It is
+best to try several random seeds in order to check results.</p>
+</dd>
+<dt>dense</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">use standard dense matrix operations for the eigenvalue</span><dd><p class="first last">decomposition.  For this method, M must be an array
+or matrix type.  This method should be avoided for
+large problems.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>tol</strong> : float, optional</p>
+<blockquote>
+<div><p>Tolerance for &#8216;arpack&#8217; method
+Not used if eigen_solver==&#8217;dense&#8217;.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : integer</p>
+<blockquote>
+<div><p>maximum number of iterations for the arpack solver.</p>
+</div></blockquote>
+<p><strong>method</strong> : {&#8216;standard&#8217;, &#8216;hessian&#8217;, &#8216;modified&#8217;, &#8216;ltsa&#8217;}</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>standard</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">use the standard locally linear embedding algorithm.</span><dd><p class="first last">see reference <a class="reference internal" href="#r154" id="id1">[R154]</a></p>
+</dd>
+<dt>hessian</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">use the Hessian eigenmap method.  This method requires</span><dd><p class="first last">n_neighbors &gt; n_components * (1 + (n_components + 1) / 2.
+see reference <a class="reference internal" href="#r155" id="id2">[R155]</a></p>
+</dd>
+<dt>modified</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">use the modified locally linear embedding algorithm.</span><dd><p class="first last">see reference <a class="reference internal" href="#r156" id="id3">[R156]</a></p>
+</dd>
+<dt>ltsa</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">use local tangent space alignment algorithm</span><dd><p class="first last">see reference <a class="reference internal" href="#r157" id="id4">[R157]</a></p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>hessian_tol</strong> : float, optional</p>
+<blockquote>
+<div><p>Tolerance for Hessian eigenmapping method.
+Only used if method == &#8216;hessian&#8217;</p>
+</div></blockquote>
+<p><strong>modified_tol</strong> : float, optional</p>
+<blockquote>
+<div><p>Tolerance for modified LLE method.
+Only used if method == &#8216;modified&#8217;</p>
+</div></blockquote>
+<p><strong>random_state: numpy.RandomState or int, optional</strong> :</p>
+<blockquote>
+<div><p>The generator or seed used to determine the starting vector for arpack
+iterations.  Defaults to numpy.random.</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : int, optional (default = 1)</p>
+<blockquote>
+<div><p>The number of parallel jobs to run for neighbors search.
+If <code class="docutils literal"><span class="pre">-1</span></code>, then the number of jobs is set to the number of CPU cores.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Y</strong> : array-like, shape [n_samples, n_components]</p>
+<blockquote>
+<div><p>Embedding vectors.</p>
+</div></blockquote>
+<p><strong>squared_error</strong> : float</p>
+<blockquote class="last">
+<div><p>Reconstruction error for the embedding vectors. Equivalent to
+<code class="docutils literal"><span class="pre">norm(Y</span> <span class="pre">-</span> <span class="pre">W</span> <span class="pre">Y,</span> <span class="pre">'fro')**2</span></code>, where W are the reconstruction weights.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r154" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R154]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id5">2</a>)</em> <cite>Roweis, S. &amp; Saul, L. Nonlinear dimensionality reduction
+by locally linear embedding.  Science 290:2323 (2000).</cite></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r155" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R155]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id6">2</a>)</em> <cite>Donoho, D. &amp; Grimes, C. Hessian eigenmaps: Locally
+linear embedding techniques for high-dimensional data.
+Proc Natl Acad Sci U S A.  100:5591 (2003).</cite></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r156" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R156]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id7">2</a>)</em> <cite>Zhang, Z. &amp; Wang, J. MLLE: Modified Locally Linear
+Embedding Using Multiple Weights.</cite>
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.70.382">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.70.382</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r157" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R157]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> <cite>Zhang, Z. &amp; Zha, H. Principal manifolds and nonlinear
+dimensionality reduction via tangent space alignment.
+Journal of Shanghai Univ.  8:406 (2004)</cite></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-manifold-locally-linear-embedding">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.manifold.locally_linear_embedding</span></code><a class="headerlink" href="#examples-using-sklearn-manifold-locally-linear-embedding" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="An illustration of Swiss Roll reduction with locally linear embedding "><div class="figure" id="id9">
+<a class="reference external image-reference" href="./../../auto_examples/manifold/plot_swissroll.html"><img alt="../../_images/plot_swissroll1.png" src="../../_images/plot_swissroll1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/manifold/plot_swissroll.html#example-manifold-plot-swissroll-py"><span class="std std-ref">Swiss Roll reduction with LLE</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.manifold.locally_linear_embedding.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.manifold.TSNE.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,300 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.datasets.load_svmlight_files &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.datasets.dump_svmlight_file" href="sklearn.datasets.dump_svmlight_file.html" />
+    <link rel="prev" title="sklearn.datasets.load_svmlight_file" href="sklearn.datasets.load_svmlight_file.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_svmlight_files.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.datasets.load_svmlight_file.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.datas...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.datasets.load_svmlight_file
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.datasets</span></code>.load_svmlight_files</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-datasets-load-svmlight-files">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.load_svmlight_files<a class="headerlink" href="#sklearn-datasets-load-svmlight-files" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.datasets.load_svmlight_files">
+<code class="descclassname">sklearn.datasets.</code><code class="descname">load_svmlight_files</code><span class="sig-paren">(</span><em>files</em>, <em>n_features=None</em>, <em>dtype=&lt;type 'numpy.float64'&gt;</em>, <em>multilabel=False</em>, <em>zero_based='auto'</em>, <em>query_id=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/datasets/svmlight_format.py#L175"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.datasets.load_svmlight_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load dataset from multiple files in SVMlight format</p>
+<p>This function is equivalent to mapping load_svmlight_file over a list of
+files, except that the results are concatenated into a single, flat list
+and the samples vectors are constrained to all have the same number of
+features.</p>
+<p>In case the file contains a pairwise preference constraint (known
+as &#8220;qid&#8221; in the svmlight format) these are ignored unless the
+query_id parameter is set to True. These pairwise preference
+constraints can be used to constraint the combination of samples
+when using pairwise loss functions (as is the case in some
+learning to rank problems) so that only pairs with the same
+query_id value are considered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>files</strong> : iterable over {str, file-like, int}</p>
+<blockquote>
+<div><p>(Paths of) files to load. If a path ends in &#8221;.gz&#8221; or &#8221;.bz2&#8221;, it will
+be uncompressed on the fly. If an integer is passed, it is assumed to
+be a file descriptor. File-likes and file descriptors will not be
+closed by this function. File-like objects must be opened in binary
+mode.</p>
+</div></blockquote>
+<p><strong>n_features</strong> : int or None</p>
+<blockquote>
+<div><p>The number of features to use. If None, it will be inferred from the
+maximum column index occurring in any of the files.</p>
+<p>This can be set to a higher value than the actual number of features
+in any of the input files, but setting it to a lower value will cause
+an exception to be raised.</p>
+</div></blockquote>
+<p><strong>multilabel</strong> : boolean, optional</p>
+<blockquote>
+<div><p>Samples may have several labels each (see
+<a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multilabel.html">http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multilabel.html</a>)</p>
+</div></blockquote>
+<p><strong>zero_based</strong> : boolean or &#8220;auto&#8221;, optional</p>
+<blockquote>
+<div><p>Whether column indices in f are zero-based (True) or one-based
+(False). If column indices are one-based, they are transformed to
+zero-based to match Python/NumPy conventions.
+If set to &#8220;auto&#8221;, a heuristic check is applied to determine this from
+the file contents. Both kinds of files occur &#8220;in the wild&#8221;, but they
+are unfortunately not self-identifying. Using &#8220;auto&#8221; or True should
+always be safe.</p>
+</div></blockquote>
+<p><strong>query_id</strong> : boolean, defaults to False</p>
+<blockquote>
+<div><p>If True, will return the query_id array for each file.</p>
+</div></blockquote>
+<p><strong>dtype</strong> : numpy data type, default np.float64</p>
+<blockquote>
+<div><p>Data type of dataset to be loaded. This will be the data type of the
+output numpy arrays <code class="docutils literal"><span class="pre">X</span></code> and <code class="docutils literal"><span class="pre">y</span></code>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>[X1, y1, ..., Xn, yn]</strong> :</p>
+<p><strong>where each (Xi, yi) pair is the result from load_svmlight_file(files[i]).</strong> :</p>
+<p><strong>If query_id is set to True, this will return instead [X1, y1, q1,</strong> :</p>
+<p><strong>..., Xn, yn, qn] where (Xi, yi, qi) is the result from</strong> :</p>
+<p class="last"><strong>load_svmlight_file(files[i])</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="sklearn.datasets.load_svmlight_file.html#sklearn.datasets.load_svmlight_file" title="sklearn.datasets.load_svmlight_file"><code class="xref py py-obj docutils literal"><span class="pre">load_svmlight_file</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>When fitting a model to a matrix X_train and evaluating it against a
+matrix X_test, it is essential that X_train and X_test have the same
+number of features (X_train.shape[1] == X_test.shape[1]). This may not
+be the case if you load the files individually with load_svmlight_file.</p>
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.datasets.load_svmlight_files.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.datasets.load_svmlight_file.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

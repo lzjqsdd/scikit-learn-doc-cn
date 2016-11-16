@@ -1,0 +1,164 @@
+
+
+.. _example_plot_johnson_lindenstrauss_bound.py:
+
+
+=====================================================================
+The Johnson-Lindenstrauss bound for embedding with random projections
+=====================================================================
+
+
+The `Johnson-Lindenstrauss lemma`_ states that any high dimensional
+dataset can be randomly projected into a lower dimensional Euclidean
+space while controlling the distortion in the pairwise distances.
+
+.. _`Johnson-Lindenstrauss lemma`: http://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma
+
+
+Theoretical bounds
+==================
+
+The distortion introduced by a random projection `p` is asserted by
+the fact that `p` is defining an eps-embedding with good probability
+as defined by:
+
+.. math::
+   (1 - eps) \|u - v\|^2 < \|p(u) - p(v)\|^2 < (1 + eps) \|u - v\|^2
+
+Where u and v are any rows taken from a dataset of shape [n_samples,
+n_features] and p is a projection by a random Gaussian N(0, 1) matrix
+with shape [n_components, n_features] (or a sparse Achlioptas matrix).
+
+The minimum number of components to guarantees the eps-embedding is
+given by:
+
+.. math::
+   n\_components >= 4 log(n\_samples) / (eps^2 / 2 - eps^3 / 3)
+
+
+The first plot shows that with an increasing number of samples ``n_samples``,
+the minimal number of dimensions ``n_components`` increased logarithmically
+in order to guarantee an ``eps``-embedding.
+
+The second plot shows that an increase of the admissible
+distortion ``eps`` allows to reduce drastically the minimal number of
+dimensions ``n_components`` for a given number of samples ``n_samples``
+
+
+Empirical validation
+====================
+
+We validate the above bounds on the the digits dataset or on the 20 newsgroups
+text document (TF-IDF word frequencies) dataset:
+
+- for the digits dataset, some 8x8 gray level pixels data for 500
+  handwritten digits pictures are randomly projected to spaces for various
+  larger number of dimensions ``n_components``.
+
+- for the 20 newsgroups dataset some 500 documents with 100k
+  features in total are projected using a sparse random matrix to smaller
+  euclidean spaces with various values for the target number of dimensions
+  ``n_components``.
+
+The default dataset is the digits dataset. To run the example on the twenty
+newsgroups dataset, pass the --twenty-newsgroups command line argument to this
+script.
+
+For each value of ``n_components``, we plot:
+
+- 2D distribution of sample pairs with pairwise distances in original
+  and projected spaces as x and y axis respectively.
+
+- 1D histogram of the ratio of those distances (projected / original).
+
+We can see that for low values of ``n_components`` the distribution is wide
+with many distorted pairs and a skewed distribution (due to the hard
+limit of zero ratio on the left as distances are always positives)
+while for larger values of n_components the distortion is controlled
+and the distances are well preserved by the random projection.
+
+
+Remarks
+=======
+
+According to the JL lemma, projecting 500 samples without too much distortion
+will require at least several thousands dimensions, irrespective of the
+number of features of the original dataset.
+
+Hence using random projections on the digits dataset which only has 64 features
+in the input space does not make sense: it does not allow for dimensionality
+reduction in this case.
+
+On the twenty newsgroups on the other hand the dimensionality can be decreased
+from 56436 down to 10000 while reasonably preserving pairwise distances.
+
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_johnson_lindenstrauss_bound_001.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_johnson_lindenstrauss_bound_002.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_johnson_lindenstrauss_bound_003.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_johnson_lindenstrauss_bound_004.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_johnson_lindenstrauss_bound_005.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_johnson_lindenstrauss_bound_006.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_johnson_lindenstrauss_bound_007.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_johnson_lindenstrauss_bound_008.png
+            :scale: 47
+
+
+**Script output**::
+
+  Embedding 500 samples with dim 64 using various random projections
+  Projected 500 samples from 64 to 300 in 0.010s
+  Random matrix with size: 0.028MB
+  Mean distances rate: 1.05 (0.10)
+  Projected 500 samples from 64 to 1000 in 0.028s
+  Random matrix with size: 0.097MB
+  Mean distances rate: 1.00 (0.05)
+  Projected 500 samples from 64 to 10000 in 0.275s
+  Random matrix with size: 0.962MB
+  Mean distances rate: 1.00 (0.01)
+
+
+
+**Python source code:** :download:`plot_johnson_lindenstrauss_bound.py <plot_johnson_lindenstrauss_bound.py>`
+
+.. literalinclude:: plot_johnson_lindenstrauss_bound.py
+    :lines: 92-
+
+**Total running time of the example:**  3.07 seconds
+( 0 minutes  3.07 seconds)
+    

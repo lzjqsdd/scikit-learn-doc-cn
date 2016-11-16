@@ -1,0 +1,642 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>1.10. Decision Trees &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="1. Supervised learning" href="../supervised_learning.html" />
+    <link rel="next" title="1.11. 集成方法" href="ensemble.html" />
+    <link rel="prev" title="1.9. 朴素贝叶斯" href="naive_bayes.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/tree.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="naive_bayes.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        1.9. 朴素贝叶斯
+        </span>
+            <span class="hiddenrellink">
+            1.9. 朴素贝叶斯
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../supervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        1. Supervised...
+        </span>
+            <span class="hiddenrellink">
+            1. Supervised learning
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">1.10. Decision Trees</a><ul>
+<li><a class="reference internal" href="#classification">1.10.1. Classification</a></li>
+<li><a class="reference internal" href="#regression">1.10.2. Regression</a></li>
+<li><a class="reference internal" href="#multi-output-problems">1.10.3. Multi-output problems</a></li>
+<li><a class="reference internal" href="#complexity">1.10.4. Complexity</a></li>
+<li><a class="reference internal" href="#tips-on-practical-use">1.10.5. Tips on practical use</a></li>
+<li><a class="reference internal" href="#tree-algorithms-id3-c4-5-c5-0-and-cart">1.10.6. Tree algorithms: ID3, C4.5, C5.0 and CART</a></li>
+<li><a class="reference internal" href="#mathematical-formulation">1.10.7. Mathematical formulation</a><ul>
+<li><a class="reference internal" href="#classification-criteria">1.10.7.1. Classification criteria</a></li>
+<li><a class="reference internal" href="#regression-criteria">1.10.7.2. Regression criteria</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="decision-trees">
+<span id="tree"></span><h1>1.10. Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h1>
+<p><strong>Decision Trees (DTs)</strong> are a non-parametric supervised learning method used
+for <a class="reference internal" href="#tree-classification"><span class="std std-ref">classification</span></a> and <a class="reference internal" href="#tree-regression"><span class="std std-ref">regression</span></a>. The goal is to create a model that predicts the value of a
+target variable by learning simple decision rules inferred from the data
+features.</p>
+<p>For instance, in the example below, decision trees learn from data to
+approximate a sine curve with a set of if-then-else decision rules. The deeper
+the tree, the more complex the decision rules and the fitter the model.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/tree/plot_tree_regression.html"><img alt="../_images/plot_tree_regression_0011.png" src="../_images/plot_tree_regression_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p>Some advantages of decision trees are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Simple to understand and to interpret. Trees can be visualised.</li>
+<li>Requires little data preparation. Other techniques often require data
+normalisation, dummy variables need to be created and blank values to
+be removed. Note however that this module does not support missing
+values.</li>
+<li>The cost of using the tree (i.e., predicting data) is logarithmic in the
+number of data points used to train the tree.</li>
+<li>Able to handle both numerical and categorical data. Other techniques
+are usually specialised in analysing datasets that have only one type
+of variable. See <a class="reference internal" href="#tree-algorithms"><span class="std std-ref">algorithms</span></a> for more
+information.</li>
+<li>Able to handle multi-output problems.</li>
+<li>Uses a white box model. If a given situation is observable in a model,
+the explanation for the condition is easily explained by boolean logic.
+By contrast, in a black box model (e.g., in an artificial neural
+network), results may be more difficult to interpret.</li>
+<li>Possible to validate a model using statistical tests. That makes it
+possible to account for the reliability of the model.</li>
+<li>Performs well even if its assumptions are somewhat violated by
+the true model from which the data were generated.</li>
+</ul>
+</div></blockquote>
+<p>The disadvantages of decision trees include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Decision-tree learners can create over-complex trees that do not
+generalise the data well. This is called overfitting. Mechanisms
+such as pruning (not currently supported), setting the minimum
+number of samples required at a leaf node or setting the maximum
+depth of the tree are necessary to avoid this problem.</li>
+<li>Decision trees can be unstable because small variations in the
+data might result in a completely different tree being generated.
+This problem is mitigated by using decision trees within an
+ensemble.</li>
+<li>The problem of learning an optimal decision tree is known to be
+NP-complete under several aspects of optimality and even for simple
+concepts. Consequently, practical decision-tree learning algorithms
+are based on heuristic algorithms such as the greedy algorithm where
+locally optimal decisions are made at each node. Such algorithms
+cannot guarantee to return the globally optimal decision tree.  This
+can be mitigated by training multiple trees in an ensemble learner,
+where the features and samples are randomly sampled with replacement.</li>
+<li>There are concepts that are hard to learn because decision trees
+do not express them easily, such as XOR, parity or multiplexer problems.</li>
+<li>Decision tree learners create biased trees if some classes dominate.
+It is therefore recommended to balance the dataset prior to fitting
+with the decision tree.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="classification">
+<span id="tree-classification"></span><h2>1.10.1. Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">DecisionTreeClassifier</span></code></a> is a class capable of performing multi-class
+classification on a dataset.</p>
+<p>As with other classifiers, <a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">DecisionTreeClassifier</span></code></a> takes as input two arrays:
+an array X, sparse or dense, of size <code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_features]</span></code>  holding the
+training samples, and an array Y of integer values, size <code class="docutils literal"><span class="pre">[n_samples]</span></code>,
+holding the class labels for the training samples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After being fitted, the model can then be used to predict the class of samples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+<p>Alternatively, the probability of each class can be predicted, which is the
+fraction of training samples of the same class in a leaf:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([[ 0.,  1.]])</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">DecisionTreeClassifier</span></code></a> is capable of both binary (where the
+labels are [-1, 1]) classification and multiclass (where the labels are
+[0, ..., K-1]) classification.</p>
+<p>Using the Iris dataset, we can construct a tree as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once trained, we can export the tree in <a class="reference external" href="http://www.graphviz.org/">Graphviz</a> format using the <a class="reference internal" href="generated/sklearn.tree.export_graphviz.html#sklearn.tree.export_graphviz" title="sklearn.tree.export_graphviz"><code class="xref py py-func docutils literal"><span class="pre">export_graphviz</span></code></a>
+exporter. Below is an example export of a tree trained on the entire
+iris dataset:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="k">import</span> <span class="n">StringIO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;iris.dot&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">f</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then we can use Graphviz&#8217;s <code class="docutils literal"><span class="pre">dot</span></code> tool to create a PDF file (or any other
+supported file type): <code class="docutils literal"><span class="pre">dot</span> <span class="pre">-Tpdf</span> <span class="pre">iris.dot</span> <span class="pre">-o</span> <span class="pre">iris.pdf</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;iris.dot&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, if we have Python module <code class="docutils literal"><span class="pre">pydot</span></code> installed, we can generate
+a PDF file (or any other supported file type) directly in Python:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="k">import</span> <span class="n">StringIO</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pydot</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">dot_data</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">pydot</span><span class="o">.</span><span class="n">graph_from_dot_data</span><span class="p">(</span><span class="n">dot_data</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">write_pdf</span><span class="p">(</span><span class="s2">&quot;iris.pdf&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="generated/sklearn.tree.export_graphviz.html#sklearn.tree.export_graphviz" title="sklearn.tree.export_graphviz"><code class="xref py py-func docutils literal"><span class="pre">export_graphviz</span></code></a> exporter also supports a variety of aesthetic
+options, including coloring nodes by their class (or value for regression) and
+using explicit variable and class names if desired. IPython notebooks can also
+render these plots inline using the <cite>Image()</cite> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="n">dot_data</span><span class="p">,</span>  
+<span class="go">                         feature_names=iris.feature_names,  </span>
+<span class="go">                         class_names=iris.target_names,  </span>
+<span class="go">                         filled=True, rounded=True,  </span>
+<span class="go">                         special_characters=True)  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">pydot</span><span class="o">.</span><span class="n">graph_from_dot_data</span><span class="p">(</span><span class="n">dot_data</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Image</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">create_png</span><span class="p">())</span>  
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../_images/iris.svg" src="../_images/iris.svg" /></div>
+<p>After being fitted, the model can then be used to predict the class of samples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<span class="go">array([0])</span>
+</pre></div>
+</div>
+<p>Alternatively, the probability of each class can be predicted, which is the
+fraction of training samples of the same class in a leaf:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<span class="go">array([[ 1.,  0.,  0.]])</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/tree/plot_iris.html"><img alt="../_images/plot_iris_0013.png" src="../_images/plot_iris_0013.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/tree/plot_iris.html#example-tree-plot-iris-py"><span class="std std-ref">Plot the decision surface of a decision tree on the iris dataset</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="regression">
+<span id="tree-regression"></span><h2>1.10.2. Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/tree/plot_tree_regression.html"><img alt="../_images/plot_tree_regression_0011.png" src="../_images/plot_tree_regression_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p>Decision trees can also be applied to regression problems, using the
+<a class="reference internal" href="generated/sklearn.tree.DecisionTreeRegressor.html#sklearn.tree.DecisionTreeRegressor" title="sklearn.tree.DecisionTreeRegressor"><code class="xref py py-class docutils literal"><span class="pre">DecisionTreeRegressor</span></code></a> class.</p>
+<p>As in the classification setting, the fit method will take as argument arrays X
+and y, only that in this case y is expected to have floating point values
+instead of integer values:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">array([ 0.5])</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/tree/plot_tree_regression.html#example-tree-plot-tree-regression-py"><span class="std std-ref">Decision Tree Regression</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="multi-output-problems">
+<span id="tree-multioutput"></span><h2>1.10.3. Multi-output problems<a class="headerlink" href="#multi-output-problems" title="Permalink to this headline">¶</a></h2>
+<p>A multi-output problem is a supervised learning problem with several outputs
+to predict, that is when Y is a 2d array of size <code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_outputs]</span></code>.</p>
+<p>When there is no correlation between the outputs, a very simple way to solve
+this kind of problem is to build n independent models, i.e. one for each
+output, and then to use those models to independently predict each one of the n
+outputs. However, because it is likely that the output values related to the
+same input are themselves correlated, an often better way is to build a single
+model capable of predicting simultaneously all n outputs. First, it requires
+lower training time since only a single estimator is built. Second, the
+generalization accuracy of the resulting estimator may often be increased.</p>
+<p>With regard to decision trees, this strategy can readily be used to support
+multi-output problems. This requires the following changes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Store n output values in leaves, instead of 1;</li>
+<li>Use splitting criteria that compute the average reduction across all
+n outputs.</li>
+</ul>
+</div></blockquote>
+<p>This module offers support for multi-output problems by implementing this
+strategy in both <a class="reference internal" href="generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier" title="sklearn.tree.DecisionTreeClassifier"><code class="xref py py-class docutils literal"><span class="pre">DecisionTreeClassifier</span></code></a> and
+<a class="reference internal" href="generated/sklearn.tree.DecisionTreeRegressor.html#sklearn.tree.DecisionTreeRegressor" title="sklearn.tree.DecisionTreeRegressor"><code class="xref py py-class docutils literal"><span class="pre">DecisionTreeRegressor</span></code></a>. If a decision tree is fit on an output array Y
+of size <code class="docutils literal"><span class="pre">[n_samples,</span> <span class="pre">n_outputs]</span></code> then the resulting estimator will:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Output n_output values upon <code class="docutils literal"><span class="pre">predict</span></code>;</li>
+<li>Output a list of n_output arrays of class probabilities upon
+<code class="docutils literal"><span class="pre">predict_proba</span></code>.</li>
+</ul>
+</div></blockquote>
+<p>The use of multi-output trees for regression is demonstrated in
+<a class="reference internal" href="../auto_examples/tree/plot_tree_regression_multioutput.html#example-tree-plot-tree-regression-multioutput-py"><span class="std std-ref">Multi-output Decision Tree Regression</span></a>. In this example, the input
+X is a single real value and the outputs Y are the sine and cosine of X.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/tree/plot_tree_regression_multioutput.html"><img alt="../_images/plot_tree_regression_multioutput_0011.png" src="../_images/plot_tree_regression_multioutput_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p>The use of multi-output trees for classification is demonstrated in
+<a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#example-plot-multioutput-face-completion-py"><span class="std std-ref">Face completion with a multi-output estimators</span></a>. In this example, the inputs
+X are the pixels of the upper half of faces and the outputs Y are the pixels of
+the lower half of those faces.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/plot_multioutput_face_completion.html"><img alt="../_images/plot_multioutput_face_completion_0011.png" src="../_images/plot_multioutput_face_completion_0011.png" style="width: 750.0px; height: 847.5px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/tree/plot_tree_regression_multioutput.html#example-tree-plot-tree-regression-multioutput-py"><span class="std std-ref">Multi-output Decision Tree Regression</span></a></li>
+<li><a class="reference internal" href="../auto_examples/plot_multioutput_face_completion.html#example-plot-multioutput-face-completion-py"><span class="std std-ref">Face completion with a multi-output estimators</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>M. Dumont et al,  <a class="reference external" href="http://www.montefiore.ulg.ac.be/services/stochastic/pubs/2009/DMWG09/dumont-visapp09-shortpaper.pdf">Fast multi-class image annotation with random subwindows
+and multiple output randomized trees</a>, International Conference on
+Computer Vision Theory and Applications 2009</li>
+</ul>
+</div>
+</div>
+<div class="section" id="complexity">
+<span id="tree-complexity"></span><h2>1.10.4. Complexity<a class="headerlink" href="#complexity" title="Permalink to this headline">¶</a></h2>
+<p>In general, the run time cost to construct a balanced binary tree is
+<img class="math" src="../_images/math/7959c89ae4bf217a710ee4c18e8a878fc5b8d47b.png" alt="O(n_{samples}n_{features}\log(n_{samples}))"/> and query time
+<img class="math" src="../_images/math/fbe3f36bdab96ae4dcf9477daf9d6d4385cd5db4.png" alt="O(\log(n_{samples}))"/>.  Although the tree construction algorithm attempts
+to generate balanced trees, they will not always be balanced.  Assuming that the
+subtrees remain approximately balanced, the cost at each node consists of
+searching through <img class="math" src="../_images/math/ffcf60afffe3e7522203fd7ee60a0ff8827621a9.png" alt="O(n_{features})"/> to find the feature that offers the
+largest reduction in entropy.  This has a cost of
+<img class="math" src="../_images/math/61281f8e7dc8423d01b2f12a48d0f498c5c75b3a.png" alt="O(n_{features}n_{samples}\log(n_{samples}))"/> at each node, leading to a
+total cost over the entire trees (by summing the cost at each node) of
+<img class="math" src="../_images/math/3af8b0f4cdcae75eec0f2dc9e3afe9c41c5ff023.png" alt="O(n_{features}n_{samples}^{2}\log(n_{samples}))"/>.</p>
+<p>Scikit-learn offers a more efficient implementation for the construction of
+decision trees.  A naive implementation (as above) would recompute the class
+label histograms (for classification) or the means (for regression) at for each
+new split point along a given feature. Presorting the feature over all
+relevant samples, and retaining a running label count, will reduce the complexity
+at each node to <img class="math" src="../_images/math/23bf4a5d58984f6bf9c01eb09479bff6f18e4cbe.png" alt="O(n_{features}\log(n_{samples}))"/>, which results in a
+total cost of <img class="math" src="../_images/math/61281f8e7dc8423d01b2f12a48d0f498c5c75b3a.png" alt="O(n_{features}n_{samples}\log(n_{samples}))"/>. This is an option
+for all tree based algorithms. By default it is turned on for gradient boosting,
+where in general it makes training faster, but turned off for all other algorithms as
+it tends to slow down training when training deep trees.</p>
+</div>
+<div class="section" id="tips-on-practical-use">
+<h2>1.10.5. Tips on practical use<a class="headerlink" href="#tips-on-practical-use" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Decision trees tend to overfit on data with a large number of features.
+Getting the right ratio of samples to number of features is important, since
+a tree with few samples in high dimensional space is very likely to overfit.</li>
+<li>Consider performing  dimensionality reduction (<a class="reference internal" href="decomposition.html#pca"><span class="std std-ref">PCA</span></a>,
+<a class="reference internal" href="decomposition.html#ica"><span class="std std-ref">ICA</span></a>, or <a class="reference internal" href="feature_selection.html#feature-selection"><span class="std std-ref">特征选择(Feature selection)</span></a>) beforehand to
+give your tree a better chance of finding features that are discriminative.</li>
+<li>Visualise your tree as you are training by using the <code class="docutils literal"><span class="pre">export</span></code>
+function.  Use <code class="docutils literal"><span class="pre">max_depth=3</span></code> as an initial tree depth to get a feel for
+how the tree is fitting to your data, and then increase the depth.</li>
+<li>Remember that the number of samples required to populate the tree doubles
+for each additional level the tree grows to.  Use <code class="docutils literal"><span class="pre">max_depth</span></code> to control
+the size of the tree to prevent overfitting.</li>
+<li>Use <code class="docutils literal"><span class="pre">min_samples_split</span></code> or <code class="docutils literal"><span class="pre">min_samples_leaf</span></code> to control the number of
+samples at a leaf node.  A very small number will usually mean the tree
+will overfit, whereas a large number will prevent the tree from learning
+the data.  Try <code class="docutils literal"><span class="pre">min_samples_leaf=5</span></code> as an initial value.
+The main difference between the two is that <code class="docutils literal"><span class="pre">min_samples_leaf</span></code> guarantees
+a minimum number of samples in a leaf, while <code class="docutils literal"><span class="pre">min_samples_split</span></code> can
+create arbitrary small leaves, though <code class="docutils literal"><span class="pre">min_samples_split</span></code> is more common
+in the literature.</li>
+<li>Balance your dataset before training to prevent the tree from being biased
+toward the classes that are dominant. Class balancing can be done by
+sampling an equal number of samples from each class, or preferably by
+normalizing the sum of the sample weights (<code class="docutils literal"><span class="pre">sample_weight</span></code>) for each
+class to the same value. Also note that weight-based pre-pruning criteria,
+such as <code class="docutils literal"><span class="pre">min_weight_fraction_leaf</span></code>, will then be less biased toward
+dominant classes than criteria that are not aware of the sample weights,
+like <code class="docutils literal"><span class="pre">min_samples_leaf</span></code>.</li>
+<li>If the samples are weighted, it will be easier to optimize the tree
+structure using weight-based pre-pruning criterion such as
+<code class="docutils literal"><span class="pre">min_weight_fraction_leaf</span></code>, which ensure that leaf nodes contain at least
+a fraction of the overall sum of the sample weights.</li>
+<li>All decision trees use <code class="docutils literal"><span class="pre">np.float32</span></code> arrays internally.
+If training data is not in this format, a copy of the dataset will be made.</li>
+<li>If the input matrix X is very sparse, it is recommended to convert to sparse
+<code class="docutils literal"><span class="pre">csc_matrix`</span> <span class="pre">before</span> <span class="pre">calling</span> <span class="pre">fit</span> <span class="pre">and</span> <span class="pre">sparse</span> <span class="pre">``csr_matrix</span></code> before calling
+predict. Training time can be orders of magnitude faster for a sparse
+matrix input compared to a dense matrix when features have zero values in
+most of the samples.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="tree-algorithms-id3-c4-5-c5-0-and-cart">
+<span id="tree-algorithms"></span><h2>1.10.6. Tree algorithms: ID3, C4.5, C5.0 and CART<a class="headerlink" href="#tree-algorithms-id3-c4-5-c5-0-and-cart" title="Permalink to this headline">¶</a></h2>
+<p>What are all the various decision tree algorithms and how do they differ
+from each other? Which one is implemented in scikit-learn?</p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/ID3_algorithm">ID3</a> (Iterative Dichotomiser 3) was developed in 1986 by Ross Quinlan.
+The algorithm creates a multiway tree, finding for each node (i.e. in
+a greedy manner) the categorical feature that will yield the largest
+information gain for categorical targets. Trees are grown to their
+maximum size and then a pruning step is usually applied to improve the
+ability of the tree to generalise to unseen data.</p>
+<p>C4.5 is the successor to ID3 and removed the restriction that features
+must be categorical by dynamically defining a discrete attribute (based
+on numerical variables) that partitions the continuous attribute value
+into a discrete set of intervals. C4.5 converts the trained trees
+(i.e. the output of the ID3 algorithm) into sets of if-then rules.
+These accuracy of each rule is then evaluated to determine the order
+in which they should be applied. Pruning is done by removing a rule&#8217;s
+precondition if the accuracy of the rule improves without it.</p>
+<p>C5.0 is Quinlan&#8217;s latest version release under a proprietary license.
+It uses less memory and builds smaller rulesets than C4.5 while being
+more accurate.</p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Predictive_analytics#Classification_and_regression_trees">CART</a> (Classification and Regression Trees) is very similar to C4.5, but
+it differs in that it supports numerical target variables (regression) and
+does not compute rule sets. CART constructs binary trees using the feature
+and threshold that yield the largest information gain at each node.</p>
+<p>scikit-learn uses an optimised version of the CART algorithm.</p>
+</div>
+<div class="section" id="mathematical-formulation">
+<span id="tree-mathematical-formulation"></span><h2>1.10.7. Mathematical formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h2>
+<p>Given training vectors <img class="math" src="../_images/math/fd7fa6e88c2b2c8905526c69007cb8f6962d597b.png" alt="x_i \in R^n"/>, i=1,..., l and a label vector
+<img class="math" src="../_images/math/c853d47df117742a9e0bfacb609582d3efa4be7b.png" alt="y \in R^l"/>, a decision tree recursively partitions the space such
+that the samples with the same labels are grouped together.</p>
+<p>Let the data at node <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> be represented by <img class="math" src="../_images/math/331157c6afbd113256867fd408d80277d1a24756.png" alt="Q"/>. For
+each candidate split <img class="math" src="../_images/math/f8f977aeb99d954e6275e1f3954716a063d027ed.png" alt="\theta = (j, t_m)"/> consisting of a
+feature <img class="math" src="../_images/math/6b21e0b0899a0d2879d3b8019087fa630bab4ea2.png" alt="j"/> and threshold <img class="math" src="../_images/math/3215a3aaf0abc8f8b35c2420862f93dffef04d31.png" alt="t_m"/>, partition the data into
+<img class="math" src="../_images/math/ca90df04d4a35af0c1df6758f66952139cd1f9be.png" alt="Q_{left}(\theta)"/> and <img class="math" src="../_images/math/4937651bf5e7c9718cfc13c237bc13951457271f.png" alt="Q_{right}(\theta)"/> subsets</p>
+<div class="math">
+<p><img src="../_images/math/f2442b4b0fb29fec018f580b06b84a3a5a245854.png" alt="Q_{left}(\theta) = {(x, y) | x_j &lt;= t_m}
+
+Q_{right}(\theta) = Q \setminus Q_{left}(\theta)"/></p>
+</div><p>The impurity at <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> is computed using an impurity function
+<img class="math" src="../_images/math/b46105bc7f41b599216aab6f4a4cda7728a95624.png" alt="H()"/>, the choice of which depends on the task being solved
+(classification or regression)</p>
+<div class="math">
+<p><img src="../_images/math/974a1a5a14e5454f95cf8a43feb88e4ca4e77a21.png" alt="G(Q, \theta) = \frac{n_{left}}{N_m} H(Q_{left}(\theta))
++ \frac{n_{right}}{N_m} H(Q_{right}(\theta))"/></p>
+</div><p>Select the parameters that minimises the impurity</p>
+<div class="math">
+<p><img src="../_images/math/6f2f5aff90e778e32f85bfc100dc3fe87db19ada.png" alt="\theta^* = \operatorname{argmin}_\theta  G(Q, \theta)"/></p>
+</div><p>Recurse for subsets <img class="math" src="../_images/math/77266dcdef123d77a0aa96971d4887c3a8abdc66.png" alt="Q_{left}(\theta^*)"/> and
+<img class="math" src="../_images/math/9dec6651921d251f6f872a68c05ea6af4fca82f1.png" alt="Q_{right}(\theta^*)"/> until the maximum allowable depth is reached,
+<img class="math" src="../_images/math/5619659b25916a27418b281724fac49e6a8cb8c5.png" alt="N_m &lt; \min_{samples}"/> or <img class="math" src="../_images/math/63b4861107dc741950d28d303c58e159aca65a4d.png" alt="N_m = 1"/>.</p>
+<div class="section" id="classification-criteria">
+<h3>1.10.7.1. Classification criteria<a class="headerlink" href="#classification-criteria" title="Permalink to this headline">¶</a></h3>
+<p>If a target is a classification outcome taking on values 0,1,...,K-1,
+for node <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/>, representing a region <img class="math" src="../_images/math/02eada2efb3d986ab718e831b1a6bc8a5ee68f71.png" alt="R_m"/> with <img class="math" src="../_images/math/74f4b22af0f8f9823c68376042f9831dc60b45f4.png" alt="N_m"/>
+observations, let</p>
+<div class="math">
+<p><img src="../_images/math/fe3d02d3c3aca416f0f7e9ee78f2946a8aee206e.png" alt="p_{mk} = 1/ N_m \sum_{x_i \in R_m} I(y_i = k)"/></p>
+</div><p>be the proportion of class k observations in node <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/></p>
+<p>Common measures of impurity are Gini</p>
+<div class="math">
+<p><img src="../_images/math/34b492dc5edb043b6056076ec7ff64f9edcc3628.png" alt="H(X_m) = \sum_k p_{mk} (1 - p_{mk})"/></p>
+</div><p>Cross-Entropy</p>
+<div class="math">
+<p><img src="../_images/math/9d4573b12f15b5c7b80e6b12cd7e38f8de8c0ebd.png" alt="H(X_m) = - \sum_k p_{mk} \log(p_{mk})"/></p>
+</div><p>and Misclassification</p>
+<div class="math">
+<p><img src="../_images/math/24f161cd482f64a016b0b121708657d655972fae.png" alt="H(X_m) = 1 - \max(p_{mk})"/></p>
+</div></div>
+<div class="section" id="regression-criteria">
+<h3>1.10.7.2. Regression criteria<a class="headerlink" href="#regression-criteria" title="Permalink to this headline">¶</a></h3>
+<p>If the target is a continuous value, then for node <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/>,
+representing a region <img class="math" src="../_images/math/02eada2efb3d986ab718e831b1a6bc8a5ee68f71.png" alt="R_m"/> with <img class="math" src="../_images/math/74f4b22af0f8f9823c68376042f9831dc60b45f4.png" alt="N_m"/> observations, a common
+criterion to minimise is the Mean Squared Error</p>
+<div class="math">
+<p><img src="../_images/math/18b1a49e164e731a75bb626f23ecce70fdf0a181.png" alt="c_m = \frac{1}{N_m} \sum_{i \in N_m} y_i
+
+H(X_m) = \frac{1}{N_m} \sum_{i \in N_m} (y_i - c_m)^2"/></p>
+</div><div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Decision_tree_learning">http://en.wikipedia.org/wiki/Decision_tree_learning</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Predictive_analytics">http://en.wikipedia.org/wiki/Predictive_analytics</a></li>
+<li>L. Breiman, J. Friedman, R. Olshen, and C. Stone. Classification and
+Regression Trees. Wadsworth, Belmont, CA, 1984.</li>
+<li>J.R. Quinlan. C4. 5: programs for machine learning. Morgan Kaufmann, 1993.</li>
+<li>T. Hastie, R. Tibshirani and J. Friedman.
+Elements of Statistical Learning, Springer, 2009.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/tree.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="naive_bayes.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,502 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.decomposition.DictionaryLearning &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.decomposition.MiniBatchDictionaryLearning" href="sklearn.decomposition.MiniBatchDictionaryLearning.html" />
+    <link rel="prev" title="sklearn.decomposition.SparseCoder" href="sklearn.decomposition.SparseCoder.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.DictionaryLearning.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.decomposition.SparseCoder.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.decom...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.decomposition.SparseCoder
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.decomposition</span></code>.DictionaryLearning</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-decomposition-dictionarylearning">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a>.DictionaryLearning<a class="headerlink" href="#sklearn-decomposition-dictionarylearning" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.decomposition.DictionaryLearning">
+<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">DictionaryLearning</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>alpha=1</em>, <em>max_iter=1000</em>, <em>tol=1e-08</em>, <em>fit_algorithm='lars'</em>, <em>transform_algorithm='omp'</em>, <em>transform_n_nonzero_coefs=None</em>, <em>transform_alpha=None</em>, <em>n_jobs=1</em>, <em>code_init=None</em>, <em>dict_init=None</em>, <em>verbose=False</em>, <em>split_sign=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/dict_learning.py#L916"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.DictionaryLearning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary learning</p>
+<p>Finds a dictionary (a set of atoms) that can best be used to represent data
+using a sparse code.</p>
+<p>Solves the optimization problem:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">U</span><span class="o">^*</span><span class="p">,</span><span class="n">V</span><span class="o">^*</span><span class="p">)</span> <span class="o">=</span> <span class="n">argmin</span> <span class="mf">0.5</span> <span class="o">||</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">U</span> <span class="n">V</span> <span class="o">||</span><span class="n">_2</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="o">||</span> <span class="n">U</span> <span class="o">||</span><span class="n">_1</span>
+            <span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">V</span><span class="p">)</span>
+            <span class="k">with</span> <span class="o">||</span> <span class="n">V_k</span> <span class="o">||</span><span class="n">_2</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">for</span> <span class="nb">all</span>  <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n_components</span>
+</pre></div>
+</div>
+<p>Read more in the <a class="reference internal" href="../decomposition.html#dictionarylearning"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components</strong> : int,</p>
+<blockquote>
+<div><p>number of dictionary elements to extract</p>
+</div></blockquote>
+<p><strong>alpha</strong> : float,</p>
+<blockquote>
+<div><p>sparsity controlling parameter</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int,</p>
+<blockquote>
+<div><p>maximum number of iterations to perform</p>
+</div></blockquote>
+<p><strong>tol</strong> : float,</p>
+<blockquote>
+<div><p>tolerance for numerical error</p>
+</div></blockquote>
+<p><strong>fit_algorithm</strong> : {&#8216;lars&#8217;, &#8216;cd&#8217;}</p>
+<blockquote>
+<div><p>lars: uses the least angle regression method to solve the lasso problem
+(linear_model.lars_path)
+cd: uses the coordinate descent method to compute the
+Lasso solution (linear_model.Lasso). Lars will be faster if
+the estimated components are sparse.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17: </span><em>cd</em> coordinate descent method to improve speed.</p>
+</div>
+</div></blockquote>
+<p><strong>transform_algorithm</strong> : {&#8216;lasso_lars&#8217;, &#8216;lasso_cd&#8217;, &#8216;lars&#8217;, &#8216;omp&#8217;,     &#8216;threshold&#8217;}</p>
+<blockquote>
+<div><p>Algorithm used to transform the data
+lars: uses the least angle regression method (linear_model.lars_path)
+lasso_lars: uses Lars to compute the Lasso solution
+lasso_cd: uses the coordinate descent method to compute the
+Lasso solution (linear_model.Lasso). lasso_lars will be faster if
+the estimated components are sparse.
+omp: uses orthogonal matching pursuit to estimate the sparse solution
+threshold: squashes to zero all coefficients less than alpha from
+the projection <code class="docutils literal"><span class="pre">dictionary</span> <span class="pre">*</span> <span class="pre">X'</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17: </span><em>lasso_cd</em> coordinate descent method to improve speed.</p>
+</div>
+</div></blockquote>
+<p><strong>transform_n_nonzero_coefs</strong> : int, <code class="docutils literal"><span class="pre">0.1</span> <span class="pre">*</span> <span class="pre">n_features</span></code> by default</p>
+<blockquote>
+<div><p>Number of nonzero coefficients to target in each column of the
+solution. This is only used by <cite>algorithm=&#8217;lars&#8217;</cite> and <cite>algorithm=&#8217;omp&#8217;</cite>
+and is overridden by <cite>alpha</cite> in the <cite>omp</cite> case.</p>
+</div></blockquote>
+<p><strong>transform_alpha</strong> : float, 1. by default</p>
+<blockquote>
+<div><p>If <cite>algorithm=&#8217;lasso_lars&#8217;</cite> or <cite>algorithm=&#8217;lasso_cd&#8217;</cite>, <cite>alpha</cite> is the
+penalty applied to the L1 norm.
+If <cite>algorithm=&#8217;threshold&#8217;</cite>, <cite>alpha</cite> is the absolute value of the
+threshold below which coefficients will be squashed to zero.
+If <cite>algorithm=&#8217;omp&#8217;</cite>, <cite>alpha</cite> is the tolerance parameter: the value of
+the reconstruction error targeted. In this case, it overrides
+<cite>n_nonzero_coefs</cite>.</p>
+</div></blockquote>
+<p><strong>split_sign</strong> : bool, False by default</p>
+<blockquote>
+<div><p>Whether to split the sparse feature vector into the concatenation of
+its negative part and its positive part. This can improve the
+performance of downstream classifiers.</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : int,</p>
+<blockquote>
+<div><p>number of parallel jobs to run</p>
+</div></blockquote>
+<p><strong>code_init</strong> : array of shape (n_samples, n_components),</p>
+<blockquote>
+<div><p>initial value for the code, for warm restart</p>
+</div></blockquote>
+<p><strong>dict_init</strong> : array of shape (n_components, n_features),</p>
+<blockquote>
+<div><p>initial values for the dictionary, for warm restart</p>
+</div></blockquote>
+<p><strong>verbose :</strong> :</p>
+<blockquote>
+<div><p>degree of verbosity of the printed output</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int or RandomState</p>
+<blockquote>
+<div><p>Pseudo number generator state used for random sampling.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>components_</strong> : array, [n_components, n_features]</p>
+<blockquote>
+<div><p>dictionary atoms extracted from the data</p>
+</div></blockquote>
+<p><strong>error_</strong> : array</p>
+<blockquote>
+<div><p>vector of errors at each iteration</p>
+</div></blockquote>
+<p><strong>n_iter_</strong> : int</p>
+<blockquote class="last">
+<div><p>Number of iterations run.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="sklearn.decomposition.SparseCoder.html#sklearn.decomposition.SparseCoder" title="sklearn.decomposition.SparseCoder"><code class="xref py py-obj docutils literal"><span class="pre">SparseCoder</span></code></a>, <a class="reference internal" href="sklearn.decomposition.MiniBatchDictionaryLearning.html#sklearn.decomposition.MiniBatchDictionaryLearning" title="sklearn.decomposition.MiniBatchDictionaryLearning"><code class="xref py py-obj docutils literal"><span class="pre">MiniBatchDictionaryLearning</span></code></a>, <a class="reference internal" href="sklearn.decomposition.SparsePCA.html#sklearn.decomposition.SparsePCA" title="sklearn.decomposition.SparsePCA"><code class="xref py py-obj docutils literal"><span class="pre">SparsePCA</span></code></a>, <a class="reference internal" href="sklearn.decomposition.MiniBatchSparsePCA.html#sklearn.decomposition.MiniBatchSparsePCA" title="sklearn.decomposition.MiniBatchSparsePCA"><code class="xref py py-obj docutils literal"><span class="pre">MiniBatchSparsePCA</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p><strong>References:</strong></p>
+<p>J. Mairal, F. Bach, J. Ponce, G. Sapiro, 2009: Online dictionary learning
+for sparse coding (<a class="reference external" href="http://www.di.ens.fr/sierra/pdfs/icml09.pdf">http://www.di.ens.fr/sierra/pdfs/icml09.pdf</a>)</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.DictionaryLearning.fit" title="sklearn.decomposition.DictionaryLearning.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
+<td>Fit the model from data in X.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.DictionaryLearning.fit_transform" title="sklearn.decomposition.DictionaryLearning.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y])</td>
+<td>Fit to data, then transform it.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.DictionaryLearning.get_params" title="sklearn.decomposition.DictionaryLearning.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.DictionaryLearning.set_params" title="sklearn.decomposition.DictionaryLearning.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.DictionaryLearning.transform" title="sklearn.decomposition.DictionaryLearning.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(X[,&nbsp;y])</td>
+<td>Encode the data as a sparse combination of the dictionary atoms.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.decomposition.DictionaryLearning.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>alpha=1</em>, <em>max_iter=1000</em>, <em>tol=1e-08</em>, <em>fit_algorithm='lars'</em>, <em>transform_algorithm='omp'</em>, <em>transform_n_nonzero_coefs=None</em>, <em>transform_alpha=None</em>, <em>n_jobs=1</em>, <em>code_init=None</em>, <em>dict_init=None</em>, <em>verbose=False</em>, <em>split_sign=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/dict_learning.py#L1028"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.DictionaryLearning.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.DictionaryLearning.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/dict_learning.py#L1046"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.DictionaryLearning.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model from data in X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X: array-like, shape (n_samples, n_features)</strong> :</p>
+<blockquote>
+<div><p>Training vector, where n_samples in the number of samples
+and n_features is the number of features.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self: object</strong> :</p>
+<blockquote class="last">
+<div><p>Returns the object itself</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.DictionaryLearning.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L470"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.DictionaryLearning.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to X and y with optional parameters fit_params
+and returns a transformed version of X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : numpy array of shape [n_samples, n_features]</p>
+<blockquote>
+<div><p>Training set.</p>
+</div></blockquote>
+<p><strong>y</strong> : numpy array of shape [n_samples]</p>
+<blockquote>
+<div><p>Target values.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : numpy array of shape [n_samples, n_features_new]</p>
+<blockquote class="last">
+<div><p>Transformed array.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.DictionaryLearning.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.DictionaryLearning.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.DictionaryLearning.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.DictionaryLearning.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.DictionaryLearning.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/dict_learning.py#L791"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.DictionaryLearning.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode the data as a sparse combination of the dictionary atoms.</p>
+<p>Coding method is determined by the object parameter
+<cite>transform_algorithm</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array of shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Test data to be transformed, must have the same number of
+features as the data used to train the model.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : array, shape (n_samples, n_components)</p>
+<blockquote class="last">
+<div><p>Transformed data</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.decomposition.DictionaryLearning.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.decomposition.SparseCoder.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

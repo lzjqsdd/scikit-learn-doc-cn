@@ -1,0 +1,567 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.svm.SVR &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.svm.LinearSVR" href="sklearn.svm.LinearSVR.html" />
+    <link rel="prev" title="sklearn.svm.NuSVC" href="sklearn.svm.NuSVC.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.svm.NuSVC.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.svm.N...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.svm.NuSVC
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.svm</span></code>.SVR</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-svm-svr">Examples using <code class="docutils literal"><span class="pre">sklearn.svm.SVR</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-svm-svr">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.svm</span></code></a>.SVR<a class="headerlink" href="#sklearn-svm-svr" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.svm.SVR">
+<em class="property">class </em><code class="descclassname">sklearn.svm.</code><code class="descname">SVR</code><span class="sig-paren">(</span><em>kernel='rbf'</em>, <em>degree=3</em>, <em>gamma='auto'</em>, <em>coef0=0.0</em>, <em>tol=0.001</em>, <em>C=1.0</em>, <em>epsilon=0.1</em>, <em>shrinking=True</em>, <em>cache_size=200</em>, <em>verbose=False</em>, <em>max_iter=-1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/svm/classes.py#L696"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.SVR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Epsilon-Support Vector Regression.</p>
+<p>The free parameters in the model are C and epsilon.</p>
+<p>The implementation is based on libsvm.</p>
+<p>Read more in the <a class="reference internal" href="../svm.html#svm-regression"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>C</strong> : float, optional (default=1.0)</p>
+<blockquote>
+<div><p>Penalty parameter C of the error term.</p>
+</div></blockquote>
+<p><strong>epsilon</strong> : float, optional (default=0.1)</p>
+<blockquote>
+<div><p>Epsilon in the epsilon-SVR model. It specifies the epsilon-tube
+within which no penalty is associated in the training loss function
+with points predicted within a distance epsilon from the actual
+value.</p>
+</div></blockquote>
+<p><strong>kernel</strong> : string, optional (default=&#8217;rbf&#8217;)</p>
+<blockquote>
+<div><p>Specifies the kernel type to be used in the algorithm.
+It must be one of &#8216;linear&#8217;, &#8216;poly&#8217;, &#8216;rbf&#8217;, &#8216;sigmoid&#8217;, &#8216;precomputed&#8217; or
+a callable.
+If none is given, &#8216;rbf&#8217; will be used. If a callable is given it is
+used to precompute the kernel matrix.</p>
+</div></blockquote>
+<p><strong>degree</strong> : int, optional (default=3)</p>
+<blockquote>
+<div><p>Degree of the polynomial kernel function (&#8216;poly&#8217;).
+Ignored by all other kernels.</p>
+</div></blockquote>
+<p><strong>gamma</strong> : float, optional (default=&#8217;auto&#8217;)</p>
+<blockquote>
+<div><p>Kernel coefficient for &#8216;rbf&#8217;, &#8216;poly&#8217; and &#8216;sigmoid&#8217;.
+If gamma is &#8216;auto&#8217; then 1/n_features will be used instead.</p>
+</div></blockquote>
+<p><strong>coef0</strong> : float, optional (default=0.0)</p>
+<blockquote>
+<div><p>Independent term in kernel function.
+It is only significant in &#8216;poly&#8217; and &#8216;sigmoid&#8217;.</p>
+</div></blockquote>
+<p><strong>shrinking</strong> : boolean, optional (default=True)</p>
+<blockquote>
+<div><p>Whether to use the shrinking heuristic.</p>
+</div></blockquote>
+<p><strong>tol</strong> : float, optional (default=1e-3)</p>
+<blockquote>
+<div><p>Tolerance for stopping criterion.</p>
+</div></blockquote>
+<p><strong>cache_size</strong> : float, optional</p>
+<blockquote>
+<div><p>Specify the size of the kernel cache (in MB).</p>
+</div></blockquote>
+<p><strong>verbose</strong> : bool, default: False</p>
+<blockquote>
+<div><p>Enable verbose output. Note that this setting takes advantage of a
+per-process runtime setting in libsvm that, if enabled, may not work
+properly in a multithreaded context.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int, optional (default=-1)</p>
+<blockquote>
+<div><p>Hard limit on iterations within solver, or -1 for no limit.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>support_</strong> : array-like, shape = [n_SV]</p>
+<blockquote>
+<div><p>Indices of support vectors.</p>
+</div></blockquote>
+<p><strong>support_vectors_</strong> : array-like, shape = [nSV, n_features]</p>
+<blockquote>
+<div><p>Support vectors.</p>
+</div></blockquote>
+<p><strong>dual_coef_</strong> : array, shape = [1, n_SV]</p>
+<blockquote>
+<div><p>Coefficients of the support vector in the decision function.</p>
+</div></blockquote>
+<p><strong>coef_</strong> : array, shape = [1, n_features]</p>
+<blockquote>
+<div><p>Weights assigned to the features (coefficients in the primal
+problem). This is only available in the case of a linear kernel.</p>
+<p><cite>coef_</cite> is readonly property derived from <cite>dual_coef_</cite> and
+<cite>support_vectors_</cite>.</p>
+</div></blockquote>
+<p><strong>intercept_</strong> : array, shape = [1]</p>
+<blockquote>
+<div><p>Constants in decision function.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like, shape = [n_samples]</p>
+<blockquote class="last">
+<div><p>Individual weights for each sample</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="sklearn.svm.NuSVR.html#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-obj docutils literal"><span class="pre">NuSVR</span></code></a></dt>
+<dd>Support Vector Machine for regression implemented using libsvm using a parameter to control the number of support vectors.</dd>
+<dt><a class="reference internal" href="sklearn.svm.LinearSVR.html#sklearn.svm.LinearSVR" title="sklearn.svm.LinearSVR"><code class="xref py py-obj docutils literal"><span class="pre">LinearSVR</span></code></a></dt>
+<dd>Scalable Linear Support Vector Machine for regression implemented using liblinear.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SVR</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> 
+<span class="go">SVR(C=1.0, cache_size=200, coef0=0.0, degree=3, epsilon=0.2, gamma=&#39;auto&#39;,</span>
+<span class="go">    kernel=&#39;rbf&#39;, max_iter=-1, shrinking=True, tol=0.001, verbose=False)</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.svm.SVR.decision_function" title="sklearn.svm.SVR.decision_function"><code class="xref py py-obj docutils literal"><span class="pre">decision_function</span></code></a>(\*args,&nbsp;\*\*kwargs)</td>
+<td>DEPRECATED:  and will be removed in 0.19</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.svm.SVR.fit" title="sklearn.svm.SVR.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Fit the SVM model according to the given training data.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.svm.SVR.get_params" title="sklearn.svm.SVR.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.svm.SVR.predict" title="sklearn.svm.SVR.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X)</td>
+<td>Perform regression on samples in X.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.svm.SVR.score" title="sklearn.svm.SVR.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Returns the coefficient of determination R^2 of the prediction.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.svm.SVR.set_params" title="sklearn.svm.SVR.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.svm.SVR.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>kernel='rbf'</em>, <em>degree=3</em>, <em>gamma='auto'</em>, <em>coef0=0.0</em>, <em>tol=0.001</em>, <em>C=1.0</em>, <em>epsilon=0.1</em>, <em>shrinking=True</em>, <em>cache_size=200</em>, <em>verbose=False</em>, <em>max_iter=-1</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/svm/classes.py#L799"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.SVR.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.svm.SVR.decision_function">
+<code class="descname">decision_function</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/utils/deprecation.py#L69"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.SVR.decision_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED:  and will be removed in 0.19</p>
+<p>Distance of the samples X to the separating hyperplane.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>For kernel=&#8221;precomputed&#8221;, the expected shape of X is
+[n_samples_test, n_samples_train].</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_samples, n_class * (n_class-1) / 2)</p>
+<blockquote class="last">
+<div><p>Returns the decision function of the sample for each class
+in the model.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.svm.SVR.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/svm/base.py#L111"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.SVR.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the SVM model according to the given training data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training vectors, where n_samples is the number of samples
+and n_features is the number of features.
+For kernel=&#8221;precomputed&#8221;, the expected shape of X is
+(n_samples, n_samples).</p>
+</div></blockquote>
+<p><strong>y</strong> : array-like, shape (n_samples,)</p>
+<blockquote>
+<div><p>Target values (class labels in classification, real numbers in
+regression)</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like, shape (n_samples,)</p>
+<blockquote>
+<div><p>Per-sample weights. Rescale C per sample. Higher weights
+force the classifier to put more emphasis on these points.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self</strong> : object</p>
+<blockquote class="last">
+<div><p>Returns self.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>If X and y are not C-ordered and contiguous arrays of np.float64 and
+X is not a scipy.sparse.csr_matrix, X and/or y may be copied.</p>
+<p>If X is a dense array, then the other methods will not support sparse
+matrices as input.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.svm.SVR.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.SVR.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.svm.SVR.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/svm/base.py#L295"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.SVR.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform regression on samples in X.</p>
+<p>For an one-class model, +1 or -1 is returned.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>For kernel=&#8221;precomputed&#8221;, the expected shape of X is
+(n_samples_test, n_samples_train).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>y_pred</strong> : array, shape (n_samples,)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.svm.SVR.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L357"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.SVR.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
+<p>The coefficient R^2 is defined as (1 - u/v), where u is the regression
+sum of squares ((y_true - y_pred) ** 2).sum() and v is the residual
+sum of squares ((y_true - y_true.mean()) ** 2).sum().
+Best possible score is 1.0 and it can be negative (because the
+model can be arbitrarily worse). A constant model that always
+predicts the expected value of y, disregarding the input features,
+would get a R^2 score of 0.0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape = (n_samples, n_features)</p>
+<blockquote>
+<div><p>Test samples.</p>
+</div></blockquote>
+<p><strong>y</strong> : array-like, shape = (n_samples) or (n_samples, n_outputs)</p>
+<blockquote>
+<div><p>True values for X.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like, shape = [n_samples], optional</p>
+<blockquote>
+<div><p>Sample weights.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float</p>
+<blockquote class="last">
+<div><p>R^2 of self.predict(X) wrt. y.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.svm.SVR.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.svm.SVR.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-svm-svr">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.svm.SVR</span></code><a class="headerlink" href="#examples-using-sklearn-svm-svr" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="Both kernel ridge regression (KRR) and SVR learn a non-linear function by employing the kernel ..."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/./plot_kernel_ridge_regression.html"><img alt="../../_images/plot_kernel_ridge_regression1.png" src="../../_images/plot_kernel_ridge_regression1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/plot_kernel_ridge_regression.html#example-plot-kernel-ridge-regression-py"><span class="std std-ref">Comparison of kernel ridge regression and SVR</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="This is an example showing the prediction latency of various scikit-learn estimators."><div class="figure" id="id2">
+<a class="reference external image-reference" href="./../../auto_examples/applications/plot_prediction_latency.html"><img alt="../../_images/plot_prediction_latency1.png" src="../../_images/plot_prediction_latency1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/applications/plot_prediction_latency.html#example-applications-plot-prediction-latency-py"><span class="std std-ref">Prediction Latency</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Toy example of 1D regression using linear, polynomial and RBF kernels."><div class="figure" id="id3">
+<a class="reference external image-reference" href="./../../auto_examples/svm/plot_svm_regression.html"><img alt="../../_images/plot_svm_regression1.png" src="../../_images/plot_svm_regression1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/svm/plot_svm_regression.html#example-svm-plot-svm-regression-py"><span class="std std-ref">Support Vector Regression (SVR) using linear and non-linear kernels</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.svm.SVR.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.svm.NuSVC.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

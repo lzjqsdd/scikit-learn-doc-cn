@@ -1,0 +1,353 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.decomposition.fastica &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.decomposition.dict_learning" href="sklearn.decomposition.dict_learning.html" />
+    <link rel="prev" title="sklearn.decomposition.LatentDirichletAllocation" href="sklearn.decomposition.LatentDirichletAllocation.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.fastica.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.decomposition.LatentDirichletAllocation.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.decom...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.decomposition.LatentDirichletAllocation
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.decomposition</span></code>.fastica</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-decomposition-fastica">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a>.fastica<a class="headerlink" href="#sklearn-decomposition-fastica" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.decomposition.fastica">
+<code class="descclassname">sklearn.decomposition.</code><code class="descname">fastica</code><span class="sig-paren">(</span><em>X</em>, <em>n_components=None</em>, <em>algorithm='parallel'</em>, <em>whiten=True</em>, <em>fun='logcosh'</em>, <em>fun_args=None</em>, <em>max_iter=200</em>, <em>tol=0.0001</em>, <em>w_init=None</em>, <em>random_state=None</em>, <em>return_X_mean=False</em>, <em>compute_sources=True</em>, <em>return_n_iter=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/fastica_.py#L147"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.fastica" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Fast Independent Component Analysis.</p>
+<p>Read more in the <a class="reference internal" href="../decomposition.html#ica"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training vector, where n_samples is the number of samples and
+n_features is the number of features.</p>
+</div></blockquote>
+<p><strong>n_components</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of components to extract. If None no dimension reduction
+is performed.</p>
+</div></blockquote>
+<p><strong>algorithm</strong> : {&#8216;parallel&#8217;, &#8216;deflation&#8217;}, optional</p>
+<blockquote>
+<div><p>Apply a parallel or deflational FASTICA algorithm.</p>
+</div></blockquote>
+<p><strong>whiten</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True perform an initial whitening of the data.
+If False, the data is assumed to have already been
+preprocessed: it should be centered, normed and white.
+Otherwise you will get incorrect results.
+In this case the parameter n_components will be ignored.</p>
+</div></blockquote>
+<p><strong>fun</strong> : string or function, optional. Default: &#8216;logcosh&#8217;</p>
+<blockquote>
+<div><p>The functional form of the G function used in the
+approximation to neg-entropy. Could be either &#8216;logcosh&#8217;, &#8216;exp&#8217;,
+or &#8216;cube&#8217;.
+You can also provide your own function. It should return a tuple
+containing the value of the function, and of its derivative, in the
+point. Example:</p>
+<dl class="docutils">
+<dt>def my_g(x):</dt>
+<dd><p class="first last">return x ** 3, 3 * x ** 2</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>fun_args</strong> : dictionary, optional</p>
+<blockquote>
+<div><p>Arguments to send to the functional form.
+If empty or None and if fun=&#8217;logcosh&#8217;, fun_args will take value
+{&#8216;alpha&#8217; : 1.0}</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int, optional</p>
+<blockquote>
+<div><p>Maximum number of iterations to perform.</p>
+</div></blockquote>
+<p><strong>tol: float, optional</strong> :</p>
+<blockquote>
+<div><p>A positive scalar giving the tolerance at which the
+un-mixing matrix is considered to have converged.</p>
+</div></blockquote>
+<p><strong>w_init</strong> : (n_components, n_components) array, optional</p>
+<blockquote>
+<div><p>Initial un-mixing array of dimension (n.comp,n.comp).
+If None (default) then an array of normal r.v.&#8217;s is used.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int or RandomState</p>
+<blockquote>
+<div><p>Pseudo number generator state used for random sampling.</p>
+</div></blockquote>
+<p><strong>return_X_mean</strong> : bool, optional</p>
+<blockquote>
+<div><p>If True, X_mean is returned too.</p>
+</div></blockquote>
+<p><strong>compute_sources</strong> : bool, optional</p>
+<blockquote>
+<div><p>If False, sources are not computed, but only the rotation matrix.
+This can save memory when working with big data. Defaults to True.</p>
+</div></blockquote>
+<p><strong>return_n_iter</strong> : bool, optional</p>
+<blockquote>
+<div><p>Whether or not to return the number of iterations.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>K</strong> : array, shape (n_components, n_features) | None.</p>
+<blockquote>
+<div><p>If whiten is &#8216;True&#8217;, K is the pre-whitening matrix that projects data
+onto the first n_components principal components. If whiten is &#8216;False&#8217;,
+K is &#8216;None&#8217;.</p>
+</div></blockquote>
+<p><strong>W</strong> : array, shape (n_components, n_components)</p>
+<blockquote>
+<div><p>Estimated un-mixing matrix.
+The mixing matrix can be obtained by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">w</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">I</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>S</strong> : array, shape (n_samples, n_components) | None</p>
+<blockquote>
+<div><p>Estimated source matrix</p>
+</div></blockquote>
+<p><strong>X_mean</strong> : array, shape (n_features, )</p>
+<blockquote>
+<div><p>The mean over features. Returned only if return_X_mean is True.</p>
+</div></blockquote>
+<p><strong>n_iter</strong> : int</p>
+<blockquote class="last">
+<div><p>If the algorithm is &#8220;deflation&#8221;, n_iter is the
+maximum number of iterations run across all components. Else
+they are just the number of iterations taken to converge. This is
+returned only when return_n_iter is set to <cite>True</cite>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The data matrix X is considered to be a linear combination of
+non-Gaussian (independent) components i.e. X = AS where columns of S
+contain the independent components and A is a linear mixing
+matrix. In short ICA attempts to <cite>un-mix&#8217; the data by estimating an
+un-mixing matrix W where ``S = W K X.`</cite></p>
+<p>This implementation was originally made for data of shape
+[n_features, n_samples]. Now the input is transposed
+before the algorithm is applied. This makes it slightly
+faster for Fortran-ordered input.</p>
+<p>Implemented using FastICA:
+<cite>A. Hyvarinen and E. Oja, Independent Component Analysis:
+Algorithms and Applications, Neural Networks, 13(4-5), 2000,
+pp. 411-430</cite></p>
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.decomposition.fastica.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.decomposition.LatentDirichletAllocation.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

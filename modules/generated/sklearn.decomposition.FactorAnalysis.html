@@ -1,0 +1,578 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.decomposition.FactorAnalysis &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.decomposition.FastICA" href="sklearn.decomposition.FastICA.html" />
+    <link rel="prev" title="sklearn.decomposition.KernelPCA" href="sklearn.decomposition.KernelPCA.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.FactorAnalysis.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.decomposition.KernelPCA.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.decom...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.decomposition.KernelPCA
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.decomposition</span></code>.FactorAnalysis</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-decomposition-factoranalysis">Examples using <code class="docutils literal"><span class="pre">sklearn.decomposition.FactorAnalysis</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-decomposition-factoranalysis">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a>.FactorAnalysis<a class="headerlink" href="#sklearn-decomposition-factoranalysis" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.decomposition.FactorAnalysis">
+<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">FactorAnalysis</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>tol=0.01</em>, <em>copy=True</em>, <em>max_iter=1000</em>, <em>noise_variance_init=None</em>, <em>svd_method='randomized'</em>, <em>iterated_power=3</em>, <em>random_state=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/factor_analysis.py#L36"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factor Analysis (FA)</p>
+<p>A simple linear generative model with Gaussian latent variables.</p>
+<p>The observations are assumed to be caused by a linear transformation of
+lower dimensional latent factors and added Gaussian noise.
+Without loss of generality the factors are distributed according to a
+Gaussian with zero mean and unit covariance. The noise is also zero mean
+and has an arbitrary diagonal covariance matrix.</p>
+<p>If we would restrict the model further, by assuming that the Gaussian
+noise is even isotropic (all diagonal entries are the same) we would obtain
+<code class="xref py py-class docutils literal"><span class="pre">PPCA</span></code>.</p>
+<p>FactorAnalysis performs a maximum likelihood estimate of the so-called
+<cite>loading</cite> matrix, the transformation of the latent variables to the
+observed ones, using expectation-maximization (EM).</p>
+<p>Read more in the <a class="reference internal" href="../decomposition.html#fa"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components</strong> : int | None</p>
+<blockquote>
+<div><p>Dimensionality of latent space, the number of components
+of <code class="docutils literal"><span class="pre">X</span></code> that are obtained after <code class="docutils literal"><span class="pre">transform</span></code>.
+If None, n_components is set to the number of features.</p>
+</div></blockquote>
+<p><strong>tol</strong> : float</p>
+<blockquote>
+<div><p>Stopping tolerance for EM algorithm.</p>
+</div></blockquote>
+<p><strong>copy</strong> : bool</p>
+<blockquote>
+<div><p>Whether to make a copy of X. If <code class="docutils literal"><span class="pre">False</span></code>, the input X gets overwritten
+during fitting.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int</p>
+<blockquote>
+<div><p>Maximum number of iterations.</p>
+</div></blockquote>
+<p><strong>noise_variance_init</strong> : None | array, shape=(n_features,)</p>
+<blockquote>
+<div><p>The initial guess of the noise variance for each feature.
+If None, it defaults to np.ones(n_features)</p>
+</div></blockquote>
+<p><strong>svd_method</strong> : {&#8216;lapack&#8217;, &#8216;randomized&#8217;}</p>
+<blockquote>
+<div><p>Which SVD method to use. If &#8216;lapack&#8217; use standard SVD from
+scipy.linalg, if &#8216;randomized&#8217; use fast <code class="docutils literal"><span class="pre">randomized_svd</span></code> function.
+Defaults to &#8216;randomized&#8217;. For most applications &#8216;randomized&#8217; will
+be sufficiently precise while providing significant speed gains.
+Accuracy can also be improved by setting higher values for
+<cite>iterated_power</cite>. If this is not sufficient, for maximum precision
+you should choose &#8216;lapack&#8217;.</p>
+</div></blockquote>
+<p><strong>iterated_power</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of iterations for the power method. 3 by default. Only used
+if <code class="docutils literal"><span class="pre">svd_method</span></code> equals &#8216;randomized&#8217;</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int or RandomState</p>
+<blockquote>
+<div><p>Pseudo number generator state used for random sampling. Only used
+if <code class="docutils literal"><span class="pre">svd_method</span></code> equals &#8216;randomized&#8217;</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>components_</strong> : array, [n_components, n_features]</p>
+<blockquote>
+<div><p>Components with maximum variance.</p>
+</div></blockquote>
+<p><strong>loglike_</strong> : list, [n_iterations]</p>
+<blockquote>
+<div><p>The log likelihood at each iteration.</p>
+</div></blockquote>
+<p><strong>noise_variance_</strong> : array, shape=(n_features,)</p>
+<blockquote>
+<div><p>The estimated noise variance for each feature.</p>
+</div></blockquote>
+<p><strong>n_iter_</strong> : int</p>
+<blockquote class="last">
+<div><p>Number of iterations run.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-obj docutils literal"><span class="pre">PCA</span></code></a></dt>
+<dd>Principal component analysis is also a latent linear variable model which however assumes equal noise variance for each feature. This extra assumption makes probabilistic PCA faster as it can be computed in closed form.</dd>
+<dt><a class="reference internal" href="sklearn.decomposition.FastICA.html#sklearn.decomposition.FastICA" title="sklearn.decomposition.FastICA"><code class="xref py py-obj docutils literal"><span class="pre">FastICA</span></code></a></dt>
+<dd>Independent component analysis, a latent variable model with non-Gaussian latent variables.</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.FactorAnalysis.fit" title="sklearn.decomposition.FactorAnalysis.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
+<td>Fit the FactorAnalysis model to X using EM</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.FactorAnalysis.fit_transform" title="sklearn.decomposition.FactorAnalysis.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y])</td>
+<td>Fit to data, then transform it.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.FactorAnalysis.get_covariance" title="sklearn.decomposition.FactorAnalysis.get_covariance"><code class="xref py py-obj docutils literal"><span class="pre">get_covariance</span></code></a>()</td>
+<td>Compute data covariance with the FactorAnalysis model.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.FactorAnalysis.get_params" title="sklearn.decomposition.FactorAnalysis.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.FactorAnalysis.get_precision" title="sklearn.decomposition.FactorAnalysis.get_precision"><code class="xref py py-obj docutils literal"><span class="pre">get_precision</span></code></a>()</td>
+<td>Compute data precision matrix with the FactorAnalysis model.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.FactorAnalysis.score" title="sklearn.decomposition.FactorAnalysis.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X[,&nbsp;y])</td>
+<td>Compute the average log-likelihood of the samples</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.FactorAnalysis.score_samples" title="sklearn.decomposition.FactorAnalysis.score_samples"><code class="xref py py-obj docutils literal"><span class="pre">score_samples</span></code></a>(X)</td>
+<td>Compute the log-likelihood of each sample</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.FactorAnalysis.set_params" title="sklearn.decomposition.FactorAnalysis.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.FactorAnalysis.transform" title="sklearn.decomposition.FactorAnalysis.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(X)</td>
+<td>Apply dimensionality reduction to X using the model.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_components=None</em>, <em>tol=0.01</em>, <em>copy=True</em>, <em>max_iter=1000</em>, <em>noise_variance_init=None</em>, <em>svd_method='randomized'</em>, <em>iterated_power=3</em>, <em>random_state=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/factor_analysis.py#L126"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/factor_analysis.py#L142"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the FactorAnalysis model to X using EM</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L470"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to X and y with optional parameters fit_params
+and returns a transformed version of X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : numpy array of shape [n_samples, n_features]</p>
+<blockquote>
+<div><p>Training set.</p>
+</div></blockquote>
+<p><strong>y</strong> : numpy array of shape [n_samples]</p>
+<blockquote>
+<div><p>Target values.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : numpy array of shape [n_samples, n_features_new]</p>
+<blockquote class="last">
+<div><p>Transformed array.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.get_covariance">
+<code class="descname">get_covariance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/factor_analysis.py#L262"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.get_covariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute data covariance with the FactorAnalysis model.</p>
+<p><code class="docutils literal"><span class="pre">cov</span> <span class="pre">=</span> <span class="pre">components_.T</span> <span class="pre">*</span> <span class="pre">components_</span> <span class="pre">+</span> <span class="pre">diag(noise_variance)</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cov</strong> : array, shape (n_features, n_features)</p>
+<blockquote class="last">
+<div><p>Estimated covariance of data.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.get_precision">
+<code class="descname">get_precision</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/factor_analysis.py#L278"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.get_precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute data precision matrix with the FactorAnalysis model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>precision</strong> : array, shape (n_features, n_features)</p>
+<blockquote class="last">
+<div><p>Estimated precision of data.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/factor_analysis.py#L331"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the average log-likelihood of the samples</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X: array, shape (n_samples, n_features)</strong> :</p>
+<blockquote>
+<div><p>The data</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ll: float</strong> :</p>
+<blockquote class="last">
+<div><p>Average log-likelihood of the samples under the current model</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.score_samples">
+<code class="descname">score_samples</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/factor_analysis.py#L307"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.score_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the log-likelihood of each sample</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X: array, shape (n_samples, n_features)</strong> :</p>
+<blockquote>
+<div><p>The data</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ll: array, shape (n_samples,)</strong> :</p>
+<blockquote class="last">
+<div><p>Log-likelihood of each sample under the current model</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.FactorAnalysis.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/factor_analysis.py#L232"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.FactorAnalysis.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply dimensionality reduction to X using the model.</p>
+<p>Compute the expected mean of the latent variables.
+See Barber, 21.2.33 (or Bishop, 12.66).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : array-like, shape (n_samples, n_components)</p>
+<blockquote class="last">
+<div><p>The latent variables of X.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-decomposition-factoranalysis">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.decomposition.FactorAnalysis</span></code><a class="headerlink" href="#examples-using-sklearn-decomposition-factoranalysis" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="Probabilistic PCA and Factor Analysis are probabilistic models. The consequence is that the lik..."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html"><img alt="../../_images/plot_pca_vs_fa_model_selection1.png" src="../../_images/plot_pca_vs_fa_model_selection1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html#example-decomposition-plot-pca-vs-fa-model-selection-py"><span class="std std-ref">Model selection with Probabilistic PCA and Factor Analysis (FA)</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="This example applies to :ref:`olivetti_faces` different unsupervised matrix decomposition (dime..."><div class="figure" id="id2">
+<a class="reference external image-reference" href="./../../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="../../_images/plot_faces_decomposition1.png" src="../../_images/plot_faces_decomposition1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/decomposition/plot_faces_decomposition.html#example-decomposition-plot-faces-decomposition-py"><span class="std std-ref">Faces dataset decompositions</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.decomposition.FactorAnalysis.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.decomposition.KernelPCA.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

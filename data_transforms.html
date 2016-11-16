@@ -1,0 +1,364 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>4. Dataset transformations &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="index.html" />
+    <link rel="up" title="User Guide" href="user_guide.html" />
+    <link rel="next" title="4.1. Pipeline and FeatureUnion: combining estimators" href="modules/pipeline.html" />
+    <link rel="prev" title="3.5. 验证曲线: 通过绘制评分图来评估模型" href="modules/learning_curve.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/data_transforms.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="index.html">
+            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="index.html">主页</a></li>
+                <li><a href="install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="tutorial/index.html">入门指南</a></li>
+            <li><a href="user_guide.html">使用手册</a></li>
+            <li><a href="modules/classes.html">API</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="modules/learning_curve.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        3.5. 验证曲线: 通过...
+        </span>
+            <span class="hiddenrellink">
+            3.5. 验证曲线: 通过绘制评分图来评估模型
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="user_guide.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        User Guide
+        </span>
+            <span class="hiddenrellink">
+            User Guide
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">4. Dataset transformations</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <style type="text/css">
+  div.bodywrapper blockquote {
+      margin: 0 ;
+  }
+
+  div.toctree-wrapper ul {
+      margin-top: 0 ;
+      margin-bottom: 0 ;
+      padding-left: 10px ;
+  }
+
+  li.toctree-l1 {
+      padding: 0 0 0.5em 0 ;
+      list-style-type: none;
+      font-size: 150% ;
+      font-weight: bold;
+      }
+
+  li.toctree-l1 ul {
+      padding-left: 40px ;
+  }
+
+  li.toctree-l2 {
+      font-size: 70% ;
+      list-style-type: square;
+      font-weight: normal;
+      }
+
+  li.toctree-l3 {
+      font-size: 85% ;
+      list-style-type: circle;
+      font-weight: normal;
+      }
+
+</style><div class="section" id="dataset-transformations">
+<span id="data-transforms"></span><h1>4. Dataset transformations<a class="headerlink" href="#dataset-transformations" title="Permalink to this headline">¶</a></h1>
+<p>scikit-learn provides a library of transformers, which may clean (see
+<a class="reference internal" href="modules/preprocessing.html#preprocessing"><span class="std std-ref">数据预处理</span></a>), reduce (see <a class="reference internal" href="modules/unsupervised_reduction.html#data-reduction"><span class="std std-ref">Unsupervised dimensionality reduction</span></a>), expand (see
+<a class="reference internal" href="modules/kernel_approximation.html#kernel-approximation"><span class="std std-ref">Kernel Approximation</span></a>) or generate (see <a class="reference internal" href="modules/feature_extraction.html#feature-extraction"><span class="std std-ref">特征提取</span></a>)
+feature representations.</p>
+<p>Like other estimators, these are represented by classes with <code class="docutils literal"><span class="pre">fit</span></code> method,
+which learns model parameters (e.g. mean and standard deviation for
+normalization) from a training set, and a <code class="docutils literal"><span class="pre">transform</span></code> method which applies
+this transformation model to unseen data. <code class="docutils literal"><span class="pre">fit_transform</span></code> may be more
+convenient and efficient for modelling and transforming the training data
+simultaneously.</p>
+<p>Combining such transformers, either in parallel or series is covered in
+<a class="reference internal" href="modules/pipeline.html#combining-estimators"><span class="std std-ref">Pipeline and FeatureUnion: combining estimators</span></a>. <a class="reference internal" href="modules/metrics.html#metrics"><span class="std std-ref">配对矩阵，类别以及核函数</span></a> covers transforming feature
+spaces into affinity matrices, while <a class="reference internal" href="modules/preprocessing_targets.html#preprocessing-targets"><span class="std std-ref">预测目标(y)的转换</span></a> considers
+transformations of the target space (e.g. categorical labels) for use in
+scikit-learn.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/pipeline.html">4.1. Pipeline and FeatureUnion: combining estimators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/pipeline.html#pipeline-chaining-estimators">4.1.1. Pipeline: chaining estimators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/pipeline.html#usage">4.1.1.1. Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/pipeline.html#notes">4.1.1.2. Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/pipeline.html#featureunion-composite-feature-spaces">4.1.2. FeatureUnion: composite feature spaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/pipeline.html#id1">4.1.2.1. Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/feature_extraction.html">4.2. 特征提取</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#dict-feature-extraction">4.2.1. 加载字典的中的特征</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#feature-hashing">4.2.2. 特征哈希</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id5">4.2.2.1. 实现细节</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#text-feature-extraction">4.2.3. 文本特征提取</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id7">4.2.3.1. 体现：词袋模型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id8">4.2.3.2. 稀疏</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#common-vectorizer-usage">4.2.3.3. 通常向量化使用Common Vectorizer usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#tfidf">4.2.3.4. Tf–idf算法 字词权值</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id12">4.2.3.5. 文档编码 转码</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id13">4.2.3.6. 应用与例子</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id14">4.2.3.7. 词袋子模型表示法的限制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#vectorizing-a-large-text-corpus-with-the-hashing-trick">4.2.3.8. Vectorizing a large text corpus with the hashing trick</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#performing-out-of-core-scaling-with-hashingvectorizer">4.2.3.9. Performing out-of-core scaling with HashingVectorizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#customizing-the-vectorizer-classes">4.2.3.10. Customizing the vectorizer classes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#image-feature-extraction">4.2.4. Image feature extraction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#patch-extraction">4.2.4.1. Patch extraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#connectivity-graph-of-an-image">4.2.4.2. Connectivity graph of an image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/preprocessing.html">4.3. 数据预处理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#variance-scaling">4.3.1. 标准化、去均值、方差缩放(variance scaling)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id6">4.3.1.1. 特征缩放至特定范围</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id13">4.3.1.2. 稀疏数据缩放</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id16">4.3.1.3. 含异常值数据缩放</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#kernel-centering">4.3.1.4. 核矩阵中心化</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#preprocessing-normalization">4.3.2. 规范化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#preprocessing-binarization">4.3.3. 二值化</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id28">4.3.3.1. 特征二值化</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#preprocessing-categorical-features">4.3.4. 分类特征编码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#imputation">4.3.5. 缺失值处理（Imputation）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#polynomial-features">4.3.6. 多项式特征生成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#id36">4.3.7. 装换器定制</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/unsupervised_reduction.html">4.4. Unsupervised dimensionality reduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/unsupervised_reduction.html#pca-principal-component-analysis">4.4.1. PCA: principal component analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/unsupervised_reduction.html#random-projections">4.4.2. Random projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/unsupervised_reduction.html#feature-agglomeration">4.4.3. Feature agglomeration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/random_projection.html">4.5. Random Projection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/random_projection.html#the-johnson-lindenstrauss-lemma">4.5.1. The Johnson-Lindenstrauss lemma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/random_projection.html#gaussian-random-projection">4.5.2. Gaussian random projection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/random_projection.html#sparse-random-projection">4.5.3. Sparse random projection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/kernel_approximation.html">4.6. Kernel Approximation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html#nystroem-method-for-kernel-approximation">4.6.1. Nystroem Method for Kernel Approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html#radial-basis-function-kernel">4.6.2. Radial Basis Function Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html#additive-chi-squared-kernel">4.6.3. Additive Chi Squared Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html#skewed-chi-squared-kernel">4.6.4. Skewed Chi Squared Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html#mathematical-details">4.6.5. Mathematical Details</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/metrics.html">4.7. 配对矩阵，类别以及核函数</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html#cosine-similarity">4.7.1. 余弦相似度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html#linear-kernel">4.7.2. 线性核函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html#polynomial-kernel">4.7.3. 多项式核函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html#s">4.7.4. S型核函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html#rbf">4.7.5. RBF核函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html#laplacian-kernel">4.7.6. 拉普拉斯核函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html#chi2-kernel">4.7.7. 卡方核函数</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/preprocessing_targets.html">4.8. 预测目标(<code class="docutils literal"><span class="pre">y</span></code>)的转换</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing_targets.html#id1">4.8.1. 标签二值化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing_targets.html#id2">4.8.2. 标签编码</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="_sources/data_transforms.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="modules/learning_curve.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

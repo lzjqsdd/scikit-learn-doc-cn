@@ -1,0 +1,43 @@
+
+
+.. _example_neighbors_plot_nearest_centroid.py:
+
+
+===============================
+Nearest Centroid Classification
+===============================
+
+Sample usage of Nearest Centroid classification.
+It will plot the decision boundaries for each class.
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_nearest_centroid_001.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_nearest_centroid_002.png
+            :scale: 47
+
+
+**Script output**::
+
+  None 0.813333333333
+  0.1 0.813333333333
+
+
+
+**Python source code:** :download:`plot_nearest_centroid.py <plot_nearest_centroid.py>`
+
+.. literalinclude:: plot_nearest_centroid.py
+    :lines: 9-
+
+**Total running time of the example:**  0.11 seconds
+( 0 minutes  0.11 seconds)
+    

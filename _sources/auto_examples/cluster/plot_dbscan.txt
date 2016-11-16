@@ -1,0 +1,38 @@
+
+
+.. _example_cluster_plot_dbscan.py:
+
+
+===================================
+Demo of DBSCAN clustering algorithm
+===================================
+
+Finds core samples of high density and expands clusters from them.
+
+
+
+
+.. image:: images/plot_dbscan_001.png
+    :align: center
+
+
+**Script output**::
+
+  Estimated number of clusters: 3
+  Homogeneity: 0.953
+  Completeness: 0.883
+  V-measure: 0.917
+  Adjusted Rand Index: 0.952
+  Adjusted Mutual Information: 0.883
+  Silhouette Coefficient: 0.626
+
+
+
+**Python source code:** :download:`plot_dbscan.py <plot_dbscan.py>`
+
+.. literalinclude:: plot_dbscan.py
+    :lines: 10-
+
+**Total running time of the example:**  0.10 seconds
+( 0 minutes  0.10 seconds)
+    

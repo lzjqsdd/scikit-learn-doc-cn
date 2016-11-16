@@ -1,0 +1,588 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.cluster.KMeans &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.cluster.MiniBatchKMeans" href="sklearn.cluster.MiniBatchKMeans.html" />
+    <link rel="prev" title="sklearn.cluster.FeatureAgglomeration" href="sklearn.cluster.FeatureAgglomeration.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.cluster.FeatureAgglomeration.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.clust...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.cluster.FeatureAgglomeration
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.cluster</span></code>.KMeans</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-cluster-kmeans">Examples using <code class="docutils literal"><span class="pre">sklearn.cluster.KMeans</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-cluster-kmeans">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cluster</span></code></a>.KMeans<a class="headerlink" href="#sklearn-cluster-kmeans" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.cluster.KMeans">
+<em class="property">class </em><code class="descclassname">sklearn.cluster.</code><code class="descname">KMeans</code><span class="sig-paren">(</span><em>n_clusters=8</em>, <em>init='k-means++'</em>, <em>n_init=10</em>, <em>max_iter=300</em>, <em>tol=0.0001</em>, <em>precompute_distances='auto'</em>, <em>verbose=0</em>, <em>random_state=None</em>, <em>copy_x=True</em>, <em>n_jobs=1</em>, <em>algorithm='auto'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/k_means_.py#L704"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans" title="Permalink to this definition">¶</a></dt>
+<dd><p>K-Means clustering</p>
+<p>Read more in the <a class="reference internal" href="../clustering.html#k-means"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_clusters</strong> : int, optional, default: 8</p>
+<blockquote>
+<div><p>The number of clusters to form as well as the number of
+centroids to generate.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int, default: 300</p>
+<blockquote>
+<div><p>Maximum number of iterations of the k-means algorithm for a
+single run.</p>
+</div></blockquote>
+<p><strong>n_init</strong> : int, default: 10</p>
+<blockquote>
+<div><p>Number of time the k-means algorithm will be run with different
+centroid seeds. The final results will be the best output of
+n_init consecutive runs in terms of inertia.</p>
+</div></blockquote>
+<p><strong>init</strong> : {&#8216;k-means++&#8217;, &#8216;random&#8217; or an ndarray}</p>
+<blockquote>
+<div><p>Method for initialization, defaults to &#8216;k-means++&#8217;:</p>
+<p>&#8216;k-means++&#8217; : selects initial cluster centers for k-mean
+clustering in a smart way to speed up convergence. See section
+Notes in k_init for more details.</p>
+<p>&#8216;random&#8217;: choose k observations (rows) at random from data for
+the initial centroids.</p>
+<p>If an ndarray is passed, it should be of shape (n_clusters, n_features)
+and gives the initial centers.</p>
+</div></blockquote>
+<p><strong>algorithm</strong> : &#8220;auto&#8221;, &#8220;full&#8221; or &#8220;elkan&#8221;, default=&#8221;auto&#8221;</p>
+<blockquote>
+<div><p>K-means algorithm to use. The classical EM-style algorithm is &#8220;full&#8221;.
+The &#8220;elkan&#8221; variation is more efficient by using the triangle
+inequality, but currently doesn&#8217;t support sparse data. &#8220;auto&#8221; chooses
+&#8220;elkan&#8221; for dense data and &#8220;full&#8221; for sparse data.</p>
+</div></blockquote>
+<p><strong>precompute_distances</strong> : {&#8216;auto&#8217;, True, False}</p>
+<blockquote>
+<div><p>Precompute distances (faster but takes more memory).</p>
+<p>&#8216;auto&#8217; : do not precompute distances if n_samples * n_clusters &gt; 12
+million. This corresponds to about 100MB overhead per job using
+double precision.</p>
+<p>True : always precompute distances</p>
+<p>False : never precompute distances</p>
+</div></blockquote>
+<p><strong>tol</strong> : float, default: 1e-4</p>
+<blockquote>
+<div><p>Relative tolerance with regards to inertia to declare convergence</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : int</p>
+<blockquote>
+<div><p>The number of jobs to use for the computation. This works by computing
+each of the n_init runs in parallel.</p>
+<p>If -1 all CPUs are used. If 1 is given, no parallel computing code is
+used at all, which is useful for debugging. For n_jobs below -1,
+(n_cpus + 1 + n_jobs) are used. Thus for n_jobs = -2, all CPUs but one
+are used.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : integer or numpy.RandomState, optional</p>
+<blockquote>
+<div><p>The generator used to initialize the centers. If an integer is
+given, it fixes the seed. Defaults to the global numpy random
+number generator.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : int, default 0</p>
+<blockquote>
+<div><p>Verbosity mode.</p>
+</div></blockquote>
+<p><strong>copy_x</strong> : boolean, default True</p>
+<blockquote>
+<div><p>When pre-computing distances it is more numerically accurate to center
+the data first.  If copy_x is True, then the original data is not
+modified.  If False, the original data is modified, and put back before
+the function returns, but small numerical differences may be introduced
+by subtracting and then adding the data mean.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>cluster_centers_</strong> : array, [n_clusters, n_features]</p>
+<blockquote>
+<div><p>Coordinates of cluster centers</p>
+</div></blockquote>
+<p><strong>labels_ :</strong> :</p>
+<blockquote>
+<div><p>Labels of each point</p>
+</div></blockquote>
+<p><strong>inertia_</strong> : float</p>
+<blockquote class="last">
+<div><p>Sum of distances of samples to their closest cluster center.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans" title="sklearn.cluster.MiniBatchKMeans"><code class="xref py py-obj docutils literal"><span class="pre">MiniBatchKMeans</span></code></a></dt>
+<dd>Alternative online implementation that does incremental updates of the centers positions using mini-batches. For large scale learning (say n_samples &gt; 10k) MiniBatchKMeans is probably much faster than the default batch implementation.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The k-means problem is solved using Lloyd&#8217;s algorithm.</p>
+<p>The average complexity is given by O(k n T), were n is the number of
+samples and T is the number of iteration.</p>
+<p>The worst case complexity is given by O(n^(k+2/p)) with
+n = n_samples, p = n_features. (D. Arthur and S. Vassilvitskii,
+&#8216;How slow is the k-means method?&#8217; SoCG2006)</p>
+<p>In practice, the k-means algorithm is very fast (one of the fastest
+clustering algorithms available), but it falls in local minima. That&#8217;s why
+it can be useful to restart it several times.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+<span class="go">array([0, 0, 0, 1, 1, 1], dtype=int32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="go">array([0, 1], dtype=int32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
+<span class="go">array([[ 1.,  2.],</span>
+<span class="go">       [ 4.,  2.]])</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.cluster.KMeans.fit" title="sklearn.cluster.KMeans.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
+<td>Compute k-means clustering.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.cluster.KMeans.fit_predict" title="sklearn.cluster.KMeans.fit_predict"><code class="xref py py-obj docutils literal"><span class="pre">fit_predict</span></code></a>(X[,&nbsp;y])</td>
+<td>Compute cluster centers and predict cluster index for each sample.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.cluster.KMeans.fit_transform" title="sklearn.cluster.KMeans.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y])</td>
+<td>Compute clustering and transform X to cluster-distance space.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.cluster.KMeans.get_params" title="sklearn.cluster.KMeans.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.cluster.KMeans.predict" title="sklearn.cluster.KMeans.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X)</td>
+<td>Predict the closest cluster each sample in X belongs to.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.cluster.KMeans.score" title="sklearn.cluster.KMeans.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X[,&nbsp;y])</td>
+<td>Opposite of the value of X on the K-means objective.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.cluster.KMeans.set_params" title="sklearn.cluster.KMeans.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.cluster.KMeans.transform" title="sklearn.cluster.KMeans.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(X[,&nbsp;y])</td>
+<td>Transform X to a cluster-distance space.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.cluster.KMeans.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_clusters=8</em>, <em>init='k-means++'</em>, <em>n_init=10</em>, <em>max_iter=300</em>, <em>tol=0.0001</em>, <em>precompute_distances='auto'</em>, <em>verbose=0</em>, <em>random_state=None</em>, <em>copy_x=True</em>, <em>n_jobs=1</em>, <em>algorithm='auto'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/k_means_.py#L835"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.KMeans.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/k_means_.py#L871"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute k-means clustering.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape=(n_samples, n_features)</p>
+<blockquote class="last">
+<div><p>Training instances to cluster.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.KMeans.fit_predict">
+<code class="descname">fit_predict</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/k_means_.py#L892"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans.fit_predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute cluster centers and predict cluster index for each sample.</p>
+<p>Convenience method; equivalent to calling fit(X) followed by
+predict(X).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.KMeans.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/k_means_.py#L900"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute clustering and transform X to cluster-distance space.</p>
+<p>Equivalent to fit(X).transform(X), but more efficiently implemented.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.KMeans.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.KMeans.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/k_means_.py#L938"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict the closest cluster each sample in X belongs to.</p>
+<p>In the vector quantization literature, <cite>cluster_centers_</cite> is called
+the code book and each value returned by <cite>predict</cite> is the index of
+the closest code in the code book.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>New data to predict.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>labels</strong> : array, shape [n_samples,]</p>
+<blockquote class="last">
+<div><p>Index of the cluster each sample belongs to.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.KMeans.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/k_means_.py#L961"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opposite of the value of X on the K-means objective.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>New data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float</p>
+<blockquote class="last">
+<div><p>Opposite of the value of X on the K-means objective.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.KMeans.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.cluster.KMeans.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cluster/k_means_.py#L912"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cluster.KMeans.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform X to a cluster-distance space.</p>
+<p>In the new space, each dimension is the distance to the cluster
+centers.  Note that even if X is sparse, the array returned by
+<cite>transform</cite> will typically be dense.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>New data to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : array, shape [n_samples, k]</p>
+<blockquote class="last">
+<div><p>X transformed in the new space.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-cluster-kmeans">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.cluster.KMeans</span></code><a class="headerlink" href="#examples-using-sklearn-cluster-kmeans" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="This example is meant to illustrate situations where k-means will produce unintuitive and possi..."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/cluster/plot_kmeans_assumptions.html"><img alt="../../_images/plot_kmeans_assumptions1.png" src="../../_images/plot_kmeans_assumptions1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_kmeans_assumptions.html#example-cluster-plot-kmeans-assumptions-py"><span class="std std-ref">Demonstration of k-means assumptions</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="The classic image processing example, Lena, an 8-bit grayscale bit-depth, 512 x 512 sized image..."><div class="figure" id="id2">
+<a class="reference external image-reference" href="./../../auto_examples/cluster/plot_lena_compress.html"><img alt="../../_images/plot_lena_compress1.png" src="../../_images/plot_lena_compress1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_lena_compress.html#example-cluster-plot-lena-compress-py"><span class="std std-ref">Vector Quantization Example</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="The plots display firstly what a K-means algorithm would yield using three clusters. It is then..."><div class="figure" id="id3">
+<a class="reference external image-reference" href="./../../auto_examples/cluster/plot_cluster_iris.html"><img alt="../../_images/plot_cluster_iris1.png" src="../../_images/plot_cluster_iris1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_cluster_iris.html#example-cluster-plot-cluster-iris-py"><span class="std std-ref">K-means Clustering</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Performs a pixel-wise Vector Quantization (VQ) of an image of the summer palace (China), reduci..."><div class="figure" id="id4">
+<a class="reference external image-reference" href="./../../auto_examples/cluster/plot_color_quantization.html"><img alt="../../_images/plot_color_quantization1.png" src="../../_images/plot_color_quantization1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_color_quantization.html#example-cluster-plot-color-quantization-py"><span class="std std-ref">Color Quantization using K-Means</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Evaluate the ability of k-means initializations strategies to make the algorithm convergence ro..."><div class="figure" id="id5">
+<a class="reference external image-reference" href="./../../auto_examples/cluster/plot_kmeans_stability_low_dim_dense.html"><img alt="../../_images/plot_kmeans_stability_low_dim_dense1.png" src="../../_images/plot_kmeans_stability_low_dim_dense1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_kmeans_stability_low_dim_dense.html#example-cluster-plot-kmeans-stability-low-dim-dense-py"><span class="std std-ref">Empirical evaluation of the impact of k-means initialization</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="In this example we compare the various initialization strategies for K-means in terms of runtim..."><div class="figure" id="id6">
+<a class="reference external image-reference" href="./../../auto_examples/cluster/plot_kmeans_digits.html"><img alt="../../_images/plot_kmeans_digits1.png" src="../../_images/plot_kmeans_digits1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_kmeans_digits.html#example-cluster-plot-kmeans-digits-py"><span class="std std-ref">A demo of K-Means clustering on the handwritten digits data</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="We want to compare the performance of the MiniBatchKMeans and KMeans: the MiniBatchKMeans is fa..."><div class="figure" id="id7">
+<a class="reference external image-reference" href="./../../auto_examples/cluster/plot_mini_batch_kmeans.html"><img alt="../../_images/plot_mini_batch_kmeans1.png" src="../../_images/plot_mini_batch_kmeans1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_mini_batch_kmeans.html#example-cluster-plot-mini-batch-kmeans-py"><span class="std std-ref">Comparison of the K-Means and MiniBatchKMeans clustering algorithms</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Silhouette analysis can be used to study the separation distance between the resulting clusters..."><div class="figure" id="id8">
+<a class="reference external image-reference" href="./../../auto_examples/cluster/plot_kmeans_silhouette_analysis.html"><img alt="../../_images/plot_kmeans_silhouette_analysis1.png" src="../../_images/plot_kmeans_silhouette_analysis1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/cluster/plot_kmeans_silhouette_analysis.html#example-cluster-plot-kmeans-silhouette-analysis-py"><span class="std std-ref">Selecting the number of clusters with silhouette analysis on KMeans clustering</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="This is an example showing how the scikit-learn can be used to cluster documents by topics usin..."><div class="figure" id="id9">
+<a class="reference external image-reference" href="./../../auto_examples/text/document_clustering.html"><img alt="../../_images/document_clustering1.png" src="../../_images/document_clustering1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/document_clustering.html#example-text-document-clustering-py"><span class="std std-ref">Clustering text documents using k-means</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.cluster.KMeans.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.cluster.FeatureAgglomeration.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

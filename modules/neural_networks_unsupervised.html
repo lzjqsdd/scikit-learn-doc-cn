@@ -1,0 +1,249 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>神经网络模型（无监督）(Neural network models (unsupervised)) &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/neural_networks_unsupervised.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">神经网络模型（无监督）(Neural network models (unsupervised))</a><ul>
+<li><a class="reference internal" href="#restricted-boltzmann-machines">受限波尔兹曼机 (Restricted Boltzmann machines)</a><ul>
+<li><a class="reference internal" href="#id1">图模型和参数化</a></li>
+<li><a class="reference internal" href="#id2">伯努利受限玻尔兹曼机</a></li>
+<li><a class="reference internal" href="#sml">随机最大似然学习</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="neural-network-models-unsupervised">
+<span id="neural-networks-unsupervised"></span><h1>神经网络模型（无监督）(Neural network models (unsupervised))<a class="headerlink" href="#neural-network-models-unsupervised" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="restricted-boltzmann-machines">
+<span id="rbm"></span><h2>受限波尔兹曼机 (Restricted Boltzmann machines)<a class="headerlink" href="#restricted-boltzmann-machines" title="Permalink to this headline">¶</a></h2>
+<p>受限波尔兹曼机 (Restricted Boltzmann machines, RBM) 是基于概率模型的无监督非线性特征学习器。当将由一个RBM或者RBM的层次结构所提取的特征传递给一个线性分类器（例如，线性SVM或一个感知器）时，往往能给出很好的结果。</p>
+<p>RBM模型对输入值的概率分布做出假定。目前，scikit-learn仅提供 <a class="reference internal" href="generated/sklearn.neural_network.BernoulliRBM.html#sklearn.neural_network.BernoulliRBM" title="sklearn.neural_network.BernoulliRBM"><code class="xref py py-class docutils literal"><span class="pre">BernoulliRBM</span></code></a> ，它假定输入值只能是二元值或者介于0和1之间的值，来编码特征被激活的概率。</p>
+<p>RBM使用一个特性的图模型来使数据的似然度最大化。其使用的参数学习算法（ <a class="reference internal" href="#sml"><span class="std std-ref">Stochastic
+Maximum Likelihood</span></a> ）能防止代表值与输入值发生过多的偏移，从而使代表值获得一定的正则性。但是，这也使得模型对于较小的数据集效果变差，通常来说，不能用于概率密度估计。</p>
+<p>这种方法被广泛地用于基于独立RBM权重的深度神经网络的初始化。这种方法也被称作无监督预训练。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/neural_networks/plot_rbm_logistic_classification.html"><img alt="modules/../auto_examples/neural_networks/images/sphx_glr_plot_rbm_logistic_classification_001.png" src="modules/../auto_examples/neural_networks/images/sphx_glr_plot_rbm_logistic_classification_001.png" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><span class="xref std std-ref">sphx_glr_auto_examples_neural_networks_plot_rbm_logistic_classification.py</span></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>图模型和参数化<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>一个RBM的图模型是一个全连接的双向的图形。</p>
+<img alt="../_images/rbm_graph.png" class="align-center" src="../_images/rbm_graph.png" />
+<p>节点是随机变量，它们的状态取决于和它们连接的其他节点的状态。所以模型被参数化为各连接的权重，以及每一个可见或隐藏单元的一个截矩项（或称为偏移项）。</p>
+<p>能量方程用来量度一个连接设置的质量好坏。</p>
+<div class="math">
+<p><img src="../_images/math/df25bb39991ae6423d7b0cda4bae7f5475b6240e.png" alt="E(\mathbf{v}, \mathbf{h}) = \sum_i \sum_j w_{ij}v_ih_j + \sum_i b_iv_i
+  + \sum_j c_jh_j"/></p>
+</div><p>上式中， <img class="math" src="../_images/math/c426364a800b8b3ac0709d5582365e0711316e4c.png" alt="\mathbf{b}"/> and <img class="math" src="../_images/math/86c5269f5d1ecdd2c651815e55e2d19febcb5ad4.png" alt="\mathbf{c}"/> 分别为可见层和隐藏层的截矩向量。模型的联合概率用能量来定义：</p>
+<div class="math">
+<p><img src="../_images/math/383caadc7cec723d9573d789e639ad9304e086d3.png" alt="P(\mathbf{v}, \mathbf{h}) = \frac{e^{-E(\mathbf{v}, \mathbf{h})}}{Z}"/></p>
+</div><p>受限波尔兹曼机中的 <em>受限</em> 指的是模型的双向结构，它在隐藏单元或者可见单元之间有直接的连接互动。这就意味着假定以下条件独立性：</p>
+<div class="math">
+<p><img src="../_images/math/84e4e92a838c9c2606e614e21a07db667dffe7dd.png" alt="h_i \bot h_j | \mathbf{v} \\
+v_i \bot v_j | \mathbf{h}"/></p>
+</div><p>这种双向结构能允许使用高效的块吉布斯抽样 (block Gibbs sampling)来进行统计推断。</p>
+</div>
+<div class="section" id="id2">
+<h3>伯努利受限玻尔兹曼机<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>在 <a class="reference internal" href="generated/sklearn.neural_network.BernoulliRBM.html#sklearn.neural_network.BernoulliRBM" title="sklearn.neural_network.BernoulliRBM"><code class="xref py py-class docutils literal"><span class="pre">BernoulliRBM</span></code></a> 中，所有单元都是二元随机单元。这意味着输入数据必须为二元值或者介于0和1之间的实数值。这个0和1之间的实数值代表可见单元被激活的概率。这对于特征识别是一个较好的模型，因为特征识别中我们对像素点是否激活感兴趣。但这个模型不适用于自然场景中的图像，因为背景会导致邻近像素点的深度和倾向会取相同的值。</p>
+<p>每一个单元的条件概率分布由它所接受到的输入的逻辑S形激活函数给出：</p>
+<div class="math">
+<p><img src="../_images/math/0ae6a567590ed7a63b1e86cab2dc037d3e09861b.png" alt="P(v_i=1|\mathbf{h}) = \sigma(\sum_j w_{ij}h_j + b_i) \\
+P(h_i=1|\mathbf{v}) = \sigma(\sum_i w_{ij}v_i + c_j)"/></p>
+</div><p>其中， <img class="math" src="../_images/math/011e5790a6c33043ceadca81d9657dde6c61d769.png" alt="\sigma"/> 是逻辑S形激活函数：</p>
+<div class="math">
+<p><img src="../_images/math/09fc64e9724b4c1ee2ec4c4798456f9b01eff845.png" alt="\sigma(x) = \frac{1}{1 + e^{-x}}"/></p>
+</div></div>
+<div class="section" id="sml">
+<span id="id3"></span><h3>随机最大似然学习<a class="headerlink" href="#sml" title="Permalink to this headline">¶</a></h3>
+<p>在 <a class="reference internal" href="generated/sklearn.neural_network.BernoulliRBM.html#sklearn.neural_network.BernoulliRBM" title="sklearn.neural_network.BernoulliRBM"><code class="xref py py-class docutils literal"><span class="pre">BernoulliRBM</span></code></a> 中执行的训练算法为随机最大似然 (Stochastic Maximum Likelihood, SML) 或者持续对比散度 (Persistent Contrastive Divergence, PCD)。直接最优化最大似然并不可行，因为数据似然的表达式为：</p>
+<div class="math">
+<p><img src="../_images/math/9a1fa677e1f48439082b7d6c27bb597047c37665.png" alt="\log P(v) = \log \sum_h e^{-E(v, h)} - \log \sum_{x, y} e^{-E(x, y)}"/></p>
+</div><p>为了简化，上式中仅包含一个训练样本。对样本的梯度由上式中的两项组成。它们由于各自的符号，通常也被称为正梯度项和负梯度项。在具体执行中，梯度用小批量样本进行估计。</p>
+<p>在最大化log底数似然过程中，正梯度项使模型更偏向于和观测训练数据兼容的隐藏状态。由于RBM的双向结构，正梯度项的计算很高效。但是负梯度项的计算并不容易。其目的是降低模型偏好的联合状态的能量，以此来使模型对数据保真。它可以用块吉布斯抽样算法的马尔科夫链来近似，即 <img class="math" src="../_images/math/8d230554a01423c4c6560104b2918b65607c9406.png" alt="v"/> 和 <img class="math" src="../_images/math/293fb39e1b93282c804a86186e721b32f829f1b2.png" alt="h"/> 在对方条件下迭代抽样，直至马尔科夫链混合。通过这种方式产生的样本有时也被称为虚空粒子。这种方式效率非常低，而且很难判断马尔科夫链是否已经混合。</p>
+<p>对比散度方法建议在较少次的 <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> 次迭代后就停止马尔科夫链，有时迭代甚至仅为一次。这种方法快速且方差较低，但是样本对模型分布的偏移很大。</p>
+<p>持续对比散度用来针对这个问题。不同于每次在需要梯度的时候开始一个新的马尔科夫链，并且仅进行一次吉布斯抽样，在PCD中我们保留一定的马尔科夫链 （虚空粒子），它们在每次权重更新后进行 <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> 步吉布斯抽样。这允许粒子更彻底地探索整个空间。</p>
+<div class="topic">
+<p class="topic-title first">参考文献：</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/fastnc.pdf">&#8220;A fast learning algorithm for deep belief nets&#8221;</a>
+G. Hinton, S. Osindero, Y.-W. Teh, 2006</li>
+<li><a class="reference external" href="http://www.cs.toronto.edu/~tijmen/pcd/pcd.pdf">&#8220;Training Restricted Boltzmann Machines using Approximations to
+the Likelihood Gradient&#8221;</a>
+T. Tieleman, 2008</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/neural_networks_unsupervised.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel rellarge">
+    
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

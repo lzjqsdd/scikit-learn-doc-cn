@@ -1,0 +1,1150 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>Contributing &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="Developer’s Guide" href="index.html" />
+    <link rel="next" title="Developers’ Tips for Debugging" href="debugging.html" />
+    <link rel="prev" title="Developer’s Guide" href="index.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/developers/contributing.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="index.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Developer’s G...
+        </span>
+            <span class="hiddenrellink">
+            Developer’s Guide
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        Developer’s G...
+        </span>
+            <span class="hiddenrellink">
+            Developer’s Guide
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">Contributing</a><ul>
+<li><a class="reference internal" href="#submitting-a-bug-report">Submitting a bug report</a></li>
+<li><a class="reference internal" href="#retrieving-the-latest-code">Retrieving the latest code</a></li>
+<li><a class="reference internal" href="#contributing-code">Contributing code</a><ul>
+<li><a class="reference internal" href="#how-to-contribute">How to contribute</a></li>
+<li><a class="reference internal" href="#easy-issues">Easy Issues</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#testing-and-improving-test-coverage">Testing and improving test coverage</a></li>
+<li><a class="reference internal" href="#developers-web-site">Developers web site</a></li>
+<li><a class="reference internal" href="#issue-tracker-tags">Issue Tracker Tags</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#other-ways-to-contribute">Other ways to contribute</a></li>
+<li><a class="reference internal" href="#coding-guidelines">Coding guidelines</a><ul>
+<li><a class="reference internal" href="#input-validation">Input validation</a></li>
+<li><a class="reference internal" href="#random-numbers">Random Numbers</a></li>
+<li><a class="reference internal" href="#deprecation">Deprecation</a></li>
+<li><a class="reference internal" href="#python-3-x-support">Python 3.x support</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#apis-of-scikit-learn-objects">APIs of scikit-learn objects</a><ul>
+<li><a class="reference internal" href="#different-objects">Different objects</a></li>
+<li><a class="reference internal" href="#estimators">Estimators</a><ul>
+<li><a class="reference internal" href="#instantiation">Instantiation</a></li>
+<li><a class="reference internal" href="#fitting">Fitting</a></li>
+<li><a class="reference internal" href="#estimated-attributes">Estimated Attributes</a></li>
+<li><a class="reference internal" href="#optional-arguments">Optional Arguments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rolling-your-own-estimator">Rolling your own estimator</a><ul>
+<li><a class="reference internal" href="#get-params-and-set-params">get_params and set_params</a></li>
+<li><a class="reference internal" href="#parameters-and-init">Parameters and init</a></li>
+<li><a class="reference internal" href="#cloning">Cloning</a></li>
+<li><a class="reference internal" href="#pipeline-compatibility">Pipeline compatibility</a></li>
+<li><a class="reference internal" href="#estimator-types">Estimator types</a></li>
+<li><a class="reference internal" href="#working-notes">Working notes</a></li>
+<li><a class="reference internal" href="#specific-models">Specific models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="contributing">
+<span id="id1"></span><h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>This project is a community effort, and everyone is welcome to
+contribute.</p>
+<p>The project is hosted on <a class="reference external" href="http://github.com/scikit-learn/scikit-learn">http://github.com/scikit-learn/scikit-learn</a></p>
+<p>Scikit-learn is somewhat <a class="reference internal" href="../faq.html#selectiveness"><span class="std std-ref">selective</span></a> when it comes to
+adding new algorithms, and the best way to contribute and to help the project
+is to start working on known issues.
+See <a class="reference internal" href="#easy-issues"><span class="std std-ref">Easy Issues</span></a> to get started.</p>
+<div class="section" id="submitting-a-bug-report">
+<h2>Submitting a bug report<a class="headerlink" href="#submitting-a-bug-report" title="Permalink to this headline">¶</a></h2>
+<p>In case you experience issues using this package, do not hesitate to submit a
+ticket to the
+<a class="reference external" href="http://github.com/scikit-learn/scikit-learn/issues">Bug Tracker</a>. You are
+also welcome to post feature requests or pull requests.</p>
+</div>
+<div class="section" id="retrieving-the-latest-code">
+<span id="git-repo"></span><h2>Retrieving the latest code<a class="headerlink" href="#retrieving-the-latest-code" title="Permalink to this headline">¶</a></h2>
+<p>We use <a class="reference external" href="http://git-scm.com/">Git</a> for version control and
+<a class="reference external" href="http://github.com/">GitHub</a> for hosting our main repository.</p>
+<p>You can check out the latest sources with the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">/</span><span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>or if you have write privileges:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">/</span><span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>If you run the development version, it is cumbersome to reinstall the
+package each time you update the sources. It is thus preferred that
+you add the scikit-learn directory to your <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> and build the
+extension in place:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_ext</span> <span class="o">--</span><span class="n">inplace</span>
+</pre></div>
+</div>
+<p>Another option is to use the <code class="docutils literal"><span class="pre">develop</span></code> option if you change your code a lot
+and do not want to have to reinstall every time. This basically builds the
+extension in place and creates a link to the development directory (see
+<a class="reference external" href="https://pythonhosted.org/setuptools/setuptools.html#development-mode">the setuptool docs</a>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>if you decide to do that you have to rerun:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_ext</span> <span class="o">--</span><span class="n">inplace</span>
+</pre></div>
+</div>
+<p class="last">every time the source code of a compiled extension is
+changed (for instance when switching branches or pulling changes from upstream).</p>
+</div>
+<p>On Unix-like systems, you can simply type <code class="docutils literal"><span class="pre">make</span></code> in the top-level folder to
+build in-place and launch all the tests. Have a look at the <code class="docutils literal"><span class="pre">Makefile</span></code> for
+additional utilities.</p>
+</div>
+<div class="section" id="contributing-code">
+<h2>Contributing code<a class="headerlink" href="#contributing-code" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>To avoid duplicating work, it is highly advised that you contact the
+developers on the mailing list before starting work on a non-trivial feature.</p>
+<p class="last"><a class="reference external" href="https://lists.sourceforge.net/lists/listinfo/scikit-learn-general">https://lists.sourceforge.net/lists/listinfo/scikit-learn-general</a></p>
+</div>
+<div class="section" id="how-to-contribute">
+<h3>How to contribute<a class="headerlink" href="#how-to-contribute" title="Permalink to this headline">¶</a></h3>
+<p>The preferred way to contribute to scikit-learn is to fork the <a class="reference external" href="http://github.com/scikit-learn/scikit-learn/">main
+repository</a> on GitHub,
+then submit a &#8220;pull request&#8221; (PR):</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first"><a class="reference external" href="https://github.com/signup/free">Create an account</a> on
+GitHub if you do not already have one.</p>
+</li>
+<li><p class="first">Fork the <a class="reference external" href="http://github.com/scikit-learn/scikit-learn">project repository</a>: click on the &#8216;Fork&#8217;
+button near the top of the page. This creates a copy of the code under your
+account on the GitHub server.</p>
+</li>
+<li><p class="first">Clone this copy to your local disk:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git clone git@github.com:YourLogin/scikit-learn.git
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create a branch to hold your changes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git checkout -b my-feature
+</pre></div>
+</div>
+<p>and start making changes. Never work in the <code class="docutils literal"><span class="pre">master</span></code> branch!</p>
+</li>
+<li><p class="first">Work on this copy, on your computer, using Git to do the version
+control. When you&#8217;re done editing, do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git add modified_files
+$ git commit
+</pre></div>
+</div>
+<p>to record your changes in Git, then push them to GitHub with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git push -u origin my-feature
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>Finally, go to the web page of the your fork of the scikit-learn repo,
+and click &#8216;Pull request&#8217; to send your changes to the maintainers for review.
+You may want to consider sending an email to the mailing list for more
+visibility.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In the above setup, your <code class="docutils literal"><span class="pre">origin</span></code> remote repository points to
+YourLogin/scikit-learn.git. If you wish to fetch/merge from the main
+repository instead of your forked one, you will need to add another remote
+to use instead of <code class="docutils literal"><span class="pre">origin</span></code>. If we choose the name <code class="docutils literal"><span class="pre">upstream</span></code> for it, the
+command will be:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span>$ git remote add upstream https://github.com/scikit-learn/scikit-learn.git
+</pre></div>
+</div>
+</div>
+<p>(If any of the above seems like magic to you, then look up the
+<a class="reference external" href="http://git-scm.com/documentation">Git documentation</a> on the web.)</p>
+<p>It is recommended to check that your contribution complies with the following
+rules before submitting a pull request:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Follow the <a class="reference internal" href="#coding-guidelines">coding-guidelines</a> (see below).</p>
+</li>
+<li><p class="first">When applicable, use the Validation tools and other code in the
+<code class="docutils literal"><span class="pre">sklearn.utils</span></code> submodule.  A list of utility routines available
+for developers can be found in the <a class="reference internal" href="utilities.html#developers-utils"><span class="std std-ref">Utilities for Developers</span></a> page.</p>
+</li>
+<li><p class="first">All public methods should have informative docstrings with sample
+usage presented as doctests when appropriate.</p>
+</li>
+<li><p class="first">All other tests pass when everything is rebuilt from scratch. On
+Unix-like systems, check with (from the toplevel source folder):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ make
+</pre></div>
+</div>
+</li>
+<li><p class="first">When adding additional functionality, provide at least one example script
+in the <code class="docutils literal"><span class="pre">examples/</span></code> folder. Have a look at other examples for reference.
+Examples should demonstrate why the new functionality is useful in
+practice and, if possible, compare it to other methods available in
+scikit-learn.</p>
+</li>
+<li><p class="first">At least one paragraph of narrative documentation with links to
+references in the literature (with PDF links when possible) and
+the example. For more details on writing and building the
+documentation, see the <a class="reference internal" href="#contribute-documentation"><span class="std std-ref">Documentation</span></a> section.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>You can also check for common programming errors with the following tools:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Code with a good unittest coverage (at least 90%, better 100%), check
+with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install nose coverage
+$ nosetests --with-coverage path/to/tests_for_package
+</pre></div>
+</div>
+<p>see also <a class="reference internal" href="#testing-coverage"><span class="std std-ref">Testing and improving test coverage</span></a></p>
+</li>
+<li><p class="first">No pyflakes warnings, check with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install pyflakes
+$ pyflakes path/to/module.py
+</pre></div>
+</div>
+</li>
+<li><p class="first">No PEP8 warnings, check with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install pep8
+$ pep8 path/to/module.py
+</pre></div>
+</div>
+</li>
+<li><p class="first">AutoPEP8 can help you fix some of the easy redundant errors:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install autopep8
+$ autopep8 path/to/pep8.py
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<p>Bonus points for contributions that include a performance analysis with
+a benchmark script and profiling output (please report on the mailing
+list or on the GitHub wiki).</p>
+<p>Also check out the <a class="reference internal" href="performance.html#performance-howto"><span class="std std-ref">How to optimize for speed</span></a> guide for more details on profiling
+and Cython optimizations.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The current state of the scikit-learn code base is not compliant with
+all of those guidelines, but we expect that enforcing those constraints
+on all new contributions will get the overall code base quality in the
+right direction.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For two very well documented and more detailed guides on development
+workflow, please pay a visit to the <a class="reference external" href="http://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html">Scipy Development Workflow</a> -
+and the <a class="reference external" href="http://astropy.readthedocs.org/en/latest/development/workflow/development_workflow.html">Astropy Workflow for Developers</a>
+sections.</p>
+</div>
+</div>
+<div class="section" id="easy-issues">
+<span id="id2"></span><h3>Easy Issues<a class="headerlink" href="#easy-issues" title="Permalink to this headline">¶</a></h3>
+<p>A great way to start contributing to scikit-learn is to pick an item from the
+list of <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/labels/Easy">Easy issues</a>
+in the issue tracker. Resolving these issues allow you to start contributing
+to the project without much prior knowledge. Your assistance in this area will
+be greatly appreciated by the more experienced developers as it helps free up
+their time to concentrate on other issues.</p>
+</div>
+<div class="section" id="documentation">
+<span id="contribute-documentation"></span><h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<p>We are glad to accept any sort of documentation: function docstrings,
+reStructuredText documents (like this one), tutorials, etc. reStructuredText
+documents live in the source code repository under the doc/ directory.</p>
+<p>You can edit the documentation using any text editor, and then generate the
+HTML output by typing <code class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></code> from the doc/ directory. Alternatively,
+<code class="docutils literal"><span class="pre">make</span> <span class="pre">html-noplot</span></code> can be used to quickly generate the documentation without
+the example gallery. The resulting HTML files will be placed in _build/html/
+and are viewable in a web browser. See the README file in the doc/ directory
+for more information.</p>
+<p>For building the documentation, you will need <a class="reference external" href="http://sphinx.pocoo.org/">sphinx</a>,
+<a class="reference external" href="http://matplotlib.sourceforge.net/">matplotlib</a> and
+<a class="reference external" href="http://pillow.readthedocs.org/en/latest/">pillow</a>.</p>
+<p><strong>When you are writing documentation</strong>, it is important to keep a good
+compromise between mathematical and algorithmic details, and give
+intuition to the reader on what the algorithm does.</p>
+<p>Basically, to elaborate on the above, it is best to always
+start with a small paragraph with a hand-waving explanation of what the
+method does to the data. Then, it is very helpful
+to point out why the feature is useful and when it should be used -
+the latter also including &#8220;big O&#8221;
+(<img class="math" src="../_images/math/a40fd9733cd91fc744fb0de48c5dfbceb756c241.png" alt="O\left(g\left(n\right)\right)"/>)
+complexities of the algorithm, as opposed to just <em>rules of thumb</em>,
+as the latter can be very machine-dependent.
+If those complexities are not available, then rules of thumb
+may be provided instead.</p>
+<p>Secondly, a generated figure from an example (as mentioned in the previous
+paragraph) should then be included to further provide some
+intuition.</p>
+<p>Next, one or two small code examples to show its use can be added.</p>
+<p>Next, any math and equations, followed by references,
+can be added to further the documentation. Not starting the
+documentation with the maths makes it more friendly towards
+users that are just interested in what the feature will do, as
+opposed to how it works &#8220;under the hood&#8221;.</p>
+<p>Finally, follow the formatting rules below to make it consistently good:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Add &#8220;See also&#8221; in docstrings for related classes/functions.</p>
+</li>
+<li><p class="first">&#8220;See also&#8221; in docstrings should be one line per reference,
+with a colon and an explanation, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">See</span> <span class="n">also</span>
+<span class="o">--------</span>
+<span class="n">SelectKBest</span><span class="p">:</span> <span class="n">Select</span> <span class="n">features</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">k</span> <span class="n">highest</span> <span class="n">scores</span><span class="o">.</span>
+<span class="n">SelectFpr</span><span class="p">:</span> <span class="n">Select</span> <span class="n">features</span> <span class="n">based</span> <span class="n">on</span> <span class="n">a</span> <span class="n">false</span> <span class="n">positive</span> <span class="n">rate</span> <span class="n">test</span><span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For unwritten formatting rules, try to follow existing good works:</p>
+<blockquote>
+<div><ul class="simple">
+<li>For &#8220;References&#8221; in docstrings, see the Silhouette Coefficient
+(<a class="reference internal" href="../modules/generated/sklearn.metrics.silhouette_score.html#sklearn.metrics.silhouette_score" title="sklearn.metrics.silhouette_score"><code class="xref py py-func docutils literal"><span class="pre">sklearn.metrics.silhouette_score</span></code></a>).</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Sphinx version</strong></p>
+<p class="last">While we do our best to have the documentation build under as many
+version of Sphinx as possible, the different versions tend to behave
+slightly differently. To get the best results, you should use version
+1.0.</p>
+</div>
+</div>
+<div class="section" id="testing-and-improving-test-coverage">
+<span id="testing-coverage"></span><h3>Testing and improving test coverage<a class="headerlink" href="#testing-and-improving-test-coverage" title="Permalink to this headline">¶</a></h3>
+<p>High-quality <a class="reference external" href="http://en.wikipedia.org/wiki/Unit_testing">unit testing</a>
+is a corner-stone of the scikit-learn development process. For this
+purpose, we use the <a class="reference external" href="http://nose.readthedocs.org/en/latest/">nose</a>
+package. The tests are functions appropriately named, located in <cite>tests</cite>
+subdirectories, that check the validity of the algorithms and the
+different options of the code.</p>
+<p>The full scikit-learn tests can be run using &#8216;make&#8217; in the root folder.
+Alternatively, running &#8216;nosetests&#8217; in a folder will run all the tests of
+the corresponding subpackages.</p>
+<p>We expect code coverage of new features to be at least around 90%.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Workflow to improve test coverage</strong></p>
+<p>To test code coverage, you need to install the <a class="reference external" href="http://pypi.python.org/pypi/coverage">coverage</a> package in addition to nose.</p>
+<ol class="last arabic simple">
+<li>Run &#8216;make test-coverage&#8217;. The output lists for each file the line
+numbers that are not tested.</li>
+<li>Find a low hanging fruit, looking at which lines are not tested,
+write or adapt a test specifically for these lines.</li>
+<li>Loop.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="developers-web-site">
+<h3>Developers web site<a class="headerlink" href="#developers-web-site" title="Permalink to this headline">¶</a></h3>
+<p>More information can be found on the <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/wiki">developer&#8217;s wiki</a>.</p>
+</div>
+<div class="section" id="issue-tracker-tags">
+<h3>Issue Tracker Tags<a class="headerlink" href="#issue-tracker-tags" title="Permalink to this headline">¶</a></h3>
+<p>All issues and pull requests on the
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">Github issue tracker</a>
+should have (at least) one of the following tags:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Bug / Crash:</th><td class="field-body">Something is happening that clearly shouldn&#8217;t happen.
+Wrong results as well as unexpected errors from estimators go here.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Cleanup / Enhancement:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">Improving performance, usability, consistency.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Documentation:</th><td class="field-body">Missing, incorrect or sub-standard documentations and examples.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">New Feature:</th><td class="field-body">Feature requests and pull requests implementing a new feature.</td>
+</tr>
+</tbody>
+</table>
+<p>There are two other tags to help new contributors:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Easy:</th><td class="field-body">This issue can be tackled by anyone, no experience needed.
+Ask for help if the formulation is unclear.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Moderate:</th><td class="field-body">Might need some knowledge of machine learning or the package,
+but is still approachable for someone new to the project.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="other-ways-to-contribute">
+<h2>Other ways to contribute<a class="headerlink" href="#other-ways-to-contribute" title="Permalink to this headline">¶</a></h2>
+<p>Code is not the only way to contribute to scikit-learn. For instance,
+documentation is also a very important part of the project and often
+doesn&#8217;t get as much attention as it deserves. If you find a typo in
+the documentation, or have made improvements, do not hesitate to send
+an email to the mailing list or submit a GitHub pull request. Full
+documentation can be found under the doc/ directory.</p>
+<p>It also helps us if you spread the word: reference the project from your blog
+and articles, link to it from your website, or simply say &#8220;I use it&#8221;:</p>
+<script type="text/javascript" src="http://www.ohloh.net/p/480792/widgets/project_users.js?style=rainbow"></script></div>
+<div class="section" id="coding-guidelines">
+<span id="id4"></span><h2>Coding guidelines<a class="headerlink" href="#coding-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>The following are some guidelines on how new code should be written. Of
+course, there are special cases and there will be exceptions to these
+rules. However, following these rules when submitting new code makes
+the review easier so new code can be integrated in less time.</p>
+<p>Uniformly formatted code makes it easier to share code ownership. The
+scikit-learn project tries to closely follow the official Python guidelines
+detailed in <a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">PEP8</a> that
+detail how code should be formatted and indented. Please read it and
+follow it.</p>
+<p>In addition, we add the following guidelines:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Use underscores to separate words in non class names: <code class="docutils literal"><span class="pre">n_samples</span></code>
+rather than <code class="docutils literal"><span class="pre">nsamples</span></code>.</li>
+<li>Avoid multiple statements on one line. Prefer a line return after
+a control flow statement (<code class="docutils literal"><span class="pre">if</span></code>/<code class="docutils literal"><span class="pre">for</span></code>).</li>
+<li>Use relative imports for references inside scikit-learn.</li>
+<li>Unit tests are an exception to the previous rule;
+they should use absolute imports, exactly as client code would.
+A corollary is that, if <code class="docutils literal"><span class="pre">sklearn.foo</span></code> exports a class or function
+that is implemented in <code class="docutils literal"><span class="pre">sklearn.foo.bar.baz</span></code>,
+the test should import it from <code class="docutils literal"><span class="pre">sklearn.foo</span></code>.</li>
+<li><strong>Please don&#8217;t use</strong> <code class="docutils literal"><span class="pre">import</span> <span class="pre">*</span></code> <strong>in any case</strong>. It is considered harmful
+by the <a class="reference external" href="http://docs.python.org/howto/doanddont.html#from-module-import">official Python recommendations</a>.
+It makes the code harder to read as the origin of symbols is no
+longer explicitly referenced, but most important, it prevents
+using a static analysis tool like <a class="reference external" href="http://www.divmod.org/trac/wiki/DivmodPyflakes">pyflakes</a> to automatically
+find bugs in scikit-learn.</li>
+<li>Use the <a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">numpy docstring standard</a>
+in all your docstrings.</li>
+</ul>
+</div></blockquote>
+<p>A good example of code that we like can be found <a class="reference external" href="https://svn.enthought.com/enthought/browser/sandbox/docs/coding_standard.py">here</a>.</p>
+<div class="section" id="input-validation">
+<h3>Input validation<a class="headerlink" href="#input-validation" title="Permalink to this headline">¶</a></h3>
+<p>The module <a class="reference internal" href="../modules/classes.html#module-sklearn.utils" title="sklearn.utils"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.utils</span></code></a> contains various functions for doing input
+validation and conversion. Sometimes, <code class="docutils literal"><span class="pre">np.asarray</span></code> suffices for validation;
+do <em>not</em> use <code class="docutils literal"><span class="pre">np.asanyarray</span></code> or <code class="docutils literal"><span class="pre">np.atleast_2d</span></code>, since those let NumPy&#8217;s
+<code class="docutils literal"><span class="pre">np.matrix</span></code> through, which has a different API
+(e.g., <code class="docutils literal"><span class="pre">*</span></code> means dot product on <code class="docutils literal"><span class="pre">np.matrix</span></code>,
+but Hadamard product on <code class="docutils literal"><span class="pre">np.ndarray</span></code>).</p>
+<p>In other cases, be sure to call <code class="xref py py-func docutils literal"><span class="pre">check_array</span></code> on any array-like argument
+passed to a scikit-learn API function. The exact parameters to use depends
+mainly on whether and which <code class="docutils literal"><span class="pre">scipy.sparse</span></code> matrices must be accepted.</p>
+<p>For more information, refer to the <a class="reference internal" href="utilities.html#developers-utils"><span class="std std-ref">Utilities for Developers</span></a> page.</p>
+</div>
+<div class="section" id="random-numbers">
+<h3>Random Numbers<a class="headerlink" href="#random-numbers" title="Permalink to this headline">¶</a></h3>
+<p>If your code depends on a random number generator, do not use
+<code class="docutils literal"><span class="pre">numpy.random.random()</span></code> or similar routines.  To ensure
+repeatability in error checking, the routine should accept a keyword
+<code class="docutils literal"><span class="pre">random_state</span></code> and use this to construct a
+<code class="docutils literal"><span class="pre">numpy.random.RandomState</span></code> object.
+See <a class="reference internal" href="../modules/generated/sklearn.utils.check_random_state.html#sklearn.utils.check_random_state" title="sklearn.utils.check_random_state"><code class="xref py py-func docutils literal"><span class="pre">sklearn.utils.check_random_state</span></code></a> in <a class="reference internal" href="utilities.html#developers-utils"><span class="std std-ref">Utilities for Developers</span></a>.</p>
+<p>Here&#8217;s a simple example of code using some of the above guidelines:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">check_random_state</span>
+
+<span class="k">def</span> <span class="nf">choose_random_sample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Choose a random point from X</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X : array-like, shape = (n_samples, n_features)</span>
+<span class="sd">        array representing the data</span>
+<span class="sd">    random_state : RandomState or an int seed (0 by default)</span>
+<span class="sd">        A random number generator instance to define the state of the</span>
+<span class="sd">        random permutations generator.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    x : numpy array, shape = (n_features,)</span>
+<span class="sd">        A random point selected from X</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">random_state</span> <span class="o">=</span> <span class="n">check_random_state</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">random_state</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If you use randomness in an estimator instead of a freestanding function,
+some additional guidelines apply.</p>
+<p>First off, the estimator should take a <code class="docutils literal"><span class="pre">random_state</span></code> argument to its
+<code class="docutils literal"><span class="pre">__init__</span></code> with a default value of <code class="docutils literal"><span class="pre">None</span></code>.
+It should store that argument&#8217;s value, <strong>unmodified</strong>,
+in an attribute <code class="docutils literal"><span class="pre">random_state</span></code>.
+<code class="docutils literal"><span class="pre">fit</span></code> can call <code class="docutils literal"><span class="pre">check_random_state</span></code> on that attribute
+to get an actual random number generator.
+If, for some reason, randomness is needed after <code class="docutils literal"><span class="pre">fit</span></code>,
+the RNG should be stored in an attribute <code class="docutils literal"><span class="pre">random_state_</span></code>.
+The following example should make this clear:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GaussianNoise</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This estimator ignores its input and returns random Gaussian noise.</span>
+
+<span class="sd">    It also does not adhere to all scikit-learn conventions,</span>
+<span class="sd">    but showcases how to handle randomness.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
+
+    <span class="c1"># the arguments are ignored anyway, so we make them optional</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_state_</span> <span class="o">=</span> <span class="n">check_random_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_state_</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_components</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The reason for this setup is reproducibility:
+when an estimator is <code class="docutils literal"><span class="pre">fit</span></code> twice to the same data,
+it should produce an identical model both times,
+hence the validation in <code class="docutils literal"><span class="pre">fit</span></code>, not <code class="docutils literal"><span class="pre">__init__</span></code>.</p>
+</div>
+<div class="section" id="deprecation">
+<h3>Deprecation<a class="headerlink" href="#deprecation" title="Permalink to this headline">¶</a></h3>
+<p>If any publicly accessible method, function, attribute or parameter
+is renamed, we still support the old one for two releases and issue
+a deprecation warning when it is called/passed/accessed.
+E.g., if the function <code class="docutils literal"><span class="pre">zero_one</span></code> is renamed to <code class="docutils literal"><span class="pre">zero_one_loss</span></code>,
+we add the decorator <code class="docutils literal"><span class="pre">deprecated</span></code> (from <code class="docutils literal"><span class="pre">sklearn.utils</span></code>)
+to <code class="docutils literal"><span class="pre">zero_one</span></code> and call <code class="docutils literal"><span class="pre">zero_one_loss</span></code> from that function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">..utils</span> <span class="k">import</span> <span class="n">deprecated</span>
+
+<span class="k">def</span> <span class="nf">zero_one_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># actual implementation</span>
+    <span class="k">pass</span>
+
+<span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;Function &#39;zero_one&#39; has been renamed to &quot;</span>
+            <span class="s2">&quot;&#39;zero_one_loss&#39; and will be removed in release 0.15.&quot;</span>
+            <span class="s2">&quot;Default behavior is changed from &#39;normalize=False&#39; to &quot;</span>
+            <span class="s2">&quot;&#39;normalize=True&#39;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">zero_one</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">zero_one_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">normalize</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If an attribute is to be deprecated,
+use the decorator <code class="docutils literal"><span class="pre">deprecated</span></code> on a property.
+E.g., renaming an attribute <code class="docutils literal"><span class="pre">labels_</span></code> to <code class="docutils literal"><span class="pre">classes_</span></code> can be done as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@property</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;Attribute labels_ is deprecated and &quot;</span>
+            <span class="s2">&quot;will be removed in 0.15. Use &#39;classes_&#39; instead&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">labels_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span>
+</pre></div>
+</div>
+<p>If a parameter has to be deprecated, use <code class="docutils literal"><span class="pre">DeprecationWarning</span></code> appropriately.
+In following example, k is deprecated and renamed to n_clusters:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;&#39;k&#39; was renamed to n_clusters and will &quot;</span>
+                      <span class="s2">&quot;be removed in 0.15.&quot;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">n_clusters</span> <span class="o">=</span> <span class="n">k</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="python-3-x-support">
+<h3>Python 3.x support<a class="headerlink" href="#python-3-x-support" title="Permalink to this headline">¶</a></h3>
+<p>All scikit-learn code should work unchanged in both Python 2.[67]
+and 3.2 or newer. Since Python 3.x is not backwards compatible,
+that may require changes to code and it certainly requires testing
+on both 2.6 or 2.7, and 3.2 or newer.</p>
+<p>For most numerical algorithms, Python 3.x support is easy:
+just remember that <code class="docutils literal"><span class="pre">print</span></code> is a function and
+integer division is written <code class="docutils literal"><span class="pre">//</span></code>.
+String handling has been overhauled, though, as have parts of
+the Python standard library.
+The <a class="reference external" href="http://pythonhosted.org/six/">six</a> package helps with
+cross-compatibility and is included in scikit-learn as
+<code class="docutils literal"><span class="pre">sklearn.externals.six</span></code>.</p>
+</div>
+</div>
+<div class="section" id="apis-of-scikit-learn-objects">
+<h2>APIs of scikit-learn objects<a class="headerlink" href="#apis-of-scikit-learn-objects" title="Permalink to this headline">¶</a></h2>
+<p>To have a uniform API, we try to have a common basic API for all the
+objects. In addition, to avoid the proliferation of framework code, we
+try to adopt simple conventions and limit to a minimum the number of
+methods an object must implement.</p>
+<div class="section" id="different-objects">
+<h3>Different objects<a class="headerlink" href="#different-objects" title="Permalink to this headline">¶</a></h3>
+<p>The main objects in scikit-learn are (one class can implement
+multiple interfaces):</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Estimator:</th><td class="field-body"><p class="first">The base object, implements a <code class="docutils literal"><span class="pre">fit</span></code> method to learn from data, either:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">estimator</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">estimator</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Predictor:</th><td class="field-body"><p class="first">For supervised learning, or some unsupervised problems, implements:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Classification algorithms usually also offer a way to quantify certainty
+of a prediction, either using <code class="docutils literal"><span class="pre">decision_function</span></code> or <code class="docutils literal"><span class="pre">predict_proba</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">probability</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Transformer:</th><td class="field-body"><p class="first">For filtering or modifying the data, in a supervised or unsupervised
+way, implements:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">new_data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When fitting and transforming can be performed much more efficiently
+together than separately, implements:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">new_data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Model:</th><td class="field-body"><p class="first">A model that can give a <a class="reference external" href="https://en.wikipedia.org/wiki/Goodness_of_fit">goodness of fit</a>
+measure or a likelihood of unseen data, implements (higher is better):</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="estimators">
+<h3>Estimators<a class="headerlink" href="#estimators" title="Permalink to this headline">¶</a></h3>
+<p>The API has one predominant object: the estimator. A estimator is an
+object that fits a model based on some training data and is capable of
+inferring some properties on new data. It can be, for instance, a
+classifier or a regressor. All estimators implement the fit method:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All built-in estimators also have a <code class="docutils literal"><span class="pre">set_params</span></code> method, which sets
+data-independent parameters (overriding previous parameter values passed
+to <code class="docutils literal"><span class="pre">__init__</span></code>).</p>
+<p>All estimators in the main scikit-learn codebase should inherit from
+<code class="docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>.</p>
+<div class="section" id="instantiation">
+<h4>Instantiation<a class="headerlink" href="#instantiation" title="Permalink to this headline">¶</a></h4>
+<p>This concerns the creation of an object. The object&#8217;s <code class="docutils literal"><span class="pre">__init__</span></code> method
+might accept constants as arguments that determine the estimator&#8217;s behavior
+(like the C constant in SVMs). It should not, however, take the actual training
+data as an argument, as this is left to the <code class="docutils literal"><span class="pre">fit()</span></code> method:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">clf2</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">2.3</span><span class="p">)</span>
+<span class="n">clf3</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="c1"># WRONG!</span>
+</pre></div>
+</div>
+<p>The arguments accepted by <code class="docutils literal"><span class="pre">__init__</span></code> should all be keyword arguments
+with a default value. In other words, a user should be able to instantiate
+an estimator without passing any arguments to it. The arguments should all
+correspond to hyperparameters describing the model or the optimisation
+problem the estimator tries to solve. These initial arguments (or parameters)
+are always remembered by the estimator.
+Also note that they should not be documented under the &#8220;Attributes&#8221; section,
+but rather under the &#8220;Parameters&#8221; section for that estimator.</p>
+<p>In addition, <strong>every keyword argument accepted by</strong> <code class="docutils literal"><span class="pre">__init__</span></code> <strong>should
+correspond to an attribute on the instance</strong>. Scikit-learn relies on this to
+find the relevant attributes to set on an estimator when doing model selection.</p>
+<p>To summarize, an <code class="docutils literal"><span class="pre">__init__</span></code> should look like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">param1</span> <span class="o">=</span> <span class="n">param1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">param2</span> <span class="o">=</span> <span class="n">param2</span>
+</pre></div>
+</div>
+<p>There should be no logic, not even input validation,
+and the parameters should not be changed.
+The corresponding logic should be put where the parameters are used,
+typically in <code class="docutils literal"><span class="pre">fit</span></code>.
+The following is wrong:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">param3</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="c1"># WRONG: parameters should not be modified</span>
+    <span class="k">if</span> <span class="n">param1</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">param2</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">param1</span> <span class="o">=</span> <span class="n">param1</span>
+    <span class="c1"># WRONG: the object&#39;s attributes should have exactly the name of</span>
+    <span class="c1"># the argument in the constructor</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">param3</span> <span class="o">=</span> <span class="n">param2</span>
+</pre></div>
+</div>
+<p>The reason for postponing the validation is that the same validation
+would have to be performed in <code class="docutils literal"><span class="pre">set_params</span></code>,
+which is used in algorithms like <code class="docutils literal"><span class="pre">GridSearchCV</span></code>.</p>
+</div>
+<div class="section" id="fitting">
+<h4>Fitting<a class="headerlink" href="#fitting" title="Permalink to this headline">¶</a></h4>
+<p>The next thing you will probably want to do is to estimate some
+parameters in the model. This is implemented in the <code class="docutils literal"><span class="pre">fit()</span></code> method.</p>
+<p>The <code class="docutils literal"><span class="pre">fit()</span></code> method takes the training data as arguments, which can be one
+array in the case of unsupervised learning, or two arrays in the case
+of supervised learning.</p>
+<p>Note that the model is fitted using X and y, but the object holds no
+reference to X and y. There are, however, some exceptions to this, as in
+the case of precomputed kernels where this data must be stored for use by
+the predict method.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameters</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>X</td>
+<td>array-like, with shape = [N, D], where N is the number
+of samples and D is the number of features.</td>
+</tr>
+<tr class="row-odd"><td>y</td>
+<td>array, with shape = [N], where N is the number of
+samples.</td>
+</tr>
+<tr class="row-even"><td>kwargs</td>
+<td>optional data-dependent parameters.</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal"><span class="pre">X.shape[0]</span></code> should be the same as <code class="docutils literal"><span class="pre">y.shape[0]</span></code>. If this requisite
+is not met, an exception of type <code class="docutils literal"><span class="pre">ValueError</span></code> should be raised.</p>
+<p><code class="docutils literal"><span class="pre">y</span></code> might be ignored in the case of unsupervised learning. However, to
+make it possible to use the estimator as part of a pipeline that can
+mix both supervised and unsupervised transformers, even unsupervised
+estimators need to accept a <code class="docutils literal"><span class="pre">y=None</span></code> keyword argument in
+the second position that is just ignored by the estimator.
+For the same reason, <code class="docutils literal"><span class="pre">fit_predict</span></code>, <code class="docutils literal"><span class="pre">fit_transform</span></code>, <code class="docutils literal"><span class="pre">score</span></code>
+and <code class="docutils literal"><span class="pre">partial_fit</span></code> methods need to accept a <code class="docutils literal"><span class="pre">y</span></code> argument in
+the second place if they are implemented.</p>
+<p>The method should return the object (<code class="docutils literal"><span class="pre">self</span></code>). This pattern is useful
+to be able to implement quick one liners in an IPython session such as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">y_predicted</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Depending on the nature of the algorithm, <code class="docutils literal"><span class="pre">fit</span></code> can sometimes also
+accept additional keywords arguments. However, any parameter that can
+have a value assigned prior to having access to the data should be an
+<code class="docutils literal"><span class="pre">__init__</span></code> keyword argument. <strong>fit parameters should be restricted
+to directly data dependent variables</strong>. For instance a Gram matrix or
+an affinity matrix which are precomputed from the data matrix <code class="docutils literal"><span class="pre">X</span></code> are
+data dependent. A tolerance stopping criterion <code class="docutils literal"><span class="pre">tol</span></code> is not directly
+data dependent (although the optimal value according to some scoring
+function probably is).</p>
+</div>
+<div class="section" id="estimated-attributes">
+<h4>Estimated Attributes<a class="headerlink" href="#estimated-attributes" title="Permalink to this headline">¶</a></h4>
+<p>Attributes that have been estimated from the data must always have a name
+ending with trailing underscore, for example the coefficients of
+some regression estimator would be stored in a <code class="docutils literal"><span class="pre">coef_</span></code> attribute after
+<code class="docutils literal"><span class="pre">fit</span></code> has been called.</p>
+<p>The last-mentioned attributes are expected to be overridden when
+you call <code class="docutils literal"><span class="pre">fit</span></code> a second time without taking any previous value into
+account: <strong>fit should be idempotent</strong>.</p>
+</div>
+<div class="section" id="optional-arguments">
+<h4>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h4>
+<p>In iterative algorithms, the number of iterations should be specified by
+an integer called <code class="docutils literal"><span class="pre">n_iter</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="rolling-your-own-estimator">
+<h2>Rolling your own estimator<a class="headerlink" href="#rolling-your-own-estimator" title="Permalink to this headline">¶</a></h2>
+<p>If you want to implement a new estimator that is scikit-learn-compatible,
+whether it is just for you or for contributing it to sklearn, there are several
+internals of scikit-learn that you should be aware of in addition to the
+sklearn API outlined above. You can check whether your estimator
+adheres to the scikit-learn interface and standards by running
+<code class="xref py py-func docutils literal"><span class="pre">utils.estimator_checks.check_estimator</span></code> on the class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils.estimator_checks</span> <span class="k">import</span> <span class="n">check_estimator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">LinearSVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_estimator</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">)</span>  <span class="c1"># passes</span>
+</pre></div>
+</div>
+<p>The main motivation to make a class compatible to the scikit-learn estimator
+interface might be that you want to use it together with model assessment and
+selection tools such as <a class="reference internal" href="../modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV" title="sklearn.grid_search.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">grid_search.GridSearchCV</span></code></a>.</p>
+<p>For this to work, you need to implement the following interface.
+If a dependency on scikit-learn is okay for your code,
+you can prevent a lot of boilerplate code
+by deriving a class from <code class="docutils literal"><span class="pre">BaseEstimator</span></code>
+and optionally the mixin classes in <code class="docutils literal"><span class="pre">sklearn.base</span></code>.
+E.g., here&#8217;s a custom classifier:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MajorityClassifier</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="sd">&quot;&quot;&quot;Predicts the majority class of its training data.&quot;&quot;&quot;</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">pass</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">([</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">],</span>
+<span class="gp">... </span>                                           <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">majority_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">indices</span><span class="p">))</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">majority_</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="section" id="get-params-and-set-params">
+<h3>get_params and set_params<a class="headerlink" href="#get-params-and-set-params" title="Permalink to this headline">¶</a></h3>
+<p>All sklearn estimator have <code class="docutils literal"><span class="pre">get_params</span></code> and <code class="docutils literal"><span class="pre">set_params</span></code> functions.
+The <code class="docutils literal"><span class="pre">get_params</span></code> function takes no arguments and returns a dict of the
+<code class="docutils literal"><span class="pre">__init__</span></code> parameters of the estimator, together with their values.
+It must take one keyword argument, <code class="docutils literal"><span class="pre">deep</span></code>,
+which receives a boolean value that determines
+whether the method should return the parameters of sub-estimators
+(for most estimators, this can be ignored).
+The default value for <code class="docutils literal"><span class="pre">deep</span></code> should be true.</p>
+<p>The <code class="docutils literal"><span class="pre">set_params</span></code> on the other hand takes as input a dict of the form
+<code class="docutils literal"><span class="pre">'parameter':</span> <span class="pre">value</span></code> and sets the parameter of the estimator using this dict.
+Return value must be estimator itself.</p>
+<p>While the <code class="docutils literal"><span class="pre">get_params</span></code> mechanism is not essential (see <a class="reference internal" href="#cloning"><span class="std std-ref">Cloning</span></a> below),
+the <code class="docutils literal"><span class="pre">set_params</span></code> function is necessary as it is used to set parameters during
+grid searches.</p>
+<p>The easiest way to implement these functions, and to get a sensible
+<code class="docutils literal"><span class="pre">__repr__</span></code> method, is to inherit from <code class="docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>. If you
+do not want to make your code dependent on scikit-learn, the easiest way to
+implement the interface is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># suppose this estimator has parameters &quot;alpha&quot; and &quot;recursive&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="s2">&quot;recursive&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">recursive</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">set_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parameters-and-init">
+<h3>Parameters and init<a class="headerlink" href="#parameters-and-init" title="Permalink to this headline">¶</a></h3>
+<p>As <a class="reference internal" href="../modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV" title="sklearn.grid_search.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">grid_search.GridSearchCV</span></code></a> uses <code class="docutils literal"><span class="pre">set_params</span></code>
+to apply parameter setting to estimators,
+it is essential that calling <code class="docutils literal"><span class="pre">set_params</span></code> has the same effect
+as setting parameters using the <code class="docutils literal"><span class="pre">__init__</span></code> method.
+The easiest and recommended way to accomplish this is to
+<strong>not do any parameter validation in</strong> <code class="docutils literal"><span class="pre">__init__</span></code>.
+All logic behind estimator parameters,
+like translating string arguments into functions, should be done in <code class="docutils literal"><span class="pre">fit</span></code>.</p>
+<p>Also it is expected that parameters with trailing <code class="docutils literal"><span class="pre">_</span></code> are <strong>not to be set
+inside the</strong> <code class="docutils literal"><span class="pre">__init__</span></code> <strong>method</strong>. All and only the public attributes set by
+fit have a trailing <code class="docutils literal"><span class="pre">_</span></code>. As a result the existence of parameters with
+trailing <code class="docutils literal"><span class="pre">_</span></code> is used to check if the estimator has been fitted.</p>
+</div>
+<div class="section" id="cloning">
+<span id="id5"></span><h3>Cloning<a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h3>
+<p>For using <code class="xref py py-class docutils literal"><span class="pre">grid_search.GridSearch</span></code> or any functionality of the
+<code class="xref py py-mod docutils literal"><span class="pre">cross_validation</span></code> module, an estimator must support the <code class="docutils literal"><span class="pre">base.clone</span></code>
+function to replicate an estimator.
+This can be done by providing a <code class="docutils literal"><span class="pre">get_params</span></code> method.
+If <code class="docutils literal"><span class="pre">get_params</span></code> is present, then <code class="docutils literal"><span class="pre">clone(estimator)</span></code> will be an instance of
+<code class="docutils literal"><span class="pre">type(estimator)</span></code> on which <code class="docutils literal"><span class="pre">set_params</span></code> has been called with clones of
+the result of <code class="docutils literal"><span class="pre">estimator.get_params()</span></code>.</p>
+<p>Objects that do not provide this method will be deep-copied
+(using the Python standard function <code class="docutils literal"><span class="pre">copy.deepcopy</span></code>)
+if <code class="docutils literal"><span class="pre">safe=False</span></code> is passed to <code class="docutils literal"><span class="pre">clone</span></code>.</p>
+</div>
+<div class="section" id="pipeline-compatibility">
+<h3>Pipeline compatibility<a class="headerlink" href="#pipeline-compatibility" title="Permalink to this headline">¶</a></h3>
+<p>For an estimator to be usable together with <code class="docutils literal"><span class="pre">pipeline.Pipeline</span></code> in any but the
+last step, it needs to provide a <code class="docutils literal"><span class="pre">fit</span></code> or <code class="docutils literal"><span class="pre">fit_transform</span></code> function.
+To be able to evaluate the pipeline on any data but the training set,
+it also needs to provide a <code class="docutils literal"><span class="pre">transform</span></code> function.
+There are no special requirements for the last step in a pipeline, except that
+it has a <code class="docutils literal"><span class="pre">fit</span></code> function. All <code class="docutils literal"><span class="pre">fit</span></code> and <code class="docutils literal"><span class="pre">fit_transform</span></code> functions must
+take arguments <code class="docutils literal"><span class="pre">X,</span> <span class="pre">y</span></code>, even if y is not used. Similarly, for <code class="docutils literal"><span class="pre">score</span></code> to be
+usable, the last step of the pipeline needs to have a <code class="docutils literal"><span class="pre">score</span></code> function that
+accepts an optional <code class="docutils literal"><span class="pre">y</span></code>.</p>
+</div>
+<div class="section" id="estimator-types">
+<h3>Estimator types<a class="headerlink" href="#estimator-types" title="Permalink to this headline">¶</a></h3>
+<p>Some common functionality depends on the kind of estimator passed.
+For example, cross-validation in <a class="reference internal" href="../modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV" title="sklearn.grid_search.GridSearchCV"><code class="xref py py-class docutils literal"><span class="pre">grid_search.GridSearchCV</span></code></a> and
+<a class="reference internal" href="../modules/generated/sklearn.cross_validation.cross_val_score.html#sklearn.cross_validation.cross_val_score" title="sklearn.cross_validation.cross_val_score"><code class="xref py py-func docutils literal"><span class="pre">cross_validation.cross_val_score</span></code></a> defaults to being stratified when used
+on a classifier, but not otherwise. Similarly, scorers for average precision
+that take a continuous prediction need to call <code class="docutils literal"><span class="pre">decision_function</span></code> for classifiers,
+but <code class="docutils literal"><span class="pre">predict</span></code> for regressors. This distinction between classifiers and regressors
+is implemented using the <code class="docutils literal"><span class="pre">_estimator_type</span></code> attribute, which takes a string value.
+It should be <code class="docutils literal"><span class="pre">&quot;classifier&quot;</span></code> for classifiers and <code class="docutils literal"><span class="pre">&quot;regressor&quot;</span></code> for
+regressors and <code class="docutils literal"><span class="pre">&quot;clusterer&quot;</span></code> for clustering methods, to work as expected.
+Inheriting from <code class="docutils literal"><span class="pre">ClassifierMixin</span></code>, <code class="docutils literal"><span class="pre">RegressorMixin</span></code> or <code class="docutils literal"><span class="pre">ClusterMixin</span></code>
+will set the attribute automatically.</p>
+</div>
+<div class="section" id="working-notes">
+<h3>Working notes<a class="headerlink" href="#working-notes" title="Permalink to this headline">¶</a></h3>
+<p>For unresolved issues, TODOs, and remarks on ongoing work, developers are
+advised to maintain notes on the <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/wiki">GitHub wiki</a>.</p>
+</div>
+<div class="section" id="specific-models">
+<h3>Specific models<a class="headerlink" href="#specific-models" title="Permalink to this headline">¶</a></h3>
+<p>Classifiers should accept <code class="docutils literal"><span class="pre">y</span></code> (target) arguments to <code class="docutils literal"><span class="pre">fit</span></code>
+that are sequences (lists, arrays) of either strings or integers.
+They should not assume that the class labels
+are a contiguous range of integers;
+instead, they should store a list of classes
+in a <code class="docutils literal"><span class="pre">classes_</span></code> attribute or property.
+The order of class labels in this attribute
+should match the order in which <code class="docutils literal"><span class="pre">predict_proba</span></code>, <code class="docutils literal"><span class="pre">predict_log_proba</span></code>
+and <code class="docutils literal"><span class="pre">decision_function</span></code> return their values.
+The easiest way to achieve this is to put:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>in <code class="docutils literal"><span class="pre">fit</span></code>.
+This returns a new <code class="docutils literal"><span class="pre">y</span></code> that contains class indexes, rather than labels,
+in the range [0, <code class="docutils literal"><span class="pre">n_classes</span></code>).</p>
+<p>A classifier&#8217;s <code class="docutils literal"><span class="pre">predict</span></code> method should return
+arrays containing class labels from <code class="docutils literal"><span class="pre">classes_</span></code>.
+In a classifier that implements <code class="docutils literal"><span class="pre">decision_function</span></code>,
+this can be achieved with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>In linear models, coefficients are stored in an array called <code class="docutils literal"><span class="pre">coef_</span></code>,
+and the independent term is stored in <code class="docutils literal"><span class="pre">intercept_</span></code>.
+<code class="docutils literal"><span class="pre">sklearn.linear_model.base</span></code> contains a few base classes and mixins
+that implement common linear model patterns.</p>
+<p>The <code class="xref py py-mod docutils literal"><span class="pre">sklearn.utils.multiclass</span></code> module contains useful functions
+for working with multiclass and multilabel problems.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/developers/contributing.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="index.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,521 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.preprocessing.LabelBinarizer &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.preprocessing.LabelEncoder" href="sklearn.preprocessing.LabelEncoder.html" />
+    <link rel="prev" title="sklearn.preprocessing.KernelCenterer" href="sklearn.preprocessing.KernelCenterer.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelBinarizer.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.preprocessing.KernelCenterer.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.prepr...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.preprocessing.KernelCenterer
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.preprocessing</span></code>.LabelBinarizer</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-preprocessing-labelbinarizer">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.preprocessing</span></code></a>.LabelBinarizer<a class="headerlink" href="#sklearn-preprocessing-labelbinarizer" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.preprocessing.LabelBinarizer">
+<em class="property">class </em><code class="descclassname">sklearn.preprocessing.</code><code class="descname">LabelBinarizer</code><span class="sig-paren">(</span><em>neg_label=0</em>, <em>pos_label=1</em>, <em>sparse_output=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/preprocessing/label.py#L177"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.LabelBinarizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Binarize labels in a one-vs-all fashion</p>
+<p>Several regression and binary classification algorithms are
+available in the scikit. A simple way to extend these algorithms
+to the multi-class classification case is to use the so-called
+one-vs-all scheme.</p>
+<p>At learning time, this simply consists in learning one regressor
+or binary classifier per class. In doing so, one needs to convert
+multi-class labels to binary labels (belong or does not belong
+to the class). LabelBinarizer makes this process easy with the
+transform method.</p>
+<p>At prediction time, one assigns the class for which the corresponding
+model gave the greatest confidence. LabelBinarizer makes this easy
+with the inverse_transform method.</p>
+<p>Read more in the <a class="reference internal" href="../preprocessing_targets.html#preprocessing-targets"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>neg_label</strong> : int (default: 0)</p>
+<blockquote>
+<div><p>Value with which negative labels must be encoded.</p>
+</div></blockquote>
+<p><strong>pos_label</strong> : int (default: 1)</p>
+<blockquote>
+<div><p>Value with which positive labels must be encoded.</p>
+</div></blockquote>
+<p><strong>sparse_output</strong> : boolean (default: False)</p>
+<blockquote>
+<div><p>True if the returned array from transform is desired to be in sparse
+CSR format.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>classes_</strong> : array of shape [n_class]</p>
+<blockquote>
+<div><p>Holds the label for each class.</p>
+</div></blockquote>
+<p><strong>y_type_</strong> : str,</p>
+<blockquote>
+<div><p>Represents the type of the target data as evaluated by
+utils.multiclass.type_of_target. Possible type are &#8216;continuous&#8217;,
+&#8216;continuous-multioutput&#8217;, &#8216;binary&#8217;, &#8216;multiclass&#8217;,
+&#8216;multiclass-multioutput&#8217;, &#8216;multilabel-indicator&#8217;, and &#8216;unknown&#8217;.</p>
+</div></blockquote>
+<p><strong>sparse_input_</strong> : boolean,</p>
+<blockquote class="last">
+<div><p>True if the input data to transform is given as a sparse matrix, False
+otherwise.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="sklearn.preprocessing.label_binarize.html#sklearn.preprocessing.label_binarize" title="sklearn.preprocessing.label_binarize"><code class="xref py py-obj docutils literal"><span class="pre">label_binarize</span></code></a></dt>
+<dd>function to perform the transform operation of LabelBinarizer with fixed classes.</dd>
+<dt><a class="reference internal" href="sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder" title="sklearn.preprocessing.OneHotEncoder"><code class="xref py py-obj docutils literal"><span class="pre">sklearn.preprocessing.OneHotEncoder</span></code></a></dt>
+<dd>encode categorical integer features using a one-hot aka one-of-K scheme.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">preprocessing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelBinarizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">LabelBinarizer(neg_label=0, pos_label=1, sparse_output=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">classes_</span>
+<span class="go">array([1, 2, 4, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="go">array([[1, 0, 0, 0],</span>
+<span class="go">       [0, 0, 0, 1]])</span>
+</pre></div>
+</div>
+<p>Binary targets transform to a column vector</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelBinarizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;yes&#39;</span><span class="p">])</span>
+<span class="go">array([[1],</span>
+<span class="go">       [0],</span>
+<span class="go">       [0],</span>
+<span class="go">       [1]])</span>
+</pre></div>
+</div>
+<p>Passing a 2D matrix for multilabel classification</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]))</span>
+<span class="go">LabelBinarizer(neg_label=0, pos_label=1, sparse_output=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">classes_</span>
+<span class="go">array([0, 1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lb</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">array([[1, 0, 0],</span>
+<span class="go">       [0, 1, 0],</span>
+<span class="go">       [0, 0, 1],</span>
+<span class="go">       [0, 1, 0]])</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.preprocessing.LabelBinarizer.fit" title="sklearn.preprocessing.LabelBinarizer.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(y)</td>
+<td>Fit label binarizer</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.preprocessing.LabelBinarizer.fit_transform" title="sklearn.preprocessing.LabelBinarizer.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y])</td>
+<td>Fit to data, then transform it.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.preprocessing.LabelBinarizer.get_params" title="sklearn.preprocessing.LabelBinarizer.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.preprocessing.LabelBinarizer.inverse_transform" title="sklearn.preprocessing.LabelBinarizer.inverse_transform"><code class="xref py py-obj docutils literal"><span class="pre">inverse_transform</span></code></a>(Y[,&nbsp;threshold])</td>
+<td>Transform binary labels back to multi-class labels</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.preprocessing.LabelBinarizer.set_params" title="sklearn.preprocessing.LabelBinarizer.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.preprocessing.LabelBinarizer.transform" title="sklearn.preprocessing.LabelBinarizer.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(y)</td>
+<td>Transform multi-class labels to binary labels</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.preprocessing.LabelBinarizer.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>neg_label=0</em>, <em>pos_label=1</em>, <em>sparse_output=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/preprocessing/label.py#L268"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.LabelBinarizer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.preprocessing.LabelBinarizer.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/preprocessing/label.py#L283"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.LabelBinarizer.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit label binarizer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>y</strong> : numpy array of shape (n_samples,) or (n_samples, n_classes)</p>
+<blockquote>
+<div><p>Target values. The 2-d matrix should only contain 0 and 1,
+represents multilabel classification.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> : returns an instance of self.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.preprocessing.LabelBinarizer.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L470"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.LabelBinarizer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to X and y with optional parameters fit_params
+and returns a transformed version of X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : numpy array of shape [n_samples, n_features]</p>
+<blockquote>
+<div><p>Training set.</p>
+</div></blockquote>
+<p><strong>y</strong> : numpy array of shape [n_samples]</p>
+<blockquote>
+<div><p>Target values.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : numpy array of shape [n_samples, n_features_new]</p>
+<blockquote class="last">
+<div><p>Transformed array.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.preprocessing.LabelBinarizer.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.LabelBinarizer.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.preprocessing.LabelBinarizer.inverse_transform">
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>Y</em>, <em>threshold=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/preprocessing/label.py#L337"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.LabelBinarizer.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform binary labels back to multi-class labels</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>Y</strong> : numpy array or sparse matrix with shape [n_samples, n_classes]</p>
+<blockquote>
+<div><p>Target values. All sparse matrices are converted to CSR before
+inverse transformation.</p>
+</div></blockquote>
+<p><strong>threshold</strong> : float or None</p>
+<blockquote>
+<div><p>Threshold used in the binary and multi-label cases.</p>
+<dl class="docutils">
+<dt>Use 0 when:</dt>
+<dd><ul class="first last simple">
+<li>Y contains the output of decision_function (classifier)</li>
+</ul>
+</dd>
+<dt>Use 0.5 when:</dt>
+<dd><ul class="first last simple">
+<li>Y contains the output of predict_proba</li>
+</ul>
+</dd>
+</dl>
+<p>If None, the threshold is assumed to be half way between
+neg_label and pos_label.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>y</strong> : numpy array or CSR matrix of shape [n_samples] Target values.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>In the case when the binary labels are fractional
+(probabilistic), inverse_transform chooses the class with the
+greatest value. Typically, this allows to use the output of a
+linear model&#8217;s decision_function method directly as the input
+of inverse_transform.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.preprocessing.LabelBinarizer.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.LabelBinarizer.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.preprocessing.LabelBinarizer.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/preprocessing/label.py#L307"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.preprocessing.LabelBinarizer.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform multi-class labels to binary labels</p>
+<p>The output of transform is sometimes referred to by some authors as the
+1-of-K coding scheme.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>y</strong> : numpy array or sparse matrix of shape (n_samples,) or</p>
+<blockquote>
+<div><p>(n_samples, n_classes) Target values. The 2-d matrix should only
+contain 0 and 1, represents multilabel classification. Sparse
+matrix can be CSR, CSC, COO, DOK, or LIL.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Y</strong> : numpy array or CSR matrix of shape [n_samples, n_classes]</p>
+<blockquote class="last">
+<div><p>Shape will be [n_samples, 1] for binary problems.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.preprocessing.LabelBinarizer.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.preprocessing.KernelCenterer.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

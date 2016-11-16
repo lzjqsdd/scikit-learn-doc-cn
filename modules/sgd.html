@@ -1,0 +1,544 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>1.5. 随机梯度下降 &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="1. Supervised learning" href="../supervised_learning.html" />
+    <link rel="next" title="1.6. 最邻近法" href="neighbors.html" />
+    <link rel="prev" title="1.4. Support Vector Machines" href="svm.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/sgd.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="svm.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        1.4. Support ...
+        </span>
+            <span class="hiddenrellink">
+            1.4. Support Vector Machines
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../supervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        1. Supervised...
+        </span>
+            <span class="hiddenrellink">
+            1. Supervised learning
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">1.5. 随机梯度下降</a><ul>
+<li><a class="reference internal" href="#id2">1.5.1. 分类</a></li>
+<li><a class="reference internal" href="#id3">1.5.2. 回归</a></li>
+<li><a class="reference internal" href="#id4">1.5.3. 稀疏数据上的随机梯度下降</a></li>
+<li><a class="reference internal" href="#id5">1.5.4. 复杂度</a></li>
+<li><a class="reference internal" href="#tips-on-practical-use">1.5.5. Tips on Practical Use</a></li>
+<li><a class="reference internal" href="#sgd-mathematical-formulation">1.5.6. 数学表达</a><ul>
+<li><a class="reference internal" href="#id7">1.5.6.1. SGD</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">1.5.7. 实现细节</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sgd">
+<span id="id1"></span><h1>1.5. 随机梯度下降<a class="headerlink" href="#sgd" title="Permalink to this headline">¶</a></h1>
+<p><strong>Stochastic Gradient Descent (SGD)</strong> 是一种简单但又非常高效的方式判别式学习方法，比如凸损失函数的线性分类器如
+<a class="reference external" href="http://en.wikipedia.org/wiki/Support_vector_machine">Support Vector Machines</a> 和 <a class="reference external" href="http://en.wikipedia.org/wiki/Logistic_regression">Logistic
+Regression</a>.
+虽然SGD已经在机器学习社区出现很长时间，但是在近期在大规模机器学习上受到了相当大数量的关注。</p>
+<p>SGD 已经被成功应用到大规模和稀疏机器学习问题上，通常为文本分类和自然语言处理。如果给定数据是稀疏的，那么该模块中的分类器
+很容易把问题规模缩放到超过10^5训练样本和超过10^5的特征数量。</p>
+<p>SGD的优势如下：</p>
+<blockquote>
+<div><ul class="simple">
+<li>高效性.</li>
+<li>容易实现 (lots of opportunities for code tuning大量代码调整的机会).</li>
+</ul>
+</div></blockquote>
+<p>SGD缺点如下：</p>
+<blockquote>
+<div><ul class="simple">
+<li>SGD需要许多超参数,比如正则化参数、迭代次数</li>
+<li>SGD 对特征规模比较敏感(应该是特征维数)</li>
+</ul>
+</div></blockquote>
+<div class="section" id="id2">
+<h2>1.5.1. 分类<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">请确保在拟合模型之前把训练数据打乱(shuffle)或者使用 <code class="docutils literal"><span class="pre">shuffle=True</span></code> 设置项来在每次迭代后打乱训练数据。</p>
+</div>
+<p>类 <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> 实现了一个简单的随机梯度下降的程序，该程序支持分类中不同的损失函数和罚项</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_separating_hyperplane.html"><img alt="../_images/plot_sgd_separating_hyperplane_0011.png" src="../_images/plot_sgd_separating_hyperplane_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p>同其他分类器一样，SGD需要拟合两个数组(向量): X为存储训练样本的数组，大小为[n_samples,n_features]，另一个是Y,大小为[n_samples],
+用来存放对于每个输入的目标值(或者类标label)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">SGDClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;hinge&quot;</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s2">&quot;l2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,</span>
+<span class="go">       eta0=0.0, fit_intercept=True, l1_ratio=0.15,</span>
+<span class="go">       learning_rate=&#39;optimal&#39;, loss=&#39;hinge&#39;, n_iter=5, n_jobs=1,</span>
+<span class="go">       penalty=&#39;l2&#39;, power_t=0.5, random_state=None, shuffle=True,</span>
+<span class="go">       verbose=0, warm_start=False)</span>
+</pre></div>
+</div>
+<p>拟合之后，模型就可以用来预测新的输入:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+<p>SGD为训练数据拟合了一个线性模型。成员变量 <code class="docutils literal"><span class="pre">coef_</span></code> 存储的是模型的参数:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>                                         
+<span class="go">array([[ 9.9...,  9.9...]])</span>
+</pre></div>
+</div>
+<p>成员变量 <code class="docutils literal"><span class="pre">intercept_</span></code> 存储的是截距 (又称为 offset 或者 bias,偏置):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span>                                    
+<span class="go">array([-9.9...])</span>
+</pre></div>
+</div>
+<p>无论模型是否使用截距，比如 一个有偏置的超平面，是由 <code class="docutils literal"><span class="pre">fit_intercept</span></code> 参数来控制(待校正)。</p>
+<p>获取到超平面的符号距离使用 <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier.decision_function" title="sklearn.linear_model.SGDClassifier.decision_function"><code class="xref py py-meth docutils literal"><span class="pre">SGDClassifier.decision_function</span></code></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>                 
+<span class="go">array([ 29.6...])</span>
+</pre></div>
+</div>
+<p>具体的损失函数可以通过 <code class="docutils literal"><span class="pre">loss</span></code> 参数来设置。<a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> 支持以下几种损失函数:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">loss=&quot;hinge&quot;</span></code>: (soft-margin) linear Support Vector Machine,</li>
+<li><code class="docutils literal"><span class="pre">loss=&quot;modified_huber&quot;</span></code>: smoothed hinge loss,</li>
+<li><code class="docutils literal"><span class="pre">loss=&quot;log&quot;</span></code>: logistic regression,</li>
+<li>and all regression losses below.</li>
+</ul>
+</div></blockquote>
+<p>上述中前两个损失函数lazy的，它们只有在某个样本违反了margin（间隔）限制才会更新模型参数，这样是的训练过程非常有效，并且可以应用在稀疏
+模型上，甚至当使用了L2罚项的时候。</p>
+<blockquote>
+<div>使用 <code class="docutils literal"><span class="pre">loss=&quot;log&quot;</span></code> 或者 <code class="docutils literal"><span class="pre">loss=&quot;modified_huber&quot;</span></code> 启用</div></blockquote>
+<p><code class="docutils literal"><span class="pre">predict_proba</span></code> 方法,该方法给出了对于每个样本 <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/> 的概率估计 <img class="math" src="../_images/math/f1618e77c8e15b4a154134e2816452a588992532.png" alt="P(y|x)"/> 的一个向量:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>                      
+<span class="go">array([[ 0.00...,  0.99...]])</span>
+</pre></div>
+</div>
+<p>具体的罚项可以通过 <code class="docutils literal"><span class="pre">penalty</span></code> 参数。SGD支持一下几种罚项:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">penalty=&quot;l2&quot;</span></code>: L2 norm penalty on <code class="docutils literal"><span class="pre">coef_</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">penalty=&quot;l1&quot;</span></code>: L1 norm penalty on <code class="docutils literal"><span class="pre">coef_</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">penalty=&quot;elasticnet&quot;</span></code>: Convex combination of L2 and L1;
+<code class="docutils literal"><span class="pre">(1</span> <span class="pre">-</span> <span class="pre">l1_ratio)</span> <span class="pre">*</span> <span class="pre">L2</span> <span class="pre">+</span> <span class="pre">l1_ratio</span> <span class="pre">*</span> <span class="pre">L1</span></code>.</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>默认的设置是 <code class="docutils literal"><span class="pre">penalty=&quot;l2&quot;</span></code>。L1罚项会导致稀疏的解，使大多数稀疏为0。弹性网络解决了当属性高度相关情况下L1罚项的不足。参数</dt>
+<dd><code class="docutils literal"><span class="pre">l1_ratio</span></code> 控制 L1 和 L2 罚项的凸组合。</dd>
+</dl>
+<p><a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> 通过组合多个“one versus all(OVA)”形式的二分类器来支持多类分类。
+对于 <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> 类中每个类别，二分类器通过判别该类和其它 <img class="math" src="../_images/math/d1fb41a058b1d3126362bd00674f573b11212607.png" alt="K-1"/> 类来学习。在测试阶段，
+我们计算为每个分类器计算其置信度得分（比如 与超平面的符号距离）。下图说明了OVA方式在iris数据集上的情况。
+虚线表示三个OVA分类器;背景颜色显示了由三个分类器诱导的决策面。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_iris.html"><img alt="../_images/plot_sgd_iris_0011.png" src="../_images/plot_sgd_iris_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p>在多分类问题中  <code class="docutils literal"><span class="pre">coef_</span></code> 是一个``shape=[n_classes, n_features]`` 的二维数组 ,
+, <code class="docutils literal"><span class="pre">intercept_</span></code> 是一个  <code class="docutils literal"><span class="pre">shape=[n_classes]</span></code> 的一维数组。 <code class="docutils literal"><span class="pre">coef_</span></code> 的第i行
+存储对第i类的OVA分类器的权重向量。类别通过增序索引（参考属性 <code class="docutils literal"><span class="pre">classes_</span></code>）。
+请注意，原则上由于 <code class="docutils literal"><span class="pre">loss=&quot;log&quot;</span></code> 和 <code class="docutils literal"><span class="pre">loss=&quot;modified_huber&quot;</span></code> 允许创建
+概率模型，所以这两项对于OVA(one-vs-all)分类更加合适。</p>
+<p><a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> 支持加权类别和加权实例(或者说加权的样本)，通过
+<code class="docutils literal"><span class="pre">class_weight</span></code> 和 <code class="docutils literal"><span class="pre">sample_weight</span></code> 两个拟合参数。请看下述几个例子，
+参考文档 <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier.fit" title="sklearn.linear_model.SGDClassifier.fit"><code class="xref py py-meth docutils literal"><span class="pre">SGDClassifier.fit</span></code></a> 获取更多信息。</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_separating_hyperplane.html#example-linear-model-plot-sgd-separating-hyperplane-py"><span class="std std-ref">SGD: Maximum margin separating hyperplane</span></a>,</li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_iris.html#example-linear-model-plot-sgd-iris-py"><span class="std std-ref">Plot multi-class SGD on the iris dataset</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_weighted_samples.html#example-linear-model-plot-sgd-weighted-samples-py"><span class="std std-ref">SGD: Weighted samples</span></a></li>
+<li><a class="reference internal" href="../auto_examples/linear_model/plot_sgd_comparison.html#example-linear-model-plot-sgd-comparison-py"><span class="std std-ref">Comparing various online solvers</span></a></li>
+<li><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane_unbalanced.html#example-svm-plot-separating-hyperplane-unbalanced-py"><span class="std std-ref">SVM: Separating hyperplane for unbalanced classes</span></a> (See the <cite>Note</cite>)</li>
+</ul>
+</div>
+<p><a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> 支持平均SGD(ASGD).Averaging可以通过设置  <code class="docutils literal"><span class="pre">`average=True`</span></code> 来启用。
+ASGD 通过计算普通SGD算法中每次迭代后每个样本的系数的平均值来处理。当使用ASGD时，学习率可以大很多甚至为常量，
+在一些数据集上训练时速度加快。。</p>
+<p>对于带logistic损失的分类，提供了另外一种带平均策略的SGD变体，使用了随机平均梯度算法（SAG,
+详细参考论文：Minimizing Finite Sums with the Stochastic Average Gradient）。
+实现的程序为 <a class="reference internal" href="generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">LogisticRegression</span></code></a>.</p>
+</div>
+<div class="section" id="id3">
+<h2>1.5.2. 回归<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><a class="reference internal" href="generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code></a> 类实现了一个简单的随机梯度下降的学习算法的程序，该程序支持不同的损失函数和罚项
+来拟合线性回归模型。 <a class="reference internal" href="generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code></a> 对于非常大的训练样本(&gt;10.000)的回归问题是非常合适的。
+对于其他问题我们推荐 <a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code></a>,:class:<cite>Lasso</cite>, 或者 <a class="reference internal" href="generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet" title="sklearn.linear_model.ElasticNet"><code class="xref py py-class docutils literal"><span class="pre">ElasticNet</span></code></a> 。</div></blockquote>
+<p>具体损失函数可以通过设置  <code class="docutils literal"><span class="pre">loss</span></code> 参数。 <a class="reference internal" href="generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code></a> 支持以下几种损失函数:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">loss=&quot;squared_loss&quot;</span></code>: Ordinary least squares,</li>
+<li><code class="docutils literal"><span class="pre">loss=&quot;huber&quot;</span></code>: Huber loss for robust regression,</li>
+<li><code class="docutils literal"><span class="pre">loss=&quot;epsilon_insensitive&quot;</span></code>: linear Support Vector Regression.</li>
+</ul>
+</div></blockquote>
+<p>Huber 和 epsilon-insensitive 损失函数可以用于鲁棒回归。insensitive区域的宽度可以
+通过参数 <code class="docutils literal"><span class="pre">epsilon</span></code> 指定，该参数由目标变量的规模来决定。</p>
+<p><a class="reference internal" href="generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal"><span class="pre">SGDRegressor</span></code></a> 和  <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> 一样支持平均SGD。Averaging
+可以通过设置 <code class="docutils literal"><span class="pre">`average=True`</span></code> 来启用。</p>
+<p>对于带平方损失和l2罚项的回归，提供了另外一个带平均策略的SGD的变体，使用了随机平均梯度算法(SAG),
+实现程序为  <a class="reference internal" href="generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="sklearn.linear_model.Ridge"><code class="xref py py-class docutils literal"><span class="pre">Ridge</span></code></a> 。</p>
+</div>
+<div class="section" id="id4">
+<h2>1.5.3. 稀疏数据上的随机梯度下降<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">稀疏实现和稠密实现结果有轻微不同，因为截距部分的收敛的学习率的影响。</p>
+</div>
+<p>对于以下格式 <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.html">scipy.sparse</a> 任意给定矩阵的稀疏数据有内建的支持方法。
+然而，为了最大化效率应该使用CSR矩阵格式，定义在 <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html">scipy.sparse.csr_matrix</a>.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/text/document_classification_20newsgroups.html#example-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>1.5.4. 复杂度<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>SGD主要的优势是它的高效性，和训练样本的数量线性相关。如果 X 是一个大小为(n ,p)的矩阵，则训练的代价为</dt>
+<dd><img class="math" src="../_images/math/d6d26b34a5b03fbea63cfb88418b145be4afa16e.png" alt="O(k n \bar p)"/> ，其中K是迭代的次数(epochs), <img class="math" src="../_images/math/fe649a4b036454a15ebd0b3725425a7755eb6dc2.png" alt="\bar p"/> 是每个样本中非零属性(每个维度)的平均个数。</dd>
+</dl>
+<p>然而，最新理论研究结果显示，为了获得一些期望的最优的精度并不会随着训练样本集的大小增加而增加运行时间。</p>
+</div>
+<div class="section" id="tips-on-practical-use">
+<h2>1.5.5. Tips on Practical Use<a class="headerlink" href="#tips-on-practical-use" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first">随机梯度下降对于特征的尺度非常敏感，所以强烈推荐尺度化数据。比如，把每个输入向量X内的属性尺度化到区间[0,1]或者[-1,+1]
+上，或者把X标准化为均值为0，方差为1的数据。请注意，<em>相同的</em> 尺度也必须应用到测试向量上以保证得到有意义的结果。上述可以通过
+类 <code class="xref py py-class docutils literal"><span class="pre">StandardScaler</span></code> 来处理</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>  <span class="c1"># Don&#39;t cheat - fit only on training data</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>  <span class="c1"># apply same transformation to test data</span>
+</pre></div>
+</div>
+<p>如果你的特征向量的属性中有固定的尺度（比如词频或者指示特征）,则不必进行尺度化。</p>
+</li>
+<li><p class="first">在使用 <code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code> 时最好的做法是找到一个合适的
+正则化项 <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 通常取值范围为 <code class="docutils literal"><span class="pre">10.0**-np.arange(1,7)</span></code> 。</p>
+</li>
+<li><p class="first">在实际经验中，我们发现SGD算法在大约10^6训练样本之后趋于收敛。因此，
+对于迭代次数比较合理的估计为 <code class="docutils literal"><span class="pre">n_iter</span> <span class="pre">=</span> <span class="pre">np.ceil(10**6</span> <span class="pre">/</span> <span class="pre">n)</span></code>，
+其中， <code class="docutils literal"><span class="pre">n</span></code> 是训练集的大小</p>
+</li>
+<li><p class="first">如果在使用PCA进行特征提取中应用SGD,通常比较好的做法是使用常量 <cite>c</cite> 将特征值尺度化，
+比如使训练数据的L2 norm 平均值为1.</p>
+</li>
+<li><p class="first">我们发现 Averaged SGD 在特征数据比较大以及eta0很大时更加有效。</p>
+</li>
+</ul>
+</div></blockquote>
+<div class="topic">
+<p class="topic-title first">参考资料:</p>
+<ul class="simple">
+<li><a class="reference external" href="yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">&#8220;Efficient BackProp&#8221;</a>
+Y. LeCun, L. Bottou, G. Orr, K. Müller - In Neural Networks: Tricks
+of the Trade 1998.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="sgd-mathematical-formulation">
+<span id="id6"></span><h2>1.5.6. 数学表达<a class="headerlink" href="#sgd-mathematical-formulation" title="Permalink to this headline">¶</a></h2>
+<p>给定一组训练样本 <img class="math" src="../_images/math/ad478fbbe9e05a85505011379bb0b62a50c90c19.png" alt="(x_1,y_1), \ldots, (x_n,y_n"/> 其中，
+<img class="math" src="../_images/math/bed637067e6e774b87cc8e3c059b2f97ce7be531.png" alt="x_i \in \mathbf{R}^n"/> and <img class="math" src="../_images/math/72cc647a6fea5baa575125773c28b6e5be5133d7.png" alt="y_i \in \{-1,1\}"/>, 我们的目标是
+学习一个线性的判分函数 <img class="math" src="../_images/math/485c5d017bb28ce9151f2d301eb4fc45269b276c.png" alt="f(x) = w^T x + b"/> ， 模型参数为
+<img class="math" src="../_images/math/858a736d009336cd95d17ba520bffcd11c6b0c28.png" alt="w \in \mathbf{R}^m"/> ，截距为 <img class="math" src="../_images/math/5c3f945125220355508d71c6f63549c669edb675.png" alt="b \in \mathbf{R}"/>. 为了实现预测，
+我们只需看 <img class="math" src="../_images/math/eda52292f6952f7e27fef52e7ce8393981770d2c.png" alt="f(x)"/> 的符号。通常求解模型参数的方式是通过最小化下面的训练误差</p>
+<div class="math">
+<p><img src="../_images/math/62d4b457d5f92d158e0f1f1bf3b73116e34d3931.png" alt="E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w)"/></p>
+</div><p>其中， <img class="math" src="../_images/math/ae2b750f71e1fc0daaa3de9a85d42794d7cd1326.png" alt="L"/> 表示损失函数（模型预测值和实际值的误差），<img class="math" src="../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.png" alt="R"/> 是正则化项（或称作罚项），
+用来惩罚模型的复杂性（避免模型过于复杂导致过拟合）； <img class="math" src="../_images/math/969cb5f6781dc1ccd2500d69e55fdb01ae91b31a.png" alt="\alpha &gt; 0"/> 是非负的超参数。</p>
+<p>不同损失函数的选择会产生不同的分类器，比如</p>
+<blockquote>
+<div><ul class="simple">
+<li>Hinge: (soft-margin) Support Vector Machines.</li>
+<li>Log:   Logistic Regression.</li>
+<li>Least-Squares: Ridge Regression.</li>
+<li>Epsilon-Insensitive: (soft-margin) Support Vector Regression.</li>
+</ul>
+</div></blockquote>
+<p>上述所有的损失函数均可以看做误分类误差的上界，如下图所示：</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_loss_functions.html"><img alt="../_images/plot_sgd_loss_functions_0011.png" src="../_images/plot_sgd_loss_functions_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p>比较流行的正则化项 <img class="math" src="../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.png" alt="R"/> 的选择包括：</p>
+<blockquote>
+<div><ul class="simple">
+<li>L2 norm: <img class="math" src="../_images/math/4fa07873ede84da7b6e2c3b6fe47b6fca2af4a55.png" alt="R(w) := \frac{1}{2} \sum_{i=1}^{n} w_i^2"/>,</li>
+<li>L1 norm: <img class="math" src="../_images/math/fadb54be33141d99ef411fba024ea3c7ec2de22a.png" alt="R(w) := \sum_{i=1}^{n} |w_i|"/>, which leads to sparse
+solutions.</li>
+<li>Elastic Net: <img class="math" src="../_images/math/885050c5d01823261cfba1f447fd02b5b6fc20db.png" alt="R(w) := \frac{\rho}{2} \sum_{i=1}^{n} w_i^2 + (1-\rho) \sum_{i=1}^{n} |w_i|"/>, a convex combination of L2 and L1, where <img class="math" src="../_images/math/9a51ab9a0b521705e1e8762fac6bdd6f11771758.png" alt="\rho"/> is given by <code class="docutils literal"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">l1_ratio</span></code>.</li>
+</ul>
+</div></blockquote>
+<p>下图显示不同的正则化项在  <img class="math" src="../_images/math/9d8d44da8ab5aa213680932767fcd1fc38f8b2cb.png" alt="R(w) = 1"/> 时的参数平面的曲线。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_sgd_penalties.html"><img alt="../_images/plot_sgd_penalties_0011.png" src="../_images/plot_sgd_penalties_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<div class="section" id="id7">
+<h3>1.5.6.1. SGD<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>随机梯度下降是无约束最优化问题。相比批梯度下降（BGD），SGD通过每次只考虑单一训练样本来估计实际的梯度。</p>
+<p>类  <a class="reference internal" href="generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">SGDClassifier</span></code></a> 实现了一个一阶的SGD学习程序。该算法遍历训练样本，对于每个
+样本根据下面的更新规则来更新模型参数。</p>
+<div class="math">
+<p><img src="../_images/math/72cbe4d2bf214f47779e8e308f9cad17b46acb07.png" alt="w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
++ \frac{\partial L(w^T x_i + b, y_i)}{\partial w})"/></p>
+</div><p>其中， <img class="math" src="../_images/math/5635a7c34414599c2452d72430811e816b460335.png" alt="\eta"/> 为学习率，用来控制参数空间的步长。截距 <img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/> 和w更新方式相似但是没有正则项。</p>
+<p>学习率 <img class="math" src="../_images/math/5635a7c34414599c2452d72430811e816b460335.png" alt="\eta"/> 既可以是常量，也可以逐渐变小。对于分类问题，默认的学习率设定 （<code class="docutils literal"><span class="pre">learning_rate='optimal'</span></code>）
+由以下公式给出</p>
+<div class="math">
+<p><img src="../_images/math/4f5acaa58eefe708361216e63f1108fc8751bd22.png" alt="\eta^{(t)} = \frac {1}{\alpha  (t_0 + t)}"/></p>
+</div><p>其中 <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> 是时间步长（总共有 <cite>n_samples * n_iter</cite> 的时间步长）， <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> 基于
+一个启发式的算法( Léon Bottou 提出的)来决定,比如 期望的初始的更新为权重的数量。
+（假设训练样本的模长为1）.精确的定义在 <code class="xref py py-class docutils literal"><span class="pre">BaseSGD</span></code> 的 <cite>_init_t</cite> 中可以找到。(需校对)</p>
+<p>对于回归问题，默认的学习率呈反比例趋势变化(<code class="docutils literal"><span class="pre">learning_rate='invscaling'</span></code>),由以下公式给出</p>
+<div class="math">
+<p><img src="../_images/math/93c34305150894c3956e9f2816c1b9f30f33b200.png" alt="\eta^{(t)} = \frac{eta_0}{t^{power\_t}}"/></p>
+</div><p>其中  <img class="math" src="../_images/math/64dc796cf3af805cbab2f810ad7ee70d880bfd49.png" alt="eta_0"/> 和 <img class="math" src="../_images/math/b6e8ac1dcea3e0265093fae39c534076991c3af2.png" alt="power\_t"/> 是由用户选择  <code class="docutils literal"><span class="pre">eta0</span></code> and <code class="docutils literal"><span class="pre">power_t</span></code>
+的超参数。</p>
+<p>使用固定的学习率则设置  <code class="docutils literal"><span class="pre">learning_rate='constant'</span></code> ,并且使用 <code class="docutils literal"><span class="pre">eta0</span></code> 来指定学习率。</p>
+<p>模型参数可以通过 <code class="docutils literal"><span class="pre">coef_</span></code> 和 <code class="docutils literal"><span class="pre">intercept_</span></code> 来访问：</p>
+<blockquote>
+<div><ul class="simple">
+<li>成员变量 <code class="docutils literal"><span class="pre">coef_</span></code> 保存权重 <img class="math" src="../_images/math/ecd1ee2a1cd226b40c37e079aca62398d4b774f5.png" alt="w"/></li>
+<li>成员变量 <code class="docutils literal"><span class="pre">intercept_</span></code> 保存截距 <img class="math" src="../_images/math/57c9d14bb082716df9000146882ce365335d08f1.png" alt="b"/></li>
+</ul>
+</div></blockquote>
+<div class="topic">
+<p class="topic-title first">参考资料:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.58.7377">&#8220;Solving large scale linear prediction problems using stochastic
+gradient descent algorithms&#8221;</a>
+T. Zhang - In Proceedings of ICML &#8216;04.</li>
+<li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.124.4696">&#8220;Regularization and variable selection via the elastic net&#8221;</a>
+H. Zou, T. Hastie - Journal of the Royal Statistical Society Series B,
+67 (2), 301-320.</li>
+<li><a class="reference external" href="http://arxiv.org/pdf/1107.2490v2.pdf">&#8220;Towards Optimal One Pass Large Scale Learning with
+Averaged Stochastic Gradient Descent&#8221;</a>
+Xu, Wei</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>1.5.7. 实现细节<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>SGD的实现受Léon Bottou <a class="reference external" href="http://leon.bottou.org/projects/sgd">Stochastic Gradient SVM</a> 的影响。
+类似于SvmSGD，权重向量表达为 一个标量和一个向量的内积，这样保证在使用L2正则项时可以有效更新权重。对于
+稀疏的特征向量，截距的更新通过一个更小的学习率（乘以0.01）来避免实际更新过于频繁。训练样本按顺序选择并且学习率
+在每次观测样本后下降。我们采用了 Shalev-Shwartz et al. 2007 的学习率变化方案。对于多分类问题，使用
+&#8220;one versus all&#8221; 方法。对于L1正则项（以及弹性网络）我们使用了由 Tsuruoka等人提出的截断梯度算法，代码由Cython编写。</p>
+<div class="topic">
+<p class="topic-title first">参考资料:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://leon.bottou.org/projects/sgd">&#8220;Stochastic Gradient Descent&#8221;</a> L. Bottou - Website, 2010.</li>
+<li><a class="reference external" href="http://leon.bottou.org/slides/largescale/lstut.pdf">&#8220;The Tradeoffs of Large Scale Machine Learning&#8221;</a> L. Bottou - Website, 2011.</li>
+<li><a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.74.8513">&#8220;Pegasos: Primal estimated sub-gradient solver for svm&#8221;</a>
+S. Shalev-Shwartz, Y. Singer, N. Srebro - In Proceedings of ICML &#8216;07.</li>
+<li><a class="reference external" href="http://www.aclweb.org/anthology/P/P09/P09-1054.pdf">&#8220;Stochastic gradient descent training for l1-regularized log-linear models with cumulative penalty&#8221;</a>
+Y. Tsuruoka, J. Tsujii, S. Ananiadou -  In Proceedings of the AFNLP/ACL &#8216;09.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/sgd.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="svm.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

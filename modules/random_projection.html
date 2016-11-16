@@ -1,0 +1,362 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>4.5. Random Projection &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="4. Dataset transformations" href="../data_transforms.html" />
+    <link rel="next" title="4.6. Kernel Approximation" href="kernel_approximation.html" />
+    <link rel="prev" title="4.4. Unsupervised dimensionality reduction" href="unsupervised_reduction.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/random_projection.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="unsupervised_reduction.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        4.4. Unsuperv...
+        </span>
+            <span class="hiddenrellink">
+            4.4. Unsupervised dimensionality reduction
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../data_transforms.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        4. Dataset tr...
+        </span>
+            <span class="hiddenrellink">
+            4. Dataset transformations
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">4.5. Random Projection</a><ul>
+<li><a class="reference internal" href="#the-johnson-lindenstrauss-lemma">4.5.1. The Johnson-Lindenstrauss lemma</a></li>
+<li><a class="reference internal" href="#gaussian-random-projection">4.5.2. Gaussian random projection</a></li>
+<li><a class="reference internal" href="#sparse-random-projection">4.5.3. Sparse random projection</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="random-projection">
+<span id="id1"></span><h1>4.5. Random Projection<a class="headerlink" href="#random-projection" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="classes.html#module-sklearn.random_projection" title="sklearn.random_projection"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.random_projection</span></code></a> module implements a simple and
+computationally efficient way to reduce the dimensionality of the data by
+trading a controlled amount of accuracy (as additional variance) for faster
+processing times and smaller model sizes. This module implements two types of
+unstructured random matrix:
+<a class="reference internal" href="#gaussian-random-matrix"><span class="std std-ref">Gaussian random matrix</span></a> and
+<a class="reference internal" href="#sparse-random-matrix"><span class="std std-ref">sparse random matrix</span></a>.</p>
+<p>The dimensions and distribution of random projections matrices are
+controlled so as to preserve the pairwise distances between any two
+samples of the dataset. Thus random projection is a suitable approximation
+technique for distance based method.</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Sanjoy Dasgupta. 2000.
+<a class="reference external" href="http://cseweb.ucsd.edu/users/dasgupta/papers/randomf.pdf">Experiments with random projection.</a>
+In Proceedings of the Sixteenth conference on Uncertainty in artificial
+intelligence (UAI&#8216;00), Craig Boutilier and Moisés Goldszmidt (Eds.). Morgan
+Kaufmann Publishers Inc., San Francisco, CA, USA, 143-151.</li>
+<li>Ella Bingham and Heikki Mannila. 2001.
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.24.5135&amp;rep=rep1&amp;type=pdf">Random projection in dimensionality reduction: applications to image and text data.</a>
+In Proceedings of the seventh ACM SIGKDD international conference on
+Knowledge discovery and data mining (KDD &#8216;01). ACM, New York, NY, USA,
+245-250.</li>
+</ul>
+</div>
+<div class="section" id="the-johnson-lindenstrauss-lemma">
+<span id="johnson-lindenstrauss"></span><h2>4.5.1. The Johnson-Lindenstrauss lemma<a class="headerlink" href="#the-johnson-lindenstrauss-lemma" title="Permalink to this headline">¶</a></h2>
+<p>The main theoretical result behind the efficiency of random projection is the
+<a class="reference external" href="http://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma">Johnson-Lindenstrauss lemma (quoting Wikipedia)</a>:</p>
+<blockquote>
+<div>In mathematics, the Johnson-Lindenstrauss lemma is a result
+concerning low-distortion embeddings of points from high-dimensional
+into low-dimensional Euclidean space. The lemma states that a small set
+of points in a high-dimensional space can be embedded into a space of
+much lower dimension in such a way that distances between the points are
+nearly preserved. The map used for the embedding is at least Lipschitz,
+and can even be taken to be an orthogonal projection.</div></blockquote>
+<p>Knowing only the number of samples, the
+<a class="reference internal" href="generated/sklearn.random_projection.johnson_lindenstrauss_min_dim.html#sklearn.random_projection.johnson_lindenstrauss_min_dim" title="sklearn.random_projection.johnson_lindenstrauss_min_dim"><code class="xref py py-func docutils literal"><span class="pre">sklearn.random_projection.johnson_lindenstrauss_min_dim</span></code></a> estimates
+conservatively the minimal size of the random subspace to guarantee a
+bounded distortion introduced by the random projection:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.random_projection</span> <span class="k">import</span> <span class="n">johnson_lindenstrauss_min_dim</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">johnson_lindenstrauss_min_dim</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1</span><span class="n">e6</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">663</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">johnson_lindenstrauss_min_dim</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1</span><span class="n">e6</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
+<span class="go">array([    663,   11841, 1112658])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">johnson_lindenstrauss_min_dim</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="n">e4</span><span class="p">,</span> <span class="mi">1</span><span class="n">e5</span><span class="p">,</span> <span class="mi">1</span><span class="n">e6</span><span class="p">],</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="go">array([ 7894,  9868, 11841])</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/plot_johnson_lindenstrauss_bound.html"><img alt="../_images/plot_johnson_lindenstrauss_bound_0011.png" src="../_images/plot_johnson_lindenstrauss_bound_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/plot_johnson_lindenstrauss_bound.html"><img alt="../_images/plot_johnson_lindenstrauss_bound_0021.png" src="../_images/plot_johnson_lindenstrauss_bound_0021.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Example:</p>
+<ul class="simple">
+<li>See <a class="reference internal" href="../auto_examples/plot_johnson_lindenstrauss_bound.html#example-plot-johnson-lindenstrauss-bound-py"><span class="std std-ref">The Johnson-Lindenstrauss bound for embedding with random projections</span></a>
+for a theoretical explication on the Johnson-Lindenstrauss lemma and an
+empirical validation using sparse random matrices.</li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Sanjoy Dasgupta and Anupam Gupta, 1999.
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.39.3334&amp;rep=rep1&amp;type=pdf">An elementary proof of the Johnson-Lindenstrauss Lemma.</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="gaussian-random-projection">
+<span id="gaussian-random-matrix"></span><h2>4.5.2. Gaussian random projection<a class="headerlink" href="#gaussian-random-projection" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="generated/sklearn.random_projection.GaussianRandomProjection.html#sklearn.random_projection.GaussianRandomProjection" title="sklearn.random_projection.GaussianRandomProjection"><code class="xref py py-class docutils literal"><span class="pre">sklearn.random_projection.GaussianRandomProjection</span></code></a> reduces the
+dimensionality by projecting the original input space on a randomly generated
+matrix where components are drawn from the following distribution
+<img class="math" src="../_images/math/0239c544e0d11bc2014aaa002eb41364f9c5e778.png" alt="N(0, \frac{1}{n_{components}})"/>.</p>
+<p>Here a small excerpt which illustrates how to use the Gaussian random
+projection transformer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">random_projection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">random_projection</span><span class="o">.</span><span class="n">GaussianRandomProjection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 3947)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sparse-random-projection">
+<span id="sparse-random-matrix"></span><h2>4.5.3. Sparse random projection<a class="headerlink" href="#sparse-random-projection" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="generated/sklearn.random_projection.SparseRandomProjection.html#sklearn.random_projection.SparseRandomProjection" title="sklearn.random_projection.SparseRandomProjection"><code class="xref py py-class docutils literal"><span class="pre">sklearn.random_projection.SparseRandomProjection</span></code></a> reduces the
+dimensionality by projecting the original input space using a sparse
+random matrix.</p>
+<p>Sparse random matrices are an alternative to dense Gaussian random
+projection matrix that guarantees similar embedding quality while being much
+more memory efficient and allowing faster computation of the projected data.</p>
+<p>If we define <code class="docutils literal"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">density</span></code>, the elements of the random matrix
+are drawn from</p>
+<div class="math">
+<p><img src="../_images/math/1b457fec3a07ee781d34450f29ab55076d4e4620.png" alt="\left\{
+\begin{array}{c c l}
+-\sqrt{\frac{s}{n_{\text{components}}}} &amp; &amp; 1 / 2s\\
+0 &amp;\text{with probability}  &amp; 1 - 1 / s \\
++\sqrt{\frac{s}{n_{\text{components}}}} &amp; &amp; 1 / 2s\\
+\end{array}
+\right."/></p>
+</div><p>where <img class="math" src="../_images/math/cda2b09341fe018d4227a14ed2e5d4711f586964.png" alt="n_{\text{components}}"/> is the size of the projected subspace.
+By default the density of non zero elements is set to the minimum density as
+recommended by Ping Li et al.: <img class="math" src="../_images/math/0b2b8af7310a47c6d1ce53da78e8e8f45cfcde24.png" alt="1 / \sqrt{n_{\text{features}}}"/>.</p>
+<p>Here a small excerpt which illustrates how to use the sparse random
+projection transformer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">random_projection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">random_projection</span><span class="o">.</span><span class="n">SparseRandomProjection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 3947)</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>D. Achlioptas. 2003.
+<a class="reference external" href="www.cs.ucsc.edu/~optas/papers/jl.pdf">Database-friendly random projections: Johnson-Lindenstrauss  with binary
+coins</a>.
+Journal of Computer and System Sciences 66 (2003) 671–687</li>
+<li>Ping Li, Trevor J. Hastie, and Kenneth W. Church. 2006.
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.62.585&amp;rep=rep1&amp;type=pdf">Very sparse random projections.</a>
+In Proceedings of the 12th ACM SIGKDD international conference on
+Knowledge discovery and data mining (KDD &#8216;06). ACM, New York, NY, USA,
+287-296.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/random_projection.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="unsupervised_reduction.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

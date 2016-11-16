@@ -1,0 +1,55 @@
+
+
+.. _example_bicluster_plot_spectral_coclustering.py:
+
+
+==============================================
+A demo of the Spectral Co-Clustering algorithm
+==============================================
+
+This example demonstrates how to generate a dataset and bicluster it
+using the the Spectral Co-Clustering algorithm.
+
+The dataset is generated using the ``make_biclusters`` function, which
+creates a matrix of small values and implants bicluster with large
+values. The rows and columns are then shuffled and passed to the
+Spectral Co-Clustering algorithm. Rearranging the shuffled matrix to
+make biclusters contiguous shows how accurately the algorithm found
+the biclusters.
+
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_spectral_coclustering_001.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_spectral_coclustering_002.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_spectral_coclustering_003.png
+            :scale: 47
+
+
+**Script output**::
+
+  consensus score: 1.000
+
+
+
+**Python source code:** :download:`plot_spectral_coclustering.py <plot_spectral_coclustering.py>`
+
+.. literalinclude:: plot_spectral_coclustering.py
+    :lines: 17-
+
+**Total running time of the example:**  0.19 seconds
+( 0 minutes  0.19 seconds)
+    

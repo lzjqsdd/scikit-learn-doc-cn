@@ -1,0 +1,656 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>How to optimize for speed &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="Developer’s Guide" href="index.html" />
+    <link rel="next" title="Advanced installation instructions" href="advanced_installation.html" />
+    <link rel="prev" title="Utilities for Developers" href="utilities.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/developers/performance.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="utilities.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Utilities for...
+        </span>
+            <span class="hiddenrellink">
+            Utilities for Developers
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        Developer’s G...
+        </span>
+            <span class="hiddenrellink">
+            Developer’s Guide
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">How to optimize for speed</a><ul>
+<li><a class="reference internal" href="#python-cython-or-c-c">Python, Cython or C/C++?</a></li>
+<li><a class="reference internal" href="#fast-matrix-multiplications">Fast matrix multiplications</a></li>
+<li><a class="reference internal" href="#profiling-python-code">Profiling Python code</a></li>
+<li><a class="reference internal" href="#memory-usage-profiling">Memory usage profiling</a></li>
+<li><a class="reference internal" href="#performance-tips-for-the-cython-developer">Performance tips for the Cython developer</a></li>
+<li><a class="reference internal" href="#profiling-compiled-extensions">Profiling compiled extensions</a><ul>
+<li><a class="reference internal" href="#using-yep-and-google-perftools">Using yep and google-perftools</a></li>
+<li><a class="reference internal" href="#using-gprof">Using gprof</a></li>
+<li><a class="reference internal" href="#using-valgrind-callgrind-kcachegrind">Using valgrind / callgrind / kcachegrind</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multi-core-parallelism-using-joblib-parallel">Multi-core parallelism using <code class="docutils literal"><span class="pre">joblib.Parallel</span></code></a></li>
+<li><a class="reference internal" href="#a-sample-algorithmic-trick-warm-restarts-for-cross-validation">A sample algorithmic trick: warm restarts for cross validation</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-optimize-for-speed">
+<span id="performance-howto"></span><h1>How to optimize for speed<a class="headerlink" href="#how-to-optimize-for-speed" title="Permalink to this headline">¶</a></h1>
+<p>The following gives some practical guidelines to help you write efficient
+code for the scikit-learn project.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>While it is always useful to profile your code so as to <strong>check
+performance assumptions</strong>, it is also highly recommended
+to <strong>review the literature</strong> to ensure that the implemented algorithm
+is the state of the art for the task before investing into costly
+implementation optimization.</p>
+<p>Times and times, hours of efforts invested in optimizing complicated
+implementation details have been rendered irrelevant by the subsequent
+discovery of simple <strong>algorithmic tricks</strong>, or by using another algorithm
+altogether that is better suited to the problem.</p>
+<p class="last">The section <a class="reference internal" href="#warm-restarts"><span class="std std-ref">A sample algorithmic trick: warm restarts for cross validation</span></a> gives an example of such a trick.</p>
+</div>
+<div class="section" id="python-cython-or-c-c">
+<h2>Python, Cython or C/C++?<a class="headerlink" href="#python-cython-or-c-c" title="Permalink to this headline">¶</a></h2>
+<p>In general, the scikit-learn project emphasizes the <strong>readability</strong> of
+the source code to make it easy for the project users to dive into the
+source code so as to understand how the algorithm behaves on their data
+but also for ease of maintainability (by the developers).</p>
+<p>When implementing a new algorithm is thus recommended to <strong>start
+implementing it in Python using Numpy and Scipy</strong> by taking care of avoiding
+looping code using the vectorized idioms of those libraries. In practice
+this means trying to <strong>replace any nested for loops by calls to equivalent
+Numpy array methods</strong>. The goal is to avoid the CPU wasting time in the
+Python interpreter rather than crunching numbers to fit your statistical
+model. It&#8217;s generally a good idea to consider NumPy and SciPy performance tips:
+<a class="reference external" href="http://wiki.scipy.org/PerformanceTips">http://wiki.scipy.org/PerformanceTips</a></p>
+<p>Sometimes however an algorithm cannot be expressed efficiently in simple
+vectorized Numpy code. In this case, the recommended strategy is the
+following:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><strong>Profile</strong> the Python implementation to find the main bottleneck and
+isolate it in a <strong>dedicated module level function</strong>. This function
+will be reimplemented as a compiled extension module.</li>
+<li>If there exists a well maintained BSD or MIT <strong>C/C++</strong> implementation
+of the same algorithm that is not too big, you can write a
+<strong>Cython wrapper</strong> for it and include a copy of the source code
+of the library in the scikit-learn source tree: this strategy is
+used for the classes <a class="reference internal" href="../modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal"><span class="pre">svm.LinearSVC</span></code></a>, <a class="reference internal" href="../modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">svm.SVC</span></code></a> and
+<a class="reference internal" href="../modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="sklearn.linear_model.LogisticRegression"><code class="xref py py-class docutils literal"><span class="pre">linear_model.LogisticRegression</span></code></a> (wrappers for liblinear
+and libsvm).</li>
+<li>Otherwise, write an optimized version of your Python function using
+<strong>Cython</strong> directly. This strategy is used
+for the <a class="reference internal" href="../modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet" title="sklearn.linear_model.ElasticNet"><code class="xref py py-class docutils literal"><span class="pre">linear_model.ElasticNet</span></code></a> and
+<a class="reference internal" href="../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal"><span class="pre">linear_model.SGDClassifier</span></code></a> classes for instance.</li>
+<li><strong>Move the Python version of the function in the tests</strong> and use
+it to check that the results of the compiled extension are consistent
+with the gold standard, easy to debug Python version.</li>
+<li>Once the code is optimized (not simple bottleneck spottable by
+profiling), check whether it is possible to have <strong>coarse grained
+parallelism</strong> that is amenable to <strong>multi-processing</strong> by using the
+<code class="docutils literal"><span class="pre">joblib.Parallel</span></code> class.</li>
+</ol>
+</div></blockquote>
+<p>When using Cython, include the generated C source code alongside with
+the Cython source code. The goal is to make it possible to install the
+scikit on any machine with Python, Numpy, Scipy and C/C++ compiler.</p>
+</div>
+<div class="section" id="fast-matrix-multiplications">
+<h2>Fast matrix multiplications<a class="headerlink" href="#fast-matrix-multiplications" title="Permalink to this headline">¶</a></h2>
+<p>Matrix multiplications (matrix-matrix and matrix-vector) are usually handled
+using the NumPy function <code class="docutils literal"><span class="pre">np.dot</span></code>, but in versions of NumPy before 1.7.2
+this function is suboptimal when the inputs are not both in the C (row-major)
+layout; in that case, the inputs may be implicitly copied to obtain the right
+layout. This obviously consumes memory and takes time.</p>
+<p>The function <code class="docutils literal"><span class="pre">fast_dot</span></code> in <code class="docutils literal"><span class="pre">sklearn.utils.extmath</span></code> offers a fast
+replacement for <code class="docutils literal"><span class="pre">np.dot</span></code> that prevents copies from being made in some cases.
+In all other cases, it dispatches to <code class="docutils literal"><span class="pre">np.dot</span></code> and when the NumPy version is
+new enough, it is in fact an alias for that function, making it a drop-in
+replacement. Example usage of <code class="docutils literal"><span class="pre">fast_dot</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils.extmath</span> <span class="k">import</span> <span class="n">fast_dot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">fast_dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>This function operates optimally on 2-dimensional arrays, both of the same
+dtype, which should be either single or double precision float. If these
+requirements aren&#8217;t met or the BLAS package is not available, the call is
+silently dispatched to <code class="docutils literal"><span class="pre">numpy.dot</span></code>. If you want to be sure when the original
+<code class="docutils literal"><span class="pre">numpy.dot</span></code> has been invoked in a situation where it is suboptimal, you can
+activate the related warning:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils.validation</span> <span class="k">import</span> <span class="n">NonBLASDotWarning</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;always&#39;</span><span class="p">,</span> <span class="n">NonBLASDotWarning</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="section" id="profiling-python-code">
+<span id="id1"></span><h2>Profiling Python code<a class="headerlink" href="#profiling-python-code" title="Permalink to this headline">¶</a></h2>
+<p>In order to profile Python code we recommend to write a script that
+loads and prepare you data and then use the IPython integrated profiler
+for interactively exploring the relevant part for the code.</p>
+<p>Suppose we want to profile the Non Negative Matrix Factorization module
+of the scikit. Let us setup a new IPython session and load the digits
+dataset and as in the <a class="reference internal" href="../auto_examples/classification/plot_digits_classification.html#example-classification-plot-digits-classification-py"><span class="std std-ref">Recognizing hand-written digits</span></a> example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">NMF</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_digits</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">X</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+<p>Before starting the profiling session and engaging in tentative
+optimization iterations, it is important to measure the total execution
+time of the function we want to optimize without any kind of profiler
+overhead and save it somewhere for later reference:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="mi">1</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">1.7</span> <span class="n">s</span> <span class="n">per</span> <span class="n">loop</span>
+</pre></div>
+</div>
+<p>To have have a look at the overall performance profile using the <code class="docutils literal"><span class="pre">%prun</span></code>
+magic command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="o">%</span><span class="n">prun</span> <span class="o">-</span><span class="n">l</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+         <span class="mi">14496</span> <span class="n">function</span> <span class="n">calls</span> <span class="ow">in</span> <span class="mf">1.682</span> <span class="n">CPU</span> <span class="n">seconds</span>
+
+   <span class="n">Ordered</span> <span class="n">by</span><span class="p">:</span> <span class="n">internal</span> <span class="n">time</span>
+   <span class="n">List</span> <span class="n">reduced</span> <span class="kn">from</span> <span class="mi">90</span> <span class="n">to</span> <span class="mi">9</span> <span class="n">due</span> <span class="n">to</span> <span class="n">restriction</span> <span class="o">&lt;</span><span class="s1">&#39;nmf.py&#39;</span><span class="o">&gt;</span>
+
+   <span class="n">ncalls</span>  <span class="n">tottime</span>  <span class="n">percall</span>  <span class="n">cumtime</span>  <span class="n">percall</span> <span class="n">filename</span><span class="p">:</span><span class="n">lineno</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+       <span class="mi">36</span>    <span class="mf">0.609</span>    <span class="mf">0.017</span>    <span class="mf">1.499</span>    <span class="mf">0.042</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">151</span><span class="p">(</span><span class="n">_nls_subproblem</span><span class="p">)</span>
+     <span class="mi">1263</span>    <span class="mf">0.157</span>    <span class="mf">0.000</span>    <span class="mf">0.157</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">18</span><span class="p">(</span><span class="n">_pos</span><span class="p">)</span>
+        <span class="mi">1</span>    <span class="mf">0.053</span>    <span class="mf">0.053</span>    <span class="mf">1.681</span>    <span class="mf">1.681</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">352</span><span class="p">(</span><span class="n">fit_transform</span><span class="p">)</span>
+      <span class="mi">673</span>    <span class="mf">0.008</span>    <span class="mf">0.000</span>    <span class="mf">0.057</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">28</span><span class="p">(</span><span class="n">norm</span><span class="p">)</span>
+        <span class="mi">1</span>    <span class="mf">0.006</span>    <span class="mf">0.006</span>    <span class="mf">0.047</span>    <span class="mf">0.047</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">42</span><span class="p">(</span><span class="n">_initialize_nmf</span><span class="p">)</span>
+       <span class="mi">36</span>    <span class="mf">0.001</span>    <span class="mf">0.000</span>    <span class="mf">0.010</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">36</span><span class="p">(</span><span class="n">_sparseness</span><span class="p">)</span>
+       <span class="mi">30</span>    <span class="mf">0.001</span>    <span class="mf">0.000</span>    <span class="mf">0.001</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">23</span><span class="p">(</span><span class="n">_neg</span><span class="p">)</span>
+        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">337</span><span class="p">(</span><span class="n">__init__</span><span class="p">)</span>
+        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">1.681</span>    <span class="mf">1.681</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">461</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">tottime</span></code> column is the most interesting: it gives to total time spent
+executing the code of a given function ignoring the time spent in executing the
+sub-functions. The real total time (local code + sub-function calls) is given by
+the <code class="docutils literal"><span class="pre">cumtime</span></code> column.</p>
+<p>Note the use of the <code class="docutils literal"><span class="pre">-l</span> <span class="pre">nmf.py</span></code> that restricts the output to lines that
+contains the &#8220;nmf.py&#8221; string. This is useful to have a quick look at the hotspot
+of the nmf Python module it-self ignoring anything else.</p>
+<p>Here is the beginning of the output of the same command without the <code class="docutils literal"><span class="pre">-l</span> <span class="pre">nmf.py</span></code>
+filter:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">%</span><span class="n">prun</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+         <span class="mi">16159</span> <span class="n">function</span> <span class="n">calls</span> <span class="ow">in</span> <span class="mf">1.840</span> <span class="n">CPU</span> <span class="n">seconds</span>
+
+   <span class="n">Ordered</span> <span class="n">by</span><span class="p">:</span> <span class="n">internal</span> <span class="n">time</span>
+
+   <span class="n">ncalls</span>  <span class="n">tottime</span>  <span class="n">percall</span>  <span class="n">cumtime</span>  <span class="n">percall</span> <span class="n">filename</span><span class="p">:</span><span class="n">lineno</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+     <span class="mi">2833</span>    <span class="mf">0.653</span>    <span class="mf">0.000</span>    <span class="mf">0.653</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">numpy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">_dotblas</span><span class="o">.</span><span class="n">dot</span><span class="p">}</span>
+       <span class="mi">46</span>    <span class="mf">0.651</span>    <span class="mf">0.014</span>    <span class="mf">1.636</span>    <span class="mf">0.036</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">151</span><span class="p">(</span><span class="n">_nls_subproblem</span><span class="p">)</span>
+     <span class="mi">1397</span>    <span class="mf">0.171</span>    <span class="mf">0.000</span>    <span class="mf">0.171</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">18</span><span class="p">(</span><span class="n">_pos</span><span class="p">)</span>
+     <span class="mi">2780</span>    <span class="mf">0.167</span>    <span class="mf">0.000</span>    <span class="mf">0.167</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s1">&#39;sum&#39;</span> <span class="n">of</span> <span class="s1">&#39;numpy.ndarray&#39;</span> <span class="n">objects</span><span class="p">}</span>
+        <span class="mi">1</span>    <span class="mf">0.064</span>    <span class="mf">0.064</span>    <span class="mf">1.840</span>    <span class="mf">1.840</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">352</span><span class="p">(</span><span class="n">fit_transform</span><span class="p">)</span>
+     <span class="mi">1542</span>    <span class="mf">0.043</span>    <span class="mf">0.000</span>    <span class="mf">0.043</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s1">&#39;flatten&#39;</span> <span class="n">of</span> <span class="s1">&#39;numpy.ndarray&#39;</span> <span class="n">objects</span><span class="p">}</span>
+      <span class="mi">337</span>    <span class="mf">0.019</span>    <span class="mf">0.000</span>    <span class="mf">0.019</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s1">&#39;all&#39;</span> <span class="n">of</span> <span class="s1">&#39;numpy.ndarray&#39;</span> <span class="n">objects</span><span class="p">}</span>
+     <span class="mi">2734</span>    <span class="mf">0.011</span>    <span class="mf">0.000</span>    <span class="mf">0.181</span>    <span class="mf">0.000</span> <span class="n">fromnumeric</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1185</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+        <span class="mi">2</span>    <span class="mf">0.010</span>    <span class="mf">0.005</span>    <span class="mf">0.010</span>    <span class="mf">0.005</span> <span class="p">{</span><span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lapack_lite</span><span class="o">.</span><span class="n">dgesdd</span><span class="p">}</span>
+      <span class="mi">748</span>    <span class="mf">0.009</span>    <span class="mf">0.000</span>    <span class="mf">0.065</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">28</span><span class="p">(</span><span class="n">norm</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>The above results show that the execution is largely dominated by
+dot products operations (delegated to blas). Hence there is probably
+no huge gain to expect by rewriting this code in Cython or C/C++: in
+this case out of the 1.7s total execution time, almost 0.7s are spent
+in compiled code we can consider optimal. By rewriting the rest of the
+Python code and assuming we could achieve a 1000% boost on this portion
+(which is highly unlikely given the shallowness of the Python loops),
+we would not gain more than a 2.4x speed-up globally.</p>
+<p>Hence major improvements can only be achieved by <strong>algorithmic
+improvements</strong> in this particular example (e.g. trying to find operation
+that are both costly and useless to avoid computing then rather than
+trying to optimize their implementation).</p>
+<p>It is however still interesting to check what&#8217;s happening inside the
+<code class="docutils literal"><span class="pre">_nls_subproblem</span></code> function which is the hotspot if we only consider
+Python code: it takes around 100% of the cumulated time of the module. In
+order to better understand the profile of this specific function, let
+us install <code class="docutils literal"><span class="pre">line-prof</span></code> and wire it to IPython:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install line-profiler
+</pre></div>
+</div>
+<ul>
+<li><p class="first"><strong>Under IPython &lt;= 0.10</strong>, edit <code class="docutils literal"><span class="pre">~/.ipython/ipy_user_conf.py</span></code> and
+ensure the following lines are present:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">IPython.ipapi</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">ipapi</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Towards the end of the file, define the <code class="docutils literal"><span class="pre">%lprun</span></code> magic:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">line_profiler</span>
+<span class="n">ip</span><span class="o">.</span><span class="n">expose_magic</span><span class="p">(</span><span class="s1">&#39;lprun&#39;</span><span class="p">,</span> <span class="n">line_profiler</span><span class="o">.</span><span class="n">magic_lprun</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Under IPython 0.11+</strong>, first create a configuration profile:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ipython profile create
+</pre></div>
+</div>
+<p>Then create a file named <code class="docutils literal"><span class="pre">~/.ipython/extensions/line_profiler_ext.py</span></code> with
+the following content:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">line_profiler</span>
+
+<span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+    <span class="n">ip</span><span class="o">.</span><span class="n">define_magic</span><span class="p">(</span><span class="s1">&#39;lprun&#39;</span><span class="p">,</span> <span class="n">line_profiler</span><span class="o">.</span><span class="n">magic_lprun</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then register it in <code class="docutils literal"><span class="pre">~/.ipython/profile_default/ipython_config.py</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;line_profiler_ext&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">c</span><span class="o">.</span><span class="n">InteractiveShellApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;line_profiler_ext&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>This will register the <code class="docutils literal"><span class="pre">%lprun</span></code> magic command in the IPython terminal
+application and the other frontends such as qtconsole and notebook.</p>
+</li>
+</ul>
+<p>Now restart IPython and let us use this new toy:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_digits</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">sklearn.decomposition.nmf</span> <span class="k">import</span> <span class="n">_nls_subproblem</span><span class="p">,</span> <span class="n">NMF</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">X</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="o">%</span><span class="n">lprun</span> <span class="o">-</span><span class="n">f</span> <span class="n">_nls_subproblem</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">Timer</span> <span class="n">unit</span><span class="p">:</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">06</span> <span class="n">s</span>
+
+<span class="n">File</span><span class="p">:</span> <span class="n">sklearn</span><span class="o">/</span><span class="n">decomposition</span><span class="o">/</span><span class="n">nmf</span><span class="o">.</span><span class="n">py</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">_nls_subproblem</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">137</span>
+<span class="n">Total</span> <span class="n">time</span><span class="p">:</span> <span class="mf">1.73153</span> <span class="n">s</span>
+
+<span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
+<span class="o">==============================================================</span>
+   <span class="mi">137</span>                                           <span class="k">def</span> <span class="nf">_nls_subproblem</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">H_init</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">):</span>
+   <span class="mi">138</span>                                               <span class="s2">&quot;&quot;&quot;Non-negative least square solver</span>
+<span class="s2">   ...</span>
+<span class="s2">   170                                               &quot;&quot;&quot;</span>
+   <span class="mi">171</span>        <span class="mi">48</span>         <span class="mi">5863</span>    <span class="mf">122.1</span>      <span class="mf">0.3</span>      <span class="k">if</span> <span class="p">(</span><span class="n">H_init</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+   <span class="mi">172</span>                                                   <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Negative values in H_init passed to NLS solver.&quot;</span><span class="p">)</span>
+   <span class="mi">173</span>
+   <span class="mi">174</span>        <span class="mi">48</span>          <span class="mi">139</span>      <span class="mf">2.9</span>      <span class="mf">0.0</span>      <span class="n">H</span> <span class="o">=</span> <span class="n">H_init</span>
+   <span class="mi">175</span>        <span class="mi">48</span>       <span class="mi">112141</span>   <span class="mf">2336.3</span>      <span class="mf">5.8</span>      <span class="n">WtV</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+   <span class="mi">176</span>        <span class="mi">48</span>        <span class="mi">16144</span>    <span class="mf">336.3</span>      <span class="mf">0.8</span>      <span class="n">WtW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+   <span class="mi">177</span>
+   <span class="mi">178</span>                                               <span class="c1"># values justified in the paper</span>
+   <span class="mi">179</span>        <span class="mi">48</span>          <span class="mi">144</span>      <span class="mf">3.0</span>      <span class="mf">0.0</span>      <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
+   <span class="mi">180</span>        <span class="mi">48</span>          <span class="mi">113</span>      <span class="mf">2.4</span>      <span class="mf">0.0</span>      <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.1</span>
+   <span class="mi">181</span>       <span class="mi">638</span>         <span class="mi">1880</span>      <span class="mf">2.9</span>      <span class="mf">0.1</span>      <span class="k">for</span> <span class="n">n_iter</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+   <span class="mi">182</span>       <span class="mi">638</span>       <span class="mi">195133</span>    <span class="mf">305.9</span>     <span class="mf">10.2</span>          <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">WtW</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span> <span class="o">-</span> <span class="n">WtV</span>
+   <span class="mi">183</span>       <span class="mi">638</span>       <span class="mi">495761</span>    <span class="mf">777.1</span>     <span class="mf">25.9</span>          <span class="n">proj_gradient</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">grad</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">grad</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">H</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)])</span>
+   <span class="mi">184</span>       <span class="mi">638</span>         <span class="mi">2449</span>      <span class="mf">3.8</span>      <span class="mf">0.1</span>          <span class="k">if</span> <span class="n">proj_gradient</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+   <span class="mi">185</span>        <span class="mi">48</span>          <span class="mi">130</span>      <span class="mf">2.7</span>      <span class="mf">0.0</span>              <span class="k">break</span>
+   <span class="mi">186</span>
+   <span class="mi">187</span>      <span class="mi">1474</span>         <span class="mi">4474</span>      <span class="mf">3.0</span>      <span class="mf">0.2</span>          <span class="k">for</span> <span class="n">inner_iter</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+   <span class="mi">188</span>      <span class="mi">1474</span>        <span class="mi">83833</span>     <span class="mf">56.9</span>      <span class="mf">4.4</span>              <span class="n">Hn</span> <span class="o">=</span> <span class="n">H</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">grad</span>
+   <span class="mi">189</span>                                                       <span class="c1"># Hn = np.where(Hn &gt; 0, Hn, 0)</span>
+   <span class="mi">190</span>      <span class="mi">1474</span>       <span class="mi">194239</span>    <span class="mf">131.8</span>     <span class="mf">10.1</span>              <span class="n">Hn</span> <span class="o">=</span> <span class="n">_pos</span><span class="p">(</span><span class="n">Hn</span><span class="p">)</span>
+   <span class="mi">191</span>      <span class="mi">1474</span>        <span class="mi">48858</span>     <span class="mf">33.1</span>      <span class="mf">2.5</span>              <span class="n">d</span> <span class="o">=</span> <span class="n">Hn</span> <span class="o">-</span> <span class="n">H</span>
+   <span class="mi">192</span>      <span class="mi">1474</span>       <span class="mi">150407</span>    <span class="mf">102.0</span>      <span class="mf">7.8</span>              <span class="n">gradd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">grad</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span>
+   <span class="mi">193</span>      <span class="mi">1474</span>       <span class="mi">515390</span>    <span class="mf">349.7</span>     <span class="mf">26.9</span>              <span class="n">dQd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">WtW</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span>
+   <span class="o">...</span>
+</pre></div>
+</div>
+<p>By looking at the top values of the <code class="docutils literal"><span class="pre">%</span> <span class="pre">Time</span></code> column it is really easy to
+pin-point the most expensive expressions that would deserve additional care.</p>
+</div>
+<div class="section" id="memory-usage-profiling">
+<h2>Memory usage profiling<a class="headerlink" href="#memory-usage-profiling" title="Permalink to this headline">¶</a></h2>
+<p>You can analyze in detail the memory usage of any Python code with the help of
+<a class="reference external" href="http://pypi.python.org/pypi/memory_profiler">memory_profiler</a>. First,
+install the latest version:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install -U memory_profiler
+</pre></div>
+</div>
+<p>Then, setup the magics in a manner similar to <code class="docutils literal"><span class="pre">line_profiler</span></code>.</p>
+<ul>
+<li><p class="first"><strong>Under IPython &lt;= 0.10</strong>, edit <code class="docutils literal"><span class="pre">~/.ipython/ipy_user_conf.py</span></code> and
+ensure the following lines are present:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">IPython.ipapi</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">ipapi</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Towards the end of the file, define the <code class="docutils literal"><span class="pre">%memit</span></code> and <code class="docutils literal"><span class="pre">%mprun</span></code> magics:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">memory_profiler</span>
+<span class="n">ip</span><span class="o">.</span><span class="n">expose_magic</span><span class="p">(</span><span class="s1">&#39;memit&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_memit</span><span class="p">)</span>
+<span class="n">ip</span><span class="o">.</span><span class="n">expose_magic</span><span class="p">(</span><span class="s1">&#39;mprun&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_mprun</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Under IPython 0.11+</strong>, first create a configuration profile:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ipython profile create
+</pre></div>
+</div>
+<p>Then create a file named <code class="docutils literal"><span class="pre">~/.ipython/extensions/memory_profiler_ext.py</span></code>
+with the following content:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">memory_profiler</span>
+
+<span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+    <span class="n">ip</span><span class="o">.</span><span class="n">define_magic</span><span class="p">(</span><span class="s1">&#39;memit&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_memit</span><span class="p">)</span>
+    <span class="n">ip</span><span class="o">.</span><span class="n">define_magic</span><span class="p">(</span><span class="s1">&#39;mprun&#39;</span><span class="p">,</span> <span class="n">memory_profiler</span><span class="o">.</span><span class="n">magic_mprun</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then register it in <code class="docutils literal"><span class="pre">~/.ipython/profile_default/ipython_config.py</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;memory_profiler_ext&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">c</span><span class="o">.</span><span class="n">InteractiveShellApp</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;memory_profiler_ext&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>This will register the <code class="docutils literal"><span class="pre">%memit</span></code> and <code class="docutils literal"><span class="pre">%mprun</span></code> magic commands in the
+IPython terminal application and the other frontends such as qtconsole and
+notebook.</p>
+</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">%mprun</span></code> is useful to examine, line-by-line, the memory usage of key
+functions in your program. It is very similar to <code class="docutils literal"><span class="pre">%lprun</span></code>, discussed in the
+previous section. For example, from the <code class="docutils literal"><span class="pre">memory_profiler</span></code> <code class="docutils literal"><span class="pre">examples</span></code>
+directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="kn">from</span> <span class="nn">example</span> <span class="k">import</span> <span class="n">my_func</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">%</span><span class="n">mprun</span> <span class="o">-</span><span class="n">f</span> <span class="n">my_func</span> <span class="n">my_func</span><span class="p">()</span>
+<span class="n">Filename</span><span class="p">:</span> <span class="n">example</span><span class="o">.</span><span class="n">py</span>
+
+<span class="n">Line</span> <span class="c1">#    Mem usage  Increment   Line Contents</span>
+<span class="o">==============================================</span>
+     <span class="mi">3</span>                           <span class="nd">@profile</span>
+     <span class="mi">4</span>      <span class="mf">5.97</span> <span class="n">MB</span>    <span class="mf">0.00</span> <span class="n">MB</span>   <span class="k">def</span> <span class="nf">my_func</span><span class="p">():</span>
+     <span class="mi">5</span>     <span class="mf">13.61</span> <span class="n">MB</span>    <span class="mf">7.64</span> <span class="n">MB</span>       <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
+     <span class="mi">6</span>    <span class="mf">166.20</span> <span class="n">MB</span>  <span class="mf">152.59</span> <span class="n">MB</span>       <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">7</span><span class="p">)</span>
+     <span class="mi">7</span>     <span class="mf">13.61</span> <span class="n">MB</span> <span class="o">-</span><span class="mf">152.59</span> <span class="n">MB</span>       <span class="k">del</span> <span class="n">b</span>
+     <span class="mi">8</span>     <span class="mf">13.61</span> <span class="n">MB</span>    <span class="mf">0.00</span> <span class="n">MB</span>       <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+<p>Another useful magic that <code class="docutils literal"><span class="pre">memory_profiler</span></code> defines is <code class="docutils literal"><span class="pre">%memit</span></code>, which is
+analogous to <code class="docutils literal"><span class="pre">%timeit</span></code>. It can be used as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="o">%</span><span class="n">memit</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="n">e7</span><span class="p">)</span>
+<span class="n">maximum</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">76.402344</span> <span class="n">MB</span> <span class="n">per</span> <span class="n">loop</span>
+</pre></div>
+</div>
+<p>For more details, see the docstrings of the magics, using <code class="docutils literal"><span class="pre">%memit?</span></code> and
+<code class="docutils literal"><span class="pre">%mprun?</span></code>.</p>
+</div>
+<div class="section" id="performance-tips-for-the-cython-developer">
+<h2>Performance tips for the Cython developer<a class="headerlink" href="#performance-tips-for-the-cython-developer" title="Permalink to this headline">¶</a></h2>
+<p>If profiling of the Python code reveals that the Python interpreter
+overhead is larger by one order of magnitude or more than the cost of the
+actual numerical computation (e.g. <code class="docutils literal"><span class="pre">for</span></code> loops over vector components,
+nested evaluation of conditional expression, scalar arithmetic...), it
+is probably adequate to extract the hotspot portion of the code as a
+standalone function in a <code class="docutils literal"><span class="pre">.pyx</span></code> file, add static type declarations and
+then use Cython to generate a C program suitable to be compiled as a
+Python extension module.</p>
+<p>The official documentation available at <a class="reference external" href="http://docs.cython.org/">http://docs.cython.org/</a> contains
+a tutorial and reference guide for developing such a module. In the
+following we will just highlight a couple of tricks that we found
+important in practice on the existing cython codebase in the scikit-learn
+project.</p>
+<p>TODO: html report, type declarations, bound checks, division by zero checks,
+memory alignment, direct blas calls...</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.euroscipy.org/file/3696?vid=download">http://www.euroscipy.org/file/3696?vid=download</a></li>
+<li><a class="reference external" href="http://conference.scipy.org/proceedings/SciPy2009/paper_1/">http://conference.scipy.org/proceedings/SciPy2009/paper_1/</a></li>
+<li><a class="reference external" href="http://conference.scipy.org/proceedings/SciPy2009/paper_2/">http://conference.scipy.org/proceedings/SciPy2009/paper_2/</a></li>
+</ul>
+</div>
+<div class="section" id="profiling-compiled-extensions">
+<span id="profiling-compiled-extension"></span><h2>Profiling compiled extensions<a class="headerlink" href="#profiling-compiled-extensions" title="Permalink to this headline">¶</a></h2>
+<p>When working with compiled extensions (written in C/C++ with a wrapper or
+directly as Cython extension), the default Python profiler is useless:
+we need a dedicated tool to introspect what&#8217;s happening inside the
+compiled extension it-self.</p>
+<div class="section" id="using-yep-and-google-perftools">
+<h3>Using yep and google-perftools<a class="headerlink" href="#using-yep-and-google-perftools" title="Permalink to this headline">¶</a></h3>
+<p>Easy profiling without special compilation options use yep:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://pypi.python.org/pypi/yep">http://pypi.python.org/pypi/yep</a></li>
+<li><a class="reference external" href="http://fseoane.net/blog/2011/a-profiler-for-python-extensions/">http://fseoane.net/blog/2011/a-profiler-for-python-extensions/</a></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">google-perftools provides a nice &#8216;line by line&#8217; report mode that
+can be triggered with the <code class="docutils literal"><span class="pre">--lines</span></code> option. However this
+does not seem to work correctly at the time of writing. This
+issue can be tracked on the <a class="reference external" href="https://code.google.com/p/google-perftools/issues/detail?id=326">project issue tracker</a>.</p>
+</div>
+</div>
+<div class="section" id="using-gprof">
+<h3>Using gprof<a class="headerlink" href="#using-gprof" title="Permalink to this headline">¶</a></h3>
+<p>In order to profile compiled Python extensions one could use <code class="docutils literal"><span class="pre">gprof</span></code>
+after having recompiled the project with <code class="docutils literal"><span class="pre">gcc</span> <span class="pre">-pg</span></code> and using the
+<code class="docutils literal"><span class="pre">python-dbg</span></code> variant of the interpreter on debian / ubuntu: however
+this approach requires to also have <code class="docutils literal"><span class="pre">numpy</span></code> and <code class="docutils literal"><span class="pre">scipy</span></code> recompiled
+with <code class="docutils literal"><span class="pre">-pg</span></code> which is rather complicated to get working.</p>
+<p>Fortunately there exist two alternative profilers that don&#8217;t require you to
+recompile everything.</p>
+</div>
+<div class="section" id="using-valgrind-callgrind-kcachegrind">
+<h3>Using valgrind / callgrind / kcachegrind<a class="headerlink" href="#using-valgrind-callgrind-kcachegrind" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+</div>
+<div class="section" id="multi-core-parallelism-using-joblib-parallel">
+<h2>Multi-core parallelism using <code class="docutils literal"><span class="pre">joblib.Parallel</span></code><a class="headerlink" href="#multi-core-parallelism-using-joblib-parallel" title="Permalink to this headline">¶</a></h2>
+<p>TODO: give a simple teaser example here.</p>
+<p>Checkout the official joblib documentation:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://packages.python.org/joblib/">http://packages.python.org/joblib/</a></li>
+</ul>
+</div>
+<div class="section" id="a-sample-algorithmic-trick-warm-restarts-for-cross-validation">
+<span id="warm-restarts"></span><h2>A sample algorithmic trick: warm restarts for cross validation<a class="headerlink" href="#a-sample-algorithmic-trick-warm-restarts-for-cross-validation" title="Permalink to this headline">¶</a></h2>
+<p>TODO: demonstrate the warm restart tricks for cross validation of linear
+regression with Coordinate Descent.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/developers/performance.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="utilities.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

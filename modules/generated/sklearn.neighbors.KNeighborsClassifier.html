@@ -1,0 +1,660 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.neighbors.KNeighborsClassifier &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.neighbors.RadiusNeighborsClassifier" href="sklearn.neighbors.RadiusNeighborsClassifier.html" />
+    <link rel="prev" title="sklearn.neighbors.NearestNeighbors" href="sklearn.neighbors.NearestNeighbors.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.neighbors.NearestNeighbors.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.neigh...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.neighbors.NearestNeighbors
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.neighbors</span></code>.KNeighborsClassifier</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-neighbors-kneighborsclassifier">Examples using <code class="docutils literal"><span class="pre">sklearn.neighbors.KNeighborsClassifier</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-neighbors-kneighborsclassifier">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.neighbors" title="sklearn.neighbors"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.neighbors</span></code></a>.KNeighborsClassifier<a class="headerlink" href="#sklearn-neighbors-kneighborsclassifier" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.neighbors.KNeighborsClassifier">
+<em class="property">class </em><code class="descclassname">sklearn.neighbors.</code><code class="descname">KNeighborsClassifier</code><span class="sig-paren">(</span><em>n_neighbors=5</em>, <em>weights='uniform'</em>, <em>algorithm='auto'</em>, <em>leaf_size=30</em>, <em>p=2</em>, <em>metric='minkowski'</em>, <em>metric_params=None</em>, <em>n_jobs=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/neighbors/classification.py#L23"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classifier implementing the k-nearest neighbors vote.</p>
+<p>Read more in the <a class="reference internal" href="../neighbors.html#classification"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_neighbors</strong> : int, optional (default = 5)</p>
+<blockquote>
+<div><p>Number of neighbors to use by default for <code class="xref py py-meth docutils literal"><span class="pre">k_neighbors</span></code> queries.</p>
+</div></blockquote>
+<p><strong>weights</strong> : str or callable, optional (default = &#8216;uniform&#8217;)</p>
+<blockquote>
+<div><p>weight function used in prediction.  Possible values:</p>
+<ul class="simple">
+<li>&#8216;uniform&#8217; : uniform weights.  All points in each neighborhood
+are weighted equally.</li>
+<li>&#8216;distance&#8217; : weight points by the inverse of their distance.
+in this case, closer neighbors of a query point will have a
+greater influence than neighbors which are further away.</li>
+<li>[callable] : a user-defined function which accepts an
+array of distances, and returns an array of the same shape
+containing the weights.</li>
+</ul>
+</div></blockquote>
+<p><strong>algorithm</strong> : {&#8216;auto&#8217;, &#8216;ball_tree&#8217;, &#8216;kd_tree&#8217;, &#8216;brute&#8217;}, optional</p>
+<blockquote>
+<div><p>Algorithm used to compute the nearest neighbors:</p>
+<ul class="simple">
+<li>&#8216;ball_tree&#8217; will use <a class="reference internal" href="sklearn.neighbors.BallTree.html#sklearn.neighbors.BallTree" title="sklearn.neighbors.BallTree"><code class="xref py py-class docutils literal"><span class="pre">BallTree</span></code></a></li>
+<li>&#8216;kd_tree&#8217; will use <a class="reference internal" href="sklearn.neighbors.KDTree.html#sklearn.neighbors.KDTree" title="sklearn.neighbors.KDTree"><code class="xref py py-class docutils literal"><span class="pre">KDTree</span></code></a></li>
+<li>&#8216;brute&#8217; will use a brute-force search.</li>
+<li>&#8216;auto&#8217; will attempt to decide the most appropriate algorithm
+based on the values passed to <a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.fit" title="sklearn.neighbors.KNeighborsClassifier.fit"><code class="xref py py-meth docutils literal"><span class="pre">fit</span></code></a> method.</li>
+</ul>
+<p>Note: fitting on sparse input will override the setting of
+this parameter, using brute force.</p>
+</div></blockquote>
+<p><strong>leaf_size</strong> : int, optional (default = 30)</p>
+<blockquote>
+<div><p>Leaf size passed to BallTree or KDTree.  This can affect the
+speed of the construction and query, as well as the memory
+required to store the tree.  The optimal value depends on the
+nature of the problem.</p>
+</div></blockquote>
+<p><strong>metric</strong> : string or DistanceMetric object (default = &#8216;minkowski&#8217;)</p>
+<blockquote>
+<div><p>the distance metric to use for the tree.  The default metric is
+minkowski, and with p=2 is equivalent to the standard Euclidean
+metric. See the documentation of the DistanceMetric class for a
+list of available metrics.</p>
+</div></blockquote>
+<p><strong>p</strong> : integer, optional (default = 2)</p>
+<blockquote>
+<div><p>Power parameter for the Minkowski metric. When p = 1, this is
+equivalent to using manhattan_distance (l1), and euclidean_distance
+(l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.</p>
+</div></blockquote>
+<p><strong>metric_params</strong> : dict, optional (default = None)</p>
+<blockquote>
+<div><p>Additional keyword arguments for the metric function.</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : int, optional (default = 1)</p>
+<blockquote class="last">
+<div><p>The number of parallel jobs to run for neighbors search.
+If <code class="docutils literal"><span class="pre">-1</span></code>, then the number of jobs is set to the number of CPU cores.
+Doesn&#8217;t affect <a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.fit" title="sklearn.neighbors.KNeighborsClassifier.fit"><code class="xref py py-meth docutils literal"><span class="pre">fit</span></code></a> method.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="sklearn.neighbors.RadiusNeighborsClassifier.html#sklearn.neighbors.RadiusNeighborsClassifier" title="sklearn.neighbors.RadiusNeighborsClassifier"><code class="xref py py-obj docutils literal"><span class="pre">RadiusNeighborsClassifier</span></code></a>, <a class="reference internal" href="sklearn.neighbors.KNeighborsRegressor.html#sklearn.neighbors.KNeighborsRegressor" title="sklearn.neighbors.KNeighborsRegressor"><code class="xref py py-obj docutils literal"><span class="pre">KNeighborsRegressor</span></code></a>, <a class="reference internal" href="sklearn.neighbors.RadiusNeighborsRegressor.html#sklearn.neighbors.RadiusNeighborsRegressor" title="sklearn.neighbors.RadiusNeighborsRegressor"><code class="xref py py-obj docutils literal"><span class="pre">RadiusNeighborsRegressor</span></code></a>, <a class="reference internal" href="sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors" title="sklearn.neighbors.NearestNeighbors"><code class="xref py py-obj docutils literal"><span class="pre">NearestNeighbors</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>See <a class="reference internal" href="../neighbors.html#neighbors"><span class="std std-ref">Nearest Neighbors</span></a> in the online documentation
+for a discussion of the choice of <code class="docutils literal"><span class="pre">algorithm</span></code> and <code class="docutils literal"><span class="pre">leaf_size</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Regarding the Nearest Neighbors algorithms, if it is found that two
+neighbors, neighbor <cite>k+1</cite> and <cite>k</cite>, have identical distances
+but different labels, the results will depend on the ordering of the
+training data.</p>
+</div>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm">https://en.wikipedia.org/wiki/K-nearest_neighbor_algorithm</a></p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> 
+<span class="go">KNeighborsClassifier(...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">neigh</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">1.1</span><span class="p">]]))</span>
+<span class="go">[0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">neigh</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">]]))</span>
+<span class="go">[[ 0.66666667  0.33333333]]</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.fit" title="sklearn.neighbors.KNeighborsClassifier.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X,&nbsp;y)</td>
+<td>Fit the model using X as training data and y as target values</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.get_params" title="sklearn.neighbors.KNeighborsClassifier.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.kneighbors" title="sklearn.neighbors.KNeighborsClassifier.kneighbors"><code class="xref py py-obj docutils literal"><span class="pre">kneighbors</span></code></a>([X,&nbsp;n_neighbors,&nbsp;return_distance])</td>
+<td>Finds the K-neighbors of a point.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.kneighbors_graph" title="sklearn.neighbors.KNeighborsClassifier.kneighbors_graph"><code class="xref py py-obj docutils literal"><span class="pre">kneighbors_graph</span></code></a>([X,&nbsp;n_neighbors,&nbsp;mode])</td>
+<td>Computes the (weighted) graph of k-Neighbors for points in X</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.predict" title="sklearn.neighbors.KNeighborsClassifier.predict"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(X)</td>
+<td>Predict the class labels for the provided data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.predict_proba" title="sklearn.neighbors.KNeighborsClassifier.predict_proba"><code class="xref py py-obj docutils literal"><span class="pre">predict_proba</span></code></a>(X)</td>
+<td>Return probability estimates for the test data X.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.score" title="sklearn.neighbors.KNeighborsClassifier.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Returns the mean accuracy on the given test data and labels.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.neighbors.KNeighborsClassifier.set_params" title="sklearn.neighbors.KNeighborsClassifier.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.neighbors.KNeighborsClassifier.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_neighbors=5</em>, <em>weights='uniform'</em>, <em>algorithm='auto'</em>, <em>leaf_size=30</em>, <em>p=2</em>, <em>metric='minkowski'</em>, <em>metric_params=None</em>, <em>n_jobs=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/neighbors/classification.py#L118"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KNeighborsClassifier.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/neighbors/base.py#L747"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model using X as training data and y as target values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix, BallTree, KDTree}</p>
+<blockquote>
+<div><p>Training data. If array or matrix, shape [n_samples, n_features],
+or [n_samples, n_samples] if metric=&#8217;precomputed&#8217;.</p>
+</div></blockquote>
+<p><strong>y</strong> : {array-like, sparse matrix}</p>
+<blockquote class="last">
+<div><p>Target values of shape = [n_samples] or [n_samples, n_outputs]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KNeighborsClassifier.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KNeighborsClassifier.kneighbors">
+<code class="descname">kneighbors</code><span class="sig-paren">(</span><em>X=None</em>, <em>n_neighbors=None</em>, <em>return_distance=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/neighbors/base.py#L269"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier.kneighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the K-neighbors of a point.</p>
+<p>Returns indices of and distances to the neighbors of each point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_query, n_features),                 or (n_query, n_indexed) if metric == &#8216;precomputed&#8217;</p>
+<blockquote>
+<div><p>The query point or points.
+If not provided, neighbors of each indexed point are returned.
+In this case, the query point is not considered its own neighbor.</p>
+</div></blockquote>
+<p><strong>n_neighbors</strong> : int</p>
+<blockquote>
+<div><p>Number of neighbors to get (default is the value
+passed to the constructor).</p>
+</div></blockquote>
+<p><strong>return_distance</strong> : boolean, optional. Defaults to True.</p>
+<blockquote>
+<div><p>If False, distances will not be returned</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dist</strong> : array</p>
+<blockquote>
+<div><p>Array representing the lengths to points, only present if
+return_distance=True</p>
+</div></blockquote>
+<p><strong>ind</strong> : array</p>
+<blockquote class="last">
+<div><p>Indices of the nearest points in the population matrix.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>In the following example, we construct a NeighborsClassifier
+class from an array representing our data set and ask who&#8217;s
+the closest point to [1,1,1]</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">samples</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">NearestNeighbors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> 
+<span class="go">NearestNeighbors(algorithm=&#39;auto&#39;, leaf_size=30, ...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">neigh</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]))</span> 
+<span class="go">(array([[ 0.5]]), array([[2]]...))</span>
+</pre></div>
+</div>
+<p>As you can see, it returns [[0.5]], and [[2]], which means that the
+element is at distance 0.5 and is the third element of samples
+(indexes start at 0). You can also query for multiple points:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+<span class="go">array([[1],</span>
+<span class="go">       [2]]...)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KNeighborsClassifier.kneighbors_graph">
+<code class="descname">kneighbors_graph</code><span class="sig-paren">(</span><em>X=None</em>, <em>n_neighbors=None</em>, <em>mode='connectivity'</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/neighbors/base.py#L420"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier.kneighbors_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the (weighted) graph of k-Neighbors for points in X</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_query, n_features),                 or (n_query, n_indexed) if metric == &#8216;precomputed&#8217;</p>
+<blockquote>
+<div><p>The query point or points.
+If not provided, neighbors of each indexed point are returned.
+In this case, the query point is not considered its own neighbor.</p>
+</div></blockquote>
+<p><strong>n_neighbors</strong> : int</p>
+<blockquote>
+<div><p>Number of neighbors for each sample.
+(default is value passed to the constructor).</p>
+</div></blockquote>
+<p><strong>mode</strong> : {&#8216;connectivity&#8217;, &#8216;distance&#8217;}, optional</p>
+<blockquote>
+<div><p>Type of returned matrix: &#8216;connectivity&#8217; will return the
+connectivity matrix with ones and zeros, in &#8216;distance&#8217; the
+edges are Euclidean distance between points.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>A</strong> : sparse matrix in CSR format, shape = [n_samples, n_samples_fit]</p>
+<blockquote class="last">
+<div><p>n_samples_fit is the number of samples in the fitted data
+A[i, j] is assigned the weight of edge that connects i to j.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors.radius_neighbors_graph" title="sklearn.neighbors.NearestNeighbors.radius_neighbors_graph"><code class="xref py py-obj docutils literal"><span class="pre">NearestNeighbors.radius_neighbors_graph</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">NearestNeighbors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neigh</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+<span class="go">NearestNeighbors(algorithm=&#39;auto&#39;, leaf_size=30, ...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">neigh</span><span class="o">.</span><span class="n">kneighbors_graph</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[ 1.,  0.,  1.],</span>
+<span class="go">       [ 0.,  1.,  1.],</span>
+<span class="go">       [ 1.,  0.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KNeighborsClassifier.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/neighbors/classification.py#L129"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict the class labels for the provided data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_query, n_features),                 or (n_query, n_indexed) if metric == &#8216;precomputed&#8217;</p>
+<blockquote>
+<div><p>Test samples.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y</strong> : array of shape [n_samples] or [n_samples, n_outputs]</p>
+<blockquote class="last">
+<div><p>Class labels for each data sample.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KNeighborsClassifier.predict_proba">
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/neighbors/classification.py#L172"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier.predict_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return probability estimates for the test data X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape (n_query, n_features),                 or (n_query, n_indexed) if metric == &#8216;precomputed&#8217;</p>
+<blockquote>
+<div><p>Test samples.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>p</strong> : array of shape = [n_samples, n_classes], or a list of n_outputs</p>
+<blockquote class="last">
+<div><p>of such arrays if n_outputs &gt; 1.
+The class probabilities of the input samples. Classes are ordered
+by lexicographic order.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KNeighborsClassifier.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L324"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean accuracy on the given test data and labels.</p>
+<p>In multi-label classification, this is the subset accuracy
+which is a harsh metric since you require for each sample that
+each label set be correctly predicted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like, shape = (n_samples, n_features)</p>
+<blockquote>
+<div><p>Test samples.</p>
+</div></blockquote>
+<p><strong>y</strong> : array-like, shape = (n_samples) or (n_samples, n_outputs)</p>
+<blockquote>
+<div><p>True labels for X.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like, shape = [n_samples], optional</p>
+<blockquote>
+<div><p>Sample weights.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float</p>
+<blockquote class="last">
+<div><p>Mean accuracy of self.predict(X) wrt. y.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.KNeighborsClassifier.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.neighbors.KNeighborsClassifier.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-neighbors-kneighborsclassifier">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.neighbors.KNeighborsClassifier</span></code><a class="headerlink" href="#examples-using-sklearn-neighbors-kneighborsclassifier" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="A comparison of a several classifiers in scikit-learn on synthetic datasets. The point of this ..."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/classification/plot_classifier_comparison.html"><img alt="../../_images/plot_classifier_comparison1.png" src="../../_images/plot_classifier_comparison1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/classification/plot_classifier_comparison.html#example-classification-plot-classifier-comparison-py"><span class="std std-ref">Classifier comparison</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Plot the decision boundaries of a `VotingClassifier` for two features of the Iris dataset."><div class="figure" id="id2">
+<a class="reference external image-reference" href="./../../auto_examples/ensemble/plot_voting_decision_regions.html"><img alt="../../_images/plot_voting_decision_regions1.png" src="../../_images/plot_voting_decision_regions1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/ensemble/plot_voting_decision_regions.html#example-ensemble-plot-voting-decision-regions-py"><span class="std std-ref">Plot the decision boundaries of a VotingClassifier</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="A tutorial exercise regarding the use of classification techniques on the Digits dataset."><div class="figure" id="id3">
+<a class="reference external image-reference" href="./../../auto_examples/exercises/digits_classification_exercise.html"><img alt="../../_images/digits_classification_exercise1.png" src="../../_images/digits_classification_exercise1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/exercises/digits_classification_exercise.html#example-exercises-digits-classification-exercise-py"><span class="std std-ref">Digits Classification Exercise</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Sample usage of Nearest Neighbors classification. It will plot the decision boundaries for each..."><div class="figure" id="id4">
+<a class="reference external image-reference" href="./../../auto_examples/neighbors/plot_classification.html"><img alt="../../_images/plot_classification1.png" src="../../_images/plot_classification1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/neighbors/plot_classification.html#example-neighbors-plot-classification-py"><span class="std std-ref">Nearest Neighbors Classification</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Making sure that each Feature has approximately the same scale can be a crucial preprocessing s..."><div class="figure" id="id5">
+<a class="reference external image-reference" href="./../../auto_examples/preprocessing/plot_robust_scaling.html"><img alt="../../_images/plot_robust_scaling1.png" src="../../_images/plot_robust_scaling1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/preprocessing/plot_robust_scaling.html#example-preprocessing-plot-robust-scaling-py"><span class="std std-ref">Robust Scaling on Toy Data</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="This is an example showing how scikit-learn can be used to classify documents by topics using a..."><div class="figure" id="id6">
+<a class="reference external image-reference" href="./../../auto_examples/text/document_classification_20newsgroups.html"><img alt="../../_images/document_classification_20newsgroups1.png" src="../../_images/document_classification_20newsgroups1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/document_classification_20newsgroups.html#example-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.neighbors.KNeighborsClassifier.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.neighbors.NearestNeighbors.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

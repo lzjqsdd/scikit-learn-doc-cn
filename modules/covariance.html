@@ -1,0 +1,394 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>2.6. 协方差估计 (Covariance estimation) &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="2. Unsupervised learning" href="../unsupervised_learning.html" />
+    <link rel="next" title="2.7. Novelty and Outlier Detection" href="outlier_detection.html" />
+    <link rel="prev" title="2.5. Decomposing signals in components (matrix factorization problems)" href="decomposition.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/covariance.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="decomposition.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        2.5. Decompos...
+        </span>
+            <span class="hiddenrellink">
+            2.5. Decomposing signals in components (matrix factorization problems)
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../unsupervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        2. Unsupervis...
+        </span>
+            <span class="hiddenrellink">
+            2. Unsupervised learning
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">2.6. 协方差估计 (Covariance estimation)</a><ul>
+<li><a class="reference internal" href="#empirical-covariance">2.6.1. 经验协方差 (Empirical covariance)</a></li>
+<li><a class="reference internal" href="#shrunk-covariance">2.6.2. 缩减协方差 (Shrunk Covariance)</a><ul>
+<li><a class="reference internal" href="#id2">2.6.2.1. 基本缩减</a></li>
+<li><a class="reference internal" href="#ledoit-wolf">2.6.2.2. Ledoit-Wolf缩减</a></li>
+<li><a class="reference internal" href="#oracle-oracle-approximating-shrinkage-oas">2.6.2.3. Oracle近似缩减 (Oracle Approximating Shrinkage, OAS)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sparse-inverse-covariance">2.6.3. 稀疏逆协方差 (Sparse inverse covariance)</a></li>
+<li><a class="reference internal" href="#robust-covariance-estimation">2.6.4. 鲁棒的协方差估计 (Robust Covariance Estimation)</a><ul>
+<li><a class="reference internal" href="#minimum-covariance-determinant">2.6.4.1. 最小协方差行列式 (Minimum Covariance Determinant)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="covariance-estimation">
+<h1>2.6. 协方差估计 (Covariance estimation)<a class="headerlink" href="#covariance-estimation" title="Permalink to this headline">¶</a></h1>
+<p>许多的统计学问题在某种程度上都需要估计总体的协方差矩阵，即估计样本数据集散点图的形状。大多数情况下，样本数据的性质（样本大小，结构特性，均一性等）会对估计质量产生非常大的影响。因此， <cite>sklearn.covariance</cite> 包提供了一个能在不同数据条件下对总体的协方差矩阵进行精确估计的工具。</p>
+<p>我们假定，数据集中的所有观测样本都服从独立同分布 (independent and identically distributed, i.i.d.)。</p>
+<div class="section" id="empirical-covariance">
+<h2>2.6.1. 经验协方差 (Empirical covariance)<a class="headerlink" href="#empirical-covariance" title="Permalink to this headline">¶</a></h2>
+<p>在观测样本数相对于数据特征数（用来描述单个样本属性的变量的个数）足够多的情况下，我们可以用经典方法 <em>最大似然估计</em> （Maximum likelihood estimator, 或者称为 <em>经验协方差</em> ）来很好地估计数据集的协方差矩阵。具体来说，样本的最大似然估计是对应的总体的协方差矩阵的一个无偏估计。</p>
+<p>在 <cite>sklearn.covariance</cite> 包中，用 <a class="reference internal" href="generated/sklearn.covariance.empirical_covariance.html#sklearn.covariance.empirical_covariance" title="sklearn.covariance.empirical_covariance"><code class="xref py py-func docutils literal"><span class="pre">empirical_covariance</span></code></a> 函数进行计算，或者，用 <a class="reference internal" href="generated/sklearn.covariance.EmpiricalCovariance.html#sklearn.covariance.EmpiricalCovariance.fit" title="sklearn.covariance.EmpiricalCovariance.fit"><code class="xref py py-meth docutils literal"><span class="pre">EmpiricalCovariance.fit</span></code></a> 方法把 <a class="reference internal" href="generated/sklearn.covariance.EmpiricalCovariance.html#sklearn.covariance.EmpiricalCovariance" title="sklearn.covariance.EmpiricalCovariance"><code class="xref py py-class docutils literal"><span class="pre">EmpiricalCovariance</span></code></a> 对象和数据样本进行拟合。需要小心的是，当样本数据处于中心或者不处于中心时，得到的结果将不同。这就需要准确设置 <code class="docutils literal"><span class="pre">assume_centered</span></code> 参数。精确来说，如果设置 <code class="docutils literal"><span class="pre">assume_centered=False</span></code> ，测试集的均值向量应当与训练集的相等；反之，应设置 <code class="docutils literal"><span class="pre">assume_centered=Ture</span></code> 并且指定测试集和训练集的中心。</p>
+<div class="topic">
+<p class="topic-title first">样例:</p>
+<ul class="simple">
+<li>参见 <a class="reference internal" href="../auto_examples/covariance/plot_covariance_estimation.html#example-covariance-plot-covariance-estimation-py"><span class="std std-ref">Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood</span></a> ：如何根据数据拟合 <a class="reference internal" href="generated/sklearn.covariance.EmpiricalCovariance.html#sklearn.covariance.EmpiricalCovariance" title="sklearn.covariance.EmpiricalCovariance"><code class="xref py py-class docutils literal"><span class="pre">EmpiricalCovariance</span></code></a> 对象</li>
+</ul>
+</div>
+</div>
+<div class="section" id="shrunk-covariance">
+<span id="id1"></span><h2>2.6.2. 缩减协方差 (Shrunk Covariance)<a class="headerlink" href="#shrunk-covariance" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>2.6.2.1. 基本缩减<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><em>最大似然估计</em> 尽管是一个无偏估计，但就求协方差矩阵的特征值来说它并不是一个好的估计。因为根据它的逆矩阵求得的精度矩阵并不精确。由于数值求解的困难，经验协方差矩阵有时甚至不可求逆。 为了解决矩阵求逆问题，这里引入了一个经验协方差矩阵的变换：<code class="docutils literal"><span class="pre">缩减</span> <span class="pre">(shrinkage)</span></code>。</p>
+<p>在scikit-learn中，变换（用户指定缩减系数）可以通过 <a class="reference internal" href="generated/sklearn.covariance.shrunk_covariance.html#sklearn.covariance.shrunk_covariance" title="sklearn.covariance.shrunk_covariance"><code class="xref py py-func docutils literal"><span class="pre">shrunk_covariance</span></code></a> 方法直接应用到未计算的协方差中。同样，协方差的缩减估计可以通过 <a class="reference internal" href="generated/sklearn.covariance.ShrunkCovariance.html#sklearn.covariance.ShrunkCovariance" title="sklearn.covariance.ShrunkCovariance"><code class="xref py py-class docutils literal"><span class="pre">ShrunkCovariance</span></code></a> 对象和 <a class="reference internal" href="generated/sklearn.covariance.ShrunkCovariance.html#sklearn.covariance.ShrunkCovariance.fit" title="sklearn.covariance.ShrunkCovariance.fit"><code class="xref py py-meth docutils literal"><span class="pre">ShrunkCovariance.fit</span></code></a> 方法进行拟合；由于样本数据处于中心或者不处于中心，结果将不同，我们需要准确设置 <code class="docutils literal"><span class="pre">assume_centered</span></code> 参数。</p>
+<p>数学上，缩减目的在于减少经验协方差矩阵最小特征值和最大特征值的比值。这可以通过对特征值进行定量的偏移来实现，等效于求协方差矩阵的L2-penalized最大似然估计。实际应用时，缩减归结为一个简单的凸转换： <img class="math" src="../_images/math/15c11d65b606f856718f48222608c71e479df07c.png" alt="\Sigma_{\rm
+shrunk} = (1-\alpha)\hat{\Sigma} + \alpha\frac{{\rm
+Tr}\hat{\Sigma}}{p}\rm Id"/>。</p>
+<p>设置缩减系数 <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 等同于设置偏差/方差的均衡，详细讨论参见样例。</p>
+<div class="topic">
+<p class="topic-title first">样例:</p>
+<ul class="simple">
+<li>参见 <a class="reference internal" href="../auto_examples/covariance/plot_covariance_estimation.html#example-covariance-plot-covariance-estimation-py"><span class="std std-ref">Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood</span></a> ：如何根据数据拟合 <a class="reference internal" href="generated/sklearn.covariance.ShrunkCovariance.html#sklearn.covariance.ShrunkCovariance" title="sklearn.covariance.ShrunkCovariance"><code class="xref py py-class docutils literal"><span class="pre">ShrunkCovariance</span></code></a> 对象</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ledoit-wolf">
+<h3>2.6.2.2. Ledoit-Wolf缩减<a class="headerlink" href="#ledoit-wolf" title="Permalink to this headline">¶</a></h3>
+<ol class="upperalpha simple" start="15">
+<li>Ledoit和M. Wolf在他们2004的论文[1]中提出了一个用来计算最优缩减系数 <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 的公式，用来最小化估计协方差矩阵和真实协方差矩阵之间的均方差。</li>
+</ol>
+<p>Ledoit-Wolf协方差估计可以通过 <cite>sklearn.covariance</cite> 包中的 <a class="reference internal" href="generated/sklearn.covariance.ledoit_wolf.html#sklearn.covariance.ledoit_wolf" title="sklearn.covariance.ledoit_wolf"><code class="xref py py-meth docutils literal"><span class="pre">ledoit_wolf</span></code></a> 函数得到，或者，通过 <a class="reference internal" href="generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf" title="sklearn.covariance.LedoitWolf"><code class="xref py py-class docutils literal"><span class="pre">LedoitWolf</span></code></a> 对象拟合同一组样本。</p>
+<div class="topic">
+<p class="topic-title first">样例:</p>
+<ul class="simple">
+<li>参见 <a class="reference internal" href="../auto_examples/covariance/plot_covariance_estimation.html#example-covariance-plot-covariance-estimation-py"><span class="std std-ref">Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood</span></a>：如何根据数据拟合 <a class="reference internal" href="generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf" title="sklearn.covariance.LedoitWolf"><code class="xref py py-class docutils literal"><span class="pre">LedoitWolf</span></code></a> 对象，并就似然性展示Ledoit-Wolf估计的性能。</li>
+</ul>
+</div>
+<dl class="docutils">
+<dt>[1] O. Ledoit and M. Wolf, &#8220;A Well-Conditioned Estimator for Large-Dimensional</dt>
+<dd>Covariance Matrices&#8221;, Journal of Multivariate Analysis, Volume 88, Issue 2,
+February 2004, pages 365-411.</dd>
+</dl>
+</div>
+<div class="section" id="oracle-oracle-approximating-shrinkage-oas">
+<span id="oracle-approximating-shrinkage"></span><h3>2.6.2.3. Oracle近似缩减 (Oracle Approximating Shrinkage, OAS)<a class="headerlink" href="#oracle-oracle-approximating-shrinkage-oas" title="Permalink to this headline">¶</a></h3>
+<p>在假定数据服从高斯正态分布条件下，Chen等推导了一个公式来确定缩减系数，其产生均方差小于O. Ledoit和M. Wolf的公式。这个估计被称作协方差的Oracle近似缩减 (Oracle Approximating Shrinkage, OAS)估计。</p>
+<p>协方差矩阵的OAS估计可以通过 <cite>sklearn.covariance</cite> 包中的 <a class="reference internal" href="generated/sklearn.covariance.oas.html#sklearn.covariance.oas" title="sklearn.covariance.oas"><code class="xref py py-meth docutils literal"><span class="pre">oas</span></code></a> 函数进行计算，或者，通过 <a class="reference internal" href="generated/sklearn.covariance.OAS.html#sklearn.covariance.OAS" title="sklearn.covariance.OAS"><code class="xref py py-class docutils literal"><span class="pre">OAS</span></code></a> 对象拟合同一组样本。</p>
+<div class="figure align-center" id="id4">
+<a class="reference external image-reference" href="../auto_examples/covariance/plot_covariance_estimation.html"><img alt="../_images/plot_covariance_estimation_0011.png" src="../_images/plot_covariance_estimation_0011.png" style="width: 520.0px; height: 390.0px;" /></a>
+<p class="caption"><span class="caption-text">比较Ledoit-Wolf和OAS 估计设置缩减值时偏差-方差的均衡</span></p>
+</div>
+<dl class="docutils">
+<dt>[2] Chen et al., &#8220;Shrinkage Algorithms for MMSE Covariance Estimation&#8221;,</dt>
+<dd>IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</dd>
+</dl>
+<div class="topic">
+<p class="topic-title first">样例:</p>
+<ul class="simple">
+<li>参见 <a class="reference internal" href="../auto_examples/covariance/plot_covariance_estimation.html#example-covariance-plot-covariance-estimation-py"><span class="std std-ref">Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood</span></a>：如何根据数据拟合出 <a class="reference internal" href="generated/sklearn.covariance.OAS.html#sklearn.covariance.OAS" title="sklearn.covariance.OAS"><code class="xref py py-class docutils literal"><span class="pre">OAS</span></code></a> 对象。</li>
+<li>参见 <a class="reference internal" href="../auto_examples/covariance/plot_lw_vs_oas.html#example-covariance-plot-lw-vs-oas-py"><span class="std std-ref">Ledoit-Wolf vs OAS estimation</span></a>：如何可视化根据 <a class="reference internal" href="generated/sklearn.covariance.LedoitWolf.html#sklearn.covariance.LedoitWolf" title="sklearn.covariance.LedoitWolf"><code class="xref py py-class docutils literal"><span class="pre">LedoitWolf</span></code></a> 和 <a class="reference internal" href="generated/sklearn.covariance.OAS.html#sklearn.covariance.OAS" title="sklearn.covariance.OAS"><code class="xref py py-class docutils literal"><span class="pre">OAS</span></code></a> 协方差估计得到均方差的差异。</li>
+</ul>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/covariance/plot_lw_vs_oas.html"><img alt="../_images/plot_lw_vs_oas_0011.png" src="../_images/plot_lw_vs_oas_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="sparse-inverse-covariance">
+<span id="id3"></span><h2>2.6.3. 稀疏逆协方差 (Sparse inverse covariance)<a class="headerlink" href="#sparse-inverse-covariance" title="Permalink to this headline">¶</a></h2>
+<p>协方差矩阵的逆矩阵（也被称为精度矩阵）与偏相关矩阵成比例。它描述数据之间的偏独立关系。换句话说，如果两个特征对于其他特征是有条件地独立，那么，精度矩阵中相应的系数为零。这就是我们需要估计稀疏精度矩阵的原因：通过从数据中学习独立性关系，协方差矩阵的估计能被更好地处理。这个过程也被称为 <em>协方差选择</em>。</p>
+<p>在小样本情况下，即当 <code class="docutils literal"><span class="pre">n_samples</span></code> 的级数等于或小于 <code class="docutils literal"><span class="pre">n_features</span></code> 时，稀疏逆协方差估计倾向于得到比缩减协方差估计更好的结果。但是，在大样本情况下，或者在数据相关性较强的情况下，稀疏估计能恢复矩阵的非对角结构。</p>
+<p><a class="reference internal" href="generated/sklearn.covariance.GraphLasso.html#sklearn.covariance.GraphLasso" title="sklearn.covariance.GraphLasso"><code class="xref py py-class docutils literal"><span class="pre">GraphLasso</span></code></a> 估计用L1-penalty将稀疏性加到精度矩阵中： <code class="docutils literal"><span class="pre">alpha</span></code> 参数越大，精度矩阵越稀疏。对应的 <a class="reference internal" href="generated/sklearn.covariance.GraphLassoCV.html#sklearn.covariance.GraphLassoCV" title="sklearn.covariance.GraphLassoCV"><code class="xref py py-class docutils literal"><span class="pre">GraphLassoCV</span></code></a> 对象用交叉验证来自动地设置 <code class="docutils literal"><span class="pre">alpha</span></code> 参数。</p>
+<div class="figure align-center" id="id5">
+<a class="reference external image-reference" href="../auto_examples/covariance/plot_sparse_cov.html"><img alt="../_images/plot_sparse_cov_0011.png" src="../_images/plot_sparse_cov_0011.png" style="width: 600.0px; height: 360.0px;" /></a>
+<p class="caption"><span class="caption-text"><em>在小样本情况下，最大似然估计，缩减估计和稀疏估计的协方差及精度矩阵的比较。</em></span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>结构恢复</strong></p>
+<p>从数据的相关性中恢复一个可视化结构是一件困难的事情。如果您对恢复感兴趣，那么必须牢记：</p>
+<ul class="last simple">
+<li>从相关矩阵中恢复比从协方差矩阵中容易：在运行 <a class="reference internal" href="generated/sklearn.covariance.GraphLasso.html#sklearn.covariance.GraphLasso" title="sklearn.covariance.GraphLasso"><code class="xref py py-class docutils literal"><span class="pre">GraphLasso</span></code></a> 前对观测样本进行标准化。</li>
+<li>如果潜在的可视化图形中的节点拥有的连接数比普通节点多，那么，这个算法将会漏掉一部分连接。</li>
+<li>如果你的观测样本数相比于潜在的可视化图形中边的数量不够大，那么你将不能恢复它。</li>
+<li>即便恢复条件较好，通过交叉验证得到的 <code class="docutils literal"><span class="pre">alpha</span></code> 参数（例如，使用 <a class="reference internal" href="generated/sklearn.covariance.GraphLassoCV.html#sklearn.covariance.GraphLassoCV" title="sklearn.covariance.GraphLassoCV"><code class="xref py py-class docutils literal"><span class="pre">GraphLassoCV</span></code></a> 对象）会导致选择太多的边。但是，相关边的权重会大于非相关边。</li>
+</ul>
+</div>
+<p>数学公式如下：</p>
+<div class="math">
+<p><img src="../_images/math/535c046ade78aa5720a56f46f769008dfc3aab5f.png" alt="\hat{K} = \mathrm{argmin}_K \big(
+            \mathrm{tr} S K - \mathrm{log} \mathrm{det} K
+            + \alpha \|K\|_1
+            \big)"/></p>
+</div><p>其中， <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> 是需要估计的精度矩阵， <img class="math" src="../_images/math/1dbc400fcc213305415872f9f625cd2828f97a00.png" alt="S"/> 是样本的协方差矩阵， <img class="math" src="../_images/math/76aedfc82946a2105b42aec1dd12e836f447fafb.png" alt="\|K\|_1"/> 是 <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> 非对角系数绝对值的和。用来求解这个问题的是Friedman 2008 Biostatistics论文中的GLasso算法。此算法与R <code class="docutils literal"><span class="pre">glasso</span></code> 包中的算法相同。</p>
+<div class="topic">
+<p class="topic-title first">样例:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/covariance/plot_sparse_cov.html#example-covariance-plot-sparse-cov-py"><span class="std std-ref">Sparse inverse covariance estimation</span></a>：人工数据，用来展示一个结构的部分修复，并与其他协方差估计进行比较。</li>
+<li><a class="reference internal" href="../auto_examples/applications/plot_stock_market.html#example-applications-plot-stock-market-py"><span class="std std-ref">Visualizing the stock market structure</span></a> ：实际股票市场数据，寻找那些符号最相关。</li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">参考文献：</p>
+<ul class="simple">
+<li>Friedman et al, <a class="reference external" href="http://biostatistics.oxfordjournals.org/content/9/3/432.short">&#8220;Sparse inverse covariance estimation with the
+graphical lasso&#8221;</a>,
+Biostatistics 9, pp 432, 2008</li>
+</ul>
+</div>
+</div>
+<div class="section" id="robust-covariance-estimation">
+<span id="robust-covariance"></span><h2>2.6.4. 鲁棒的协方差估计 (Robust Covariance Estimation)<a class="headerlink" href="#robust-covariance-estimation" title="Permalink to this headline">¶</a></h2>
+<p>实际数据集通常受到测量误差和记录误差的影响。由于各种不同的原因，常规但不寻常的观测值也会出现。非常不寻常的观测值被称为异常值。</p>
+<p>上文讨论的经验协方差估计和缩减协方差估计对数据中的异常观测值非常敏感。因此，我们需要使用鲁棒的协方差估计来估算实际数据集的协方差。另外，鲁棒的协方差估计也可用来探测异常值，和根据数据的进一步处理结果剔除/降低一些观测值。</p>
+<p>在 <cite>sklearn.covariance</cite> 包中，我们应用了一个鲁棒的协方差估计，即最小协方差行列式 [3]。</p>
+<div class="section" id="minimum-covariance-determinant">
+<h3>2.6.4.1. 最小协方差行列式 (Minimum Covariance Determinant)<a class="headerlink" href="#minimum-covariance-determinant" title="Permalink to this headline">¶</a></h3>
+<p>最小协方差行列式估计是一个鲁棒的数据集协方差估计，是由P.J. Rousseeuw在[3]中提出。基本思想是选取一定百分比 (h) 的“好”观测值（即非异常值），并计算其经验协方差矩阵。紧接着，对这个协方差矩阵进行缩放来补偿选取过程（“一致性步骤”）。在计算了最小协方差行列式估计后，我们可以根据Mahalanobis距离来对观测值施加权重，最终得到一个重新加权了的协方差估计值（“重新加权步骤”）。</p>
+<p>Rousseeuw和Van Driessen [4] 开发了FastMCD算法来计算最小协方差行列式。Scikit-learn中使用这个算法来对数据集拟合MCD对象。FastMCD算法同时也计算了一个数据集位置的鲁棒估计。</p>
+<p>原始估计可以通过 <a class="reference internal" href="generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet" title="sklearn.covariance.MinCovDet"><code class="xref py py-class docutils literal"><span class="pre">MinCovDet</span></code></a> 鲁棒的协方差估计对象中的 <code class="docutils literal"><span class="pre">raw_location_</span></code> 属性和 <code class="docutils literal"><span class="pre">raw_covariance_</span></code> 属性进行访问。</p>
+<dl class="docutils">
+<dt>[3] P. J. Rousseeuw. Least median of squares regression.</dt>
+<dd><ol class="first last upperalpha simple" start="10">
+<li>Am Stat Ass, 79:871, 1984.</li>
+</ol>
+</dd>
+<dt>[4] A Fast Algorithm for the Minimum Covariance Determinant Estimator,</dt>
+<dd>1999, American Statistical Association and the American Society
+for Quality, TECHNOMETRICS.</dd>
+</dl>
+<div class="topic">
+<p class="topic-title first">样例：</p>
+<ul class="simple">
+<li>参见 <a class="reference internal" href="../auto_examples/covariance/plot_robust_vs_empirical_covariance.html#example-covariance-plot-robust-vs-empirical-covariance-py"><span class="std std-ref">Robust vs Empirical covariance estimate</span></a>：如何根据数据集来拟合 <a class="reference internal" href="generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet" title="sklearn.covariance.MinCovDet"><code class="xref py py-class docutils literal"><span class="pre">MinCovDet</span></code></a> 对象，并可以发现，尽管存在异常值，估计仍然保持了一定的精度。</li>
+<li>参见 <a class="reference internal" href="../auto_examples/covariance/plot_mahalanobis_distances.html#example-covariance-plot-mahalanobis-distances-py"><span class="std std-ref">Robust covariance estimation and Mahalanobis distances relevance</span></a>：比较。 <a class="reference internal" href="generated/sklearn.covariance.EmpiricalCovariance.html#sklearn.covariance.EmpiricalCovariance" title="sklearn.covariance.EmpiricalCovariance"><code class="xref py py-class docutils literal"><span class="pre">EmpiricalCovariance</span></code></a> 和 <a class="reference internal" href="generated/sklearn.covariance.MinCovDet.html#sklearn.covariance.MinCovDet" title="sklearn.covariance.MinCovDet"><code class="xref py py-class docutils literal"><span class="pre">MinCovDet</span></code></a> 协方差估计的Mahalanobis距离的不同（也可以得到精度矩阵的更好的估计）。</li>
+</ul>
+</div>
+<hr class="docutils" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">异常值对位置和协方差估计的影响</th>
+<th class="head">使用Mahalanobis距离从异常值中分离出正常值</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="../auto_examples/covariance/plot_robust_vs_empirical_covariance.html"><img alt="robust_vs_emp" src="../_images/plot_robust_vs_empirical_covariance_0011.png" style="width: 392.0px; height: 294.0px;" /></a></td>
+<td><a class="reference external" href="../auto_examples/covariance/plot_mahalanobis_distances.html"><img alt="mahalanobis" src="../_images/plot_mahalanobis_distances_0011.png" style="width: 392.0px; height: 294.0px;" /></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/covariance.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="decomposition.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

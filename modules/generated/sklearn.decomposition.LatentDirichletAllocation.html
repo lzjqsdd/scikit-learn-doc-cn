@@ -1,0 +1,600 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.decomposition.LatentDirichletAllocation &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.decomposition.fastica" href="sklearn.decomposition.fastica.html" />
+    <link rel="prev" title="sklearn.decomposition.MiniBatchDictionaryLearning" href="sklearn.decomposition.MiniBatchDictionaryLearning.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.LatentDirichletAllocation.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.decomposition.MiniBatchDictionaryLearning.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.decom...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.decomposition.MiniBatchDictionaryLearning
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.decomposition</span></code>.LatentDirichletAllocation</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-decomposition-latentdirichletallocation">Examples using <code class="docutils literal"><span class="pre">sklearn.decomposition.LatentDirichletAllocation</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-decomposition-latentdirichletallocation">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a>.LatentDirichletAllocation<a class="headerlink" href="#sklearn-decomposition-latentdirichletallocation" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.decomposition.LatentDirichletAllocation">
+<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">LatentDirichletAllocation</code><span class="sig-paren">(</span><em>n_topics=10</em>, <em>doc_topic_prior=None</em>, <em>topic_word_prior=None</em>, <em>learning_method=None</em>, <em>learning_decay=0.7</em>, <em>learning_offset=10.0</em>, <em>max_iter=10</em>, <em>batch_size=128</em>, <em>evaluate_every=-1</em>, <em>total_samples=1000000.0</em>, <em>perp_tol=0.1</em>, <em>mean_change_tol=0.001</em>, <em>max_doc_update_iter=100</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/online_lda.py#L137"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Latent Dirichlet Allocation with online variational Bayes algorithm</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17.</span></p>
+</div>
+<p>Read more in the <a class="reference internal" href="../decomposition.html#latentdirichletallocation"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_topics</strong> : int, optional (default=10)</p>
+<blockquote>
+<div><p>Number of topics.</p>
+</div></blockquote>
+<p><strong>doc_topic_prior</strong> : float, optional (default=None)</p>
+<blockquote>
+<div><p>Prior of document topic distribution <cite>theta</cite>. If the value is None,
+defaults to <cite>1 / n_topics</cite>.
+In the literature, this is called <cite>alpha</cite>.</p>
+</div></blockquote>
+<p><strong>topic_word_prior</strong> : float, optional (default=None)</p>
+<blockquote>
+<div><p>Prior of topic word distribution <cite>beta</cite>. If the value is None, defaults
+to <cite>1 / n_topics</cite>.
+In the literature, this is called <cite>eta</cite>.</p>
+</div></blockquote>
+<p><strong>learning_method</strong> : &#8216;batch&#8217; | &#8216;online&#8217;, default=&#8217;online&#8217;</p>
+<blockquote>
+<div><p>Method used to update <cite>_component</cite>. Only used in <cite>fit</cite> method.
+In general, if the data size is large, the online update will be much
+faster than the batch update.
+The default learning method is going to be changed to &#8216;batch&#8217; in the 0.20 release.
+Valid options:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&#39;batch&#39;: Batch variational Bayes method. Use all training data in
+    each EM update.
+    Old `components_` will be overwritten in each iteration.
+&#39;online&#39;: Online variational Bayes method. In each EM update, use
+    mini-batch of training data to update the ``components_``
+    variable incrementally. The learning rate is controlled by the
+    ``learning_decay`` and the ``learning_offset`` parameters.
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>learning_decay</strong> : float, optional (default=0.7)</p>
+<blockquote>
+<div><p>It is a parameter that control learning rate in the online learning
+method. The value should be set between (0.5, 1.0] to guarantee
+asymptotic convergence. When the value is 0.0 and batch_size is
+<code class="docutils literal"><span class="pre">n_samples</span></code>, the update method is same as batch learning. In the
+literature, this is called kappa.</p>
+</div></blockquote>
+<p><strong>learning_offset</strong> : float, optional (default=10.)</p>
+<blockquote>
+<div><p>A (positive) parameter that downweights early iterations in online
+learning.  It should be greater than 1.0. In the literature, this is
+called tau_0.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : integer, optional (default=10)</p>
+<blockquote>
+<div><p>The maximum number of iterations.</p>
+</div></blockquote>
+<p><strong>total_samples</strong> : int, optional (default=1e6)</p>
+<blockquote>
+<div><p>Total number of documents. Only used in the <cite>partial_fit</cite> method.</p>
+</div></blockquote>
+<p><strong>batch_size</strong> : int, optional (default=128)</p>
+<blockquote>
+<div><p>Number of documents to use in each EM iteration. Only used in online
+learning.</p>
+</div></blockquote>
+<p><strong>evaluate_every</strong> : int optional (default=0)</p>
+<blockquote>
+<div><p>How often to evaluate perplexity. Only used in <cite>fit</cite> method.
+set it to 0 or negative number to not evalute perplexity in
+training at all. Evaluating perplexity can help you check convergence
+in training process, but it will also increase total training time.
+Evaluating perplexity in every iteration might increase training time
+up to two-fold.</p>
+</div></blockquote>
+<p><strong>perp_tol</strong> : float, optional (default=1e-1)</p>
+<blockquote>
+<div><p>Perplexity tolerance in batch learning. Only used when
+<code class="docutils literal"><span class="pre">evaluate_every</span></code> is greater than 0.</p>
+</div></blockquote>
+<p><strong>mean_change_tol</strong> : float, optional (default=1e-3)</p>
+<blockquote>
+<div><p>Stopping tolerance for updating document topic distribution in E-step.</p>
+</div></blockquote>
+<p><strong>max_doc_update_iter</strong> : int (default=100)</p>
+<blockquote>
+<div><p>Max number of iterations for updating document topic distribution in
+the E-step.</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : int, optional (default=1)</p>
+<blockquote>
+<div><p>The number of jobs to use in the E-step. If -1, all CPUs are used. For
+<code class="docutils literal"><span class="pre">n_jobs</span></code> below -1, (n_cpus + 1 + n_jobs) are used.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : int, optional (default=0)</p>
+<blockquote>
+<div><p>Verbosity level.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int or RandomState instance or None, optional (default=None)</p>
+<blockquote>
+<div><p>Pseudo-random number generator seed control.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>components_</strong> : array, [n_topics, n_features]</p>
+<blockquote>
+<div><p>Topic word distribution. <code class="docutils literal"><span class="pre">components_[i,</span> <span class="pre">j]</span></code> represents word j in
+topic <cite>i</cite>.</p>
+</div></blockquote>
+<p><strong>n_batch_iter_</strong> : int</p>
+<blockquote>
+<div><p>Number of iterations of the EM step.</p>
+</div></blockquote>
+<p><strong>n_iter_</strong> : int</p>
+<blockquote class="last">
+<div><p>Number of passes over the dataset.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] &#8220;Online Learning for Latent Dirichlet Allocation&#8221;, Matthew D. Hoffman,</dt>
+<dd>David M. Blei, Francis Bach, 2010</dd>
+<dt>[2] &#8220;Stochastic Variational Inference&#8221;, Matthew D. Hoffman, David M. Blei,</dt>
+<dd>Chong Wang, John Paisley, 2013</dd>
+<dt>[3] Matthew D. Hoffman&#8217;s onlineldavb code. Link:</dt>
+<dd><a class="reference external" href="http://matthewdhoffman.com//code/onlineldavb.tar">http://matthewdhoffman.com//code/onlineldavb.tar</a></dd>
+</dl>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.LatentDirichletAllocation.fit" title="sklearn.decomposition.LatentDirichletAllocation.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
+<td>Learn model for the data X with variational Bayes method.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.LatentDirichletAllocation.fit_transform" title="sklearn.decomposition.LatentDirichletAllocation.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y])</td>
+<td>Fit to data, then transform it.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.LatentDirichletAllocation.get_params" title="sklearn.decomposition.LatentDirichletAllocation.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.LatentDirichletAllocation.partial_fit" title="sklearn.decomposition.LatentDirichletAllocation.partial_fit"><code class="xref py py-obj docutils literal"><span class="pre">partial_fit</span></code></a>(X[,&nbsp;y])</td>
+<td>Online VB with Mini-Batch update.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.LatentDirichletAllocation.perplexity" title="sklearn.decomposition.LatentDirichletAllocation.perplexity"><code class="xref py py-obj docutils literal"><span class="pre">perplexity</span></code></a>(X[,&nbsp;doc_topic_distr,&nbsp;sub_sampling])</td>
+<td>Calculate approximate perplexity for data X.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.LatentDirichletAllocation.score" title="sklearn.decomposition.LatentDirichletAllocation.score"><code class="xref py py-obj docutils literal"><span class="pre">score</span></code></a>(X[,&nbsp;y])</td>
+<td>Calculate approximate log-likelihood as score.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.LatentDirichletAllocation.set_params" title="sklearn.decomposition.LatentDirichletAllocation.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.LatentDirichletAllocation.transform" title="sklearn.decomposition.LatentDirichletAllocation.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(X)</td>
+<td>Transform data X according to the fitted model.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.decomposition.LatentDirichletAllocation.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_topics=10</em>, <em>doc_topic_prior=None</em>, <em>topic_word_prior=None</em>, <em>learning_method=None</em>, <em>learning_decay=0.7</em>, <em>learning_offset=10.0</em>, <em>max_iter=10</em>, <em>batch_size=128</em>, <em>evaluate_every=-1</em>, <em>total_samples=1000000.0</em>, <em>perp_tol=0.1</em>, <em>mean_change_tol=0.001</em>, <em>max_doc_update_iter=100</em>, <em>n_jobs=1</em>, <em>verbose=0</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/online_lda.py#L250"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.LatentDirichletAllocation.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/online_lda.py#L483"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn model for the data X with variational Bayes method.</p>
+<p>When <cite>learning_method</cite> is &#8216;online&#8217;, use mini-batch update.
+Otherwise, use batch update.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape=(n_samples, n_features)</p>
+<blockquote>
+<div><p>Document word matrix.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.LatentDirichletAllocation.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L470"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to X and y with optional parameters fit_params
+and returns a transformed version of X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : numpy array of shape [n_samples, n_features]</p>
+<blockquote>
+<div><p>Training set.</p>
+</div></blockquote>
+<p><strong>y</strong> : numpy array of shape [n_samples]</p>
+<blockquote>
+<div><p>Target values.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : numpy array of shape [n_samples, n_features_new]</p>
+<blockquote class="last">
+<div><p>Transformed array.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.LatentDirichletAllocation.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.LatentDirichletAllocation.partial_fit">
+<code class="descname">partial_fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/online_lda.py#L445"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation.partial_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Online VB with Mini-Batch update.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape=(n_samples, n_features)</p>
+<blockquote>
+<div><p>Document word matrix.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.LatentDirichletAllocation.perplexity">
+<code class="descname">perplexity</code><span class="sig-paren">(</span><em>X</em>, <em>doc_topic_distr=None</em>, <em>sub_sampling=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/online_lda.py#L675"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation.perplexity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate approximate perplexity for data X.</p>
+<p>Perplexity is defined as exp(-1. * log-likelihood per word)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, [n_samples, n_features]</p>
+<blockquote>
+<div><p>Document word matrix.</p>
+</div></blockquote>
+<p><strong>doc_topic_distr</strong> : None or array, shape=(n_samples, n_topics)</p>
+<blockquote>
+<div><p>Document topic distribution.
+If it is None, it will be generated by applying transform on X.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float</p>
+<blockquote class="last">
+<div><p>Perplexity score.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.LatentDirichletAllocation.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/online_lda.py#L655"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate approximate log-likelihood as score.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape=(n_samples, n_features)</p>
+<blockquote>
+<div><p>Document word matrix.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float</p>
+<blockquote class="last">
+<div><p>Use approximate bound as score.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.LatentDirichletAllocation.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.LatentDirichletAllocation.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/online_lda.py#L546"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.LatentDirichletAllocation.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform data X according to the fitted model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape=(n_samples, n_features)</p>
+<blockquote>
+<div><p>Document word matrix.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>doc_topic_distr</strong> : shape=(n_samples, n_topics)</p>
+<blockquote class="last">
+<div><p>Document topic distribution for X.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-decomposition-latentdirichletallocation">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.decomposition.LatentDirichletAllocation</span></code><a class="headerlink" href="#examples-using-sklearn-decomposition-latentdirichletallocation" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="This is an example of applying Non-negative Matrix Factorization and Latent Dirichlet Allocatio..."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/applications/topics_extraction_with_nmf_lda.html"><img alt="../../_images/topics_extraction_with_nmf_lda1.png" src="../../_images/topics_extraction_with_nmf_lda1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/applications/topics_extraction_with_nmf_lda.html#example-applications-topics-extraction-with-nmf-lda-py"><span class="std std-ref">Topic extraction with Non-negative Matrix Factorization and Latent Dirichlet Allocation</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.decomposition.LatentDirichletAllocation.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.decomposition.MiniBatchDictionaryLearning.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

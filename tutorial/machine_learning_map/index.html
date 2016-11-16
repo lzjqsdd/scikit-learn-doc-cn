@@ -1,0 +1,347 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>Choosing the right estimator &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="scikit-learn Tutorials" href="../index.html" />
+    <link rel="next" title="External Resources, Videos and Talks" href="../../presentations.html" />
+    <link rel="prev" title="Working With Text Data" href="../text_analytics/working_with_text_data.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="../text_analytics/working_with_text_data.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Working With ...
+        </span>
+            <span class="hiddenrellink">
+            Working With Text Data
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        scikit-learn ...
+        </span>
+            <span class="hiddenrellink">
+            scikit-learn Tutorials
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">Choosing the right estimator</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="ml-map"></span><style type="text/css">
+  div.bodywrapper blockquote {
+      margin: 0 ;
+  }
+
+  div.toctree-wrapper ul {
+      margin-top: 0 ;
+      margin-bottom: 0 ;
+      padding-left: 10px ;
+  }
+
+  li.toctree-l1 {
+      padding: 0 0 0.5em 0 ;
+      list-style-type: none;
+      font-size: 150% ;
+      font-weight: bold;
+      }
+
+  li.toctree-l1 ul {
+      padding-left: 40px ;
+  }
+
+  li.toctree-l2 {
+      font-size: 70% ;
+      list-style-type: square;
+      font-weight: normal;
+      }
+
+  li.toctree-l3 {
+      font-size: 85% ;
+      list-style-type: circle;
+      font-weight: normal;
+      }
+
+</style><div class="section" id="choosing-the-right-estimator">
+<h1>Choosing the right estimator<a class="headerlink" href="#choosing-the-right-estimator" title="Permalink to this headline">¶</a></h1>
+<p>Often the hardest part of solving a machine learning problem can
+be finding the right estimator for the job.</p>
+<p>Different estimators are better suited for different types of data
+and different problems.</p>
+<p>The flowchart below is designed to give users a bit of
+a rough guide on how to approach problems with regard to
+which estimators to try on your data.</p>
+<p>Click on any estimator in the chart below to see it&#8217;s documentation.</p>
+<style>
+body {
+    display: inline-block;
+}
+div.content-wrapper {
+    max-width: 100%;
+}
+div.bodywrapper h1 {
+    text-align: left;
+}
+div.content {
+    margin-left: 0;
+    height: 1300px;
+    width: 1680px;
+}
+div.map {
+    position: absolute;
+    left: -145px;
+    top: 195px;
+    width: 2117px;
+    -webkit-transform: scale(0.67); /* Saf3.1+, Chrome */
+    -moz-transform: scale(0.67); /* FF3.5+ */
+    -ms-transform: scale(0.67); /* IE9 */
+    -o-transform: scale(0.67); /* Opera 10.5+ */
+    transform: scale(0.67);
+}
+div.body img {
+    max-width: 100%;
+}
+p {
+    max-width: 2150px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+p.logo {
+    padding-left: 0px;
+}
+</style>
+
+<body>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.maphilight.min.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.min.js"></script>
+    <script type="text/javascript">$(function() {
+            $('.map').maphilight({
+                fade: true
+            });
+    });</script>
+  <p>
+    <img src="../../_static/ml_map.png" class="map" width="2122" height="1323" alt="Move mouse over image" usemap="#imgmap">
+        <map name="imgmap">
+            <area href="../../documentation.html" title="Back to Documentation" shape="poly" coords="97,1094, 76,1097, 56,1105, 40,1120, 35,1132, 34,1145, 35,1153, 40,1162, 46,1171, 54,1177, 62,1182, 72,1187, 81,1188, 100,1189, 118,1186, 127,1182, 136,1177, 146,1170, 152,1162, 155,1158, 158,1146, 158,1126, 143,1110, 138,1105, 127,1100, 97,1094"></area>
+            <area href="../../modules/linear_model.html#elastic-net" title="Elastic Net Documentation" shape="poly" coords="1556,446, 1556,446, 1556,476, 1556,476, 1556,476, 1676,476, 1676,476, 1676,476, 1676,446, 1676,446, 1676,446, 1556,446, 1556,446" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/ensemble.html" title="Ensembe Methods Documentation" shape="poly" coords="209,200, 209,200, 209,252, 209,252, 209,252, 332,252, 332,252, 332,252, 332,200, 332,200, 332,200, 209,200, 209,200" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/ensemble.html" title="Ensembe Methods Documentation" shape="poly" coords="1828,506, 1828,506, 1828,544, 1828,544, 1828,544, 2054,544, 2054,544, 2054,544, 2054,506, 2054,506, 2054,506, 1828,506, 1828,506" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/mixture.html" title="Gaussian mixture models Documentation" shape="poly" coords="142,637, 142,637, 142,667, 142,667, 142,667, 265,667, 265,667, 265,667, 265,637, 265,637, 265,637, 142,637, 142,637" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/manifold.html#isomap" title="Isomap Documentation" shape="poly" coords="1500,799, 1500,799, 1500,844, 1500,844, 1500,844, 1618,844, 1618,844, 1618,844, 1618,800, 1618,800, 1618,800, 1500,799, 1500,799" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/kernel_approximation.html" title="Kernel Approximation Documentation" shape="poly" coords="1477,982, 1477,982, 1477,1055, 1477,1055, 1477,1055, 1638,1055, 1638,1055, 1638,1055, 1638,982, 1638,982, 1638,982, 1477,982, 1477,982" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/kernel_approximation.html" title="Kernel Approximation Documentation" shape="poly" coords="472,100, 472,100, 472,173, 472,173, 472,173, 634,173, 634,173, 634,173, 634,100, 634,100, 634,100, 472,100, 472,100" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/clustering.html#k-means" title="KMeans Documentation" shape="poly" coords="377,605, 377,605, 377,655, 377,655, 377,655, 476,655, 476,655, 476,655, 476,605, 476,605, 476,605, 377,605, 377,605" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/neighbors.html" title="Nearest Neighbors" shape="poly" coords="440,219, 440,219, 440,293, 440,293, 440,293, 574,293, 574,293, 574,293, 574,219, 574,219, 574,219, 440,219, 440,219" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/linear_model.html#lasso" title="Lasso Documentation" shape="poly" coords="1550,408, 1550,408, 1550,436, 1550,436, 1550,436, 1671,436, 1671,436, 1671,436, 1671,408, 1671,408, 1671,408, 1550,408, 1550,408" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/svm.html#classification" title="LinearSVC Documentation" shape="poly" coords="609,419, 609,419, 609,492, 609,492, 609,492, 693,492, 693,492, 693,492, 693,419, 693,419, 693,419, 609,419, 609,419" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/manifold.html#locally-linear-embedding" title="Locally Linear Embedding Documentation" shape="poly" coords="1719,888, 1719,888, 1719,945, 1719,945, 1719,945, 1819,945, 1819,945, 1819,945, 1819,888, 1819,888, 1819,888, 1719,888, 1719,888" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/clustering.html#mean-shift" title="Mean Shift Documentation" shape="poly" coords="562,949, 562,949, 562,981, 562,981, 562,981, 682,981, 682,981, 682,981, 682,949, 682,949, 682,949, 562,949, 562,949" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/clustering.html#mini-batch-k-means" title="Mini Batch K-means Documentation" shape="poly" coords="343,917, 343,917, 343,990, 343,990, 343,990, 461,990, 461,990, 461,990, 461,917, 461,917, 461,917, 343,917, 343,917" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/naive_bayes.html" title="Naive Bayes Documentation" shape="poly" coords="194,339, 194,339, 194,412, 194,412, 194,412, 294,412, 294,412, 294,412, 294,339, 294,339, 294,339, 194,339, 194,339" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/decomposition.html#principal-component-analysis-pca" title="Principal Component Analysis Documentation" shape="poly" coords="1208,778, 1208,778, 1208,851, 1208,851, 1208,851, 1350,851, 1350,851, 1350,851, 1350,778, 1350,778, 1350,778, 1208,778, 1208,778" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/linear_model.html#ridge-regression" title="Ridge Regression Documentation" shape="poly" coords="1696,648, 1696,648, 1696,687, 1696,687, 1696,687, 1890,687, 1890,687, 1890,687, 1890,648, 1890,648, 1890,648, 1696,648, 1696,648" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/sgd.html#classification" title="SGD Classifier Documentation" shape="poly" coords="691,205, 691,205, 691,278, 691,278, 691,278, 803,278, 803,278, 803,278, 803,205, 803,205, 803,205, 691,205, 691,205" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/sgd.html#regression" title="SGD Regression Documentation" shape="poly" coords="1317,425, 1317,425, 1317,498, 1317,498, 1317,498, 1436,498, 1436,498, 1436,498, 1436,425, 1436,425, 1436,425, 1317,425, 1317,425" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/clustering.html#spectral-clustering" title="Spectral Clustering Documentation" shape="poly" coords="145,572, 145,572, 145,631, 145,631, 145,631, 267,631, 267,631, 267,631, 267,572, 267,572, 267,572, 145,572, 145,572" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/manifold.html#spectral-embedding" title="Spectral Embedding Documentation" shape="poly" coords="1502,849, 1502,849, 1502,910, 1502,910, 1502,910, 1618,910, 1618,910, 1618,910, 1618,849, 1618,849, 1618,849, 1502,849, 1502,849" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/svm.html#classification" title="SVC Documentation" shape="poly" coords="210,157, 210,157, 210,194, 210,194, 210,194, 333,194, 333,194, 333,194, 333,157, 333,157, 333,157, 210,157, 210,157" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/svm.html#regression" title="SVR Documentation" shape="poly" coords="1696,692, 1696,692, 1696,732, 1696,732, 1696,732, 1890,732, 1890,732, 1890,732, 1890,692, 1890,692, 1890,692, 1696,692, 1696,692" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/svm.html#regression" title="SVR Documentation" shape="poly" coords="1831,458, 1831,458, 1831,496, 1831,496, 1831,496, 2052,496, 2052,496, 2052,496, 2052,458, 2052,458, 2052,458, 1831,458, 1831,458" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+            <area href="../../modules/mixture.html#vbgmm-classifier-variational-gaussian-mixtures" title=" VBGMM Documentation" shape="poly" coords="562,994, 562,994, 562,1026, 562,1026, 562,1026, 682,1026, 682,1026, 682,1026, 682,994, 682,994, 682,994, 562,994, 562,994" data-maphilight='{"strokeColor":"0000ff","strokeWidth":5,"fillColor":"66FF66","fillOpacity":0.4}'></area>
+        </map>
+    </img>
+  </p>
+  <script type="text/javascript">
+      // Note that this is a hack-fix for now. This should be
+      // fixed using css, not js. See issue #2328 for reference
+      $('.map').css({'height': '1300px'});
+  </script>
+</body></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/tutorial/machine_learning_map/index.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="../text_analytics/working_with_text_data.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

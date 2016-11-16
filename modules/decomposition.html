@@ -1,0 +1,887 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>2.5. Decomposing signals in components (matrix factorization problems) &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="2. Unsupervised learning" href="../unsupervised_learning.html" />
+    <link rel="next" title="2.6. 协方差估计 (Covariance estimation)" href="covariance.html" />
+    <link rel="prev" title="2.4. Biclustering" href="biclustering.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/decomposition.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="biclustering.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        2.4. Bicluste...
+        </span>
+            <span class="hiddenrellink">
+            2.4. Biclustering
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../unsupervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        2. Unsupervis...
+        </span>
+            <span class="hiddenrellink">
+            2. Unsupervised learning
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">2.5. Decomposing signals in components (matrix factorization problems)</a><ul>
+<li><a class="reference internal" href="#principal-component-analysis-pca">2.5.1. Principal component analysis (PCA)</a><ul>
+<li><a class="reference internal" href="#exact-pca-and-probabilistic-interpretation">2.5.1.1. Exact PCA and probabilistic interpretation</a></li>
+<li><a class="reference internal" href="#incremental-pca">2.5.1.2. Incremental PCA</a></li>
+<li><a class="reference internal" href="#approximate-pca">2.5.1.3. Approximate PCA</a></li>
+<li><a class="reference internal" href="#kernel-pca">2.5.1.4. Kernel PCA</a></li>
+<li><a class="reference internal" href="#sparse-principal-components-analysis-sparsepca-and-minibatchsparsepca">2.5.1.5. Sparse principal components analysis (SparsePCA and MiniBatchSparsePCA)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#truncated-singular-value-decomposition-and-latent-semantic-analysis">2.5.2. Truncated singular value decomposition and latent semantic analysis</a></li>
+<li><a class="reference internal" href="#dictionary-learning">2.5.3. Dictionary Learning</a><ul>
+<li><a class="reference internal" href="#sparse-coding-with-a-precomputed-dictionary">2.5.3.1. Sparse coding with a precomputed dictionary</a></li>
+<li><a class="reference internal" href="#generic-dictionary-learning">2.5.3.2. Generic dictionary learning</a></li>
+<li><a class="reference internal" href="#mini-batch-dictionary-learning">2.5.3.3. Mini-batch dictionary learning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#factor-analysis">2.5.4. Factor Analysis</a></li>
+<li><a class="reference internal" href="#independent-component-analysis-ica">2.5.5. Independent component analysis (ICA)</a></li>
+<li><a class="reference internal" href="#non-negative-matrix-factorization-nmf-or-nnmf">2.5.6. Non-negative matrix factorization (NMF or NNMF)</a></li>
+<li><a class="reference internal" href="#latent-dirichlet-allocation-lda">2.5.7. Latent Dirichlet Allocation (LDA)</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="decomposing-signals-in-components-matrix-factorization-problems">
+<span id="decompositions"></span><h1>2.5. Decomposing signals in components (matrix factorization problems)<a class="headerlink" href="#decomposing-signals-in-components-matrix-factorization-problems" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="principal-component-analysis-pca">
+<span id="pca"></span><h2>2.5.1. Principal component analysis (PCA)<a class="headerlink" href="#principal-component-analysis-pca" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exact-pca-and-probabilistic-interpretation">
+<h3>2.5.1.1. Exact PCA and probabilistic interpretation<a class="headerlink" href="#exact-pca-and-probabilistic-interpretation" title="Permalink to this headline">¶</a></h3>
+<p>PCA is used to decompose a multivariate dataset in a set of successive
+orthogonal components that explain a maximum amount of the variance. In
+scikit-learn, <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> is implemented as a <em>transformer</em> object
+that learns <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> components in its <code class="docutils literal"><span class="pre">fit</span></code> method, and can be used on new
+data to project it on these components.</p>
+<p>The optional parameter <code class="docutils literal"><span class="pre">whiten=True</span></code> parameter make it possible to
+project the data onto the singular space while scaling each component
+to unit variance. This is often useful if the models down-stream make
+strong assumptions on the isotropy of the signal: this is for example
+the case for Support Vector Machines with the RBF kernel and the K-Means
+clustering algorithm.</p>
+<p>Below is an example of the iris dataset, which is comprised of 4
+features, projected on the 2 dimensions that explain most variance:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_lda.html"><img alt="../_images/plot_pca_vs_lda_0011.png" src="../_images/plot_pca_vs_lda_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p>The <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> object also provides a
+probabilistic interpretation of the PCA that can give a likelihood of
+data based on the amount of variance it explains. As such it implements a
+<cite>score</cite> method that can be used in cross-validation:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html"><img alt="modules/../auto_examples/decomposition/images/plot_pca_vs_fa_model_selection_001.png" src="modules/../auto_examples/decomposition/images/plot_pca_vs_fa_model_selection_001.png" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_pca_vs_lda.html#example-decomposition-plot-pca-vs-lda-py"><span class="std std-ref">Comparison of LDA and PCA 2D projection of Iris dataset</span></a></li>
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html#example-decomposition-plot-pca-vs-fa-model-selection-py"><span class="std std-ref">Model selection with Probabilistic PCA and Factor Analysis (FA)</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="incremental-pca">
+<span id="incrementalpca"></span><h3>2.5.1.2. Incremental PCA<a class="headerlink" href="#incremental-pca" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> object is very useful, but has certain limitations for
+large datasets. The biggest limitation is that <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> only supports
+batch processing, which means all of the data to be processed must fit in main
+memory. The <a class="reference internal" href="generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-class docutils literal"><span class="pre">IncrementalPCA</span></code></a> object uses a different form of
+processing and allows for partial computations which almost
+exactly match the results of <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> while processing the data in a
+minibatch fashion. <a class="reference internal" href="generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-class docutils literal"><span class="pre">IncrementalPCA</span></code></a> makes it possible to implement
+out-of-core Principal Component Analysis either by:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Using its <code class="docutils literal"><span class="pre">partial_fit</span></code> method on chunks of data fetched sequentially
+from the local hard drive or a network database.</li>
+<li>Calling its fit method on a memory mapped file using <code class="docutils literal"><span class="pre">numpy.memmap</span></code>.</li>
+</ul>
+</div></blockquote>
+<p><a class="reference internal" href="generated/sklearn.decomposition.IncrementalPCA.html#sklearn.decomposition.IncrementalPCA" title="sklearn.decomposition.IncrementalPCA"><code class="xref py py-class docutils literal"><span class="pre">IncrementalPCA</span></code></a> only stores estimates of component and noise variances,
+in order update <code class="docutils literal"><span class="pre">explained_variance_ratio_</span></code> incrementally. This is why
+memory usage depends on the number of samples per batch, rather than the
+number of samples to be processed in the dataset.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_incremental_pca.html"><img alt="../_images/plot_incremental_pca_0011.png" src="../_images/plot_incremental_pca_0011.png" style="width: 600.0px; height: 600.0px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_incremental_pca.html"><img alt="../_images/plot_incremental_pca_0021.png" src="../_images/plot_incremental_pca_0021.png" style="width: 600.0px; height: 600.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_incremental_pca.html#example-decomposition-plot-incremental-pca-py"><span class="std std-ref">Incremental PCA</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="approximate-pca">
+<span id="randomizedpca"></span><h3>2.5.1.3. Approximate PCA<a class="headerlink" href="#approximate-pca" title="Permalink to this headline">¶</a></h3>
+<p>It is often interesting to project data to a lower-dimensional
+space that preserves most of the variance, by dropping the singular vector
+of components associated with lower singular values.</p>
+<p>For instance, if we work with 64x64 pixel gray-level pictures
+for face recognition,
+the dimensionality of the data is 4096 and it is slow to train an
+RBF support vector machine on such wide data. Furthermore we know that
+the intrinsic dimensionality of the data is much lower than 4096 since all
+pictures of human faces look somewhat alike.
+The samples lie on a manifold of much lower
+dimension (say around 200 for instance). The PCA algorithm can be used
+to linearly transform the data while both reducing the dimensionality
+and preserve most of the explained variance at the same time.</p>
+<p>The class <a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a> is very useful in that case: since we
+are going to drop most of the singular vectors it is much more efficient
+to limit the computation to an approximated estimate of the singular
+vectors we will keep to actually perform the transform.</p>
+<p>For instance, the following shows 16 sample portraits (centered around
+0.0) from the Olivetti dataset. On the right hand side are the first 16
+singular vectors reshaped as portraits. Since we only require the top
+16 singular vectors of a dataset with size <img class="math" src="../_images/math/7c790b4bc24b1251b9968c990c77b543d958386e.png" alt="n_{samples} = 400"/>
+and <img class="math" src="../_images/math/c75475811b373526edf4afe866021d364748ed2a.png" alt="n_{features} = 64 \times 64 = 4096"/>, the computation time it
+less than 1s:</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="orig_img" src="../_images/plot_faces_decomposition_0011.png" style="width: 360.0px; height: 270.6px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img" src="../_images/plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.6px;" /></a></strong></p><p><a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a> can hence be used as a drop in replacement for
+<a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> with the exception that we need to give it the size of
+the lower-dimensional space <code class="docutils literal"><span class="pre">n_components</span></code> as a mandatory input parameter.</p>
+<p>If we note <img class="math" src="../_images/math/2fbdeee57cb72854b8708cdf0f9788a4dab31768.png" alt="n_{max} = max(n_{samples}, n_{features})"/> and
+<img class="math" src="../_images/math/34f1ebcc1efea032abb8ce46522c9d461c338a1e.png" alt="n_{min} = min(n_{samples}, n_{features})"/>, the time complexity
+of <a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a> is <img class="math" src="../_images/math/f8be6ae15f6388ff1dbdab5f9ffdfc2a86cdd9c6.png" alt="O(n_{max}^2 \cdot n_{components})"/>
+instead of <img class="math" src="../_images/math/ad8ba59b782070f423ec6d6269cdeabccccf7628.png" alt="O(n_{max}^2 \cdot n_{min})"/> for the exact method
+implemented in <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>.</p>
+<p>The memory footprint of <a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a> is also proportional to
+<img class="math" src="../_images/math/89fa6f0afae6d5eacbc7806935ab9c4d8cad7f04.png" alt="2 \cdot n_{max} \cdot n_{components}"/> instead of <img class="math" src="../_images/math/ff79a19db41e255ddc85228dc28ffcd21369d9db.png" alt="n_{max}
+\cdot n_{min}"/> for the exact method.</p>
+<p>Note: the implementation of <code class="docutils literal"><span class="pre">inverse_transform</span></code> in <a class="reference internal" href="generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="sklearn.decomposition.RandomizedPCA"><code class="xref py py-class docutils literal"><span class="pre">RandomizedPCA</span></code></a>
+is not the exact inverse transform of <code class="docutils literal"><span class="pre">transform</span></code> even when
+<code class="docutils literal"><span class="pre">whiten=False</span></code> (default).</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/applications/face_recognition.html#example-applications-face-recognition-py"><span class="std std-ref">Faces recognition example using eigenfaces and SVMs</span></a></li>
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_faces_decomposition.html#example-decomposition-plot-faces-decomposition-py"><span class="std std-ref">Faces dataset decompositions</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://arxiv.org/abs/0909.4061">&#8220;Finding structure with randomness: Stochastic algorithms for
+constructing approximate matrix decompositions&#8221;</a>
+Halko, et al., 2009</li>
+</ul>
+</div>
+</div>
+<div class="section" id="kernel-pca">
+<span id="id1"></span><h3>2.5.1.4. Kernel PCA<a class="headerlink" href="#kernel-pca" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA" title="sklearn.decomposition.KernelPCA"><code class="xref py py-class docutils literal"><span class="pre">KernelPCA</span></code></a> is an extension of PCA which achieves non-linear
+dimensionality reduction through the use of kernels (see <a class="reference internal" href="metrics.html#metrics"><span class="std std-ref">配对矩阵，类别以及核函数</span></a>). It
+has many applications including denoising, compression and structured
+prediction (kernel dependency estimation). <a class="reference internal" href="generated/sklearn.decomposition.KernelPCA.html#sklearn.decomposition.KernelPCA" title="sklearn.decomposition.KernelPCA"><code class="xref py py-class docutils literal"><span class="pre">KernelPCA</span></code></a> supports both
+<code class="docutils literal"><span class="pre">transform</span></code> and <code class="docutils literal"><span class="pre">inverse_transform</span></code>.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_kernel_pca.html"><img alt="../_images/plot_kernel_pca_0011.png" src="../_images/plot_kernel_pca_0011.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_kernel_pca.html#example-decomposition-plot-kernel-pca-py"><span class="std std-ref">Kernel PCA</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="sparse-principal-components-analysis-sparsepca-and-minibatchsparsepca">
+<span id="sparsepca"></span><h3>2.5.1.5. Sparse principal components analysis (SparsePCA and MiniBatchSparsePCA)<a class="headerlink" href="#sparse-principal-components-analysis-sparsepca-and-minibatchsparsepca" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.decomposition.SparsePCA.html#sklearn.decomposition.SparsePCA" title="sklearn.decomposition.SparsePCA"><code class="xref py py-class docutils literal"><span class="pre">SparsePCA</span></code></a> is a variant of PCA, with the goal of extracting the
+set of sparse components that best reconstruct the data.</p>
+<p>Mini-batch sparse PCA (<a class="reference internal" href="generated/sklearn.decomposition.MiniBatchSparsePCA.html#sklearn.decomposition.MiniBatchSparsePCA" title="sklearn.decomposition.MiniBatchSparsePCA"><code class="xref py py-class docutils literal"><span class="pre">MiniBatchSparsePCA</span></code></a>) is a variant of
+<a class="reference internal" href="generated/sklearn.decomposition.SparsePCA.html#sklearn.decomposition.SparsePCA" title="sklearn.decomposition.SparsePCA"><code class="xref py py-class docutils literal"><span class="pre">SparsePCA</span></code></a> that is faster but less accurate. The increased speed is
+reached by iterating over small chunks of the set of features, for a given
+number of iterations.</p>
+<p>Principal component analysis (<a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>) has the disadvantage that the
+components extracted by this method have exclusively dense expressions, i.e.
+they have non-zero coefficients when expressed as linear combinations of the
+original variables. This can make interpretation difficult. In many cases,
+the real underlying components can be more naturally imagined as sparse
+vectors; for example in face recognition, components might naturally map to
+parts of faces.</p>
+<p>Sparse principal components yields a more parsimonious, interpretable
+representation, clearly emphasizing which of the original features contribute
+to the differences between samples.</p>
+<p>The following example illustrates 16 components extracted using sparse PCA from
+the Olivetti faces dataset.  It can be seen how the regularization term induces
+many zeros. Furthermore, the natural structure of the data causes the non-zero
+coefficients to be vertically adjacent. The model does not enforce this
+mathematically: each component is a vector <img class="math" src="../_images/math/23927a9bff1e327391ef879d44a26a7a15a71142.png" alt="h \in \mathbf{R}^{4096}"/>, and
+there is no notion of vertical adjacency except during the human-friendly
+visualization as 64x64 pixel images. The fact that the components shown below
+appear local is the effect of the inherent structure of the data, which makes
+such local patterns minimize reconstruction error. There exist sparsity-inducing
+norms that take into account adjacency and different kinds of structure; see
+<a class="reference internal" href="#jen09" id="id2">[Jen09]</a> for a review of such methods.
+For more details on how to use Sparse PCA, see the Examples section, below.</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img" src="../_images/plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.6px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="spca_img" src="../_images/plot_faces_decomposition_0051.png" style="width: 360.0px; height: 270.6px;" /></a></strong></p><p>Note that there are many different formulations for the Sparse PCA
+problem. The one implemented here is based on <a class="reference internal" href="#mrl09" id="id3">[Mrl09]</a> . The optimization
+problem solved is a PCA problem (dictionary learning) with an
+<img class="math" src="../_images/math/a301afaec3a8e4e639ad1d14140c7c5470a8eef2.png" alt="\ell_1"/> penalty on the components:</p>
+<div class="math">
+<p><img src="../_images/math/335af27459a81a353944c860fb01ae4f19f6a18c.png" alt="(U^*, V^*) = \underset{U, V}{\operatorname{arg\,min\,}} &amp; \frac{1}{2}
+             ||X-UV||_2^2+\alpha||V||_1 \\
+             \text{subject to\,} &amp; ||U_k||_2 = 1 \text{ for all }
+             0 \leq k &lt; n_{components}"/></p>
+</div><p>The sparsity-inducing <img class="math" src="../_images/math/a301afaec3a8e4e639ad1d14140c7c5470a8eef2.png" alt="\ell_1"/> norm also prevents learning
+components from noise when few training samples are available. The degree
+of penalization (and thus sparsity) can be adjusted through the
+hyperparameter <code class="docutils literal"><span class="pre">alpha</span></code>. Small values lead to a gently regularized
+factorization, while larger values shrink many coefficients to zero.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While in the spirit of an online algorithm, the class
+<a class="reference internal" href="generated/sklearn.decomposition.MiniBatchSparsePCA.html#sklearn.decomposition.MiniBatchSparsePCA" title="sklearn.decomposition.MiniBatchSparsePCA"><code class="xref py py-class docutils literal"><span class="pre">MiniBatchSparsePCA</span></code></a> does not implement <code class="docutils literal"><span class="pre">partial_fit</span></code> because
+the algorithm is online along the features direction, not the samples
+direction.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_faces_decomposition.html#example-decomposition-plot-faces-decomposition-py"><span class="std std-ref">Faces dataset decompositions</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<table class="docutils citation" frame="void" id="mrl09" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[Mrl09]</a></td><td><a class="reference external" href="http://www.di.ens.fr/sierra/pdfs/icml09.pdf">&#8220;Online Dictionary Learning for Sparse Coding&#8221;</a>
+J. Mairal, F. Bach, J. Ponce, G. Sapiro, 2009</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="jen09" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[Jen09]</a></td><td><a class="reference external" href="www.di.ens.fr/~fbach/sspca_AISTATS2010.pdf">&#8220;Structured Sparse Principal Component Analysis&#8221;</a>
+R. Jenatton, G. Obozinski, F. Bach, 2009</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="truncated-singular-value-decomposition-and-latent-semantic-analysis">
+<span id="lsa"></span><h2>2.5.2. Truncated singular value decomposition and latent semantic analysis<a class="headerlink" href="#truncated-singular-value-decomposition-and-latent-semantic-analysis" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD" title="sklearn.decomposition.TruncatedSVD"><code class="xref py py-class docutils literal"><span class="pre">TruncatedSVD</span></code></a> implements a variant of singular value decomposition
+(SVD) that only computes the <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> largest singular values,
+where <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> is a user-specified parameter.</p>
+<p>When truncated SVD is applied to term-document matrices
+(as returned by <code class="docutils literal"><span class="pre">CountVectorizer</span></code> or <code class="docutils literal"><span class="pre">TfidfVectorizer</span></code>),
+this transformation is known as
+<a class="reference external" href="http://nlp.stanford.edu/IR-book/pdf/18lsi.pdf">latent semantic analysis</a>
+(LSA), because it transforms such matrices
+to a &#8220;semantic&#8221; space of low dimensionality.
+In particular, LSA is known to combat the effects of synonymy and polysemy
+(both of which roughly mean there are multiple meanings per word),
+which cause term-document matrices to be overly sparse
+and exhibit poor similarity under measures such as cosine similarity.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LSA is also known as latent semantic indexing, LSI,
+though strictly that refers to its use in persistent indexes
+for information retrieval purposes.</p>
+</div>
+<p>Mathematically, truncated SVD applied to training samples <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>
+produces a low-rank approximation <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>:</p>
+<div class="math">
+<p><img src="../_images/math/971743681a20f3ebf86e325069d6777add13e94d.png" alt="X \approx X_k = U_k \Sigma_k V_k^\top"/></p>
+</div><p>After this operation, <img class="math" src="../_images/math/6ea603ff310adc3f2b5b4a4e149832b4020e6f95.png" alt="U_k \Sigma_k^\top"/>
+is the transformed training set with <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> features
+(called <code class="docutils literal"><span class="pre">n_components</span></code> in the API).</p>
+<p>To also transform a test set <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>, we multiply it with <img class="math" src="../_images/math/635157e4f7d2751399e64d631236f6e67a9742a6.png" alt="V_k"/>:</p>
+<div class="math">
+<p><img src="../_images/math/412863914fb65558d712b7bf8c8d6a90985991c0.png" alt="X' = X V_k"/></p>
+</div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Most treatments of LSA in the natural language processing (NLP)
+and information retrieval (IR) literature
+swap the axes of the matrix <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/> so that it has shape
+<code class="docutils literal"><span class="pre">n_features</span></code> × <code class="docutils literal"><span class="pre">n_samples</span></code>.
+We present LSA in a different way that matches the scikit-learn API better,
+but the singular values found are the same.</p>
+</div>
+<p><a class="reference internal" href="generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD" title="sklearn.decomposition.TruncatedSVD"><code class="xref py py-class docutils literal"><span class="pre">TruncatedSVD</span></code></a> is very similar to <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>, but differs
+in that it works on sample matrices <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/> directly
+instead of their covariance matrices.
+When the columnwise (per-feature) means of <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>
+are subtracted from the feature values,
+truncated SVD on the resulting matrix is equivalent to PCA.
+In practical terms, this means
+that the <a class="reference internal" href="generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD" title="sklearn.decomposition.TruncatedSVD"><code class="xref py py-class docutils literal"><span class="pre">TruncatedSVD</span></code></a> transformer accepts <code class="docutils literal"><span class="pre">scipy.sparse</span></code>
+matrices without the need to densify them,
+as densifying may fill up memory even for medium-sized document collections.</p>
+<p>While the <a class="reference internal" href="generated/sklearn.decomposition.TruncatedSVD.html#sklearn.decomposition.TruncatedSVD" title="sklearn.decomposition.TruncatedSVD"><code class="xref py py-class docutils literal"><span class="pre">TruncatedSVD</span></code></a> transformer
+works with any (sparse) feature matrix,
+using it on tf–idf matrices is recommended over raw frequency counts
+in an LSA/document processing setting.
+In particular, sublinear scaling and inverse document frequency
+should be turned on (<code class="docutils literal"><span class="pre">sublinear_tf=True,</span> <span class="pre">use_idf=True</span></code>)
+to bring the feature values closer to a Gaussian distribution,
+compensating for LSA&#8217;s erroneous assumptions about textual data.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/text/document_clustering.html#example-text-document-clustering-py"><span class="std std-ref">Clustering text documents using k-means</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Christopher D. Manning, Prabhakar Raghavan and Hinrich Schütze (2008),
+<em>Introduction to Information Retrieval</em>, Cambridge University Press,
+chapter 18: <a class="reference external" href="http://nlp.stanford.edu/IR-book/pdf/18lsi.pdf">Matrix decompositions &amp; latent semantic indexing</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="dictionary-learning">
+<span id="dictionarylearning"></span><h2>2.5.3. Dictionary Learning<a class="headerlink" href="#dictionary-learning" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sparse-coding-with-a-precomputed-dictionary">
+<span id="sparsecoder"></span><h3>2.5.3.1. Sparse coding with a precomputed dictionary<a class="headerlink" href="#sparse-coding-with-a-precomputed-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="generated/sklearn.decomposition.SparseCoder.html#sklearn.decomposition.SparseCoder" title="sklearn.decomposition.SparseCoder"><code class="xref py py-class docutils literal"><span class="pre">SparseCoder</span></code></a> object is an estimator that can be used to transform signals
+into sparse linear combination of atoms from a fixed, precomputed dictionary
+such as a discrete wavelet basis. This object therefore does not
+implement a <code class="docutils literal"><span class="pre">fit</span></code> method. The transformation amounts
+to a sparse coding problem: finding a representation of the data as a linear
+combination of as few dictionary atoms as possible. All variations of
+dictionary learning implement the following transform methods, controllable via
+the <code class="docutils literal"><span class="pre">transform_method</span></code> initialization parameter:</p>
+<ul class="simple">
+<li>Orthogonal matching pursuit (<a class="reference internal" href="linear_model.html#omp"><span class="std std-ref">Orthogonal Matching Pursuit (OMP) 正交匹配跟踪</span></a>)</li>
+<li>Least-angle regression (<a class="reference internal" href="linear_model.html#least-angle-regression"><span class="std std-ref">Least Angle Regression最小角回归</span></a>)</li>
+<li>Lasso computed by least-angle regression</li>
+<li>Lasso using coordinate descent (<a class="reference internal" href="linear_model.html#lasso"><span class="std std-ref">Lasso</span></a>)</li>
+<li>Thresholding</li>
+</ul>
+<p>Thresholding is very fast but it does not yield accurate reconstructions.
+They have been shown useful in literature for classification tasks. For image
+reconstruction tasks, orthogonal matching pursuit yields the most accurate,
+unbiased reconstruction.</p>
+<p>The dictionary learning objects offer, via the <code class="docutils literal"><span class="pre">split_code</span></code> parameter, the
+possibility to separate the positive and negative values in the results of
+sparse coding. This is useful when dictionary learning is used for extracting
+features that will be used for supervised learning, because it allows the
+learning algorithm to assign different weights to negative loadings of a
+particular atom, from to the corresponding positive loading.</p>
+<p>The split code for a single sample has length <code class="docutils literal"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">n_components</span></code>
+and is constructed using the following rule: First, the regular code of length
+<code class="docutils literal"><span class="pre">n_components</span></code> is computed. Then, the first <code class="docutils literal"><span class="pre">n_components</span></code> entries of the
+<code class="docutils literal"><span class="pre">split_code</span></code> are
+filled with the positive part of the regular code vector. The second half of
+the split code is filled with the negative part of the code vector, only with
+a positive sign. Therefore, the split_code is non-negative.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_sparse_coding.html#example-decomposition-plot-sparse-coding-py"><span class="std std-ref">Sparse coding with a precomputed dictionary</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="generic-dictionary-learning">
+<h3>2.5.3.2. Generic dictionary learning<a class="headerlink" href="#generic-dictionary-learning" title="Permalink to this headline">¶</a></h3>
+<p>Dictionary learning (<a class="reference internal" href="generated/sklearn.decomposition.DictionaryLearning.html#sklearn.decomposition.DictionaryLearning" title="sklearn.decomposition.DictionaryLearning"><code class="xref py py-class docutils literal"><span class="pre">DictionaryLearning</span></code></a>) is a matrix factorization
+problem that amounts to finding a (usually overcomplete) dictionary that will
+perform good at sparsely encoding the fitted data.</p>
+<p>Representing data as sparse combinations of atoms from an overcomplete
+dictionary is suggested to be the way the mammal primary visual cortex works.
+Consequently, dictionary learning applied on image patches has been shown to
+give good results in image processing tasks such as image completion,
+inpainting and denoising, as well as for supervised recognition tasks.</p>
+<p>Dictionary learning is an optimization problem solved by alternatively updating
+the sparse code, as a solution to multiple Lasso problems, considering the
+dictionary fixed, and then updating the dictionary to best fit the sparse code.</p>
+<div class="math">
+<p><img src="../_images/math/ba959972ad1603c9a1839df9656fae980f9e2bd7.png" alt="(U^*, V^*) = \underset{U, V}{\operatorname{arg\,min\,}} &amp; \frac{1}{2}
+             ||X-UV||_2^2+\alpha||U||_1 \\
+             \text{subject to\,} &amp; ||V_k||_2 = 1 \text{ for all }
+             0 \leq k &lt; n_{atoms}"/></p>
+</div><p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img2" src="../_images/plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.6px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="dict_img2" src="../_images/plot_faces_decomposition_0061.png" style="width: 360.0px; height: 270.6px;" /></a></strong></p><p>After using such a procedure to fit the dictionary, the transform is simply a
+sparse coding step that shares the same implementation with all dictionary
+learning objects (see <a class="reference internal" href="#sparsecoder"><span class="std std-ref">Sparse coding with a precomputed dictionary</span></a>).</p>
+<p>The following image shows how a dictionary learned from 4x4 pixel image patches
+extracted from part of the image of Lena looks like.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="modules/../auto_examples/decomposition/images/plot_image_denoising_001.png" src="modules/../auto_examples/decomposition/images/plot_image_denoising_001.png" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_image_denoising.html#example-decomposition-plot-image-denoising-py"><span class="std std-ref">Image denoising using dictionary learning</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.di.ens.fr/sierra/pdfs/icml09.pdf">&#8220;Online dictionary learning for sparse coding&#8221;</a>
+J. Mairal, F. Bach, J. Ponce, G. Sapiro, 2009</li>
+</ul>
+</div>
+</div>
+<div class="section" id="mini-batch-dictionary-learning">
+<span id="minibatchdictionarylearning"></span><h3>2.5.3.3. Mini-batch dictionary learning<a class="headerlink" href="#mini-batch-dictionary-learning" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="generated/sklearn.decomposition.MiniBatchDictionaryLearning.html#sklearn.decomposition.MiniBatchDictionaryLearning" title="sklearn.decomposition.MiniBatchDictionaryLearning"><code class="xref py py-class docutils literal"><span class="pre">MiniBatchDictionaryLearning</span></code></a> implements a faster, but less accurate
+version of the dictionary learning algorithm that is better suited for large
+datasets.</p>
+<p>By default, <a class="reference internal" href="generated/sklearn.decomposition.MiniBatchDictionaryLearning.html#sklearn.decomposition.MiniBatchDictionaryLearning" title="sklearn.decomposition.MiniBatchDictionaryLearning"><code class="xref py py-class docutils literal"><span class="pre">MiniBatchDictionaryLearning</span></code></a> divides the data into
+mini-batches and optimizes in an online manner by cycling over the mini-batches
+for the specified number of iterations. However, at the moment it does not
+implement a stopping condition.</p>
+<p>The estimator also implements <code class="docutils literal"><span class="pre">partial_fit</span></code>, which updates the dictionary by
+iterating only once over a mini-batch. This can be used for online learning
+when the data is not readily available from the start, or for when the data
+does not fit into the memory.</p>
+<a class="reference external image-reference" href="../auto_examples/cluster/plot_dict_face_patches.html"><img alt="../_images/plot_dict_face_patches_0011.png" class="align-right" src="../_images/plot_dict_face_patches_0011.png" style="width: 210.0px; height: 200.0px;" /></a>
+<div class="topic">
+<p class="topic-title first"><strong>Clustering for dictionary learning</strong></p>
+<p>Note that when using dictionary learning to extract a representation
+(e.g. for sparse coding) clustering can be a good proxy to learn the
+dictionary. For instance the <a class="reference internal" href="generated/sklearn.cluster.MiniBatchKMeans.html#sklearn.cluster.MiniBatchKMeans" title="sklearn.cluster.MiniBatchKMeans"><code class="xref py py-class docutils literal"><span class="pre">MiniBatchKMeans</span></code></a> estimator is
+computationally efficient and implements on-line learning with a
+<code class="docutils literal"><span class="pre">partial_fit</span></code> method.</p>
+<blockquote>
+<div>Example: <a class="reference internal" href="../auto_examples/cluster/plot_dict_face_patches.html#example-cluster-plot-dict-face-patches-py"><span class="std std-ref">Online learning of a dictionary of parts of faces</span></a></div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="factor-analysis">
+<span id="fa"></span><h2>2.5.4. Factor Analysis<a class="headerlink" href="#factor-analysis" title="Permalink to this headline">¶</a></h2>
+<p>In unsupervised learning we only have a dataset <img class="math" src="../_images/math/9558e3a20b5c0a5c3ca4abf4d7b1d09a8d82bf6e.png" alt="X = \{x_1, x_2, \dots, x_n
+\}"/>. How can this dataset be described mathematically? A very simple
+<cite>continuous latent variabel</cite> model for <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/> is</p>
+<div class="math">
+<p><img src="../_images/math/2928a798e1df010dd146706bd3c8af380fecd5bc.png" alt="x_i = W h_i + \mu + \epsilon"/></p>
+</div><p>The vector <img class="math" src="../_images/math/d03a4b38f7e618d6826778cf0a8b906fbbaa935a.png" alt="h_i"/> is called &#8220;latent&#8221; because it is unobserved. <img class="math" src="../_images/math/65d19c66c148d5016c6a89d26486bf6d1966ded1.png" alt="\epsilon"/> is
+considered a noise term distributed according to a Gaussian with mean 0 and
+covariance <img class="math" src="../_images/math/334b0728f25dd84a28e483181038a307ea6e483e.png" alt="\Psi"/> (i.e. <img class="math" src="../_images/math/9d080efe7a0db146b4b749440967386423dce761.png" alt="\epsilon \sim \mathcal{N}(0, \Psi)"/>), <img class="math" src="../_images/math/d79e8a2c7ce54906c2b25549da38bdbe02cf40d6.png" alt="\mu"/> is some
+arbitrary offset vector. Such a model is called &#8220;generative&#8221; as it describes
+how <img class="math" src="../_images/math/7720e563212e11bf72de255ab82c2a3b97c1a7f5.png" alt="x_i"/> is generated from <img class="math" src="../_images/math/d03a4b38f7e618d6826778cf0a8b906fbbaa935a.png" alt="h_i"/>. If we use all the <img class="math" src="../_images/math/7720e563212e11bf72de255ab82c2a3b97c1a7f5.png" alt="x_i"/>&#8216;s as columns to form
+a matrix <img class="math" src="../_images/math/c20f7f9210a91b8aeba2e85d2bcb23e29bcab3f4.png" alt="\mathbf{X}"/> and all the <img class="math" src="../_images/math/d03a4b38f7e618d6826778cf0a8b906fbbaa935a.png" alt="h_i"/>&#8216;s as columns of a matrix <img class="math" src="../_images/math/5b376574393838c7d3de2a4f8c01a6f1c41f276e.png" alt="\mathbf{H}"/>
+then we can write (with suitably defined <img class="math" src="../_images/math/6a9403af9e7b26aa7c54b37e1adf8f4c120fe637.png" alt="\mathbf{M}"/> and <img class="math" src="../_images/math/a05518e70679fd7c3be91f014e20981910b20c9a.png" alt="\mathbf{E}"/>):</p>
+<div class="math">
+<p><img src="../_images/math/6b05de5a49aafaf7214f8d14d3aafaf03e3ffd15.png" alt="\mathbf{X} = W \mathbf{H} + \mathbf{M} + \mathbf{E}"/></p>
+</div><p>In other words, we <em>decomposed</em> matrix <img class="math" src="../_images/math/c20f7f9210a91b8aeba2e85d2bcb23e29bcab3f4.png" alt="\mathbf{X}"/>.</p>
+<p>If <img class="math" src="../_images/math/d03a4b38f7e618d6826778cf0a8b906fbbaa935a.png" alt="h_i"/> is given, the above equation automatically implies the following
+probabilistic interpretation:</p>
+<div class="math">
+<p><img src="../_images/math/52f6d87abfac0f47772ac7ee8772526df4d4cba1.png" alt="p(x_i|h_i) = \mathcal{N}(Wh_i + \mu, \Psi)"/></p>
+</div><p>For a complete probabilistic model we also need a prior distribution for the
+latent variable <img class="math" src="../_images/math/293fb39e1b93282c804a86186e721b32f829f1b2.png" alt="h"/>. The most straightforward assumption (based on the nice
+properties of the Gaussian distribution) is <img class="math" src="../_images/math/dde36e93b2cb0b9e54d8c2f67d446dfc62c3707e.png" alt="h \sim \mathcal{N}(0,
+\mathbf{I})"/>.  This yields a Gaussian as the marginal distribution of <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/>:</p>
+<div class="math">
+<p><img src="../_images/math/fc114f553a1484ac7a44174b8c750fa5fa8a95ed.png" alt="p(x) = \mathcal{N}(\mu, WW^T + \Psi)"/></p>
+</div><p>Now, without any further assumptions the idea of having a latent variable <img class="math" src="../_images/math/293fb39e1b93282c804a86186e721b32f829f1b2.png" alt="h"/>
+would be superfluous &#8211; <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/> can be completely modelled with a mean
+and a covariance. We need to impose some more specific structure on one
+of these two parameters. A simple additional assumption regards the
+structure of the error covariance <img class="math" src="../_images/math/334b0728f25dd84a28e483181038a307ea6e483e.png" alt="\Psi"/>:</p>
+<ul class="simple">
+<li><img class="math" src="../_images/math/da4420e600a84ae2cb75938f0b0928084b3b8cd9.png" alt="\Psi = \sigma^2 \mathbf{I}"/>: This assumption leads to
+the probabilistic model of <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>.</li>
+<li><img class="math" src="../_images/math/1dede435991238f12ccde8a9e1070f21df15dd02.png" alt="\Psi = diag(\psi_1, \psi_2, \dots, \psi_n)"/>: This model is called
+<a class="reference internal" href="generated/sklearn.decomposition.FactorAnalysis.html#sklearn.decomposition.FactorAnalysis" title="sklearn.decomposition.FactorAnalysis"><code class="xref py py-class docutils literal"><span class="pre">FactorAnalysis</span></code></a>, a classical statistical model. The matrix W is
+sometimes called the &#8220;factor loading matrix&#8221;.</li>
+</ul>
+<p>Both model essentially estimate a Gaussian with a low-rank covariance matrix.
+Because both models are probabilistic they can be integrated in more complex
+models, e.g. Mixture of Factor Analysers. One gets very different models (e.g.
+<a class="reference internal" href="generated/sklearn.decomposition.FastICA.html#sklearn.decomposition.FastICA" title="sklearn.decomposition.FastICA"><code class="xref py py-class docutils literal"><span class="pre">FastICA</span></code></a>) if non-Gaussian priors on the latent variables are assumed.</p>
+<p>Factor analysis <em>can</em> produce similar components (the columns of its loading
+matrix) to <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>. However, one can not make any general statements
+about these components (e.g. whether they are orthogonal):</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img3" src="../_images/plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.6px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="fa_img3" src="../_images/plot_faces_decomposition_0091.png" style="width: 360.0px; height: 270.6px;" /></a></strong></p><p>The main advantage for Factor Analysis (over <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> is that
+it can model the variance in every direction of the input space independently
+(heteroscedastic noise):</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="../_images/plot_faces_decomposition_0081.png" src="../_images/plot_faces_decomposition_0081.png" style="width: 150.0px; height: 168.75px;" /></a>
+</div>
+<p>This allows better model selection than probabilistic PCA in the presence
+of heteroscedastic noise:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html"><img alt="modules/../auto_examples/decomposition/images/plot_pca_vs_fa_model_selection_002.png" src="modules/../auto_examples/decomposition/images/plot_pca_vs_fa_model_selection_002.png" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html#example-decomposition-plot-pca-vs-fa-model-selection-py"><span class="std std-ref">Model selection with Probabilistic PCA and Factor Analysis (FA)</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="independent-component-analysis-ica">
+<span id="ica"></span><h2>2.5.5. Independent component analysis (ICA)<a class="headerlink" href="#independent-component-analysis-ica" title="Permalink to this headline">¶</a></h2>
+<p>Independent component analysis separates a multivariate signal into
+additive subcomponents that are maximally independent. It is
+implemented in scikit-learn using the <a class="reference internal" href="generated/sklearn.decomposition.FastICA.html#sklearn.decomposition.FastICA" title="sklearn.decomposition.FastICA"><code class="xref py py-class docutils literal"><span class="pre">Fast</span> <span class="pre">ICA</span></code></a>
+algorithm. Typically, ICA is not used for reducing dimensionality but
+for separating superimposed signals. Since the ICA model does not include
+a noise term, for the model to be correct, whitening must be applied.
+This can be done internally using the whiten argument or manually using one
+of the PCA variants.</p>
+<p>It is classically used to separate mixed signals (a problem known as
+<em>blind source separation</em>), as in the example below:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_ica_blind_source_separation.html"><img alt="../_images/plot_ica_blind_source_separation_0011.png" src="../_images/plot_ica_blind_source_separation_0011.png" style="width: 480.0px; height: 360.0px;" /></a>
+</div>
+<p>ICA can also be used as yet another non linear decomposition that finds
+components with some sparsity:</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img4" src="../_images/plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.6px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="ica_img4" src="../_images/plot_faces_decomposition_0041.png" style="width: 360.0px; height: 270.6px;" /></a></strong></p><div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_ica_blind_source_separation.html#example-decomposition-plot-ica-blind-source-separation-py"><span class="std std-ref">Blind source separation using FastICA</span></a></li>
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_ica_vs_pca.html#example-decomposition-plot-ica-vs-pca-py"><span class="std std-ref">FastICA on 2D point clouds</span></a></li>
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_faces_decomposition.html#example-decomposition-plot-faces-decomposition-py"><span class="std std-ref">Faces dataset decompositions</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="non-negative-matrix-factorization-nmf-or-nnmf">
+<span id="nmf"></span><h2>2.5.6. Non-negative matrix factorization (NMF or NNMF)<a class="headerlink" href="#non-negative-matrix-factorization-nmf-or-nnmf" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> is an alternative approach to decomposition that assumes that the
+data and the components are non-negative. <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> can be plugged in
+instead of <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a> or its variants, in the cases where the data matrix
+does not contain negative values.
+It finds a decomposition of samples <img class="math" src="../_images/math/7a7bb470119808e2db2879fc2b2526f467b7a40b.png" alt="X"/>
+into two matrices <img class="math" src="../_images/math/953bde2ab2fca30897f66185e5b37b73747b8b46.png" alt="W"/> and <img class="math" src="../_images/math/44d4c3f22452acebfb3ac644e23508b67500be90.png" alt="H"/> of non-negative elements,
+by optimizing for the squared Frobenius norm:</p>
+<div class="math">
+<p><img src="../_images/math/56dd37b79327006a201a5b9e450bea913f2b5d65.png" alt="\arg\min_{W,H} \frac{1}{2} ||X - WH||_{Fro}^2 = \frac{1}{2} \sum_{i,j} (X_{ij} - {WH}_{ij})^2"/></p>
+</div><p>This norm is an obvious extension of the Euclidean norm to matrices. (Other
+optimization objectives have been suggested in the NMF literature, in
+particular Kullback-Leibler divergence, but these are not currently
+implemented.)</p>
+<p>Unlike <a class="reference internal" href="generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA" title="sklearn.decomposition.PCA"><code class="xref py py-class docutils literal"><span class="pre">PCA</span></code></a>, the representation of a vector is obtained in an additive
+fashion, by superimposing the components, without subtracting. Such additive
+models are efficient for representing images and text.</p>
+<p>It has been observed in [Hoyer, 04] that, when carefully constrained,
+<a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> can produce a parts-based representation of the dataset,
+resulting in interpretable models. The following example displays 16
+sparse components found by <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> from the images in the Olivetti
+faces dataset, in comparison with the PCA eigenfaces.</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img5" src="../_images/plot_faces_decomposition_0021.png" style="width: 360.0px; height: 270.6px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="nmf_img5" src="../_images/plot_faces_decomposition_0031.png" style="width: 360.0px; height: 270.6px;" /></a></strong></p><p>The <code class="xref py py-attr docutils literal"><span class="pre">init</span></code> attribute determines the initialization method applied, which
+has a great impact on the performance of the method. <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> implements
+the method Nonnegative Double Singular Value Decomposition. NNDSVD is based on
+two SVD processes, one approximating the data matrix, the other approximating
+positive sections of the resulting partial SVD factors utilizing an algebraic
+property of unit rank matrices. The basic NNDSVD algorithm is better fit for
+sparse factorization. Its variants NNDSVDa (in which all zeros are set equal to
+the mean of all elements of the data), and NNDSVDar (in which the zeros are set
+to random perturbations less than the mean of the data divided by 100) are
+recommended in the dense case.</p>
+<p><a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> can also be initialized with correctly scaled random non-negative
+matrices by setting <code class="xref py py-attr docutils literal"><span class="pre">init=&quot;random&quot;</span></code>. An integer seed or a
+<code class="docutils literal"><span class="pre">RandomState</span></code> can also be passed to <code class="xref py py-attr docutils literal"><span class="pre">random_state</span></code> to control
+reproducibility.</p>
+<p>In <a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a>, L1 and L2 priors can be added to the loss function in order
+to regularize the model. The L2 prior uses the Frobenius norm, while the L1
+prior uses an elementwise L1 norm. As in <code class="xref py py-class docutils literal"><span class="pre">ElasticNet</span></code>, we control the
+combination of L1 and L2 with the <code class="xref py py-attr docutils literal"><span class="pre">l1_ratio</span></code> (<img class="math" src="../_images/math/9a51ab9a0b521705e1e8762fac6bdd6f11771758.png" alt="\rho"/>) parameter,
+and the intensity of the regularization with the <code class="xref py py-attr docutils literal"><span class="pre">alpha</span></code>
+(<img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/>) parameter. Then the priors terms are:</p>
+<div class="math">
+<p><img src="../_images/math/064f9ca9ed5d3fa5b659fa2a50176552cd789296.png" alt="\alpha \rho ||W||_1 + \alpha \rho ||H||_1
++ \frac{\alpha(1-\rho)}{2} ||W||_{Fro} ^ 2
++ \frac{\alpha(1-\rho)}{2} ||H||_{Fro} ^ 2"/></p>
+</div><p>and the regularized objective function is:</p>
+<div class="math">
+<p><img src="../_images/math/438d66f608dddc17c7f483b93c58181886643923.png" alt="\frac{1}{2}||X - WH||_{Fro}^2
++ \alpha \rho ||W||_1 + \alpha \rho ||H||_1
++ \frac{\alpha(1-\rho)}{2} ||W||_{Fro} ^ 2
++ \frac{\alpha(1-\rho)}{2} ||H||_{Fro} ^ 2"/></p>
+</div><p><a class="reference internal" href="generated/sklearn.decomposition.NMF.html#sklearn.decomposition.NMF" title="sklearn.decomposition.NMF"><code class="xref py py-class docutils literal"><span class="pre">NMF</span></code></a> regularizes both W and H. The public function
+<code class="xref py py-func docutils literal"><span class="pre">non_negative_factorization</span></code> allows a finer control through the
+<code class="xref py py-attr docutils literal"><span class="pre">regularization</span></code> attribute, and may regularize only W, only H, or both.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/decomposition/plot_faces_decomposition.html#example-decomposition-plot-faces-decomposition-py"><span class="std std-ref">Faces dataset decompositions</span></a></li>
+<li><a class="reference internal" href="../auto_examples/applications/topics_extraction_with_nmf_lda.html#example-applications-topics-extraction-with-nmf-lda-py"><span class="std std-ref">Topic extraction with Non-negative Matrix Factorization and Latent Dirichlet Allocation</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://hebb.mit.edu/people/seung/papers/ls-lponm-99.pdf">&#8220;Learning the parts of objects by non-negative matrix factorization&#8221;</a>
+D. Lee, S. Seung, 1999</li>
+<li><a class="reference external" href="http://www.jmlr.org/papers/volume5/hoyer04a/hoyer04a.pdf">&#8220;Non-negative Matrix Factorization with Sparseness Constraints&#8221;</a>
+P. Hoyer, 2004</li>
+<li><a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/nmf/">&#8220;Projected gradient methods for non-negative matrix factorization&#8221;</a>
+C.-J. Lin, 2007</li>
+<li><a class="reference external" href="http://scgroup.hpclab.ceid.upatras.gr/faculty/stratis/Papers/HPCLAB020107.pdf">&#8220;SVD based initialization: A head start for nonnegative
+matrix factorization&#8221;</a>
+C. Boutsidis, E. Gallopoulos, 2008</li>
+<li><a class="reference external" href="http://www.bsp.brain.riken.jp/publications/2009/Cichocki-Phan-IEICE_col.pdf">&#8220;Fast local algorithms for large scale nonnegative matrix and tensor
+factorizations.&#8221;</a>
+A. Cichocki, P. Anh-Huy, 2009</li>
+</ul>
+</div>
+</div>
+<div class="section" id="latent-dirichlet-allocation-lda">
+<span id="latentdirichletallocation"></span><h2>2.5.7. Latent Dirichlet Allocation (LDA)<a class="headerlink" href="#latent-dirichlet-allocation-lda" title="Permalink to this headline">¶</a></h2>
+<p>Latent Dirichlet Allocation is a generative probabilistic model for collections of
+discrete dataset such as text corpora. It is also a topic model that is used for
+discovering abstract topics from a collection of documents.</p>
+<p>The graphical model of LDA is a three-level Bayesian model:</p>
+<img alt="../_images/lda_model_graph.png" class="align-center" src="../_images/lda_model_graph.png" />
+<p>When modeling text corpora, the model assumes the following generative process for
+a corpus with <img class="math" src="../_images/math/3cf5aa5abe312e6fd4996975341a43aa566e8d8d.png" alt="D"/> documents and <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> topics:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>For each topic <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/>, draw <img class="math" src="../_images/math/c3932e7c23d7d40fe51fe10425de8304588f18e6.png" alt="\beta_k \sim Dirichlet(\eta),\: k =1...K"/></li>
+<li>For each document <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/>, draw <img class="math" src="../_images/math/54b3b3ceb2a30104187cd3fe777d6c13dc5f4f94.png" alt="\theta_d \sim Dirichlet(\alpha), \: d=1...D"/></li>
+<li>For each word <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> in document <img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.png" alt="d"/>:</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Draw a topic index <img class="math" src="../_images/math/aee6c5c5ea60b277573daa8c3b8765ad0b128cd9.png" alt="z_{di} \sim Multinomial(\theta_d)"/></li>
+<li>Draw the observed word <img class="math" src="../_images/math/6d206c1636c1349687dda8829230465aac927a16.png" alt="w_{ij} \sim Multinomial(beta_{z_{di}}.)"/></li>
+</ol>
+</div></blockquote>
+</div></blockquote>
+<p>For parameter estimation, the posterior distribution is:</p>
+<div class="math">
+<p><img src="../_images/math/404da44d7b41d98a2191fb2cd02c3f4ac1c68b2b.png" alt="p(z, \theta, \beta |w, \alpha, \eta) =
+  \frac{p(z, \theta, \beta|\alpha, \eta)}{p(w|\alpha, \eta)}"/></p>
+</div><p>Since the posterior is intractable, variational Bayesian method
+uses a simpler distribution <img class="math" src="../_images/math/0510b5c618c540bbb500c44ee4086a3e17e18696.png" alt="q(z,\theta,\beta | \lambda, \phi, \gamma)"/>
+to approximate it, and those variational parameters <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.png" alt="\lambda"/>, <img class="math" src="../_images/math/c2f31c22645274c375eff7920cfdfdc18d60341f.png" alt="\phi"/>,
+<img class="math" src="../_images/math/3666981dc77862de77b6ecfcb64aad59b425cbaf.png" alt="\gamma"/> are optimized to maximize the Evidence Lower Bound (ELBO):</p>
+<div class="math">
+<p><img src="../_images/math/2e5a140010bc061501b1b515b57572f993604c2c.png" alt="log\: P(w | \alpha, \eta) \geq L(w,\phi,\gamma,\lambda) \overset{\triangle}{=}
+  E_{q}[log\:p(w,z,\theta,\beta|\alpha,\eta)] - E_{q}[log\:q(z, \theta, \beta)]"/></p>
+</div><p>Maximizing ELBO is equivalent to minimizing the Kullback-Leibler(KL) divergence
+between <img class="math" src="../_images/math/30e44216f8466495285af2e10ecf0677614f10d5.png" alt="q(z,\theta,\beta)"/> and the true posterior
+<img class="math" src="../_images/math/4fdab4dc628d7c9a10b0cc7a1b99d672868cb4ed.png" alt="p(z, \theta, \beta |w, \alpha, \eta)"/>.</p>
+<p><a class="reference internal" href="generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation" title="sklearn.decomposition.LatentDirichletAllocation"><code class="xref py py-class docutils literal"><span class="pre">LatentDirichletAllocation</span></code></a> implements online variational Bayes algorithm and supports
+both online and batch update method.
+While batch method updates variational variables after each full pass through the data,
+online method updates variational variables from mini-batch data points. Therefore,
+online method usually converges faster than batch method.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although online method is guaranteed to converge to a local optimum point, the quality of
+the optimum point and the speed of convergence may depend on mini-batch size and
+attributes related to learning rate setting.</p>
+</div>
+<p>When <a class="reference internal" href="generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation" title="sklearn.decomposition.LatentDirichletAllocation"><code class="xref py py-class docutils literal"><span class="pre">LatentDirichletAllocation</span></code></a> is applied on a &#8220;document-term&#8221; matrix, the matrix
+will be decomposed into a &#8220;topic-term&#8221; matrix and a &#8220;document-topic&#8221; matrix. While
+&#8220;topic-term&#8221; matrix is stored as <code class="xref py py-attr docutils literal"><span class="pre">components_</span></code> in the model, &#8220;document-topic&#8221; matrix
+can be calculated from <code class="docutils literal"><span class="pre">transform</span></code> method.</p>
+<p><a class="reference internal" href="generated/sklearn.decomposition.LatentDirichletAllocation.html#sklearn.decomposition.LatentDirichletAllocation" title="sklearn.decomposition.LatentDirichletAllocation"><code class="xref py py-class docutils literal"><span class="pre">LatentDirichletAllocation</span></code></a> also implements <code class="docutils literal"><span class="pre">partial_fit</span></code> method. This is used
+when data can be fetched sequentially.</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/applications/topics_extraction_with_nmf_lda.html#example-applications-topics-extraction-with-nmf-lda-py"><span class="std std-ref">Topic extraction with Non-negative Matrix Factorization and Latent Dirichlet Allocation</span></a></li>
+</ul>
+</div>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.cs.princeton.edu/~blei/papers/BleiNgJordan2003.pdf">&#8220;Latent Dirichlet Allocation&#8221;</a>
+D. Blei, A. Ng, M. Jordan, 2003</li>
+<li><a class="reference external" href="https://www.cs.princeton.edu/~blei/papers/HoffmanBleiBach2010b.pdf">&#8220;Online Learning for Latent Dirichlet Allocation”</a>
+M. Hoffman, D. Blei, F. Bach, 2010</li>
+<li><a class="reference external" href="http://www.columbia.edu/~jwp2128/Papers/HoffmanBleiWangPaisley2013.pdf">&#8220;Stochastic Variational Inference&#8221;</a>
+M. Hoffman, D. Blei, C. Wang, J. Paisley, 2013</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/decomposition.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="biclustering.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,493 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>Utilities for Developers &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="Developer’s Guide" href="index.html" />
+    <link rel="next" title="How to optimize for speed" href="performance.html" />
+    <link rel="prev" title="Developers’ Tips for Debugging" href="debugging.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/developers/utilities.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="debugging.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Developers’ T...
+        </span>
+            <span class="hiddenrellink">
+            Developers’ Tips for Debugging
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        Developer’s G...
+        </span>
+            <span class="hiddenrellink">
+            Developer’s Guide
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">Utilities for Developers</a><ul>
+<li><a class="reference internal" href="#validation-tools">Validation Tools</a></li>
+<li><a class="reference internal" href="#efficient-linear-algebra-array-operations">Efficient Linear Algebra &amp; Array Operations</a></li>
+<li><a class="reference internal" href="#efficient-random-sampling">Efficient Random Sampling</a></li>
+<li><a class="reference internal" href="#efficient-routines-for-sparse-matrices">Efficient Routines for Sparse Matrices</a></li>
+<li><a class="reference internal" href="#graph-routines">Graph Routines</a></li>
+<li><a class="reference internal" href="#backports">Backports</a><ul>
+<li><a class="reference internal" href="#arpack">ARPACK</a></li>
+<li><a class="reference internal" href="#benchmarking">Benchmarking</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing-functions">Testing Functions</a></li>
+<li><a class="reference internal" href="#multiclass-and-multilabel-utility-function">Multiclass and multilabel utility function</a></li>
+<li><a class="reference internal" href="#helper-functions">Helper Functions</a></li>
+<li><a class="reference internal" href="#hash-functions">Hash Functions</a></li>
+<li><a class="reference internal" href="#warnings-and-exceptions">Warnings and Exceptions</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="utilities-for-developers">
+<span id="developers-utils"></span><h1>Utilities for Developers<a class="headerlink" href="#utilities-for-developers" title="Permalink to this headline">¶</a></h1>
+<p>Scikit-learn contains a number of utilities to help with development.  These are
+located in <a class="reference internal" href="../modules/classes.html#module-sklearn.utils" title="sklearn.utils"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.utils</span></code></a>, and include tools in a number of categories.
+All the following functions and classes are in the module <a class="reference internal" href="../modules/classes.html#module-sklearn.utils" title="sklearn.utils"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.utils</span></code></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">These utilities are meant to be used internally within the scikit-learn
+package.  They are not guaranteed to be stable between versions of
+scikit-learn.  Backports, in particular, will be removed as the scikit-learn
+dependencies evolve.</p>
+</div>
+<div class="section" id="validation-tools">
+<h2>Validation Tools<a class="headerlink" href="#validation-tools" title="Permalink to this headline">¶</a></h2>
+<p>These are tools used to check and validate input.  When you write a function
+which accepts arrays, matrices, or sparse matrices as arguments, the following
+should be used when applicable.</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">assert_all_finite</span></code>: Throw an error if array contains NaNs or Infs.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">as_float_array</span></code>: convert input to an array of floats.  If a sparse
+matrix is passed, a sparse matrix will be returned.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">check_array</span></code>: convert input to 2d array, raise error on sparse
+matrices.  Allowed sparse matrix formats can be given optionally, as well as
+allowing 1d or nd arrays.  Calls <code class="xref py py-func docutils literal"><span class="pre">assert_all_finite</span></code> by default.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">check_X_y</span></code>: check that X and y have consistent length, calls
+check_array on X, and column_or_1d on y. For multilabel classification or
+multitarget regression, specify multi_output=True, in which case check_array
+will be called on y.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">indexable</span></code>: check that all input arrays have consistent length and can
+be sliced or indexed using safe_index.  This is used to validate input for
+cross-validation.</li>
+</ul>
+<p>If your code relies on a random number generator, it should never use
+functions like <code class="docutils literal"><span class="pre">numpy.random.random</span></code> or <code class="docutils literal"><span class="pre">numpy.random.normal</span></code>.  This
+approach can lead to repeatability issues in unit tests.  Instead, a
+<code class="docutils literal"><span class="pre">numpy.random.RandomState</span></code> object should be used, which is built from
+a <code class="docutils literal"><span class="pre">random_state</span></code> argument passed to the class or function.  The function
+<a class="reference internal" href="../modules/generated/sklearn.utils.check_random_state.html#sklearn.utils.check_random_state" title="sklearn.utils.check_random_state"><code class="xref py py-func docutils literal"><span class="pre">check_random_state</span></code></a>, below, can then be used to create a random
+number generator object.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.check_random_state.html#sklearn.utils.check_random_state" title="sklearn.utils.check_random_state"><code class="xref py py-func docutils literal"><span class="pre">check_random_state</span></code></a>: create a <code class="docutils literal"><span class="pre">np.random.RandomState</span></code> object from
+a parameter <code class="docutils literal"><span class="pre">random_state</span></code>.<ul>
+<li>If <code class="docutils literal"><span class="pre">random_state</span></code> is <code class="docutils literal"><span class="pre">None</span></code> or <code class="docutils literal"><span class="pre">np.random</span></code>, then a
+randomly-initialized <code class="docutils literal"><span class="pre">RandomState</span></code> object is returned.</li>
+<li>If <code class="docutils literal"><span class="pre">random_state</span></code> is an integer, then it is used to seed a new
+<code class="docutils literal"><span class="pre">RandomState</span></code> object.</li>
+<li>If <code class="docutils literal"><span class="pre">random_state</span></code> is a <code class="docutils literal"><span class="pre">RandomState</span></code> object, then it is passed through.</li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <span class="n">check_random_state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random_state</span> <span class="o">=</span> <span class="n">check_random_state</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random_state</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">array([ 0.5488135 ,  0.71518937,  0.60276338,  0.54488318])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="efficient-linear-algebra-array-operations">
+<h2>Efficient Linear Algebra &amp; Array Operations<a class="headerlink" href="#efficient-linear-algebra-array-operations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">extmath.randomized_range_finder</span></code>: construct an orthonormal matrix
+whose range approximates the range of the input.  This is used in
+<code class="xref py py-func docutils literal"><span class="pre">extmath.randomized_svd</span></code>, below.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">extmath.randomized_svd</span></code>: compute the k-truncated randomized SVD.
+This algorithm finds the exact truncated singular values decomposition
+using randomization to speed up the computations. It is particularly
+fast on large matrices on which you wish to extract only a small
+number of components.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">arrayfuncs.cholesky_delete</span></code>:
+(used in <code class="xref py py-func docutils literal"><span class="pre">sklearn.linear_model.least_angle.lars_path</span></code>)  Remove an
+item from a cholesky factorization.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">arrayfuncs.min_pos</span></code>: (used in <code class="docutils literal"><span class="pre">sklearn.linear_model.least_angle</span></code>)
+Find the minimum of the positive values within an array.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">extmath.norm</span></code>: computes Euclidean (L2) vector norm
+by directly calling the BLAS
+<code class="docutils literal"><span class="pre">nrm2</span></code> function.  This is more stable than <code class="docutils literal"><span class="pre">scipy.linalg.norm</span></code>.  See
+<a class="reference external" href="http://fseoane.net/blog/2011/computing-the-vector-norm/">Fabian&#8217;s blog post</a> for a discussion.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">extmath.fast_logdet</span></code>: efficiently compute the log of the determinant
+of a matrix.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">extmath.density</span></code>: efficiently compute the density of a sparse vector</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">extmath.safe_sparse_dot</span></code>: dot product which will correctly handle
+<code class="docutils literal"><span class="pre">scipy.sparse</span></code> inputs.  If the inputs are dense, it is equivalent to
+<code class="docutils literal"><span class="pre">numpy.dot</span></code>.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">extmath.logsumexp</span></code>: compute the sum of X assuming X is in the log
+domain. This is equivalent to calling <code class="docutils literal"><span class="pre">np.log(np.sum(np.exp(X)))</span></code>, but is
+robust to overflow/underflow errors.  Note that there is similar
+functionality in <code class="docutils literal"><span class="pre">np.logaddexp.reduce</span></code>, but because of the pairwise nature
+of this routine, it is slower for large arrays.
+Scipy has a similar routine in <code class="docutils literal"><span class="pre">scipy.misc.logsumexp</span></code> (In scipy versions
+&lt; 0.10, this is found in <code class="docutils literal"><span class="pre">scipy.maxentropy.logsumexp</span></code>),
+but the scipy version does not accept an <code class="docutils literal"><span class="pre">axis</span></code> keyword.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">extmath.weighted_mode</span></code>: an extension of <code class="docutils literal"><span class="pre">scipy.stats.mode</span></code> which
+allows each item to have a real-valued weight.</li>
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.resample.html#sklearn.utils.resample" title="sklearn.utils.resample"><code class="xref py py-func docutils literal"><span class="pre">resample</span></code></a>: Resample arrays or sparse matrices in a consistent way.
+used in <a class="reference internal" href="../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle" title="sklearn.utils.shuffle"><code class="xref py py-func docutils literal"><span class="pre">shuffle</span></code></a>, below.</li>
+<li><a class="reference internal" href="../modules/generated/sklearn.utils.shuffle.html#sklearn.utils.shuffle" title="sklearn.utils.shuffle"><code class="xref py py-func docutils literal"><span class="pre">shuffle</span></code></a>: Shuffle arrays or sparse matrices in a consistent way.
+Used in <code class="docutils literal"><span class="pre">sklearn.cluster.k_means</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="efficient-random-sampling">
+<h2>Efficient Random Sampling<a class="headerlink" href="#efficient-random-sampling" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">random.sample_without_replacement</span></code>: implements efficient algorithms
+for sampling <code class="docutils literal"><span class="pre">n_samples</span></code> integers from a population of size <code class="docutils literal"><span class="pre">n_population</span></code>
+without replacement.</li>
+</ul>
+</div>
+<div class="section" id="efficient-routines-for-sparse-matrices">
+<h2>Efficient Routines for Sparse Matrices<a class="headerlink" href="#efficient-routines-for-sparse-matrices" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">sklearn.utils.sparsefuncs</span></code> cython module hosts compiled extensions to
+efficiently process <code class="docutils literal"><span class="pre">scipy.sparse</span></code> data.</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">sparsefuncs.mean_variance_axis</span></code>: compute the means and
+variances along a specified axis of a CSR matrix.
+Used for normalizing the tolerance stopping criterion in
+<code class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.k_means_.KMeans</span></code>.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">sparsefuncs.inplace_csr_row_normalize_l1</span></code> and
+<code class="xref py py-func docutils literal"><span class="pre">sparsefuncs.inplace_csr_row_normalize_l2</span></code>: can be used to normalize
+individual sparse samples to unit L1 or L2 norm as done in
+<a class="reference internal" href="../modules/generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer" title="sklearn.preprocessing.Normalizer"><code class="xref py py-class docutils literal"><span class="pre">sklearn.preprocessing.Normalizer</span></code></a>.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">sparsefuncs.inplace_csr_column_scale</span></code>: can be used to multiply the
+columns of a CSR matrix by a constant scale (one scale per column).
+Used for scaling features to unit standard deviation in
+<a class="reference internal" href="../modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler" title="sklearn.preprocessing.StandardScaler"><code class="xref py py-class docutils literal"><span class="pre">sklearn.preprocessing.StandardScaler</span></code></a>.</li>
+</ul>
+</div>
+<div class="section" id="graph-routines">
+<h2>Graph Routines<a class="headerlink" href="#graph-routines" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">graph.single_source_shortest_path_length</span></code>:
+(not currently used in scikit-learn)
+Return the shortest path from a single source
+to all connected nodes on a graph.  Code is adapted from <a class="reference external" href="https://networkx.github.io/">networkx</a>.
+If this is ever needed again, it would be far faster to use a single
+iteration of Dijkstra&#8217;s algorithm from <code class="docutils literal"><span class="pre">graph_shortest_path</span></code>.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">graph.graph_laplacian</span></code>:
+(used in <code class="xref py py-func docutils literal"><span class="pre">sklearn.cluster.spectral.spectral_embedding</span></code>)
+Return the Laplacian of a given graph.  There is specialized code for
+both dense and sparse connectivity matrices.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">graph_shortest_path.graph_shortest_path</span></code>:
+(used in <a class="reference internal" href="../modules/generated/sklearn.manifold.Isomap.html#sklearn.manifold.Isomap" title="sklearn.manifold.Isomap"><code class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.Isomap</span></code></a>)
+Return the shortest path between all pairs of connected points on a directed
+or undirected graph.  Both the Floyd-Warshall algorithm and Dijkstra&#8217;s
+algorithm are available.  The algorithm is most efficient when the
+connectivity matrix is a <code class="docutils literal"><span class="pre">scipy.sparse.csr_matrix</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="backports">
+<h2>Backports<a class="headerlink" href="#backports" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">fixes.expit</span></code>: Logistic sigmoid function. Replacement for SciPy 0.10&#8217;s
+<code class="docutils literal"><span class="pre">scipy.special.expit</span></code>.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">sparsetools.connected_components</span></code>
+(backported from <code class="docutils literal"><span class="pre">scipy.sparse.connected_components</span></code> in scipy 0.12).
+Used in <code class="docutils literal"><span class="pre">sklearn.cluster.hierarchical</span></code>, as well as in tests for
+<a class="reference internal" href="../modules/classes.html#module-sklearn.feature_extraction" title="sklearn.feature_extraction"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.feature_extraction</span></code></a>.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">fixes.isclose</span></code>
+(backported from <code class="docutils literal"><span class="pre">numpy.isclose</span></code> in numpy 1.8.1).
+In versions before 1.7, this function was not available in
+numpy. Used in <code class="docutils literal"><span class="pre">sklearn.metrics</span></code>.</li>
+</ul>
+<div class="section" id="arpack">
+<h3>ARPACK<a class="headerlink" href="#arpack" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">arpack.eigs</span></code>
+(backported from <code class="docutils literal"><span class="pre">scipy.sparse.linalg.eigs</span></code> in scipy 0.10)
+Sparse non-symmetric eigenvalue decomposition using the Arnoldi
+method.  A limited version of <code class="docutils literal"><span class="pre">eigs</span></code> is available in earlier
+scipy versions.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">arpack.eigsh</span></code>
+(backported from <code class="docutils literal"><span class="pre">scipy.sparse.linalg.eigsh</span></code> in scipy 0.10)
+Sparse non-symmetric eigenvalue decomposition using the Arnoldi
+method.  A limited version of <code class="docutils literal"><span class="pre">eigsh</span></code> is available in earlier
+scipy versions.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">arpack.svds</span></code>
+(backported from <code class="docutils literal"><span class="pre">scipy.sparse.linalg.svds</span></code> in scipy 0.10)
+Sparse non-symmetric eigenvalue decomposition using the Arnoldi
+method.  A limited version of <code class="docutils literal"><span class="pre">svds</span></code> is available in earlier
+scipy versions.</li>
+</ul>
+</div>
+<div class="section" id="benchmarking">
+<h3>Benchmarking<a class="headerlink" href="#benchmarking" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">bench.total_seconds</span></code> (back-ported from <code class="docutils literal"><span class="pre">timedelta.total_seconds</span></code>
+in Python 2.7).  Used in <code class="docutils literal"><span class="pre">benchmarks/bench_glm.py</span></code>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="testing-functions">
+<h2>Testing Functions<a class="headerlink" href="#testing-functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">testing.assert_in</span></code>, <code class="xref py py-func docutils literal"><span class="pre">testing.assert_not_in</span></code>: Assertions for
+container membership. Designed for forward compatibility with Nose 1.0.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">testing.assert_raise_message</span></code>: Assertions for checking the
+error raise message.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">testing.mock_mldata_urlopen</span></code>: Mocks the urlopen function to fake
+requests to mldata.org. Used in tests of <a class="reference internal" href="../modules/classes.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.datasets</span></code></a>.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">testing.all_estimators</span></code> : returns a list of all estimators in
+scikit-learn to test for consistent behavior and interfaces.</li>
+</ul>
+</div>
+<div class="section" id="multiclass-and-multilabel-utility-function">
+<h2>Multiclass and multilabel utility function<a class="headerlink" href="#multiclass-and-multilabel-utility-function" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">multiclass.is_multilabel</span></code>: Helper function to check if the task
+is a multi-label classification one.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">multiclass.is_label_indicator_matrix</span></code>: Helper function to check if
+a classification output is in label indicator matrix format.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">multiclass.unique_labels</span></code>: Helper function to extract an ordered
+array of unique labels from different formats of target.</li>
+</ul>
+</div>
+<div class="section" id="helper-functions">
+<h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="xref py py-class docutils literal"><span class="pre">gen_even_slices</span></code>: generator to create <code class="docutils literal"><span class="pre">n</span></code>-packs of slices going up
+to <code class="docutils literal"><span class="pre">n</span></code>.  Used in <code class="docutils literal"><span class="pre">sklearn.decomposition.dict_learning</span></code> and
+<code class="docutils literal"><span class="pre">sklearn.cluster.k_means</span></code>.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">safe_mask</span></code>: Helper function to convert a mask to the format expected
+by the numpy array or scipy sparse matrix on which to use it (sparse
+matrices support integer indices only while numpy arrays support both
+boolean masks and integer indices).</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">safe_sqr</span></code>: Helper function for unified squaring (<code class="docutils literal"><span class="pre">**2</span></code>) of
+array-likes, matrices and sparse matrices.</li>
+</ul>
+</div>
+<div class="section" id="hash-functions">
+<h2>Hash Functions<a class="headerlink" href="#hash-functions" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><code class="xref py py-func docutils literal"><span class="pre">murmurhash3_32</span></code> provides a python wrapper for the
+<code class="docutils literal"><span class="pre">MurmurHash3_x86_32</span></code> C++ non cryptographic hash function. This hash
+function is suitable for implementing lookup tables, Bloom filters,
+Count Min Sketch, feature hashing and implicitly defined sparse
+random projections:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <span class="n">murmurhash3_32</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">murmurhash3_32</span><span class="p">(</span><span class="s2">&quot;some feature&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">384616559</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">murmurhash3_32</span><span class="p">(</span><span class="s2">&quot;some feature&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3910350737</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">sklearn.utils.murmurhash</span></code> module can also be &#8220;cimported&#8221; from
+other cython modules so as to benefit from the high performance of
+MurmurHash while skipping the overhead of the Python interpreter.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="warnings-and-exceptions">
+<h2>Warnings and Exceptions<a class="headerlink" href="#warnings-and-exceptions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="xref py py-class docutils literal"><span class="pre">deprecated</span></code>: Decorator to mark a function or class as deprecated.</li>
+<li><code class="xref py py-class docutils literal"><span class="pre">ConvergenceWarning</span></code>: Custom warning to catch convergence problems.
+Used in <code class="docutils literal"><span class="pre">sklearn.covariance.graph_lasso</span></code>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/developers/utilities.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="debugging.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

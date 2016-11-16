@@ -1,0 +1,548 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.neighbors.DistanceMetric &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.neighbors.KernelDensity" href="sklearn.neighbors.KernelDensity.html" />
+    <link rel="prev" title="sklearn.neighbors.LSHForest" href="sklearn.neighbors.LSHForest.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.neighbors.LSHForest.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.neigh...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.neighbors.LSHForest
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.neighbors</span></code>.DistanceMetric</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-neighbors-distancemetric">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.neighbors" title="sklearn.neighbors"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.neighbors</span></code></a>.DistanceMetric<a class="headerlink" href="#sklearn-neighbors-distancemetric" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.neighbors.DistanceMetric">
+<em class="property">class </em><code class="descclassname">sklearn.neighbors.</code><code class="descname">DistanceMetric</code><a class="headerlink" href="#sklearn.neighbors.DistanceMetric" title="Permalink to this definition">¶</a></dt>
+<dd><p>DistanceMetric class</p>
+<p>This class provides a uniform interface to fast distance metric
+functions.  The various metrics can be accessed via the <cite>get_metric</cite>
+class method and the metric string identifier (see below).
+For example, to use the Euclidean distance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span> <span class="o">=</span> <span class="n">DistanceMetric</span><span class="o">.</span><span class="n">get_metric</span><span class="p">(</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="go">         [3, 4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span><span class="o">.</span><span class="n">pairwise</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[ 0.        ,  5.19615242],</span>
+<span class="go">       [ 5.19615242,  0.        ]])</span>
+</pre></div>
+</div>
+<p>Available Metrics
+The following lists the string metric identifiers and the associated
+distance metric classes:</p>
+<p><strong>Metrics intended for real-valued vector spaces:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="27%" />
+<col width="11%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>identifier</td>
+<td>class name</td>
+<td>args</td>
+<td>distance function</td>
+</tr>
+<tr class="row-even"><td>&#8220;euclidean&#8221;</td>
+<td>EuclideanDistance</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><code class="docutils literal"><span class="pre">sqrt(sum((x</span> <span class="pre">-</span> <span class="pre">y)^2))</span></code></td>
+</tr>
+<tr class="row-odd"><td>&#8220;manhattan&#8221;</td>
+<td>ManhattanDistance</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><code class="docutils literal"><span class="pre">sum(|x</span> <span class="pre">-</span> <span class="pre">y|)</span></code></td>
+</tr>
+<tr class="row-even"><td>&#8220;chebyshev&#8221;</td>
+<td>ChebyshevDistance</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><code class="docutils literal"><span class="pre">max(|x</span> <span class="pre">-</span> <span class="pre">y|)</span></code></td>
+</tr>
+<tr class="row-odd"><td>&#8220;minkowski&#8221;</td>
+<td>MinkowskiDistance</td>
+<td>p</td>
+<td><code class="docutils literal"><span class="pre">sum(|x</span> <span class="pre">-</span> <span class="pre">y|^p)^(1/p)</span></code></td>
+</tr>
+<tr class="row-even"><td>&#8220;wminkowski&#8221;</td>
+<td>WMinkowskiDistance</td>
+<td>p, w</td>
+<td><code class="docutils literal"><span class="pre">sum(w</span> <span class="pre">*</span> <span class="pre">|x</span> <span class="pre">-</span> <span class="pre">y|^p)^(1/p)</span></code></td>
+</tr>
+<tr class="row-odd"><td>&#8220;seuclidean&#8221;</td>
+<td>SEuclideanDistance</td>
+<td>V</td>
+<td><code class="docutils literal"><span class="pre">sqrt(sum((x</span> <span class="pre">-</span> <span class="pre">y)^2</span> <span class="pre">/</span> <span class="pre">V))</span></code></td>
+</tr>
+<tr class="row-even"><td>&#8220;mahalanobis&#8221;</td>
+<td>MahalanobisDistance</td>
+<td>V or VI</td>
+<td><code class="docutils literal"><span class="pre">sqrt((x</span> <span class="pre">-</span> <span class="pre">y)'</span> <span class="pre">V^-1</span> <span class="pre">(x</span> <span class="pre">-</span> <span class="pre">y))</span></code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Metrics intended for two-dimensional vector spaces:</strong>  Note that the haversine
+distance metric requires data in the form of [latitude, longitude] and both
+inputs and outputs are in units of radians.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="26%" />
+<col width="57%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>identifier</td>
+<td>class name</td>
+<td>distance function</td>
+</tr>
+<tr class="row-even"><td>&#8220;haversine&#8221;</td>
+<td>HaversineDistance</td>
+<td><dl class="first last docutils">
+<dt>2 arcsin(sqrt(sin^2(0.5*dx)</dt>
+<dd><ul class="first last simple">
+<li>cos(x1)cos(x2)sin^2(0.5*dy)))</li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Metrics intended for integer-valued vector spaces:</strong>  Though intended
+for integer-valued vectors, these are also valid metrics in the case of
+real-valued vectors.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="27%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>identifier</td>
+<td>class name</td>
+<td>distance function</td>
+</tr>
+<tr class="row-even"><td>&#8220;hamming&#8221;</td>
+<td>HammingDistance</td>
+<td><code class="docutils literal"><span class="pre">N_unequal(x,</span> <span class="pre">y)</span> <span class="pre">/</span> <span class="pre">N_tot</span></code></td>
+</tr>
+<tr class="row-odd"><td>&#8220;canberra&#8221;</td>
+<td>CanberraDistance</td>
+<td><code class="docutils literal"><span class="pre">sum(|x</span> <span class="pre">-</span> <span class="pre">y|</span> <span class="pre">/</span> <span class="pre">(|x|</span> <span class="pre">+</span> <span class="pre">|y|))</span></code></td>
+</tr>
+<tr class="row-even"><td>&#8220;braycurtis&#8221;</td>
+<td>BrayCurtisDistance</td>
+<td><code class="docutils literal"><span class="pre">sum(|x</span> <span class="pre">-</span> <span class="pre">y|)</span> <span class="pre">/</span> <span class="pre">(sum(|x|)</span> <span class="pre">+</span> <span class="pre">sum(|y|))</span></code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Metrics intended for boolean-valued vector spaces:</strong>  Any nonzero entry
+is evaluated to &#8220;True&#8221;.  In the listings below, the following
+abbreviations are used:</p>
+<blockquote>
+<div><ul class="simple">
+<li>N  : number of dimensions</li>
+<li>NTT : number of dims in which both values are True</li>
+<li>NTF : number of dims in which the first value is True, second is False</li>
+<li>NFT : number of dims in which the first value is False, second is True</li>
+<li>NFF : number of dims in which both values are False</li>
+<li>NNEQ : number of non-equal dimensions, NNEQ = NTF + NFT</li>
+<li>NNZ : number of nonzero dimensions, NNZ = NTF + NFT + NTT</li>
+</ul>
+</div></blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="32%" />
+<col width="44%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>identifier</td>
+<td>class name</td>
+<td>distance function</td>
+</tr>
+<tr class="row-even"><td>&#8220;jaccard&#8221;</td>
+<td>JaccardDistance</td>
+<td>NNEQ / NNZ</td>
+</tr>
+<tr class="row-odd"><td>&#8220;matching&#8221;</td>
+<td>MatchingDistance</td>
+<td>NNEQ / N</td>
+</tr>
+<tr class="row-even"><td>&#8220;dice&#8221;</td>
+<td>DiceDistance</td>
+<td>NNEQ / (NTT + NNZ)</td>
+</tr>
+<tr class="row-odd"><td>&#8220;kulsinski&#8221;</td>
+<td>KulsinskiDistance</td>
+<td>(NNEQ + N - NTT) / (NNEQ + N)</td>
+</tr>
+<tr class="row-even"><td>&#8220;rogerstanimoto&#8221;</td>
+<td>RogersTanimotoDistance</td>
+<td>2 * NNEQ / (N + NNEQ)</td>
+</tr>
+<tr class="row-odd"><td>&#8220;russellrao&#8221;</td>
+<td>RussellRaoDistance</td>
+<td>NNZ / N</td>
+</tr>
+<tr class="row-even"><td>&#8220;sokalmichener&#8221;</td>
+<td>SokalMichenerDistance</td>
+<td>2 * NNEQ / (N + NNEQ)</td>
+</tr>
+<tr class="row-odd"><td>&#8220;sokalsneath&#8221;</td>
+<td>SokalSneathDistance</td>
+<td>NNEQ / (NNEQ + 0.5 * NTT)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>User-defined distance:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="45%" />
+<col width="21%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>identifier</td>
+<td>class name</td>
+<td>args</td>
+</tr>
+<tr class="row-even"><td>&#8220;pyfunc&#8221;</td>
+<td>PyFuncDistance</td>
+<td>func</td>
+</tr>
+</tbody>
+</table>
+<p>Here <code class="docutils literal"><span class="pre">func</span></code> is a function which takes two one-dimensional numpy
+arrays, and returns a distance.  Note that in order to be used within
+the BallTree, the distance must be a true metric:
+i.e. it must satisfy the following properties</p>
+<ol class="arabic simple">
+<li>Non-negativity: d(x, y) &gt;= 0</li>
+<li>Identity: d(x, y) = 0 if and only if x == y</li>
+<li>Symmetry: d(x, y) = d(y, x)</li>
+<li>Triangle Inequality: d(x, y) + d(y, z) &gt;= d(x, z)</li>
+</ol>
+<p>Because of the Python object overhead involved in calling the python
+function, this will be fairly slow, but it will have the same
+scaling as other distances.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.neighbors.DistanceMetric.dist_to_rdist" title="sklearn.neighbors.DistanceMetric.dist_to_rdist"><code class="xref py py-obj docutils literal"><span class="pre">dist_to_rdist</span></code></a></td>
+<td>Convert the true distance to the reduced distance.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.neighbors.DistanceMetric.get_metric" title="sklearn.neighbors.DistanceMetric.get_metric"><code class="xref py py-obj docutils literal"><span class="pre">get_metric</span></code></a></td>
+<td>Get the given distance metric from the string identifier.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.neighbors.DistanceMetric.pairwise" title="sklearn.neighbors.DistanceMetric.pairwise"><code class="xref py py-obj docutils literal"><span class="pre">pairwise</span></code></a></td>
+<td>Compute the pairwise distances between X and Y</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.neighbors.DistanceMetric.rdist_to_dist" title="sklearn.neighbors.DistanceMetric.rdist_to_dist"><code class="xref py py-obj docutils literal"><span class="pre">rdist_to_dist</span></code></a></td>
+<td>Convert the Reduced distance to the true distance.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.neighbors.DistanceMetric.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.DistanceMetric.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.DistanceMetric.dist_to_rdist">
+<code class="descname">dist_to_rdist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.DistanceMetric.dist_to_rdist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the true distance to the reduced distance.</p>
+<p>The reduced distance, defined for some metrics, is a computationally
+more efficent measure which preserves the rank of the true distance.
+For example, in the Euclidean distance metric, the reduced distance
+is the squared-euclidean distance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.DistanceMetric.get_metric">
+<code class="descname">get_metric</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.DistanceMetric.get_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the given distance metric from the string identifier.</p>
+<p>See the docstring of DistanceMetric for a list of available metrics.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>metric</strong> : string or class name</p>
+<blockquote>
+<div><p>The distance metric to use</p>
+</div></blockquote>
+<p><strong>**kwargs</strong> :</p>
+<blockquote class="last">
+<div><p>additional arguments will be passed to the requested metric</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.DistanceMetric.pairwise">
+<code class="descname">pairwise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.DistanceMetric.pairwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the pairwise distances between X and Y</p>
+<p>This is a convenience routine for the sake of testing.  For many
+metrics, the utilities in scipy.spatial.distance.cdist and
+scipy.spatial.distance.pdist will be faster.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array_like</p>
+<blockquote>
+<div><p>Array of shape (Nx, D), representing Nx points in D dimensions.</p>
+</div></blockquote>
+<p><strong>Y</strong> : array_like (optional)</p>
+<blockquote>
+<div><p>Array of shape (Ny, D), representing Ny points in D dimensions.
+If not specified, then Y=X.</p>
+</div></blockquote>
+<p><strong>Returns</strong> :</p>
+<p><strong>&#8212;&#8212;-</strong> :</p>
+<p><strong>dist</strong> : ndarray</p>
+<blockquote class="last">
+<div><p>The shape (Nx, Ny) array of pairwise distances between points in
+X and Y.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.neighbors.DistanceMetric.rdist_to_dist">
+<code class="descname">rdist_to_dist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.neighbors.DistanceMetric.rdist_to_dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the Reduced distance to the true distance.</p>
+<p>The reduced distance, defined for some metrics, is a computationally
+more efficent measure which preserves the rank of the true distance.
+For example, in the Euclidean distance metric, the reduced distance
+is the squared-euclidean distance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.neighbors.DistanceMetric.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.neighbors.LSHForest.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

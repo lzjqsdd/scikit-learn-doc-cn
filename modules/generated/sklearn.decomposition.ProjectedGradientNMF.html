@@ -1,0 +1,600 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.decomposition.ProjectedGradientNMF &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.decomposition.RandomizedPCA" href="sklearn.decomposition.RandomizedPCA.html" />
+    <link rel="prev" title="sklearn.decomposition.IncrementalPCA" href="sklearn.decomposition.IncrementalPCA.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.ProjectedGradientNMF.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.decomposition.IncrementalPCA.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.decom...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.decomposition.IncrementalPCA
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.decomposition</span></code>.ProjectedGradientNMF</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-decomposition-projectedgradientnmf">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.decomposition</span></code></a>.ProjectedGradientNMF<a class="headerlink" href="#sklearn-decomposition-projectedgradientnmf" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.decomposition.ProjectedGradientNMF">
+<em class="property">class </em><code class="descclassname">sklearn.decomposition.</code><code class="descname">ProjectedGradientNMF</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/nmf.py#L1111"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.ProjectedGradientNMF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-Negative Matrix Factorization (NMF)</p>
+<p>Find two non-negative matrices (W, H) whose product approximates the non-
+negative matrix X. This factorization can be used for example for
+dimensionality reduction, source separation or topic extraction.</p>
+<p>The objective function is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.5</span> <span class="o">*</span> <span class="o">||</span><span class="n">X</span> <span class="o">-</span> <span class="n">WH</span><span class="o">||</span><span class="n">_Fro</span><span class="o">^</span><span class="mi">2</span>
+<span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">l1_ratio</span> <span class="o">*</span> <span class="o">||</span><span class="n">vec</span><span class="p">(</span><span class="n">W</span><span class="p">)</span><span class="o">||</span><span class="n">_1</span>
+<span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">l1_ratio</span> <span class="o">*</span> <span class="o">||</span><span class="n">vec</span><span class="p">(</span><span class="n">H</span><span class="p">)</span><span class="o">||</span><span class="n">_1</span>
+<span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">l1_ratio</span><span class="p">)</span> <span class="o">*</span> <span class="o">||</span><span class="n">W</span><span class="o">||</span><span class="n">_Fro</span><span class="o">^</span><span class="mi">2</span>
+<span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">l1_ratio</span><span class="p">)</span> <span class="o">*</span> <span class="o">||</span><span class="n">H</span><span class="o">||</span><span class="n">_Fro</span><span class="o">^</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">||</span><span class="n">A</span><span class="o">||</span><span class="n">_Fro</span><span class="o">^</span><span class="mi">2</span> <span class="o">=</span> \<span class="n">sum_</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">}</span> <span class="n">A_</span><span class="p">{</span><span class="n">ij</span><span class="p">}</span><span class="o">^</span><span class="mi">2</span> <span class="p">(</span><span class="n">Frobenius</span> <span class="n">norm</span><span class="p">)</span>
+<span class="o">||</span><span class="n">vec</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">||</span><span class="n">_1</span> <span class="o">=</span> \<span class="n">sum_</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">}</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A_</span><span class="p">{</span><span class="n">ij</span><span class="p">})</span> <span class="p">(</span><span class="n">Elementwise</span> <span class="n">L1</span> <span class="n">norm</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The objective function is minimized with an alternating minimization of W
+and H.</p>
+<p>Read more in the <a class="reference internal" href="../decomposition.html#nmf"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components</strong> : int or None</p>
+<blockquote>
+<div><p>Number of components, if n_components is not set all features
+are kept.</p>
+</div></blockquote>
+<p><strong>init</strong> :  &#8216;random&#8217; | &#8216;nndsvd&#8217; |  &#8216;nndsvda&#8217; | &#8216;nndsvdar&#8217; | &#8216;custom&#8217;</p>
+<blockquote>
+<div><p>Method used to initialize the procedure.
+Default: &#8216;nndsvdar&#8217; if n_components &lt; n_features, otherwise random.
+Valid options:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>&#8216;random&#8217;: non-negative random matrices, scaled with:</dt>
+<dd><p class="first last">sqrt(X.mean() / n_components)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8216;nndsvd&#8217;: Nonnegative Double Singular Value Decomposition (NNDSVD)</dt>
+<dd><p class="first last">initialization (better for sparseness)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8216;nndsvda&#8217;: NNDSVD with zeros filled with the average of X</dt>
+<dd><p class="first last">(better when sparsity is not desired)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8216;nndsvdar&#8217;: NNDSVD with zeros filled with small random values</dt>
+<dd><p class="first last">(generally faster, less accurate alternative to NNDSVDa
+for when sparsity is not desired)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">&#8216;custom&#8217;: use custom matrices W and H</p>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>solver</strong> : &#8216;pg&#8217; | &#8216;cd&#8217;</p>
+<blockquote>
+<div><p>Numerical solver to use:
+&#8216;pg&#8217; is a Projected Gradient solver (deprecated).
+&#8216;cd&#8217; is a Coordinate Descent solver (recommended).</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17: </span>Coordinate Descent solver.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.17: </span>Deprecated Projected Gradient solver.</p>
+</div>
+</div></blockquote>
+<p><strong>tol</strong> : double, default: 1e-4</p>
+<blockquote>
+<div><p>Tolerance value used in stopping conditions.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : integer, default: 200</p>
+<blockquote>
+<div><p>Number of iterations to compute.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : integer seed, RandomState instance, or None (default)</p>
+<blockquote>
+<div><p>Random number generator seed control.</p>
+</div></blockquote>
+<p><strong>alpha</strong> : double, default: 0.</p>
+<blockquote>
+<div><p>Constant that multiplies the regularization terms. Set it to zero to
+have no regularization.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17: </span><em>alpha</em> used in the Coordinate Descent solver.</p>
+</div>
+</div></blockquote>
+<p><strong>l1_ratio</strong> : double, default: 0.</p>
+<blockquote>
+<div><p>The regularization mixing parameter, with 0 &lt;= l1_ratio &lt;= 1.
+For l1_ratio = 0 the penalty is an elementwise L2 penalty
+(aka Frobenius Norm).
+For l1_ratio = 1 it is an elementwise L1 penalty.
+For 0 &lt; l1_ratio &lt; 1, the penalty is a combination of L1 and L2.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17: </span>Regularization parameter <em>l1_ratio</em> used in the Coordinate Descent
+solver.</p>
+</div>
+</div></blockquote>
+<p><strong>shuffle</strong> : boolean, default: False</p>
+<blockquote>
+<div><p>If true, randomize the order of coordinates in the CD solver.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17: </span><em>shuffle</em> parameter used in the Coordinate Descent solver.</p>
+</div>
+</div></blockquote>
+<p><strong>nls_max_iter</strong> : integer, default: 2000</p>
+<blockquote>
+<div><p>Number of iterations in NLS subproblem.
+Used only in the deprecated &#8216;pg&#8217; solver.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.17: </span>Deprecated Projected Gradient solver. Use Coordinate Descent solver
+instead.</p>
+</div>
+</div></blockquote>
+<p><strong>sparseness</strong> : &#8216;data&#8217; | &#8216;components&#8217; | None, default: None</p>
+<blockquote>
+<div><p>Where to enforce sparsity in the model.
+Used only in the deprecated &#8216;pg&#8217; solver.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.17: </span>Deprecated Projected Gradient solver. Use Coordinate Descent solver
+instead.</p>
+</div>
+</div></blockquote>
+<p><strong>beta</strong> : double, default: 1</p>
+<blockquote>
+<div><p>Degree of sparseness, if sparseness is not None. Larger values mean
+more sparseness. Used only in the deprecated &#8216;pg&#8217; solver.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.17: </span>Deprecated Projected Gradient solver. Use Coordinate Descent solver
+instead.</p>
+</div>
+</div></blockquote>
+<p><strong>eta</strong> : double, default: 0.1</p>
+<blockquote>
+<div><p>Degree of correctness to maintain, if sparsity is not None. Smaller
+values mean larger error. Used only in the deprecated &#8216;pg&#8217; solver.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.17: </span>Deprecated Projected Gradient solver. Use Coordinate Descent solver
+instead.</p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>components_</strong> : array, [n_components, n_features]</p>
+<blockquote>
+<div><p>Non-negative components of the data.</p>
+</div></blockquote>
+<p><strong>reconstruction_err_</strong> : number</p>
+<blockquote>
+<div><p>Frobenius norm of the matrix difference between
+the training data and the reconstructed data from
+the fit produced by the model. <code class="docutils literal"><span class="pre">||</span> <span class="pre">X</span> <span class="pre">-</span> <span class="pre">WH</span> <span class="pre">||_2</span></code></p>
+</div></blockquote>
+<p><strong>n_iter_</strong> : int</p>
+<blockquote class="last">
+<div><p>Actual number of iterations.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>C.-J. Lin. Projected gradient methods for non-negative matrix
+factorization. Neural Computation, 19(2007), 2756-2779.
+<a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/nmf/">http://www.csie.ntu.edu.tw/~cjlin/nmf/</a></p>
+<p>Cichocki, Andrzej, and P. H. A. N. Anh-Huy. &#8220;Fast local algorithms for
+large scale nonnegative matrix and tensor factorizations.&#8221;
+IEICE transactions on fundamentals of electronics, communications and
+computer sciences 92.3: 708-721, 2009.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">NMF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+<span class="go">NMF(alpha=0.0, beta=1, eta=0.1, init=&#39;random&#39;, l1_ratio=0.0, max_iter=200,</span>
+<span class="go">  n_components=2, nls_max_iter=2000, random_state=0, shuffle=False,</span>
+<span class="go">  solver=&#39;cd&#39;, sparseness=None, tol=0.0001, verbose=0)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">components_</span>
+<span class="go">array([[ 2.09783018,  0.30560234],</span>
+<span class="go">       [ 2.13443044,  2.13171694]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">reconstruction_err_</span> 
+<span class="go">0.00115993...</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.ProjectedGradientNMF.fit" title="sklearn.decomposition.ProjectedGradientNMF.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y])</td>
+<td>Learn a NMF model for the data X.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.ProjectedGradientNMF.fit_transform" title="sklearn.decomposition.ProjectedGradientNMF.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y,&nbsp;W,&nbsp;H])</td>
+<td>Learn a NMF model for the data X and returns the transformed data.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.ProjectedGradientNMF.get_params" title="sklearn.decomposition.ProjectedGradientNMF.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.ProjectedGradientNMF.inverse_transform" title="sklearn.decomposition.ProjectedGradientNMF.inverse_transform"><code class="xref py py-obj docutils literal"><span class="pre">inverse_transform</span></code></a>(W)</td>
+<td>Transform data back to its original space.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.decomposition.ProjectedGradientNMF.set_params" title="sklearn.decomposition.ProjectedGradientNMF.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.decomposition.ProjectedGradientNMF.transform" title="sklearn.decomposition.ProjectedGradientNMF.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(X)</td>
+<td>Transform the data X according to the fitted NMF model</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.decomposition.ProjectedGradientNMF.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/utils/deprecation.py#L51"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.ProjectedGradientNMF.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED: It will be removed in release 0.19. Use NMF instead.&#8217;pg&#8217; solver is still available until release 0.19.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.ProjectedGradientNMF.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/nmf.py#L1048"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.ProjectedGradientNMF.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn a NMF model for the data X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X: {array-like, sparse matrix}, shape (n_samples, n_features)</strong> :</p>
+<blockquote>
+<div><p>Data matrix to be decomposed</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>self</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.ProjectedGradientNMF.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>W=None</em>, <em>H=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/nmf.py#L1003"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.ProjectedGradientNMF.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn a NMF model for the data X and returns the transformed data.</p>
+<p>This is more efficient than calling fit followed by transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X: {array-like, sparse matrix}, shape (n_samples, n_features)</strong> :</p>
+<blockquote>
+<div><p>Data matrix to be decomposed</p>
+</div></blockquote>
+<p><strong>W</strong> : array-like, shape (n_samples, n_components)</p>
+<blockquote>
+<div><p>If init=&#8217;custom&#8217;, it is used as initial guess for the solution.</p>
+</div></blockquote>
+<p><strong>H</strong> : array-like, shape (n_components, n_features)</p>
+<blockquote>
+<div><p>If init=&#8217;custom&#8217;, it is used as initial guess for the solution.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>W: array, shape (n_samples, n_components)</strong> :</p>
+<blockquote class="last">
+<div><p>Transformed data.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.ProjectedGradientNMF.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.ProjectedGradientNMF.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.ProjectedGradientNMF.inverse_transform">
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>W</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/nmf.py#L1090"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.ProjectedGradientNMF.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform data back to its original space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>W: {array-like, sparse matrix}, shape (n_samples, n_components)</strong> :</p>
+<blockquote>
+<div><p>Transformed data matrix</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X: {array-like, sparse matrix}, shape (n_samples, n_features)</strong> :</p>
+<blockquote>
+<div><p>Data matrix of original shape</p>
+</div></blockquote>
+<p class="last"><strong>.. versionadded:: 0.18</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.ProjectedGradientNMF.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.ProjectedGradientNMF.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.decomposition.ProjectedGradientNMF.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/decomposition/nmf.py#L1063"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.decomposition.ProjectedGradientNMF.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the data X according to the fitted NMF model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X: {array-like, sparse matrix}, shape (n_samples, n_features)</strong> :</p>
+<blockquote>
+<div><p>Data matrix to be transformed by the model</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>W: array, shape (n_samples, n_components)</strong> :</p>
+<blockquote class="last">
+<div><p>Transformed data</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.decomposition.ProjectedGradientNMF.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.decomposition.IncrementalPCA.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

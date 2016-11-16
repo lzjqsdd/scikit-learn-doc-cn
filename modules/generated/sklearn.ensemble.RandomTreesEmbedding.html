@@ -1,0 +1,599 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.ensemble.RandomTreesEmbedding &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.ensemble.VotingClassifier" href="sklearn.ensemble.VotingClassifier.html" />
+    <link rel="prev" title="sklearn.ensemble.BaggingRegressor" href="sklearn.ensemble.BaggingRegressor.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomTreesEmbedding.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.ensemble.BaggingRegressor.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.ensem...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.ensemble.BaggingRegressor
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.ensemble</span></code>.RandomTreesEmbedding</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-ensemble-randomtreesembedding">Examples using <code class="docutils literal"><span class="pre">sklearn.ensemble.RandomTreesEmbedding</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-ensemble-randomtreesembedding">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.ensemble</span></code></a>.RandomTreesEmbedding<a class="headerlink" href="#sklearn-ensemble-randomtreesembedding" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sklearn.ensemble.RandomTreesEmbedding">
+<em class="property">class </em><code class="descclassname">sklearn.ensemble.</code><code class="descname">RandomTreesEmbedding</code><span class="sig-paren">(</span><em>n_estimators=10</em>, <em>max_depth=5</em>, <em>min_samples_split=2</em>, <em>min_samples_leaf=1</em>, <em>min_weight_fraction_leaf=0.0</em>, <em>max_leaf_nodes=None</em>, <em>min_impurity_split=1e-07</em>, <em>sparse_output=True</em>, <em>n_jobs=1</em>, <em>random_state=None</em>, <em>verbose=0</em>, <em>warm_start=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/ensemble/forest.py#L1515"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>An ensemble of totally random trees.</p>
+<p>An unsupervised transformation of a dataset to a high-dimensional
+sparse representation. A datapoint is coded according to which leaf of
+each tree it is sorted into. Using a one-hot encoding of the leaves,
+this leads to a binary coding with as many ones as there are trees in
+the forest.</p>
+<p>The dimensionality of the resulting representation is
+<code class="docutils literal"><span class="pre">n_out</span> <span class="pre">&lt;=</span> <span class="pre">n_estimators</span> <span class="pre">*</span> <span class="pre">max_leaf_nodes</span></code>. If <code class="docutils literal"><span class="pre">max_leaf_nodes</span> <span class="pre">==</span> <span class="pre">None</span></code>,
+the number of leaf nodes is at most <code class="docutils literal"><span class="pre">n_estimators</span> <span class="pre">*</span> <span class="pre">2</span> <span class="pre">**</span> <span class="pre">max_depth</span></code>.</p>
+<p>Read more in the <a class="reference internal" href="../ensemble.html#random-trees-embedding"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_estimators</strong> : integer, optional (default=10)</p>
+<blockquote>
+<div><p>Number of trees in the forest.</p>
+</div></blockquote>
+<p><strong>max_depth</strong> : integer, optional (default=5)</p>
+<blockquote>
+<div><p>The maximum depth of each tree. If None, then nodes are expanded until
+all leaves are pure or until all leaves contain less than
+min_samples_split samples.</p>
+</div></blockquote>
+<p><strong>min_samples_split</strong> : int, float, optional (default=2)</p>
+<blockquote>
+<div><p>The minimum number of samples required to split an internal node:</p>
+<ul class="simple">
+<li>If int, then consider <cite>min_samples_split</cite> as the minimum number.</li>
+<li>If float, then <cite>min_samples_split</cite> is a percentage and
+<cite>ceil(min_samples_split * n_samples)</cite> is the minimum
+number of samples for each split.</li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.18: </span>Added float values for percentages.</p>
+</div>
+</div></blockquote>
+<p><strong>min_samples_leaf</strong> : int, float, optional (default=1)</p>
+<blockquote>
+<div><p>The minimum number of samples required to be at a leaf node:</p>
+<ul class="simple">
+<li>If int, then consider <cite>min_samples_leaf</cite> as the minimum number.</li>
+<li>If float, then <cite>min_samples_leaf</cite> is a percentage and
+<cite>ceil(min_samples_leaf * n_samples)</cite> is the minimum
+number of samples for each node.</li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.18: </span>Added float values for percentages.</p>
+</div>
+</div></blockquote>
+<p><strong>min_weight_fraction_leaf</strong> : float, optional (default=0.)</p>
+<blockquote>
+<div><p>The minimum weighted fraction of the sum total of weights (of all
+the input samples) required to be at a leaf node. Samples have
+equal weight when sample_weight is not provided.</p>
+</div></blockquote>
+<p><strong>max_leaf_nodes</strong> : int or None, optional (default=None)</p>
+<blockquote>
+<div><p>Grow trees with <code class="docutils literal"><span class="pre">max_leaf_nodes</span></code> in best-first fashion.
+Best nodes are defined as relative reduction in impurity.
+If None then unlimited number of leaf nodes.</p>
+</div></blockquote>
+<p><strong>min_impurity_split</strong> : float, optional (default=1e-7)</p>
+<blockquote>
+<div><p>Threshold for early stopping in tree growth. A node will split
+if its impurity is above the threshold, otherwise it is a leaf.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.18.</span></p>
+</div>
+</div></blockquote>
+<p><strong>sparse_output</strong> : bool, optional (default=True)</p>
+<blockquote>
+<div><p>Whether or not to return a sparse CSR matrix, as default behavior,
+or to return a dense array compatible with dense pipeline operators.</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : integer, optional (default=1)</p>
+<blockquote>
+<div><p>The number of jobs to run in parallel for both <cite>fit</cite> and <cite>predict</cite>.
+If -1, then the number of jobs is set to the number of cores.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int, RandomState instance or None, optional (default=None)</p>
+<blockquote>
+<div><p>If int, random_state is the seed used by the random number generator;
+If RandomState instance, random_state is the random number generator;
+If None, the random number generator is the RandomState instance used
+by <cite>np.random</cite>.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : int, optional (default=0)</p>
+<blockquote>
+<div><p>Controls the verbosity of the tree building process.</p>
+</div></blockquote>
+<p><strong>warm_start</strong> : bool, optional (default=False)</p>
+<blockquote>
+<div><p>When set to <code class="docutils literal"><span class="pre">True</span></code>, reuse the solution of the previous call to fit
+and add more estimators to the ensemble, otherwise, just fit a whole
+new forest.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><p class="first"><strong>estimators_</strong> : list of DecisionTreeClassifier</p>
+<blockquote class="last">
+<div><p>The collection of fitted sub-estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r139" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R139]</a></td><td>P. Geurts, D. Ernst., and L. Wehenkel, &#8220;Extremely randomized trees&#8221;,
+Machine Learning, 63(1), 3-42, 2006.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r140" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[R140]</a></td><td>Moosmann, F. and Triggs, B. and Jurie, F.  &#8220;Fast discriminative
+visual codebooks using randomized clustering forests&#8221;
+NIPS 2007</td></tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.ensemble.RandomTreesEmbedding.apply" title="sklearn.ensemble.RandomTreesEmbedding.apply"><code class="xref py py-obj docutils literal"><span class="pre">apply</span></code></a>(X)</td>
+<td>Apply trees in the forest to X, return leaf indices.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.ensemble.RandomTreesEmbedding.decision_path" title="sklearn.ensemble.RandomTreesEmbedding.decision_path"><code class="xref py py-obj docutils literal"><span class="pre">decision_path</span></code></a>(X)</td>
+<td>Return the decision path in the forest</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.ensemble.RandomTreesEmbedding.fit" title="sklearn.ensemble.RandomTreesEmbedding.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>(X[,&nbsp;y,&nbsp;sample_weight])</td>
+<td>Fit estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.ensemble.RandomTreesEmbedding.fit_transform" title="sklearn.ensemble.RandomTreesEmbedding.fit_transform"><code class="xref py py-obj docutils literal"><span class="pre">fit_transform</span></code></a>(X[,&nbsp;y,&nbsp;sample_weight])</td>
+<td>Fit estimator and transform dataset.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.ensemble.RandomTreesEmbedding.get_params" title="sklearn.ensemble.RandomTreesEmbedding.get_params"><code class="xref py py-obj docutils literal"><span class="pre">get_params</span></code></a>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#sklearn.ensemble.RandomTreesEmbedding.set_params" title="sklearn.ensemble.RandomTreesEmbedding.set_params"><code class="xref py py-obj docutils literal"><span class="pre">set_params</span></code></a>(\*\*params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#sklearn.ensemble.RandomTreesEmbedding.transform" title="sklearn.ensemble.RandomTreesEmbedding.transform"><code class="xref py py-obj docutils literal"><span class="pre">transform</span></code></a>(X)</td>
+<td>Transform dataset.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sklearn.ensemble.RandomTreesEmbedding.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_estimators=10</em>, <em>max_depth=5</em>, <em>min_samples_split=2</em>, <em>min_samples_leaf=1</em>, <em>min_weight_fraction_leaf=0.0</em>, <em>max_leaf_nodes=None</em>, <em>min_impurity_split=1e-07</em>, <em>sparse_output=True</em>, <em>n_jobs=1</em>, <em>random_state=None</em>, <em>verbose=0</em>, <em>warm_start=False</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/ensemble/forest.py#L1615"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sklearn.ensemble.RandomTreesEmbedding.apply">
+<code class="descname">apply</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/ensemble/forest.py#L160"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply trees in the forest to X, return leaf indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>The input samples. Internally, its dtype will be converted to
+<code class="docutils literal"><span class="pre">dtype=np.float32</span></code>. If a sparse matrix is provided, it will be
+converted into a sparse <code class="docutils literal"><span class="pre">csr_matrix</span></code>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_leaves</strong> : array_like, shape = [n_samples, n_estimators]</p>
+<blockquote class="last">
+<div><p>For each datapoint x in X and for each tree in the forest,
+return the index of the leaf x ends up in.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.ensemble.RandomTreesEmbedding.decision_path">
+<code class="descname">decision_path</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/ensemble/forest.py#L184"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding.decision_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the decision path in the forest</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.18.</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>The input samples. Internally, its dtype will be converted to
+<code class="docutils literal"><span class="pre">dtype=np.float32</span></code>. If a sparse matrix is provided, it will be
+converted into a sparse <code class="docutils literal"><span class="pre">csr_matrix</span></code>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>indicator</strong> : sparse csr array, shape = [n_samples, n_nodes]</p>
+<blockquote>
+<div><p>Return a node indicator matrix where non zero elements
+indicates that the samples goes through the nodes.</p>
+</div></blockquote>
+<p><strong>n_nodes_ptr</strong> : array of size (n_estimators + 1, )</p>
+<blockquote class="last">
+<div><p>The columns from indicator[n_nodes_ptr[i]:n_nodes_ptr[i+1]]
+gives the indicator value for the i-th estimator.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sklearn.ensemble.RandomTreesEmbedding.feature_importances_">
+<code class="descname">feature_importances_</code><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding.feature_importances_" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Return the feature importances (the higher, the more important the</dt>
+<dd>feature).</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>feature_importances_</strong> : array, shape = [n_features]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.ensemble.RandomTreesEmbedding.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/ensemble/forest.py#L1655"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape=(n_samples, n_features)</p>
+<blockquote>
+<div><p>The input samples. Use <code class="docutils literal"><span class="pre">dtype=np.float32</span></code> for maximum
+efficiency. Sparse matrices are also supported, use sparse
+<code class="docutils literal"><span class="pre">csc_matrix</span></code> for maximum efficiency.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self</strong> : object</p>
+<blockquote class="last">
+<div><p>Returns self.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.ensemble.RandomTreesEmbedding.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/ensemble/forest.py#L1674"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit estimator and transform dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape=(n_samples, n_features)</p>
+<blockquote>
+<div><p>Input data used to build forests. Use <code class="docutils literal"><span class="pre">dtype=np.float32</span></code> for
+maximum efficiency.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_transformed</strong> : sparse matrix, shape=(n_samples, n_out)</p>
+<blockquote class="last">
+<div><p>Transformed dataset.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.ensemble.RandomTreesEmbedding.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L220"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>deep</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>params</strong> : mapping of string to any</p>
+<blockquote class="last">
+<div><p>Parameter names mapped to their values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.ensemble.RandomTreesEmbedding.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/base.py#L257"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>self</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sklearn.ensemble.RandomTreesEmbedding.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/ensemble/forest.py#L1704"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.ensemble.RandomTreesEmbedding.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array-like or sparse matrix, shape=(n_samples, n_features)</p>
+<blockquote>
+<div><p>Input data to be transformed. Use <code class="docutils literal"><span class="pre">dtype=np.float32</span></code> for maximum
+efficiency. Sparse matrices are also supported, use sparse
+<code class="docutils literal"><span class="pre">csr_matrix</span></code> for maximum efficiency.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_transformed</strong> : sparse matrix, shape=(n_samples, n_out)</p>
+<blockquote class="last">
+<div><p>Transformed dataset.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-ensemble-randomtreesembedding">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.ensemble.RandomTreesEmbedding</span></code><a class="headerlink" href="#examples-using-sklearn-ensemble-randomtreesembedding" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="RandomTreesEmbedding provides a way to map data to a very high-dimensional, sparse representati..."><div class="figure" id="id3">
+<a class="reference external image-reference" href="./../../auto_examples/ensemble/plot_random_forest_embedding.html"><img alt="../../_images/plot_random_forest_embedding1.png" src="../../_images/plot_random_forest_embedding1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/ensemble/plot_random_forest_embedding.html#example-ensemble-plot-random-forest-embedding-py"><span class="std std-ref">Hashing feature transformation using Totally Random Trees</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Transform your features into a higher dimensional, sparse space. Then train a linear model on t..."><div class="figure" id="id4">
+<a class="reference external image-reference" href="./../../auto_examples/ensemble/plot_feature_transformation.html"><img alt="../../_images/plot_feature_transformation1.png" src="../../_images/plot_feature_transformation1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/ensemble/plot_feature_transformation.html#example-ensemble-plot-feature-transformation-py"><span class="std std-ref">Feature transformations with ensembles of trees</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="An illustration of various embeddings on the digits dataset."><div class="figure" id="id5">
+<a class="reference external image-reference" href="./../../auto_examples/manifold/plot_lle_digits.html"><img alt="../../_images/plot_lle_digits1.png" src="../../_images/plot_lle_digits1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/manifold/plot_lle_digits.html#example-manifold-plot-lle-digits-py"><span class="std std-ref">Manifold learning on handwritten digits: Locally Linear Embedding, Isomap...</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.ensemble.RandomTreesEmbedding.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.ensemble.BaggingRegressor.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

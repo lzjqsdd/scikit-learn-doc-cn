@@ -1,0 +1,92 @@
+
+
+.. _example_applications_plot_species_distribution_modeling.py:
+
+
+=============================
+Species distribution modeling
+=============================
+
+Modeling species' geographic distributions is an important
+problem in conservation biology. In this example we
+model the geographic distribution of two south american
+mammals given past observations and 14 environmental
+variables. Since we have only positive examples (there are
+no unsuccessful observations), we cast this problem as a
+density estimation problem and use the `OneClassSVM` provided
+by the package `sklearn.svm` as our modeling tool.
+The dataset is provided by Phillips et. al. (2006).
+If available, the example uses
+`basemap <http://matplotlib.sourceforge.net/basemap/doc/html/>`_
+to plot the coast lines and national boundaries of South America.
+
+The two species are:
+
+ - `"Bradypus variegatus"
+   <http://www.iucnredlist.org/apps/redlist/details/3038/0>`_ ,
+   the Brown-throated Sloth.
+
+ - `"Microryzomys minutus"
+   <http://www.iucnredlist.org/apps/redlist/details/13408/0>`_ ,
+   also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+   Colombia, Ecuador, Peru, and Venezuela.
+
+References
+----------
+
+ * `"Maximum entropy modeling of species geographic distributions"
+   <http://www.cs.princeton.edu/~schapire/papers/ecolmod.pdf>`_
+   S. J. Phillips, R. P. Anderson, R. E. Schapire - Ecological Modelling,
+   190:231-259, 2006.
+
+
+
+.. image:: images/plot_species_distribution_modeling_001.png
+    :align: center
+
+
+**Script output**::
+
+  Downloading species data from http://www.cs.princeton.edu/~schapire/maxent/datasets/samples.zip to /home/travis/scikit_learn_data
+  Downloading coverage data from http://www.cs.princeton.edu/~schapire/maxent/datasets/coverages.zip to /home/travis/scikit_learn_data
+  (' - converting', 'coverages/cld6190_ann.asc')
+  (' - converting', 'coverages/dtr6190_ann.asc')
+  (' - converting', 'coverages/ecoreg.asc')
+  (' - converting', 'coverages/frs6190_ann.asc')
+  (' - converting', 'coverages/h_dem.asc')
+  (' - converting', 'coverages/pre6190_ann.asc')
+  (' - converting', 'coverages/pre6190_l1.asc')
+  (' - converting', 'coverages/pre6190_l10.asc')
+  (' - converting', 'coverages/pre6190_l4.asc')
+  (' - converting', 'coverages/pre6190_l7.asc')
+  (' - converting', 'coverages/tmn6190_ann.asc')
+  (' - converting', 'coverages/tmp6190_ann.asc')
+  (' - converting', 'coverages/tmx6190_ann.asc')
+  (' - converting', 'coverages/vap6190_ann.asc')
+  ________________________________________________________________________________
+  Modeling distribution of species 'bradypus variegatus'
+   - fit OneClassSVM ... done.
+   - plot coastlines from coverage
+   - predict species distribution
+  
+   Area under the ROC curve : 0.868443
+  ________________________________________________________________________________
+  Modeling distribution of species 'microryzomys minutus'
+   - fit OneClassSVM ... done.
+   - plot coastlines from coverage
+   - predict species distribution
+  
+   Area under the ROC curve : 0.993919
+  
+  time elapsed: 32.55s
+
+
+
+**Python source code:** :download:`plot_species_distribution_modeling.py <plot_species_distribution_modeling.py>`
+
+.. literalinclude:: plot_species_distribution_modeling.py
+    :lines: 38-
+
+**Total running time of the example:**  32.55 seconds
+( 0 minutes  32.55 seconds)
+    

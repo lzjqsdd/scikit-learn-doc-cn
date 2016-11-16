@@ -1,0 +1,386 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>Scalability of Approximate Nearest Neighbors &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="next" title="Restricted Boltzmann Machine features for digit classification" href="../neural_networks/plot_rbm_logistic_classification.html" />
+    <link rel="prev" title="Simple 1D Kernel Density Estimation" href="plot_kde_1d.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/neighbors/plot_approximate_nearest_neighbors_scalability.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="plot_kde_1d.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Simple 1D Ker...
+        </span>
+            <span class="hiddenrellink">
+            Simple 1D Kernel Density Estimation
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        Examples
+        </span>
+            <span class="hiddenrellink">
+            Examples
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">Scalability of Approximate Nearest Neighbors</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="scalability-of-approximate-nearest-neighbors">
+<span id="example-neighbors-plot-approximate-nearest-neighbors-scalability-py"></span><h1>Scalability of Approximate Nearest Neighbors<a class="headerlink" href="#scalability-of-approximate-nearest-neighbors" title="Permalink to this headline">¶</a></h1>
+<p>This example studies the scalability profile of approximate 10-neighbors
+queries using the LSHForest with <code class="docutils literal"><span class="pre">n_estimators=20</span></code> and <code class="docutils literal"><span class="pre">n_candidates=200</span></code>
+when varying the number of samples in the dataset.</p>
+<p>The first plot demonstrates the relationship between query time and index size
+of LSHForest. Query time is compared with the brute force method in exact
+nearest neighbor search for the same index sizes. The brute force queries have a
+very predictable linear scalability with the index (full scan). LSHForest index
+have sub-linear scalability profile but can be slower for small datasets.</p>
+<p>The second plot shows the speedup when using approximate queries vs brute force
+exact queries. The speedup tends to increase with the dataset size but should
+reach a plateau typically when doing queries on datasets with millions of
+samples and a few hundreds of dimensions. Higher dimensional datasets tends to
+benefit more from LSHForest indexing.</p>
+<p>The break even point (speedup = 1) depends on the dimensionality and structure
+of the indexed data and the parameters of the LSHForest index.</p>
+<p>The precision of approximate queries should decrease slowly with the dataset
+size. The speed of the decrease depends mostly on the LSHForest parameters and
+the dimensionality of the data.</p>
+<ul class="horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/plot_approximate_nearest_neighbors_scalability_001.png"><img alt="../../_images/plot_approximate_nearest_neighbors_scalability_001.png" src="../../_images/plot_approximate_nearest_neighbors_scalability_001.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/plot_approximate_nearest_neighbors_scalability_002.png"><img alt="../../_images/plot_approximate_nearest_neighbors_scalability_002.png" src="../../_images/plot_approximate_nearest_neighbors_scalability_002.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/plot_approximate_nearest_neighbors_scalability_003.png"><img alt="../../_images/plot_approximate_nearest_neighbors_scalability_003.png" src="../../_images/plot_approximate_nearest_neighbors_scalability_003.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p><strong>Script output</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.001</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.009</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">2511</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.002</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.010</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">6309</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.005</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.008</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">15848</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.013</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.012</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">39810</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.035</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.014</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">1.00</span> <span class="o">+/-</span><span class="mf">0.00</span>
+<span class="n">Index</span> <span class="n">size</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">exact</span><span class="p">:</span> <span class="mf">0.133</span><span class="n">s</span><span class="p">,</span> <span class="n">LSHF</span><span class="p">:</span> <span class="mf">0.021</span><span class="n">s</span><span class="p">,</span> <span class="n">speedup</span><span class="p">:</span> <span class="mf">6.5</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.94</span> <span class="o">+/-</span><span class="mf">0.08</span>
+</pre></div>
+</div>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_approximate_nearest_neighbors_scalability.py" download=""><code class="xref download docutils literal"><span class="pre">plot_approximate_nearest_neighbors_scalability.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+
+<span class="c1"># Authors: Maheshakya Wijewardena &lt;maheshakya.10@cse.mrt.ac.lk&gt;</span>
+<span class="c1">#          Olivier Grisel &lt;olivier.grisel@ensta.org&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># License: BSD 3 clause</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets.samples_generator</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs"><span class="n">make_blobs</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.neighbors.LSHForest.html#sklearn.neighbors.LSHForest"><span class="n">LSHForest</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors"><span class="n">NearestNeighbors</span></a>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Parameters of the study</span>
+<span class="n">n_samples_min</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="n">e3</span><span class="p">)</span>
+<span class="n">n_samples_max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="n">e5</span><span class="p">)</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_centers</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_queries</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">n_iter</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Initialize the range of `n_samples`</span>
+<span class="n">n_samples_values</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.log10.html#numpy.log10"><span class="n">np</span><span class="o">.</span><span class="n">log10</span></a><span class="p">(</span><span class="n">n_samples_min</span><span class="p">),</span>
+                               <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.log10.html#numpy.log10"><span class="n">np</span><span class="o">.</span><span class="n">log10</span></a><span class="p">(</span><span class="n">n_samples_max</span><span class="p">),</span>
+                               <span class="n">n_steps</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+
+<span class="c1"># Generate some structured data</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">all_data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs"><span class="n">make_blobs</span></a><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples_max</span> <span class="o">+</span> <span class="n">n_queries</span><span class="p">,</span>
+                         <span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="n">n_centers</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">queries</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[:</span><span class="n">n_queries</span><span class="p">]</span>
+<span class="n">index_data</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">n_queries</span><span class="p">:]</span>
+
+<span class="c1"># Metrics to collect for the plots</span>
+<span class="n">average_times_exact</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">average_times_approx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">std_times_approx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">accuracies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">std_accuracies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">average_speedups</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">std_speedups</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Calculate the average query time</span>
+<span class="k">for</span> <span class="n">n_samples</span> <span class="ow">in</span> <span class="n">n_samples_values</span><span class="p">:</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">index_data</span><span class="p">[:</span><span class="n">n_samples</span><span class="p">]</span>
+    <span class="c1"># Initialize LSHForest for queries of a single neighbor</span>
+    <span class="n">lshf</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neighbors.LSHForest.html#sklearn.neighbors.LSHForest"><span class="n">LSHForest</span></a><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_candidates</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                     <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">nbrs</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors"><span class="n">NearestNeighbors</span></a><span class="p">(</span><span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;brute&#39;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span>
+                            <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">time_approx</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">time_exact</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>
+        <span class="c1"># pick one query at random to study query time variability in LSHForest</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">queries</span><span class="p">[[</span><span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_queries</span><span class="p">)]]</span>
+
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">exact_neighbors</span> <span class="o">=</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">time_exact</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span>
+
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">approx_neighbors</span> <span class="o">=</span> <span class="n">lshf</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">time_approx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span>
+
+        <span class="n">accuracy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.in1d.html#numpy.in1d"><span class="n">np</span><span class="o">.</span><span class="n">in1d</span></a><span class="p">(</span><span class="n">approx_neighbors</span><span class="p">,</span> <span class="n">exact_neighbors</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+    <span class="n">average_time_exact</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">time_exact</span><span class="p">)</span>
+    <span class="n">average_time_approx</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">time_approx</span><span class="p">)</span>
+    <span class="n">speedup</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">time_exact</span><span class="p">)</span> <span class="o">/</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">time_approx</span><span class="p">)</span>
+    <span class="n">average_speedup</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">speedup</span><span class="p">)</span>
+    <span class="n">mean_accuracy</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+    <span class="n">std_accuracy</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.std.html#numpy.std"><span class="n">np</span><span class="o">.</span><span class="n">std</span></a><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index size: </span><span class="si">%d</span><span class="s2">, exact: </span><span class="si">%0.3f</span><span class="s2">s, LSHF: </span><span class="si">%0.3f</span><span class="s2">s, speedup: </span><span class="si">%0.1f</span><span class="s2">, &quot;</span>
+          <span class="s2">&quot;accuracy: </span><span class="si">%0.2f</span><span class="s2"> +/-</span><span class="si">%0.2f</span><span class="s2">&quot;</span> <span class="o">%</span>
+          <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">average_time_exact</span><span class="p">,</span> <span class="n">average_time_approx</span><span class="p">,</span> <span class="n">average_speedup</span><span class="p">,</span>
+           <span class="n">mean_accuracy</span><span class="p">,</span> <span class="n">std_accuracy</span><span class="p">))</span>
+
+    <span class="n">accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_accuracy</span><span class="p">)</span>
+    <span class="n">std_accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">std_accuracy</span><span class="p">)</span>
+    <span class="n">average_times_exact</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">average_time_exact</span><span class="p">)</span>
+    <span class="n">average_times_approx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">average_time_approx</span><span class="p">)</span>
+    <span class="n">std_times_approx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.std.html#numpy.std"><span class="n">np</span><span class="o">.</span><span class="n">std</span></a><span class="p">(</span><span class="n">time_approx</span><span class="p">))</span>
+    <span class="n">average_speedups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">average_speedup</span><span class="p">)</span>
+    <span class="n">std_speedups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.std.html#numpy.std"><span class="n">np</span><span class="o">.</span><span class="n">std</span></a><span class="p">(</span><span class="n">speedup</span><span class="p">))</span>
+
+<span class="c1"># Plot average query time against n_samples</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">n_samples_values</span><span class="p">,</span> <span class="n">average_times_approx</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">std_times_approx</span><span class="p">,</span>
+             <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;LSHForest&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">n_samples_values</span><span class="p">,</span> <span class="n">average_times_exact</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NearestNeighbors(algorithm=&#39;brute&#39;, metric=&#39;cosine&#39;)&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Average query time in seconds&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;n_samples&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.grid"><span class="n">plt</span><span class="o">.</span><span class="n">grid</span></a><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Impact of index size on response time for first &quot;</span>
+          <span class="s2">&quot;nearest neighbors queries&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot average query speedup versus index size</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">n_samples_values</span><span class="p">,</span> <span class="n">average_speedups</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">std_speedups</span><span class="p">,</span>
+             <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Average speedup&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;n_samples&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.grid"><span class="n">plt</span><span class="o">.</span><span class="n">grid</span></a><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Speedup of the approximate NN queries vs brute force&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot average precision versus index size</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">n_samples_values</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">,</span> <span class="n">std_accuracies</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylim"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;precision@10&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;n_samples&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.grid"><span class="n">plt</span><span class="o">.</span><span class="n">grid</span></a><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;precision of 10-nearest-neighbors queries with index size&quot;</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>  6.04 seconds
+( 0 minutes  6.04 seconds)</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/auto_examples/neighbors/plot_approximate_nearest_neighbors_scalability.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="plot_kde_1d.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

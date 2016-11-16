@@ -1,0 +1,443 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>Frequently Asked Questions &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="index.html" />
+    <link rel="up" title="scikit-learn" href="preface.html" />
+    <link rel="next" title="Support" href="support.html" />
+    <link rel="prev" title="Installing scikit-learn" href="install.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/faq.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="index.html">
+            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="index.html">主页</a></li>
+                <li><a href="install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="tutorial/index.html">入门指南</a></li>
+            <li><a href="user_guide.html">使用手册</a></li>
+            <li><a href="modules/classes.html">API</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="install.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Installing sc...
+        </span>
+            <span class="hiddenrellink">
+            Installing scikit-learn
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="preface.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        scikit-learn
+        </span>
+            <span class="hiddenrellink">
+            scikit-learn
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#what-is-the-project-name-a-lot-of-people-get-it-wrong">What is the project name (a lot of people get it wrong)?</a></li>
+<li><a class="reference internal" href="#how-do-you-pronounce-the-project-name">How do you pronounce the project name?</a></li>
+<li><a class="reference internal" href="#why-scikit">Why scikit?</a></li>
+<li><a class="reference internal" href="#how-can-i-contribute-to-scikit-learn">How can I contribute to scikit-learn?</a></li>
+<li><a class="reference internal" href="#how-can-i-create-a-bunch-object">How can I create a bunch object?</a></li>
+<li><a class="reference internal" href="#can-i-add-this-new-algorithm-that-i-or-someone-else-just-published">Can I add this new algorithm that I (or someone else) just published?</a></li>
+<li><a class="reference internal" href="#can-i-add-this-classical-algorithm-from-the-80s">Can I add this classical algorithm from the 80s?</a></li>
+<li><a class="reference internal" href="#why-are-you-so-selective-on-what-algorithms-you-include-in-scikit-learn">Why are you so selective on what algorithms you include in scikit-learn?</a></li>
+<li><a class="reference internal" href="#why-did-you-remove-hmms-from-scikit-learn">Why did you remove HMMs from scikit-learn?</a></li>
+<li><a class="reference internal" href="#will-you-add-graphical-models-or-sequence-prediction-to-scikit-learn">Will you add graphical models or sequence prediction to scikit-learn?</a></li>
+<li><a class="reference internal" href="#will-you-add-gpu-support">Will you add GPU support?</a></li>
+<li><a class="reference internal" href="#do-you-support-pypy">Do you support PyPy?</a></li>
+<li><a class="reference internal" href="#how-do-i-deal-with-string-data-or-trees-graphs">How do I deal with string data (or trees, graphs...)?</a></li>
+<li><a class="reference internal" href="#why-do-i-sometime-get-a-crash-freeze-with-n-jobs-1-under-osx-or-linux">Why do I sometime get a crash/freeze with n_jobs &gt; 1 under OSX or Linux?</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="frequently-asked-questions">
+<span id="faq"></span><h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<p>Here we try to give some answers to questions that regularly pop up on the mailing list.</p>
+<div class="section" id="what-is-the-project-name-a-lot-of-people-get-it-wrong">
+<h2>What is the project name (a lot of people get it wrong)?<a class="headerlink" href="#what-is-the-project-name-a-lot-of-people-get-it-wrong" title="Permalink to this headline">¶</a></h2>
+<p>scikit-learn, but not scikit or SciKit nor sci-kit learn. Also not scikits.learn or scikits-learn, which where previously used.</p>
+</div>
+<div class="section" id="how-do-you-pronounce-the-project-name">
+<h2>How do you pronounce the project name?<a class="headerlink" href="#how-do-you-pronounce-the-project-name" title="Permalink to this headline">¶</a></h2>
+<p>sy-kit learn. sci stands for science!</p>
+</div>
+<div class="section" id="why-scikit">
+<h2>Why scikit?<a class="headerlink" href="#why-scikit" title="Permalink to this headline">¶</a></h2>
+<p>There are multiple scikits, which are scientific toolboxes build around SciPy.
+You can find a list at <a class="reference external" href="https://scikits.appspot.com/scikits">https://scikits.appspot.com/scikits</a>.
+Apart from scikit-learn, another popular one is <a class="reference external" href="http://scikit-image.org/">scikit-image</a>.</p>
+</div>
+<div class="section" id="how-can-i-contribute-to-scikit-learn">
+<h2>How can I contribute to scikit-learn?<a class="headerlink" href="#how-can-i-contribute-to-scikit-learn" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="developers/contributing.html#contributing"><span class="std std-ref">Contributing</span></a>. Before wanting to add a new algorithm, which is
+usually a major and lengthy undertaking, it is recommended to start with <a class="reference internal" href="developers/contributing.html#easy-issues"><span class="std std-ref">known
+issues</span></a>.</p>
+</div>
+<div class="section" id="how-can-i-create-a-bunch-object">
+<h2>How can I create a bunch object?<a class="headerlink" href="#how-can-i-create-a-bunch-object" title="Permalink to this headline">¶</a></h2>
+<p>Don&#8217;t make a bunch object! They are not part of the scikit-learn API. Bunch
+objects are just a way to package some numpy arrays. As a scikit-learn user you
+only ever need numpy arrays to feed your model with data.</p>
+<p>For instance to train a classifier, all you need is a 2D array <code class="docutils literal"><span class="pre">X</span></code> for the
+input variables and a 1D array <code class="docutils literal"><span class="pre">y</span></code> for the target variables. The array <code class="docutils literal"><span class="pre">X</span></code>
+holds the features as columns and samples as rows . The array <code class="docutils literal"><span class="pre">y</span></code> contains
+integer values to encode the class membership of each sample in <code class="docutils literal"><span class="pre">X</span></code>.</p>
+<p>To load data as numpy arrays you can use different libraries depending on the
+original data format:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html">numpy.loadtxt</a> to
+load text files (such as CSV) assuming that all the columns have an
+homogeneous data type (e.g. all numeric values).</li>
+<li><a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/io.html">scipy.io</a> for common
+binary formats often used in scientific computing context.</li>
+<li><a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.misc.imread.html#scipy.misc.imread">scipy.misc.imread</a> (requires the <a class="reference external" href="https://pypi.python.org/pypi/Pillow">Pillow</a> package) to load pixel intensities
+data from various image file formats.</li>
+<li><a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/io.html">pandas.io</a> to load
+heterogeneously typed data from various file formats and database protocols
+that can slice and dice before conversion to numerical features in a numpy
+array.</li>
+</ul>
+<p>Note: if you manage your own numerical data it is recommended to use an
+optimized file format such as HDF5 to reduce data load times. Various libraries
+such as H5Py, PyTables and pandas provides a Python interface for reading and
+writing data in that format.</p>
+</div>
+<div class="section" id="can-i-add-this-new-algorithm-that-i-or-someone-else-just-published">
+<h2>Can I add this new algorithm that I (or someone else) just published?<a class="headerlink" href="#can-i-add-this-new-algorithm-that-i-or-someone-else-just-published" title="Permalink to this headline">¶</a></h2>
+<p>No. As a rule we only add well-established algorithms. A rule of thumb is at least
+3 years since publications, 200+ citations and wide use and usefullness. A
+technique that provides a clear-cut improvement (e.g. an enhanced  data
+structure or efficient approximation) on a widely-used method will also be
+considered for inclusion.
+Your implementation doesn&#8217;t need to be in scikit-learn to be used together
+with scikit-learn tools, though. Implement your favorite algorithm
+in a scikit-learn compatible way, upload it to github and we will list
+it under <a class="reference internal" href="related_projects.html#related-projects"><span class="std std-ref">Related Projects</span></a>.
+Also see <a class="reference internal" href="#selectiveness">selectiveness</a>.</p>
+</div>
+<div class="section" id="can-i-add-this-classical-algorithm-from-the-80s">
+<h2>Can I add this classical algorithm from the 80s?<a class="headerlink" href="#can-i-add-this-classical-algorithm-from-the-80s" title="Permalink to this headline">¶</a></h2>
+<p>Depends. If there is a common usecase within the scope of scikit-learn, such
+as classification, regression or clustering, where it outperforms methods
+that are already implemented in scikit-learn, we will consider it.</p>
+</div>
+<div class="section" id="why-are-you-so-selective-on-what-algorithms-you-include-in-scikit-learn">
+<span id="selectiveness"></span><h2>Why are you so selective on what algorithms you include in scikit-learn?<a class="headerlink" href="#why-are-you-so-selective-on-what-algorithms-you-include-in-scikit-learn" title="Permalink to this headline">¶</a></h2>
+<p>Code is maintenance cost, and we need to balance the amount of
+code we have with the size of the team (and add to this the fact that
+complexity scales non linearly with the number of features).
+The package relies on core developers using their free time to
+fix bugs, maintain code and review contributions.
+Any algorithm that is added needs future attention by the developers,
+at which point the original author might long have lost interest.
+Also see <a class="reference external" href="http://sourceforge.net/p/scikit-learn/mailman/scikit-learn-general/thread/CAAkaFLWcBG%2BgtsFQzpTLfZoCsHMDv9UG5WaqT0LwUApte0TVzg%40mail.gmail.com/#msg33104380">this thread on the mailing list</a>.</p>
+</div>
+<div class="section" id="why-did-you-remove-hmms-from-scikit-learn">
+<h2>Why did you remove HMMs from scikit-learn?<a class="headerlink" href="#why-did-you-remove-hmms-from-scikit-learn" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="#adding-graphical-models"><span class="std std-ref">Will you add graphical models or sequence prediction to scikit-learn?</span></a>.</p>
+</div>
+<div class="section" id="will-you-add-graphical-models-or-sequence-prediction-to-scikit-learn">
+<span id="adding-graphical-models"></span><h2>Will you add graphical models or sequence prediction to scikit-learn?<a class="headerlink" href="#will-you-add-graphical-models-or-sequence-prediction-to-scikit-learn" title="Permalink to this headline">¶</a></h2>
+<p>Not in the foreseeable future.
+scikit-learn tries to provide a unified API for the basic tasks in machine
+learning, with pipelines and meta-algorithms like grid search to tie
+everything together. The required concepts, APIs, algorithms and
+expertise required for structured learning are different from what
+scikit-learn has to offer. If we started doing arbitrary structured
+learning, we&#8217;d need to redesign the whole package and the project
+would likely collapse under its own weight.</p>
+<p>There are two project with API similar to scikit-learn that
+do structured prediction:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://pystruct.github.io/">pystruct</a> handles general structured
+learning (focuses on SSVMs on arbitrary graph structures with
+approximate inference; defines the notion of sample as an instance of
+the graph structure)</li>
+<li><a class="reference external" href="http://larsmans.github.io/seqlearn/">seqlearn</a> handles sequences only
+(focuses on exact inference; has HMMs, but mostly for the sake of
+completeness; treats a feature vector as a sample and uses an offset encoding
+for the dependencies between feature vectors)</li>
+</ul>
+</div>
+<div class="section" id="will-you-add-gpu-support">
+<h2>Will you add GPU support?<a class="headerlink" href="#will-you-add-gpu-support" title="Permalink to this headline">¶</a></h2>
+<p>No, or at least not in the near future. The main reason is that GPU support
+will introduce many software dependencies and introduce platform specific
+issues. scikit-learn is designed to be easy to install on a wide variety of
+platforms. Outside of neural networks, GPUs don&#8217;t play a large role in machine
+learning today, and much larger gains in speed can often be achieved by a
+careful choice of algorithms.</p>
+</div>
+<div class="section" id="do-you-support-pypy">
+<h2>Do you support PyPy?<a class="headerlink" href="#do-you-support-pypy" title="Permalink to this headline">¶</a></h2>
+<p>In case you didn&#8217;t know, <a class="reference external" href="http://pypy.org/">PyPy</a> is the new, fast,
+just-in-time compiling Python implementation. We don&#8217;t support it.
+When the <a class="reference external" href="http://buildbot.pypy.org/numpy-status/latest.html">NumPy support</a>
+in PyPy is complete or near-complete, and SciPy is ported over as well,
+we can start thinking of a port.
+We use too much of NumPy to work with a partial implementation.</p>
+</div>
+<div class="section" id="how-do-i-deal-with-string-data-or-trees-graphs">
+<h2>How do I deal with string data (or trees, graphs...)?<a class="headerlink" href="#how-do-i-deal-with-string-data-or-trees-graphs" title="Permalink to this headline">¶</a></h2>
+<p>scikit-learn estimators assume you&#8217;ll feed them real-valued feature vectors.
+This assumption is hard-coded in pretty much all of the library.
+However, you can feed non-numerical inputs to estimators in several ways.</p>
+<p>If you have text documents, you can use a term frequency features; see
+<a class="reference internal" href="modules/feature_extraction.html#text-feature-extraction"><span class="std std-ref">文本特征提取</span></a> for the built-in <em>text vectorizers</em>.
+For more general feature extraction from any kind of data, see
+<a class="reference internal" href="modules/feature_extraction.html#dict-feature-extraction"><span class="std std-ref">加载字典的中的特征</span></a> and <a class="reference internal" href="modules/feature_extraction.html#feature-hashing"><span class="std std-ref">特征哈希</span></a>.</p>
+<p>Another common case is when you have non-numerical data and a custom distance
+(or similarity) metric on these data. Examples include strings with edit
+distance (aka. Levenshtein distance; e.g., DNA or RNA sequences). These can be
+encoded as numbers, but doing so is painful and error-prone. Working with
+distance metrics on arbitrary data can be done in two ways.</p>
+<p>Firstly, many estimators take precomputed distance/similarity matrices, so if
+the dataset is not too large, you can compute distances for all pairs of inputs.
+If the dataset is large, you can use feature vectors with only one &#8220;feature&#8221;,
+which is an index into a separate data structure, and supply a custom metric
+function that looks up the actual data in this data structure. E.g., to use
+DBSCAN with Levenshtein distances:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">leven</span> <span class="k">import</span> <span class="n">levenshtein</span>       
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">dbscan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ACCTCCTAGAAG&quot;</span><span class="p">,</span> <span class="s2">&quot;ACCTACTAGAAGTT&quot;</span><span class="p">,</span> <span class="s2">&quot;GAATATTAGGCCGA&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">lev_metric</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>     <span class="c1"># extract indices</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">levenshtein</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[0],</span>
+<span class="go">       [1],</span>
+<span class="go">       [2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dbscan</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">lev_metric</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  
+<span class="go">([0, 1], array([ 0,  0, -1]))</span>
+</pre></div>
+</div>
+<p>(This uses the third-party edit distance package <code class="docutils literal"><span class="pre">leven</span></code>.)</p>
+<p>Similar tricks can be used, with some care, for tree kernels, graph kernels,
+etc.</p>
+</div>
+<div class="section" id="why-do-i-sometime-get-a-crash-freeze-with-n-jobs-1-under-osx-or-linux">
+<h2>Why do I sometime get a crash/freeze with n_jobs &gt; 1 under OSX or Linux?<a class="headerlink" href="#why-do-i-sometime-get-a-crash-freeze-with-n-jobs-1-under-osx-or-linux" title="Permalink to this headline">¶</a></h2>
+<p>Several scikit-learn tools such as <code class="docutils literal"><span class="pre">GridSearchCV</span></code> and <code class="docutils literal"><span class="pre">cross_val_score</span></code>
+rely internally on Python&#8217;s <cite>multiprocessing</cite> module to parallelize execution
+onto several Python processes by passing <code class="docutils literal"><span class="pre">n_jobs</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> as argument.</p>
+<p>The problem is that Python <code class="docutils literal"><span class="pre">multiprocessing</span></code> does a <code class="docutils literal"><span class="pre">fork</span></code> system call
+without following it with an <code class="docutils literal"><span class="pre">exec</span></code> system call for performance reasons. Many
+libraries like (some versions of) Accelerate / vecLib under OSX, (some versions
+of) MKL, the OpenMP runtime of GCC, nvidia&#8217;s Cuda (and probably many others),
+manage their own internal thread pool. Upon a call to <cite>fork</cite>, the thread pool
+state in the child process is corrupted: the thread pool believes it has many
+threads while only the main thread state has been forked. It is possible to
+change the libraries to make them detect when a fork happens and reinitialize
+the thread pool in that case: we did that for OpenBLAS (merged upstream in
+master since 0.2.10) and we contributed a <a class="reference external" href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=60035">patch</a> to GCC&#8217;s OpenMP runtime
+(not yet reviewed).</p>
+<p>But in the end the real culprit is Python&#8217;s <code class="docutils literal"><span class="pre">multiprocessing</span></code> that does
+<code class="docutils literal"><span class="pre">fork</span></code> without <code class="docutils literal"><span class="pre">exec</span></code> to reduce the overhead of starting and using new
+Python processes for parallel computing. Unfortunately this is a violation of
+the POSIX standard and therefore some software editors like Apple refuse to
+consider the lack of fork-safety in Accelerate / vecLib as a bug.</p>
+<p>In Python 3.4+ it is now possible to configure <code class="docutils literal"><span class="pre">multiprocessing</span></code> to use the
+&#8216;forkserver&#8217; or &#8216;spawn&#8217; start methods (instead of the default &#8216;fork&#8217;) to manage
+the process pools. This makes it possible to not be subject to this issue
+anymore. The version of joblib shipped with scikit-learn automatically uses
+that setting by default (under Python 3.4 and later).</p>
+<p>If you have custom code that uses <code class="docutils literal"><span class="pre">multiprocessing</span></code> directly instead of using
+it via joblib you can enable the the &#8216;forkserver&#8217; mode globally for your
+program: Insert the following instructions in your main script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="c1"># other imports, custom code, load data, define model...</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">multiprocessing</span><span class="o">.</span><span class="n">set_start_method</span><span class="p">(</span><span class="s1">&#39;forkserver&#39;</span><span class="p">)</span>
+
+    <span class="c1"># call scikit-learn utils with n_jobs &gt; 1 here</span>
+</pre></div>
+</div>
+<p>You can find more default on the new start methods in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods">multiprocessing
+documentation</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="_sources/faq.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="install.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

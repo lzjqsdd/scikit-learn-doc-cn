@@ -1,0 +1,40 @@
+
+
+.. _example_ensemble_plot_adaboost_hastie_10_2.py:
+
+
+=============================
+Discrete versus Real AdaBoost
+=============================
+
+This example is based on Figure 10.2 from Hastie et al 2009 [1] and illustrates
+the difference in performance between the discrete SAMME [2] boosting
+algorithm and real SAMME.R boosting algorithm. Both algorithms are evaluated
+on a binary classification task where the target Y is a non-linear function
+of 10 input features.
+
+Discrete SAMME AdaBoost adapts based on errors in predicted class labels
+whereas real SAMME.R uses the predicted class probabilities.
+
+.. [1] T. Hastie, R. Tibshirani and J. Friedman, "Elements of Statistical
+    Learning Ed. 2", Springer, 2009.
+
+.. [2] J. Zhu, H. Zou, S. Rosset, T. Hastie, "Multi-class AdaBoost", 2009.
+
+
+
+
+.. image:: images/plot_adaboost_hastie_10_2_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_adaboost_hastie_10_2.py <plot_adaboost_hastie_10_2.py>`
+
+.. literalinclude:: plot_adaboost_hastie_10_2.py
+    :lines: 21-
+
+**Total running time of the example:**  6.85 seconds
+( 0 minutes  6.85 seconds)
+    

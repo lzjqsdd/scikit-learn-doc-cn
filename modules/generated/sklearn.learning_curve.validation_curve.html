@@ -1,0 +1,325 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.learning_curve.validation_curve &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.linear_model.ARDRegression" href="sklearn.linear_model.ARDRegression.html" />
+    <link rel="prev" title="sklearn.learning_curve.learning_curve" href="sklearn.learning_curve.learning_curve.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.learning_curve.validation_curve.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.learning_curve.learning_curve.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.learn...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.learning_curve.learning_curve
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.learning_curve</span></code>.validation_curve</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-learning-curve-validation-curve">Examples using <code class="docutils literal"><span class="pre">sklearn.learning_curve.validation_curve</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-learning-curve-validation-curve">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.learning_curve" title="sklearn.learning_curve"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.learning_curve</span></code></a>.validation_curve<a class="headerlink" href="#sklearn-learning-curve-validation-curve" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.learning_curve.validation_curve">
+<code class="descclassname">sklearn.learning_curve.</code><code class="descname">validation_curve</code><span class="sig-paren">(</span><em>estimator</em>, <em>X</em>, <em>y</em>, <em>param_name</em>, <em>param_range</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=1</em>, <em>pre_dispatch='all'</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/learning_curve.py#L262"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.learning_curve.validation_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validation curve.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.18: </span>This module will be removed in 0.20.
+Use <code class="xref py py-func docutils literal"><span class="pre">sklearn.model_selection.validation_curve</span></code> instead.</p>
+</div>
+<p>Determine training and test scores for varying parameter values.</p>
+<p>Compute scores for an estimator with different values of a specified
+parameter. This is similar to grid search with one parameter. However, this
+will also compute training scores and is merely a utility for plotting the
+results.</p>
+<p>Read more in the <a class="reference internal" href="../learning_curve.html#validation-curve"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>estimator</strong> : object type that implements the &#8220;fit&#8221; and &#8220;predict&#8221; methods</p>
+<blockquote>
+<div><p>An object of that type which is cloned for each validation.</p>
+</div></blockquote>
+<p><strong>X</strong> : array-like, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training vector, where n_samples is the number of samples and
+n_features is the number of features.</p>
+</div></blockquote>
+<p><strong>y</strong> : array-like, shape (n_samples) or (n_samples, n_features), optional</p>
+<blockquote>
+<div><p>Target relative to X for classification or regression;
+None for unsupervised learning.</p>
+</div></blockquote>
+<p><strong>param_name</strong> : string</p>
+<blockquote>
+<div><p>Name of the parameter that will be varied.</p>
+</div></blockquote>
+<p><strong>param_range</strong> : array-like, shape (n_values,)</p>
+<blockquote>
+<div><p>The values of the parameter that will be evaluated.</p>
+</div></blockquote>
+<p><strong>cv</strong> : int, cross-validation generator or an iterable, optional</p>
+<blockquote>
+<div><p>Determines the cross-validation splitting strategy.
+Possible inputs for cv are:</p>
+<ul class="simple">
+<li>None, to use the default 3-fold cross-validation,</li>
+<li>integer, to specify the number of folds.</li>
+<li>An object to be used as a cross-validation generator.</li>
+<li>An iterable yielding train/test splits.</li>
+</ul>
+<p>For integer/None inputs, if the estimator is a classifier and <code class="docutils literal"><span class="pre">y</span></code> is
+either binary or multiclass,
+<code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection.StratifiedKFold</span></code> is used. In all
+other cases, <code class="xref py py-class docutils literal"><span class="pre">sklearn.model_selection.KFold</span></code> is used.</p>
+<p>Refer <a class="reference internal" href="../cross_validation.html#cross-validation"><span class="std std-ref">User Guide</span></a> for the various
+cross-validation strategies that can be used here.</p>
+</div></blockquote>
+<p><strong>scoring</strong> : string, callable or None, optional, default: None</p>
+<blockquote>
+<div><p>A string (see model evaluation documentation) or
+a scorer callable object / function with signature
+<code class="docutils literal"><span class="pre">scorer(estimator,</span> <span class="pre">X,</span> <span class="pre">y)</span></code>.</p>
+</div></blockquote>
+<p><strong>n_jobs</strong> : integer, optional</p>
+<blockquote>
+<div><p>Number of jobs to run in parallel (default 1).</p>
+</div></blockquote>
+<p><strong>pre_dispatch</strong> : integer or string, optional</p>
+<blockquote>
+<div><p>Number of predispatched jobs for parallel execution (default is
+all). The option can reduce the allocated memory. The string can
+be an expression like &#8216;2*n_jobs&#8217;.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : integer, optional</p>
+<blockquote>
+<div><p>Controls the verbosity: the higher, the more messages.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>train_scores</strong> : array, shape (n_ticks, n_cv_folds)</p>
+<blockquote>
+<div><p>Scores on training sets.</p>
+</div></blockquote>
+<p><strong>test_scores</strong> : array, shape (n_ticks, n_cv_folds)</p>
+<blockquote class="last">
+<div><p>Scores on test set.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>See
+<span class="xref std std-ref">examples/model_selection/plot_validation_curve.py</span></p>
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-learning-curve-validation-curve">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.learning_curve.validation_curve</span></code><a class="headerlink" href="#examples-using-sklearn-learning-curve-validation-curve" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="In this plot you can see the training scores and validation scores of an SVM for different valu..."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/model_selection/plot_validation_curve.html"><img alt="../../_images/plot_validation_curve1.png" src="../../_images/plot_validation_curve1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/model_selection/plot_validation_curve.html#example-model-selection-plot-validation-curve-py"><span class="std std-ref">Plotting Validation Curves</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.learning_curve.validation_curve.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.learning_curve.learning_curve.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

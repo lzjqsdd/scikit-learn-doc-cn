@@ -1,0 +1,289 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>2.8. 概率密度估计 (Density Estimation) &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="2. Unsupervised learning" href="../unsupervised_learning.html" />
+    <link rel="next" title="2.9. Neural network models (unsupervised)" href="neural_networks.html" />
+    <link rel="prev" title="2.7. Novelty and Outlier Detection" href="outlier_detection.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/density.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="outlier_detection.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        2.7. Novelty ...
+        </span>
+            <span class="hiddenrellink">
+            2.7. Novelty and Outlier Detection
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../unsupervised_learning.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        2. Unsupervis...
+        </span>
+            <span class="hiddenrellink">
+            2. Unsupervised learning
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">2.8. 概率密度估计 (Density Estimation)</a><ul>
+<li><a class="reference internal" href="#id1">2.8.1. 概率密度估计：直方图</a></li>
+<li><a class="reference internal" href="#kernel-density-estimation">2.8.2. 核概率密度估计 (Kernel Density Estimation)</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="density-estimation">
+<h1>2.8. 概率密度估计 (Density Estimation)<a class="headerlink" href="#density-estimation" title="Permalink to this headline">¶</a></h1>
+<p>概率密度估计可应用到无监督学习(unsupervised learning)，特征工程 (feature engineering)，数据建模 (data modeling)。 其中使用最广泛最有效的概率密度估计方法包括基于混合模型 (mixture models)的方法，比如，高斯混合 (Gaussian Mixtures, <a class="reference internal" href="generated/sklearn.mixture.GMM.html#sklearn.mixture.GMM" title="sklearn.mixture.GMM"><code class="xref py py-class docutils literal"><span class="pre">sklearn.mixture.GMM</span></code></a>)；和基于邻域的方法，比如说核密度估计 (kernel density estimation, <a class="reference internal" href="generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity" title="sklearn.neighbors.KernelDensity"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.KernelDensity</span></code></a>). 高斯混合因为在无监督聚类分析中非常有效，因此在 <a class="reference internal" href="clustering.html#clustering"><span class="std std-ref">clustering</span></a> 中更全面地进行介绍。</p>
+<p>概率密度是一个非常简单的概念，而且大多数的人已经对一个概率密度估计方法非常熟悉：频率分布直方图。</p>
+<div class="section" id="id1">
+<h2>2.8.1. 概率密度估计：直方图<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>直方图是数据的一个简单的可视化：我们在直方图中定义了组距和组数，并对每个组中的数据点数进行统计。我们可以在下图的左上角看到直方图的一个例子：</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="hist_to_kde" src="../_images/plot_kde_1d_0011.png" style="width: 640.0px; height: 480.0px;" /></a></strong></p><p>直方图的最大的一个问题是，组距和组数的选择对最终可视化的结果可能会产生负面的效果。现在我们看一下上图右上角。图中可以看到对于相同的数据，当采用适当的组距和组数时，左右两个图将完全不同，这会导致数据的不同解释。</p>
+<p>直觉上来说，我们可以认为直方图是块的堆积，每一个数据点对应一个块。通过在适当的网格空间内堆积块，我们可以得到直方图。但是，如果我们不是在规格网格上堆积块，而是我们将每个块放在它所代表的点的中心，计算每个位置高度的总和，那么结果将会怎样？正如左下图所示，这个方式可能没有直方图那么直观，但事实上这个方法中，块的位置由数据驱动，意味着能更好地代表数据的本质结构。</p>
+<p>这个图是 <em>核密度估计</em> 的一个例子，它采用了帽顶核 (top-hat kernel，每一个数据点都是一个方块). 我们可以通过使用一个更平滑的核来得到一个更平滑的分布。右下图是一个高斯核概率密度估计，其中每个数据点对最终叠加曲线提供一个高斯分布曲线。它是基于数据的一个平滑概率密度估计，是数据点分布的一个强大的非参数模型。</p>
+</div>
+<div class="section" id="kernel-density-estimation">
+<span id="kernel-density"></span><h2>2.8.2. 核概率密度估计 (Kernel Density Estimation)<a class="headerlink" href="#kernel-density-estimation" title="Permalink to this headline">¶</a></h2>
+<p>在scikit-learn中，核概率密度估计是通过 <a class="reference internal" href="generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity" title="sklearn.neighbors.KernelDensity"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.KernelDensity</span></code></a> 进行的， 并使用 Ball Tree 或者 KD Tree 进行有效的查询（详细讨论可参见 <a class="reference internal" href="neighbors.html#neighbors"><span class="std std-ref">最邻近法</span></a> ）。尽管为了简化上述例子中使用了一维的数据集，但核概率密度估计原则上可以应用于任意维数的数据。但是在实际应用中，维度诅咒 (the curse of dimensionality) 使其在高维中的性能严重退化。</p>
+<p>在下图中，从双峰分布中产生100个样本数据点，使用三种不同的核来估计核概率密度：</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="kde_1d_distribution" src="../_images/plot_kde_1d_0031.png" style="width: 640.0px; height: 480.0px;" /></a></strong></p><p>我们可以清楚地看到核的形状会影响最终估计的分布的平滑性。 scikit-learn中可以这样使用核概率密度估计：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors.kde</span> <span class="k">import</span> <span class="n">KernelDensity</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kde</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kde</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([-0.41075698, -0.41075698, -0.41076071, -0.41075698, -0.41075698,</span>
+<span class="go">       -0.41076071])</span>
+</pre></div>
+</div>
+<p>从上面可以看到，我们使用了  <code class="docutils literal"><span class="pre">kernel='gaussian'</span></code> 。数学上来说，核是一个正函数  <img class="math" src="../_images/math/88f86c9420421950f3a197f506d070a739926642.png" alt="K(x;h)"/> ，由带宽参数 <img class="math" src="../_images/math/293fb39e1b93282c804a86186e721b32f829f1b2.png" alt="h"/> 决定。给定核的类型的条件下，任意一点 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> 在一组点 <img class="math" src="../_images/math/bf1873c9355f4409a0f498ba584399616319829b.png" alt="x_i; i=1\cdots N"/> 中的密度估计可以由下式得到：</p>
+<div class="math">
+<p><img src="../_images/math/d1d4fad62d41386f5af602f68f5dd53f03bf92fa.png" alt="\rho_K(y) = \sum_{i=1}^{N} K((y - x_i) / h)"/></p>
+</div><p>这里带宽是一个平滑参数，控制着结果中偏差和方差的相互平衡。当带宽较大时，可得到非常平滑（即偏差较大）的密度分布；当带宽较小时，得到一个不平滑（即方差较大）的密度分布。</p>
+<p>在下图中可以看到，<a class="reference internal" href="generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity" title="sklearn.neighbors.KernelDensity"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.KernelDensity</span></code></a> 采用了几种常规的核的类型：</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_kde_1d.html"><img alt="kde_kernels" src="../_images/plot_kde_1d_0021.png" style="width: 640.0px; height: 480.0px;" /></a></strong></p><p>这些核的类型如下：</p>
+<ul>
+<li><p class="first">高斯核 (<code class="docutils literal"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'gaussian'</span></code>)</p>
+<p><img class="math" src="../_images/math/d45a22c5dc8427e67f5a8dca0497cea40c8697cb.png" alt="K(x; h) \propto \exp(- \frac{x^2}{2h^2} )"/></p>
+</li>
+<li><p class="first">帽顶核 (<code class="docutils literal"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'tophat'</span></code>)</p>
+<p><img class="math" src="../_images/math/437c6b42e24e4b12c4496e13d2a8b1c0729b7200.png" alt="K(x; h) \propto 1"/> if <img class="math" src="../_images/math/b88c5390caf5c99c8e17425b19992fdce1198245.png" alt="x &lt; h"/></p>
+</li>
+<li><p class="first">Epanechnikov核 (<code class="docutils literal"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'epanechnikov'</span></code>)
+<img class="math" src="../_images/math/2c199098c419390c0f6a3c7db8ba2e6b6fb42f73.png" alt="K(x; h) \propto 1 - \frac{x^2}{h^2}"/></p>
+</li>
+<li><p class="first">指数核 (<code class="docutils literal"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'exponential'</span></code>)</p>
+<p><img class="math" src="../_images/math/fe779ad27d62c80a58b5978c79fe875da4ad1cc2.png" alt="K(x; h) \propto \exp(-x/h)"/></p>
+</li>
+<li><p class="first">线性核 (<code class="docutils literal"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'linear'</span></code>)</p>
+<p><img class="math" src="../_images/math/0bcc52b28358eb00cbf5055745472d37864687fb.png" alt="K(x; h) \propto 1 - x/h"/> if <img class="math" src="../_images/math/b88c5390caf5c99c8e17425b19992fdce1198245.png" alt="x &lt; h"/></p>
+</li>
+<li><p class="first">Cosine核 (<code class="docutils literal"><span class="pre">kernel</span> <span class="pre">=</span> <span class="pre">'cosine'</span></code>)</p>
+<p><img class="math" src="../_images/math/e94d029cc9ea0177d30872920460c3f03a571a48.png" alt="K(x; h) \propto \cos(\frac{\pi x}{2h})"/> if <img class="math" src="../_images/math/b88c5390caf5c99c8e17425b19992fdce1198245.png" alt="x &lt; h"/></p>
+</li>
+</ul>
+<p>核概率密度估计可以用在任何有效的距离测度中（可用的距离测列表参见 <a class="reference internal" href="generated/sklearn.neighbors.DistanceMetric.html#sklearn.neighbors.DistanceMetric" title="sklearn.neighbors.DistanceMetric"><code class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.DistanceMetric</span></code></a> ），但仅对欧几里得测度的结果进行了适当的正则化。一个特别有效的测度是 <a class="reference external" href="http://en.wikipedia.org/wiki/Haversine_formula">Haversine distance</a> ，用来测量球体中各个点之间的角距离。下图的例子是用核概率密度估计来对地理空间数据进行可视化，即南美洲大陆上两种不同物种的观测数据的分布：</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_species_kde.html"><img alt="species_kde" src="../_images/plot_species_kde_0011.png" style="width: 640.0px; height: 480.0px;" /></a></strong></p><p>核概率密度估计的另一个应用是学习一个数据集的非参数生成模型，来有效地从这个生成模型中产生新的样本数据。下图的例子中使用了这个思想，通过基于数据在PCA投射，应用高斯核来产生手写数字的一个新的集合：</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/neighbors/plot_digits_kde_sampling.html"><img alt="digits_kde" src="../_images/plot_digits_kde_sampling_0011.png" style="width: 640.0px; height: 480.0px;" /></a></strong></p><p>“新”的数据包含输入数据的线性组合，其权重从KDE模型中随机产生。</p>
+<div class="topic">
+<p class="topic-title first">样例：</p>
+<ul class="simple">
+<li><a class="reference internal" href="../auto_examples/neighbors/plot_kde_1d.html#example-neighbors-plot-kde-1d-py"><span class="std std-ref">Simple 1D Kernel Density Estimation</span></a>: 在一维空间中计算简单的核概率密度估计。</li>
+<li><a class="reference internal" href="../auto_examples/neighbors/plot_digits_kde_sampling.html#example-neighbors-plot-digits-kde-sampling-py"><span class="std std-ref">Kernel Density Estimation</span></a>: 本例采用核概率密度估计来产生手写数字数据的生成模型，并从这个模型中抽样新的样本数据。</li>
+<li><a class="reference internal" href="../auto_examples/neighbors/plot_species_kde.html#example-neighbors-plot-species-kde-py"><span class="std std-ref">Kernel Density Estimate of Species Distributions</span></a>: 本例采用核概率密度估计来可视化地理空间数据，其中使用了Haversine距离测度。</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/density.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="outlier_detection.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

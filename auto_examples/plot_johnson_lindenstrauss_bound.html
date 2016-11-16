@@ -1,0 +1,431 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>The Johnson-Lindenstrauss bound for embedding with random projections &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="Examples" href="index.html" />
+    <link rel="next" title="Comparison of kernel ridge regression and SVR" href="plot_kernel_ridge_regression.html" />
+    <link rel="prev" title="Face completion with a multi-output estimators" href="plot_multioutput_face_completion.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/plot_johnson_lindenstrauss_bound.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="../modules/classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="plot_multioutput_face_completion.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Face completi...
+        </span>
+            <span class="hiddenrellink">
+            Face completion with a multi-output estimators
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        Examples
+        </span>
+            <span class="hiddenrellink">
+            Examples
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">The Johnson-Lindenstrauss bound for embedding with random projections</a><ul>
+<li><a class="reference internal" href="#theoretical-bounds">Theoretical bounds</a></li>
+<li><a class="reference internal" href="#empirical-validation">Empirical validation</a></li>
+<li><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-johnson-lindenstrauss-bound-for-embedding-with-random-projections">
+<span id="example-plot-johnson-lindenstrauss-bound-py"></span><h1>The Johnson-Lindenstrauss bound for embedding with random projections<a class="headerlink" href="#the-johnson-lindenstrauss-bound-for-embedding-with-random-projections" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="http://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma">Johnson-Lindenstrauss lemma</a> states that any high dimensional
+dataset can be randomly projected into a lower dimensional Euclidean
+space while controlling the distortion in the pairwise distances.</p>
+<div class="section" id="theoretical-bounds">
+<h2>Theoretical bounds<a class="headerlink" href="#theoretical-bounds" title="Permalink to this headline">¶</a></h2>
+<p>The distortion introduced by a random projection <cite>p</cite> is asserted by
+the fact that <cite>p</cite> is defining an eps-embedding with good probability
+as defined by:</p>
+<div class="math">
+<p><img src="../_images/math/f959343b770e80df34786eebb08e80e60d69d91f.png" alt="(1 - eps) \|u - v\|^2 &lt; \|p(u) - p(v)\|^2 &lt; (1 + eps) \|u - v\|^2"/></p>
+</div><p>Where u and v are any rows taken from a dataset of shape [n_samples,
+n_features] and p is a projection by a random Gaussian N(0, 1) matrix
+with shape [n_components, n_features] (or a sparse Achlioptas matrix).</p>
+<p>The minimum number of components to guarantees the eps-embedding is
+given by:</p>
+<div class="math">
+<p><img src="../_images/math/065d63cc8b891d9269d412a42f0691aeaec0f49f.png" alt="n\_components &gt;= 4 log(n\_samples) / (eps^2 / 2 - eps^3 / 3)"/></p>
+</div><p>The first plot shows that with an increasing number of samples <code class="docutils literal"><span class="pre">n_samples</span></code>,
+the minimal number of dimensions <code class="docutils literal"><span class="pre">n_components</span></code> increased logarithmically
+in order to guarantee an <code class="docutils literal"><span class="pre">eps</span></code>-embedding.</p>
+<p>The second plot shows that an increase of the admissible
+distortion <code class="docutils literal"><span class="pre">eps</span></code> allows to reduce drastically the minimal number of
+dimensions <code class="docutils literal"><span class="pre">n_components</span></code> for a given number of samples <code class="docutils literal"><span class="pre">n_samples</span></code></p>
+</div>
+<div class="section" id="empirical-validation">
+<h2>Empirical validation<a class="headerlink" href="#empirical-validation" title="Permalink to this headline">¶</a></h2>
+<p>We validate the above bounds on the the digits dataset or on the 20 newsgroups
+text document (TF-IDF word frequencies) dataset:</p>
+<ul class="simple">
+<li>for the digits dataset, some 8x8 gray level pixels data for 500
+handwritten digits pictures are randomly projected to spaces for various
+larger number of dimensions <code class="docutils literal"><span class="pre">n_components</span></code>.</li>
+<li>for the 20 newsgroups dataset some 500 documents with 100k
+features in total are projected using a sparse random matrix to smaller
+euclidean spaces with various values for the target number of dimensions
+<code class="docutils literal"><span class="pre">n_components</span></code>.</li>
+</ul>
+<p>The default dataset is the digits dataset. To run the example on the twenty
+newsgroups dataset, pass the &#8211;twenty-newsgroups command line argument to this
+script.</p>
+<p>For each value of <code class="docutils literal"><span class="pre">n_components</span></code>, we plot:</p>
+<ul class="simple">
+<li>2D distribution of sample pairs with pairwise distances in original
+and projected spaces as x and y axis respectively.</li>
+<li>1D histogram of the ratio of those distances (projected / original).</li>
+</ul>
+<p>We can see that for low values of <code class="docutils literal"><span class="pre">n_components</span></code> the distribution is wide
+with many distorted pairs and a skewed distribution (due to the hard
+limit of zero ratio on the left as distances are always positives)
+while for larger values of n_components the distortion is controlled
+and the distances are well preserved by the random projection.</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>According to the JL lemma, projecting 500 samples without too much distortion
+will require at least several thousands dimensions, irrespective of the
+number of features of the original dataset.</p>
+<p>Hence using random projections on the digits dataset which only has 64 features
+in the input space does not make sense: it does not allow for dimensionality
+reduction in this case.</p>
+<p>On the twenty newsgroups on the other hand the dimensionality can be decreased
+from 56436 down to 10000 while reasonably preserving pairwise distances.</p>
+<ul class="horizontal">
+<li><a class="first reference internal image-reference" href="../_images/plot_johnson_lindenstrauss_bound_001.png"><img alt="../_images/plot_johnson_lindenstrauss_bound_001.png" src="../_images/plot_johnson_lindenstrauss_bound_001.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_johnson_lindenstrauss_bound_002.png"><img alt="../_images/plot_johnson_lindenstrauss_bound_002.png" src="../_images/plot_johnson_lindenstrauss_bound_002.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_johnson_lindenstrauss_bound_003.png"><img alt="../_images/plot_johnson_lindenstrauss_bound_003.png" src="../_images/plot_johnson_lindenstrauss_bound_003.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_johnson_lindenstrauss_bound_004.png"><img alt="../_images/plot_johnson_lindenstrauss_bound_004.png" src="../_images/plot_johnson_lindenstrauss_bound_004.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_johnson_lindenstrauss_bound_005.png"><img alt="../_images/plot_johnson_lindenstrauss_bound_005.png" src="../_images/plot_johnson_lindenstrauss_bound_005.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_johnson_lindenstrauss_bound_006.png"><img alt="../_images/plot_johnson_lindenstrauss_bound_006.png" src="../_images/plot_johnson_lindenstrauss_bound_006.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_johnson_lindenstrauss_bound_007.png"><img alt="../_images/plot_johnson_lindenstrauss_bound_007.png" src="../_images/plot_johnson_lindenstrauss_bound_007.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_johnson_lindenstrauss_bound_008.png"><img alt="../_images/plot_johnson_lindenstrauss_bound_008.png" src="../_images/plot_johnson_lindenstrauss_bound_008.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p><strong>Script output</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Embedding</span> <span class="mi">500</span> <span class="n">samples</span> <span class="k">with</span> <span class="n">dim</span> <span class="mi">64</span> <span class="n">using</span> <span class="n">various</span> <span class="n">random</span> <span class="n">projections</span>
+<span class="n">Projected</span> <span class="mi">500</span> <span class="n">samples</span> <span class="kn">from</span> <span class="mi">64</span> <span class="n">to</span> <span class="mi">300</span> <span class="ow">in</span> <span class="mf">0.010</span><span class="n">s</span>
+<span class="n">Random</span> <span class="n">matrix</span> <span class="k">with</span> <span class="n">size</span><span class="p">:</span> <span class="mf">0.028</span><span class="n">MB</span>
+<span class="n">Mean</span> <span class="n">distances</span> <span class="n">rate</span><span class="p">:</span> <span class="mf">1.05</span> <span class="p">(</span><span class="mf">0.10</span><span class="p">)</span>
+<span class="n">Projected</span> <span class="mi">500</span> <span class="n">samples</span> <span class="kn">from</span> <span class="mi">64</span> <span class="n">to</span> <span class="mi">1000</span> <span class="ow">in</span> <span class="mf">0.028</span><span class="n">s</span>
+<span class="n">Random</span> <span class="n">matrix</span> <span class="k">with</span> <span class="n">size</span><span class="p">:</span> <span class="mf">0.097</span><span class="n">MB</span>
+<span class="n">Mean</span> <span class="n">distances</span> <span class="n">rate</span><span class="p">:</span> <span class="mf">1.00</span> <span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">Projected</span> <span class="mi">500</span> <span class="n">samples</span> <span class="kn">from</span> <span class="mi">64</span> <span class="n">to</span> <span class="mi">10000</span> <span class="ow">in</span> <span class="mf">0.275</span><span class="n">s</span>
+<span class="n">Random</span> <span class="n">matrix</span> <span class="k">with</span> <span class="n">size</span><span class="p">:</span> <span class="mf">0.962</span><span class="n">MB</span>
+<span class="n">Mean</span> <span class="n">distances</span> <span class="n">rate</span><span class="p">:</span> <span class="mf">1.00</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_johnson_lindenstrauss_bound.py" download=""><code class="xref download docutils literal"><span class="pre">plot_johnson_lindenstrauss_bound.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.random_projection</span> <span class="k">import</span> <a href="../modules/generated/sklearn.random_projection.johnson_lindenstrauss_min_dim.html#sklearn.random_projection.johnson_lindenstrauss_min_dim"><span class="n">johnson_lindenstrauss_min_dim</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.random_projection</span> <span class="k">import</span> <a href="../modules/generated/sklearn.random_projection.SparseRandomProjection.html#sklearn.random_projection.SparseRandomProjection"><span class="n">SparseRandomProjection</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../modules/generated/sklearn.datasets.fetch_20newsgroups_vectorized.html#sklearn.datasets.fetch_20newsgroups_vectorized"><span class="n">fetch_20newsgroups_vectorized</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">load_digits</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="k">import</span> <span class="n">euclidean_distances</span>
+
+<span class="c1"># Part 1: plot the theoretical dependency between n_components_min and</span>
+<span class="c1"># n_samples</span>
+
+<span class="c1"># range of admissible distortions</span>
+<span class="n">eps_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">eps_range</span><span class="p">)))</span>
+
+<span class="c1"># range of number of samples (observation) to embed</span>
+<span class="n">n_samples_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="k">for</span> <span class="n">eps</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">eps_range</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">min_n_components</span> <span class="o">=</span> <a href="../modules/generated/sklearn.random_projection.johnson_lindenstrauss_min_dim.html#sklearn.random_projection.johnson_lindenstrauss_min_dim"><span class="n">johnson_lindenstrauss_min_dim</span></a><span class="p">(</span><span class="n">n_samples_range</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.loglog"><span class="n">plt</span><span class="o">.</span><span class="n">loglog</span></a><span class="p">(</span><span class="n">n_samples_range</span><span class="p">,</span> <span class="n">min_n_components</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">([</span><span class="s2">&quot;eps = </span><span class="si">%0.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">eps</span> <span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="n">eps_range</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;Number of observations to eps-embed&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Minimum number of dimensions&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Johnson-Lindenstrauss bounds:</span><span class="se">\n</span><span class="s2">n_samples vs n_components&quot;</span><span class="p">)</span>
+
+<span class="c1"># range of admissible distortions</span>
+<span class="n">eps_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># range of number of samples (observation) to embed</span>
+<span class="n">n_samples_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.logspace.html#numpy.logspace"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_samples_range</span><span class="p">)))</span>
+
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="k">for</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">n_samples_range</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">min_n_components</span> <span class="o">=</span> <a href="../modules/generated/sklearn.random_projection.johnson_lindenstrauss_min_dim.html#sklearn.random_projection.johnson_lindenstrauss_min_dim"><span class="n">johnson_lindenstrauss_min_dim</span></a><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps_range</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">eps_range</span><span class="p">,</span> <span class="n">min_n_components</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">([</span><span class="s2">&quot;n_samples = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_samples_range</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;Distortion eps&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Minimum number of dimensions&quot;</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Johnson-Lindenstrauss bounds:</span><span class="se">\n</span><span class="s2">n_components vs eps&quot;</span><span class="p">)</span>
+
+<span class="c1"># Part 2: perform sparse random projection of some digits images which are</span>
+<span class="c1"># quite low dimensional and dense or documents of the 20 newsgroups dataset</span>
+<span class="c1"># which is both high dimensional and sparse</span>
+
+<span class="k">if</span> <span class="s1">&#39;--twenty-newsgroups&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
+    <span class="c1"># Need an internet connection hence not enabled by default</span>
+    <span class="n">data</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.fetch_20newsgroups_vectorized.html#sklearn.datasets.fetch_20newsgroups_vectorized"><span class="n">fetch_20newsgroups_vectorized</span></a><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <a href="../modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits"><span class="n">load_digits</span></a><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+
+<span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Embedding </span><span class="si">%d</span><span class="s2"> samples with dim </span><span class="si">%d</span><span class="s2"> using various random projections&quot;</span>
+      <span class="o">%</span> <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span>
+
+<span class="n">n_components_range</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">])</span>
+<span class="n">dists</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="c1"># select only non-identical samples pairs</span>
+<span class="n">nonzero</span> <span class="o">=</span> <span class="n">dists</span> <span class="o">!=</span> <span class="mi">0</span>
+<span class="n">dists</span> <span class="o">=</span> <span class="n">dists</span><span class="p">[</span><span class="n">nonzero</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">n_components</span> <span class="ow">in</span> <span class="n">n_components_range</span><span class="p">:</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">rp</span> <span class="o">=</span> <a href="../modules/generated/sklearn.random_projection.SparseRandomProjection.html#sklearn.random_projection.SparseRandomProjection"><span class="n">SparseRandomProjection</span></a><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">)</span>
+    <span class="n">projected_data</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Projected </span><span class="si">%d</span><span class="s2"> samples from </span><span class="si">%d</span><span class="s2"> to </span><span class="si">%d</span><span class="s2"> in </span><span class="si">%0.3f</span><span class="s2">s&quot;</span>
+          <span class="o">%</span> <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">n_components</span><span class="p">,</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">rp</span><span class="p">,</span> <span class="s1">&#39;components_&#39;</span><span class="p">):</span>
+        <span class="n">n_bytes</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">nbytes</span>
+        <span class="n">n_bytes</span> <span class="o">+=</span> <span class="n">rp</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">nbytes</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random matrix with size: </span><span class="si">%0.3f</span><span class="s2">MB&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n_bytes</span> <span class="o">/</span> <span class="mi">1</span><span class="n">e6</span><span class="p">))</span>
+
+    <span class="n">projected_dists</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span>
+        <span class="n">projected_data</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="n">nonzero</span><span class="p">]</span>
+
+    <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.hexbin"><span class="n">plt</span><span class="o">.</span><span class="n">hexbin</span></a><span class="p">(</span><span class="n">dists</span><span class="p">,</span> <span class="n">projected_dists</span><span class="p">,</span> <span class="n">gridsize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">PuBu</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;Pairwise squared distances in original space&quot;</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Pairwise squared distances in projected space&quot;</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Pairwise distances distribution for n_components=</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span>
+              <span class="n">n_components</span><span class="p">)</span>
+    <span class="n">cb</span> <span class="o">=</span> <a href="http://matplotlib.org/api/colorbar_api.html#matplotlib.colorbar"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span></a><span class="p">()</span>
+    <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Sample pairs counts&#39;</span><span class="p">)</span>
+
+    <span class="n">rates</span> <span class="o">=</span> <span class="n">projected_dists</span> <span class="o">/</span> <span class="n">dists</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean distances rate: </span><span class="si">%0.2f</span><span class="s2"> (</span><span class="si">%0.2f</span><span class="s2">)&quot;</span>
+          <span class="o">%</span> <span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.mean.html#numpy.mean"><span class="n">np</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">rates</span><span class="p">),</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.std.html#numpy.std"><span class="n">np</span><span class="o">.</span><span class="n">std</span></a><span class="p">(</span><span class="n">rates</span><span class="p">)))</span>
+
+    <a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.hist"><span class="n">plt</span><span class="o">.</span><span class="n">hist</span></a><span class="p">(</span><span class="n">rates</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">))</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;Squared distances rate: projected / original&quot;</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Distribution of samples pairs&quot;</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s2">&quot;Histogram of pairwise distance rates for n_components=</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span>
+              <span class="n">n_components</span><span class="p">)</span>
+
+    <span class="c1"># TODO: compute the expected value of eps and add them to the previous plot</span>
+    <span class="c1"># as vertical lines / region</span>
+
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>  3.07 seconds
+( 0 minutes  3.07 seconds)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/auto_examples/plot_johnson_lindenstrauss_bound.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="plot_multioutput_face_completion.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

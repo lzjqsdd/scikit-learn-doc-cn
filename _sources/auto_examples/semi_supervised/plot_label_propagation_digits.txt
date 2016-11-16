@@ -1,0 +1,65 @@
+
+
+.. _example_semi_supervised_plot_label_propagation_digits.py:
+
+
+===================================================
+Label Propagation digits: Demonstrating performance
+===================================================
+
+This example demonstrates the power of semisupervised learning by
+training a Label Spreading model to classify handwritten digits
+with sets of very few labels.
+
+The handwritten digit dataset has 1797 total points. The model will
+be trained using all points, but only 30 will be labeled. Results
+in the form of a confusion matrix and a series of metrics over each
+class will be very good.
+
+At the end, the top 10 most uncertain predictions will be shown.
+
+
+
+.. image:: images/plot_label_propagation_digits_001.png
+    :align: center
+
+
+**Script output**::
+
+  Label Spreading model: 30 labeled & 300 unlabeled points (330 total)
+               precision    recall  f1-score   support
+  
+            0       1.00      1.00      1.00        23
+            1       0.58      0.54      0.56        28
+            2       0.96      0.93      0.95        29
+            3       0.00      0.00      0.00        28
+            4       0.91      0.80      0.85        25
+            5       0.96      0.79      0.87        33
+            6       0.97      0.97      0.97        36
+            7       0.89      1.00      0.94        34
+            8       0.48      0.83      0.61        29
+            9       0.54      0.77      0.64        35
+  
+  avg / total       0.73      0.77      0.74       300
+  
+  Confusion matrix
+  [[23  0  0  0  0  0  0  0  0]
+   [ 0 15  1  0  0  1  0 11  0]
+   [ 0  0 27  0  0  0  2  0  0]
+   [ 0  5  0 20  0  0  0  0  0]
+   [ 0  0  0  0 26  0  0  1  6]
+   [ 0  1  0  0  0 35  0  0  0]
+   [ 0  0  0  0  0  0 34  0  0]
+   [ 0  5  0  0  0  0  0 24  0]
+   [ 0  0  0  2  1  0  2  3 27]]
+
+
+
+**Python source code:** :download:`plot_label_propagation_digits.py <plot_label_propagation_digits.py>`
+
+.. literalinclude:: plot_label_propagation_digits.py
+    :lines: 17-
+
+**Total running time of the example:**  1.04 seconds
+( 0 minutes  1.04 seconds)
+    

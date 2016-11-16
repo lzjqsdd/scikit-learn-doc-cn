@@ -1,0 +1,38 @@
+
+
+.. _example_linear_model_plot_ridge_path.py:
+
+
+===========================================================
+Plot Ridge coefficients as a function of the regularization
+===========================================================
+
+Shows the effect of collinearity in the coefficients of an estimator.
+
+.. currentmodule:: sklearn.linear_model
+
+:class:`Ridge` Regression is the estimator used in this example.
+Each color represents a different feature of the
+coefficient vector, and this is displayed as a function of the
+regularization parameter.
+
+At the end of the path, as alpha tends toward zero
+and the solution tends towards the ordinary least squares, coefficients
+exhibit big oscillations.
+
+
+
+.. image:: images/plot_ridge_path_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_ridge_path.py <plot_ridge_path.py>`
+
+.. literalinclude:: plot_ridge_path.py
+    :lines: 19-
+
+**Total running time of the example:**  0.24 seconds
+( 0 minutes  0.24 seconds)
+    

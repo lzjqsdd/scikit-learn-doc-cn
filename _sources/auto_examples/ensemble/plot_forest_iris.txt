@@ -1,0 +1,75 @@
+
+
+.. _example_ensemble_plot_forest_iris.py:
+
+
+====================================================================
+Plot the decision surfaces of ensembles of trees on the iris dataset
+====================================================================
+
+Plot the decision surfaces of forests of randomized trees trained on pairs of
+features of the iris dataset.
+
+This plot compares the decision surfaces learned by a decision tree classifier
+(first column), by a random forest classifier (second column), by an extra-
+trees classifier (third column) and by an AdaBoost classifier (fourth column).
+
+In the first row, the classifiers are built using the sepal width and the sepal
+length features only, on the second row using the petal length and sepal length
+only, and on the third row using the petal width and the petal length only.
+
+In descending order of quality, when trained (outside of this example) on all
+4 features using 30 estimators and scored using 10 fold cross validation, we see::
+
+    ExtraTreesClassifier()  # 0.95 score
+    RandomForestClassifier()  # 0.94 score
+    AdaBoost(DecisionTree(max_depth=3))  # 0.94 score
+    DecisionTree(max_depth=None)  # 0.94 score
+
+Increasing `max_depth` for AdaBoost lowers the standard deviation of the scores (but
+the average score does not improve).
+
+See the console's output for further details about each model.
+
+In this example you might try to:
+
+1) vary the ``max_depth`` for the ``DecisionTreeClassifier`` and
+   ``AdaBoostClassifier``, perhaps try ``max_depth=3`` for the
+   ``DecisionTreeClassifier`` or ``max_depth=None`` for ``AdaBoostClassifier``
+2) vary ``n_estimators``
+
+It is worth noting that RandomForests and ExtraTrees can be fitted in parallel
+on many cores as each tree is built independently of the others. AdaBoost's
+samples are built sequentially and so do not use multiple cores.
+
+
+
+.. image:: images/plot_forest_iris_001.png
+    :align: center
+
+
+**Script output**::
+
+  DecisionTree with features [0, 1] has a score of 0.926666666667
+  RandomForest with 30 estimators with features [0, 1] has a score of 0.926666666667
+  ExtraTrees with 30 estimators with features [0, 1] has a score of 0.926666666667
+  AdaBoost with 30 estimators with features [0, 1] has a score of 0.84
+  DecisionTree with features [0, 2] has a score of 0.993333333333
+  RandomForest with 30 estimators with features [0, 2] has a score of 0.993333333333
+  ExtraTrees with 30 estimators with features [0, 2] has a score of 0.993333333333
+  AdaBoost with 30 estimators with features [0, 2] has a score of 0.993333333333
+  DecisionTree with features [2, 3] has a score of 0.993333333333
+  RandomForest with 30 estimators with features [2, 3] has a score of 0.993333333333
+  ExtraTrees with 30 estimators with features [2, 3] has a score of 0.993333333333
+  AdaBoost with 30 estimators with features [2, 3] has a score of 0.993333333333
+
+
+
+**Python source code:** :download:`plot_forest_iris.py <plot_forest_iris.py>`
+
+.. literalinclude:: plot_forest_iris.py
+    :lines: 41-
+
+**Total running time of the example:**  9.99 seconds
+( 0 minutes  9.99 seconds)
+    

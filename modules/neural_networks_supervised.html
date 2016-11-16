@@ -1,0 +1,399 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>神经网络模型（有监督） (Neural network models (supervised)) &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/neural_networks_supervised.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">神经网络模型（有监督） (Neural network models (supervised))</a><ul>
+<li><a class="reference internal" href="#multi-layer-perceptron">多层感知器 (Multi-layer Perceptron)</a></li>
+<li><a class="reference internal" href="#classification">分类 (Classification)</a></li>
+<li><a class="reference internal" href="#regression">回归 (Regression)</a></li>
+<li><a class="reference internal" href="#regularization">正则化 (Regularization)</a></li>
+<li><a class="reference internal" href="#algorithms">算法 (Algorithms)</a></li>
+<li><a class="reference internal" href="#complexity">复杂性 (Complexity)</a></li>
+<li><a class="reference internal" href="#id2">数学公式</a></li>
+<li><a class="reference internal" href="#mlp-tips">实际使用中的建议</a></li>
+<li><a class="reference internal" href="#warm-start">使用warm_start进行控制</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="neural-network-models-supervised">
+<span id="neural-networks-supervised"></span><h1>神经网络模型（有监督） (Neural network models (supervised))<a class="headerlink" href="#neural-network-models-supervised" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">这部分的内容并不适用于大规模的应用问题。特别地，scikit-learn 并不提供GPU支持。如需更快的基于GPU的执行，或者需要能为搭建深度学习架构提供更多灵活性的框架，可参见 <a class="reference internal" href="../related_projects.html#related-projects"><span class="std std-ref">Related Projects</span></a> 中的内容。</p>
+</div>
+<div class="section" id="multi-layer-perceptron">
+<span id="multilayer-perceptron"></span><h2>多层感知器 (Multi-layer Perceptron)<a class="headerlink" href="#multi-layer-perceptron" title="Permalink to this headline">¶</a></h2>
+<p><strong>多层感知器 (MLP)</strong> 是一种监督学习算法，它通过训练一个数据集来学习方程  <img class="math" src="../_images/math/b3369cdf3c515179a0291e22134e25ac942b6a5f.png" alt="f(\cdot): R^m \rightarrow R^o"/> ，其中， <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> 是输入量 (input)的维度，  <img class="math" src="../_images/math/21736df275793e73d4849d98709ef561b459defd.png" alt="o"/> 是输出量 (output)的维度。已知一个特征集 <img class="math" src="../_images/math/1f069dd81a0792b491333c979b9004885084622b.png" alt="X = {x_1, x_2, ..., x_m}"/> 和一个目标 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> ，它能为分类或回归问题学习一个非线性方程的近似方程。不同于逻辑回归，多层感知器在输入层和输出层之间存在一个或多个非线性层（叫做隐藏层）。图1所表示的MLP有一个隐藏层，且其输出是一个标量。</p>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="modules/../images/multilayerperceptron_network.png"><img alt="modules/../images/multilayerperceptron_network.png" src="modules/../images/multilayerperceptron_network.png" /></a>
+<p class="caption"><span class="caption-text"><strong>图1: 一个隐藏层的MLP.</strong></span></p>
+</div>
+<p>最左边的层，一般叫做输入层，包含一个神经元集合 <img class="math" src="../_images/math/e1da569291ec999307a44cb3a595f8cd6de07375.png" alt="\{x_i | x_1, x_2, ..., x_m\}"/> ，来表示输入中的特征。每一个神经元通过一个加权线性和 <img class="math" src="../_images/math/2c229488da3e5c9d302d9c1ca146d5ef9f81170d.png" alt="w_1x_1 + w_2x_2 + ... + w_mx_m"/> 来变换上一个层的值，随后用一个非线性激活函数 <img class="math" src="../_images/math/abdd0d89cecdca094c69cea06054e115ad071753.png" alt="g(\cdot):R \rightarrow R"/> 来计算，例如双曲tan函数。输出层从最后一个隐藏层中得到数值，然后将其转换为输出值。</p>
+<p>本模块包含两个公共属性 <code class="docutils literal"><span class="pre">coefs_</span></code> 和 <code class="docutils literal"><span class="pre">intercepts_</span></code>。 <code class="docutils literal"><span class="pre">coefs_</span></code> 是一个权重矩阵的列表，权重矩阵的索引 <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> 表示 <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> 层和 <img class="math" src="../_images/math/332e5378de791e071e4c73e332d91ae51120deea.png" alt="i+1"/> 层之间的权重。 <code class="docutils literal"><span class="pre">intercepts_</span></code> 是一个偏度向量的列表，索引号为 <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> 的向量表示加到 <img class="math" src="../_images/math/332e5378de791e071e4c73e332d91ae51120deea.png" alt="i+1"/> 层的偏度值。</p>
+<p>多层感知器 (MLP)的优势在于：</p>
+<blockquote>
+<div><ul class="simple">
+<li>具有学习非线性模型的能力。</li>
+<li>应用  <code class="docutils literal"><span class="pre">partial_fit</span></code> 具有实时（或在线）学习模型的能力。</li>
+</ul>
+</div></blockquote>
+<p>多层感知器 (MLP)的劣势包括：</p>
+<blockquote>
+<div><ul class="simple">
+<li>包含隐藏层的MLP的损失函数是一个非凸函数，存在多于一个的局部最小值。因此，不同的初始随机权重值会到时不同的验证精度。</li>
+<li>MLP需要调试若干个超参数，比如隐藏神经元的个数，层数，迭代数。</li>
+<li>MLP对特征缩放敏感</li>
+</ul>
+</div></blockquote>
+<p>部分劣势的详细说明可以参见 <a class="reference internal" href="#mlp-tips"><span class="std std-ref">Tips on Practical Use</span></a> 部分。</p>
+</div>
+<div class="section" id="classification">
+<h2>分类 (Classification)<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-class docutils literal"><span class="pre">MLPClassifier</span></code> 类通过使用 <a class="reference external" href="http://ufldl.stanford.edu/wiki/index.php/Backpropagation_Algorithm">Backpropagation</a> 来执行一个MLP算法来训练。</p>
+<p>MLP对两个向量进行训练：向量X的大小为 (n_samples, n_features)，其包含以浮点型的特征的向量来表示的训练样本；另一个向量y的大小为 (n_samples,)，其包含训练样本对应的目标值（类别标签）。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="k">import</span> <span class="n">MLPClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>                         
+<span class="go">MLPClassifier(activation=&#39;relu&#39;, alpha=1e-05, batch_size=&#39;auto&#39;,</span>
+<span class="go">       beta_1=0.9, beta_2=0.999, early_stopping=False,</span>
+<span class="go">       epsilon=1e-08, hidden_layer_sizes=(5, 2), learning_rate=&#39;constant&#39;,</span>
+<span class="go">       learning_rate_init=0.001, max_iter=200, momentum=0.9,</span>
+<span class="go">       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,</span>
+<span class="go">       solver=&#39;lbfgs&#39;, tol=0.0001, validation_fraction=0.1, verbose=False,</span>
+<span class="go">       warm_start=False)</span>
+</pre></div>
+</div>
+<p>在拟合（训练）后，模型能对新样本的标签进行预测：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([1, 0])</span>
+</pre></div>
+</div>
+<p>MLP对训练数据拟合一个非线性模型。 <code class="docutils literal"><span class="pre">clf.coefs_</span></code> 包含权重矩阵，从而构成了整个模型的参数:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">coef</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">coef</span> <span class="ow">in</span> <span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span><span class="p">]</span>
+<span class="go">[(2, 5), (5, 2), (2, 1)]</span>
+</pre></div>
+</div>
+<p>目前， <code class="xref py py-class docutils literal"><span class="pre">MLPClassifier</span></code> 仅支持互熵(Cross-Entropy)损失函数，其可以通过运行
+<code class="docutils literal"><span class="pre">predict_proba</span></code> 方法来进行概率估计。</p>
+<p>MLP应用了反向传播算法。更准确地说，它用某种形式的梯度下降来进行训练，梯度是用反向传播算法进行计算的。对于分类问题，它对互熵损伤函数进行最小化，最后对每个样本 <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/> 给出一个概率估计向量 <img class="math" src="../_images/math/f1618e77c8e15b4a154134e2816452a588992532.png" alt="P(y|x)"/>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>  
+<span class="go">array([[  1.967...e-04,   9.998...-01],</span>
+<span class="go">       [  1.967...e-04,   9.998...-01]])</span>
+</pre></div>
+</div>
+<p><code class="xref py py-class docutils literal"><span class="pre">MLPClassifier</span></code> 支持多类别的分类，可以通过应用 <a class="reference external" href="https://en.wikipedia.org/wiki/Softmax_activation_function">Softmax</a> 作为输出函数。</p>
+<p>具体来说，模型支持 <a class="reference internal" href="multiclass.html#multiclass"><span class="std std-ref">multi-label classification</span></a> ，即一个样本可以属于多于一个的类。对于每一个类，原始输出用逻辑函数处理。大于等于 <cite>0.5</cite> 的值取为 <cite>1</cite>，否则取为 <cite>0</cite>。对于一个样本的预测出来的输出，值为 <cite>1</cite> 处的索引值即为这个样本被指定的类：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>                         
+<span class="go">MLPClassifier(activation=&#39;relu&#39;, alpha=1e-05, batch_size=&#39;auto&#39;,</span>
+<span class="go">       beta_1=0.9, beta_2=0.999, early_stopping=False,</span>
+<span class="go">       epsilon=1e-08, hidden_layer_sizes=(15,), learning_rate=&#39;constant&#39;,</span>
+<span class="go">       learning_rate_init=0.001, max_iter=200, momentum=0.9,</span>
+<span class="go">       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,</span>
+<span class="go">       solver=&#39;lbfgs&#39;, tol=0.0001, validation_fraction=0.1, verbose=False,</span>
+<span class="go">       warm_start=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([[1, 1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="go">array([[0, 1]])</span>
+</pre></div>
+</div>
+<p>更多信息可以参见下面的例子和 <code class="xref py py-meth docutils literal"><span class="pre">MLPClassifier.fit</span></code> 。</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><span class="xref std std-ref">sphx_glr_auto_examples_neural_networks_plot_mlp_training_curves.py</span></li>
+<li><span class="xref std std-ref">sphx_glr_auto_examples_neural_networks_plot_mnist_filters.py</span></li>
+</ul>
+</div>
+</div>
+<div class="section" id="regression">
+<h2>回归 (Regression)<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-class docutils literal"><span class="pre">MLPRegressor</span></code> 类应用一个多层感知器 (MLP)来通过向后传播来训练，其输出层中没有激活函数，这也可以看作使用恒等函数作为激活函数。所以，它把平方误差作为损失函数，最后输出量是连续值的集合。</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">MLPRegressor</span></code> 同样也支持多输出的回归，即一个样本有多于一个的目标。</p>
+</div>
+<div class="section" id="regularization">
+<h2>正则化 (Regularization)<a class="headerlink" href="#regularization" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-class docutils literal"><span class="pre">MLPRegressor</span></code> 和 <code class="xref py py-class docutils literal"><span class="pre">MLPClassifier</span></code> 都使用 <code class="docutils literal"><span class="pre">alpha</span></code> 来进行正则化（L2正则化），其通过惩罚较大的权重来防止过拟合。下图展示了决策函数随着alpha值变化的情况。</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="../auto_examples/neural_networks/plot_mlp_alpha.html"><img alt="modules/../auto_examples/neural_networks/images/sphx_glr_plot_mlp_alpha_001.png" src="modules/../auto_examples/neural_networks/images/sphx_glr_plot_mlp_alpha_001.png" /></a>
+</div>
+<p>更多信息可以参见下面的例子。</p>
+<div class="topic">
+<p class="topic-title first">Examples:</p>
+<ul class="simple">
+<li><span class="xref std std-ref">sphx_glr_auto_examples_neural_networks_plot_mlp_alpha.py</span></li>
+</ul>
+</div>
+</div>
+<div class="section" id="algorithms">
+<h2>算法 (Algorithms)<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
+<p>MLP训练使用随机梯度下降 <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">Stochastic Gradient Descent</a> ，
+<a class="reference external" href="http://arxiv.org/abs/1412.6980">Adam</a>, 或者
+<a class="reference external" href="https://en.wikipedia.org/wiki/Limited-memory_BFGS">L-BFGS</a> 。随机梯度下降 (SGD) 对需要改进的参数的损失函数求其梯度，例如，</p>
+<div class="math">
+<p><img src="../_images/math/a160d57b1272e29072531701bcdd6555946be9cd.png" alt="w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
++ \frac{\partial Loss}{\partial w})"/></p>
+</div><p>其中， <img class="math" src="../_images/math/5635a7c34414599c2452d72430811e816b460335.png" alt="\eta"/> 是控制参数空间搜索步长的学习速度。 <img class="math" src="../_images/math/f9f41ce267e37443888658cc880175eafe9d2f53.png" alt="Loss"/> 是这个网络的损失函数。</p>
+<p>更多细节可以在 <a class="reference external" href="http://scikit-learn.org/stable/modules/sgd.html">SGD</a>
+文档中找到。</p>
+<p>Adam和SGD类似，它也是一个随机最优化器，但是它能根据低阶矩的自适应估计来自动地调整更新参数的量。</p>
+<p>SGD和Adam的训练支持在线 (online)和小批量 (mini-batch)的学习.</p>
+<p>L-BFGS 是Hessian矩阵的一个求解器，用来求一个函数的二阶偏微分导数。它通过求Hessian矩阵的逆矩阵的近似解来进行参数更新。实现过程使用了L-BFGS的Scipy版本 <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html">L-BFGS</a> 。</p>
+<p>如果选择的求解器是 L-BFGS，那么训练不支持在线或小批量学习。</p>
+</div>
+<div class="section" id="complexity">
+<h2>复杂性 (Complexity)<a class="headerlink" href="#complexity" title="Permalink to this headline">¶</a></h2>
+<p>假定有 <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> 个训练样本， <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> 个特征， <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> 层隐藏层，每层包含 <img class="math" src="../_images/math/293fb39e1b93282c804a86186e721b32f829f1b2.png" alt="h"/> 个神经元， <img class="math" src="../_images/math/21736df275793e73d4849d98709ef561b459defd.png" alt="o"/> 个输出神经元。向后传播的时间复杂性为 <img class="math" src="../_images/math/e048678984af140ae0a45df95f911e4a7948404d.png" alt="O(n\cdot m \cdot h^k \cdot o \cdot i)"/> ，其中， <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> 是迭代次数。由于向后传播有很高的时间复杂性，我们建议一开始时使用数量较少的神经元和较少的隐藏层数进行训练。</p>
+</div>
+<div class="section" id="id2">
+<h2>数学公式<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>现有一组训练样本 <img class="math" src="../_images/math/4e0f755b374ec06a092547fcab3a9143e74aa616.png" alt="(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)"/> 其中 <img class="math" src="../_images/math/bed637067e6e774b87cc8e3c059b2f97ce7be531.png" alt="x_i \in \mathbf{R}^n"/> 和 <img class="math" src="../_images/math/c96ba98df2ce948d307c8d65a1116a3f92373d7d.png" alt="y_i \in \{0, 1\}"/>，一个隐藏层和一个隐藏神经元的MLP来学习函数 <img class="math" src="../_images/math/b8ef47935bc9fef8f50d6c679d8a892e8fd515f4.png" alt="f(x) = W_2 g(W_1^T x + b_1) + b_2"/> 其中  <img class="math" src="../_images/math/a5982880326749e9b56fd2ef13f2055d5755ebcb.png" alt="W_1 \in \mathbf{R}^m"/> 和  <img class="math" src="../_images/math/77bdaa1e41a1abaa9404afaeb3e81746883b71c1.png" alt="W_2, b_1, b_2 \in \mathbf{R}"/>  为模型参数。 <img class="math" src="../_images/math/c86d5b6a9948b498f94ee23a1dbb907001a07fad.png" alt="W_1, W_2"/> 分别表示输入层和隐藏层的权重。 <img class="math" src="../_images/math/a0ecc47cd2be952e11178b321a66c21303616c39.png" alt="b_1, b_2"/> 分别表示加到隐藏层和输出层的偏移值。 <img class="math" src="../_images/math/8a563d56f5916ef7f622fb68039db03f275f0e74.png" alt="g(\cdot) : R \rightarrow R"/> 是一个激活函数，默认设置为双曲tan函数。其公式为：</p>
+<div class="math">
+<p><img src="../_images/math/1bfb170b0c45709d820d4deb3494b43e76394571.png" alt="g(z)= \frac{e^z-e^{-z}}{e^z+e^{-z}}"/></p>
+</div><p>对于二元分类， <img class="math" src="../_images/math/eda52292f6952f7e27fef52e7ce8393981770d2c.png" alt="f(x)"/> 通过逻辑函数 <img class="math" src="../_images/math/312440886d440bec709d6fc7367b79a41d60441e.png" alt="g(z)=1/(1+e^{-z})"/> 来获得1和0之间的输出值。阈值设置为0.5，即将大于等于0.5的样本输出指定为阳性类别，其他为阴性类别。</p>
+<p>如果是多于两个的类别， <img class="math" src="../_images/math/eda52292f6952f7e27fef52e7ce8393981770d2c.png" alt="f(x)"/> 本身是一个大小为(n_classes,)的向量。这时它并不传递给逻辑函数，而是传递给softmax函数，该函数表示为：</p>
+<div class="math">
+<p><img src="../_images/math/f24633ab2c3fc24cb312ec743250c5362ce126e3.png" alt="\text{softmax}(z)_i = \frac{\exp(z_i)}{\sum_{l=1}^k\exp(z_l)}"/></p>
+</div><p>其中， <img class="math" src="../_images/math/6de62736d8aa90101801d7a1416e97e921d1620f.png" alt="z_i"/> 表示softmax的输入的第 <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> 个元素，其对应类别 <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> ， <img class="math" src="../_images/math/684381a21cd73ebbf43b63a087d3f7410ee99ce8.png" alt="K"/> 是类别的数量。其结果是一个包含样本 <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/> 属于每个类别的概率的向量。输出的是最高概率所对应的类别。</p>
+<p>在回归中，输出量仍然是 <img class="math" src="../_images/math/eda52292f6952f7e27fef52e7ce8393981770d2c.png" alt="f(x)"/> 。因此，输出的激活函数仅仅是一个恒等函数。</p>
+<p>MLP基于问题的类型使用不同的损失函数。分类的损失函数是互熵，在二元问题中表示为：</p>
+<div class="math">
+<p><img src="../_images/math/954e4b8812ec294fc7925e2beac5d0e94148a28a.png" alt="Loss(\hat{y},y,W) = -y \ln {\hat{y}} - (1-y) \ln{(1-\hat{y})} + \alpha ||W||_2^2"/></p>
+</div><p>其中， <img class="math" src="../_images/math/bf7147d1882ec73d4b23e33585a9ac09261602b3.png" alt="\alpha ||W||_2^2"/> 是一个L2正则项（又称作惩罚项），用来惩罚模型的复杂性； <img class="math" src="../_images/math/969cb5f6781dc1ccd2500d69e55fdb01ae91b31a.png" alt="\alpha &gt; 0"/> 是一个非负的超参数，用来控制惩罚的程度。</p>
+<p>对于回归，MLP使用平方误差损失函数，可写作：</p>
+<div class="math">
+<p><img src="../_images/math/cbe6a0921e1d81c24f5493414498fdc7c5cca2c2.png" alt="Loss(\hat{y},y,W) = \frac{1}{2}||\hat{y} - y ||_2^2 + \alpha ||W||_2^2"/></p>
+</div><p>MLP从初始随机权重开始通过重复地对权重进行更新，从而对损失函数进行最小化。在计算损失后，一个向后的路径将损失从后面一层传递到前面的层，为每个权重参数提供一个能减小损失的更新后的权重值。</p>
+<p>在梯度下降中，我们计算基于 <img class="math" src="../_images/math/953bde2ab2fca30897f66185e5b37b73747b8b46.png" alt="W"/> 的损失对于权重的梯度 <img class="math" src="../_images/math/f97269fdd6f4eddbc7bd4d1a4ac1fedfd1be48d9.png" alt="\nabla Loss_{W}"/> 。更严密的公式可表达为：</p>
+<div class="math">
+<p><img src="../_images/math/8e10fe4f76e486ffe56c26bd4e2ce5bc0304e12f.png" alt="W^{i+1} = W^i - \epsilon \nabla {Loss}_{W}^{i}"/></p>
+</div><p>其中， <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> 是迭代步， <img class="math" src="../_images/math/65d19c66c148d5016c6a89d26486bf6d1966ded1.png" alt="\epsilon"/> 是一个大于0的学习速率。</p>
+<p>但达到预设的最大迭代数时，或者对损失的改进小于一个较小的数时，我们停止运算。</p>
+</div>
+<div class="section" id="mlp-tips">
+<span id="id3"></span><h2>实际使用中的建议<a class="headerlink" href="#mlp-tips" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first">多层感知器对于特征缩放敏感，所以我们强烈建议缩放您的数据。例如，将输入向量的每个特征缩放至[0, 1] 或者 [-1, +1]，或者，将其标准化至均值为0且方差为1。需要注意的是，为了得到有意义的结果，我们必须对测试集应用 <em>相同</em> 的缩放。您可以用 <code class="xref py py-class docutils literal"><span class="pre">StandardScaler</span></code> 进行标准化。</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Don&#39;t cheat - fit only on training data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># apply same transformation to test data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>  
+</pre></div>
+</div>
+<p>另一个推荐的方式是使用 <code class="xref py py-class docutils literal"><span class="pre">Pipeline</span></code> 中的 <code class="xref py py-class docutils literal"><span class="pre">StandardScaler</span></code> 。</p>
+</li>
+<li><p class="first">找到一个合理的正则化参数 <img class="math" src="../_images/math/877d234f4cec6974ce218fc2e975a486a7972dfd.png" alt="\alpha"/> 的方式是使用 <code class="xref py py-class docutils literal"><span class="pre">GridSearchCV</span></code> ，通常其区间是 <code class="docutils literal"><span class="pre">10.0</span> <span class="pre">**</span> <span class="pre">-np.arange(1,</span> <span class="pre">7)</span></code> 。</p>
+</li>
+<li><p class="first">就经验来说，我们发现 <cite>L-BFGS</cite> 对于小的数据集收敛速度较快且结果更好。但对于相对较大的数据集， <cite>Adam</cite> 非常得可靠。通常它能很快收敛并且给出较好的结果。然而， <cite>SGD</cite> 用动量或nesterov动量时，如果学习速率调试正确，其性能比上述两种方法都要好。</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="warm-start">
+<h2>使用warm_start进行控制<a class="headerlink" href="#warm-start" title="Permalink to this headline">¶</a></h2>
+<p>如果您想要在SGD中对停止准则或学习速率有更多的控制，或者您想要更多地监控，设置 <code class="docutils literal"><span class="pre">warm_start=True</span></code> 和 <code class="docutils literal"><span class="pre">max_iter=1</span></code> 进行循环可以对此有所帮助：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="c1"># additional monitoring / inspection </span>
+<span class="go">MLPClassifier(...</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">参考文献：</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf">&#8220;Learning representations by back-propagating errors.&#8221;</a>
+Rumelhart, David E., Geoffrey E. Hinton, and Ronald J. Williams.</li>
+<li><a class="reference external" href="http://leon.bottou.org/projects/sgd">&#8220;Stochastic Gradient Descent&#8221;</a> L. Bottou - Website, 2010.</li>
+<li><a class="reference external" href="http://ufldl.stanford.edu/wiki/index.php/Backpropagation_Algorithm">&#8220;Backpropagation&#8221;</a>
+Andrew Ng, Jiquan Ngiam, Chuan Yu Foo, Yifan Mai, Caroline Suen - Website, 2011.</li>
+<li><a class="reference external" href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">&#8220;Efficient BackProp&#8221;</a>
+Y. LeCun, L. Bottou, G. Orr, K. Müller - In Neural Networks: Tricks
+of the Trade 1998.</li>
+<li><a class="reference external" href="http://arxiv.org/pdf/1412.6980v8.pdf">&#8220;Adam: A method for stochastic optimization.&#8221;</a>
+Kingma, Diederik, and Jimmy Ba. arXiv preprint arXiv:1412.6980 (2014).</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/neural_networks_supervised.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel rellarge">
+    
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

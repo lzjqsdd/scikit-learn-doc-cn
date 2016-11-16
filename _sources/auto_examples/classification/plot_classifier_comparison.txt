@@ -1,0 +1,39 @@
+
+
+.. _example_classification_plot_classifier_comparison.py:
+
+
+=====================
+Classifier comparison
+=====================
+
+A comparison of a several classifiers in scikit-learn on synthetic datasets.
+The point of this example is to illustrate the nature of decision boundaries
+of different classifiers.
+This should be taken with a grain of salt, as the intuition conveyed by
+these examples does not necessarily carry over to real datasets.
+
+Particularly in high-dimensional spaces, data can more easily be separated
+linearly and the simplicity of classifiers such as naive Bayes and linear SVMs
+might lead to better generalization than is achieved by other classifiers.
+
+The plots show training points in solid colors and testing points
+semi-transparent. The lower right shows the classification accuracy on the test
+set.
+
+
+
+.. image:: images/plot_classifier_comparison_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_classifier_comparison.py <plot_classifier_comparison.py>`
+
+.. literalinclude:: plot_classifier_comparison.py
+    :lines: 23-
+
+**Total running time of the example:**  5.53 seconds
+( 0 minutes  5.53 seconds)
+    

@@ -1,0 +1,687 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>Out-of-core classification of text documents &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="Examples" href="../index.html" />
+    <link rel="next" title="A demo of the Spectral Co-Clustering algorithm" href="../bicluster/plot_spectral_coclustering.html" />
+    <link rel="prev" title="Libsvm GUI" href="svm_gui.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/auto_examples/applications/plot_out_of_core_classification.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../../modules/classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="svm_gui.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        Libsvm GUI
+        </span>
+            <span class="hiddenrellink">
+            Libsvm GUI
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        Examples
+        </span>
+            <span class="hiddenrellink">
+            Examples
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">Out-of-core classification of text documents</a></li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="out-of-core-classification-of-text-documents">
+<span id="example-applications-plot-out-of-core-classification-py"></span><h1>Out-of-core classification of text documents<a class="headerlink" href="#out-of-core-classification-of-text-documents" title="Permalink to this headline">¶</a></h1>
+<p>This is an example showing how scikit-learn can be used for classification
+using an out-of-core approach: learning from data that doesn&#8217;t fit into main
+memory. We make use of an online classifier, i.e., one that supports the
+partial_fit method, that will be fed with batches of examples. To guarantee
+that the features space remains the same over time we leverage a
+HashingVectorizer that will project each example into the same feature space.
+This is especially useful in the case of text classification where new
+features (words) may appear in each batch.</p>
+<p>The dataset used in this example is Reuters-21578 as provided by the UCI ML
+repository. It will be automatically downloaded and uncompressed on first run.</p>
+<p>The plot represents the learning curve of the classifier: the evolution
+of classification accuracy over the course of the mini-batches. Accuracy is
+measured on the first 1000 samples, held out as a validation set.</p>
+<p>To limit the memory consumption, we queue examples up to a fixed amount before
+feeding them to the learner.</p>
+<ul class="horizontal">
+<li><a class="first reference internal image-reference" href="../../_images/plot_out_of_core_classification_001.png"><img alt="../../_images/plot_out_of_core_classification_001.png" src="../../_images/plot_out_of_core_classification_001.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/plot_out_of_core_classification_002.png"><img alt="../../_images/plot_out_of_core_classification_002.png" src="../../_images/plot_out_of_core_classification_002.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/plot_out_of_core_classification_003.png"><img alt="../../_images/plot_out_of_core_classification_003.png" src="../../_images/plot_out_of_core_classification_003.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../../_images/plot_out_of_core_classification_004.png"><img alt="../../_images/plot_out_of_core_classification_004.png" src="../../_images/plot_out_of_core_classification_004.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p><strong>Script output</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">downloading</span> <span class="n">dataset</span> <span class="p">(</span><span class="n">once</span> <span class="ow">and</span> <span class="k">for</span> <span class="nb">all</span><span class="p">)</span> <span class="n">into</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">travis</span><span class="o">/</span><span class="n">scikit_learn_data</span><span class="o">/</span><span class="n">reuters</span>
+<span class="n">untarring</span> <span class="n">Reuters</span> <span class="n">dataset</span><span class="o">...</span>
+<span class="n">done</span><span class="o">.</span>
+<span class="n">Test</span> <span class="nb">set</span> <span class="ow">is</span> <span class="mi">994</span> <span class="n">documents</span> <span class="p">(</span><span class="mi">121</span> <span class="n">positive</span><span class="p">)</span>
+  <span class="n">Passive</span><span class="o">-</span><span class="n">Aggressive</span> <span class="n">classifier</span> <span class="p">:</span>          <span class="mi">469</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>    <span class="mi">49</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.910</span> <span class="ow">in</span> <span class="mf">1.27</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">369</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+          <a href="../../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron"><span class="n">Perceptron</span></a> <span class="n">classifier</span> <span class="p">:</span>          <span class="mi">469</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>    <span class="mi">49</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.882</span> <span class="ow">in</span> <span class="mf">1.27</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">368</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+                 <span class="n">SGD</span> <span class="n">classifier</span> <span class="p">:</span>          <span class="mi">469</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>    <span class="mi">49</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.908</span> <span class="ow">in</span> <span class="mf">1.27</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">367</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+      <span class="n">NB</span> <span class="n">Multinomial</span> <span class="n">classifier</span> <span class="p">:</span>          <span class="mi">469</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>    <span class="mi">49</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.878</span> <span class="ow">in</span> <span class="mf">1.30</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">359</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+
+
+  <span class="n">Passive</span><span class="o">-</span><span class="n">Aggressive</span> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">3385</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">389</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.939</span> <span class="ow">in</span> <span class="mf">4.28</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">791</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+          <a href="../../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron"><span class="n">Perceptron</span></a> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">3385</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">389</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.946</span> <span class="ow">in</span> <span class="mf">4.28</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">790</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+                 <span class="n">SGD</span> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">3385</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">389</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.957</span> <span class="ow">in</span> <span class="mf">4.29</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">789</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+      <span class="n">NB</span> <span class="n">Multinomial</span> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">3385</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">389</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.883</span> <span class="ow">in</span> <span class="mf">4.31</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">785</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+
+
+  <span class="n">Passive</span><span class="o">-</span><span class="n">Aggressive</span> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">6220</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">691</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.968</span> <span class="ow">in</span> <span class="mf">7.28</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">854</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+          <a href="../../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron"><span class="n">Perceptron</span></a> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">6220</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">691</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.956</span> <span class="ow">in</span> <span class="mf">7.29</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">853</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+                 <span class="n">SGD</span> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">6220</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">691</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.933</span> <span class="ow">in</span> <span class="mf">7.29</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">853</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+      <span class="n">NB</span> <span class="n">Multinomial</span> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">6220</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">691</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.890</span> <span class="ow">in</span> <span class="mf">7.32</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">849</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+
+
+  <span class="n">Passive</span><span class="o">-</span><span class="n">Aggressive</span> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">9048</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1023</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.968</span> <span class="ow">in</span> <span class="mf">10.12</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">893</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+          <a href="../../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron"><span class="n">Perceptron</span></a> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">9048</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1023</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.961</span> <span class="ow">in</span> <span class="mf">10.13</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">893</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+                 <span class="n">SGD</span> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">9048</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1023</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.950</span> <span class="ow">in</span> <span class="mf">10.13</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">893</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+      <span class="n">NB</span> <span class="n">Multinomial</span> <span class="n">classifier</span> <span class="p">:</span>         <span class="mi">9048</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1023</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.902</span> <span class="ow">in</span> <span class="mf">10.16</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">890</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+
+
+  <span class="n">Passive</span><span class="o">-</span><span class="n">Aggressive</span> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">11462</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1278</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.966</span> <span class="ow">in</span> <span class="mf">12.94</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">885</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+          <a href="../../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron"><span class="n">Perceptron</span></a> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">11462</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1278</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.958</span> <span class="ow">in</span> <span class="mf">12.95</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">885</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+                 <span class="n">SGD</span> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">11462</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1278</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.948</span> <span class="ow">in</span> <span class="mf">12.95</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">885</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+      <span class="n">NB</span> <span class="n">Multinomial</span> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">11462</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1278</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.908</span> <span class="ow">in</span> <span class="mf">12.98</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">883</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+
+
+  <span class="n">Passive</span><span class="o">-</span><span class="n">Aggressive</span> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">14323</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1685</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.970</span> <span class="ow">in</span> <span class="mf">15.97</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">897</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+          <a href="../../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron"><span class="n">Perceptron</span></a> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">14323</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1685</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.956</span> <span class="ow">in</span> <span class="mf">15.97</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">896</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+                 <span class="n">SGD</span> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">14323</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1685</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.965</span> <span class="ow">in</span> <span class="mf">15.97</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">896</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+      <span class="n">NB</span> <span class="n">Multinomial</span> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">14323</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">1685</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.929</span> <span class="ow">in</span> <span class="mf">16.00</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">895</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+
+
+  <span class="n">Passive</span><span class="o">-</span><span class="n">Aggressive</span> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">17183</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">2089</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.967</span> <span class="ow">in</span> <span class="mf">18.92</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">908</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+          <a href="../../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron"><span class="n">Perceptron</span></a> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">17183</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">2089</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.942</span> <span class="ow">in</span> <span class="mf">18.92</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">908</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+                 <span class="n">SGD</span> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">17183</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">2089</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.973</span> <span class="ow">in</span> <span class="mf">18.93</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">907</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+      <span class="n">NB</span> <span class="n">Multinomial</span> <span class="n">classifier</span> <span class="p">:</span>        <span class="mi">17183</span> <span class="n">train</span> <span class="n">docs</span> <span class="p">(</span>  <span class="mi">2089</span> <span class="n">positive</span><span class="p">)</span>    <span class="mi">994</span> <span class="n">test</span> <span class="n">docs</span> <span class="p">(</span>   <span class="mi">121</span> <span class="n">positive</span><span class="p">)</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.932</span> <span class="ow">in</span> <span class="mf">18.96</span><span class="n">s</span> <span class="p">(</span>  <span class="mi">906</span> <span class="n">docs</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_out_of_core_classification.py" download=""><code class="xref download docutils literal"><span class="pre">plot_out_of_core_classification.py</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>
+<span class="c1"># Authors: Eustache Diemert &lt;eustache@diemert.fr&gt;</span>
+<span class="c1">#          @FedericoV &lt;https://github.com/FedericoV/&gt;</span>
+<span class="c1"># License: BSD 3 clause</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+
+<span class="kn">from</span> <span class="nn">glob</span> <span class="k">import</span> <span class="n">glob</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <a href="http://matplotlib.org/api/matplotlib_configuration_api.html#matplotlib.rcParams"><span class="n">rcParams</span></a>
+
+<span class="kn">from</span> <span class="nn">sklearn.externals.six.moves</span> <span class="k">import</span> <span class="n">html_parser</span>
+<span class="kn">from</span> <span class="nn">sklearn.externals.six.moves</span> <span class="k">import</span> <span class="n">urllib</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.datasets.get_data_home.html#sklearn.datasets.get_data_home"><span class="n">get_data_home</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer"><span class="n">HashingVectorizer</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.PassiveAggressiveClassifier.html#sklearn.linear_model.PassiveAggressiveClassifier"><span class="n">PassiveAggressiveClassifier</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron"><span class="n">Perceptron</span></a>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="k">import</span> <a href="../../modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB"><span class="n">MultinomialNB</span></a>
+
+
+<span class="k">def</span> <span class="nf">_not_in_sphinx</span><span class="p">():</span>
+    <span class="c1"># Hack to detect whether we are running by the sphinx builder</span>
+    <span class="k">return</span> <span class="s1">&#39;__file__&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Reuters Dataset related routines</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="k">class</span> <span class="nc">ReutersParser</span><span class="p">(</span><span class="n">html_parser</span><span class="o">.</span><span class="n">HTMLParser</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Utility class to parse a SGML file and yield documents one at a time.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">):</span>
+        <span class="n">html_parser</span><span class="o">.</span><span class="n">HTMLParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span>
+
+    <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;start_&#39;</span> <span class="o">+</span> <span class="n">tag</span>
+        <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span><span class="p">)(</span><span class="n">attrs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">handle_endtag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;end_&#39;</span> <span class="o">+</span> <span class="n">tag</span>
+        <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span><span class="p">)()</span>
+
+    <span class="k">def</span> <span class="nf">_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_title</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_body</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_topics</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_topic_d</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topics</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topic_d</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fd</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">docs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">docs</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">doc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">docs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_body</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">+=</span> <span class="n">data</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_title</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">+=</span> <span class="n">data</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_topic_d</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">topic_d</span> <span class="o">+=</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">start_reuters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">end_reuters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r&#39;\s+&#39;</span><span class="p">,</span> <span class="s1">r&#39; &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">docs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                          <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">,</span>
+                          <span class="s1">&#39;topics&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reset</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">start_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_title</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">end_title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_title</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">start_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_body</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">end_body</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_body</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">start_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_topics</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">end_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_topics</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">start_d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_topic_d</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">end_d</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_topic_d</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topic_d</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topic_d</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">stream_reuters_documents</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Iterate over documents of the Reuters dataset.</span>
+
+<span class="sd">    The Reuters archive will automatically be downloaded and uncompressed if</span>
+<span class="sd">    the `data_path` directory does not exist.</span>
+
+<span class="sd">    Documents are represented as dictionaries with &#39;body&#39; (str),</span>
+<span class="sd">    &#39;title&#39; (str), &#39;topics&#39; (list(str)) keys.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">DOWNLOAD_URL</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;http://archive.ics.uci.edu/ml/machine-learning-databases/&#39;</span>
+                    <span class="s1">&#39;reuters21578-mld/reuters21578.tar.gz&#39;</span><span class="p">)</span>
+    <span class="n">ARCHIVE_FILENAME</span> <span class="o">=</span> <span class="s1">&#39;reuters21578.tar.gz&#39;</span>
+
+    <span class="k">if</span> <span class="n">data_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><a href="../../modules/generated/sklearn.datasets.get_data_home.html#sklearn.datasets.get_data_home"><span class="n">get_data_home</span></a><span class="p">(),</span> <span class="s2">&quot;reuters&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Download the dataset.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;downloading dataset (once and for all) into </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+              <span class="n">data_path</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">progress</span><span class="p">(</span><span class="n">blocknum</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+            <span class="n">total_sz_mb</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1"> MB&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">1</span><span class="n">e6</span><span class="p">)</span>
+            <span class="n">current_sz_mb</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1"> MB&#39;</span> <span class="o">%</span> <span class="p">((</span><span class="n">blocknum</span> <span class="o">*</span> <span class="n">bs</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1</span><span class="n">e6</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_not_in_sphinx</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">downloaded </span><span class="si">%s</span><span class="s1"> / </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">current_sz_mb</span><span class="p">,</span> <span class="n">total_sz_mb</span><span class="p">),</span>
+                      <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="n">archive_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">ARCHIVE_FILENAME</span><span class="p">)</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">DOWNLOAD_URL</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">archive_path</span><span class="p">,</span>
+                                   <span class="n">reporthook</span><span class="o">=</span><span class="n">progress</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_not_in_sphinx</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;untarring Reuters dataset...&quot;</span><span class="p">)</span>
+        <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">archive_path</span><span class="p">,</span> <span class="s1">&#39;r:gz&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;done.&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">ReutersParser</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;*.sgm&quot;</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)):</span>
+            <span class="k">yield</span> <span class="n">doc</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Main</span>
+<span class="c1">###############################################################################</span>
+<span class="c1"># Create the vectorizer and limit the number of features to a reasonable</span>
+<span class="c1"># maximum</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <a href="../../modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer"><span class="n">HashingVectorizer</span></a><span class="p">(</span><span class="n">decode_error</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">18</span><span class="p">,</span>
+                               <span class="n">non_negative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># Iterator over parsed Reuters SGML files.</span>
+<span class="n">data_stream</span> <span class="o">=</span> <span class="n">stream_reuters_documents</span><span class="p">()</span>
+
+<span class="c1"># We learn a binary classification between the &quot;acq&quot; class and all the others.</span>
+<span class="c1"># &quot;acq&quot; was chosen as it is more or less evenly distributed in the Reuters</span>
+<span class="c1"># files. For other datasets, one should take care of creating a test set with</span>
+<span class="c1"># a realistic portion of positive instances.</span>
+<span class="n">all_classes</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">positive_class</span> <span class="o">=</span> <span class="s1">&#39;acq&#39;</span>
+
+<span class="c1"># Here are some classifiers that support the `partial_fit` method</span>
+<span class="n">partial_fit_classifiers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;SGD&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"><span class="n">SGDClassifier</span></a><span class="p">(),</span>
+    <span class="s1">&#39;Perceptron&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.linear_model.Perceptron.html#sklearn.linear_model.Perceptron"><span class="n">Perceptron</span></a><span class="p">(),</span>
+    <span class="s1">&#39;NB Multinomial&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB"><span class="n">MultinomialNB</span></a><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">),</span>
+    <span class="s1">&#39;Passive-Aggressive&#39;</span><span class="p">:</span> <a href="../../modules/generated/sklearn.linear_model.PassiveAggressiveClassifier.html#sklearn.linear_model.PassiveAggressiveClassifier"><span class="n">PassiveAggressiveClassifier</span></a><span class="p">(),</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">get_minibatch</span><span class="p">(</span><span class="n">doc_iter</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">pos_class</span><span class="o">=</span><span class="n">positive_class</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract a minibatch of examples, return a tuple X_text, y.</span>
+
+<span class="sd">    Note: size is before excluding invalid docs with no topics assigned.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">u&#39;</span><span class="si">{title}</span><span class="se">\n\n</span><span class="si">{body}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">doc</span><span class="p">),</span> <span class="n">pos_class</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">[</span><span class="s1">&#39;topics&#39;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">doc_iter</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">doc</span><span class="p">[</span><span class="s1">&#39;topics&#39;</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.asarray.html#numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.asarray.html#numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">X_text</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X_text</span><span class="p">,</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.asarray.html#numpy.asarray"><span class="n">np</span><span class="o">.</span><span class="n">asarray</span></a><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">iter_minibatches</span><span class="p">(</span><span class="n">doc_iter</span><span class="p">,</span> <span class="n">minibatch_size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generator of minibatches.&quot;&quot;&quot;</span>
+    <span class="n">X_text</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">get_minibatch</span><span class="p">(</span><span class="n">doc_iter</span><span class="p">,</span> <span class="n">minibatch_size</span><span class="p">)</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_text</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">X_text</span><span class="p">,</span> <span class="n">y</span>
+        <span class="n">X_text</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">get_minibatch</span><span class="p">(</span><span class="n">doc_iter</span><span class="p">,</span> <span class="n">minibatch_size</span><span class="p">)</span>
+
+
+<span class="c1"># test data statistics</span>
+<span class="n">test_stats</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_test&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;n_test_pos&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+<span class="c1"># First we hold out a number of examples to estimate accuracy</span>
+<span class="n">n_test_documents</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">tick</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">X_test_text</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">get_minibatch</span><span class="p">(</span><span class="n">data_stream</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">parsing_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tick</span>
+<span class="n">tick</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_text</span><span class="p">)</span>
+<span class="n">vectorizing_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tick</span>
+<span class="n">test_stats</span><span class="p">[</span><span class="s1">&#39;n_test&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">test_stats</span><span class="p">[</span><span class="s1">&#39;n_test_pos&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test set is </span><span class="si">%d</span><span class="s2"> documents (</span><span class="si">%d</span><span class="s2"> positive)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y_test</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">progress</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="n">stats</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Report progress information, return a string.&quot;&quot;&quot;</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;t0&#39;</span><span class="p">]</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%20s</span><span class="s2"> classifier : </span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cls_name</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%(n_train)6d</span><span class="s2"> train docs (</span><span class="si">%(n_train_pos)6d</span><span class="s2"> positive) &quot;</span> <span class="o">%</span> <span class="n">stats</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%(n_test)6d</span><span class="s2"> test docs (</span><span class="si">%(n_test_pos)6d</span><span class="s2"> positive) &quot;</span> <span class="o">%</span> <span class="n">test_stats</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;accuracy: </span><span class="si">%(accuracy).3f</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="n">stats</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;in </span><span class="si">%.2f</span><span class="s2">s (</span><span class="si">%5d</span><span class="s2"> docs/s)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;n_train&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">duration</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span>
+
+
+<span class="n">cls_stats</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">cls_name</span> <span class="ow">in</span> <span class="n">partial_fit_classifiers</span><span class="p">:</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_train&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;n_train_pos&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+             <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;accuracy_history&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="s1">&#39;t0&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+             <span class="s1">&#39;runtime_history&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="s1">&#39;total_fit_time&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+    <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span>
+
+<span class="n">get_minibatch</span><span class="p">(</span><span class="n">data_stream</span><span class="p">,</span> <span class="n">n_test_documents</span><span class="p">)</span>
+<span class="c1"># Discard test set</span>
+
+<span class="c1"># We will feed the classifier with mini-batches of 1000 documents; this means</span>
+<span class="c1"># we have at most 1000 docs in memory at any time.  The smaller the document</span>
+<span class="c1"># batch, the bigger the relative overhead of the partial fit methods.</span>
+<span class="n">minibatch_size</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># Create the data_stream that parses Reuters SGML files and iterates on</span>
+<span class="c1"># documents as a stream.</span>
+<span class="n">minibatch_iterators</span> <span class="o">=</span> <span class="n">iter_minibatches</span><span class="p">(</span><span class="n">data_stream</span><span class="p">,</span> <span class="n">minibatch_size</span><span class="p">)</span>
+<span class="n">total_vect_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># Main loop : iterate on mini-batchs of examples</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">X_train_text</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">minibatch_iterators</span><span class="p">):</span>
+
+    <span class="n">tick</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_text</span><span class="p">)</span>
+    <span class="n">total_vect_time</span> <span class="o">+=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tick</span>
+
+    <span class="k">for</span> <span class="n">cls_name</span><span class="p">,</span> <span class="n">cls</span> <span class="ow">in</span> <span class="n">partial_fit_classifiers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">tick</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="c1"># update estimator with examples in the current mini-batch</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">partial_fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">all_classes</span><span class="p">)</span>
+
+        <span class="c1"># accumulate test accuracy stats</span>
+        <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;total_fit_time&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tick</span>
+        <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;n_train&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;n_train_pos&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="n">tick</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+        <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;prediction_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tick</span>
+        <span class="n">acc_history</span> <span class="o">=</span> <span class="p">(</span><span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span>
+                       <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;n_train&#39;</span><span class="p">])</span>
+        <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;accuracy_history&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acc_history</span><span class="p">)</span>
+        <span class="n">run_history</span> <span class="o">=</span> <span class="p">(</span><span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span>
+                       <span class="n">total_vect_time</span> <span class="o">+</span> <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;total_fit_time&#39;</span><span class="p">])</span>
+        <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">][</span><span class="s1">&#39;runtime_history&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">run_history</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">progress</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="n">cls_stats</span><span class="p">[</span><span class="n">cls_name</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1"># Plot results</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="k">def</span> <span class="nf">plot_accuracy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x_legend</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot accuracy as a function of x.&quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.array.html#numpy.array"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;Classification accuracy as a function of </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">x_legend</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">x_legend</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.grid"><span class="n">plt</span><span class="o">.</span><span class="n">grid</span></a><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/matplotlib_configuration_api.html#matplotlib.rcParams"><span class="n">rcParams</span></a><span class="p">[</span><span class="s1">&#39;legend.fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">cls_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">cls_stats</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+<span class="c1"># Plot accuracy evolution</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">stats</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cls_stats</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="c1"># Plot accuracy evolution with #examples</span>
+    <span class="n">accuracy</span><span class="p">,</span> <span class="n">n_examples</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;accuracy_history&#39;</span><span class="p">])</span>
+    <span class="n">plot_accuracy</span><span class="p">(</span><span class="n">n_examples</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">,</span> <span class="s2">&quot;training examples (#)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gca"><span class="n">plt</span><span class="o">.</span><span class="n">gca</span></a><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">cls_names</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">stats</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cls_stats</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="c1"># Plot accuracy evolution with runtime</span>
+    <span class="n">accuracy</span><span class="p">,</span> <span class="n">runtime</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;runtime_history&#39;</span><span class="p">])</span>
+    <span class="n">plot_accuracy</span><span class="p">(</span><span class="n">runtime</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">,</span> <span class="s1">&#39;runtime (s)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gca"><span class="n">plt</span><span class="o">.</span><span class="n">gca</span></a><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<a href="http://matplotlib.org/api/legend_api.html#matplotlib.legend"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">(</span><span class="n">cls_names</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot fitting times</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="n">fig</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.gcf"><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span></a><span class="p">()</span>
+<span class="n">cls_runtime</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">cls_name</span><span class="p">,</span> <span class="n">stats</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cls_stats</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">cls_runtime</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;total_fit_time&#39;</span><span class="p">])</span>
+
+<span class="n">cls_runtime</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_vect_time</span><span class="p">)</span>
+<span class="n">cls_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Vectorization&#39;</span><span class="p">)</span>
+<span class="n">bar_colors</span> <span class="o">=</span> <a href="http://matplotlib.org/api/matplotlib_configuration_api.html#matplotlib.rcParams"><span class="n">rcParams</span></a><span class="p">[</span><span class="s1">&#39;axes.color_cycle&#39;</span><span class="p">][:</span><span class="nb">len</span><span class="p">(</span><span class="n">cls_names</span><span class="p">)]</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">rectangles</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.bar"><span class="n">plt</span><span class="o">.</span><span class="n">bar</span></a><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cls_names</span><span class="p">)),</span> <span class="n">cls_runtime</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                     <span class="n">color</span><span class="o">=</span><span class="n">bar_colors</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cls_names</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.75</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cls_names</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">cls_names</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ymax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cls_runtime</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.2</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;runtime (s)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Training Times&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">autolabel</span><span class="p">(</span><span class="n">rectangles</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;attach some text vi autolabel on rectangles.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">rect</span> <span class="ow">in</span> <span class="n">rectangles</span><span class="p">:</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>
+                <span class="mf">1.05</span> <span class="o">*</span> <span class="n">height</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">height</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+
+<span class="n">autolabel</span><span class="p">(</span><span class="n">rectangles</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+
+<span class="c1"># Plot prediction times</span>
+<a href="http://matplotlib.org/api/figure_api.html#matplotlib.figure"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">()</span>
+<span class="c1">#fig = plt.gcf()</span>
+<span class="n">cls_runtime</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">cls_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">cls_stats</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="k">for</span> <span class="n">cls_name</span><span class="p">,</span> <span class="n">stats</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cls_stats</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">cls_runtime</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;prediction_time&#39;</span><span class="p">])</span>
+<span class="n">cls_runtime</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parsing_time</span><span class="p">)</span>
+<span class="n">cls_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Read/Parse</span><span class="se">\n</span><span class="s1">+Feat.Extr.&#39;</span><span class="p">)</span>
+<span class="n">cls_runtime</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vectorizing_time</span><span class="p">)</span>
+<span class="n">cls_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Hashing</span><span class="se">\n</span><span class="s1">+Vect.&#39;</span><span class="p">)</span>
+<span class="n">bar_colors</span> <span class="o">=</span> <a href="http://matplotlib.org/api/matplotlib_configuration_api.html#matplotlib.rcParams"><span class="n">rcParams</span></a><span class="p">[</span><span class="s1">&#39;axes.color_cycle&#39;</span><span class="p">][:</span><span class="nb">len</span><span class="p">(</span><span class="n">cls_names</span><span class="p">)]</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">rectangles</span> <span class="o">=</span> <a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.bar"><span class="n">plt</span><span class="o">.</span><span class="n">bar</span></a><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cls_names</span><span class="p">)),</span> <span class="n">cls_runtime</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                     <span class="n">color</span><span class="o">=</span><span class="n">bar_colors</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><a href="http://docs.scipy.org/doc/numpy-1.6.0/reference/generated/numpy.linspace.html#numpy.linspace"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cls_names</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.75</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cls_names</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">cls_names</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.setp"><span class="n">plt</span><span class="o">.</span><span class="n">setp</span></a><span class="p">(</span><a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span></a><span class="p">()[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">ymax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cls_runtime</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.2</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;runtime (s)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Prediction Times (</span><span class="si">%d</span><span class="s1"> instances)&#39;</span> <span class="o">%</span> <span class="n">n_test_documents</span><span class="p">)</span>
+<span class="n">autolabel</span><span class="p">(</span><span class="n">rectangles</span><span class="p">)</span>
+<a href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>  22.98 seconds
+( 0 minutes  22.98 seconds)</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/auto_examples/applications/plot_out_of_core_classification.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="svm_gui.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

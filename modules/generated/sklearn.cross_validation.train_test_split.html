@@ -1,0 +1,377 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.cross_validation.train_test_split &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.cross_validation.cross_val_score" href="sklearn.cross_validation.cross_val_score.html" />
+    <link rel="prev" title="sklearn.cross_validation.StratifiedShuffleSplit" href="sklearn.cross_validation.StratifiedShuffleSplit.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.cross_validation.StratifiedShuffleSplit.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.cross...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.cross_validation.StratifiedShuffleSplit
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.cross_validation</span></code>.train_test_split</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-cross-validation-train-test-split">Examples using <code class="docutils literal"><span class="pre">sklearn.cross_validation.train_test_split</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-cross-validation-train-test-split">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.cross_validation" title="sklearn.cross_validation"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.cross_validation</span></code></a>.train_test_split<a class="headerlink" href="#sklearn-cross-validation-train-test-split" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.cross_validation.train_test_split">
+<code class="descclassname">sklearn.cross_validation.</code><code class="descname">train_test_split</code><span class="sig-paren">(</span><em>*arrays</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/cross_validation.py#L1942"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.cross_validation.train_test_split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split arrays or matrices into random train and test subsets</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.18: </span>This module will be removed in 0.20.
+Use <code class="xref py py-func docutils literal"><span class="pre">sklearn.model_selection.train_test_split</span></code> instead.</p>
+</div>
+<p>Quick utility that wraps input validation and
+<code class="docutils literal"><span class="pre">next(iter(ShuffleSplit(n_samples)))</span></code> and application to input
+data into a single call for splitting (and optionally subsampling)
+data in a oneliner.</p>
+<p>Read more in the <a class="reference internal" href="../cross_validation.html#cross-validation"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*arrays</strong> : sequence of indexables with same length / shape[0]</p>
+<blockquote>
+<div><p>Allowed inputs are lists, numpy arrays, scipy-sparse
+matrices or pandas dataframes.</p>
+</div></blockquote>
+<p><strong>test_size</strong> : float, int, or None (default is None)</p>
+<blockquote>
+<div><p>If float, should be between 0.0 and 1.0 and represent the
+proportion of the dataset to include in the test split. If
+int, represents the absolute number of test samples. If None,
+the value is automatically set to the complement of the train size.
+If train size is also None, test size is set to 0.25.</p>
+</div></blockquote>
+<p><strong>train_size</strong> : float, int, or None (default is None)</p>
+<blockquote>
+<div><p>If float, should be between 0.0 and 1.0 and represent the
+proportion of the dataset to include in the train split. If
+int, represents the absolute number of train samples. If None,
+the value is automatically set to the complement of the test size.</p>
+</div></blockquote>
+<p><strong>random_state</strong> : int or RandomState</p>
+<blockquote>
+<div><p>Pseudo-random number generator state used for random sampling.</p>
+</div></blockquote>
+<p><strong>stratify</strong> : array-like or None (default is None)</p>
+<blockquote>
+<div><p>If not None, data is split in a stratified fashion, using this as
+the labels array.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.17: </span><em>stratify</em> splitting</p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>splitting</strong> : list, length = 2 * len(arrays),</p>
+<blockquote class="last">
+<div><p>List containing train-test split of inputs.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.16: </span>If the input is sparse, the output will be a
+<code class="docutils literal"><span class="pre">scipy.sparse.csr_matrix</span></code>. Else, output type is the same as the
+input type.</p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [2, 3],</span>
+<span class="go">       [4, 5],</span>
+<span class="go">       [6, 7],</span>
+<span class="go">       [8, 9]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span>
+<span class="go">array([[4, 5],</span>
+<span class="go">       [0, 1],</span>
+<span class="go">       [6, 7]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_train</span>
+<span class="go">[2, 0, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span>
+<span class="go">array([[2, 3],</span>
+<span class="go">       [8, 9]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_test</span>
+<span class="go">[1, 4]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-cross-validation-train-test-split">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.cross_validation.train_test_split</span></code><a class="headerlink" href="#examples-using-sklearn-cross-validation-train-test-split" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="The dataset used in this example is a preprocessed excerpt of the "Labeled Faces in the Wild", ..."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/applications/face_recognition.html"><img alt="../../_images/face_recognition1.png" src="../../_images/face_recognition1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/applications/face_recognition.html#example-applications-face-recognition-py"><span class="std std-ref">Faces recognition example using eigenfaces and SVMs</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="When performing classification one often wants to predict not only the class label, but also th..."><div class="figure" id="id2">
+<a class="reference external image-reference" href="./../../auto_examples/calibration/plot_calibration_curve.html"><img alt="../../_images/plot_calibration_curve1.png" src="../../_images/plot_calibration_curve1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/calibration/plot_calibration_curve.html#example-calibration-plot-calibration-curve-py"><span class="std std-ref">Probability Calibration curves</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="When performing classification you often want to predict not only the class label, but also the..."><div class="figure" id="id3">
+<a class="reference external image-reference" href="./../../auto_examples/calibration/plot_calibration.html"><img alt="../../_images/plot_calibration1.png" src="../../_images/plot_calibration1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/calibration/plot_calibration.html#example-calibration-plot-calibration-py"><span class="std std-ref">Probability calibration of classifiers</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="A comparison of a several classifiers in scikit-learn on synthetic datasets. The point of this ..."><div class="figure" id="id4">
+<a class="reference external image-reference" href="./../../auto_examples/classification/plot_classifier_comparison.html"><img alt="../../_images/plot_classifier_comparison1.png" src="../../_images/plot_classifier_comparison1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/classification/plot_classifier_comparison.html#example-classification-plot-classifier-comparison-py"><span class="std std-ref">Classifier comparison</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Partial dependence plots show the dependence between the target function [2]_ and a set of 'tar..."><div class="figure" id="id5">
+<a class="reference external image-reference" href="./../../auto_examples/ensemble/plot_partial_dependence.html"><img alt="../../_images/plot_partial_dependence1.png" src="../../_images/plot_partial_dependence1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/ensemble/plot_partial_dependence.html#example-ensemble-plot-partial-dependence-py"><span class="std std-ref">Partial Dependence Plots</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Transform your features into a higher dimensional, sparse space. Then train a linear model on t..."><div class="figure" id="id6">
+<a class="reference external image-reference" href="./../../auto_examples/ensemble/plot_feature_transformation.html"><img alt="../../_images/plot_feature_transformation1.png" src="../../_images/plot_feature_transformation1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/ensemble/plot_feature_transformation.html#example-ensemble-plot-feature-transformation-py"><span class="std std-ref">Feature transformations with ensembles of trees</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Out-of-bag (OOB) estimates can be a useful heuristic to estimate the "optimal" number of boosti..."><div class="figure" id="id7">
+<a class="reference external image-reference" href="./../../auto_examples/ensemble/plot_gradient_boosting_oob.html"><img alt="../../_images/plot_gradient_boosting_oob1.png" src="../../_images/plot_gradient_boosting_oob1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/ensemble/plot_gradient_boosting_oob.html#example-ensemble-plot-gradient-boosting-oob-py"><span class="std std-ref">Gradient Boosting Out-of-Bag estimates</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="An example showing how different online solvers perform on the hand-written digits dataset."><div class="figure" id="id8">
+<a class="reference external image-reference" href="./../../auto_examples/linear_model/plot_sgd_comparison.html"><img alt="../../_images/plot_sgd_comparison1.png" src="../../_images/plot_sgd_comparison1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/plot_sgd_comparison.html#example-linear-model-plot-sgd-comparison-py"><span class="std std-ref">Comparing various online solvers</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Example of confusion matrix usage to evaluate the quality of the output of a classifier on the ..."><div class="figure" id="id9">
+<a class="reference external image-reference" href="./../../auto_examples/model_selection/plot_confusion_matrix.html"><img alt="../../_images/plot_confusion_matrix1.png" src="../../_images/plot_confusion_matrix1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/model_selection/plot_confusion_matrix.html#example-model-selection-plot-confusion-matrix-py"><span class="std std-ref">Confusion matrix</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="This examples shows how a classifier is optimized by cross-validation, which is done using the ..."><div class="figure" id="id10">
+<a class="reference external image-reference" href="./../../auto_examples/model_selection/grid_search_digits.html"><img alt="../../_images/grid_search_digits1.png" src="../../_images/grid_search_digits1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/model_selection/grid_search_digits.html#example-model-selection-grid-search-digits-py"><span class="std std-ref">Parameter estimation using grid search with cross-validation</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Example of Precision-Recall metric to evaluate classifier output quality."><div class="figure" id="id11">
+<a class="reference external image-reference" href="./../../auto_examples/model_selection/plot_precision_recall.html"><img alt="../../_images/plot_precision_recall1.png" src="../../_images/plot_precision_recall1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/model_selection/plot_precision_recall.html#example-model-selection-plot-precision-recall-py"><span class="std std-ref">Precision-Recall</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Example of Receiver Operating Characteristic (ROC) metric to evaluate classifier output quality..."><div class="figure" id="id12">
+<a class="reference external image-reference" href="./../../auto_examples/model_selection/plot_roc.html"><img alt="../../_images/plot_roc1.png" src="../../_images/plot_roc1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/model_selection/plot_roc.html#example-model-selection-plot-roc-py"><span class="std std-ref">Receiver Operating Characteristic (ROC)</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="For greyscale image data where pixel values can be interpreted as degrees of blackness on a whi..."><div class="figure" id="id13">
+<a class="reference external image-reference" href="./../../auto_examples/neural_networks/plot_rbm_logistic_classification.html"><img alt="../../_images/plot_rbm_logistic_classification1.png" src="../../_images/plot_rbm_logistic_classification1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/neural_networks/plot_rbm_logistic_classification.html#example-neural-networks-plot-rbm-logistic-classification-py"><span class="std std-ref">Restricted Boltzmann Machine features for digit classification</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Shows how to use a function transformer in a pipeline. If you know your dataset's first princip..."><div class="figure" id="id14">
+<a class="reference external image-reference" href="./../../auto_examples/preprocessing/plot_function_transformer.html"><img alt="../../_images/plot_function_transformer1.png" src="../../_images/plot_function_transformer1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/preprocessing/plot_function_transformer.html#example-preprocessing-plot-function-transformer-py"><span class="std std-ref">Using FunctionTransformer to select columns</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.cross_validation.train_test_split.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.cross_validation.StratifiedShuffleSplit.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

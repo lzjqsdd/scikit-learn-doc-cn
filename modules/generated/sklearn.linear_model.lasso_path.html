@@ -1,0 +1,372 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.linear_model.lasso_path &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.linear_model.lasso_stability_path" href="sklearn.linear_model.lasso_stability_path.html" />
+    <link rel="prev" title="sklearn.linear_model.lars_path" href="sklearn.linear_model.lars_path.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.lasso_path.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.linear_model.lars_path.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.linea...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.linear_model.lars_path
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.linear_model</span></code>.lasso_path</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-linear-model-lasso-path">Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.lasso_path</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-linear-model-lasso-path">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.linear_model</span></code></a>.lasso_path<a class="headerlink" href="#sklearn-linear-model-lasso-path" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.linear_model.lasso_path">
+<code class="descclassname">sklearn.linear_model.</code><code class="descname">lasso_path</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>eps=0.001</em>, <em>n_alphas=100</em>, <em>alphas=None</em>, <em>precompute='auto'</em>, <em>Xy=None</em>, <em>copy_X=True</em>, <em>coef_init=None</em>, <em>verbose=False</em>, <em>return_n_iter=False</em>, <em>positive=False</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/linear_model/coordinate_descent.py#L128"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.linear_model.lasso_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Lasso path with coordinate descent</p>
+<p>The Lasso optimization function varies for mono and multi-outputs.</p>
+<p>For mono-output tasks it is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">))</span> <span class="o">*</span> <span class="o">||</span><span class="n">y</span> <span class="o">-</span> <span class="n">Xw</span><span class="o">||^</span><span class="mi">2</span><span class="n">_2</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="o">||</span><span class="n">w</span><span class="o">||</span><span class="n">_1</span>
+</pre></div>
+</div>
+<p>For multi-output tasks it is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">))</span> <span class="o">*</span> <span class="o">||</span><span class="n">Y</span> <span class="o">-</span> <span class="n">XW</span><span class="o">||^</span><span class="mi">2</span><span class="n">_Fro</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="o">||</span><span class="n">W</span><span class="o">||</span><span class="n">_21</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">||</span><span class="n">W</span><span class="o">||</span><span class="n">_21</span> <span class="o">=</span> \<span class="n">sum_i</span> \<span class="n">sqrt</span><span class="p">{</span>\<span class="n">sum_j</span> <span class="n">w_</span><span class="p">{</span><span class="n">ij</span><span class="p">}</span><span class="o">^</span><span class="mi">2</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>i.e. the sum of norm of each row.</p>
+<p>Read more in the <a class="reference internal" href="../linear_model.html#lasso"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : {array-like, sparse matrix}, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training data. Pass directly as Fortran-contiguous data to avoid
+unnecessary memory duplication. If <code class="docutils literal"><span class="pre">y</span></code> is mono-output then <code class="docutils literal"><span class="pre">X</span></code>
+can be sparse.</p>
+</div></blockquote>
+<p><strong>y</strong> : ndarray, shape (n_samples,), or (n_samples, n_outputs)</p>
+<blockquote>
+<div><p>Target values</p>
+</div></blockquote>
+<p><strong>eps</strong> : float, optional</p>
+<blockquote>
+<div><p>Length of the path. <code class="docutils literal"><span class="pre">eps=1e-3</span></code> means that
+<code class="docutils literal"><span class="pre">alpha_min</span> <span class="pre">/</span> <span class="pre">alpha_max</span> <span class="pre">=</span> <span class="pre">1e-3</span></code></p>
+</div></blockquote>
+<p><strong>n_alphas</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of alphas along the regularization path</p>
+</div></blockquote>
+<p><strong>alphas</strong> : ndarray, optional</p>
+<blockquote>
+<div><p>List of alphas where to compute the models.
+If <code class="docutils literal"><span class="pre">None</span></code> alphas are set automatically</p>
+</div></blockquote>
+<p><strong>precompute</strong> : True | False | &#8216;auto&#8217; | array-like</p>
+<blockquote>
+<div><p>Whether to use a precomputed Gram matrix to speed up
+calculations. If set to <code class="docutils literal"><span class="pre">'auto'</span></code> let us decide. The Gram
+matrix can also be passed as argument.</p>
+</div></blockquote>
+<p><strong>Xy</strong> : array-like, optional</p>
+<blockquote>
+<div><p>Xy = np.dot(X.T, y) that can be precomputed. It is useful
+only when the Gram matrix is precomputed.</p>
+</div></blockquote>
+<p><strong>copy_X</strong> : boolean, optional, default True</p>
+<blockquote>
+<div><p>If <code class="docutils literal"><span class="pre">True</span></code>, X will be copied; else, it may be overwritten.</p>
+</div></blockquote>
+<p><strong>coef_init</strong> : array, shape (n_features, ) | None</p>
+<blockquote>
+<div><p>The initial values of the coefficients.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : bool or integer</p>
+<blockquote>
+<div><p>Amount of verbosity.</p>
+</div></blockquote>
+<p><strong>params</strong> : kwargs</p>
+<blockquote>
+<div><p>keyword arguments passed to the coordinate descent solver.</p>
+</div></blockquote>
+<p><strong>positive</strong> : bool, default False</p>
+<blockquote>
+<div><p>If set to True, forces coefficients to be positive.</p>
+</div></blockquote>
+<p><strong>return_n_iter</strong> : bool</p>
+<blockquote>
+<div><p>whether to return the number of iterations or not.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>alphas</strong> : array, shape (n_alphas,)</p>
+<blockquote>
+<div><p>The alphas along the path where models are computed.</p>
+</div></blockquote>
+<p><strong>coefs</strong> : array, shape (n_features, n_alphas) or             (n_outputs, n_features, n_alphas)</p>
+<blockquote>
+<div><p>Coefficients along the path.</p>
+</div></blockquote>
+<p><strong>dual_gaps</strong> : array, shape (n_alphas,)</p>
+<blockquote>
+<div><p>The dual gaps at the end of the optimization for each alpha.</p>
+</div></blockquote>
+<p><strong>n_iters</strong> : array-like, shape (n_alphas,)</p>
+<blockquote class="last">
+<div><p>The number of iterations taken by the coordinate descent optimizer to
+reach the specified tolerance for each alpha.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="sklearn.linear_model.lars_path.html#sklearn.linear_model.lars_path" title="sklearn.linear_model.lars_path"><code class="xref py py-obj docutils literal"><span class="pre">lars_path</span></code></a>, <a class="reference internal" href="sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso" title="sklearn.linear_model.Lasso"><code class="xref py py-obj docutils literal"><span class="pre">Lasso</span></code></a>, <a class="reference internal" href="sklearn.linear_model.LassoLars.html#sklearn.linear_model.LassoLars" title="sklearn.linear_model.LassoLars"><code class="xref py py-obj docutils literal"><span class="pre">LassoLars</span></code></a>, <a class="reference internal" href="sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV" title="sklearn.linear_model.LassoCV"><code class="xref py py-obj docutils literal"><span class="pre">LassoCV</span></code></a>, <a class="reference internal" href="sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV" title="sklearn.linear_model.LassoLarsCV"><code class="xref py py-obj docutils literal"><span class="pre">LassoLarsCV</span></code></a>, <a class="reference internal" href="sklearn.decomposition.sparse_encode.html#sklearn.decomposition.sparse_encode" title="sklearn.decomposition.sparse_encode"><code class="xref py py-obj docutils literal"><span class="pre">sklearn.decomposition.sparse_encode</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>See examples/linear_model/plot_lasso_coordinate_descent_path.py
+for an example.</p>
+<p>To avoid unnecessary memory duplication the X argument of the fit method
+should be directly passed as a Fortran-contiguous numpy array.</p>
+<p>Note that in certain cases, the Lars solver may be significantly
+faster to implement this functionality. In particular, linear
+interpolation can be used to retrieve model coefficients between the
+values output by lars_path</p>
+<p class="rubric">Examples</p>
+<p>Comparing lasso_path and lars_path with interpolation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">5.4</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use lasso_path to compute a coefficient path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="p">,</span> <span class="n">coef_path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">lasso_path</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coef_path</span><span class="p">)</span>
+<span class="go">[[ 0.          0.          0.46874778]</span>
+<span class="go"> [ 0.2159048   0.4425765   0.23689075]]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Now use lars_path and 1D linear interpolation to compute the</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># same path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">lars_path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alphas</span><span class="p">,</span> <span class="n">active</span><span class="p">,</span> <span class="n">coef_path_lars</span> <span class="o">=</span> <span class="n">lars_path</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;lasso&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">interpolate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coef_path_continuous</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">alphas</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                                            <span class="n">coef_path_lars</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coef_path_continuous</span><span class="p">([</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">]))</span>
+<span class="go">[[ 0.          0.          0.46915237]</span>
+<span class="go"> [ 0.2159048   0.4425765   0.23668876]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-linear-model-lasso-path">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.linear_model.lasso_path</span></code><a class="headerlink" href="#examples-using-sklearn-linear-model-lasso-path" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="Lasso and elastic net (L1 and L2 penalisation) implemented using a coordinate descent."><div class="figure" id="id1">
+<a class="reference external image-reference" href="./../../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html"><img alt="../../_images/plot_lasso_coordinate_descent_path1.png" src="../../_images/plot_lasso_coordinate_descent_path1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html#example-linear-model-plot-lasso-coordinate-descent-path-py"><span class="std std-ref">Lasso and Elastic Net</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.linear_model.lasso_path.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.linear_model.lars_path.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

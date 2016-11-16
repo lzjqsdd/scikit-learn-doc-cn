@@ -1,0 +1,41 @@
+
+
+.. _example_feature_selection_plot_feature_selection.py:
+
+
+===============================
+Univariate Feature Selection
+===============================
+
+An example showing univariate feature selection.
+
+Noisy (non informative) features are added to the iris data and
+univariate feature selection is applied. For each feature, we plot the
+p-values for the univariate feature selection and the corresponding
+weights of an SVM. We can see that univariate feature selection
+selects the informative features and that these have larger SVM weights.
+
+In the total set of features, only the 4 first ones are significant. We
+can see that they have the highest score with univariate feature
+selection. The SVM assigns a large weight to one of these features, but also
+Selects many of the non-informative features.
+Applying univariate feature selection before the SVM
+increases the SVM weight attributed to the significant features, and will
+thus improve classification.
+
+
+
+.. image:: images/plot_feature_selection_001.png
+    :align: center
+
+
+
+
+**Python source code:** :download:`plot_feature_selection.py <plot_feature_selection.py>`
+
+.. literalinclude:: plot_feature_selection.py
+    :lines: 22-
+
+**Total running time of the example:**  0.12 seconds
+( 0 minutes  0.12 seconds)
+    

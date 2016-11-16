@@ -1,0 +1,374 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>4.7. 配对矩阵，类别以及核函数 &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../index.html" />
+    <link rel="up" title="4. Dataset transformations" href="../data_transforms.html" />
+    <link rel="next" title="4.8. 预测目标(y)的转换" href="preprocessing_targets.html" />
+    <link rel="prev" title="4.6. Kernel Approximation" href="kernel_approximation.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/metrics.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../index.html">主页</a></li>
+                <li><a href="../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../tutorial/index.html">入门指南</a></li>
+            <li><a href="../user_guide.html">使用手册</a></li>
+            <li><a href="classes.html">API</a></li>
+            <li><a href="../faq.html">FAQ</a></li>
+            <li><a href="../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="kernel_approximation.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        4.6. Kernel A...
+        </span>
+            <span class="hiddenrellink">
+            4.6. Kernel Approximation
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../data_transforms.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        4. Dataset tr...
+        </span>
+            <span class="hiddenrellink">
+            4. Dataset transformations
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">4.7. 配对矩阵，类别以及核函数</a><ul>
+<li><a class="reference internal" href="#cosine-similarity">4.7.1. 余弦相似度</a></li>
+<li><a class="reference internal" href="#linear-kernel">4.7.2. 线性核函数</a></li>
+<li><a class="reference internal" href="#polynomial-kernel">4.7.3. 多项式核函数</a></li>
+<li><a class="reference internal" href="#s">4.7.4. S型核函数</a></li>
+<li><a class="reference internal" href="#rbf">4.7.5. RBF核函数</a></li>
+<li><a class="reference internal" href="#laplacian-kernel">4.7.6. 拉普拉斯核函数</a></li>
+<li><a class="reference internal" href="#chi2-kernel">4.7.7. 卡方核函数</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="metrics">
+<span id="id1"></span><h1>4.7. 配对矩阵，类别以及核函数<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><a class="reference internal" href="classes.html#module-sklearn.metrics.pairwise" title="sklearn.metrics.pairwise"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics.pairwise</span></code></a> 子模块实现了用于评估</div></blockquote>
+<p>成对距离或样本集合之间的联系的实用程序。</p>
+<p>本模块同时包含距离度量和核函数，对于这两者这里提供一个简短的总结。</p>
+<p>距离度量是形如 <code class="docutils literal"><span class="pre">d(a,</span> <span class="pre">b)</span></code> 的函数，如果 目标 <code class="docutils literal"><span class="pre">a</span></code> 和 <code class="docutils literal"><span class="pre">b</span></code> 被认为 &#8220;更加相似&#8221; 相比 目标 <code class="docutils literal"><span class="pre">a</span></code>
+和 <code class="docutils literal"><span class="pre">c</span></code>，那么 <code class="docutils literal"><span class="pre">d(a,</span> <span class="pre">b)</span> <span class="pre">&lt;</span> <span class="pre">d(a,</span> <span class="pre">c)</span></code>。两个完全相同的目标的距离是零。最广泛使用的例子就是欧几里得距离。
+为保证是 &#8216;真实&#8217; 的度量，其必须满足以下条件:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>1. 对于所有的 a 和 b，d(a, b) &gt;= 0,
+2. 正定性：当且仅当 a = b时，d(a, b) == 0
+3. 对称性：d(a, b) == d(b, a)
+4. 三角不等式：d(a, c) &lt;= d(a, b) + d(b, c)
+</pre></div>
+</div>
+<p>核函数是相似度的标准，即如果目标 <code class="docutils literal"><span class="pre">a</span></code> 和 <code class="docutils literal"><span class="pre">b</span></code> 相比 <code class="docutils literal"><span class="pre">a</span></code> 和 <code class="docutils literal"><span class="pre">c</span></code>&#8220;更加相似&#8221;， 那么``s(a, b) &gt; s(a, c)``。
+核函数必须是半正定性的。</p>
+<p>存在许多种方法将距离度量转换为相似度标准，例如核函数。假定``D``是距离，并且``S``是核函数:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">np.exp(-D</span> <span class="pre">*</span> <span class="pre">gamma)</span></code>, 其中``gamma`` 的一种选择是``1 / num_features``</li>
+<li><code class="docutils literal"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">1.</span> <span class="pre">/</span> <span class="pre">(D</span> <span class="pre">/</span> <span class="pre">np.max(D))</span></code></li>
+</ol>
+</div></blockquote>
+<div class="section" id="cosine-similarity">
+<span id="id2"></span><h2>4.7.1. 余弦相似度<a class="headerlink" href="#cosine-similarity" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-func docutils literal"><span class="pre">cosine_similarity</span></code> 计算L2正则化的向量的点积。也就是说，如果 <img class="math" src="../_images/math/a59f68a4202623bb859a7093f0316bf466e6f75d.png" alt="x"/> 和 <img class="math" src="../_images/math/276f7e256cbddeb81eee42e1efc348f3cb4ab5f8.png" alt="y"/> 都是行向量,
+它们的余弦相似度 <img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.png" alt="k"/> 定义为:</p>
+<div class="math">
+<p><img src="../_images/math/0726450249a46f230f61b48698f4dc476418409a.png" alt="k(x, y) = \frac{x y^\top}{\|x\| \|y\|}"/></p>
+</div><p>这被称为余弦相似度，因为欧几里得(L2) 正则化将向量投影到单元球内，那么它们的点积就是被向量表示的点之间的角度。</p>
+<p>这种核函数对于计算以tf-idf向量表示的文档之间的相似度是一个通常的选择。
+<code class="xref py py-func docutils literal"><span class="pre">cosine_similarity</span></code> 接受 <code class="docutils literal"><span class="pre">scipy.sparse</span></code> 矩阵.
+(注意到``sklearn.feature_extraction.text``中的tf-idf函数能计算归一化的向量，在这种情况下 <code class="xref py py-func docutils literal"><span class="pre">cosine_similarity</span></code>
+等同于 <a class="reference internal" href="generated/sklearn.metrics.pairwise.linear_kernel.html#sklearn.metrics.pairwise.linear_kernel" title="sklearn.metrics.pairwise.linear_kernel"><code class="xref py py-func docutils literal"><span class="pre">linear_kernel</span></code></a>，只是慢一点而已。)</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>C.D. Manning, P. Raghavan and H. Schütze (2008). Introduction to
+Information Retrieval. Cambridge University Press.
+<a class="reference external" href="http://nlp.stanford.edu/IR-book/html/htmledition/the-vector-space-model-for-scoring-1.html">http://nlp.stanford.edu/IR-book/html/htmledition/the-vector-space-model-for-scoring-1.html</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="linear-kernel">
+<span id="id3"></span><h2>4.7.2. 线性核函数<a class="headerlink" href="#linear-kernel" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.linear_kernel.html#sklearn.metrics.pairwise.linear_kernel" title="sklearn.metrics.pairwise.linear_kernel"><code class="xref py py-func docutils literal"><span class="pre">linear_kernel</span></code></a> 计算线性核函数，也就是一种在 <code class="docutils literal"><span class="pre">degree=1</span></code> 和 <code class="docutils literal"><span class="pre">coef0=0</span></code> (同质化) 情况下的</dt>
+<dd><a class="reference internal" href="generated/sklearn.metrics.pairwise.polynomial_kernel.html#sklearn.metrics.pairwise.polynomial_kernel" title="sklearn.metrics.pairwise.polynomial_kernel"><code class="xref py py-func docutils literal"><span class="pre">polynomial_kernel</span></code></a> 的特殊形式。</dd>
+</dl>
+<p>如果 <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> 是列向量，它们的线性核函数是:</p>
+<div class="math">
+<p><img src="../_images/math/5e995a21d418589008596cf969bcca01e310ced0.png" alt="k(x, y) = x^\top y"/></p>
+</div></div>
+<div class="section" id="polynomial-kernel">
+<span id="id4"></span><h2>4.7.3. 多项式核函数<a class="headerlink" href="#polynomial-kernel" title="Permalink to this headline">¶</a></h2>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.polynomial_kernel.html#sklearn.metrics.pairwise.polynomial_kernel" title="sklearn.metrics.pairwise.polynomial_kernel"><code class="xref py py-func docutils literal"><span class="pre">polynomial_kernel</span></code></a> 计算两个向量的d次方的多项式核函数。 多项式核函数代表着两个向量之间的相似度。
+概念上来说，多项式核函数不仅考虑相同维度还考虑跨维度的向量的相似度。当被用在机器学习中的时候，这可以原来代表着特征之间的
+相互作用。</p>
+<p>多项式函数定义为:</p>
+<div class="math">
+<p><img src="../_images/math/4eb2bfeb5822df1cc9ca086784c2228d844195aa.png" alt="k(x, y) = (\gamma x^\top y +c_0)^d"/></p>
+</div><p>其中:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">x</span></code>, <code class="docutils literal"><span class="pre">y</span></code> 是输入向量</li>
+<li><code class="docutils literal"><span class="pre">d</span></code> 核函数维度</li>
+</ul>
+</div></blockquote>
+<p>如果 <img class="math" src="../_images/math/9e9feb9698b46a0fed4c4051d926c21dc5fb1221.png" alt="c_0 = 0"/> 那么核函数就被定义为同质化的。</p>
+</div>
+<div class="section" id="s">
+<span id="sigmoid-kernel"></span><h2>4.7.4. S型核函数<a class="headerlink" href="#s" title="Permalink to this headline">¶</a></h2>
+<p>函数 <code class="xref py py-func docutils literal"><span class="pre">sigmoid_kernel</span></code> 计算两个向量之间的S型核函数。 S型核函数也被称为双曲切线或者
+多层感知机(因为在神经网络领域，它经常被当做激活函数). S型核函数定义为:</p>
+<div class="math">
+<p><img src="../_images/math/47107a6358bafafdd3ec9bcaccc99e3740890eec.png" alt="k(x, y) = \tanh( \gamma x^\top y + c_0)"/></p>
+</div><p>其中:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">x</span></code>, <code class="docutils literal"><span class="pre">y</span></code> 是输入向量</li>
+<li><img class="math" src="../_images/math/3666981dc77862de77b6ecfcb64aad59b425cbaf.png" alt="\gamma"/> 是斜度</li>
+<li><img class="math" src="../_images/math/871e0834b8b6f132c00a57acee8b4c8fb2eb2c77.png" alt="c_0"/> 是截距</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rbf">
+<span id="rbf-kernel"></span><h2>4.7.5. RBF核函数<a class="headerlink" href="#rbf" title="Permalink to this headline">¶</a></h2>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.rbf_kernel.html#sklearn.metrics.pairwise.rbf_kernel" title="sklearn.metrics.pairwise.rbf_kernel"><code class="xref py py-func docutils literal"><span class="pre">rbf_kernel</span></code></a> 计算计算两个向量之间的径向基函数核 (RBF) 。
+其定义为:</p>
+<div class="math">
+<p><img src="../_images/math/f7c461595eb9df9f002fef77cf997ce8ca5864f2.png" alt="k(x, y) = \exp( -\gamma \| x-y \|^2)"/></p>
+</div><p>其中 <code class="docutils literal"><span class="pre">x</span></code> 和 <code class="docutils literal"><span class="pre">y</span></code> 是输入向量。如果  <img class="math" src="../_images/math/0cdbb4eaf81fad82174196e5ce8bdfd693f84245.png" alt="\gamma = \sigma^{-2}"/>
+核函数就变成方差为 <img class="math" src="../_images/math/7a3d0c9264473a58cc3a769f99a662631131377c.png" alt="\sigma^2"/> 的高斯核函数。</p>
+</div>
+<div class="section" id="laplacian-kernel">
+<span id="id5"></span><h2>4.7.6. 拉普拉斯核函数<a class="headerlink" href="#laplacian-kernel" title="Permalink to this headline">¶</a></h2>
+<p>函数 <a class="reference internal" href="generated/sklearn.metrics.pairwise.laplacian_kernel.html#sklearn.metrics.pairwise.laplacian_kernel" title="sklearn.metrics.pairwise.laplacian_kernel"><code class="xref py py-func docutils literal"><span class="pre">laplacian_kernel</span></code></a> 是一种径向基函数核的变体，定义为:</p>
+<div class="math">
+<p><img src="../_images/math/14f2bae3d7aa3e3fe565ce35a4e71fb7fcfedd12.png" alt="k(x, y) = \exp( -\gamma \| x-y \|_1)"/></p>
+</div><p>其中 <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> 是输入向量并且 <img class="math" src="../_images/math/90453dabb1432ca51e0f230ac2c318c3c2db9901.png" alt="\|x-y\|_1"/> 是输入向量之间的曼哈顿距离。</p>
+<p>已被证明在机器学习中运用到无噪声数据中是有用的。
+可见例如 <a class="reference external" href="http://onlinelibrary.wiley.com/doi/10.1002/qua.24954/abstract/">Machine learning for quantum mechanics in a nutshell</a>.</p>
+</div>
+<div class="section" id="chi2-kernel">
+<span id="id6"></span><h2>4.7.7. 卡方核函数<a class="headerlink" href="#chi2-kernel" title="Permalink to this headline">¶</a></h2>
+<p>在计算机视觉应用中训练非线性支持向量机时，卡方核函数是一种非常流行的选择。
+它能以 <a class="reference internal" href="generated/sklearn.metrics.pairwise.chi2_kernel.html#sklearn.metrics.pairwise.chi2_kernel" title="sklearn.metrics.pairwise.chi2_kernel"><code class="xref py py-func docutils literal"><span class="pre">chi2_kernel</span></code></a> 计算然后以参数 <a href="#id7"><span class="problematic" id="id8">``</span></a>kernel=&#8221;precomputed&#8221;<a href="#id9"><span class="problematic" id="id10">``</span></a>传递到
+<a class="reference internal" href="generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVC</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="k">import</span> <span class="n">chi2_kernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="o">.</span><span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">chi2_kernel</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span>                        
+<span class="go">array([[ 1.        ,  0.36...,  0.89...,  0.58...],</span>
+<span class="go">       [ 0.36...,  1.        ,  0.51...,  0.83...],</span>
+<span class="go">       [ 0.89...,  0.51...,  1.        ,  0.77... ],</span>
+<span class="go">       [ 0.58...,  0.83...,  0.77... ,  1.        ]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">svm</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+<span class="go">array([0, 1, 0, 1])</span>
+</pre></div>
+</div>
+<p>也可以直接使用 <code class="docutils literal"><span class="pre">kernel</span></code> 变量:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">svm</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">chi2_kernel</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([0, 1, 0, 1])</span>
+</pre></div>
+</div>
+<p>卡方核函数定义为</p>
+<div class="math">
+<p><img src="../_images/math/2c5f9f729c23f4e274254560c146ddf32fd803cf.png" alt="k(x, y) = \exp \left (-\gamma \sum_i \frac{(x[i] - y[i]) ^ 2}{x[i] + y[i]} \right )"/></p>
+</div><p>数据假定为非负的，并且已经以L1正则化。
+归一化随着与卡方平方距离的连接而被合理化，其是离散概率分布之间的距离。</p>
+<p>卡方核函数最常用于可视化词汇的矩形图。</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<ul class="simple">
+<li>Zhang, J. and Marszalek, M. and Lazebnik, S. and Schmid, C.
+Local features and kernels for classification of texture and object
+categories: A comprehensive study
+International Journal of Computer Vision 2007
+<a class="reference external" href="http://research.microsoft.com/en-us/um/people/manik/projects/trade-off/papers/ZhangIJCV06.pdf">http://research.microsoft.com/en-us/um/people/manik/projects/trade-off/papers/ZhangIJCV06.pdf</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../_sources/modules/metrics.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="kernel_approximation.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

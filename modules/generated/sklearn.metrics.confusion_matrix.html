@@ -1,0 +1,324 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>sklearn.metrics.confusion_matrix &#8212; scikit-learn 0.18.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.18.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="scikit-learn 0.18.1 documentation" href="../../index.html" />
+    <link rel="up" title="API ?ο?" href="../classes.html" />
+    <link rel="next" title="sklearn.metrics.f1_score" href="sklearn.metrics.f1_score.html" />
+    <link rel="prev" title="sklearn.metrics.classification_report" href="sklearn.metrics.classification_report.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+  </script>
+
+  </head>
+  <body role="document">
+
+<div class="header-wrapper">
+    <div class="header">
+        <p class="logo"><a href="../../index.html">
+            <img src="../../_static/scikit-learn-logo-small.png" alt="Logo"/>
+        </a>
+        </p><div class="navbar">
+            <ul>
+                <li><a href="../../index.html">主页</a></li>
+                <li><a href="../../install.html">安装</a></li>
+                <li class="btn-li"><div class="btn-group">
+              <a href="../../documentation.html">文档</a>
+              <a class="btn dropdown-toggle" data-toggle="dropdown">
+                 <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+            <li class="link-title">Scikit-learn 0.17 (stable)</li>
+            <li><a href="../../tutorial/index.html">入门指南</a></li>
+            <li><a href="../../user_guide.html">使用手册</a></li>
+            <li><a href="../classes.html">API</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../developers.html">贡献</a></li>
+            <li class="divider"></li>
+                <li><a href="http://scikit-learn.org/dev/documentation.html">Scikit-learn 0.18 (development)</a></li>
+                <li><a href="http://scikit-learn.org/0.16/documentation.html">Scikit-learn 0.16</a></li>
+				<li><a href="../../_downloads/user_guide.pdf">PDF 文档</a></li>
+              </ul>
+            </div>
+        </li>
+            <li><a href="../../auto_examples/index.html">例子</a></li>
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/lzjqsdd/scikit-learn-doc-cn">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="sklearn.metrics.classification_report.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        sklearn.metri...
+        </span>
+            <span class="hiddenrellink">
+            sklearn.metrics.classification_report
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="../classes.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        API ?ο?
+        </span>
+            <span class="hiddenrellink">
+            API ?ο?
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for scikit-learn <strong>version 0.18.1</strong> &mdash; <a href="http://scikit-learn.org/stable/support.html#documentation-resources">Other versions</a></p>
+    <p class="citing">If you use the software, please consider <a href="../../about.html#citing-scikit-learn">citing scikit-learn</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">sklearn.metrics</span></code>.confusion_matrix</a><ul>
+<li><a class="reference internal" href="#examples-using-sklearn-metrics-confusion-matrix">Examples using <code class="docutils literal"><span class="pre">sklearn.metrics.confusion_matrix</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" checked />
+<label for="nav-trigger"></label>
+
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sklearn-metrics-confusion-matrix">
+<h1><a class="reference internal" href="../classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal"><span class="pre">sklearn.metrics</span></code></a>.confusion_matrix<a class="headerlink" href="#sklearn-metrics-confusion-matrix" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sklearn.metrics.confusion_matrix">
+<code class="descclassname">sklearn.metrics.</code><code class="descname">confusion_matrix</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em>, <em>labels=None</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9d3f127/sklearn/metrics/classification.py#L182"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sklearn.metrics.confusion_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute confusion matrix to evaluate the accuracy of a classification</p>
+<p>By definition a confusion matrix <img class="math" src="../../_images/math/afce44aa7c55836ca9345404c22fc7b599d2ed84.png" alt="C"/> is such that <img class="math" src="../../_images/math/7b586356f6f6e4d6f62568dc2a177abf146dd6c7.png" alt="C_{i, j}"/>
+is equal to the number of observations known to be in group <img class="math" src="../../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> but
+predicted to be in group <img class="math" src="../../_images/math/6b21e0b0899a0d2879d3b8019087fa630bab4ea2.png" alt="j"/>.</p>
+<p>Thus in binary classification, the count of true negatives is
+<img class="math" src="../../_images/math/1dbaa2b2093e69f81dfe4137f6b9be50deb02ca7.png" alt="C_{0,0}"/>, false negatives is <img class="math" src="../../_images/math/8f3c0b9f0a1ff699877c4da942d6ca12f7fd30b0.png" alt="C_{1,0}"/>, true positives is
+<img class="math" src="../../_images/math/615b139ff0b3084ccade5b7937e779192b699a16.png" alt="C_{1,1}"/> and false positives is <img class="math" src="../../_images/math/495bbd585c230cf7bec09029cf05dfe3af27a9b4.png" alt="C_{0,1}"/>.</p>
+<p>Read more in the <a class="reference internal" href="../model_evaluation.html#confusion-matrix"><span class="std std-ref">User Guide</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>y_true</strong> : array, shape = [n_samples]</p>
+<blockquote>
+<div><p>Ground truth (correct) target values.</p>
+</div></blockquote>
+<p><strong>y_pred</strong> : array, shape = [n_samples]</p>
+<blockquote>
+<div><p>Estimated targets as returned by a classifier.</p>
+</div></blockquote>
+<p><strong>labels</strong> : array, shape = [n_classes], optional</p>
+<blockquote>
+<div><p>List of labels to index the matrix. This may be used to reorder
+or select a subset of labels.
+If none is given, those that appear at least once
+in <code class="docutils literal"><span class="pre">y_true</span></code> or <code class="docutils literal"><span class="pre">y_pred</span></code> are used in sorted order.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array-like of shape = [n_samples], optional</p>
+<blockquote>
+<div><p>Sample weights.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>C</strong> : array, shape = [n_classes, n_classes]</p>
+<blockquote class="last">
+<div><p>Confusion matrix</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r163" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R163]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">Wikipedia entry for the Confusion matrix</a></td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">confusion_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="go">array([[2, 0, 0],</span>
+<span class="go">       [0, 0, 1],</span>
+<span class="go">       [1, 0, 2]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;ant&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;ant&quot;</span><span class="p">,</span> <span class="s2">&quot;bird&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ant&quot;</span><span class="p">,</span> <span class="s2">&quot;ant&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;ant&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ant&quot;</span><span class="p">,</span> <span class="s2">&quot;bird&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">])</span>
+<span class="go">array([[2, 0, 0],</span>
+<span class="go">       [0, 0, 1],</span>
+<span class="go">       [1, 0, 2]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="section" id="examples-using-sklearn-metrics-confusion-matrix">
+<h2>Examples using <code class="docutils literal"><span class="pre">sklearn.metrics.confusion_matrix</span></code><a class="headerlink" href="#examples-using-sklearn-metrics-confusion-matrix" title="Permalink to this headline">¶</a></h2>
+<div class="thumbnailContainer" tooltip="The dataset used in this example is a preprocessed excerpt of the "Labeled Faces in the Wild", ..."><div class="figure" id="id2">
+<a class="reference external image-reference" href="./../../auto_examples/applications/face_recognition.html"><img alt="../../_images/face_recognition1.png" src="../../_images/face_recognition1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/applications/face_recognition.html#example-applications-face-recognition-py"><span class="std std-ref">Faces recognition example using eigenfaces and SVMs</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="An example showing how the scikit-learn can be used to recognize images of hand-written digits."><div class="figure" id="id3">
+<a class="reference external image-reference" href="./../../auto_examples/classification/plot_digits_classification.html"><img alt="../../_images/plot_digits_classification1.png" src="../../_images/plot_digits_classification1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/classification/plot_digits_classification.html#example-classification-plot-digits-classification-py"><span class="std std-ref">Recognizing hand-written digits</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Example of confusion matrix usage to evaluate the quality of the output of a classifier on the ..."><div class="figure" id="id4">
+<a class="reference external image-reference" href="./../../auto_examples/model_selection/plot_confusion_matrix.html"><img alt="../../_images/plot_confusion_matrix1.png" src="../../_images/plot_confusion_matrix1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/model_selection/plot_confusion_matrix.html#example-model-selection-plot-confusion-matrix-py"><span class="std std-ref">Confusion matrix</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="This example demonstrates the power of semisupervised learning by training a Label Spreading mo..."><div class="figure" id="id5">
+<a class="reference external image-reference" href="./../../auto_examples/semi_supervised/plot_label_propagation_digits.html"><img alt="../../_images/plot_label_propagation_digits1.png" src="../../_images/plot_label_propagation_digits1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/semi_supervised/plot_label_propagation_digits.html#example-semi-supervised-plot-label-propagation-digits-py"><span class="std std-ref">Label Propagation digits: Demonstrating performance</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="Demonstrates an active learning technique to learn handwritten digits using label propagation."><div class="figure" id="id6">
+<a class="reference external image-reference" href="./../../auto_examples/semi_supervised/plot_label_propagation_digits_active_learning.html"><img alt="../../_images/plot_label_propagation_digits_active_learning1.png" src="../../_images/plot_label_propagation_digits_active_learning1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/semi_supervised/plot_label_propagation_digits_active_learning.html#example-semi-supervised-plot-label-propagation-digits-active-learning-py"><span class="std std-ref">Label Propagation digits active learning</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="This is an example showing how the scikit-learn can be used to classify documents by topics usi..."><div class="figure" id="id7">
+<a class="reference external image-reference" href="./../../auto_examples/text/mlcomp_sparse_document_classification.html"><img alt="../../_images/mlcomp_sparse_document_classification1.png" src="../../_images/mlcomp_sparse_document_classification1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/mlcomp_sparse_document_classification.html#example-text-mlcomp-sparse-document-classification-py"><span class="std std-ref">Classification of text documents: using a MLComp dataset</span></a></span></p>
+</div>
+</div><div class="thumbnailContainer" tooltip="This is an example showing how scikit-learn can be used to classify documents by topics using a..."><div class="figure" id="id8">
+<a class="reference external image-reference" href="./../../auto_examples/text/document_classification_20newsgroups.html"><img alt="../../_images/document_classification_20newsgroups1.png" src="../../_images/document_classification_20newsgroups1.png" /></a>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../../auto_examples/text/document_classification_20newsgroups.html#example-text-document-classification-20newsgroups-py"><span class="std std-ref">Classification of text documents using sparse features</span></a></span></p>
+</div>
+</div><div class="clearer"></div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2010 - 2014, scikit-learn developers (BSD License).
+      <a href="../../_sources/modules/generated/sklearn.metrics.confusion_matrix.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="sklearn.metrics.classification_report.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>
