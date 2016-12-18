@@ -37,7 +37,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | covariance.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| RobinSeaside |
 | cross_decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | cross_validation.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| LianYun |
-| decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| heyuanhao |
 | density.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| RobinSeaside |
 | dp-derivation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | ensemble.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|ustblzj|
@@ -46,7 +46,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | gaussian_process.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)|alingse|
 | grid_search.rst | ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg) | LianYun |
 | isotonic.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
-| kernel_approximation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| kernel_approximation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)|heyuanhao|
 | kernel_ridge.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | label_propagation.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
 | lda_qda.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)|ShangruZhong|
