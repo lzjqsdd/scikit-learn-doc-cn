@@ -3,15 +3,16 @@
 .. _grid_search:
 
 ===============================================
-网格搜索: 找到最好的估计器
+网格搜索: 找到最好的估计器参数
 ===============================================
 
 Parameters that are not directly learnt within estimators can be set by
 searching a parameter space for the best :ref:`cross_validation` score.
 Typical examples include ``C``, ``kernel`` and ``gamma`` for Support Vector
-Classifier, ``alpha`` for Lasso, etc. (对于估计器不能够直接学习的参数，可以设定一个搜索空间，
+Classifier, ``alpha`` for Lasso, etc. 
+对于估计器不能够直接学习的参数，可以设定一个搜索空间，
 找到能够取得最高分数 :ref:`cross_validation` 的参数。典型的例子有支持向量机分类器中的
- ``C``, ``kernel`` 和 ``gamma``， Lasso 中的 ``alpha`` 等。)
+ ``C``, ``kernel`` 和 ``gamma``， Lasso 中的 ``alpha`` 等。
 
 Any parameter provided when constructing an estimator may be optimized in this
 manner.  Specifically, to find the names and current values for all parameters
@@ -22,8 +23,9 @@ for a given estimator, use (当构建一个估计器时，任何参数都可以�
 
 Such parameters are often referred to as *hyperparameters* (particularly in
 Bayesian learning), distinguishing them from the parameters optimised in a
-machine learning procedure (这些参数通常称之为 *超参数* (特别是在 Bayesian 学习中)，这使得他们和
-机器学习过程中红优化的参数区别开来).
+machine learning procedure.
+这些参数通常称之为 *超参数* (特别是在 Bayesian 学习中)，这使得他们和
+机器学习过程中红优化的参数区别开来。
 
 A search consists of(一个搜索包括):
 
@@ -40,11 +42,12 @@ scikit-learn: for given values, :class:`GridSearchCV` exhaustively considers
 all parameter combinations, while :class:`RandomizedSearchCV` can sample a
 given number of candidates from a parameter space with a specified
 distribution. After describing these tools we detail
-:ref:`best practice <grid_search_tips>` applicable to both approaches. (一些模型允许使用特别的，
-高效的参数搜索策略，:ref:`outlined below <alternative_cv>`。在 scikit-learn 中给出了两种通用的用于
-搜索候选区间的方法：对于给定的值， :class:`GridSearchCV` 会搜索全部的参数组合，而 :class:`RandomizedSearchCV` 
-会从参数空间中使用特定的分布给出一些参数的候选用于搜索。在描述这些工具之后，:ref:`best practice <grid_search_tips>` 
-详细讲解如何用用这两种方法。)
+:ref:`best practice <grid_search_tips>` applicable to both approaches. 
+一些模型允许使用特别的，高效的参数搜索策略，:ref:`outlined below <alternative_cv>`。
+在 scikit-learn 中给出了两种通用的用于搜索候选区间的方法：对于给定的值，
+:class:`GridSearchCV` 会搜索全部的参数组合，而 :class:`RandomizedSearchCV` 
+会从参数空间中使用特定的分布给出一些参数的候选用于搜索。在描述这些工具之后，
+:ref:`best practice <grid_search_tips>` 详细讲解如何用用这两种方法。
 
 穷尽网格搜索(Exhaustive Grid Search)
 =================================
@@ -62,13 +65,15 @@ parameter. For instance, the following ``param_grid`` (由 :class:`GridSearchCV`
 specifies that two grids should be explored: one with a linear kernel and
 C values in [1, 10, 100, 1000], and the second one with an RBF kernel,
 and the cross-product of C values ranging in [1, 10, 100, 1000] and gamma
-values in [0.001, 0.0001]. (特别的，两个网格会被搜索：一个拥有线性核而且 C 的值在 [1, 10, 100, 1000]，
-而另一个拥有 RBF 核，C 的值在 [1, 10, 100, 1000] 而 gamma 的取值在 [0.001, 0.0001] 中)。
+values in [0.001, 0.0001]. 
+特别的，两个网格会被搜索：一个拥有线性核而且 C 的值在 [1, 10, 100, 1000]，
+而另一个拥有 RBF 核，C 的值在 [1, 10, 100, 1000] 而 gamma 的取值在 [0.001, 0.0001] 中。
 
 The :class:`GridSearchCV` instance implements the usual estimator API: when
 "fitting" it on a dataset all the possible combinations of parameter values are
-evaluated and the best combination is retained. ( :class:`GridSearchCV` 实例实现了通常的估计器 API：
-当使用其在某个数据集上进行拟合，评估所有可能的参数值的组合结果时，能够获得最好的参数组合。)
+evaluated and the best combination is retained. 
+:class:`GridSearchCV` 实例实现了通常的估计器 API：
+当使用其在某个数据集上进行拟合，评估所有可能的参数值的组合结果时，能够获得最好的参数组合。
 
 .. currentmodule:: sklearn.grid_search
 
@@ -92,11 +97,12 @@ Randomized Parameter Optimization (随机参数优化)
 ==============================================
 While using a grid of parameter settings is currently the most widely used
 method for parameter optimization, other search methods have more
-favourable properties. (使用一个网格的参数设置并搜索
-是当前常用的参数优化手段，然而一些其他的搜索方法也有一些自己特有的性质)
+favourable properties. 
+使用一个网格的参数设置并搜索是当前常用的参数优化手段，然而一些其他的搜索方法也有一些自己特有的性质。
+
 :class:`RandomizedSearchCV` implements a randomized search over parameters,
 where each setting is sampled from a distribution over possible parameter values.
-This has two main benefits over an exhaustive search (:class:`RandomizedSearchCV` 实现了一个在参数上随机搜索的方法，
+This has two main benefits over an exhaustive search(:class:`RandomizedSearchCV` 实现了一个在参数上随机搜索的方法，
 每次使用的参数是使用一个特别的分布从允许的参数列表中选择。相比于群举搜索，有以下好处):
 
 * A budget can be chosen independent of the number of parameters and possible values. (可以独立地控制计算代价，与参数空间的选择无关)
@@ -133,8 +139,9 @@ consecutive calls. (实际上，给任意函数传入一个 ``rvs`` (随机变�
 
 For continuous parameters, such as ``C`` above, it is important to specify
 a continuous distribution to take full advantage of the randomization. This way,
-increasing ``n_iter`` will always lead to a finer search. (对于连续的参数，比如上面的 ``C``，设定一个连续的分布使得随机性的全部好处发挥出来十分重要。
-这种方式下，增加 ``n_iter`` 总会得到一个更好的搜索结果。) 
+increasing ``n_iter`` will always lead to a finer search. 
+对于连续的参数，比如上面的 ``C``，设定一个连续的分布使得随机性的全部好处发挥出来十分重要。
+这种方式下，增加 ``n_iter`` 总会得到一个更好的搜索结果。
 
 .. topic:: Examples:
 
@@ -197,7 +204,8 @@ to compute performance metrics.
 建议将数据划分为 **开发集** (``GridSearchCV`` 实例使用) 和 **评估集** 来衡量结果。
 
 This can be done by using the :func:`cross_validation.train_test_split`
-utility function. 这个可以通过 :func:`cross_validation.train_test_split` 函数实现。
+utility function. 
+这个可以通过 :func:`cross_validation.train_test_split` 函数实现。
 
 Parallelism (并行化)
 -------------------
@@ -239,8 +247,8 @@ cross-validation used for model selection of this parameter. (一些模型在一
 
 The most common parameter amenable to this strategy is the parameter
 encoding the strength of the regularizer. In this case we say that we
-compute the **regularization path** of the estimator. (这种策略常用于正则参数的编码强化。
-这种情况下，计算估计器的 **regularization path**)
+compute the **regularization path** of the estimator. 
+这种策略常用于正则参数的编码强化。这种情况下，计算估计器的 **regularization path** 。
 
 Here is the list of such models (这种模型的列表如下):
 
@@ -267,8 +275,8 @@ Information Criterion (信息规范)
 
 Some models can offer an information-theoretic closed-form formula of the
 optimal estimate of the regularization parameter by computing a single
-regularization path (instead of several when using cross-validation). (一些模型通过计算规则路径
-（而不是使用交叉验证) 可以给出提供在信息理论上可解析的最优规则参数计算公式。
+regularization path (instead of several when using cross-validation). 
+一些模型通过计算规则路径（而不是使用交叉验证) 可以给出提供在信息理论上可解析的最优规则参数计算公式。
 
 Here is the list of models benefitting from the Aikike Information
 Criterion (AIC) or the Bayesian Information Criterion (BIC) for automated
@@ -289,13 +297,15 @@ Out of Bag Estimates 实用化的评估
 When using ensemble methods base upon bagging, i.e. generating new
 training sets using sampling with replacement, part of the training set
 remains unused.  For each classifier in the ensemble, a different part
-of the training set is left out. (当使用提升方法比如 bagging, 当使用可替代采样重新生成训练集合时，有一部分训练数据集仍然没有使用，
-对于提升集合中的每个分类器，一个不同的训练集合被保留出来)
+of the training set is left out. 
+当使用提升方法比如 bagging, 当使用可替代采样重新生成训练集合时，有一部分训练数据集仍然没有使用，
+对于提升集合中的每个分类器，一个不同的训练集合被保留出来。
 
 This left out portion can be used to estimate the generalization error
 without having to rely on a separate validation set.  This estimate
 comes "for free" as no additional data is needed and can be used for
-model selection. 留出来的部分可以用于评估泛化误差，而不需要另外依赖于一个单独的验证集合。
+model selection. 
+留出来的部分可以用于评估泛化误差，而不需要另外依赖于一个单独的验证集合。
 这个估计不需要额外的数据，可以用于模型选择。
 
 This is currently implemented in the following classes 在下面的类中实现了这个方法:
