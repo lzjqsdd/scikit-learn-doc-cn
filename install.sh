@@ -61,9 +61,9 @@ python --version
 python -c "import numpy; print('numpy %s' % numpy.__version__)"
 python -c "import scipy; print('scipy %s' % scipy.__version__)"
 
-- cp -r translate/* doc
-- cd doc
-- travis-sphinx --source=. --nowarn build
-- cd target/doc/build
-- echo "sklearn.lzjqsdd.com" > CNAME
-- cd ../../..
+cp -r translate/* doc
+cd doc
+travis-sphinx --source=. --nowarn build
+cd target/doc/build
+echo "sklearn.lzjqsdd.com" > CNAME
+cd ../../..
