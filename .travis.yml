@@ -32,11 +32,7 @@ cache: apt
 
 install: source install.sh
 
-script:
-  - cp -r translate/* doc
-  - bash test_script.sh
-  - cd doc/_build/html/stable
-  - echo "sklearn.lzjqsdd.com" > CNAME
+script: bash test_script.sh
 
 after_success:
   - travis-sphinx --branches=master,deploy deploy
