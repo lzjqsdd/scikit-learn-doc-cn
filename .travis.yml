@@ -3,31 +3,40 @@ branches:
   - master
   - deploy
 
-language: python - "2.7"
+language: python
+# make it explicit that we favor the new container-based travis workers
+sudo: false
+addons:
+  apt:
+    packages:
+      # Only used by the DISTRIB="ubuntu" setting
+      - libatlas3gf-base
+      - libatlas-dev
+      - python-scipy
+env:
+  global:
+     - OMP_NUM_THREADS=4
+     - OPENBLAS_NUM_THREADS=4
+  matrix:
+    # This environment tests that scikit-learn can be built against
+    # versions of numpy, scipy with ATLAS that comes with Ubuntu Precise 12.04
+    - DISTRIB="ubuntu" PYTHON_VERSION="2.7" COVERAGE="true"
+    # This environment tests the oldest supported anaconda env
+    - DISTRIB="conda" PYTHON_VERSION="2.6" INSTALL_MKL="false"
+      NUMPY_VERSION="1.6.2" SCIPY_VERSION="0.11.0"
+    # This environment tests the newest supported anaconda env
+    - DISTRIB="conda" PYTHON_VERSION="3.5" INSTALL_MKL="true"
+      NUMPY_VERSION="1.10.2" SCIPY_VERSION="0.16.1"
 
-before_install:
-    - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
-    - chmod +x miniconda.sh
-    - "./miniconda.sh -b"
-    - export PATH=/home/travis/miniconda2/bin:$PATH
-    - conda update --yes conda
-    - sudo rm -rf /dev/shm
-    - sudo ln -s /run/shm /dev/shm
-    - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+cache: apt
 
-install:
-  - conda install --yes python="2.7" sphinx scikit-learn matplotlib scipy numpy PIL
-  - conda update scikit-learn
-  - pip install --user travis-sphinx
+install: source install.sh
 
-cache: conda
 script:
   - cp -r translate/* doc
-  - cd doc
-  - travis-sphinx --source=. --nowarn build
-  - cd target/doc/build
+  - bash test_script.sh
+  - cd doc/_build/html/stable
   - echo "sklearn.lzjqsdd.com" > CNAME
-  - cd ../../..
 
 after_success:
   - travis-sphinx --branches=master,deploy deploy
