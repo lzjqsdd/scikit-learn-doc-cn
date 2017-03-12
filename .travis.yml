@@ -30,7 +30,7 @@ env:
 
 cache: apt
 
-install: source install.sh
+install: source ./install.sh
 
 script: bash test_script.sh
 
