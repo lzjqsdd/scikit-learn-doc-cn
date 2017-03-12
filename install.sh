@@ -55,6 +55,8 @@ if [[ "$COVERAGE" == "true" ]]; then
     pip install coverage coveralls
 fi
 
+pip install --user travis-sphinx
+
 # Build scikit-learn in the install.sh script to collapse the verbose
 # build output in the travis output when it succeeds.
 python --version
