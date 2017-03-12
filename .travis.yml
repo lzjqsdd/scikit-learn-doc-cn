@@ -12,7 +12,7 @@ before_install:
     - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 
 install:
-  - pip install numpy scipy sphinx scikit-learn
+  - pip install numpy scipy sphinx scikit-learn matplotlib numpy PIL
   - pip install --user travis-sphinx
 
 cache: conda
