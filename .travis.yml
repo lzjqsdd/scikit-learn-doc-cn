@@ -6,6 +6,7 @@ branches:
 language: python - "2.7"
 
 before_install:
+    - echo "54.230.142.136 apt.dockerproject.org" | sudo tee -a /etc/hosts
     - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
     - chmod +x miniconda.sh
     - "./miniconda.sh -b"
@@ -16,7 +17,7 @@ before_install:
     - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 
 install:
-  - conda install --yes python="2.7" sphinx scikit-learn=0.17.1 matplotlib scipy numpy PIL
+  - conda install --yes python="2.7" sphinx scikit-learn matplotlib scipy numpy PIL
   - conda update scikit-learn
   - pip install --user travis-sphinx
 
