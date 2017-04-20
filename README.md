@@ -35,7 +35,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | clustering.rst | ![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|huangbinapple|
 | computational_performance.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg) | iphyer |
 | covariance.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| RobinSeaside |
-| cross_decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)||
+| cross_decomposition.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|muyeby|
 | cross_validation.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| LianYun |
 | decomposition.rst |![Build Status](https://img.shields.io/badge/translate-undo-lightgray.svg)| heyuanhao |
 | density.rst |![Build Status](https://img.shields.io/badge/translate-done-blue.svg)| RobinSeaside |
