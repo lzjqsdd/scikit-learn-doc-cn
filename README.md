@@ -71,8 +71,7 @@ sklearn库作为目前机器学习非常流行的python库，一个易读的文�
 | tree.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|RobinSeaside|
 | unsupervised_reduction.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|iphyer|
 | svm.rst |![Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|lzjqsdd|
-
-### 任务申领
+| decomposition.rst|[Build Status](https://img.shields.io/badge/translate-doing-brightgreen.svg)|[Stephen.Z](https://github.com/StephenZMZ/)|
 首先fork该项目到个人github，clone到本地，修改README中要申领的翻译内容的状态，提交pull request,接受之后即可开始翻译工作。
 翻译结束后确保可正常编译成html，然后只提交rst文件的修改，不要添加sphinx生成的文件。
 **所有翻译后的文档以同名的方式添加到translate/同目录文件夹下,例如：**  
