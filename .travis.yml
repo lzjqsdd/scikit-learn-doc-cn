@@ -2,8 +2,6 @@ branches:
   only:
   - master
   - deploy
-  
-dist: precise
 
 language: python - "2.7"
 
@@ -14,7 +12,8 @@ before_install:
     - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 
 install:
-  - pip install numpy scipy sphinx scikit-learn matplotlib numpy PIL
+  - pip install numpy scipy scikit-learn matplotlib numpy PIL
+  - pip install sphinx==1.4
   - pip install --user travis-sphinx
 
 cache: conda
