@@ -1,4 +1,5 @@
 dist: trusty
+
 branches:
   only:
   - master
@@ -7,13 +8,18 @@ branches:
 language: python - "2.7"
 
 before_install:
+    - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+    - chmod +x miniconda.sh
+    - "./miniconda.sh -b"
+    - export PATH=/home/travis/miniconda2/bin:$PATH
+    - conda update --yes conda
     - sudo rm -rf /dev/shm
     - sudo ln -s /run/shm /dev/shm
     - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 
 install:
-  - pip install numpy scipy scikit-learn matplotlib numpy PIL
-  - pip install sphinx==1.4
+  - conda install --yes python="2.7" sphinx scikit-learn matplotlib scipy numpy PIL
+  - conda update scikit-learn
   - pip install --user travis-sphinx
 
 cache: conda
